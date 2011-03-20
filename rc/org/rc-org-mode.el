@@ -221,7 +221,6 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-c\C-o\C-l" 'org-agenda-open-link)
-(global-set-key "\C-cr" 'org-remember)
 (global-set-key "\C-ctc" 'org-table-create)
 (global-set-key "\C-cts" 'org-sparse-tree)
 (global-set-key "\C-ci" 'org-show-index)

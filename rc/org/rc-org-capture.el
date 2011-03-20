@@ -9,7 +9,7 @@
 
 (setq org-default-notes-file custom/org-capture-file)
 
-(global-set-key (kbd "\C-cr") 'org-capture)
+(global-set-key "\C-cr" 'org-capture)
 
 (setq org-capture-templates
       (quote
