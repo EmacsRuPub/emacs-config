@@ -11,5 +11,6 @@
 (load "~/.emacs.d/rc/access/rc-bookmarks.el")
 (load "~/.emacs.d/rc/access/rc-icicles.el")
 (load "~/.emacs.d/rc/access/rc-search.el")
+(load "~/.emacs.d/rc/access/rc-popup-test.el")
 
 ;;; access.el ends here
