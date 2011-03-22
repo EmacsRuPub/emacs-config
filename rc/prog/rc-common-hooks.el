@@ -52,7 +52,7 @@
   (when (member major-mode custom/untabify-modes)
     (untabify (point-min) (point-max))))
 
-(add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
+;; (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 ;; (add-hook 'before-save-hook 'common-hooks/untabify-hook)
 
 ;;; emacs-rc-common-hooks.el ends here

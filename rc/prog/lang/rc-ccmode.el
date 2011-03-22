@@ -69,8 +69,8 @@
 (add-hook 'c++-mode-hook 'custom/c-mode-common-hook)
 (add-hook 'c-mode-common-hook 'common-hooks/comment-hook)
 (add-hook 'c-mode-common-hook 'common-hooks/show-prog-keywords)
-(add-hook 'c-mode-hook 'custom/c-mode-ws-hook)
-(add-hook 'c++-mode-hook 'custom/c-mode-ws-hook)
+;; (add-hook 'c-mode-hook 'custom/c-mode-ws-hook)
+;; (add-hook 'c++-mode-hook 'custom/c-mode-ws-hook)
 (add-hook 'c-mode-hook 'common-hooks/newline-hook)
 (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
 
