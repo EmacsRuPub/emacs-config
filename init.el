@@ -10,6 +10,7 @@
 
 (add-to-list 'load-path "~/site-lisp")
 (solidload "~/.emacs.d/constants.el")
+(solidload "~/.emacs.d/credentials.el")
 ;; Initializing
 (solidload "~/.emacs.d/emacs-rc-auto-mode.el")
 ;; ============
