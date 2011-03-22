@@ -9,5 +9,6 @@
 
 (load "~/.emacs.d/rc/prog/tools/rc-doxygen.el")
 (load "~/.emacs.d/rc/prog/tools/rc-gdb.el")
+(load "~/.emacs.d/rc/prog/tools/rc-project-buffer.el")
 
 ;;; major-modes.el ends here
