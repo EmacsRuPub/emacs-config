@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (push "~/site-lisp/slime/" load-path)
+;; (push custom-ext-path/slime load-path)
 
 (require 'inf-lisp)
 (require 'slime)

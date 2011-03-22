@@ -46,12 +46,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.hsc$" . haskell-mode))
 
-;; (add-to-list 'auto-mode-alist '("\\.el" . emacs-lisp-mode))
-;; (add-to-list 'auto-mode-alist '("\\.gnus$" . emacs-lisp-mode))
-;; (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.el" . emacs-lisp-mode))
-(add-to-list 'auto-mode-alist '("\\.gnus$" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.gnus$" . emacs-lisp-mode))
 
 ;; (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 

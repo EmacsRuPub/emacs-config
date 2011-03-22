@@ -12,8 +12,8 @@
 ;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
 
-(load "~/site-lisp/clients/google-weather.el")
-(load "~/site-lisp/clients/org-google-weather.el")
+(load custom-ext-path/gweather)
+(load custom-ext-path/org-gweather)
 
 (require 'google-weather)
 (require 'org-google-weather)

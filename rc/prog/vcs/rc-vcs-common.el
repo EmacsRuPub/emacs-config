@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/vcs")
+(add-to-list 'load-path custom-ext-path/vcs)
 
 (require 'psvn)
 (require 'mercurial)

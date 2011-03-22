@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (load-file "~/site-lisp/clients/autosmiley.el")
+;; (load-file custom-ext-path/autosmiley)
 
 (require 'jabber)
 (require 'jabber-autoloads) ;; For 0.7.90 and above:

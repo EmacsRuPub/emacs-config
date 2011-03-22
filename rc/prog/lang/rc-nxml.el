@@ -10,10 +10,10 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/publishing/docbook-menu")
-;; (add-to-list 'load-path "~/site-lisp/nxml-mode")
+(add-to-list 'load-path custom-ext-path/docbook-menu)
+;; (add-to-list 'load-path custom-ext-path/nxml-mode)
 
-;; (load "~/site-lisp/nxml-mode/rng-auto.el")
+;; (load custom-ext-path/rng-auto)
 
 (require 'docbk-menu)
 ;; (require 'nxml-menu)

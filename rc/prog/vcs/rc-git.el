@@ -10,12 +10,12 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(load-file "~/site-lisp/vcs/git.el") ;; standard git module
+(load-file custom-ext-path/git) ;; standard git module
 ;; additional packages
-(load-file "~/site-lisp/vcs/egit.el")
-(load-file "~/site-lisp/vcs/gitsum.el")
-(add-to-list 'load-path "~/site-lisp/vcs/egg")
-;; (add-to-list 'load-path "~/site-lisp/vcs/git-emacs")
+(load-file custom-ext-path/egit)
+(load-file custom-ext-path/gitsum)
+(add-to-list 'load-path custom-ext-path/egg)
+;; (add-to-list 'load-path custom-ext-path/git-emacs)
 
 ;; (autoload 'magit-status "magit" nil t)
 (autoload 'egit "egit" "Emacs git history" t)
