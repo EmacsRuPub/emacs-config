@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(load "~/site-lisp/programming/c-eldoc.el")
+(load custom-ext-path/c-eldoc)
 
 (require 'cc-mode)
 (require 'info-look)

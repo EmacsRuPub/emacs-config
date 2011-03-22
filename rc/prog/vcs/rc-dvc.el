@@ -10,8 +10,8 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/vcs/dvc/")
-(load-file "~/site-lisp/vcs/dvc/dvc-load.el")
+(add-to-list 'load-path custom-ext-path/dvc-dir)
+(load-file custom-ext-path/dvc-load)
 
 (require 'dvc-autoloads)
 

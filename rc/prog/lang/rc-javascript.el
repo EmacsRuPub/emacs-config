@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (add-to-list 'load-path "~/emacs/ejacs")
+;; (add-to-list 'load-path custom-ext-path/ejacs)
 (load-library "js2-mode")
 ;; (load-library "js2")
 
