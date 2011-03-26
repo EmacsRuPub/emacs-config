@@ -8,15 +8,12 @@
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
-;#   Load Extensions
+;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/automation/anything")
-(add-to-list 'load-path "~/site-lisp/bookmarks/bookmark-extension")
 
-(require 'bookmark-extensions)
 (require 'anything)
 (require 'anything-config)
-(require 'anything-extension)
+;; (require 'anything-extension)
 (require 'anything-match-plugin)
 (require 'anything-show-completion)
 
@@ -31,14 +28,15 @@
     (candidate-number-limit . 9999)
     (action . call-interactively)))
 
+;; TODO: code below fails; fix it
 ;; have file name history keep out non-existent files
-(let ((source (find-if
-               (lambda (s)
-                 (string= (cdr (assoc 'name s)) "File Name History"))
-               anything-sources)))
-  (setcdr (assoc 'candidates source)
-          (lambda ()
-            (remove-if-not 'file-exists-p file-name-history))))
+;; (let ((source (find-if
+;;                (lambda (s)
+;;                  (string= (cdr (assoc 'name s)) "File Name History"))
+;;                anything-sources)))
+;;   (setcdr (assoc 'candidates source)
+;;           (lambda ()
+;;             (remove-if-not 'file-exists-p file-name-history))))
 
 
 ;#############################################################################

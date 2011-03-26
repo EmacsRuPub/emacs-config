@@ -7,6 +7,8 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
+;; TODO: get rid of whizzytex from package manager
+
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
@@ -56,8 +58,6 @@
 ;#############################################################################
 ;#   CDLaTeX
 ;############################################################################
-(load-file "~/site-lisp/publishing/cdlatex.el")
-
 (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 

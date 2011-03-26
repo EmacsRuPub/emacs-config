@@ -10,8 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (push custom-ext-path/slime load-path)
-
 (require 'inf-lisp)
 (require 'slime)
 (require 'info-look)
@@ -31,8 +29,9 @@
 
 (eval-after-load "slime"
   '(progn
-     (push "~/site-lisp/slime/contrib" load-path)
-     (slime-setup '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl))
+		 ;; TODO: slime-setup fails to load contribs, fix it someway.
+     ;; (slime-setup '(slime-fancy slime-asdf slime-banner slime-fuzzy
+		 ;; 														slime-autodoc slime-repl))
      (setq slime-complete-symbol*-fancy t)
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
      ))

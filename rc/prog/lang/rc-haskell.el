@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path custom-ext-path/shime)
+;; (add-to-list 'load-path custom-ext-path/shime)
 
 (autoload 'turn-on-haskell-ghci "haskell-ghci" "Turn on interaction with a GHCi interpreter." t)
 

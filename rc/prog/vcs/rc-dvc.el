@@ -10,9 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path custom-ext-path/dvc-dir)
-(load-file custom-ext-path/dvc-load)
-
 (require 'dvc-autoloads)
 
 

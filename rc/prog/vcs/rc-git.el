@@ -10,14 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(load-file custom-ext-path/git) ;; standard git module
-;; additional packages
-(load-file custom-ext-path/egit)
-(load-file custom-ext-path/gitsum)
-(add-to-list 'load-path custom-ext-path/egg)
-;; (add-to-list 'load-path custom-ext-path/git-emacs)
-
-;; (autoload 'magit-status "magit" nil t)
 (autoload 'egit "egit" "Emacs git history" t)
 (autoload 'egit-file "egit" "Emacs git history file" t)
 (autoload 'egit-dir "egit" "Emacs git history directory" t)

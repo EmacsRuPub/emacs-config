@@ -7,12 +7,9 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
-(add-to-list 'load-path "~/site-lisp/editing")
-(add-to-list 'load-path "/site-lisp/editing/kill-ring-search.el")
-(load-file "~/site-lisp/search/re-builder.el")
-(load-file "~/site-lisp/search/full-ack.el")
-
 (require 'highlight-symbol)
+(require 're-builder)
+(require 'full-ack)
 
 
 ;#############################################################################

@@ -10,8 +10,6 @@
 ;#############################################################################
 ;#   Load extension
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/dired/sunrise")
-(load-file "~/site-lisp/dired/dired+.el")
 
 (require 'dired+)
 (require 'sunrise-commander)

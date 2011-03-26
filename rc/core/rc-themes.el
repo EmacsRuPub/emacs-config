@@ -7,9 +7,10 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load-file "~/site-lisp/system/color-theme-darkmate.el")
-
 (require 'color-theme)
+(require 'color-theme-darkmate)
+(require 'color-theme-sanityinc)
+(require 'color-theme-tango-2)
 
 ;#############################################################################
 ;#   Text coloring
@@ -27,6 +28,9 @@
 ;; (set-mouse-color "yellow")
 
 (color-theme-initialize)
+;; (color-theme-mac-classic) ;; bright
+;; (color-theme-sanityinc-light) ;; bright
+;; (color-theme-tango-2)
 (color-theme-zenburn)
 ;; (color-theme-gtk-ide)
 ;; (color-theme-darkmate)

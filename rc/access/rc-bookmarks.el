@@ -10,8 +10,7 @@
 ;#############################################################################
 ;#   Load Extensions
 ;############################################################################
-(add-to-list 'load-path "~/site-lisp/bookmarks/bookmark+")
-(add-to-list 'load-path "~/site-lisp/bookmarks/crosshair")
+;; (add-to-list 'load-path custom-ext-path/crosshair)
 
 (require 'bookmark+)
 

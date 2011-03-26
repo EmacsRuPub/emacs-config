@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(load custom-ext-path/c-eldoc)
+;; (load custom-ext-path/c-eldoc)
 
 (require 'cc-mode)
 (require 'info-look)
