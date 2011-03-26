@@ -39,7 +39,8 @@
 													 sunrise-x-checkpoints sunrise-x-loop
 													 sunrise-x-mirror sunrise-x-modeline
 													 sunrise-x-popviewer sunrise-x-tabs
-													 sunrise-x-tree undo-tree yasnippet
+													 sunrise-x-tree undo-tree wrap-region
+													 yasnippet
 													 (:name autosmiley :type emacswiki)
 													 (:name c-eldoc :type emacswiki)
 													 (:name cdlatex 

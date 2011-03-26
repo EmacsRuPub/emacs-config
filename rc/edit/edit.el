@@ -9,5 +9,6 @@
 
 (load "~/.emacs.d/rc/edit/rc-editing.el")
 (load "~/.emacs.d/rc/edit/rc-joinlines.el")
+(load "~/.emacs.d/rc/edit/rc-wrap-region.el")
 
 ;;; major-modes.el ends here
