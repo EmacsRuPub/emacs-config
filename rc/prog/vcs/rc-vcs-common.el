@@ -10,8 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path custom-ext-path/vcs)
-
 (require 'psvn)
 (require 'mercurial)
 (require 'ahg)

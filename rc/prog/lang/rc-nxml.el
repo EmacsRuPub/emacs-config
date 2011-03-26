@@ -7,15 +7,14 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+;; TODO: integrate docbook-menu into el-get, probable relevant links below
+;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
+;; http://www.emacswiki.org/emacs/DocbookXmlMode
+
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(add-to-list 'load-path custom-ext-path/docbook-menu)
-;; (add-to-list 'load-path custom-ext-path/nxml-mode)
-
-;; (load custom-ext-path/rng-auto)
-
-(require 'docbk-menu)
+;; (require 'docbk-menu)
 ;; (require 'nxml-menu)
 
 
@@ -50,6 +49,6 @@
 (add-hook 'nxml-mode-hook 'common-hooks/comment-hook)
 (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
-(add-hook 'nxml-mode-hook 'docbook-menu-mode)
+;; (add-hook 'nxml-mode-hook 'docbook-menu-mode)
 
 ;;; emacs-nxml.el ends here

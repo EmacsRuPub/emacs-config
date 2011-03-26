@@ -10,13 +10,11 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (load-file custom-ext-path/autosmiley)
-
 (require 'jabber)
 (require 'jabber-autoloads) ;; For 0.7.90 and above:
 (require 'jabber-bookmarks)
 (require 'jabber-autoaway)
-;; (require 'autosmiley)
+(require 'autosmiley)
 
 
 ;#############################################################################

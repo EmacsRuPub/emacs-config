@@ -7,7 +7,6 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
-(load-file "~/site-lisp/wm/window-number.el")
 (require 'window-number)
 
 (window-number-meta-mode)

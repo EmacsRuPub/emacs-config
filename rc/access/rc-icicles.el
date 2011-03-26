@@ -7,8 +7,6 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
-(add-to-list 'load-path "~/site-lisp/automation/icicles")
-
 (require 'icicles)
 (require 'lacarte)
 (require 'icicles-iswitchb)

@@ -8,6 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (require 'iswitchb)
+(require 'iswitchb-highlight)
 
 (iswitchb-mode 1)
 (iswitchb-default-keybindings)

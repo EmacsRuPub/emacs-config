@@ -6,6 +6,8 @@
 
 (setq message-log-max t)
 
+(solidload "~/.emacs.d/rc-el-get.el")
+
 (setq custom-file "~/.emacs.d/customizations.el")
 
 (add-to-list 'load-path "~/site-lisp")

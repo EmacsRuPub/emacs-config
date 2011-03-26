@@ -10,6 +10,6 @@
 (load "~/.emacs.d/rc/prog/vcs/rc-dvc.el")
 (load "~/.emacs.d/rc/prog/vcs/rc-git.el")
 (load "~/.emacs.d/rc/prog/vcs/rc-mercurial.el")
-;; (load "~/.emacs.d/rc/prog/vcs/rc-vcs-common.el")
+(load "~/.emacs.d/rc/prog/vcs/rc-vcs-common.el")
 
 ;;; vcs.el ends here

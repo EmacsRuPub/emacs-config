@@ -12,9 +12,6 @@
 ;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
 
-(load custom-ext-path/gweather)
-(load custom-ext-path/org-gweather)
-
 (require 'google-weather)
 (require 'org-google-weather)
 
@@ -153,7 +150,7 @@
 (setq appt-message-warning-time '60)
 (setq appt-display-interval '15)
 ;; drawing diagrams with ditaa
-(setq org-ditaa-jar-path "~/site-lisp/ditaa0_9.jar")
+(setq org-ditaa-jar-path "~/.emacs.d/resources/ditaa0_9.jar")
 
 
 ;#############################################################################
