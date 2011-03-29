@@ -31,15 +31,15 @@
 													 color-theme-tango-2
 													 color-theme-zenburn dired+ distel doxymacs
 													 dvc egg emacs-jabber emacs-w3m ess
-													 fit-frame git-emacs google-weather hs-lint
-													 iedit ioccur js2-mode mo-git-blame org-mode
-													 po-mode psvn quack shime slime
-													 sunrise-commander sunrise-x-buttons
-													 sunrise-x-checkpoints sunrise-x-loop
-													 sunrise-x-mirror sunrise-x-modeline
-													 sunrise-x-popviewer sunrise-x-tabs
-													 sunrise-x-tree tail undo-tree wrap-region
-													 yasnippet
+													 fit-frame git-emacs google-weather
+													 highlight-symbol hs-lint iedit ioccur
+													 js2-mode mo-git-blame org-mode po-mode psvn
+													 quack shime slime sunrise-commander
+													 sunrise-x-buttons sunrise-x-checkpoints
+													 sunrise-x-loop sunrise-x-mirror
+													 sunrise-x-modeline sunrise-x-popviewer
+													 sunrise-x-tabs sunrise-x-tree tail
+													 undo-tree wrap-region yasnippet
 													 (:name autosmiley :type emacswiki)
 													 (:name c-eldoc :type emacswiki)
 													 (:name cdlatex 
@@ -62,11 +62,6 @@
 																	:type git
 																	:url "git://github.com/chneukirchen/gitsum.git"
 																	:load "gitsum.el")
-													 (:name highlight-symbol
-																	:type http
-																	:url
-																	"http://nschum.de/src/emacs/highlight-symbol/highlight-symbol.el"
-																	:load "highlight-symbol.el")
 													 (:name icicles
 																	:type git
 																	:url "https://github.com/emacsmirror/icicles.git"
