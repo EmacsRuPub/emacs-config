@@ -32,7 +32,7 @@
 													 color-theme-zenburn dired+ distel doxymacs
 													 dvc egg emacs-jabber emacs-w3m ess
 													 fit-frame git-emacs google-weather hs-lint
-													 ioccur js2-mode mo-git-blame org-mode
+													 iedit ioccur js2-mode mo-git-blame org-mode
 													 po-mode psvn quack shime slime
 													 sunrise-commander sunrise-x-buttons
 													 sunrise-x-checkpoints sunrise-x-loop
