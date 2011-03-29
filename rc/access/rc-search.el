@@ -10,6 +10,7 @@
 (require 'highlight-symbol)
 (require 're-builder)
 (require 'full-ack)
+(require 'ioccur)
 
 
 ;#############################################################################
@@ -32,7 +33,9 @@
 (global-set-key "\C-cs" 'multi-occur-in-matching-buffers)
 (global-set-key "\C-cug" 'rgrep)
 (global-set-key "\C-cua" 'ack)
-(global-set-key "\C-co" 'occur)
+(global-set-key "\C-coo" 'occur)
 (global-set-key "\C-cur" 're-builder)
+(global-set-key "\C-coi" 'ioccur)
+(global-set-key "\C-cob" 'ioccur-find-buffer-matching)
 
 ;;; init-search.el ends here

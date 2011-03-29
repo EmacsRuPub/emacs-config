@@ -32,13 +32,14 @@
 													 color-theme-zenburn dired+ distel doxymacs
 													 dvc egg emacs-jabber emacs-w3m ess
 													 fit-frame git-emacs google-weather hs-lint
-													 js2-mode mo-git-blame org-mode po-mode psvn
-													 quack shime slime sunrise-commander
-													 sunrise-x-buttons sunrise-x-checkpoints
-													 sunrise-x-loop sunrise-x-mirror
-													 sunrise-x-modeline sunrise-x-popviewer
-													 sunrise-x-tabs sunrise-x-tree tail
-													 undo-tree wrap-region yasnippet
+													 ioccur js2-mode mo-git-blame org-mode
+													 po-mode psvn quack shime slime
+													 sunrise-commander sunrise-x-buttons
+													 sunrise-x-checkpoints sunrise-x-loop
+													 sunrise-x-mirror sunrise-x-modeline
+													 sunrise-x-popviewer sunrise-x-tabs
+													 sunrise-x-tree tail undo-tree wrap-region
+													 yasnippet
 													 (:name autosmiley :type emacswiki)
 													 (:name c-eldoc :type emacswiki)
 													 (:name cdlatex 
