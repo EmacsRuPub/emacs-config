@@ -82,36 +82,6 @@
   (insert ":-* ")
   (backward-char 4))
 
-(defun custom-jabber/cite-region ()
-  "Encloses current selection in quotes"
-  (interactive)
-  (setq sel-start (region-beginning))
-  (setq sel-end (+ (region-end) 1))
-  (goto-char sel-start)
-  (insert "\"")
-  (goto-char sel-end)
-  (insert "\""))
-
-(defun custom-jabber/asterisk-region ()
-  "Encloses current selection in quotes"
-  (interactive)
-  (setq sel-start (region-beginning))
-  (setq sel-end (+ (region-end) 1))
-  (goto-char sel-start)
-  (insert "*")
-  (goto-char sel-end)
-  (insert "*"))
-
-(defun custom-jabber/parenthesize-region ()
-  "Encloses current selection in parentheses"
-  (interactive)
-  (setq sel-start (region-beginning))
-  (setq sel-end (+ (region-end) 1))
-  (goto-char sel-start)
-  (insert "(")
-  (goto-char sel-end)
-  (insert ")"))
-
 (defun custom-jabber/wrap-replace-regexp ()
   "Wraps current word in ed's 'replace' regexp"
   (interactive)
