@@ -13,6 +13,8 @@
 (require 'table) ;; table
 (require 'hideshow) ;; Hide/Show mode
 (require 'undo-tree)
+;; (require 'drag-stuff)
+(require 'saveplace)
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -115,11 +117,12 @@
 (global-hl-line-mode 1)
 ;; (pc-selection-mode nil nil (pc-select))
 ;; (cua-selection-mode t)
+;;(drag-stuff-global-mode t)
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
-(setq uniquify-buffer-name-style (quote post-forward))
-(setq fill-column 90)
+(setq uniquify-buffer-name-style (quote forward))
+(setq fill-column 120)
 (setq indent-tabs-mode nil)
 (setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
 (setq comment-style 'indent)
@@ -135,32 +138,40 @@
 (setq whitespace-silent t)
 ;; (setq x-select-request-type (quote (UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 ;; (setq scroll-conservatively 50)
+;; (setq save-place-file "~/.emacs.d/saveplace")
+;; (setq-default save-place t)
+
 
 
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-xn" 'linum-mode)
-(global-set-key "\C-cv" 'view-mode)
-(global-set-key "\C-cd" 'insert-current-date-time)
-(global-set-key "\C-xx" 'copy-to-register)
-(global-set-key "\C-xg" 'insert-register)
-(global-set-key "\C-cf" 'diff-buffer-with-file)
 (global-set-key "\C-c\C-u\C-r" 'rename-uniquely)
-(global-set-key "\C-cus" 'sort-lines)
+(global-set-key "\C-cd" 'insert-current-date-time)
+(global-set-key "\C-cf" 'diff-buffer-with-file)
+(global-set-key "\C-chm" 'woman)
+(global-set-key "\C-cnr" 'narrow-to-region)
+(global-set-key "\C-cqr" 'query-replace)
 (global-set-key "\C-cuq" 'uniq)
+(global-set-key "\C-cus" 'sort-lines)
 (global-set-key "\C-cut" 'tabify)
 (global-set-key "\C-cuu" 'untabify)
+(global-set-key "\C-cv" 'view-mode)
 (global-set-key "\C-cwd" 'delete-trailing-whitespace)
+(global-set-key "\C-cwr" 'widen)
+(global-set-key "\C-x\M-a" 'indent-region)
+(global-set-key "\C-xg" 'insert-register)
+(global-set-key "\C-xx" 'copy-to-register)
+(global-set-key [(?%)] 'match-paren)
 (global-set-key [(meta g)] 'goto-line)
 (global-set-key [?\M-]] 'custom/comment-or-uncomment-region)
-(global-set-key [(?%)] 'match-paren)
 (global-set-key [f12] 'whitespace-mode)
-(global-set-key "\C-cqr" 'query-replace)
-(global-set-key "\C-chm" 'woman)
-(global-set-key "\C-x\M-a" 'indent-region)
+
 ;; TODO: find more appropriate place for below keybindings
 (global-set-key "\C-cpm" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
 (global-set-key "\C-cpu" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
+(global-set-key "\C-cpk" (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
+(define-key global-map (kbd "C-;") 'iedit-mode)
+(define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
 
 ;;; emacs-rc-editing.el ends here
