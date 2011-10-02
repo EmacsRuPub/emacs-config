@@ -12,13 +12,6 @@
 ;############################################################################
 
 (require 'dired+)
-(require 'sunrise-commander)
-(require 'sunrise-x-buttons)
-(require 'sunrise-x-checkpoints)
-(require 'sunrise-x-modeline)
-(require 'sunrise-x-old-checkpoints)
-(require 'sunrise-x-tabs)
-(require 'sunrise-x-tree)
 
 
 ;#############################################################################
@@ -118,7 +111,6 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-c\C-s" 'sunrise)
 (global-set-key "\C-c\C-j" 'dired-jump)
 
 ;;; emacs-rc-dired.el ends here
