@@ -8,7 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 (setq custom/base-conf-dir "~/.emacs.d")
-(setq custom/base-ext-dir "~/site-lisp")
 
 ;#############################################################################
 ;#   Abbreviation
@@ -30,12 +29,5 @@
 ;############################################################################
 (setq custom/jabber-history-dir "~/.emacs-jabber")
 (setq custom/rc-jabber-custom "~/.emacs.d/rc/extras/client/rc-jabber-custom.el")
-
-
-;#############################################################################
-;#   Extension paths
-;############################################################################
-;; project-buffer-mode
-(setq custom-ext-path/project-buffer-mode (concat custom/base-ext-dir "/projects"))
 
 ;;; constants.el ends here
