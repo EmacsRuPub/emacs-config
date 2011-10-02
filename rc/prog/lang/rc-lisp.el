@@ -12,13 +12,13 @@
 ;############################################################################
 (require 'inf-lisp)
 (require 'slime)
+;; (require 'slime-autoloads)
 (require 'info-look)
 
 
 ;#############################################################################
 ;#   setup extensions
 ;############################################################################
-(slime-setup)
 
 ;; lookup information in hyperspec
 (info-lookup-add-help
@@ -29,9 +29,7 @@
 
 (eval-after-load "slime"
   '(progn
-		 ;; TODO: slime-setup fails to load contribs, fix it someway.
-     ;; (slime-setup '(slime-fancy slime-asdf slime-banner slime-fuzzy
-		 ;; 														slime-autodoc slime-repl))
+     (slime-setup '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl))
      (setq slime-complete-symbol*-fancy t)
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
      ))
@@ -47,6 +45,7 @@
 
 (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
 
+(setq common-lisp-hyperspec-root "/mnt/work/help/HyperSpec/")
 
 ;#############################################################################
 ;#   Hooks
@@ -62,7 +61,13 @@
        (list (assoc 'sbcl slime-lisp-implementations)))
   (setq tab-width 2
 	indent-tabs-mode t)
+	(local-set-key "\C-c;" 'slime-insert-balanced-comments)
+	(local-set-key "\C-c\M-;" 'slime-remove-balanced-comments)
   )
+
+(defun custom/slime-repl-hook ()
+	(local-set-key "\C-c\C-dh" 'slime-documentation-lookup)
+	)
 
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/comment-hook)
@@ -70,6 +75,7 @@
 (add-hook 'lisp-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+(add-hook 'slime-repl-mode-hook 'custom/slime-repl-hook)
 ;; (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
 ;; (add-hook 'slime-connected-hook 'slime-ensure-typeout-frame)
 
