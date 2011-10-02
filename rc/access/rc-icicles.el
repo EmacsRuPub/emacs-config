@@ -18,6 +18,6 @@
 (defadvice switch-to-buffer (after custom/turn-off-icicles-org ())
   "Turns off Icicles in Orgmode buffers."
   (if (eq major-mode 'org-mode) (icy-mode nil) (icy-mode t)))
-(ad-activate 'switch-to-buffer)
+;; (ad-activate 'switch-to-buffer)
 
 ;;; rc-icicles.el ends here
