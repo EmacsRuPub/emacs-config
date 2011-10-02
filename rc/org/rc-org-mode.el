@@ -45,8 +45,8 @@
       )
 
 (setq org-agenda-files (quote ("/mnt/work/org/blog-posts.org"
-			       "/mnt/work/org/books/books_detailed.org"
 			       "/mnt/work/org/books/books.org"
+			       "/mnt/work/org/books/books_detailed.org"
 			       "/mnt/work/org/books/books_toread.org"
 			       "/mnt/work/org/checklists/checklists.org"
 			       "/mnt/work/org/checklists/download.org"
@@ -57,41 +57,50 @@
 			       "/mnt/work/org/checklists/wishlist.org"
 			       "/mnt/work/org/contacts.org"
 			       "/mnt/work/org/dates.org"
-			       "/mnt/work/org/index.org"
 			       "/mnt/work/org/job/braintasks.org"
 			       "/mnt/work/org/job/job.org"
 			       "/mnt/work/org/job/othertasks.org"
 			       "/mnt/work/org/job/resume.org"
 			       "/mnt/work/org/job/testtasks.org"
+			       "/mnt/work/org/ordering.org"
 			       "/mnt/work/org/projects/autocad/autocad.org"
 			       "/mnt/work/org/projects/autocad/autocad2.org"
 			       "/mnt/work/org/projects/boostdc/boostdc.org"
 			       "/mnt/work/org/projects/boostdc/boostdc_rpc_eng.org"
-			       "/mnt/work/org/projects/delicious-client.org"
-			       "/mnt/work/org/projects/editors.org"
-			       "/mnt/work/org/projects/erlang-make.org"
-			       "/mnt/work/org/projects/erlang-postgres.org"
+			       "/mnt/work/org/projects/config/editors.org"
+			       "/mnt/work/org/projects/config/linux-system.org"
+			       "/mnt/work/org/projects/config/xmonad.org"
 			       "/mnt/work/org/projects/homeprojects.org"
+			       "/mnt/work/org/projects/ideas/issue-tracker.org"
+			       "/mnt/work/org/projects/ideas/projectideas.org"
 			       "/mnt/work/org/projects/learn.org"
-			       "/mnt/work/org/projects/leechcraft.org"
-			       "/mnt/work/org/projects/linux-system.org"
-			       "/mnt/work/org/projects/mastering-admin.org"
-			       "/mnt/work/org/projects/mastering-mochiweb.org"
-			       "/mnt/work/org/projects/mastering_proglang.org"
-			       "/mnt/work/org/projects/mastering-vcs.org"
-			       "/mnt/work/org/projects/organizer.org"
-			       "/mnt/work/org/projects/qross.org"
+			       "/mnt/work/org/projects/mastering/mastering-admin.org"
+			       "/mnt/work/org/projects/mastering/mastering-mochiweb.org"
+			       "/mnt/work/org/projects/mastering/mastering-vcs.org"
+			       "/mnt/work/org/projects/mastering/mastering_proglang.org"
+			       "/mnt/work/org/projects/oss/delicious-client.org"
+			       "/mnt/work/org/projects/oss/erlang-make.org"
+			       "/mnt/work/org/projects/oss/erlang-postgres.org"
+			       "/mnt/work/org/projects/oss/feedsaw.org"
+			       "/mnt/work/org/projects/oss/gourmet.org"
+			       "/mnt/work/org/projects/oss/leechcraft.org"
+			       "/mnt/work/org/projects/oss/qross.org"
+			       "/mnt/work/org/projects/oss/qxmpp.org"
 			       "/mnt/work/org/projects/review.org"
 			       "/mnt/work/org/projects/science.org"
-			       "/mnt/work/org/projects/xmonad.org"
-			       "/mnt/work/org/projects/issue-tracker.org"
-			       "/mnt/work/org/projects/qxmpp.org"
 			       "/mnt/work/org/recipes.org"
-			       "/mnt/work/org/review.org"
-			       "/mnt/work/org/todo.org"
+			       "/mnt/work/org/review/review-books.org"
+			       "/mnt/work/org/review/review-essays.org"
+			       "/mnt/work/org/review/review-infosources.org"
+			       "/mnt/work/org/review/review-links.org"
+			       "/mnt/work/org/review/review-materials.org"
+			       "/mnt/work/org/review/review-media.org"
+			       "/mnt/work/org/review/review-software.org"
+			       "/mnt/work/org/review/review-tokens.org"
+			       "/mnt/work/org/review/review-unsorted.org"
+			       "/mnt/work/org/review/review-yandexfotki.org"
 			       "/mnt/work/org/search.org"
-			       "/mnt/work/org/projectideas.org"
-			       "/mnt/work/org/ordering.org"
+			       "/mnt/work/org/todo.org"
 			       "/mnt/work/org/weather.org"
 			       )))
 
@@ -156,10 +165,6 @@
 ;#############################################################################
 ;#   Custom definitions
 ;############################################################################
-(defun org-show-index()
-  (interactive)
-  (find-file "/mnt/work/org/index.org"))
-
 (defun org-osd-display (min-to-app new-time msg)
   (osd-display msg msg -1 "center" "center" "Verdana 40"))
 
@@ -220,7 +225,6 @@
 (global-set-key "\C-c\C-o\C-l" 'org-agenda-open-link)
 (global-set-key "\C-ctc" 'org-table-create)
 (global-set-key "\C-cts" 'org-sparse-tree)
-(global-set-key "\C-ci" 'org-show-index)
 (global-set-key "\C-ctt" 'org-toggle-timestamp-type)
 
 ;;; emacs-rc-org-mode.el ends here
