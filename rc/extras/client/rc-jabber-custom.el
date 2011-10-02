@@ -20,7 +20,7 @@
   (let ((process-connection-type nil))
     (start-process "notification" nil "notify-send"
 		   "-t" jabber-libnotify-timeout
-		   "-i" jabber-libnotify-icon
+		   ;; "-i" jabber-libnotify-icon
 		   from msg)))
 
 (defun jabber-libnotify-message-display (from buffer text propsed-alert)
