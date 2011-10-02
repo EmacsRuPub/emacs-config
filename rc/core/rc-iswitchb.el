@@ -61,7 +61,7 @@
 (add-to-list 'iswitchb-buffer-ignore "\\.bbdb")
 (add-to-list 'iswitchb-buffer-ignore "irc\\.")
 (add-to-list 'iswitchb-buffer-ignore "\\*Customize")
-(add-to-list 'iswitchb-buffer-ignore "\\*Shell Command")
+;; (add-to-list 'iswitchb-buffer-ignore "\\*Shell Command")
 (add-to-list 'iswitchb-buffer-ignore "\\*svn")
 (add-to-list 'iswitchb-buffer-ignore "\\*w3m\\*")
 (add-to-list 'iswitchb-buffer-ignore "\\.hgignore")
@@ -78,5 +78,6 @@
 (add-to-list 'iswitchb-buffer-ignore "\\*GTAGS")
 (add-to-list 'iswitchb-buffer-ignore "\\*Symref")
 (add-to-list 'iswitchb-buffer-ignore "^\\.cabal$")
+(add-to-list 'iswitchb-buffer-ignore "^*Org Agenda*$")
 
 ;;; emacs-rc-iswitchb.el ends here
