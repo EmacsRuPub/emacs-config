@@ -6,6 +6,9 @@
 
 (setq message-log-max t)
 
+(setq el-get-sources-system-file
+			"~/.emacs.d/el-get-sources-system.el")
+
 (solidload "~/.emacs.d/rc-el-get.el")
 
 (setq custom-file "~/.emacs.d/customizations.el")
@@ -30,3 +33,4 @@
 
 (load custom-file)
 
+(put 'narrow-to-region 'disabled nil)
