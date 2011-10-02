@@ -26,5 +26,7 @@
 ;#   Keybindings
 ;############################################################################
 (global-set-key "\C-cg" 'egg-status)
+(global-set-key "\C-cmc" 'mo-git-blame-current)
+(global-set-key "\C-cmf" 'mo-git-blame-file)
 
 ;;; init-git.el ends here

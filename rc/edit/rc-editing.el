@@ -171,6 +171,7 @@
 (global-set-key "\C-cpm" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
 (global-set-key "\C-cpu" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
 (global-set-key "\C-cpk" (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
+
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
 

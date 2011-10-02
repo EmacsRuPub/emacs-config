@@ -30,6 +30,7 @@
 
 (add-to-list 'load-path "/mnt/work/projects/oss/github/other/el-get/")
 (require 'el-get)
+
 (setq el-get-recipe-path
 			'("/mnt/work/projects/oss/github/other/el-get/recipes/"))
 
@@ -135,6 +136,7 @@
 			 el-get-sources-common
 			 el-get-sources-custom
 			 el-get-sources-system))
+
 (el-get)
 
 ;;; rc-el-get.el ends here
