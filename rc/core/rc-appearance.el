@@ -27,31 +27,28 @@
 (setq initial-scratch-message nil)
 
 ;; date|time
-(setq display-time-24hr-format t)
 (setq display-time-mail-file t)
 (setq display-time-form-list (list 'time 'load))
 (setq display-time-day-and-date t)
+(setq display-time-string-forms
+  '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 
 
 ;#############################################################################
 ;#   Appearance function calls
 ;############################################################################
 (mwheel-install)
-(display-time)
 (blink-cursor-mode t)
 (tool-bar-mode 0)
 (global-hl-line-mode t)
 (show-paren-mode t)
 (tooltip-mode nil)
 (global-font-lock-mode t)
-(display-time-mode t)
 
 ;; use y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;часы в статусе
-(setq display-time-string-forms
-  '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 (display-time)
 
 ;;; emacs-rc-appearance.el ends here
