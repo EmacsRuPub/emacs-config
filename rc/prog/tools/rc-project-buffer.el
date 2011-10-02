@@ -7,8 +7,6 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
-(add-to-list 'load-path custom-ext-path/project-buffer-mode)
-
 (require 'iproject)
 (iproject-key-binding)
 
@@ -20,5 +18,9 @@
 		 (define-key project-buffer-mode-map [(control ?f)]
 			 'project-buffer-occur)
 		 ))
+
+(custom-set-faces '(project-buffer-occur-highlight-matching-string
+                    ((((type tty)) :foreground "yellow")
+                     (t :foreground "goldenrod1"))))
 
 ;;; rc-project-buffer.el ends here
