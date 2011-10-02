@@ -9,8 +9,8 @@
 
 (require 'color-theme)
 (require 'color-theme-darkmate)
-(require 'color-theme-sanityinc)
-(require 'color-theme-tango-2)
+(require 'color-theme-sanityinc-solarized)
+
 
 ;#############################################################################
 ;#   Text coloring
@@ -20,20 +20,12 @@
 
 (setq bg-colors '("cornsilk" "gray0" "gray18" "gray40"))
 (setq fg-colors '("gainsboro" "navy"))
+(setq mouse-colors '("firebrick" "yellow"))
 
-;; (set-foreground-color (nth 0 fg-colors))
-;; (set-background-color (nth 0 bg-colors))
-;; (set-cursor-color "firebrick")
 (set-cursor-color "chartreuse2")
-;; (set-mouse-color "yellow")
 
 (color-theme-initialize)
-;; (color-theme-mac-classic) ;; bright
-;; (color-theme-sanityinc-light) ;; bright
-;; (color-theme-tango-2)
 (color-theme-zenburn)
-;; (color-theme-gtk-ide)
-;; (color-theme-darkmate)
 
 ;#############################################################################
 ;#   Fonts
@@ -42,9 +34,9 @@
 
 (setq custom/fonts-def '(
 	("Consolas:size=12" "Consolas")
-	("Terminus:size=12" "Terminus")
-	("Monaco:size=8" "Monaco")
-	("Verdana:size=10" "Verdana")
+	("Terminus:size=10" "Terminus")
+	("Monaco:size=12" "Monaco")
+	("Code2000:size=12" "Code2000")
 	))
 
 (defun set-xwindows-font (idx)
