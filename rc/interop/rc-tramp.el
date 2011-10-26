@@ -31,4 +31,10 @@
 (setenv "SHELL" "/bin/sh") ;; workaround for zsh
 (setq tramp-default-method "ssh")
 
+;; (add-to-list 'tramp-default-proxies-alist
+;; 						 '("office\\.webdrive\\.ru" "octocat"
+;; 							 "/ssh:node1.unitedplatform.com:")
+;; 						 '("\\`smee\\.loc\\'" "\\`octocat\\'"
+;; 							 "/ssh:office.webdrive.ru:"))
+
 ;;; emacs-rc-tramp.el ends here

@@ -19,6 +19,11 @@
 (require 'erc-services)
 (require 'erc-menu)
 
+;; (and
+;;  (require 'erc-highlight-nicknames)
+;;  (add-to-list 'erc-modules 'highlight-nicknames)
+;;  (erc-update-modules))
+
 
 ;#############################################################################
 ;#   Initialization

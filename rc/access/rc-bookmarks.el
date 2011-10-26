@@ -12,14 +12,14 @@
 ;############################################################################
 ;; (add-to-list 'load-path custom-ext-path/crosshair)
 
-(require 'bookmark+)
+;; (require 'bookmark+)
 
 
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-;; (global-set-key [f5] 'bookmark-set)
-;; (global-set-key [(control x) r j] 'bookmark-jump)
+(global-set-key [f5] 'bookmark-set)
+(global-set-key [(control x) r j] 'bookmark-jump)
 
 ;; TODO: See if we can customize Bookmarks[+] further
 

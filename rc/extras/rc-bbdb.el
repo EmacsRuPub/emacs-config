@@ -7,10 +7,10 @@
 ;; Requirements: 
 ;; Status: not intended to be distributed yet
 
-(bbdb-initialize 'gnus 'message)
+;; (bbdb-initialize 'gnus 'message)
 
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-(add-hook 'message-setup-hook 'bbdb-define-all-aliases)
+;; (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+;; (add-hook 'message-setup-hook 'bbdb-define-all-aliases)
 
 (setq bbdb-use-pop-up nil)
 (setq bbdb-sounds-directory nil)
@@ -43,7 +43,4 @@
 	)
 (add-hook 'bbdb-mode-hook 'my-bbdb-mode-hook)
 
-
 ;;; emacs-rc-bbdb.el ends here
-
-

@@ -9,5 +9,6 @@
 
 (load "~/.emacs.d/rc/org/rc-org-capture.el")
 (load "~/.emacs.d/rc/org/rc-org-mode.el")
+(load "~/.emacs.d/rc/org/rc-calfw.el")
 
 ;;; major-modes.el ends here

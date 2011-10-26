@@ -13,7 +13,7 @@
 
 (require 'anything)
 (require 'anything-config)
-;; (require 'anything-extension)
+(require 'anything-extension)
 (require 'anything-match-plugin)
 (require 'anything-show-completion)
 

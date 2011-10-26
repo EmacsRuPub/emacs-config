@@ -9,6 +9,8 @@
 
 (load "~/.emacs.d/rc/extras/client/rc-erc.el")
 (load "~/.emacs.d/rc/extras/client/rc-jabber.el")
+(load "~/.emacs.d/rc/extras/client/rc-instantblogs.el")
+(load "~/.emacs.d/rc/extras/client/rc-mail-wl.el")
 (load "~/.emacs.d/rc/extras/client/rc-w3m.el")
 
 ;;; extras.el ends here
