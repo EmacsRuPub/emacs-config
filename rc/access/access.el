@@ -7,9 +7,10 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/access/rc-anything.el")
-(load "~/.emacs.d/rc/access/rc-bookmarks.el")
-(load "~/.emacs.d/rc/access/rc-icicles.el")
-(load "~/.emacs.d/rc/access/rc-search.el")
+(load (concat config-basedir "/rc/access/rc-anything.el"))
+(load (concat config-basedir "/rc/access/rc-bookmarks.el"))
+(load (concat config-basedir "/rc/access/rc-icicles.el"))
+(load (concat config-basedir "/rc/access/rc-search.el"))
+(load (concat config-basedir "/rc/access/rc-tail.el"))
 
 ;;; access.el ends here

@@ -7,8 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/edit/rc-editing.el")
-(load "~/.emacs.d/rc/edit/rc-joinlines.el")
-(load "~/.emacs.d/rc/edit/rc-wrap-region.el")
+(load (concat config-basedir "/rc/edit/rc-editing.el"))
+(load (concat config-basedir "/rc/edit/rc-joinlines.el"))
+(load (concat config-basedir "/rc/edit/rc-wrap-region.el"))
 
 ;;; major-modes.el ends here

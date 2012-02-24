@@ -4,32 +4,36 @@
     (error (display-warning 'initialization (concat "Load of " filename " failed "
                                                     (prin1-to-string err)) :warning))))
 
+(setq config-basedir "/Users/octocat/.emacs.d")
+
 (setq message-log-max t)
 
 (setq el-get-sources-system-file
-			"~/.emacs.d/el-get-sources-system.el")
+  (concat config-basedir "/el-get-sources-system.el"))
 
-(solidload "~/.emacs.d/rc-el-get.el")
+(solidload (concat config-basedir "/rc-el-get.el"))
 
-(setq custom-file "~/.emacs.d/customizations.el")
+(solidload (concat config-basedir "/ext/load-ext-manual.el"))
+
+(setq custom-file (concat config-basedir "/customizations.el"))
 
 (add-to-list 'load-path "~/site-lisp")
-(solidload "~/.emacs.d/constants.el")
-(solidload "~/.emacs.d/credentials.el")
+(solidload (concat config-basedir "/constants.el"))
+(solidload (concat config-basedir "/credentials.el"))
 ;; Initializing
-(solidload "~/.emacs.d/emacs-rc-auto-mode.el")
+(solidload (concat config-basedir "/emacs-rc-auto-mode.el"))
 ;; ============
-(solidload "~/.emacs.d/rc/modes/modes.el")
-(solidload "~/.emacs.d/rc/core/core.el")
-(solidload "~/.emacs.d/rc/util/util.el")
-(solidload "~/.emacs.d/rc/abbrev/abbrev.el")
-(solidload "~/.emacs.d/rc/access/access.el")
-(solidload "~/.emacs.d/rc/edit/edit.el")
-(solidload "~/.emacs.d/rc/interop/interop.el")
-(solidload "~/.emacs.d/rc/prog/prog.el")
-(solidload "~/.emacs.d/rc/org/org.el")
-(solidload "~/.emacs.d/rc/publish/publish.el")
-(solidload "~/.emacs.d/rc/extras/extras.el")
+(solidload (concat config-basedir "/rc/modes/modes.el"))
+(solidload (concat config-basedir "/rc/core/core.el"))
+(solidload (concat config-basedir "/rc/util/util.el"))
+(solidload (concat config-basedir "/rc/abbrev/abbrev.el"))
+(solidload (concat config-basedir "/rc/access/access.el"))
+(solidload (concat config-basedir "/rc/edit/edit.el"))
+(solidload (concat config-basedir "/rc/interop/interop.el"))
+(solidload (concat config-basedir "/rc/prog/prog.el"))
+(solidload (concat config-basedir "/rc/org/org.el"))
+(solidload (concat config-basedir "/rc/publish/publish.el"))
+(solidload (concat config-basedir "/rc/extras/extras.el"))
 
 (load custom-file)
 

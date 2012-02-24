@@ -17,7 +17,7 @@
 (autoload 'wl-user-agent-compose "wl-draft" nil t)
 
 
-(setq wl-init-file "~/.emacs.d/rc/extras/client/.wl")
+(setq wl-init-file (concatenate 'config-basedir "/rc/extras/client/.wl"))
 
 ;; SMTP server for mail posting. Default: nil
 (setq wl-smtp-posting-server "localhost")

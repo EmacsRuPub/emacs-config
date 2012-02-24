@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/interop/rc-shell.el")
-(load "~/.emacs.d/rc/interop/rc-tramp.el")
+(load (concat config-basedir "/rc/interop/rc-shell.el"))
+(load (concat config-basedir "/rc/interop/rc-tramp.el"))
 
 ;;; extras.el ends here

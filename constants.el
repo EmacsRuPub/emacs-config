@@ -12,8 +12,8 @@
 ;#############################################################################
 ;#   Abbreviation
 ;############################################################################
-(setq custom/yasnippet-dir (concat custom/base-conf-dir "/resources/yasnippet"))
-(setq custom/auto-insert-dir (concat custom/base-conf-dir "/resources/auto-insert/"))
+(setq custom/yasnippet-dir (concat config-basedir "/resources/yasnippet"))
+(setq custom/auto-insert-dir (concat config-basedir "/resources/auto-insert/"))
 
 
 ;#############################################################################
@@ -28,6 +28,6 @@
 ;#   Jabber
 ;############################################################################
 (setq custom/jabber-history-dir "~/.emacs-jabber")
-(setq custom/rc-jabber-custom "~/.emacs.d/rc/extras/client/rc-jabber-custom.el")
+(setq custom/rc-jabber-custom (concat config-basedir "/rc/extras/client/rc-jabber-custom.el"))
 
 ;;; constants.el ends here

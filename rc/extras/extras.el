@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/extras/client/client.el")
-(load "~/.emacs.d/rc/extras/rc-bbdb.el")
+(load (concat config-basedir "/rc/extras/client/client.el"))
+(load (concat config-basedir "/rc/extras/rc-bbdb.el"))
 
 ;;; extras.el ends here

@@ -159,7 +159,7 @@
 (setq appt-message-warning-time '60)
 (setq appt-display-interval '15)
 ;; drawing diagrams with ditaa
-(setq org-ditaa-jar-path "~/.emacs.d/resources/ditaa0_9.jar")
+(setq org-ditaa-jar-path (concat config-basedir "/resources/ditaa0_9.jar"))
 
 
 ;#############################################################################

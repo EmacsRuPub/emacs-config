@@ -7,8 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/org/rc-org-capture.el")
-(load "~/.emacs.d/rc/org/rc-org-mode.el")
-(load "~/.emacs.d/rc/org/rc-calfw.el")
+(load (concat config-basedir "/rc/org/rc-org-capture.el"))
+(load (concat config-basedir "/rc/org/rc-org-mode.el"))
+(load (concat config-basedir "/rc/org/rc-calfw.el"))
 
 ;;; major-modes.el ends here

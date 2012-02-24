@@ -7,10 +7,10 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/prog/lang/lang.el")
-(load "~/.emacs.d/rc/prog/rc-common-hooks.el")
-(load "~/.emacs.d/rc/prog/rc-prog-common.el")
-(load "~/.emacs.d/rc/prog/tools/tools.el")
-(load "~/.emacs.d/rc/prog/vcs/vcs.el")
+(load (concat config-basedir "/rc/prog/lang/lang.el"))
+(load (concat config-basedir "/rc/prog/rc-common-hooks.el"))
+(load (concat config-basedir "/rc/prog/rc-prog-common.el"))
+(load (concat config-basedir "/rc/prog/tools/tools.el"))
+(load (concat config-basedir "/rc/prog/vcs/vcs.el"))
 
 ;;; major-modes.el ends here

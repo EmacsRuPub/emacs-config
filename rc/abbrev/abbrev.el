@@ -7,8 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(load "~/.emacs.d/rc/abbrev/rc-abbrevs.el")
-(load "~/.emacs.d/rc/abbrev/rc-auto-insert.el")
-(load "~/.emacs.d/rc/abbrev/rc-yasnippet.el")
+(load (concat config-basedir "/rc/abbrev/rc-abbrevs.el"))
+(load (concat config-basedir "/rc/abbrev/rc-auto-insert.el"))
+(load (concat config-basedir "/rc/abbrev/rc-yasnippet.el"))
 
 ;;; extras.el ends here
