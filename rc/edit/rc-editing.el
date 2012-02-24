@@ -140,6 +140,7 @@
 ;; (setq scroll-conservatively 50)
 ;; (setq save-place-file "~/.emacs.d/saveplace")
 ;; (setq-default save-place t)
+(setq default-input-method 'russian-computer)
 
 
 
