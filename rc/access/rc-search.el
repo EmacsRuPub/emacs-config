@@ -12,6 +12,10 @@
 (require 'full-ack)
 (require 'ioccur)
 
+(when (eq system-type 'darwin) ;; mac specific settings
+  (setq locate-command "mdfind")
+  )
+
 
 ;#############################################################################
 ;#   full-ack setup
