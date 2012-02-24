@@ -173,7 +173,7 @@
 (global-set-key [(?%)] 'match-paren)
 (global-set-key [(meta g)] 'goto-line)
 (global-set-key [?\M-]] 'custom/comment-or-uncomment-region)
-(global-set-key [f12] 'whitespace-mode)
+(global-set-key "\C-cws" 'whitespace-mode)
 
 ;; TODO: find more appropriate place for below keybindings
 (global-set-key "\C-cpm" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))

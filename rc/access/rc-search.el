@@ -30,7 +30,7 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key [C-f3] 'highlight-symbol-at-point)
+(global-set-key [M-f3] 'highlight-symbol-at-point)
 (global-set-key [f3] 'highlight-symbol-next)
 (global-set-key [S-f3] 'highlight-symbol-prev)
 (global-set-key "\M-\C-y" 'kill-ring-search)
@@ -41,5 +41,6 @@
 (global-set-key "\C-cur" 're-builder)
 (global-set-key "\C-coi" 'ioccur)
 (global-set-key "\C-cob" 'ioccur-find-buffer-matching)
+(global-set-key "\C-col" 'locate)
 
 ;;; init-search.el ends here
