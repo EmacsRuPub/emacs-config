@@ -15,6 +15,7 @@
 (require 'undo-tree)
 ;; (require 'drag-stuff)
 (require 'saveplace)
+(require 'minimap)
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -142,7 +143,6 @@
 ;; (setq-default save-place t)
 (setq default-input-method 'russian-computer)
 
-
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-key-is-meta t)
@@ -182,5 +182,8 @@
 
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
+
+(global-set-key "\C-cmn" 'minimap-create)
+(global-set-key "\C-cmk" 'minimap-kill)
 
 ;;; emacs-rc-editing.el ends here
