@@ -16,6 +16,7 @@
 ;; (require 'drag-stuff)
 (require 'saveplace)
 (require 'minimap)
+(require 'pretty-mode)
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -119,6 +120,7 @@
 ;; (pc-selection-mode nil nil (pc-select))
 ;; (cua-selection-mode t)
 ;;(drag-stuff-global-mode t)
+(global-pretty-mode 1)
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
