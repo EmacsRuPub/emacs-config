@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq custom/base-conf-dir "~/.emacs.d")
+(setq org-dir "/Users/octocat/org")
 
 ;#############################################################################
 ;#   Abbreviation
@@ -19,9 +19,9 @@
 ;#############################################################################
 ;#   Org
 ;############################################################################
-(setq custom/org-capture-file "/mnt/work/org/refile.org")
-(setq custom/org-capture-review-file "/mnt/work/org/review.org")
-(setq custom/org-diary-file "/mnt/work/org/diary.org")
+(setq custom/org-capture-file (concat org-dir "/refile.org"))
+(setq custom/org-capture-review-file (concat org-dir "/review.org"))
+(setq custom/org-diary-file (concat org-dir "/diary.org"))
 
 
 ;#############################################################################
