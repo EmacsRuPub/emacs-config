@@ -1,10 +1,10 @@
-;;; init-search.el --- 
+;;; init-search.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 (require 'highlight-symbol)
