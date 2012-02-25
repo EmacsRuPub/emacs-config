@@ -7,6 +7,25 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+(setq ropemacs-enable-shortcuts nil)
+(setq ropemacs-local-prefix "C-c i")
+(setq ropemacs-global-prefix "C-x /")
+
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+;; (eval-after-load "pymacs"
+;;    '(add-to-list 'pymacs-load-path "~/.emacs.d/ext/pymacs/"))
+
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+
+(autoload 'python-pylint "python-pylint")
+(autoload 'pylint "python-pylint")
+
+
 ;#############################################################################
 ;#   Custom definitions
 ;############################################################################
@@ -31,12 +50,26 @@
   (define-key python-mode-map "(" 'electric-pair)
   (define-key python-mode-map "[" 'electric-pair)
   (define-key python-mode-map "{" 'electric-pair)
+  (define-key python-mode-map "\C-cl" 'pylint)
+  (define-key python-mode-map "\C-cpe" 'pep8)
   )
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
 (add-hook 'python-mode-hook 'common-hooks/comment-hook)
 (add-hook 'python-mode-hook 'common-hooks/show-prog-keywords)
-(add-hook 'python-mode-hook 'flyspell-prog-mode)
+;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
 (add-hook 'python-mode-hook 'common-hooks/newline-hook)
+
+(setenv "PYTHONPATH"
+        (concat
+         "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:"
+         "/Users/octocat/workspace/opossum/src:"
+         "/Users/octocat/workspace/webdrive/python:"
+         (getenv "PYTHONPATH")))
+
+(setenv "PYLINTRC"
+        (concat
+         config-basedir
+         "contrib/.pylintrc"))
 
 ;;; emacs-rc-python.el ends here
