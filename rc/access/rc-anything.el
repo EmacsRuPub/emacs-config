@@ -53,7 +53,7 @@
        anything-c-source-files-in-all-dired
        anything-c-source-file-cache
        anything-c-source-buffers+
-       anything-c-source-buffer-not-found			 
+       anything-c-source-buffer-not-found
        anything-c-source-bookmarks
        anything-c-source-register
        anything-c-source-fixme

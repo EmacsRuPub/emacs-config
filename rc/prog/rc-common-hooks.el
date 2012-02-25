@@ -11,12 +11,29 @@
 ;#   Customizations
 ;############################################################################
 ;; clean trailing whitespaces automatically
-(setq custom/trailing-whitespace-modes '(c++-mode c-mode haskell-mode emacs-lisp-mode
-                                                   lisp-mode scheme-mode erlang-mode))
+(setq custom/trailing-whitespace-modes
+      '(
+        c++-mode
+        c-mode
+        haskell-mode
+        emacs-lisp-mode
+        lisp-mode
+        scheme-mode
+        erlang-mode
+        python-mode
+))
 
 ;; untabify some modes
-(setq custom/untabify-modes '(haskell-mode emacs-lisp-mode lisp-mode scheme-mode
-                                            erlang-mode clojure-mode))
+(setq custom/untabify-modes
+      '(
+        haskell-mode
+        emacs-lisp-mode
+        lisp-mode
+        scheme-mode
+        erlang-mode
+        clojure-mode
+        python-mode
+))
 
 
 ;#############################################################################

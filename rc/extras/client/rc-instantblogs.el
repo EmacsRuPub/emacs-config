@@ -14,7 +14,7 @@
 
 (setq juick-tmp-dir "~/.juick-avatars/")
 (setq juick-tag-subscribed '("emacs" "vim" "linux" "juick" "GTD"
-														 "todo"))
+			     "todo"))
 (setq juick-icon-mode t)
 
 (custom-set-faces '(psto-user-name-face

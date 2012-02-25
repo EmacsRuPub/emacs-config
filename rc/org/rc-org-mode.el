@@ -31,17 +31,17 @@
 (add-to-list 'org-link-abbrev-alist '("ms-spec" . "http://localhost/~ott/data-formats-doc/Microsoft%20Specs/[%s].pdf"))
 
 (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "STARTED(s)" "|" "DONE(d)"
-				    "CANCELLED(c)")))
+                                    "CANCELLED(c)")))
 
 (setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "STARTED(s)")))
 (setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
-	("WAITING" . (:foreground "orange" :weight bold))
-	("STARTED" . (:foreground "blue" :weight bold))
-	("DONE" . (:foreground "green" :weight bold))
-	("CANCELLED" . (:foreground "cyan" :weight bold)))
+        ("WAITING" . (:foreground "orange" :weight bold))
+        ("STARTED" . (:foreground "blue" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CANCELLED" . (:foreground "cyan" :weight bold)))
       )
 
 (setq org-agenda-files (quote ("/blog-posts.org"
@@ -136,23 +136,23 @@
 
 (setq org-agenda-custom-commands
       (quote (("d" todo "DELEGATED" nil)
-	      ("c" todo "DONE|DEFERRED|CANCELLED" nil)
-	      ("w" todo "WAITING" nil)
-	      ("et" tags "+ticket+emacs")
-	      ("xt" tags "+ticket+xmonad")
-	      ("W" agenda "" ((org-agenda-ndays 21)))
-	      ("A" agenda ""
-	       ((org-agenda-skip-function
-		 (lambda nil
-		   (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-		(org-agenda-ndays 1)
-		(org-agenda-overriding-header "Today's Priority #A tasks: ")))
-	      ("u" alltodo ""
-	       ((org-agenda-skip-function
-		 (lambda nil
-		   (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-					     (quote regexp) "<[^>\n]+>")))
-		(org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+              ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+              ("w" todo "WAITING" nil)
+              ("et" tags "+ticket+emacs")
+              ("xt" tags "+ticket+xmonad")
+              ("W" agenda "" ((org-agenda-ndays 21)))
+              ("A" agenda ""
+               ((org-agenda-skip-function
+                 (lambda nil
+                   (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
+                (org-agenda-ndays 1)
+                (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+              ("u" alltodo ""
+               ((org-agenda-skip-function
+                 (lambda nil
+                   (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
+                                             (quote regexp) "<[^>\n]+>")))
+                (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation

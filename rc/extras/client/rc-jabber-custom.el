@@ -129,7 +129,7 @@
             (mapcar
              (lambda (data) (car (last data)))
              (xml-get-children node 'string))))
-			(list
+                        (list
         (concat (regexp-opt smilies "\\(") "\\W")
         1 filename)
        )))
@@ -160,7 +160,7 @@
   (interactive "sTheme: ")
   (when smiley-base-directory
     (let* ((smiley-dir (format "%s/%s/" smiley-base-directory pack ))
-					 (smiley-path (concat smiley-dir "emoticons.xml")))
+                                         (smiley-path (concat smiley-dir "emoticons.xml")))
       (when (file-exists-p smiley-path)
         (setq
          smiley-style 'low-color ;; this is done for compatibility reasons
