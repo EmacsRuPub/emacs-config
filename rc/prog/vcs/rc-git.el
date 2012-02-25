@@ -10,13 +10,13 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(autoload 'egit "egit" "Emacs git history" t)
-(autoload 'egit-file "egit" "Emacs git history file" t)
-(autoload 'egit-dir "egit" "Emacs git history directory" t)
+;(autoload 'egit "egit" "Emacs git history" t)
+;(autoload 'egit-file "egit" "Emacs git history file" t)
+;(autoload 'egit-dir "egit" "Emacs git history directory" t)
 
 (require 'git) ;; standard git module
 ;; (require 'git-emacs) ;; git-emacs
-(require 'egit)
+;(require 'egit)
 (require 'gitsum)
 (require 'git-blame)
 (require 'egg)

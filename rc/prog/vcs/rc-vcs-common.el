@@ -11,7 +11,7 @@
 ;#   Load extensions
 ;############################################################################
 (require 'psvn)
-(require 'mercurial)
+;(require 'mercurial)
 (require 'ahg)
 ;; (require 'vc)
 
