@@ -9,21 +9,12 @@
 
 (require 'highlight-symbol)
 (require 're-builder)
-(require 'full-ack)
 (require 'ioccur)
 
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq locate-command "mdfind")
   )
 
-
-;#############################################################################
-;#   full-ack setup
-;############################################################################
-(autoload 'ack-same "full-ack" nil t)
-(autoload 'ack "full-ack" nil t)
-(autoload 'ack-find-same-file "full-ack" nil t)
-(autoload 'ack-find-file "full-ack" nil t)
 (autoload 'kill-ring-search "kill-ring-search" "Search the kill ring in the minibuffer." (interactive))
 
 
@@ -36,7 +27,6 @@
 (global-set-key "\M-\C-y" 'kill-ring-search)
 (global-set-key "\C-cs" 'multi-occur-in-matching-buffers)
 (global-set-key "\C-cug" 'rgrep)
-(global-set-key "\C-cua" 'ack)
 (global-set-key "\C-coo" 'occur)
 (global-set-key "\C-cur" 're-builder)
 (global-set-key "\C-coi" 'ioccur)
