@@ -45,6 +45,7 @@
 (show-paren-mode t)
 (tooltip-mode nil)
 (global-font-lock-mode t)
+(display-battery-mode 1)
 
 ;; use y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
