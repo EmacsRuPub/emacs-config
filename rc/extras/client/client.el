@@ -9,6 +9,7 @@
 
 (load (concat config-basedir "/rc/extras/client/rc-erc.el"))
 (load (concat config-basedir "/rc/extras/client/rc-jabber.el"))
-(load (concat config-basedir "/rc/extras/client/rc-w3m.el"))
+;; (load (concat config-basedir "/rc/extras/client/rc-w3m.el"))
+(load (concat config-basedir "/rc/extras/client/rc-twitter.el"))
 
 ;;; extras.el ends here

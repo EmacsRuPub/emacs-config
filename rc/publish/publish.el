@@ -9,5 +9,6 @@
 
 ;; (load (concat config-basedir "/rc/publish/rc-tex.el"))
 (load (concat config-basedir "/rc/publish/rc-ps-print.el"))
+(load (concat config-basedir "/rc/publish/rc-pdftools.el"))
 
 ;;; extras.el ends here

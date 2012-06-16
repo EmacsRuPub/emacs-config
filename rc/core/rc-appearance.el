@@ -9,6 +9,7 @@
 
 (require 'tree-widget)
 (require 'mwheel)
+(require 'buff-menu+)
 
 (load-library "time")
 

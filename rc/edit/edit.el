@@ -10,5 +10,7 @@
 (load (concat config-basedir "/rc/edit/rc-editing.el"))
 (load (concat config-basedir "/rc/edit/rc-joinlines.el"))
 (load (concat config-basedir "/rc/edit/rc-wrap-region.el"))
+(load (concat config-basedir "/rc/edit/rc-rebox2.el"))
+(load (concat config-basedir "/rc/edit/rc-backups.el"))
 
 ;;; major-modes.el ends here

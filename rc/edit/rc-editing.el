@@ -16,7 +16,11 @@
 ;; (require 'drag-stuff)
 (require 'saveplace)
 (require 'minimap)
-(require 'pretty-mode)
+;; (require 'pretty-mode)
+(require 'camelCase)
+(require 'saveplace)
+(require 'uniquify)
+(require 'point-stack)
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -106,6 +110,23 @@
 ;;     (kill-new msg)
 ;;     (message msg)))
 
+(defun quote-string-with-period-and-nextline ()
+  "Wraps current line in quotes, adds period and goes one down"
+  (interactive)
+  (beginning-of-line)
+  (insert "\'")
+  (end-of-line)
+  (insert "\'\,")
+  (next-line))
+
+(defun double-quote-string-with-period-and-nextline ()
+  "Wraps current line in quotes, adds period and goes one down"
+  (interactive)
+  (beginning-of-line)
+  (insert "\"")
+  (end-of-line)
+  (insert "\"\,")
+  (next-line))
 
 ;#############################################################################
 ;#   Customizations
@@ -120,7 +141,8 @@
 ;; (pc-selection-mode nil nil (pc-select))
 ;; (cua-selection-mode t)
 ;;(drag-stuff-global-mode t)
-(global-pretty-mode 1)
+;; (global-pretty-mode 1)
+(mouse-avoidance-mode 'banish)
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
@@ -139,11 +161,13 @@
 (setq use-dialog-box nil)
 (setq whitespace-global-mode nil)
 (setq whitespace-silent t)
+(defvar user-temporary-file-directory (expand-file-name "~/autosave/"))
 ;; (setq x-select-request-type (quote (UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 ;; (setq scroll-conservatively 50)
 ;; (setq save-place-file "~/.emacs.d/saveplace")
 ;; (setq-default save-place t)
 (setq default-input-method 'russian-computer)
+(setq-default save-place t)
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
@@ -188,4 +212,22 @@
 (global-set-key "\C-cmn" 'minimap-create)
 (global-set-key "\C-cmk" 'minimap-kill)
 
+(global-set-key '[(f6)] 'point-stack-push)
+(global-set-key '[(f7)] 'point-stack-pop)
+(global-set-key '[(f8)] 'point-stack-forward-stack-pop)
+
+(global-set-key "\M-\"" 'eval-region)
+
+(global-set-key '[(f9)] 'quote-string-with-period-and-nextline)
+(global-set-key '[(S-f9)] 'double-quote-string-with-period-and-nextline)
+
+
+;; (global-set-key "\C-cmk" 'kmacro-end-and-call-macro)
+
 ;;; emacs-rc-editing.el ends here
+
+;; (add-hook 'find-file-hooks
+
+;;  (lambda ()
+;;    (when buffer-read-only
+;;      (set-background-color "yellow"))))

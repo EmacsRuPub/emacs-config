@@ -10,5 +10,6 @@
 (load (concat config-basedir "/rc/util/rc-dired.el"))
 (load (concat config-basedir "/rc/util/rc-browser.el"))
 (load (concat config-basedir "/rc/util/rc-info.el"))
+(load (concat config-basedir "/rc/util/rc-command-log.el"))
 
 ;;; util.el ends here
