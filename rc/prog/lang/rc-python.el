@@ -7,21 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq ropemacs-enable-shortcuts nil)
-(setq ropemacs-local-prefix "C-c i")
-(setq ropemacs-global-prefix "C-x /")
-
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-;; (eval-after-load "pymacs"
-;;    '(add-to-list 'pymacs-load-path "~/.emacs.d/ext/pymacs/"))
-
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-
 (autoload 'python-pylint "python-pylint")
 (autoload 'pylint "python-pylint")
 
