@@ -166,28 +166,6 @@
 
 
 ;#############################################################################
-;#   Custom definitions
-;############################################################################
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40"))
-
-(defun custom/org-agenda-to-appt ()
-  (interactive)
-  (setq appt-time-msg-list nil)
-  (org-agenda-to-appt))
-
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40")
-  )
-
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40")
-  )
-
-
-;#############################################################################
 ;#   Setup
 ;############################################################################
 (custom/org-agenda-to-appt)
