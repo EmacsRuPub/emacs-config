@@ -75,8 +75,3 @@
 (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
 
 ;;; emacs-rc-cmode.el ends here
-
-
-
-
-
