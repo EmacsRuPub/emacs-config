@@ -102,6 +102,7 @@
                                "/todo.org"
                                "/weather.org"
                                "/job/work.org"
+                               "/job/reggi-bugs-archive.org"
                                "/wiki.org"
                                )))
 
