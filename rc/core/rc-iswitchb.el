@@ -79,6 +79,5 @@
 (add-to-list 'iswitchb-buffer-ignore "\\*Symref")
 (add-to-list 'iswitchb-buffer-ignore "^\\.cabal$")
 (add-to-list 'iswitchb-buffer-ignore "*Org Agenda*")
-(add-to-list 'iswitchb-buffer-ignore "\\.htm*")
 
 ;;; emacs-rc-iswitchb.el ends here
