@@ -15,6 +15,8 @@
 
 (solidload (concat config-basedir "/ext/load-ext-manual.el"))
 
+(solidload (concat config-basedir "/defuns/defuns.el"))
+
 (setq custom-file (concat config-basedir "/customizations.el"))
 
 (add-to-list 'load-path "~/site-lisp")
