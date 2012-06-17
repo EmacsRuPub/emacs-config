@@ -50,6 +50,6 @@
   (save-excursion
     (beginning-of-line 0)
     (org-remove-empty-drawer-at "CLOCK" (point))))
-(add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
+(add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 
 ;;; rc-org-capture.el ends here
