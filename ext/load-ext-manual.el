@@ -15,6 +15,7 @@
 (load (concat config-basedir "/ext/camelCase-mode.el"))
 (load (concat config-basedir "/ext/color-theme-solarized.el"))
 (load (concat config-basedir "/ext/command-log-mode/command-log-mode.el"))
+(load (concat config-basedir "/ext/kill-ring-search.el"))
 (load (concat config-basedir "/ext/minimap.el"))
 (load (concat config-basedir "/ext/pdftools.el"))
 (load (concat config-basedir "/ext/php/php-mode/php-mode.el"))
