@@ -37,6 +37,7 @@
   (define-key python-mode-map "{" 'electric-pair)
   (define-key python-mode-map "\C-cl" 'pylint)
   (define-key python-mode-map "\C-cpe" 'pep8)
+  (define-key python-mode-map "\C-c\C-e" 'python-end-of-block)
   )
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
