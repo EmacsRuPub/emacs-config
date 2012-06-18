@@ -13,7 +13,7 @@
 ;#   Hooks
 ;############################################################################
 (defun custom/TeX-keymap ()
-  (local-set-key [(meta i)] 
+  (local-set-key (kbd "M-i")
                  '(lambda ()
                     (interactive)
                     (insert "\n\\item "))))
@@ -77,7 +77,7 @@
 ;;         (concat (getenv "TEXINPUTS")
 ;;                 ":/home/ott/tex/styles//:/home/ott/projects/fprog/journal-issues/class//"))
 
-(global-set-key "\C-cmw" 'whizzytex-mode)
+(global-set-key (kbd "C-c m w") 'whizzytex-mode)
 
 
 ;#############################################################################

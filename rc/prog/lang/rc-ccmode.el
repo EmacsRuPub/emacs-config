@@ -61,7 +61,7 @@
   (hs-minor-mode 1)
   (c-turn-on-eldoc-mode)
   ;; local keys
-  (local-set-key [delete] 'delete-char)
+  (local-set-key (kbd "<delete>") 'delete-char)
   ;; (company-mode 1)
   (setq show-trailing-whitespace t) ;; show trailing whitespace
 )

@@ -40,9 +40,9 @@
   "My customization of Scheme Mode"
   (turn-on-eldoc-mode)
   ;; (paredit-mode +1)
-  (local-set-key [(control c) (\;)] 'insert-balanced-comments)
-  (local-set-key [(control c) (:)] 'remove-balanced-comments)
-  (local-set-key [f1] 'r5rs-call)
+  (local-set-key (kbd "C-c \;") 'insert-balanced-comments)
+  (local-set-key (kbd "C-c :") 'remove-balanced-comments)
+  (local-set-key (kbd "<f1>") 'r5rs-call)
 )
 
 (add-hook 'scheme-mode-hook 'common-hooks/newline-hook)

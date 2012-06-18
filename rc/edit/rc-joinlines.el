@@ -10,8 +10,8 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-j" 'join-next-line-space-n)
-(global-set-key "\C-cj" 'join-next-line-n)
-(global-set-key "\C-c\C-j" 'join-next-line-semicolon-n)
+(global-set-key (kbd "C-c C-j") 'join-next-line-space-n)
+(global-set-key (kbd "C-c C-o j") 'join-next-line-n)
+(global-set-key (kbd "C-c C-s j") 'join-next-line-semicolon-n)
 
 ;;; emacs-rc-joinlines.el ends here

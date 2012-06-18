@@ -8,7 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (require 'rebox2)
-(global-set-key [(meta q)] 'rebox-dwim)
-(global-set-key [(shift meta q)] 'rebox-cycle)
+(global-set-key (kbd "M-q") 'rebox-dwim)
+(global-set-key (kbd "<S-M-q>") 'rebox-cycle)
 
 ;;; rc-rebox2.el ends here

@@ -8,7 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 (require 'ace-jump-mode)
-;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key "\C-cj" 'ace-jump-mode)
+(global-set-key (kbd "C-c j") 'ace-jump-mode)
 
 ;;; rc-ace-jump-mode.el ends here

@@ -181,13 +181,13 @@
 ;#   Hooks
 ;############################################################################
 (defun custom/org-mode-hook ()
-  (local-set-key "\C-x\C-a" 'show-all)
+  (local-set-key (kbd "C-x C-a") 'show-all)
   (imenu-add-to-menubar "Imenu")
   (icy-mode 0)
   ;; (make-variable-buffer-local 'yas/trigger-key)
-  ;; (setq yas/trigger-key [tab])
-  ;; (local-set-key [tab] 'yas/expand)
-  ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+  ;; (setq yas/trigger-key (kbd "<tab>"))
+  ;; (local-set-key (kbd "<tab>") 'yas/expand)
+  ;; (define-key yas/keymap (kbd "<tab>") 'yas/next-field-group)
   )
 
 (add-hook 'org-mode-hook 'custom/org-mode-hook)
@@ -201,12 +201,12 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key "\C-c\C-o\C-l" 'org-agenda-open-link)
-(global-set-key "\C-ctc" 'org-table-create)
-(global-set-key "\C-cts" 'org-sparse-tree)
-(global-set-key "\C-ctt" 'org-toggle-timestamp-type)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-iswitchb)
+(global-set-key (kbd "C-c C-o C-l") 'org-agenda-open-link)
+(global-set-key (kbd "C-c t c") 'org-table-create)
+(global-set-key (kbd "C-c t s") 'org-sparse-tree)
+(global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
 
 ;;; emacs-rc-org-mode.el ends here

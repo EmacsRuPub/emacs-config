@@ -19,8 +19,8 @@
 
 (require 'ecb)
 
-(global-set-key (kbd "\C-xtq") 'ecb-toggle-ecb-windows)
-(global-set-key (kbd "\C-xta") 'ecb-activate)
-(global-set-key (kbd "\C-xtd") 'ecb-deactivate)
+(global-set-key (kbd "C-x t q") 'ecb-toggle-ecb-windows)
+(global-set-key (kbd "C-x t a") 'ecb-activate)
+(global-set-key (kbd "C-x t d") 'ecb-deactivate)
 
 ;;; rc-ecb.el ends here

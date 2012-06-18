@@ -53,7 +53,7 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-cwq" 'open-qt-docs)
+(global-set-key (kbd "C-c w q") 'open-qt-docs)
 
 ;;; rc-prog-common.el ends here
 

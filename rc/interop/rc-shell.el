@@ -22,6 +22,6 @@
 ;#############################################################################
 ;#   Shell
 ;############################################################################
-(global-set-key "\C-cz" (lambda () (interactive) (ansi-term "/bin/zsh")))
+(global-set-key (kbd "C-c z") (lambda () (interactive) (ansi-term "/bin/zsh")))
 
 ;;; emacs-rc-shell.el ends here

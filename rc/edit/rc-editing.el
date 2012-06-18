@@ -81,49 +81,48 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-c\C-u\C-r" 'rename-uniquely)
-(global-set-key "\C-cd" 'insert-current-date-time)
-(global-set-key "\C-cf" 'diff-buffer-with-file)
-(global-set-key "\C-chm" 'woman)
-(global-set-key "\C-cnr" 'narrow-to-region)
-(global-set-key "\C-cqr" 'query-replace)
-(global-set-key "\C-cuq" 'uniq)
-(global-set-key "\C-cus" 'sort-lines)
-(global-set-key "\C-cut" 'tabify)
-(global-set-key "\C-cuu" 'untabify)
-(global-set-key "\C-cv" 'view-mode)
-(global-set-key "\C-cwd" 'delete-trailing-whitespace)
-(global-set-key "\C-cwr" 'widen)
-(global-set-key "\C-x\M-a" 'indent-region)
-(global-set-key "\C-xg" 'insert-register)
-(global-set-key "\C-xx" 'copy-to-register)
-(global-set-key [(?%)] 'match-paren)
-(global-set-key [(meta g)] 'goto-line)
-(global-set-key [?\M-]] 'custom/comment-or-uncomment-region)
-(global-set-key "\C-cws" 'whitespace-mode)
+(global-set-key (kbd "C-c C-u C-r") 'rename-uniquely)
+(global-set-key (kbd "C-c d") 'insert-current-date-time)
+(global-set-key (kbd "C-c f") 'diff-buffer-with-file)
+(global-set-key (kbd "C-c h m") 'woman)
+(global-set-key (kbd "C-c n r") 'narrow-to-region)
+(global-set-key (kbd "C-c q r") 'query-replace)
+(global-set-key (kbd "C-c u q") 'uniq)
+(global-set-key (kbd "C-c u s") 'sort-lines)
+(global-set-key (kbd "C-c u t") 'tabify)
+(global-set-key (kbd "C-c u u") 'untabify)
+(global-set-key (kbd "C-c v") 'view-mode)
+(global-set-key (kbd "C-c w d") 'delete-trailing-whitespace)
+(global-set-key (kbd "C-c w r") 'widen)
+(global-set-key (kbd "C-x M-a") 'indent-region)
+(global-set-key (kbd "C-x g") 'insert-register)
+(global-set-key (kbd "C-x x") 'copy-to-register)
+(global-set-key (kbd "%") 'match-paren)
+(global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "M-]") 'custom/comment-or-uncomment-region)
+(global-set-key (kbd "C-c w s") 'whitespace-mode)
 
 ;; TODO: find more appropriate place for below keybindings
-(global-set-key "\C-cpm" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
-(global-set-key "\C-cpu" (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
-(global-set-key "\C-cpk" (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
+(global-set-key (kbd "\C-c p m") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
+(global-set-key (kbd "\C-c p u") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
+(global-set-key (kbd "\C-c p k") (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
 
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
 
-(global-set-key "\C-cmn" 'minimap-create)
-(global-set-key "\C-cmk" 'minimap-kill)
+(global-set-key (kbd "\C-c m n") 'minimap-create)
+(global-set-key (kbd "\C-c m k") 'minimap-kill)
 
-(global-set-key '[(f6)] 'point-stack-push)
-(global-set-key '[(f7)] 'point-stack-pop)
-(global-set-key '[(f8)] 'point-stack-forward-stack-pop)
+(global-set-key (kbd "<f6>") 'point-stack-push)
+(global-set-key (kbd "<f7>") 'point-stack-pop)
+(global-set-key (kbd "<f8>") 'point-stack-forward-stack-pop)
 
-(global-set-key "\M-\"" 'eval-region)
+(global-set-key (kbd "M-\"") 'eval-region)
 
-(global-set-key '[(f9)] 'quote-string-with-period-and-nextline)
-(global-set-key '[(S-f9)] 'double-quote-string-with-period-and-nextline)
+(global-set-key (kbd "<f9>") 'quote-string-with-period-and-nextline)
+(global-set-key (kbd "<S-f9>") 'double-quote-string-with-period-and-nextline)
 
-
-;; (global-set-key "\C-cmk" 'kmacro-end-and-call-macro)
+;; (global-set-key (kbd "C-c m k") 'kmacro-end-and-call-macro)
 
 ;;; emacs-rc-editing.el ends here
 

@@ -24,23 +24,23 @@
 
 ;; complete from bbdb
 (defun my-bbdb-tab-complete ()
-	(interactive)
-	(if (mail-abbrev-in-expansion-header-p)
-			(bbdb-complete-name)
-		(message-tab)))
-(define-key message-mode-map [tab] 'my-bbdb-tab-complete)
+  (interactive)
+  (if (mail-abbrev-in-expansion-header-p)
+      (bbdb-complete-name)
+    (message-tab)))
+(define-key message-mode-map (kbd "<tab>") 'my-bbdb-tab-complete)
 
 (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
 
-(global-set-key "\C-c\C-bc" 'bbdb-create)
-(global-set-key "\C-c\C-bs" 'bbdb)
+(global-set-key (kbd "C-c C-b c") 'bbdb-create)
+(global-set-key (kbd "C-c C-b s") 'bbdb)
 
 (defun my-bbdb-mode-hook ()
-	(local-set-key "\C-c\C-e" 'bbdb-edit-current-field)
-	(local-set-key "\C-c\C-d" 'bbdb-delete-current-record)
-	(local-set-key "\C-c\C-fd" 'bbdb-delete-current-field-or-record)
-	(local-set-key "\C-c\C-fi" 'bbdb-insert-new-field)
-	)
+  (local-set-key (kbd "C-c C-e") 'bbdb-edit-current-field)
+  (local-set-key (kbd "C-c C-d") 'bbdb-delete-current-record)
+  (local-set-key (kbd "C-c C-f d") 'bbdb-delete-current-field-or-record)
+  (local-set-key (kbd "C-c C-f i") 'bbdb-insert-new-field)
+  )
 (add-hook 'bbdb-mode-hook 'my-bbdb-mode-hook)
 
 ;;; emacs-rc-bbdb.el ends here

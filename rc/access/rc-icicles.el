@@ -13,7 +13,7 @@
 
 (icy-mode t) ;; Turn on Icicle mode.
 
-(global-set-key "\C-cmi" 'icy-mode)
+(global-set-key (kbd "C-c m i") 'icy-mode)
 
 (defadvice switch-to-buffer (after custom/turn-off-icicles-org ())
   "Turns off Icicles in Orgmode buffers."

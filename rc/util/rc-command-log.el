@@ -10,6 +10,6 @@
 (require 'command-log-mode)
 ;; (add-hook 'LaTeX-mode-hook 'command-log-mode)
 
-(global-set-key "\C-c\C-l" 'clm/open-command-log-buffer)
+(global-set-key (kbd "C-c C-l") 'clm/open-command-log-buffer)
 
 ;;; rc-command-log.el ends here

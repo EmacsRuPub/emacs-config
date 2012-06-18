@@ -41,7 +41,7 @@
 (defun custom/nxml-mode-hook ()
   (auto-fill-mode)
   (hs-minor-mode 1)
-  (local-set-key "\C-c/" 'nxml-finish-element)
+  (local-set-key (kbd "C-c /") 'nxml-finish-element)
   (rng-validate-mode)
   (setq ispell-skip-html t)
   (unify-8859-on-decoding-mode)

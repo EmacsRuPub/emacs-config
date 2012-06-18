@@ -59,10 +59,10 @@
   (turn-on-eldoc-mode)
   (turn-on-haskell-indentation)
   (turn-on-haskell-indent)
-	(local-set-key "\t" 'haskell-indent-cycle)
-  (local-set-key "\C-cl" 'hs-lint)
-  (local-set-key "\C-ch" 'haskell-hoogle)
-  (local-set-key "\C-c\C-h" 'haskell-hayoo)
+  (local-set-key (kbd "<tab>") 'haskell-indent-cycle)
+  (local-set-key (kbd "C-c l") 'hs-lint)
+  (local-set-key (kbd "C-c h") 'haskell-hoogle)
+  (local-set-key (kbd "C-c C-h") 'haskell-hayoo)
   (setq tab-width 4)
   (setq haskell-font-lock-symbols t)
   )
@@ -86,9 +86,10 @@
 (require 'haskell-sort-imports)
 
 (define-key haskell-mode-map (kbd "C-c .") 'haskell-align-imports)
-(define-key haskell-mode-map [f8] 'haskell-navigate-imports)
-(define-key haskell-mode-map [f6] 'haskell-goto-imports)
-(define-key haskell-mode-map [f7] 'haskell-return-from-imports)
+(define-key haskell-mode-map (kbd "<f8>") 'haskell-navigate-imports)
+(define-key haskell-mode-map (kbd "<f6>") 'haskell-goto-imports)
+(define-key haskell-mode-map (kbd "<f7>") 'haskell-return-from-imports)
 (define-key haskell-mode-map (kbd "C-c ,") 'haskell-sort-imports)
 
 ;;; emacs-rc-haskell.el ends here
+

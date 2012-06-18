@@ -10,7 +10,7 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-c\C-p" 'pdf-save-buffer-with-faces)
-(global-set-key "\C-c\C-r" 'pdf-save-region-with-faces)
+(global-set-key (kbd "C-c C-p") 'pdf-save-buffer-with-faces)
+(global-set-key (kbd "C-c C-r") 'pdf-save-region-with-faces)
 
 ;;; rc-pdftools.el ends here

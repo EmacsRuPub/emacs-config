@@ -17,7 +17,7 @@
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
   ;; (paredit-mode 1)
-  (local-set-key [(control c) /] 'semantic-ia-complete-symbol)
+  (local-set-key (kbd "C-c /") 'semantic-ia-complete-symbol)
   )
 
 (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)

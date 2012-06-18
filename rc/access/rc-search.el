@@ -21,16 +21,16 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key [M-f3] 'highlight-symbol-at-point)
-(global-set-key [f3] 'highlight-symbol-next)
-(global-set-key [S-f3] 'highlight-symbol-prev)
-(global-set-key "\M-\C-y" 'kill-ring-search)
-(global-set-key "\C-cs" 'multi-occur-in-matching-buffers)
-(global-set-key "\C-cug" 'rgrep)
-(global-set-key "\C-coo" 'occur)
-(global-set-key "\C-cur" 're-builder)
-(global-set-key "\C-coi" 'ioccur)
-(global-set-key "\C-cob" 'ioccur-find-buffer-matching)
-(global-set-key "\C-col" 'locate)
+(global-set-key (kbd "<M-f3>") 'highlight-symbol-at-point)
+(global-set-key (kbd "<f3>") 'highlight-symbol-next)
+(global-set-key (kbd "<S-f3>") 'highlight-symbol-prev)
+(global-set-key (kbd "M-C-y") 'kill-ring-search)
+(global-set-key (kbd "C-c s") 'multi-occur-in-matching-buffers)
+(global-set-key (kbd "C-c u g") 'rgrep)
+(global-set-key (kbd "C-c o o") 'occur)
+(global-set-key (kbd "C-c u r") 're-builder)
+(global-set-key (kbd "C-c o i") 'ioccur)
+(global-set-key (kbd "C-c o b") 'ioccur-find-buffer-matching)
+(global-set-key (kbd "C-c o l") 'locate)
 
 ;;; init-search.el ends here

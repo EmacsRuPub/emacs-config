@@ -16,6 +16,6 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-cc" 'cfw:open-calendar-buffer)
+(global-set-key (kbd "C-c c") 'cfw:open-calendar-buffer)
 
 ;;; rc-calfw.el ends here

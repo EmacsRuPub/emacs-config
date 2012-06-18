@@ -72,6 +72,6 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\C-xa" 'anything-at-point)
+(global-set-key (kbd "C-x a") 'anything-at-point)
 
 ;;; rc-anything.el ends here

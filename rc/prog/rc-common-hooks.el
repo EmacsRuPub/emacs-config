@@ -41,16 +41,16 @@
 ;############################################################################
 ;; common settings for different text & programming modes
 (defun common-hooks/comment-hook ()
-  (local-set-key "\C-c:" 'uncomment-region)
-  (local-set-key "\C-c;" 'comment-region)
-  (local-set-key "\M-]" 'custom/comment-or-uncomment-region)
-  (local-set-key "\C-c\C-c" 'comment-region)
-  (local-set-key "\C-u\C-c\C-c" 'uncomment-region)
+  (local-set-key (kbd "C-c :") 'uncomment-region)
+  (local-set-key (kbd "C-c ;") 'comment-region)
+  (local-set-key (kbd "M-] ") 'custom/comment-or-uncomment-region)
+  (local-set-key (kbd "C-c C-c") 'comment-region)
+  (local-set-key (kbd "C-u C-c C-c") 'uncomment-region)
   )
 
 (defun common-hooks/newline-hook ()
-  (local-set-key "\C-m" 'newline-and-indent)
-  (local-set-key [return] 'newline-and-indent)
+  (local-set-key (kbd "C-m") 'newline-and-indent)
+  (local-set-key (kbd "<return>") 'newline-and-indent)
   )
 
 ;; show FIXME/TODO/BUG keywords

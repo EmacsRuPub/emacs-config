@@ -38,15 +38,17 @@
 ;############################################################################
 
 ;; windows resizing
-(global-set-key [C-M-down] 'win-resize-minimize-vert)
-(global-set-key [C-M-up] 'win-resize-enlarge-vert)
-(global-set-key [C-M-right] 'win-resize-minimize-horiz)
-(global-set-key [C-M-left] 'win-resize-enlarge-horiz)
+(global-set-key (kbd "<C-M-down>") 'win-resize-minimize-vert)
+(global-set-key (kbd "<C-M-up>") 'win-resize-enlarge-vert)
+(global-set-key (kbd "<C-M-right>") 'win-resize-minimize-horiz)
+(global-set-key (kbd "<C-M-left>") 'win-resize-enlarge-horiz)
 
 ;; buffer controls
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key [?\C-,] 'previous-buffer)
-(global-set-key [?\C-.] 'next-buffer)
-;; (global-set-key [f6] 'bury-buffer)
+(global-set-key (kbd "<f11>") 'buffer-menu)
+(global-set-key (kbd "C-,") 'previous-buffer)
+(global-set-key (kbd "C-.") 'next-buffer)
+;; (global-set-key (kbd "<f6>") 'bury-buffer)
+(global-set-key (kbd "C-x w") 'workspace-goto)
 
 ;;; emacs-rc-wincontrol.el ends here

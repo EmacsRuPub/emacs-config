@@ -29,7 +29,7 @@
 ;#   Hooks
 ;############################################################################
 (defun custom/sh-mode-hook ()
-  (local-set-key "\C-cl" 'custom/sh-check-syntax)
+  (local-set-key (kbd "C-c l") 'custom/sh-check-syntax)
   )
 
 (add-hook 'sh-mode-hook 'custom/sh-mode-hook)

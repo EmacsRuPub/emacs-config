@@ -29,7 +29,7 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key "\M-p" 'custom/ps-print-buffer-with-faces)
-(global-set-key "\C-c\M-p" 'custom/ps-print-region-with-faces)
+(global-set-key (kbd "M-p") 'custom/ps-print-buffer-with-faces)
+(global-set-key (kbd "C-c M-p") 'custom/ps-print-region-with-faces)
 
 ;;; emacs-rc-ps-print.el ends here

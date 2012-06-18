@@ -60,14 +60,14 @@
   (set (make-local-variable 'slime-lisp-implementations)
        (list (assoc 'sbcl slime-lisp-implementations)))
   (setq tab-width 2
-	indent-tabs-mode t)
-	(local-set-key "\C-c;" 'slime-insert-balanced-comments)
-	(local-set-key "\C-c\M-;" 'slime-remove-balanced-comments)
+  indent-tabs-mode t)
+  (local-set-key (kbd "C-c ;") 'slime-insert-balanced-comments)
+  (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
 
 (defun custom/slime-repl-hook ()
-	(local-set-key "\C-c\C-dh" 'slime-documentation-lookup)
-	)
+  (local-set-key (kbd "C-c C-d h") 'slime-documentation-lookup)
+  )
 
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/comment-hook)
@@ -83,7 +83,7 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-set-key [f5] 'slime)
-(global-set-key [(control f11)] 'slime-selector)
+(global-set-key (kbd "<f5>") 'slime)
+(global-set-key (kbd "<C-f11>") 'slime-selector)
 
 ;;; emacs-rc-slime.el ends here
