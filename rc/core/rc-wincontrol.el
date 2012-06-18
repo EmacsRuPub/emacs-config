@@ -3,8 +3,8 @@
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 (require 'window-number)
