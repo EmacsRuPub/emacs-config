@@ -54,11 +54,41 @@
 (setq jabber-rare-time-format "%e %b %Y %H:00")
 (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
 
+;#############################################################################
+;#   Jabber notifications
+;############################################################################
+(when (eq system-type 'gnu/linux)
+  (defvar jabber-libnotify-icon ""
+    "*Icon to be used on the notification pop-up. Default is empty")
+  (defvar jabber-libnotify-timeout "7000"
+    "*Specifies the timeout of the pop up window in millisecond")
+  (add-to-list 'jabber-alert-message-hooks
+               'jabber-libnotify-message-display)
+  )
 
 ;#############################################################################
-;#   Loading customizations
+;#   Jabber urgency hints
 ;############################################################################
-(load custom/rc-jabber-custom)
+(when (eq window-system 'x)
+  ;; usage example
+  (defvar jabber-activity-jids-count 0)
+  (add-hook 'jabber-activity-update-hook 'jabber-urgency-hint)
+  )
+
+;; Message alert hooks
+(define-jabber-alert echo "Show a message in the echo area"
+  (lambda (msg)
+    (unless (minibuffer-prompt)
+      (message "%s" msg))))
+
+(when (eq system-type 'darwin)
+  (defvar growl-program "/usr/local/bin/growlnotify")
+  ;; Make jabber.el notify through growl when I get a new message
+  (setq jabber-message-alert-same-buffer nil)
+  (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
+  (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
+  (setq jabber-message-alert-same-buffer t)
+  )
 
 
 ;#############################################################################

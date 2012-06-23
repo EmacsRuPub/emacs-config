@@ -28,6 +28,5 @@
 ;#   Jabber
 ;############################################################################
 (setq custom/jabber-history-dir "~/.emacs-jabber")
-(setq custom/rc-jabber-custom (concat config-basedir "/rc/extras/client/rc-jabber-custom.el"))
 
 ;;; constants.el ends here
