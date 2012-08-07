@@ -41,11 +41,9 @@
 ;############################################################################
 ;; common settings for different text & programming modes
 (defun common-hooks/comment-hook ()
-  (local-set-key (kbd "C-c :") 'uncomment-region)
-  (local-set-key (kbd "C-c ;") 'comment-region)
-  (local-set-key (kbd "M-] ") 'custom/comment-or-uncomment-region)
-  (local-set-key (kbd "C-c C-c") 'comment-region)
-  (local-set-key (kbd "C-u C-c C-c") 'uncomment-region)
+  (local-set-key (kbd "C-{") 'uncomment-region)
+  (local-set-key (kbd "C-}") 'comment-region)
+  (local-set-key (kbd "M-]") 'custom/comment-or-uncomment-region)
   )
 
 (defun common-hooks/newline-hook ()
