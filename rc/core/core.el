@@ -8,7 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 (load (concat config-basedir "/rc/core/rc-appearance.el"))
-(load (concat config-basedir "/rc/core/rc-desktop.el"))
 (load (concat config-basedir "/rc/core/rc-iswitchb.el"))
 (load (concat config-basedir "/rc/core/rc-server.el"))
 (load (concat config-basedir "/rc/core/rc-themes.el"))

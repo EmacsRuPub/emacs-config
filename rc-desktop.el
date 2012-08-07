@@ -38,14 +38,12 @@
       (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
               "\\)$"))
-;; (set-file-name-coding-system 'utf-8)
 
 
 ;#############################################################################
 ;#   Desktop load setup
 ;############################################################################
 (desktop-save-mode t)
-;; (toggle-save-place-globally)
 
 (when (fboundp 'desktop-load-default)
   (desktop-load-default)

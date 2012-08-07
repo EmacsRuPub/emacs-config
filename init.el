@@ -37,6 +37,8 @@
 (solidload (concat config-basedir "/rc/publish/publish.el"))
 (solidload (concat config-basedir "/rc/extras/extras.el"))
 
+(solidload (concat config-basedir "/rc-desktop.el"))
+
 (load custom-file)
 
 (put 'narrow-to-region 'disabled nil)
