@@ -24,11 +24,11 @@
 ;;                       :url "git://github.com/kazu-yamamoto/ghc-mod.git"
 ;;                       :load-path ("./elisp"))
 ;; dvc
-(add-to-list 'load-path "/Users/octocat/projects/github/other/el-get.my/")
+(add-to-list 'load-path "/Users/octocat/workspace/el-get.my/")
 (require 'el-get)
 
 (setq el-get-recipe-path
-      '("/Users/octocat/projects/github/other/el-get.my/recipes/"))
+      '("/Users/octocat/workspace/el-get.my/recipes/"))
 
 (setq el-get-sources-common
       '(
