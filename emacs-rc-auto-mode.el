@@ -50,6 +50,9 @@
 (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.gnus$" . emacs-lisp-mode))
 
+(add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
+(add-to-list 'auto-mode-alist '("\\.rest$" . rst-mode))
+
 ;; (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
 ;; (add-to-list 'auto-mode-alist '("\\.plg$" . prolog-mode))
