@@ -21,15 +21,15 @@
 ;#   Account definitions
 ;############################################################################
 ;; 'custom/jabber-account-list' has similar layout as below:
-;; 
+;;
 ;; (setq custom/jabber-account-list '(("abc@gmail.com/emacs"
-;; 				    (:network-server . "talk.google.com")
-;; 				    (:password . "12345")
-;; 				    (:connection-type . ssl))
-;; 				   ("xyz@jabber.ru/emacs"
-;; 				    (:password . "1234567")
-;; 				    (:network-server . "jabber.ru")
-;; 				    (:disabled . t))))
+;;                                     (:network-server . "talk.google.com")
+;;                                     (:password . "12345")
+;;                                     (:connection-type . ssl))
+;;                                    ("xyz@jabber.ru/emacs"
+;;                                     (:password . "1234567")
+;;                                     (:network-server . "jabber.ru")
+;;                                     (:disabled . t))))
 (setq jabber-account-list custom/jabber-account-list)
 
 
@@ -106,18 +106,18 @@
 (defun my-jabber-connect-hook (jc)
   (jabber-send-presence "" "I'm online" 10)
   (let* ((state-data (fsm-get-state-data jc))
-	 (server (plist-get state-data :server)))
+         (server (plist-get state-data :server)))
     (message "%s" server)
     (if (string-equal server "gmail.com")
-	(progn
-	  ;; (jabber-groupchat-join jc "devil@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "haskell@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "lisp@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "emacs@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "icfpc@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "wax@conference.jabber.ru" "ronin")
-	  ;; (jabber-groupchat-join jc "erlang@conference.jabber.ru" "ronin")
-	  ))))
+        (progn
+          ;; (jabber-groupchat-join jc "devil@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "haskell@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "lisp@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "emacs@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "icfpc@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "wax@conference.jabber.ru" "ronin")
+          ;; (jabber-groupchat-join jc "erlang@conference.jabber.ru" "ronin")
+          ))))
 
 (add-hook 'jabber-chat-mode-hook 'custom/jabber-chat-mode-hook)
 (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)

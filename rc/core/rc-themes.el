@@ -32,12 +32,13 @@
 ;############################################################################
 (defvar custom/fonts-def "User's font definitions")
 
-(setq custom/fonts-def '(
-	("Consolas:size=12" "Consolas")
-	("Terminus:size=10" "Terminus")
-	("Monaco:size=12" "Monaco")
-	("Code2000:size=12" "Code2000")
-	))
+(setq custom/fonts-def
+      '(("Consolas:size=12" "Consolas")
+        ("Terminus:size=14" "Terminus")
+        ("TerminusBold:size=12" "TerminusBold")
+        ("Monaco:size=12" "Monaco")
+        ("Code2000:size=12" "Code2000")
+        ))
 
 (defun set-xwindows-font (idx)
  (if (eq window-system 'x)

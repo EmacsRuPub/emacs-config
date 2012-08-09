@@ -8,25 +8,27 @@
 ;; Status: not intended to be distributed yet
 
 (require 'window-number)
+(require 'buffer-move)
+(require 'quick-jump)
+(require 'framemove)
 
 (window-number-meta-mode)
-;; (windmove-default-keybindings 'meta)
-;; (windmove-default-keybindings)
-
+(quick-jump-default-keybinding)
+(setq framemove-hook-into-windmove t)
 
 ;#############################################################################
 ;#   Buffers management
 ;############################################################################
-(setq ibuffer-saved-filters 
+(setq ibuffer-saved-filters
       (quote (("dired" ((mode . dired-mode)))
-	      ("leechcraft" ((filename . "leechcraft")))
-	      ("qxmpp" ((filename . "qxmpp")))
-	      ("xmonad" ((filename . "xmonad")))
-	      ("jabberchat" ((mode . jabber-chat-mode)))
-	      ("orgmode" ((mode . org-mode)))
-	      ("elisp" ((mode . emacs-lisp-mode)))
-	      ("fundamental" ((mode . fundamental-mode)))
-	      ("haskell" ((mode . haskell-mode))))))
+              ("leechcraft" ((filename . "leechcraft")))
+              ("qxmpp" ((filename . "qxmpp")))
+              ("xmonad" ((filename . "xmonad")))
+              ("jabberchat" ((mode . jabber-chat-mode)))
+              ("orgmode" ((mode . org-mode)))
+              ("elisp" ((mode . emacs-lisp-mode)))
+              ("fundamental" ((mode . fundamental-mode)))
+              ("haskell" ((mode . haskell-mode))))))
 
 ;; (setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
 ;; (setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
