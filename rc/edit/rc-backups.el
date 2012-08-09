@@ -12,7 +12,6 @@
       backup-directory-alist
       '(("." . "~/.emacs-backups"))    ; don't ; litter my fs tree
       auto-save-file-name-transforms nil
-      ;; '(("." . "~/.emacs-backups"))
       delete-old-versions t
       kept-new-versions 16
       kept-old-versions 2

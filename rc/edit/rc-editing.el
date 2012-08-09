@@ -16,7 +16,6 @@
 ;; (require 'drag-stuff)
 (require 'saveplace)
 (require 'minimap)
-;; (require 'pretty-mode)
 (require 'camelCase)
 (require 'saveplace)
 (require 'uniquify)
@@ -25,7 +24,6 @@
 (require 'rst)
 (require 'savekill)
 
-(autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
 ;; (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
 ;; (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
@@ -43,9 +41,7 @@
 (show-paren-mode t)
 (global-hl-line-mode 1)
 ;; (pc-selection-mode nil nil (pc-select))
-;; (cua-selection-mode t)
 ;;(drag-stuff-global-mode t)
-;; (global-pretty-mode 1)
 (mouse-avoidance-mode 'banish)
 (global-auto-complete-mode t)
 
@@ -68,7 +64,6 @@
 (setq whitespace-silent t)
 (defvar user-temporary-file-directory (expand-file-name "~/autosave/"))
 ;; (setq x-select-request-type (quote (UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-;; (setq scroll-conservatively 50)
 ;; (setq save-place-file "~/.emacs.d/saveplace")
 ;; (setq-default save-place t)
 (setq default-input-method 'russian-computer)
@@ -116,11 +111,9 @@
 
 (global-set-key (kbd "\C-c m n") 'minimap-create)
 (global-set-key (kbd "\C-c m k") 'minimap-kill)
-
 (global-set-key (kbd "<f6>") 'point-stack-push)
 (global-set-key (kbd "<f7>") 'point-stack-pop)
 (global-set-key (kbd "<f8>") 'point-stack-forward-stack-pop)
-
 (global-set-key (kbd "M-\"") 'eval-region)
 
 (global-set-key (kbd "<f9>") 'quote-string-with-period-and-nextline)

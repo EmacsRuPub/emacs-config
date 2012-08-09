@@ -25,7 +25,6 @@
 
 (set-cursor-color "chartreuse2")
 
-(color-theme-initialize)
 (color-theme-zenburn)
 ;; (color-theme-twilight)
 
@@ -43,12 +42,8 @@
         ))
 
 (defun set-xwindows-font (idx)
- (if (eq window-system 'x)
-     (progn
-	(set-default-font (nth 0 (nth idx custom/fonts-def)))
-	;; (set-fontset-font "fontset-default" ; (frame-parameter nil 'font)
-	;; 		  'cyrillic '((nth 1 (nth idx 'custom/fonts-def)) . "unicode-bmp"))
-	)))
+  (progn
+    (set-default-font (nth 0 (nth idx custom/fonts-def)))))
 
 (set-xwindows-font 0)
 

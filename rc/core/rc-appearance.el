@@ -7,8 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'tree-widget)
-(require 'mwheel)
 (require 'buff-menu+)
 
 (load-library "time")
@@ -38,7 +36,6 @@
 ;#############################################################################
 ;#   Appearance function calls
 ;############################################################################
-(mwheel-install)
 (blink-cursor-mode t)
 (tool-bar-mode 0)
 (global-hl-line-mode t)

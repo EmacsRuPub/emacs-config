@@ -183,7 +183,6 @@
 (defun custom/org-mode-hook ()
   (local-set-key (kbd "C-x C-a") 'show-all)
   (imenu-add-to-menubar "Imenu")
-  (icy-mode 0)
   ;; (make-variable-buffer-local 'yas/trigger-key)
   ;; (setq yas/trigger-key (kbd "<tab>"))
   ;; (local-set-key (kbd "<tab>") 'yas/expand)
