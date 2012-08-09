@@ -19,6 +19,7 @@
 ;#############################################################################
 ;#   setup extensions
 ;############################################################################
+(setq slime-backend (concat config-basedir "/ext/slime/swank-loader.lisp"))
 
 ;; lookup information in hyperspec
 (info-lookup-add-help
@@ -29,7 +30,8 @@
 
 (eval-after-load "slime"
   '(progn
-     (slime-setup '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl))
+     (slime-setup
+      '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl helm-slime))
      (setq slime-complete-symbol*-fancy t)
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
      ))
@@ -68,6 +70,13 @@
 (defun custom/slime-repl-hook ()
   (local-set-key (kbd "C-c C-d h") 'slime-documentation-lookup)
   )
+
+;; Stop SLIME's REPL from grabbing DEL,
+;; which is annoying when backspacing over a '('
+(defun override-slime-repl-bindings-with-paredit ()
+  (define-key slime-repl-mode-map
+    (read-kbd-macro paredit-backward-delete-key) nil))
+(add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
 
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/comment-hook)

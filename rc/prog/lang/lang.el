@@ -12,7 +12,7 @@
 (load (concat config-basedir "/rc/prog/lang/rc-erlang.el"))
 (load (concat config-basedir "/rc/prog/lang/rc-haskell.el"))
 (load (concat config-basedir "/rc/prog/lang/rc-javascript.el"))
-;; (load (concat config-basedir "/rc/prog/lang/rc-lisp.el"))
+(load (concat config-basedir "/rc/prog/lang/rc-lisp.el"))
 ;; (load "~/.emacs.d/rc/prog/lang/rc-nxml.el") ;; TODO: make it load
 ;; and init by el-get (e.g. make own recipe)
 (load (concat config-basedir "/rc/prog/lang/rc-perl.el"))
