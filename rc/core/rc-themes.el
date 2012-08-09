@@ -10,6 +10,7 @@
 (require 'color-theme)
 (require 'color-theme-darkmate)
 (require 'color-theme-sanityinc-solarized)
+(require 'parenface)
 
 
 ;#############################################################################
@@ -26,6 +27,7 @@
 
 (color-theme-initialize)
 (color-theme-zenburn)
+;; (color-theme-twilight)
 
 ;#############################################################################
 ;#   Fonts
@@ -49,6 +51,8 @@
 	)))
 
 (set-xwindows-font 0)
+
+(set-face-foreground 'paren-face "blue4")
 
 ;;; rc-themes.el ends here
 

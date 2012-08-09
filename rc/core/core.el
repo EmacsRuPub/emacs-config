@@ -12,5 +12,6 @@
 (load (concat config-basedir "/rc/core/rc-server.el"))
 (load (concat config-basedir "/rc/core/rc-themes.el"))
 (load (concat config-basedir "/rc/core/rc-wincontrol.el"))
+(load (concat config-basedir "/rc/core/rc-workgroups.el"))
 
 ;;; extras.el ends here

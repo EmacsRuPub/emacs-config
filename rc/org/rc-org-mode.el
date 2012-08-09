@@ -18,7 +18,7 @@
 (require 'org-install)
 (require 'org)
 (require 'org-agenda)
-
+(require 'org-contacts)
 
 ;#############################################################################
 ;#   Customizations
@@ -208,5 +208,7 @@
 (global-set-key (kbd "C-c t c") 'org-table-create)
 (global-set-key (kbd "C-c t s") 'org-sparse-tree)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
+(global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
+(global-set-key (kbd "C-c o") 'oog)
 
 ;;; emacs-rc-org-mode.el ends here

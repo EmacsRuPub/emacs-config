@@ -21,6 +21,9 @@
 (require 'saveplace)
 (require 'uniquify)
 (require 'point-stack)
+(require 'auto-complete)
+(require 'rst)
+(require 'savekill)
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -44,6 +47,7 @@
 ;;(drag-stuff-global-mode t)
 ;; (global-pretty-mode 1)
 (mouse-avoidance-mode 'banish)
+(global-auto-complete-mode t)
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
@@ -123,6 +127,8 @@
 (global-set-key (kbd "<S-f9>") 'double-quote-string-with-period-and-nextline)
 
 ;; (global-set-key (kbd "C-c m k") 'kmacro-end-and-call-macro)
+
+(global-set-key (kbd "C-c f") 'fci-mode)
 
 ;;; emacs-rc-editing.el ends here
 

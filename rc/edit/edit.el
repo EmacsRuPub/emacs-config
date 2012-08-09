@@ -12,5 +12,6 @@
 (load (concat config-basedir "/rc/edit/rc-wrap-region.el"))
 (load (concat config-basedir "/rc/edit/rc-rebox2.el"))
 (load (concat config-basedir "/rc/edit/rc-backups.el"))
+(load (concat config-basedir "/rc/edit/rc-header2.el"))
 
 ;;; major-modes.el ends here

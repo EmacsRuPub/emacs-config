@@ -16,6 +16,7 @@
 (require 'anything-extension)
 (require 'anything-match-plugin)
 (require 'anything-show-completion)
+(require 'anything-grep)
 
 
 ;#############################################################################

@@ -22,6 +22,23 @@
 ;#############################################################################
 ;#   Shell
 ;############################################################################
-(global-set-key (kbd "C-c z") (lambda () (interactive) (ansi-term "/bin/zsh")))
+;; (global-set-key (kbd "C-c z") (lambda () (interactive) (ansi-term "/bin/zsh")))
+
+;; test
+
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/zsh")
+
+;; Usage
+
+;; multi-term.el provides the following interactive functions:
+
+;;     “multi-term” – Create a new terminal buffer.
+;;     “multi-term-next” – Switch to next terminal buffer.
+;;     “multi-term-prev” – Switch to previous terminal buffer.
+;;     “multi-term-dedicated-open” – Open dedicated terminal buffer.
+;;     “multi-term-dedicated-close” – Close dedicated terminal window.
+;;     “multi-term-dedicated-toggle” – Toggle dedicated terminal window.
+;;     “multi-term-dedicated-select” – Select dedicated terminal window.
 
 ;;; emacs-rc-shell.el ends here

@@ -48,9 +48,15 @@
 ;; buffer controls
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f11>") 'buffer-menu)
-(global-set-key (kbd "C-,") 'previous-buffer)
-(global-set-key (kbd "C-.") 'next-buffer)
-;; (global-set-key (kbd "<f6>") 'bury-buffer)
-(global-set-key (kbd "C-x w") 'workspace-goto)
+
+(global-set-key (kbd "C-S-c <up>") 'buf-move-up)
+(global-set-key (kbd "C-S-c <down>") 'buf-move-down)
+(global-set-key (kbd "C-S-c <left>") 'buf-move-left)
+(global-set-key (kbd "C-S-c <right>") 'buf-move-right)
+
+(global-set-key (kbd "C-c <up>") 'windmove-up)
+(global-set-key (kbd "C-c <down>") 'windmove-down)
+(global-set-key (kbd "C-c <left>") 'windmove-left)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
 
 ;;; emacs-rc-wincontrol.el ends here

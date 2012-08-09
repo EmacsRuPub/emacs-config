@@ -14,5 +14,8 @@
 (load (concat config-basedir "/rc/access/rc-tail.el"))
 (load (concat config-basedir "/rc/access/rc-helm.el"))
 (load (concat config-basedir "/rc/access/rc-ace-jump-mode.el"))
+(load (concat config-basedir "/rc/access/rc-fastnav.el"))
+(load (concat config-basedir "/rc/access/rc-browse-kill-ring.el"))
+(load (concat config-basedir "/rc/access/rc-webjump.el"))
 
 ;;; access.el ends here
