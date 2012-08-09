@@ -15,8 +15,6 @@
   (setq locate-command "mdfind")
   )
 
-(autoload 'kill-ring-search "kill-ring-search" "Search the kill ring in the minibuffer." (interactive))
-
 
 ;#############################################################################
 ;#   Keybindings

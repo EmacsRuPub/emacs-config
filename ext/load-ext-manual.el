@@ -28,7 +28,6 @@
 (load (concat config-basedir "/ext/column-marker.el"))
 (load (concat config-basedir "/ext/command-log-mode/command-log-mode.el"))
 (load (concat config-basedir "/ext/csv-mode.el"))
-(load (concat config-basedir "/ext/kill-ring-search.el"))
 (load (concat config-basedir "/ext/fastnav.el/fastnav.el"))
 (load (concat config-basedir "/ext/fill-column-indicator.el"))
 (load (concat config-basedir "/ext/helm-slime/helm-slime.el"))
