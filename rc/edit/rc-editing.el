@@ -47,7 +47,10 @@
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
-(setq uniquify-buffer-name-style (quote forward))
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 (setq fill-column 120)
 (setq indent-tabs-mode nil)
 (setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
