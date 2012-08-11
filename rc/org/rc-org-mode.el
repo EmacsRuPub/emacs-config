@@ -104,6 +104,7 @@
                                "/job/work.org"
                                "/job/reggi-bugs-archive.org"
                                "/wiki.org"
+                               "/contacts.org"
                                )))
 
 (setq org-agenda-files (mapcar (lambda (org-file) (concat org-dir org-file)) org-agenda-files))
