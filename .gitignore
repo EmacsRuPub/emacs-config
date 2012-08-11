@@ -10,3 +10,4 @@ credentials.el
 customizations.el
 el-get
 image-dired
+kill-ring-saved.el
