@@ -9,6 +9,7 @@
 
 (require 'zencoding-mode)
 
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+(add-hook 'sgml-mode-hook 'zencoding-mode)
+(add-hook 'nxml-mode-hook 'zencoding-mode)
 
 ;;; rc-zencoding.el ends here
