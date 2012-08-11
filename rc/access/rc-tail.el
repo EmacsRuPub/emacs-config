@@ -9,4 +9,6 @@
 
 (require 'tail)
 
+(global-set-key (kbd "C-c t f") 'tail-file)
+
 ;;; rc-tail.el ends here
