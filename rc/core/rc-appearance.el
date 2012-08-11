@@ -32,6 +32,11 @@
 (setq display-time-string-forms
   '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 
+(setq disabled-command-function nil)
+(and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Blinking cursors are distracting - turn blink OFF
+(and (fboundp 'blink-cursor-mode) (blink-cursor-mode (- (*) (*) (*))))
 
 ;#############################################################################
 ;#   Appearance function calls
