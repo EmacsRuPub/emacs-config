@@ -45,6 +45,16 @@
 (mouse-avoidance-mode 'banish)
 (global-auto-complete-mode t)
 
+(defvar custom-programming-brackets-syntax-table
+  (let ((table (make-syntax-table)))
+    (modify-syntax-entry ?) "w" table)
+    (modify-syntax-entry ?] "w" table)
+    table))
+;; TODO it fails to indent correctly. try to work it around by 'with'
+;; when selecting region
+;; (add-hook 'python-mode-hook (lambda () (set-syntax-table custom-programming-brackets-syntax-table)))
+;; (add-hook 'php-mode-hook (lambda () (set-syntax-table custom-programming-brackets-syntax-table)))
+
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
 (setq uniquify-buffer-name-style 'reverse)
