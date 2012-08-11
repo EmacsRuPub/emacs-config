@@ -11,6 +11,7 @@
 (require 'buffer-move)
 (require 'quick-jump)
 (require 'framemove)
+(require 'buff-menu+)
 
 (window-number-meta-mode)
 (quick-jump-default-keybinding)

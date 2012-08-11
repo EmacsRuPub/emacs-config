@@ -7,9 +7,9 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'buff-menu+)
-
 (load-library "time")
+
+(require 'uniquify)
 
 ;#############################################################################
 ;#   Appearance variables
@@ -24,6 +24,12 @@
 (setq split-width-threshold nil)
 (setq custom-buffer-done-kill t)
 (setq initial-scratch-message nil)
+
+;; uniquify
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; date|time
 (setq display-time-mail-file t)

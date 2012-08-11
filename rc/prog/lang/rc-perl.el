@@ -29,15 +29,13 @@
 ;############################################################################
 (defun custom/perl-mode-hook ()
   (setq indent-tabs-mode nil)
-  (line-number-mode 1)
-  (column-number-mode 1)
   (abbrev-mode 1)
   (turn-on-eldoc-mode)
   (cperl-mode)
   (setq compile-command (concat "perl -cw " buffer-file-name))
   (cperl-mode 1)
   (setq tab-width 2
-	indent-tabs-mode nil)
+  indent-tabs-mode nil)
   )
 (add-hook 'perl-mode-hook 'custom/perl-mode-hook)
 (add-hook 'perl-mode-hook 'common-hooks/comment-hook)
