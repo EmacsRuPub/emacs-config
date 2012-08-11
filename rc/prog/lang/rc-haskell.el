@@ -14,8 +14,11 @@
 (autoload 'haskell-indent-cycle "haskell-indent" "Indentation cycle for Haskell" t)
 (autoload 'ghc-init "ghc" nil t)
 
+(load (concat config-basedir "/ext/haskell-mode/haskell-site-file.el"))
+
 (require 'hs-lint)
 (require 'inf-haskell)
+(require 'haskell-mode)
 
 ;#############################################################################
 ;#   Customizations
@@ -57,7 +60,6 @@
   (turn-on-haskell-doc-mode)
   (turn-on-haskell-ghci)
   (turn-on-eldoc-mode)
-  (turn-on-haskell-indentation)
   (turn-on-haskell-indent)
   (local-set-key (kbd "<tab>") 'haskell-indent-cycle)
   (local-set-key (kbd "C-c l") 'hs-lint)
@@ -71,7 +73,6 @@
 (add-hook 'haskell-mode-hook 'common-hooks/comment-hook)
 (add-hook 'haskell-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
-(add-hook 'haskell-mode-hook 'haskell-unicode)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 
