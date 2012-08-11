@@ -52,6 +52,8 @@
 (setq jabber-chat-buffer-format "*-jc-%n-*")
 (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
 (setq jabber-rare-time-format "%e %b %Y %H:00")
+;; (setq jabber-debug-log-xml t)
+
 (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
 
 ;#############################################################################
