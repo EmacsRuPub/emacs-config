@@ -78,10 +78,9 @@
 (defvar user-temporary-file-directory (expand-file-name "~/autosave/"))
 ;; (setq x-select-request-type (quote (UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 ;; (setq save-place-file "~/.emacs.d/saveplace")
-;; (setq-default save-place t)
-(setq default-input-method 'russian-computer)
 (setq-default save-place t)
-
+(setq default-input-method 'russian-computer)
+(setq show-paren-style 'mixed)
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-key-is-meta t)
@@ -114,10 +113,8 @@
 (global-set-key (kbd "C-c C-u C-r") 'rename-uniquely)
 (global-set-key (kbd "C-c v") 'view-mode)
 
-;; TODO: find more appropriate place for below keybindings
-(global-set-key (kbd "\C-c p m") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
-(global-set-key (kbd "\C-c p u") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
-(global-set-key (kbd "\C-c p k") (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
+(global-set-key (kbd "<f9>") 'quote-string-with-period-and-nextline)
+(global-set-key (kbd "<S-f9>") 'double-quote-string-with-period-and-nextline)
 
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
@@ -129,17 +126,13 @@
 (global-set-key (kbd "<f8>") 'point-stack-forward-stack-pop)
 (global-set-key (kbd "M-\"") 'eval-region)
 
-(global-set-key (kbd "<f9>") 'quote-string-with-period-and-nextline)
-(global-set-key (kbd "<S-f9>") 'double-quote-string-with-period-and-nextline)
+;; TODO: find more appropriate place for below keybindings
+(global-set-key (kbd "\C-c p m") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.mask/package.common.mask")))
+(global-set-key (kbd "\C-c p u") (lambda () (interactive) (find-file "/sudo::/etc/portage/package.use")))
+(global-set-key (kbd "\C-c p k") (lambda () (interactive) (find-file "/sudo::/etc/make.conf")))
 
 ;; (global-set-key (kbd "C-c m k") 'kmacro-end-and-call-macro)
 
 (global-set-key (kbd "C-c f") 'fci-mode)
 
 ;;; emacs-rc-editing.el ends here
-
-;; (add-hook 'find-file-hooks
-
-;;  (lambda ()
-;;    (when buffer-read-only
-;;      (set-background-color "yellow"))))
