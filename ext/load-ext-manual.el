@@ -62,6 +62,7 @@
 (load (concat config-basedir "/ext/electric-dot-and-dash.el"))
 (load (concat config-basedir "/ext/header2.el"))
 (load (concat config-basedir "/ext/flymake-cursor.el"))
+(load (concat config-basedir "/ext/framemove.el"))
 
 ;; (add-to-list 'load-path (concat config-basedir "/ext/frame-tag.el"))
 ;; (add-to-list 'load-path (concat config-basedir "/ext/python/pymacs"))
