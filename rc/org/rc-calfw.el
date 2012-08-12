@@ -18,4 +18,6 @@
 ;############################################################################
 (global-set-key (kbd "C-c c") 'cfw:open-calendar-buffer)
 
+(provide 'rc-calfw)
+
 ;;; rc-calfw.el ends here

@@ -1,4 +1,4 @@
-;;; emacs-rc-auto-insert.el ---
+;;; rc-auto-insert.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
@@ -29,4 +29,6 @@
 (add-to-list 'auto-insert-alist '("\\.h$"   . ["insert-home.h" auto-update-header-file]))
 (add-to-list 'auto-insert-alist '("\\.c$" . ["insert-home.cpp" auto-update-c-source-file]))
 
-;;; emacs-rc-auto-insert.el ends here
+(provide 'rc-auto-insert)
+
+;;; rc-auto-insert.el ends here

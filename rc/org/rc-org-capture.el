@@ -56,4 +56,6 @@
     (org-remove-empty-drawer-at "CLOCK" (point))))
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 
+
+(provide 'rc-org-capture)
 ;;; rc-org-capture.el ends here

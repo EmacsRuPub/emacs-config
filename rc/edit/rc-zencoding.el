@@ -12,4 +12,6 @@
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 (add-hook 'nxml-mode-hook 'zencoding-mode)
 
+(provide 'rc-zencoding)
+
 ;;; rc-zencoding.el ends here

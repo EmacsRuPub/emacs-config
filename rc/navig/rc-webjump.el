@@ -22,4 +22,6 @@
                 )
               webjump-sample-sites))
 
+(provide 'rc-webjump)
+
 ;;; rc-webjump.el ends here

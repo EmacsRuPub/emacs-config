@@ -16,4 +16,6 @@
 
 ;; TODO: See if we can customize Bookmarks[+] further
 
+(provide 'rc-bookmarks)
+
 ;;; rc-bookmarks.el ends here

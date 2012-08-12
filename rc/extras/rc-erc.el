@@ -1,10 +1,10 @@
-;;; emacs-rc-erc.el --- 
+;;; emacs-rc-erc.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -52,8 +52,13 @@
 (setq erc-prompt-for-nickserv-password nil)
 (setq erc-nickserv-passwords
       '((freenode     ((custom/erc-nick . custom/erc-nickserv-password)
-		       (custom/erc-nick . custom/erc-nickserv-password)))))
-(setq erc-encoding-coding-alist (quote (("#debian-russian" . cyrillic-koi8) ("#altlinux" . cyrillic-koi8) ("#unix.ru" . cyrillic-koi8) ("#fidorus" . cyrillic-koi8))))
+                       (custom/erc-nick . custom/erc-nickserv-password)))))
+(setq erc-encoding-coding-alist
+      (quote
+       (("#debian-russian" . cyrillic-koi8)
+        ("#altlinux" . cyrillic-koi8)
+        ("#unix.ru" . cyrillic-koi8)
+        ("#fidorus" . cyrillic-koi8))))
 (setq erc-nick custom/erc-main-nick)
 (setq erc-nick-uniquifier "_")
 (setq erc-prompt-for-password nil)
@@ -66,13 +71,13 @@
 ;#   Network and channel presets
 ;############################################################################
 ;; (setq erc-autojoin-channels-alist
-      ;; '(("freenode.net" "#couchdb" "#haskell" "#git" "#xmonad")
-	;; ("irc.freenode.net" "#git")
-        ;; ("freenode.net" "#clojure")
-	;; ("irc.int.ru" "#unix")
-	;; ("irc.fu-berlin.de" "#unix.ru" "#fidorus")
-	;; ("fu-berlin.de" "#unix.ru" "#fidorus")
-	;; ))
+;;       '(("freenode.net" "#couchdb" "#haskell" "#git" "#xmonad")
+;;         ("irc.freenode.net" "#git")
+;;         ("freenode.net" "#clojure")
+;;         ("irc.int.ru" "#unix")
+;;         ("irc.fu-berlin.de" "#unix.ru" "#fidorus")
+;;         ("fu-berlin.de" "#unix.ru" "#fidorus")
+;;         ))
 
 ;; (defun erc-connect ()
 ;;   "Connect to IRC."
@@ -80,8 +85,8 @@
 ;;   (progn
 ;;     (erc-select :server "irc.int.ru" :port 6667 :nick custom/erc-nick)
 ;;     (erc-select :server "irc.freenode.net" :port 6667 :nick custom/erc-nick)
-;; ;;    (erc-select :server "irc.fu-berlin.de" :port 6667 :nick "alexott")
-;; 	))
+;;     ;; (erc-select :server "irc.fu-berlin.de" :port 6667 :nick "alexott")
+;;    ))
 
 
 ;#############################################################################
@@ -92,18 +97,20 @@
 (defun bitlbee-identify ()
   "If we're on the bitlbee server, send the identify command to the &bitlbee channel."
   (when (and (string= "localhost" erc-session-server)
-	     (string= "&bitlbee" (buffer-name)))
-    (erc-message "PRIVMSG" (format "%s identify %s" 
-				   (erc-default-target) 
-				   bitlbee-password))))
+             (string= "&bitlbee" (buffer-name)))
+    (erc-message "PRIVMSG" (format "%s identify %s"
+                                   (erc-default-target)
+                                   bitlbee-password))))
 (add-hook 'erc-join-hook 'bitlbee-identify)
 
 (defun erc-cmd-ICQWHOIS (uin)
   "Queries icq-user with UIN `uin', and returns the result."
   (let* ((result (myerc-query-icq-user uin))
-	 (fname (cdr (assoc 'fname result)))
-	 (lname (cdr (assoc 'lname result)))
-	 (nick (cdr (assoc 'nick result))))
+         (fname (cdr (assoc 'fname result)))
+         (lname (cdr (assoc 'lname result)))
+         (nick (cdr (assoc 'nick result))))
     (erc-display-message nil 'notice (current-buffer) (format "%s (%s %s)" nick fname lname))))
+
+(provide 'rc-erc)
 
 ;;; emacs-rc-erc.el ends here

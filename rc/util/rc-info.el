@@ -1,10 +1,10 @@
-;;; emacs-rc-info.el --- 
+;;; emacs-rc-info.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -19,5 +19,7 @@
 ;############################################################################
 (push "/usr/share/info" Info-directory-list)
 (setenv "MANPATH" "/usr/share/man:/usr/local/man")
+
+(provide 'rc-info)
 
 ;;; emacs-rc-info.el ends here

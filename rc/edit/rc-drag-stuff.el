@@ -11,4 +11,6 @@
 
 (drag-stuff-global-mode t)
 
+(provide 'rc-drag-stuff)
+
 ;;; rc-drag-stuff.el ends here

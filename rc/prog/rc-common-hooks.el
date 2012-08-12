@@ -70,4 +70,6 @@
 (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)
 
+(provide 'rc-common-hooks)
+
 ;;; emacs-rc-common-hooks.el ends here

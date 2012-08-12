@@ -1,4 +1,4 @@
-;;; init-search.el ---
+;;; rc-search.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
@@ -30,4 +30,6 @@
 (global-set-key (kbd "C-c s b") 'ioccur-find-buffer-matching)
 (global-set-key (kbd "C-c s l") 'locate)
 
-;;; init-search.el ends here
+(provide 'rc-search)
+
+;;; rc-search.el ends here

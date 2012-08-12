@@ -80,4 +80,6 @@
 (add-to-list 'iswitchb-buffer-ignore "^\\.cabal$")
 (add-to-list 'iswitchb-buffer-ignore "irc\\.")
 
+(provide 'rc-iswitchb)
+
 ;;; emacs-rc-iswitchb.el ends here

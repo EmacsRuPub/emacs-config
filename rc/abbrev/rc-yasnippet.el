@@ -1,10 +1,10 @@
-;;; emacs-rc-yasnippet.el ---
+;;; rc-yasnippet.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 (require 'yasnippet) ;; not yasnippet-bundle
@@ -17,4 +17,6 @@
     (yas/load-directory custom/yasnippet-dir)))
 (add-hook 'after-save-hook 'update-yasnippets-on-save)
 
-;;; emacs-rc-yasnippet.el ends here
+(provide 'rc-yasnippet)
+
+;;; rc-yasnippet.el ends here

@@ -55,6 +55,8 @@
 ;############################################################################
 (global-set-key (kbd "C-c w q") 'open-qt-docs)
 
+(provide 'rc-prog-common)
+
 ;;; rc-prog-common.el ends here
 
 

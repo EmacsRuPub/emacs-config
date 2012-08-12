@@ -14,4 +14,6 @@
 (global-set-key (kbd "C-c C-o j") 'join-next-line-n)
 (global-set-key (kbd "C-c C-s j") 'join-next-line-semicolon-n)
 
+(provide 'rc-joinlines)
+
 ;;; emacs-rc-joinlines.el ends here

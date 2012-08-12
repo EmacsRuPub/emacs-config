@@ -17,4 +17,6 @@
 (setq glasses-separator "")
 (setq glasses-original-separator "")
 
+(provide 'rc-php)
+
 ;;; rc-php.el ends here

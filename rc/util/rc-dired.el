@@ -113,4 +113,6 @@
 ;############################################################################
 (global-set-key (kbd "C-c C-j") 'dired-jump)
 
+(provide 'rc-dired)
+
 ;;; emacs-rc-dired.el ends here

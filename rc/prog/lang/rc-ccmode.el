@@ -74,4 +74,6 @@
 (add-hook 'c-mode-hook 'common-hooks/newline-hook)
 (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
 
-;;; emacs-rc-cmode.el ends here
+(provide 'rc-ccmode)
+
+;;; emacs-rc-ccmode.el ends here

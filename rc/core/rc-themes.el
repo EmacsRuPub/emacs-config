@@ -49,5 +49,7 @@
 
 (set-face-foreground 'paren-face "blue4")
 
+(provide 'rc-themes)
+
 ;;; rc-themes.el ends here
 

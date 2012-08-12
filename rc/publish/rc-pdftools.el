@@ -13,4 +13,6 @@
 (global-set-key (kbd "C-c C-p") 'pdf-save-buffer-with-faces)
 (global-set-key (kbd "C-c C-r") 'pdf-save-region-with-faces)
 
+(provide 'rc-pdftools)
+
 ;;; rc-pdftools.el ends here

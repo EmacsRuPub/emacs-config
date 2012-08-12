@@ -90,4 +90,6 @@
 (setq reftex-save-parse-info t)
 (setq reftex-use-multiple-selection-buffers t)
 
+(provide 'rc-tex)
+
 ;;; emacs-rc-tex.el ends here

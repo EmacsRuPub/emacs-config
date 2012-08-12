@@ -41,4 +41,6 @@
 ;;     “multi-term-dedicated-toggle” – Toggle dedicated terminal window.
 ;;     “multi-term-dedicated-select” – Select dedicated terminal window.
 
+(provide 'rc-shell)
+
 ;;; emacs-rc-shell.el ends here

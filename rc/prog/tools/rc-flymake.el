@@ -43,4 +43,6 @@
 (global-set-key (kbd "C-x <up>") 'flymake-goto-prev-error)
 (global-set-key (kbd "C-x <down>") 'flymake-goto-next-error)
 
+(provide 'rc-flymake)
+
 ;;; rc-flymake.el ends here

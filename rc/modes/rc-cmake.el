@@ -23,5 +23,7 @@
 (add-hook 'cmake-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'cmake-mode-hook 'common-hooks/newline-hook)
 
+(provide 'rc-cmake)
+
 ;;; emacs-rc-cmake.el ends here
 

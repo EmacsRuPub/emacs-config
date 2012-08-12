@@ -1,10 +1,10 @@
-;;; emacs-rc-doxygen.el --- 
+;;; emacs-rc-doxygen.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -32,5 +32,7 @@
 (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
 (add-hook 'c-mode-common-hook 'doc-mode)
+
+(provide 'rc-doxygen)
 
 ;;; emacs-rc-doxygen.el ends here

@@ -37,4 +37,6 @@
   (delayed))
  "Source for searching matching files in weblocks-saikat recursively.")
 
+(provide 'rc-anything-custom)
+
 ;;; rc-anything-custom.el ends here

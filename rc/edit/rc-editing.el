@@ -100,4 +100,6 @@
 
 (global-set-key (kbd "C-c f") 'fci-mode)
 
+(provide 'rc-editing)
+
 ;;; emacs-rc-editing.el ends here

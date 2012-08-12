@@ -10,4 +10,6 @@
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-c j") 'ace-jump-mode)
 
+(provide 'rc-ace-jump-mode)
+
 ;;; rc-ace-jump-mode.el ends here

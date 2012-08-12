@@ -17,4 +17,6 @@
       kept-old-versions 2
       version-control t)               ; use versioned backups
 
+(provide 'rc-backups)
+
 ;;; rc-backups.el ends here

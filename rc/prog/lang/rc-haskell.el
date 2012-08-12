@@ -92,5 +92,7 @@
 (define-key haskell-mode-map (kbd "<f7>") 'haskell-return-from-imports)
 (define-key haskell-mode-map (kbd "C-c ,") 'haskell-sort-imports)
 
+(provide 'rc-haskell)
+
 ;;; emacs-rc-haskell.el ends here
 

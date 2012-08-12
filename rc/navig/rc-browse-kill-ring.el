@@ -11,4 +11,6 @@
 
 (global-set-key (kbd "C-c k") 'browse-kill-ring)
 
+(provide 'rc-browse-kill-ring)
+
 ;;; rc-browse-kill-ring.el ends here

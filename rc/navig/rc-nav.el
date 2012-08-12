@@ -13,4 +13,6 @@
 
 (global-set-key [f5] 'nav-toggle)
 
+(provide 'rc-nav)
+
 ;;; rc-nav.el ends here

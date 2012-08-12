@@ -18,4 +18,6 @@
 ;;   (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
 ;;   (add-hook 'c-mode-common-hook   'auto-make-header)
 
+(provide 'rc-header2)
+
 ;;; rc-header2.el ends here

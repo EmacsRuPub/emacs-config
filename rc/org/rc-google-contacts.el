@@ -9,4 +9,6 @@
 
 (require 'google-contacts)
 
+(provide 'rc-google-contacts)
+
 ;;; rc-google-contacts.el ends here

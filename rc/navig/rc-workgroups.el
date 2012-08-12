@@ -13,5 +13,6 @@
 
 (workgroups-mode 1)
 
+(provide 'rc-workgroups)
 
 ;;; rc-workgroups.el ends here

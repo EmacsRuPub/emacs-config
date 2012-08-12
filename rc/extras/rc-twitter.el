@@ -11,4 +11,6 @@
 
 ;; (setq twittering-use-master-password t)
 
+(provide 'rc-twitter)
+
 ;;; rc-twitter.el ends here

@@ -1,10 +1,10 @@
-;;; rc-instantblogs.el --- 
+;;; rc-instantblogs.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -13,8 +13,7 @@
 (require 'juick)
 
 (setq juick-tmp-dir "~/.juick-avatars/")
-(setq juick-tag-subscribed '("emacs" "vim" "linux" "juick" "GTD"
-			     "todo"))
+(setq juick-tag-subscribed '("emacs" "vim" "linux" "juick" "GTD" "todo"))
 (setq juick-icon-mode t)
 
 (custom-set-faces '(psto-user-name-face
@@ -37,6 +36,6 @@
 ;#   Hooks
 ;############################################################################
 
-
+(provide 'rc-instantblogs)
 
 ;;; rc-instantblogs.el ends here

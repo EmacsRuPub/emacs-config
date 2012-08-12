@@ -1,4 +1,4 @@
-;;; init-git.el ---
+;;; rc-git.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
@@ -29,4 +29,6 @@
 (global-set-key (kbd "C-c m c") 'mo-git-blame-current)
 (global-set-key (kbd "C-c m f") 'mo-git-blame-file)
 
-;;; init-git.el ends here
+(provide 'rc-git)
+
+;;; rc-git.el ends here

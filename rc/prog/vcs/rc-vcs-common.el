@@ -1,10 +1,10 @@
-;;; init-vcs.el --- 
+;;; rc-vcs-common.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -24,4 +24,6 @@
 ;; (setq svn-status-svn-environment-var-list (quote ("LC_MESSAGES=C" "LANG=C" "LC_ALL=C"))))
 (setq vc-handled-backends nil)
 
-;;; init-vcs.el ends here
+(provide 'rc-vcs-common)
+
+;;; rc-vcs-common.el ends here

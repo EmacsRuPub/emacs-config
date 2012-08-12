@@ -83,4 +83,6 @@
             (dolist (spec distel-shell-keys)
               (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
+(provide 'rc-erlang)
+
 ;;; emacs-rc-erlang.el ends here

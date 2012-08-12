@@ -95,4 +95,6 @@
 (global-set-key (kbd "<f5>") 'slime)
 (global-set-key (kbd "<C-f11>") 'slime-selector)
 
-;;; emacs-rc-slime.el ends here
+(provide 'rc-lisp)
+
+;;; emacs-rc-lisp.el ends here

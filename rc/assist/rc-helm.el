@@ -15,4 +15,6 @@
 (global-set-key (kbd "C-c h e") 'helm-mini)
 (global-set-key (kbd "C-f") 'helm-find-files)
 
+(provide 'rc-helm)
+
 ;;; rc-helm.el ends here

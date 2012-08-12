@@ -75,4 +75,6 @@
 ;############################################################################
 (global-set-key (kbd "C-x a") 'anything-at-point)
 
+(provide 'rc-anything)
+
 ;;; rc-anything.el ends here

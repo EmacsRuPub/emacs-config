@@ -60,4 +60,6 @@
 (global-set-key (kbd "C-c <left>") 'windmove-left)
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 
+(provide 'rc-wincontrol)
+
 ;;; emacs-rc-wincontrol.el ends here

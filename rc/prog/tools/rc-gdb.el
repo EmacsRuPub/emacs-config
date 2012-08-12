@@ -3,8 +3,8 @@
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -14,5 +14,7 @@
 (setq gdb-show-main t)
 (setq gud-chdir-before-run nil)
 (setq gud-tooltip-mode t)
+
+(provide 'rc-gdb)
 
 ;;; emacs-rc-gdb.el ends here

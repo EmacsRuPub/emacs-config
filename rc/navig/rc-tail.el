@@ -11,4 +11,6 @@
 
 (global-set-key (kbd "C-c t f") 'tail-file)
 
+(provide 'rc-tail)
+
 ;;; rc-tail.el ends here

@@ -211,4 +211,6 @@
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
 (global-set-key (kbd "C-c o") 'oog)
 
+(provide 'rc-org-mode)
+
 ;;; emacs-rc-org-mode.el ends here

@@ -61,4 +61,6 @@
 ;;часы в статусе
 (display-time)
 
+(provide 'rc-appearance)
+
 ;;; emacs-rc-appearance.el ends here

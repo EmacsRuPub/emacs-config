@@ -43,4 +43,6 @@
   )
 (add-hook 'bbdb-mode-hook 'my-bbdb-mode-hook)
 
+(provide 'rc-bbdb)
+
 ;;; emacs-rc-bbdb.el ends here

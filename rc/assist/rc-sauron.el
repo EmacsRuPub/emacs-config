@@ -12,4 +12,6 @@
 (setq sauron-separate-frame nil)
 (setq sauron-hide-mode-line t)
 
+(provide 'rc-sauron)
+
 ;;; rc-sauron.el ends here

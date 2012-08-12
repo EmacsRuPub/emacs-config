@@ -51,4 +51,6 @@
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 ;; (add-hook 'nxml-mode-hook 'docbook-menu-mode)
 
+(provide 'rc-nxml)
+
 ;;; emacs-nxml.el ends here

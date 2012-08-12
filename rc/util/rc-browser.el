@@ -12,4 +12,6 @@
   (setq browse-url-generic-program "/usr/bin/firefox")
   )
 
+(provide 'rc-browser)
+
 ;;; rc-browser.el ends here

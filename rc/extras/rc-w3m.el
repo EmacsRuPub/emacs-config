@@ -1,10 +1,10 @@
-;;; emacs-rc-w3m.el --- 
+;;; emacs-rc-w3m.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -27,7 +27,7 @@
 (defun w3m-open-link-or-image-in-firefox ()
   "Opens the current link or image in Firefox."
   (interactive)
-  (browse-url-firefox (or (w3m-anchor) 
+  (browse-url-firefox (or (w3m-anchor)
                           (w3m-image))))
 
 
@@ -76,7 +76,9 @@
 (standard-display-ascii ?\227 " -- ")
 
 (add-to-list 'w3m-search-engine-alist
-	     '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
+             '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
+
+(provide 'rc-w3m)
 
 ;;; emacs-rc-w3m.el ends here
 

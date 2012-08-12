@@ -27,5 +27,6 @@
 (global-set-key (kbd "M-n p") 'fastnav-sprint-forward)
 (global-set-key (kbd "M-n P") 'fastnav-sprint-backward)
 
+(provide 'rc-fastnav)
 
 ;;; rc-fastnav.el ends here

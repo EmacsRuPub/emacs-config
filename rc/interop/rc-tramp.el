@@ -1,10 +1,10 @@
-;;; emacs-rc-tramp.el --- 
+;;; emacs-rc-tramp.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
 ;; Author: aaermolov@gmail.com
-;; Keywords: 
-;; Requirements: 
+;; Keywords:
+;; Requirements:
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
@@ -24,17 +24,19 @@
 ;#   Customizations
 ;############################################################################
 (tramp-set-completion-function "ssh"
-			       '((tramp-parse-sconfig "/etc/ssh_config")
-				 (tramp-parse-sconfig "~/.ssh/config")))
+                               '((tramp-parse-sconfig "/etc/ssh_config")
+                                 (tramp-parse-sconfig "~/.ssh/config")))
 ;; (setq tramp-chunksize 500)
 ;; (setq tramp-default-method "scp")
 (setenv "SHELL" "/bin/sh") ;; workaround for zsh
 (setq tramp-default-method "ssh")
 
 ;; (add-to-list 'tramp-default-proxies-alist
-;; 						 '("office\\.webdrive\\.ru" "octocat"
-;; 							 "/ssh:node1.unitedplatform.com:")
-;; 						 '("\\`smee\\.loc\\'" "\\`octocat\\'"
-;; 							 "/ssh:office.webdrive.ru:"))
+;;             '("office\\.webdrive\\.ru" "octocat"
+;;               "/ssh:node1.unitedplatform.com:")
+;;             '("\\`smee\\.loc\\'" "\\`octocat\\'"
+;;               "/ssh:office.webdrive.ru:"))
+
+(provide 'rc-tramp)
 
 ;;; emacs-rc-tramp.el ends here

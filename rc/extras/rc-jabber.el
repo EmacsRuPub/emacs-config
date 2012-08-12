@@ -143,4 +143,6 @@
 (global-set-key (kbd "C-x C-j C-a") 'jabber-activity-switch-to)
 (global-set-key (kbd "C-c C-o C-l") 'browse-url)
 
+(provide 'rc-jabber)
+
 ;;; emacs-rc-jabber.el ends here

@@ -11,4 +11,6 @@
 
 (global-set-key (kbd "C-c h v") 'hexview-find-file)
 
+(provide 'rc-hexview)
+
 ;;; rc-hexview.el ends here

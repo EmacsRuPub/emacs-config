@@ -38,4 +38,6 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'sh-mode-hook 'common-hooks/newline-hook)
 
+(provide 'rc-sh-mode)
+
 ;;; rc-sh-mode.el ends here

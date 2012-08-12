@@ -32,4 +32,6 @@
 (setq js2-skip-preprocessor-directives t)
 (setq js2-basic-offset 4)
 
+(provide 'rc-javascript)
+
 ;;; emacs-rc-javascript.el ends here

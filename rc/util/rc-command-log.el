@@ -12,4 +12,6 @@
 (global-set-key (kbd "C-c C-l t") 'command-log-mode)
 (global-set-key (kbd "C-c C-l b") 'clm/open-command-log-buffer)
 
+(provide 'rc-command-log)
+
 ;;; rc-command-log.el ends here

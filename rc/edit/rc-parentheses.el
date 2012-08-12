@@ -28,4 +28,6 @@
 
 (global-set-key (kbd "%") 'match-paren)
 
+(provide 'rc-parentheses)
+
 ;;; rc-parentheses.el ends here

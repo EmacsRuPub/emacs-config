@@ -20,4 +20,6 @@
   (if (eq major-mode 'org-mode) (icy-mode nil) (icy-mode t)))
 ;; (ad-activate 'switch-to-buffer)
 
+(provide 'rc-icicles)
+
 ;;; rc-icicles.el ends here

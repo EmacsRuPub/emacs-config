@@ -11,4 +11,6 @@
 (global-set-key (kbd "M-q") 'rebox-dwim)
 (global-set-key (kbd "<S-M-q>") 'rebox-cycle)
 
+(provide 'rc-rebox2)
+
 ;;; rc-rebox2.el ends here
