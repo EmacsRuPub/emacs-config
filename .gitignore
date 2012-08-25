@@ -11,3 +11,4 @@ customizations.el
 el-get
 image-dired
 kill-ring-saved.el
+bundle.el
