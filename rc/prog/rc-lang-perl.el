@@ -42,9 +42,6 @@
 (add-hook 'perl-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'perl-mode-hook 'common-hooks/newline-hook)
 
-(provide 'rc-perl)
+(provide 'rc-lang-perl)
 
 ;;; emacs-rc-perl.el ends here
-
-
-

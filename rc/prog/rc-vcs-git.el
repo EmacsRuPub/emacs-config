@@ -29,6 +29,6 @@
 (global-set-key (kbd "C-c m c") 'mo-git-blame-current)
 (global-set-key (kbd "C-c m f") 'mo-git-blame-file)
 
-(provide 'rc-git)
+(provide 'rc-vcs-git)
 
 ;;; rc-git.el ends here

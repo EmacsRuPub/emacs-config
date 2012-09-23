@@ -92,7 +92,11 @@
 (define-key haskell-mode-map (kbd "<f7>") 'haskell-return-from-imports)
 (define-key haskell-mode-map (kbd "C-c ,") 'haskell-sort-imports)
 
-(provide 'rc-haskell)
+;;  '(haskell-doc-show-global-types t)
+;;  '(haskell-hoogle-command "hoogle")
+;;  '(haskell-program-name "ghci \"+.\"")
+;;  '(inferior-haskell-wait-and-jump t)
+
+(provide 'rc-lang-haskell)
 
 ;;; emacs-rc-haskell.el ends here
-

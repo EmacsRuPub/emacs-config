@@ -57,6 +57,6 @@
          config-basedir
          "contrib/.pylintrc"))
 
-(provide 'rc-python)
+(provide 'rc-lang-python)
 
 ;;; emacs-rc-python.el ends here

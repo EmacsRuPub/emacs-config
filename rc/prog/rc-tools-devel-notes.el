@@ -16,6 +16,6 @@
 (global-set-key "\C-cxt" 'develnotes-add-TODO)
 (global-set-key "\C-cxf" 'develnotes-add-FIXME)
 
-(provide 'rc-devel-notes)
+(provide 'rc-tools-devel-notes)
 
 ;;; rc-devel-notes.el ends here

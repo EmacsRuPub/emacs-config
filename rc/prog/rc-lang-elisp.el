@@ -31,9 +31,6 @@
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
 
-(provide 'rc-elisp)
+(provide 'rc-lang-elisp)
 
 ;;; emacs-rc-elisp.el ends here
-
-
-

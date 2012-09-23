@@ -20,6 +20,6 @@
 (setq dvc-select-priority '(xgit xhg bzr baz))
 (setq dvc-tips-enabled nil)
 
-(provide 'rc-dvc)
+(provide 'rc-vcs-dvc)
 
 ;;; emacs-rc-dvc.el ends here

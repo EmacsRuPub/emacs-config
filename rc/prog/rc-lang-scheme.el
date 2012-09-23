@@ -51,6 +51,6 @@
 (add-hook 'scheme-mode-hook 'common-hooks/show-prog-keywords)
 (add-hook 'inferior-scheme-mode-hook '(lambda () (split-window)))
 
-(provide 'rc-scheme)
+(provide 'rc-lang-scheme)
 
 ;;; emacs-rc-scheme.el ends here

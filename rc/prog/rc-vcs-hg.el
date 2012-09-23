@@ -9,6 +9,6 @@
 
 (require 'mercurial)
 
-(provide 'rc-mercurial)
+(provide 'rc-vcs-hg)
 
 ;;; rc-mercurial.el ends here
