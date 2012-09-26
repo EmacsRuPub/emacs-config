@@ -22,6 +22,7 @@
 (require 'rst)
 (require 'savekill)
 
+(require 'cua-base)
 
 ;#############################################################################
 ;#   Customizations
@@ -32,6 +33,8 @@
 (global-hl-line-mode 1)
 (mouse-avoidance-mode 'banish)
 (global-auto-complete-mode t)
+
+(cua-mode t)
 
 (setq whitespace-modes (quote (awk-mode)))
 (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
@@ -58,7 +61,11 @@
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-key-is-meta t)
   (setq mac-command-key-is-meta nil)
-  (setq mac-command-modifier 'control)
+  (setq process-connection-type nil)
+  (setq mac-command-modifier 'alt)
+  (global-set-key [(alt x)] 'cua-cut-region)
+  (global-set-key [(alt c)] 'cua-copy-region)
+  (global-set-key [(alt v)] 'cua-paste)
   (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
   )
 
