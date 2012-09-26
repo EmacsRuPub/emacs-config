@@ -18,4 +18,6 @@
 
 (provide 'rc-bookmarks)
 
+(global-set-key (kbd "C-c C-b C-j") 'bmkp-jump-in-navlist)
+
 ;;; rc-bookmarks.el ends here
