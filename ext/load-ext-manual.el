@@ -63,6 +63,8 @@
 (load (concat config-basedir "/ext/header2.el"))
 (load (concat config-basedir "/ext/flymake-cursor.el"))
 (load (concat config-basedir "/ext/framemove.el"))
+(load (concat config-basedir "/ext/smex/smex.el"))
+(load (concat config-basedir "/ext/ido-preview.el"))
 
 ;; (add-to-list 'load-path (concat config-basedir "/ext/frame-tag.el"))
 ;; (add-to-list 'load-path (concat config-basedir "/ext/python/pymacs"))
