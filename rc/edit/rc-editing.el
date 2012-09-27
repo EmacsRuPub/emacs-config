@@ -37,7 +37,7 @@
 (cua-mode t)
 
 (setq whitespace-modes (quote (awk-mode)))
-(setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
+;; (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
 (setq fill-column 120)
 (setq indent-tabs-mode nil)
 (setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
