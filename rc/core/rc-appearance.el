@@ -16,6 +16,7 @@
 ;############################################################################
 (setq size-indication-mode t)
 (setq column-number-mode t)
+(setq line-number-mode t)
 (setq use-dialog-box nil)
 (setq scalable-fonts-allowed t)
 (setq inhibit-startup-screen t)
