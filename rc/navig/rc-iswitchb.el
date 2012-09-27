@@ -11,7 +11,6 @@
 (require 'iswitchb-highlight)
 
 (iswitchb-mode 1)
-(iswitchb-default-keybindings)
 
 (setq iswitchb-case t)
 (setq iswitchb-default-method 'samewindow)
@@ -79,6 +78,8 @@
 (add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
 (add-to-list 'iswitchb-buffer-ignore "^\\.cabal$")
 (add-to-list 'iswitchb-buffer-ignore "irc\\.")
+
+(global-set-key (kbd "C-x b") 'iswitchb-buffer)
 
 (provide 'rc-iswitchb)
 

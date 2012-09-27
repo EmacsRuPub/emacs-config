@@ -204,7 +204,7 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
-(global-set-key (kbd "C-c C-o C-l") 'org-agenda-open-link)
+;; (global-set-key (kbd "C-c C-o C-l") 'org-agenda-open-link)
 (global-set-key (kbd "C-c t c") 'org-table-create)
 (global-set-key (kbd "C-c t s") 'org-sparse-tree)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)

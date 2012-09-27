@@ -107,6 +107,9 @@
 
 (global-set-key (kbd "C-c f") 'fci-mode)
 
+;I never use set-fill-column and I hate hitting it by accident.
+(global-set-key "\C-x\ f" 'find-file)
+
 (provide 'rc-editing)
 
 ;;; emacs-rc-editing.el ends here

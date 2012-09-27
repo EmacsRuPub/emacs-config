@@ -29,6 +29,7 @@
 (global-set-key (kbd "C-c s i") 'ioccur)
 (global-set-key (kbd "C-c s b") 'ioccur-find-buffer-matching)
 (global-set-key (kbd "C-c s l") 'locate)
+(global-set-key (kbd "C-c d f") 'find-name-dired)
 
 (provide 'rc-search)
 
