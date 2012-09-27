@@ -15,6 +15,12 @@
 (setq iswitchb-case t)
 (setq iswitchb-default-method 'samewindow)
 
+(setq iswitchb-max-to-show 15)
+(setq iswitchb-prompt-newbuffer t)
+(setq iswitchb-regexp t)
+(setq iswitchb-use-frame-buffer-list t)
+;; (setq iswitchb-use-virtual-buffers t nil (recentf))
+
 
 ;#############################################################################
 ;#   Keybindings
