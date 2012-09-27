@@ -26,6 +26,6 @@
        el-get-sources-emacswiki
        el-get-sources-custom))
 
-(el-get)
+(el-get 'sync)
 
 ;;; rc-el-get.el ends here
