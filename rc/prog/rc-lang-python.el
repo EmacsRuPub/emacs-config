@@ -14,7 +14,7 @@
 ;#   Custom definitions
 ;############################################################################
 (defun electric-pair ()
-  "Insert character pair without sournding spaces"
+  "Insert character pair without surrounding spaces"
   (interactive)
   (let (parens-require-spaces)
     (insert-pair)))
