@@ -58,10 +58,11 @@
     (if (jabber-muc-sender-p from)
         (growl (format "(PM) %s"
                        (jabber-jid-displayname (jabber-jid-user from)))
-               (format "%s: %s" (jabber-jid-resource from) text)
+               (format "%s: %s" (jabber-jid-resource from)
+                       (osd-text-to-utf-16-hex text))
                (format "jabber-from-%s" (jabber-jid-resource from)))
       (growl (format "%s" (jabber-jid-displayname from))
-             text "jabber-from-unknown"))))
+             (osd-text-to-utf-16-hex text) "jabber-from-unknown"))))
 
 ;; Same as above, for groupchats
 (defun pg-jabber-muc-growl-notify (nick group buf text proposed-alert)
@@ -73,10 +74,16 @@
                   (not (string=
                         nick (cdr (assoc group *jabber-active-groupchats*)))))
           (growl (format "%s" (jabber-jid-displayname group))
-                 (format "%s: %s" nick text)
+                 (format "%s: %s" nick (osd-text-to-utf-16-hex text))
                  (format "jabber-chat-%s" (jabber-jid-displayname group))))
       (growl (format "%s" (jabber-jid-displayname group))
-             text "jabber-chat-unknown"))))
+             (osd-text-to-utf-16-hex text) "jabber-chat-unknown"))))
+
+(defun osd-text-to-utf-16-hex (text)
+  (let* ((utext (encode-coding-string text 'utf-8))
+         (ltext (string-to-list utext)))
+    (apply #'concat
+           (mapcar (lambda (x) (format "%c" x)) ltext))))
 
 
 ;#############################################################################
