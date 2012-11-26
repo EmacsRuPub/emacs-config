@@ -7,6 +7,10 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+;#############################################################################
+;#   Linux-specific notifications code
+;############################################################################
+
 (defun jabber-libnotify-message(from msg)
   "Show MSG using libnotify"
   (let ((process-connection-type nil))
@@ -40,6 +44,13 @@
           (x-urgency-hint (selected-frame) nil)
         (x-urgency-hint (selected-frame) t))
       (setq jabber-activity-jids-count count))))
+
+
+;#############################################################################
+;#   Darwin-specific notifications code
+;############################################################################
+
+(defvar growl-program "/usr/local/bin/growlnotify")
 
 (defun growl (title message &optional id)
   (if (eq id nil)
@@ -201,5 +212,11 @@
          smiley-regexp-alist (smiley-parse-file smiley-path))
         (smiley-update-cache))
       )))
+
+;; in client code:
+;; (add-hook 'jabber-chat-mode-hook 'autosmiley-mode)
+;; (setq smiley-base-directory (concat (getenv "HOME") "/.emacs.d/resources/smileys/"))
+;; (add-to-list 'gnus-smiley-file-types "gif")
+;; (smiley-load-theme "kolobok")
 
 ;;; defun-jabber-custom.el ends here

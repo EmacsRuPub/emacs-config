@@ -68,13 +68,12 @@
                'jabber-libnotify-message-display)
   )
 
-;#############################################################################
-;#   Jabber urgency hints
-;############################################################################
-(when (eq window-system 'x)
-  ;; usage example
-  (defvar jabber-activity-jids-count 0)
-  (add-hook 'jabber-activity-update-hook 'jabber-urgency-hint)
+(when (eq system-type 'darwin)
+  ;; Make jabber.el notify through growl when I get a new message
+  (setq jabber-message-alert-same-buffer nil)
+  (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
+  (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
+  (setq jabber-message-alert-same-buffer t)
   )
 
 ;; Message alert hooks
@@ -83,13 +82,14 @@
     (unless (minibuffer-prompt)
       (message "%s" msg))))
 
-(when (eq system-type 'darwin)
-  (defvar growl-program "/usr/local/bin/growlnotify")
-  ;; Make jabber.el notify through growl when I get a new message
-  (setq jabber-message-alert-same-buffer nil)
-  (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
-  (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
-  (setq jabber-message-alert-same-buffer t)
+
+;#############################################################################
+;#   Jabber urgency hints
+;############################################################################
+(when (eq window-system 'x)
+  ;; usage example
+  (defvar jabber-activity-jids-count 0)
+  (add-hook 'jabber-activity-update-hook 'jabber-urgency-hint)
   )
 
 
@@ -125,16 +125,6 @@
 (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
 (add-hook 'jabber-chat-mode-hook 'goto-address)
 (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
-
-
-;#############################################################################
-;#   Smileys
-;############################################################################
-;; (add-hook 'jabber-chat-mode-hook 'autosmiley-mode)
-;; (setq smiley-base-directory (concat (getenv "HOME") "/.emacs.d/resources/smileys/"))
-;; (add-to-list 'gnus-smiley-file-types "gif")
-;; (smiley-load-theme "kolobok")
-
 
 ;#############################################################################
 ;#   Keybindings
