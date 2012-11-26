@@ -17,10 +17,13 @@
         (:name icicles-iswitchb :type emacswiki)
         (:name iswitchb-highlight :type emacswiki)
         (:name lacarte :type emacswiki)
-        (:name iproject :type emacswiki)
-        (:name project-buffer-mode :type emacswiki)
-        (:name project-buffer-mode+ :type emacswiki)
-        (:name project-buffer-occur :type emacswiki)
-))
+        (:name auto-complete :type emacswiki)
+        (:name anything-grep :type emacswiki)
+        (:name browse-kill-ring :type emacswiki)
+        (:name buff-menu+ :type emacswiki)
+        (:name buffer-move :type emacswiki)
+        (:name window-number :type emacswiki)
+        (:name erefactor :type emacswiki)
+        ))
 
 ;;; sources-emacswiki.el ends here

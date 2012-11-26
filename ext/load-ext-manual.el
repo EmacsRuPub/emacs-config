@@ -17,14 +17,9 @@
 (add-to-list 'load-path (concat config-basedir "/ext/zencoding"))
 (add-to-list 'load-path (concat config-basedir "/ext/ghc-mod"))
 
-(load (concat config-basedir "/ext/auto-complete.el"))
-(load (concat config-basedir "/ext/anything-grep.el"))
-(load (concat config-basedir "/ext/browse-kill-ring.el"))
-(load (concat config-basedir "/ext/buff-menu+.el"))
-(load (concat config-basedir "/ext/buffer-move.el"))
-(load (concat config-basedir "/ext/camelCase-mode.el"))
-(load (concat config-basedir "/ext/change-windows-intuitively.el"))
-(load (concat config-basedir "/ext/color-theme-solarized.el"))
+(load (concat config-basedir "/ext/camelCase-mode.el")) ; nonwiki
+(load (concat config-basedir "/ext/change-windows-intuitively.el")) ; nonwiki
+(load (concat config-basedir "/ext/color-theme-solarized.el")) ; nonwiki
 (load (concat config-basedir "/ext/column-marker.el"))
 (load (concat config-basedir "/ext/command-log-mode/command-log-mode.el"))
 (load (concat config-basedir "/ext/csv-mode.el"))
@@ -33,10 +28,10 @@
 (load (concat config-basedir "/ext/helm-slime/helm-slime.el"))
 (load (concat config-basedir "/ext/hexview-mode.el"))
 (load (concat config-basedir "/ext/himark.el"))
-(load (concat config-basedir "/ext/minimap.el"))
+(load (concat config-basedir "/ext/minimap.el")) ; nonwiki
 (load (concat config-basedir "/ext/org-occur-goto.el"))
-(load (concat config-basedir "/ext/paredit.el"))
-(load (concat config-basedir "/ext/parenface.el"))
+(load (concat config-basedir "/ext/paredit.el")) ; nonwiki
+(load (concat config-basedir "/ext/parenface.el")) ; nonwiki
 (load (concat config-basedir "/ext/pdftools.el"))
 (load (concat config-basedir "/ext/php/php-mode/php-mode.el"))
 (load (concat config-basedir "/ext/php/php-electric.el")) ;; AFTER php-mode !!!
@@ -46,17 +41,16 @@
 (load (concat config-basedir "/ext/quick-jump.el"))
 (load (concat config-basedir "/ext/rainbow-mode.el"))
 (load (concat config-basedir "/ext/rebox2/rebox2.el"))
-(load (concat config-basedir "/ext/rst.el"))
+(load (concat config-basedir "/ext/rst.el")) ; nonwiki
 (load (concat config-basedir "/ext/savekill.el"))
 (load (concat config-basedir "/ext/silentcomp.el"))
 (load (concat config-basedir "/ext/smerge-mode.el"))
 (load (concat config-basedir "/ext/twilight-emacs/color-theme-twilight.el"))
 (load (concat config-basedir "/ext/unbound.el"))
 (load (concat config-basedir "/ext/webjump-plus.el"))
-(load (concat config-basedir "/ext/window-number.el"))
 (load (concat config-basedir "/ext/workspaces.el"))
 (load (concat config-basedir "/ext/zenburn-el/zenburn.el"))
-(load (concat config-basedir "/ext/erefactor.el"))
+;; (load (concat config-basedir "/ext/erefactor.el"))
 (load (concat config-basedir "/ext/minibuf-electric-gnuemacs.el"))
 (load (concat config-basedir "/ext/devel-notes.el"))
 (load (concat config-basedir "/ext/electric-dot-and-dash.el"))
