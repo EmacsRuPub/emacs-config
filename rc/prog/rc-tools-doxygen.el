@@ -33,6 +33,6 @@
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
 (add-hook 'c-mode-common-hook 'doc-mode)
 
-(provide 'rc-doxygen)
+(provide 'rc-tools-doxygen)
 
 ;;; emacs-rc-doxygen.el ends here

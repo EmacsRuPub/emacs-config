@@ -16,6 +16,6 @@
 
 (global-set-key (kbd "C-c h p") 'helm-projectile)
 
-(provide 'rc-projectile)
+(provide 'rc-tools-projectile)
 
 ;;; rc-projectile.el ends here

@@ -15,6 +15,6 @@
 (setq gud-chdir-before-run nil)
 (setq gud-tooltip-mode t)
 
-(provide 'rc-gdb)
+(provide 'rc-tools-gdb)
 
 ;;; emacs-rc-gdb.el ends here
