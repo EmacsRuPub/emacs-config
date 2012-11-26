@@ -14,10 +14,11 @@
 (require 'crosshairs)
 (require 'bookmark+)
 
+(global-set-key (kbd "C-c m j") 'bmkp-jump-in-navlist)
+
 ;; TODO: See if we can customize Bookmarks[+] further
 
 (provide 'rc-bookmarks)
 
-(global-set-key (kbd "C-c C-b C-j") 'bmkp-jump-in-navlist)
 
 ;;; rc-bookmarks.el ends here
