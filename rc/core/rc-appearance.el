@@ -62,6 +62,8 @@
 ;;часы в статусе
 (display-time)
 
+(setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE") ; temporarily here
+
 (provide 'rc-appearance)
 
 ;;; emacs-rc-appearance.el ends here
