@@ -12,6 +12,7 @@
 (wrap-region-global-mode t)
 
 (wrap-region-add-wrapper "*" "*")
+(wrap-region-add-wrapper "," ",")
 
 (provide 'rc-wrap-region)
 
