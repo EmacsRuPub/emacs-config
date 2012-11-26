@@ -8,8 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (require 'color-theme)
-(require 'color-theme-darkmate)
-(require 'color-theme-sanityinc-solarized)
+
 (require 'parenface)
 
 
@@ -26,7 +25,6 @@
 (set-cursor-color "chartreuse2")
 
 (color-theme-zenburn)
-;; (color-theme-twilight)
 
 ;#############################################################################
 ;#   Fonts
@@ -52,4 +50,3 @@
 (provide 'rc-themes)
 
 ;;; rc-themes.el ends here
-
