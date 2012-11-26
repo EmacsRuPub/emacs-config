@@ -142,6 +142,7 @@
 (global-set-key (kbd "C-x C-j C-r") 'jabber-switch-to-roster-buffer)
 (global-set-key (kbd "C-x C-j C-a") 'jabber-activity-switch-to)
 (global-set-key (kbd "C-c C-o C-l") 'browse-url)
+(global-set-key (kbd "C-c C-o C-r") 'open-urls-in-region)
 
 (provide 'rc-jabber)
 
