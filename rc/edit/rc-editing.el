@@ -42,7 +42,7 @@
 (setq indent-tabs-mode nil)
 (setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
 (setq comment-style 'indent)
-(setq user-full-name "Octocat")
+(setq user-full-name (capitalize global-username))
 (setq kill-whole-line t)
 (setq next-line-add-newlines nil)
 (setq tab-always-indent t)

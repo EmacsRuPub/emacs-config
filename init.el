@@ -6,7 +6,10 @@
 
 (setq message-log-max t)
 
-(setq config-basedir "/Users/octocat/.emacs.d")
+(setq home-directory (getenv "HOME"))
+(setq global-username "octocat")
+
+(setq config-basedir (concat home-directory "/.emacs.d"))
 
 (setq custom-file (concat config-basedir "/customizations.el"))
 

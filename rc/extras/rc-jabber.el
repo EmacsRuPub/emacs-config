@@ -39,7 +39,7 @@
 (setq jabber-alert-info-message-hooks (quote (jabber-info-echo)))
 (setq jabber-alert-message-hooks (quote (jabber-message-beep jabber-message-scroll)))
 (setq jabber-alert-presence-hooks (quote (jabber-presence-update-roster)))
-(setq jabber-nickname "Ronin")
+(setq jabber-nickname (capitalize global-username))
 (setq jabber-resource "at-home") ;; (concat "at-" (if (string-equal (system-name) "ronin.homelinux.net") "home" "work")))
 (setq jabber-auto-reconnect t)
 (setq fsm-debug nil)

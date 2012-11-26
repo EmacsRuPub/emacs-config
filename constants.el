@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq org-dir "/Users/octocat/org")
+(setq org-dir (concat home-directory "/org"))
 
 ;#############################################################################
 ;#   Abbreviation
