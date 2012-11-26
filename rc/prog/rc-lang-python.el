@@ -45,12 +45,19 @@
 ;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
 (add-hook 'python-mode-hook 'common-hooks/newline-hook)
 
-(setenv "PYTHONPATH"
+
+(let ((python-libs-path
+       (cond
+        ((eq system-type 'darwin)
+         "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
+        ((eq system-type 'gnu/linux)
+         "/usr/lib/python2.7:"))))
+  (setenv "PYTHONPATH"
         (concat
-         "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:"
-         "/Users/octocat/workspace/opossum/src:"
-         "/Users/octocat/workspace/webdrive/python:"
-         (getenv "PYTHONPATH")))
+         python-libs-path
+         "/home/octocat/workspace/opossum/src:"
+         "/home/octocat/workspace/webdrive/python:"
+         (getenv "PYTHONPATH"))))
 
 (setenv "PYLINTRC"
         (concat
