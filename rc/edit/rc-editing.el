@@ -61,12 +61,14 @@
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-key-is-meta t)
   (setq mac-command-key-is-meta nil)
+  ;; (setq mac-control-key-is-meta nil)
   (setq process-connection-type nil)
-  (setq mac-command-modifier 'alt)
-  (global-set-key [(alt x)] 'cua-cut-region)
-  (global-set-key [(alt c)] 'cua-copy-region)
-  (global-set-key [(alt v)] 'cua-paste)
+  (setq mac-command-modifier 'hyper)
+  (global-set-key [(hyper x)] 'cua-cut-region)
+  (global-set-key [(hyper c)] 'cua-copy-region)
+  (global-set-key [(hyper v)] 'cua-paste)
   (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+  (setq mac-control-modifier 'control)
   )
 
 ;#############################################################################
