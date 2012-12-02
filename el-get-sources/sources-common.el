@@ -26,7 +26,6 @@
         emacs-w3m
         erc-highlight-nicknames
         git-emacs
-        google-weather
         highlight-symbol
         hs-lint
         iedit

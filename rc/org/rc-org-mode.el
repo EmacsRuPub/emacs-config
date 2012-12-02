@@ -12,9 +12,6 @@
 ;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
 
-(require 'google-weather)
-;; (require 'org-google-weather)
-
 (require 'org-install)
 (require 'org)
 (require 'org-agenda)
@@ -100,7 +97,6 @@
                                "/review/review-yandexfotki.org"
                                "/search.org"
                                "/todo.org"
-                               "/weather.org"
                                "/job/work.org"
                                "/job/reggi-bugs-archive.org"
                                "/wiki.org"
