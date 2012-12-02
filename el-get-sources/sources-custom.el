@@ -77,6 +77,102 @@
         (:name color-theme-darkmate
                :type http
                :url "http://myvimemacs.googlecode.com/svn-history/r2/trunk/emacs/.emacs.d/site-lisp/color-theme-darkmate.el")
+        (:name multiple-cursors
+               :type git
+               :url "https://github.com/magnars/multiple-cursors.el.git"
+               :load-path ("."))
+        (:name sauron
+               :type git
+               :url "https://github.com/djcb/sauron.git"
+               :load-path ("."))
+        (:name expand-region
+               :type git
+               :url "https://github.com/magnars/expand-region.el.git"
+               :load-path ("."))
+        (:name himark
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/himark.el"
+               :load "himark.el")
+        (:name camelcase-mode
+               :type http
+               :url "http://lilypond.org/blog/jan/software/ooo/camelCase-mode.el"
+               :load "camelCase-mode.el")
+        (:name csv-mode
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/csv-mode.el"
+               :load "csv-mode.el")
+        (:name fill-column-indicator
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/fill-column-indicator.el"
+               :load "fill-column-indicator.el")
+        (:name hexview-mode
+               :type http
+               :url "http://emacswiki.org/emacs/download/hexview-mode.el"
+               :load "hexview-mode.el")
+        (:name org-occur-goto
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/org-occur-goto.el"
+               :load "org-occur-goto.el")
+        (:name paredit
+               :type http
+               :url "http://mumble.net/~campbell/emacs/paredit.el"
+               :load "paredit.el")
+        (:name parenface
+               :type http
+               :url "http://www.davep.org/emacs/parenface.el"
+               :load "parenface.el")
+        (:name pdftools
+               :type http
+               :url "http://www.emacswiki.org/emacs-en/download/pdftools.el"
+               :load "pdftools.el")
+        (:name savekill
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/savekill.el"
+               :load "savekill.el")
+        (:name silentcomp
+               :type http
+               :url "http://larch.cs.iastate.edu/emacs/ecb/silentcomp.el"
+               :load "silentcomp.el")
+        (:name emacs-minimap
+               :type git
+               :url "https://github.com/dustinlacewell/emacs-minimap.git"
+               :load "minimap.el")
+        (:name command-log-mode
+               :type git
+               :url "https://github.com/lewang/command-log-mode.git"
+               :load "command-log-mode.el")
+        (:name zenburn-el
+               :type git
+               :url "https://github.com/dbrock/zenburn-el.git"
+               :load "zenburn.el")
+        (:name change-windows-intuitively
+               :type http
+               :url "http://quimby.gnus.org/s/change-windows-intuitively.el"
+               :load "change-windows-intuitively.el")
+        (:name point-stack
+               :type git
+               :url "https://github.com/mattharrison/point-stack.git"
+               :load "point-stack.el")
+        ;; (:name helm-slime
+        ;;        :type git
+        ;;        :url "https://github.com/emacs-helm/helm-slime.git"
+        ;;        :load "helm-slime.el")
+        (:name rebox2
+               :type git
+               :url "https://github.com/lewang/rebox2.git"
+               :load "rebox2.el")
+        (:name zencoding
+               :type git
+               :url "https://github.com/rooney/zencoding.git"
+               :load-path ("."))
+        (:name workgroups-el
+               :type git
+               :url "https://github.com/tlh/workgroups.el.git"
+               :load-path ("."))
+        (:name helm
+               :type git
+               :url "https://github.com/emacs-helm/helm.git"
+               :load-path ("."))
 ))
 
 ;;; sources-custom.el ends here

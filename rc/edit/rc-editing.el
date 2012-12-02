@@ -96,9 +96,6 @@
 (global-set-key (kbd "<f9>") 'quote-string-with-period-and-nextline)
 (global-set-key (kbd "<S-f9>") 'double-quote-string-with-period-and-nextline)
 
-(define-key global-map (kbd "C-;") 'iedit-mode)
-(define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-
 (global-set-key (kbd "\C-c m n") 'minimap-create)
 (global-set-key (kbd "\C-c m k") 'minimap-kill)
 (global-set-key (kbd "<f6>") 'point-stack-push)

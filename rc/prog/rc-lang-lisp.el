@@ -31,7 +31,7 @@
 (eval-after-load "slime"
   '(progn
      (slime-setup
-      '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl helm-slime))
+      '(slime-fancy slime-asdf slime-banner slime-fuzzy slime-autodoc slime-repl)) ;helm-slime
      (setq slime-complete-symbol*-fancy t)
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
      ))

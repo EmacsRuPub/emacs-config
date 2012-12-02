@@ -16,7 +16,6 @@
         ;; haskell-mode
         ;; todochiku
         ahg
-        anything
         bbdb
         browse-kill-ring
         cmake-mode
@@ -28,7 +27,6 @@
         git-emacs
         highlight-symbol
         hs-lint
-        iedit
         ioccur
         js2-mode
         mo-git-blame
@@ -37,8 +35,8 @@
         psvn
         pymacs
         quack
-        ropemacs
         slime
+        smex
         tail
         twittering-mode
         undo-tree
