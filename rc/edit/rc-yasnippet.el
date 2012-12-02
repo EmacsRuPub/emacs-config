@@ -8,6 +8,8 @@
 ;; Status: not intended to be distributed yet
 
 (require 'yasnippet) ;; not yasnippet-bundle
+
+(setq yas/snippet-dirs custom/yasnippet-dir)
 (yas/initialize)
 (yas/load-directory custom/yasnippet-dir)
 
