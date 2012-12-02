@@ -12,8 +12,6 @@
 
 (setq ido-mode t)
 
-(provide 'rc-ido)
-
 ;; Display ido results vertically, rather than horizontally
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
@@ -33,5 +31,7 @@
             (define-key ido-completion-map (kbd "C-M-n") (lookup-key ido-completion-map (kbd "C-n"))) ; currently, this makes nothing. Maybe they'll make C-n key lately.
             (define-key ido-completion-map (kbd "C-p") 'ido-preview-backward)
             (define-key ido-completion-map (kbd "C-n") 'ido-preview-forward)))
+
+(provide 'rc-ido)
 
 ;;; rc-ido.el ends here
