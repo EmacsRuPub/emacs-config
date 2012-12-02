@@ -34,8 +34,6 @@
 (mouse-avoidance-mode 'banish)
 (global-auto-complete-mode t)
 
-(cua-mode t)
-
 (setq whitespace-modes (quote (awk-mode)))
 ;; (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
 (setq fill-column 120)
@@ -59,6 +57,7 @@
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
+  (cua-mode t)
   (setq mac-option-key-is-meta t)
   (setq mac-command-key-is-meta nil)
   ;; (setq mac-control-key-is-meta nil)
