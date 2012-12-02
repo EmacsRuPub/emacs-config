@@ -1,24 +1,33 @@
-(add-to-list 'load-path (concat config-basedir "/ext/ecb"))
-(add-to-list 'load-path (concat config-basedir "/ext/crosshairs"))
-(add-to-list 'load-path (concat config-basedir "/ext/bookmark+"))
-(add-to-list 'load-path (concat config-basedir "/ext/emacs-jabber"))
-(add-to-list 'load-path (concat config-basedir "/ext/emacs-nav"))
-(add-to-list 'load-path (concat config-basedir "/ext/git-contrib/emacs"))
-(add-to-list 'load-path (concat config-basedir "/ext/php"))
-(add-to-list 'load-path (concat config-basedir "/ext/projectile"))
-(add-to-list 'load-path (concat config-basedir "/ext/slime"))
-(add-to-list 'load-path (concat config-basedir "/ext/slime/contrib"))
-(add-to-list 'load-path (concat config-basedir "/ext/twittering-mode"))
-;; (add-to-list 'load-path (concat config-basedir "/ext/ghc-mod"))
+(setq ext-dirs
+      (quote
+       ("/ext/ecb"
+        "/ext/crosshairs"
+        "/ext/bookmark+"
+        "/ext/emacs-jabber"
+        "/ext/emacs-nav"
+        "/ext/git-contrib/emacs"
+        "/ext/php"
+        "/ext/projectile"
+        "/ext/slime"
+        "/ext/slime/contrib"
+        "/ext/twittering-mode"
+        ;; "/ext/ghc-mod"
+        )))
 
-(load (concat config-basedir "/ext/rainbow-mode.el"))
-(load (concat config-basedir "/ext/php/php-mode/php-mode.el"))
-(load (concat config-basedir "/ext/php/php-electric.el")) ;; AFTER php-mode !!!
-(load (concat config-basedir "/ext/python/python-pep8.el"))
-(load (concat config-basedir "/ext/python/python-pylint.el"))
-;; (load (concat config-basedir "/ext/quick-jump.el"))
-(load (concat config-basedir "/ext/rst.el")) ; nonwiki
-(load (concat config-basedir "/ext/smerge-mode.el"))
+(setq ext-files
+      (quote
+       ("/ext/rainbow-mode.el"
+        "/ext/php/php-mode/php-mode.el"
+        "/ext/php/php-electric.el" ;; AFTER php-mode !!!
+        "/ext/python/python-pep8.el"
+        "/ext/python/python-pylint.el"
+        ;; "/ext/quick-jump.el"
+        "/ext/rst.el" ; nonwiki
+        "/ext/smerge-mode.el"
+        )))
+
+(mapcar (lambda (ext-dir) (add-to-list 'load-path (concat config-basedir ext-dir))) ext-dirs)
+(mapcar (lambda (ext-file) (load (concat config-basedir ext-file))) ext-files)
 
 ;; (add-to-list 'load-path (concat config-basedir "/ext/frame-tag.el"))
 ;; (add-to-list 'load-path (concat config-basedir "/ext/python/pymacs"))
