@@ -67,4 +67,6 @@
   (auto-replace-file-name-no-ext)
   (auto-replace-date-time))
 
+(provide 'defun-auto-insert)
+
 ;;; defun-auto-insert.el ends here

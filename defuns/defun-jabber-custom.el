@@ -219,4 +219,6 @@
 ;; (add-to-list 'gnus-smiley-file-types "gif")
 ;; (smiley-load-theme "kolobok")
 
+(provide 'defun-jabber-custom)
+
 ;;; defun-jabber-custom.el ends here

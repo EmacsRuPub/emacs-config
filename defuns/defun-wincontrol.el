@@ -62,4 +62,6 @@
    ((equal "right" (win-resize-left-or-right)) (enlarge-window-horizontally -1))
    ((equal "mid" (win-resize-left-or-right)) (enlarge-window-horizontally 1))))
 
+(provide 'defun-wincontrol)
+
 ;;; defun-wincontrol.el ends here

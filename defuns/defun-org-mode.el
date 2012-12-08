@@ -28,4 +28,6 @@
   (osd-display msg msg -1 "center" "center" "Verdana 40")
   )
 
+(provide 'defun-org-mode)
+
 ;;; defun-org-mode.el ends here

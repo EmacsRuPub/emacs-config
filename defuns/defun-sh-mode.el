@@ -24,4 +24,6 @@
                        'sh-check-mode))
   )
 
+(provide 'defun-sh-mode)
+
 ;;; defun-sh-mode.el ends here

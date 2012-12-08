@@ -106,4 +106,6 @@
   (insert "\"\,")
   (next-line))
 
+(provide 'defun-editing)
+
 ;;; defun-editing.el ends here

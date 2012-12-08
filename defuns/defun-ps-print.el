@@ -34,4 +34,6 @@
                      (buffer-name) "-"
                      (format-time-string "%Y-%m-%dT%H-%M-%S") "-region.ps")))
 
+(provide 'defun-ps-print)
+
 ;;; defun-ps-print.el ends here

@@ -67,4 +67,6 @@
 ;;         (t (string-join-accum joiner (cdr strings)
 ;;                               (concat accum (car strings) joiner)))))
 
+(provide 'defun-joinlines)
+
 ;;; defun-joinlines.el ends here

@@ -50,4 +50,6 @@ comment progressively moves outward over enclosing expressions."
       (info "(r5rs)")
       (Info-index symbol))))
 
+(provide 'defun-scheme)
+
 ;;; defun-scheme.el ends here
