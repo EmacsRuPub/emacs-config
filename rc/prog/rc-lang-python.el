@@ -7,6 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+(require 'python)
+
 (autoload 'python-pylint "python-pylint")
 (autoload 'pylint "python-pylint")
 

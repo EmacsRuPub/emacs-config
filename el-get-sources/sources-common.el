@@ -34,6 +34,7 @@
         po-mode
         psvn
         pymacs
+        python
         quack
         slime
         smex
