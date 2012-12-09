@@ -21,12 +21,19 @@
 (add-to-list 'auto-mode-alist '("\\.dsl$" . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.scm$" . scheme-mode))
 
+;; ;; JavaScript
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
 
 (add-to-list 'auto-mode-alist
              (cons (concat "\\."
                            (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf" "html") t) "\\'")
                    'nxml-mode))
+
+;; HTML
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
 
 (add-to-list 'auto-mode-alist '("\\.wl$" . emacs-lisp-mode))
 
@@ -54,7 +61,28 @@
 (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
 (add-to-list 'auto-mode-alist '("\\.rest$" . rst-mode))
 
-;; (push '("<\\?xml" . nxml-mode) magic-mode-alist)
+;; CSS
+(add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+
+;; Clojure
+(autoload 'clojure-mode "clojure-mode")
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+
+;; SVG
+(add-to-list 'auto-mode-alist '("\\.svg$" . image-mode))
+
+;; Snippets
+(add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
+
+;; Markdown
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+
+;; Highlighting in editmsg-buffer for magit
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
+
+(push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
 ;; (add-to-list 'auto-mode-alist '("\\.plg$" . prolog-mode))
 
