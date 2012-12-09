@@ -15,13 +15,14 @@
 
 (let ((default-directory (concat config-basedir "/rc")))
   (normal-top-level-add-subdirs-to-load-path))
+(add-to-list 'load-path (concat config-basedir "/defuns"))
 
 (mapcar 'solidload
         (mapcar
          (lambda (path) (concat config-basedir path))
          '("/rc-el-get.el"
            "/ext/load-ext-manual.el"
-           "/defuns/defuns.el"
+           "/defuns.el"
            "/constants.el"
            "/credentials.el"
            "/bundle.el"
