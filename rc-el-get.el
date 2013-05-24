@@ -1,1 +1,1 @@
-/Users/octocat/.emacs.d/rc-el-get-macosx.el
+/home/octocat/.emacs.d/rc-el-get-macosx.el

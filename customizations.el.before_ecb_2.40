@@ -1,0 +1,116 @@
+;;; customizations.el ---
+
+;; Copyright (C) Ronin
+;;
+;; Author: Ronin <aaermolov@gmail.com>
+;; Keywords:
+;; Requirements:
+;; Status: not intended to be distributed yet
+
+
+
+
+;;; customizations.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(diredp-compressed-file-suffix ((((type tty)) :foreground "yellow") (t :foreground "DarkOrange1")))
+ '(diredp-dir-heading ((((type tty)) :foreground "yellow") (t :foreground "goldenrod1")))
+ '(diredp-dir-priv ((((type tty)) :foreground "blue") (t :foreground "SteelBlue3")))
+ '(diredp-display-msg ((((type tty)) :foreground "blue") (t :foreground "cornflower blue")))
+ '(diredp-executable-tag ((((type tty)) :foreground "green") (t :foreground "chartreuse")))
+ '(diredp-file-name ((((type tty)) :foreground "gray") (t :foreground "gray60")))
+ '(diredp-file-suffix ((((type tty)) :foreground "gray") (t :foreground "gray80")))
+ '(diredp-inode+size ((((type tty)) :foreground "yellow") (t :foreground "gold3")))
+ '(diredp-link-priv ((((type tty)) :foreground "blue") (t :foreground "LightSkyBlue4")))
+ '(diredp-read-priv ((((type tty)) :foreground "yellow") (t :foreground "yellow4")))
+ '(diredp-symlink ((((type tty)) :foreground "blue") (t :foreground "LightSkyBlue4")))
+ '(diredp-write-priv ((((type tty)) :foreground "red") (t :foreground "IndianRed4")))
+ '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
+;; (custom-set-faces
+;;   ;; custom-set-faces was added by Custom.
+;;   ;; If you edit it by hand, you could mess it up, so be careful.
+;;   ;; Your init file should contain only one such instance.
+;;   ;; If there is more than one, they won't work right.
+;;  '(bold ((t (:weight bold))))
+;;  '(bold-italic ((t (:slant italic :weight bold))))
+;;  '(border ((t nil)))
+;;  '(brace-face ((((class color)) (:foreground "white"))))
+;;  '(bracket-face ((((class color)) (:foreground "DeepSkyBlue3"))))
+;;  '(buffer-menu-buffer ((t (:inherit font-lock-function-name-face))))
+;;  '(button ((t (:inherit bold))))
+;;  '(comint-highlight-input ((t (:inherit bold))))
+;;  '(compilation-info ((((class color) (min-colors 88) (background dark)) (:foreground "palegreen"))))
+;;  '(compilation-warning ((((class color) (min-colors 16)) (:inherit bold :foreground "Orange"))))
+;;  '(cursor ((t (:background "palegreen"))))
+;;  '(custom-link ((((min-colors 88) (class color) (background dark)) (:underline t :weight bold))))
+;;  '(ecb-default-highlight-face ((((class color) (background dark)) (:background "darkslateblue"))))
+;;  '(escape-glyph ((((background dark)) (:foreground "lightsteelblue3"))))
+;;  '(eshell-ls-archive ((((class color) (background dark)) (:foreground "salmon"))))
+;;  '(eshell-ls-directory ((((class color) (background dark)) (:foreground "Skyblue"))))
+;;  '(eshell-ls-executable ((((class color) (background dark)) (:foreground "palegreen"))))
+;;  '(eshell-ls-missing ((((class color) (background dark)) (:foreground "tomato"))))
+;;  '(eshell-ls-symlink ((((class color) (background dark)) (:foreground "Cyan"))))
+;;  '(eshell-prompt ((t (:foreground "aquamarine2"))))
+;;  '(fg:erc-color-face1 ((t (:foreground "grey30"))))
+;;  '(font-lock-builtin-face ((((class grayscale) (background light)) (:foreground "LightGray" :weight bold)) (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold)) (((class color) (min-colors 88) (background light)) (:foreground "Orchid")) (((class color) (min-colors 88) (background dark)) (:foreground "LightSteelBlue")) (((class color) (min-colors 16) (background light)) (:foreground "Orchid")) (((class color) (min-colors 16) (background dark)) (:foreground "LightSteelBlue")) (((class color) (min-colors 8)) (:foreground "cyan" :weight bold)) (t (:weight bold))))
+;;  '(font-lock-comment-delimiter-face ((default (:foreground "tan2")) (((class color) (min-colors 16)) nil)))
+;;  '(font-lock-constant-face ((((type x) (class color) (min-colors 88) (background dark)) (:foreground "Aquamarine3"))))
+;;  '(font-lock-keyword-face ((((type x) (class color) (min-colors 88) (background dark)) (:foreground "turquoise3"))))
+;;  '(font-lock-regexp-grouping-backslash ((t (:foreground "burlywood1"))))
+;;  '(font-lock-string-face ((((type x) (class color) (min-colors 88) (background dark)) (:foreground "burlywood3")) (((type tty)) (:foreground "palegreen"))))
+;;  '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "PaleGreen3"))))
+;;  '(font-lock-variable-name-face ((((type x) (min-colors 88) (background dark)) (:foreground "LightGoldenrod3"))))
+;;  '(font-lock-warning-face ((((type x) (class color) (min-colors 88) (background dark)) (:background "firebrick4" :foreground "white")) (((type tty)) (:background "red" :foreground "white" :weight bold))))
+;;  '(fringe ((((class color) (background dark)) (:background "grey20"))))
+;;  '(header-line ((t (:inherit variable-pitch :background "grey10" :foreground "aquamarine3" :box (:line-width 2 :color "aquamarine4")))))
+;;  '(help-argument-name ((((supports :slant italic)) (:inherit font-lock-variable-name-face))))
+;;  '(highlight ((((type x) (class color) (min-colors 88) (background dark)) (:background "grey20"))))
+;;  '(highlight-changes ((((min-colors 88) (class color)) (:background "grey20"))))
+;;  '(highline-face ((t (:background "grey20"))))
+;;  '(hl-line ((t (:background "#101040"))))
+;;  '(info-menu-star ((((class color)) (:foreground "lightgoldenrod"))))
+;;  '(info-node ((((class color) (background dark)) (:inherit bold :foreground "white" :slant italic))))
+;;  '(info-xref ((((min-colors 88) (class color) (background dark)) (:foreground "lightgoldenrod2"))))
+;;  '(info-xref-visited ((default (:foreground "lightgoldenrod3")) (((class color) (background dark)) nil)))
+;;  '(italic ((((supports :underline t)) (:slant italic))))
+;;  '(match ((((class color) (min-colors 88) (background dark)) (:background "royalblue"))))
+;;  '(menu ((t (:background "grey30" :foreground "gold"))))
+;;  '(minibuffer-prompt ((((background dark)) (:foreground "aquamarine2"))))
+;;  '(mode-line ((((class color) (min-colors 88)) (:inherit variable-pitch :background "black" :foreground "palegreen3" :box (:line-width 2 :color "palegreen4")))))
+;;  '(mode-line-buffer-id ((t (:inherit bold))))
+;;  '(mode-line-inactive ((((type x)) (:inherit variable-pitch :background "grey20" :foreground "palegreen4" :box (:line-width 2 :color "grey40")))))
+;;  '(paren-face ((((class color)) (:foreground "darkseagreen"))))
+;;  '(paren-face-match ((((class color)) (:background "green"))))
+;;  '(paren-face-mismatch ((((class color)) (:foreground "white" :background "red"))))
+;;  '(paren-match ((t (:background "green"))))
+;;  '(paren-mismatch ((t (:background "red"))))
+;;  '(progmode-special-chars-face ((((class color)) (:foreground "grey90"))))
+;;  '(region ((((class color) (min-colors 88) (background dark)) (:background "darkslateblue"))))
+;;  '(scroll-bar ((t (:inherit Header\ Line :stipple nil :background "black" :foreground "lightgreen" :inverse-video nil :slant italic :weight ultra-bold :height 1 :width condensed))))
+;;  '(semicolon-face ((((class color)) (:foreground "white"))))
+;;  '(sh-escaped-newline ((t (:foreground "tomato"))))
+;;  '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face :background "grey20"))))
+;;  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "salmon1"))))
+;;  '(shadow ((((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey50"))))
+;;  '(show-paren-match ((((class color) (background dark)) (:background "deepskyblue1"))))
+;;  '(show-paren-mismatch ((((class color)) (:background "firebrick3"))))
+;;  '(tooltip ((((class color)) (:inherit variable-pitch :background "gray30" :foreground "white"))))
+;;  '(trailing-whitespace ((((class color) (background dark)) (:background "grey30"))))
+;;  '(tuareg-font-lock-governing-face ((t (:foreground "orange"))))
+;;  '(ude-error-face ((t (:background "firebrick4" :foreground "white" :weight normal))))
+;;  '(ude-font-lock-face-1 ((t (:foreground "Plum2"))))
+;;  '(variable-pitch ((t (:height 0.8 :family "arial"))))
+;;  '(vertical-border ((nil (:foreground "grey20"))))
+;;  '(which-func ((((class color) (min-colors 88) (background dark)) (:foreground "aquamarine"))))
+;;  '(woman-bold ((((background dark)) (:foreground "palegreen"))))
+;;  '(woman-italic ((((background dark)) (:foreground "lightgoldenrod"))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "/home/octocat/.emacs.d/bookmarks")
+ '(el-get-standard-packages (quote ("el-get" "ahg" "bbdb" "browse-kill-ring" "cmake-mode" "color-theme" "dired+" "doxymacs" "emacs-w3m" "erc-highlight-nicknames" "git-emacs" "highlight-symbol" "hs-lint" "ioccur" "mo-git-blame" "org-mode" "po-mode" "psvn" "pymacs" "python" "quack" "slime" "smex" "tail" "twittering-mode" "undo-tree" "wrap-region" "anything-extension" "anything-match-plugin" "autosmiley" "c-eldoc" "dired-sort-menu" "icicles-iswitchb" "iswitchb-highlight" "lacarte" "auto-complete" "anything-grep" "buff-menu+" "buffer-move" "window-number" "erefactor" "minibuf-electric-gnuemacs" "column-marker" "workspaces" "devel-notes" "electric-dot-and-dash" "header2" "flymake-cursor" "framemove" "ido-preview" "iy-go-to-char" "key-chord" "dired-details" "volatile-highlights" "yasnippet" "emacs-calfw" "drag-stuff" "egg" "full-ack" "gitsum" "haskell-mode-exts" "emacs-psto-el" "color-theme-darkmate" "multiple-cursors" "sauron" "expand-region" "himark" "camelcase-mode" "csv-mode" "fill-column-indicator" "hexview-mode" "org-occur-goto" "paredit" "parenface" "pdftools" "savekill" "silentcomp" "command-log-mode" "zenburn-el" "change-windows-intuitively" "point-stack" "rebox2" "zencoding" "workgroups-el" "helm" "list-register" "region-bindings-mode" "perspective" "ido-ubiquitous" "dash-el" "markdown-mode" "clojure-mode" "smart-forward" "change-inner" "helm-cmd-t" "helm-find-files-in-project" "simp" "breadcrumb"))))

@@ -9,14 +9,14 @@
 
 (setq el-get-sources-custom
       '(
+        (:name s
+               :type git
+               :url "https://github.com/magnars/s.el.git"
+               :load "s.el")
         (:name yasnippet
                :type git
                :url "https://github.com/capitaomorte/yasnippet.git"
                :load-path ("."))
-        ;; (:name cdlatex
-        ;;        :type http
-        ;;        :url "http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el"
-        ;;        :load "cdlatex.el")
         (:name color-theme-sanityinc-solarized
                :type git
                :url "git://github.com/purcell/color-theme-sanityinc-solarized.git"
@@ -26,24 +26,17 @@
                :url "https://github.com/kiwanami/emacs-calfw.git"
                :load-path ("."))
         (:name drag-stuff
-               :type http
-               :url "https://github.com/rejeep/drag-stuff/raw/master/drag-stuff.el")
+               :type git
+               :url "https://github.com/rejeep/drag-stuff"
+               :load "drag-stuff.el")
         (:name egg
                :type git
                :url "https://github.com/byplayer/egg.git"
                :load-path ("."))
-        ;; (:name egit
-        ;;        :type git
-        ;;        :url "git://github.com/jimhourihan/egit.git"
-        ;;        :load "egit.el")
-        ;; (:name emacs-juick-el
-        ;;        :type git
-        ;;        :url "git://github.com/mad/emacs-juick-el.git"
-        ;;        :load "juick.el")
-        (:name full-ack
-               :type http
-               :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
-               :load "full-ack.el")
+        (:name egit
+               :type git
+               :url "https://github.com/jimhourihan/egit.git"
+               :load "egit.el")
         (:name gitsum
                :type git
                :url "git://github.com/chneukirchen/gitsum.git"
@@ -54,73 +47,23 @@
                :load "highlight-symbol.el")
         (:name haskell-mode
                :type git
-               :url "https://github.com/pheaver/haskell-mode"
+               :url "https://github.com/haskell/haskell-mode"
                :load "haskell-site-file.el")
-        (:name haskell-mode-exts
-               :type git
-               :url "http://github.com/pheaver/haskell-mode-exts.git"
-               :load-path (".")
-               :features (
-                          haskell-align-imports
-                          haskell-installed-packages
-                          haskell-navigate-imports
-                          haskell-sort-imports
-                          inf-haskell-send-cmd))
-        ;; (:name icicles
-        ;;        :type git
-        ;;        :url "https://github.com/emacsmirror/icicles.git"
-        ;;        :load-path ("."))
-        (:name emacs-psto-el
-               :type git
-               :url "git://github.com/wiedzmin/emacs-psto-el.git"
-               :load-path ("."))
         (:name color-theme-darkmate
                :type http
                :url "http://myvimemacs.googlecode.com/svn-history/r2/trunk/emacs/.emacs.d/site-lisp/color-theme-darkmate.el")
-        (:name multiple-cursors
-               :type git
-               :url "https://github.com/magnars/multiple-cursors.el.git"
-               :load-path ("."))
         (:name sauron
                :type git
                :url "https://github.com/djcb/sauron.git"
                :load-path ("."))
-        (:name expand-region
-               :type git
-               :url "https://github.com/magnars/expand-region.el.git"
-               :load-path ("."))
-        (:name himark
-               :type http
-               :url "http://www.emacswiki.org/emacs/download/himark.el"
-               :load "himark.el")
-        (:name camelcase-mode
-               :type http
-               :url "http://lilypond.org/blog/jan/software/ooo/camelCase-mode.el"
-               :load "camelCase-mode.el")
         (:name csv-mode
                :type http
                :url "http://www.emacswiki.org/emacs/download/csv-mode.el"
                :load "csv-mode.el")
-        (:name fill-column-indicator
-               :type http
-               :url "http://www.emacswiki.org/emacs/download/fill-column-indicator.el"
-               :load "fill-column-indicator.el")
-        (:name hexview-mode
-               :type http
-               :url "http://emacswiki.org/emacs/download/hexview-mode.el"
-               :load "hexview-mode.el")
         (:name org-occur-goto
                :type http
                :url "http://www.emacswiki.org/emacs/download/org-occur-goto.el"
                :load "org-occur-goto.el")
-        (:name paredit
-               :type http
-               :url "http://mumble.net/~campbell/emacs/paredit.el"
-               :load "paredit.el")
-        (:name parenface
-               :type http
-               :url "http://www.davep.org/emacs/parenface.el"
-               :load "parenface.el")
         (:name pdftools
                :type http
                :url "http://www.emacswiki.org/emacs-en/download/pdftools.el"
@@ -133,46 +76,181 @@
                :type http
                :url "http://larch.cs.iastate.edu/emacs/ecb/silentcomp.el"
                :load "silentcomp.el")
-        (:name emacs-minimap
-               :type git
-               :url "https://github.com/dustinlacewell/emacs-minimap.git"
-               :load "minimap.el")
-        (:name command-log-mode
-               :type git
-               :url "https://github.com/lewang/command-log-mode.git"
-               :load "command-log-mode.el")
         (:name zenburn-el
                :type git
                :url "https://github.com/dbrock/zenburn-el.git"
                :load "zenburn.el")
-        (:name change-windows-intuitively
-               :type http
-               :url "http://quimby.gnus.org/s/change-windows-intuitively.el"
-               :load "change-windows-intuitively.el")
         (:name point-stack
                :type git
                :url "https://github.com/mattharrison/point-stack.git"
                :load "point-stack.el")
-        ;; (:name helm-slime
-        ;;        :type git
-        ;;        :url "https://github.com/emacs-helm/helm-slime.git"
-        ;;        :load "helm-slime.el")
         (:name rebox2
                :type git
                :url "https://github.com/lewang/rebox2.git"
                :load "rebox2.el")
         (:name zencoding
                :type git
-               :url "https://github.com/rooney/zencoding.git"
+               :url "https://github.com/smihica/zencoding.git"
                :load-path ("."))
-        (:name workgroups-el
+        (:name region-bindings-mode
                :type git
-               :url "https://github.com/tlh/workgroups.el.git"
+               :url "https://github.com/fgallina/region-bindings-mode.git"
                :load-path ("."))
-        (:name helm
+        (:name ido-ubiquitous
                :type git
-               :url "https://github.com/emacs-helm/helm.git"
+               :url "https://github.com/technomancy/ido-ubiquitous.git"
+               :load "ido-ubiquitous.el")
+        (:name markdown-mode
+               :type git
+               :url "git://jblevins.org/git/markdown-mode.git"
+               :load "markdown-mode.el")
+        (:name clojure-mode
+               :type git
+               :url "https://github.com/technomancy/clojure-mode.git"
                :load-path ("."))
-))
-
+        (:name mooz-js2-mode
+               :type git
+               :url "https://github.com/mooz/js2-mode.git"
+               :load-path ("."))
+        (:name js2-highlight-vars
+               :type http
+               :url "http://mihai.bazon.net/projects/editing-javascript-with-emacs-js2-mode/js2-highlight-vars-mode/js2-highlight-vars.el"
+               :load "js2-highlight-vars.el")
+        (:name breadcrumb
+               :type git
+               :url "https://github.com/pheaver/breadcrumb.git"
+               :load-path ("."))
+        (:name json-mode
+               :type git
+               :url "https://github.com/joshwnj/json-mode.git"
+               :load "json-mode.el")
+        (:name ace-jump-mode
+               :type git
+               :url "https://github.com/winterTTr/ace-jump-mode.git"
+               :load "ace-jump-mode.el")
+        (:name diminish
+               :type http
+               :url "http://www.eskimo.com/~seldon/diminish.el"
+               :load "diminish.el")
+        (:name dash
+               :type git
+               :url "https://github.com/magnars/dash.el.git"
+               :load "dash.el")
+        (:name whole-line-or-region
+               :type http
+               :url "http://www.northbound-train.com/emacs/whole-line-or-region.el"
+               :load "whole-line-or-region.el")
+        (:name oauth2
+               :type git
+               :url "https://github.com/emacsmirror/oauth2.git"
+               :load "oauth2.el")
+        (:name google-contacts
+               :type git
+               :url "http://git.naquadah.org/git/google-contacts.el.git"
+               :load-path ("."))
+        (:name rainbow-delimiters
+               :type git
+               :url "https://github.com/jlr/rainbow-delimiters.git"
+               :load "rainbow-delimiters.el")
+        (:name popwin-el
+               :type git
+               :url "https://github.com/m2ym/popwin-el.git"
+               :load "popwin.el")
+        (:name fuzzy-el
+               :type git
+               :url "https://github.com/auto-complete/fuzzy-el.git"
+               :load "fuzzy.el")
+        (:name popup-el
+               :type git
+               :url "https://github.com/auto-complete/popup-el.git"
+               :load "popup.el")
+        (:name auto-complete
+               :type git
+               :url "https://github.com/auto-complete/auto-complete.git"
+               :load-path ("."))
+        (:name ac-slime
+               :type git
+               :url "https://github.com/purcell/ac-slime.git"
+               :load "ac-slime.el")
+        (:name ack-and-a-half
+               :type git
+               :url "https://github.com/jhelwig/ack-and-a-half.git"
+               :load "ack-and-a-half.el")
+        (:name zendark
+               :type git
+               :url "https://github.com/gleber/zendark.git"
+               :load "zendark-theme.el")
+        (:name pony-mode
+               :type git
+               :url "https://github.com/davidmiller/pony-mode.git"
+               :load-path ("./src/"))
+        (:name yandex-weather
+               :type git
+               :url "https://github.com/abstractionlayer/yandex-weather.el.git"
+               :load-path ("."))
+        (:name smartparens
+               :type git
+               :url "https://github.com/Fuco1/smartparens.git"
+               :load-path ("."))
+        (:name iedit
+               :type git
+               :url "https://github.com/victorhge/iedit.git"
+               :load-path ("."))
+        (:name rainbow-mode
+               :type git
+               :url "https://github.com/emacsmirror/rainbow-mode.git"
+               :load "rainbow-mode.el")
+        (:name regex-tool
+               :type git
+               :url "https://github.com/jwiegley/regex-tool.git"
+               :load "regex-tool.el")
+        (:name python.el
+               :type git
+               :url "https://github.com/fgallina/python.el.git"
+               :load "python.el")
+        (:name django-mode
+               :type git
+               :url "https://github.com/myfreeweb/django-mode.git"
+               :load-path ("."))
+        (:name ioccur
+               :type git
+               :url "https://github.com/thierryvolpiatto/ioccur.git"
+               :load "ioccur.el")
+        (:name naquadah-theme
+               :type git
+               :url "git://git.naquadah.org/naquadah-theme.git"
+               :load-path ("."))
+        (:name naquadah-theme
+               :type git
+               :url "https://github.com/tkf/emacs-jedi.git"
+               :load-path ("."))
+        (:name golden-ratio
+               :type git
+               :url "https://github.com/Fuco1/golden-ratio.el.git"
+               :load "golden-ratio.el")
+        (:name elwm
+               :type git
+               :url "https://github.com/Fuco1/elwm.git"
+               :load "elwm.el")
+        (:name emacs-epc
+               :type git
+               :url "https://github.com/kiwanami/emacs-epc.git"
+               :load-path ("."))
+        (:name emacs-ctable
+               :type git
+               :url "https://github.com/kiwanami/emacs-ctable.git"
+               :load-path ("."))
+        (:name emacs-deferred
+               :type git
+               :url "https://github.com/kiwanami/emacs-deferred.git"
+               :load-path ("."))
+        (:name emacs-jedi
+               :type git
+               :url "https://github.com/tkf/emacs-jedi.git"
+               :load-path ("."))
+        (:name web-mode
+               :type git
+               :url "https://github.com/fxbois/web-mode.git"
+               :load "web-mode.el")
+        ))
 ;;; sources-custom.el ends here

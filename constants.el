@@ -12,21 +12,36 @@
 ;#############################################################################
 ;#   Abbreviation
 ;############################################################################
-(setq custom/yasnippet-dir (concat config-basedir "/resources/yasnippet"))
-(setq custom/auto-insert-dir (concat config-basedir "/resources/auto-insert/"))
+(setq custom/yasnippet-dir (concat config-basedir "resources/yasnippet/"))
+(setq custom/auto-insert-dir (concat config-basedir "resources/auto-insert/"))
 
 
 ;#############################################################################
 ;#   Org
 ;############################################################################
 (setq custom/org-capture-file (concat org-dir "/refile.org"))
-(setq custom/org-capture-review-file (concat org-dir "/review.org"))
-(setq custom/org-diary-file (concat org-dir "/diary.org"))
 
 
 ;#############################################################################
 ;#   Jabber
 ;############################################################################
 (setq custom/jabber-history-dir "~/.emacs-jabber")
+
+
+;#############################################################################
+;#   Various
+;############################################################################
+(setq custom/frame-title-format "emacs - %b")
+(setq custom/erc-autoaway-message "I'm gone (autoaway after %i seconds)")
+
+(setq custom/juick-tmp-dir "~/.juick-avatars/")
+(setq custom/psto-tmp-dir "~/.psto-avatars/")
+
+(setq custom/jabber-resource "laptoptop")
+(setq custom/hyperspec-root "~/help/HyperSpec/")
+
+(setq custom/wl-domain "ronin.homelinux.net")
+
+(setq custom/maildir-folder "~/Mail")
 
 ;;; constants.el ends here

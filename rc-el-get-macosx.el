@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(add-to-list 'load-path (concat config-basedir "/el-get/el-get"))
+(add-to-list 'load-path (concat config-basedir "el-get/el-get"))
 
 (unless (require 'el-get nil t)
   (url-retrieve
@@ -16,9 +16,9 @@
      (end-of-buffer)
      (eval-print-last-sexp))))
 
-(load-file (concat config-basedir "/el-get-sources/sources-common.el"))
-(load-file (concat config-basedir "/el-get-sources/sources-emacswiki.el"))
-(load-file (concat config-basedir "/el-get-sources/sources-custom.el"))
+(load-file (concat config-basedir "el-get-sources/sources-common.el"))
+(load-file (concat config-basedir "el-get-sources/sources-emacswiki.el"))
+(load-file (concat config-basedir "el-get-sources/sources-custom.el"))
 
 (setq el-get-sources
       (append

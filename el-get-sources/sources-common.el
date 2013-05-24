@@ -9,16 +9,10 @@
 
 (setq el-get-sources-common
       '(
-        ;; auctex
-        ;; distel
-        ;; emacs-jabber
-        ;; ess
-        ;; haskell-mode
-        ;; todochiku
         ahg
         bbdb
+        bookmark+
         browse-kill-ring
-        cmake-mode
         color-theme
         dired+
         doxymacs
@@ -27,21 +21,16 @@
         git-emacs
         highlight-symbol
         hs-lint
-        ioccur
-        js2-mode
         mo-git-blame
+        nxhtml
         org-mode
         po-mode
-        psvn
-        pymacs
-        python
-        quack
-        slime
+        ropemacs
         smex
+        sml-mode
         tail
         twittering-mode
         undo-tree
-        wrap-region
-))
+        ))
 
 ;;; sources-common.el ends here
