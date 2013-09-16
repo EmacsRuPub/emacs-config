@@ -172,14 +172,6 @@
                :type git
                :url "https://github.com/purcell/ac-slime.git"
                :load "ac-slime.el")
-        (:name ack-and-a-half
-               :type git
-               :url "https://github.com/jhelwig/ack-and-a-half.git"
-               :load "ack-and-a-half.el")
-        (:name zendark
-               :type git
-               :url "https://github.com/gleber/zendark.git"
-               :load "zendark-theme.el")
         (:name pony-mode
                :type git
                :url "https://github.com/davidmiller/pony-mode.git"
