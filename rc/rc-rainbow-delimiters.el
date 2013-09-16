@@ -8,9 +8,12 @@
 
 (require 'rainbow-delimiters)
 
-;; (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'php-mode-hook 'rainbow-delimiters-mode)
 
-(global-rainbow-delimiters-mode)
+;; (global-rainbow-delimiters-mode)
 
 (provide 'rc-rainbow-delimiters)
 
