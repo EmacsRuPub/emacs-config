@@ -17,10 +17,6 @@
                :type git
                :url "https://github.com/capitaomorte/yasnippet.git"
                :load-path ("."))
-        (:name color-theme-sanityinc-solarized
-               :type git
-               :url "git://github.com/purcell/color-theme-sanityinc-solarized.git"
-               :load "color-theme-sanityinc-solarized.el")
         (:name emacs-calfw
                :type git
                :url "https://github.com/kiwanami/emacs-calfw.git"
@@ -49,9 +45,6 @@
                :type git
                :url "https://github.com/haskell/haskell-mode"
                :load "haskell-site-file.el")
-        (:name color-theme-darkmate
-               :type http
-               :url "http://myvimemacs.googlecode.com/svn-history/r2/trunk/emacs/.emacs.d/site-lisp/color-theme-darkmate.el")
         (:name sauron
                :type git
                :url "https://github.com/djcb/sauron.git"
@@ -208,18 +201,6 @@
                :type git
                :url "https://github.com/thierryvolpiatto/ioccur.git"
                :load "ioccur.el")
-        (:name naquadah-theme
-               :type git
-               :url "git://git.naquadah.org/naquadah-theme.git"
-               :load-path ("."))
-        (:name naquadah-theme
-               :type git
-               :url "https://github.com/tkf/emacs-jedi.git"
-               :load-path ("."))
-        (:name golden-ratio
-               :type git
-               :url "https://github.com/Fuco1/golden-ratio.el.git"
-               :load "golden-ratio.el")
         (:name elwm
                :type git
                :url "https://github.com/Fuco1/elwm.git"
