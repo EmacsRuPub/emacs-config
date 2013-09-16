@@ -8,9 +8,13 @@
 
 (require 'xgtags)
 
-(add-hook 'php-mode-hook
-          (lambda ()
-            (xgtags-mode 1)))
+(add-hook 'php-mode-hook (lambda () (ggtags-mode 1)))
+;; (add-hook 'python-mode-hook (lambda () (ggtags-mode 1)))
+
+;; (add-hook 'c-mode-common-hook
+;;           (lambda ()
+;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+;;               (ggtags-mode 1))))
 
 ;; (defun gtags-root-dir ()
 ;;  "Returns GTAGS root directory or nil if doesn't exist."
