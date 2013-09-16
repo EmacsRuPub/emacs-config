@@ -43,7 +43,7 @@
                :load "highlight-symbol.el")
         (:name haskell-mode
                :type git
-               :url "https://github.com/haskell/haskell-mode"
+               :url "https://github.com/alexott/haskell-mode.git"
                :load "haskell-site-file.el")
         (:name sauron
                :type git
@@ -189,10 +189,10 @@
                :type git
                :url "https://github.com/jwiegley/regex-tool.git"
                :load "regex-tool.el")
-        (:name python.el
-               :type git
-               :url "https://github.com/fgallina/python.el.git"
-               :load "python.el")
+;        (:name python.el
+;               :type git
+;               :url "https://github.com/fgallina/python.el.git"
+;               :load "python.el")
         (:name django-mode
                :type git
                :url "https://github.com/myfreeweb/django-mode.git"
@@ -221,9 +221,77 @@
                :type git
                :url "https://github.com/tkf/emacs-jedi.git"
                :load-path ("."))
+        (:name sunrise-commander
+               :type git
+               :url "https://github.com/escherdragon/sunrise-commander.git"
+               :load-path ("."))
+        (:name revive
+               :type http
+               :url "http://www.gentei.org/~yuuji/software/revive.el"
+               :load "revive.el")
+        (:name nrepl
+               :type git
+               :url "https://github.com/kingtim/nrepl.el.git"
+               :load "nrepl.el")
+        (:name ag
+               :type git
+               :url "https://github.com/wiedzmin/ag.el.git"
+               :load "ag.el")
+        (:name pylookup
+               :type git
+               :url "https://github.com/tsgates/pylookup.git"
+               :load-path ("."))
+        (:name ggtags
+               :type git
+               :url "https://github.com/leoliu/ggtags.git"
+               :load "ggtags.el")
+        (:name epoch-view
+               :type git
+               :url "https://github.com/emacsmirror/epoch-view"
+               :load "epoch-view.el")
+        (:name cl-lib
+               :type git
+               :url "https://github.com/emacsmirror/cl-lib.git"
+               :load "cl-lib.el")
+        (:name flycheck
+               :type git
+               :url "https://github.com/lunaryorn/flycheck.git"
+               :load "flycheck.el")
+        (:name flycheck-color-mode-line
+               :type git
+               :url "https://github.com/syl20bnr/flycheck-color-mode-line.git"
+               :load "flycheck-color-mode-line.el")
+        (:name multiple-cursors
+               :type git
+               :url "https://github.com/wiedzmin/multiple-cursors.el.git"
+               :load-path ("."))
+        (:name helm
+               :type git
+               :url "https://github.com/emacs-helm/helm.git"
+               :load-path ("."))
+        (:name emacs-helm-gtags
+               :type git
+               :url "https://github.com/syohex/emacs-helm-gtags.git"
+               :load "helm-gtags.el")
+        (:name ac-php-doc
+               :type git
+               :url "https://github.com/steckerhalter/ac-php-doc.git"
+               :load "ac-php-doc.el")
+        (:name ac-nrepl
+               :type git
+               :url "https://github.com/clojure-emacs/ac-nrepl.git"
+               :load "ac-nrepl.el")
+        (:name dope
+               :type git
+               :url "https://github.com/emacsmirror/dope.git"
+               :load "dope.el")
+        (:name evil
+               :type git
+               :url "git://gitorious.org/evil/evil.git"
+               :load-path ("."))
         (:name web-mode
                :type git
                :url "https://github.com/fxbois/web-mode.git"
-               :load "web-mode.el")
+               :load-path ("."))
         ))
 ;;; sources-custom.el ends here

@@ -53,6 +53,10 @@
                :type git
                :url "https://github.com/fourier/loccur.git"
                :load "loccur.el")
+        (:name icicles
+               :type git
+               :url "https://github.com/emacsmirror/icicles.git"
+               :load-path ("."))
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sources-disabled.el ends here
