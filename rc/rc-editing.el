@@ -125,6 +125,7 @@
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+;; (add-hook 'minibuffer-setup-hook 'conditionally-enable-parens-mode)
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
@@ -153,7 +154,7 @@
 ;############################################################################
 (global-unset-key (kbd "C-z"))
 (define-prefix-command 'custom-edit-keymap)
-(define-key custom-edit-keymap (kbd "c") 'insert-current-date-time)
+(define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)
 (define-key custom-edit-keymap (kbd "x") 'query-replace-regexp)
@@ -171,8 +172,10 @@
 (define-key custom-edit-keymap (kbd "4") 'camelscore-word-at-point)
 (define-key custom-edit-keymap (kbd "9") 'quote-string-with-period-and-nextline)
 (define-key custom-edit-keymap (kbd "S-9") 'double-quote-string-with-period-and-nextline)
-(define-key custom-edit-keymap (kbd "<up>") 'previous-error)
-(define-key custom-edit-keymap (kbd "<down>") 'next-error)
+(define-key custom-edit-keymap (kbd "<left>") 'previous-error)
+(define-key custom-edit-keymap (kbd "<right>") 'next-error)
+(define-key custom-edit-keymap (kbd "<up>") 'move-line-up)
+(define-key custom-edit-keymap (kbd "<down>") 'move-line-down)
 (define-key custom-edit-keymap (kbd "[") 'comment-region)
 (define-key custom-edit-keymap (kbd "]") 'uncomment-region)
 (define-key custom-edit-keymap (kbd "<left>") 'iy-go-to-char-backward)
@@ -181,7 +184,15 @@
 (define-key custom-edit-keymap (kbd "j") 'join-next-line-n)
 (define-key custom-edit-keymap (kbd "C-;") 'join-next-line-semicolon-n)
 (define-key custom-edit-keymap (kbd "C-r") 'join-region)
+(define-key custom-edit-keymap (kbd "b") 'subword-mode)
+(define-key custom-edit-keymap (kbd "c") 'wc-mode)
+(define-key custom-edit-keymap (kbd "o") 'just-one-space)
+(define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
+(define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
 (global-set-key (kbd "C-z") 'custom-edit-keymap)
+
+(global-set-key (kbd "M-<up>") 'smart-symbol-go-backward)
+(global-set-key (kbd "M-<down>") 'smart-symbol-go-forward)
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
@@ -211,10 +222,11 @@
 ;; (global-set-key (kbd "C-p") 'go-back)
 ;; (global-set-key (kbd "<up>") 'go-back)
 
-(key-chord-define-global "2w" 'subword-mode)
-(key-chord-define-global "2c" 'wc-mode)
-
 (global-set-key (kbd "C-c n") 'spawn-buffer)
+
+;; remap C-a to `smarter-move-beginning-of-line'
+(global-set-key [remap move-beginning-of-line]
+                'smarter-move-beginning-of-line)
 
 
 (provide 'rc-editing)
