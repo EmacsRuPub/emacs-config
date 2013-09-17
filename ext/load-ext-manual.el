@@ -23,6 +23,8 @@
         "ext/smerge-mode.el"
         "ext/tomorrow-themes-emacs/color-theme-tomorrow.el"
         "ext/golang/go-mode.el"
+        "ext/evil-nerd-commenter/evil-nerd-commenter.el"
+        "ext/evil-surround/surround.el"
         )))
 
 (mapcar (lambda (ext-dir) (add-to-list 'load-path (concat config-basedir ext-dir))) ext-dirs)

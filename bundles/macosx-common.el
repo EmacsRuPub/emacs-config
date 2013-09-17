@@ -23,6 +23,7 @@
 (require 'rc-themes)
 (require 'rc-backups)
 (require 'rc-editing)
+;; (require 'rc-evil)
 (require 'rc-auto-complete)
 (require 'rc-header2)
 (require 'rc-rebox2)
