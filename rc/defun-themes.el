@@ -16,6 +16,7 @@
 (setf (gethash "monaco" custom/fonts-def) "Monaco:size=12")
 (setf (gethash "code2000" custom/fonts-def) "Code2000:size=12")
 (setf (gethash "consolamono" custom/fonts-def) "ConsolaMono:size=12")
+(setf (gethash "ptmono" custom/fonts-def) "PTMono:size=12")
 (setf (gethash "adobe-courier-bold-14" custom/fonts-def) "-Adobe-Courier-bold-normal-normal-*-14-*-*-*-m-90-iso10646-1")
 (setf (gethash "adobe-helvetica-bold-12" custom/fonts-def) "-Adobe-Helvetica-bold-normal-normal-*-12-*-*-*-*-70-iso10646-1")
 (setf (gethash "adobe-helvetica-bold-14" custom/fonts-def) "-Adobe-Helvetica-bold-normal-normal-*-14-*-*-*-*-82-iso10646-1")
