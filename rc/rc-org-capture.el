@@ -17,7 +17,6 @@
         ("dc" "chaos" entry (file (concat org-dir "/todo.org")) "* SOMEDAY %? %U :todo:chaos:")
         ("dt" "today" entry (file (concat org-dir "/todo.org")) "* TODO %? %U :todo:today:")
         ("dm" "tomorrow" entry (file (concat org-dir "/todo.org")) "* TODO %? %U :todo:tomorrow")
-        ("o" "ordering" entry (file (concat org-dir "/ordering.org")) "* TODO %? %U :ordering:")
         ("s" "search" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:")
         ("m" "system maintaining" entry (file+headline (concat org-dir "/projects/config/linux-system.org") "raw tickets") "* TODO %? %U :todo:system:")
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
