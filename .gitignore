@@ -17,3 +17,7 @@ newsticker
 semanticdb
 url
 bookmarks
+.emacs.desktop
+.mc-lists.el
+projectile.cache
+elpa
