@@ -95,3 +95,51 @@
 (provide 'rc-lang-haskell)
 
 ;;; emacs-rc-haskell.el ends here
+
+;; (defun flymake-get-Haskell-cmdline (source base-dir)
+;;   (list "ghc"
+;;         (append
+;;          (list "--make" (concat "-i" base-dir) source)
+;;          flymake-ghc-options
+;;          flymake-ghc-packages)))
+
+;; (defun flymake-Haskell-init ()
+;;   (flymake-simple-make-init-impl
+;;    'flymake-create-temp-inplace
+;;    nil nil
+;;    (file-name-nondirectory buffer-file-name)
+;;    'flymake-get-Haskell-cmdline))
+
+;; (defun flymake-Haskell-cleanup ()
+;;   (delete-file flymake-temp-source-file-name))
+
+;; ;; flymake settings for ghc
+;; (defvar flymake-ghc-options (list "-Wall"))
+;; (defvar flymake-ghc-packages (mapcar (lambda (p) (concat "-package " p)) '("QuickCheck")))
+
+
+;; (defun my-haskell-mode-hook ()
+;;   ;; (turn-on-haskell-doc-mode)
+;;   (turn-on-haskell-ghci)
+;;   (turn-on-eldoc-mode)
+;;   (turn-on-haskell-indent)
+;;   (local-set-key (kbd "<tab>") 'haskell-indent-cycle)
+;;   (local-set-key (kbd "C-c l") 'hs-lint)
+;;   (local-set-key (kbd "C-c h") 'haskell-hoogle)
+;;   (local-set-key (kbd "C-c C-h") 'haskell-hayoo)
+;;   (setq tab-width 4)
+;;   (setq haskell-font-lock-symbols t)
+;;   )
+;; (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+;; (add-hook 'haskell-mode-hook 'common-hooks/comment-hook)
+;; (add-hook 'haskell-mode-hook 'common-hooks/show-prog-keywords)
+;; (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
+;; ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+
+;; (define-key haskell-mode-map (kbd "C-c .") 'haskell-align-imports)
+;; (define-key haskell-mode-map (kbd "<f8>") 'haskell-navigate-imports)
+;; (define-key haskell-mode-map (kbd "<f6>") 'haskell-goto-imports)
+;; (define-key haskell-mode-map (kbd "<f7>") 'haskell-return-from-imports)
+;; (define-key haskell-mode-map (kbd "C-c ,") 'haskell-sort-imports)

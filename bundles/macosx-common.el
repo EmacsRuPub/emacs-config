@@ -55,6 +55,7 @@
 (require 'rc-lang-elisp)
 (require 'rc-lang-javascript)
 (require 'rc-lang-lisp)
+(require 'rc-lang-haskell)
 (require 'rc-lang-perl)
 (require 'rc-lang-php)
 (require 'rc-lang-python)
