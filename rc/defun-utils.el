@@ -74,18 +74,18 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if arg
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
 (defun sudo-edit-current-file ()
   (interactive)
   (let ((pos (point)))
     (find-alternate-file
      (concat "/sudo:root@localhost:" (buffer-file-name (current-buffer))))
     (goto-char pos)))
+
+(defadvice ido-find-file (after find-file-sudo activate) ;; TODO find-file-hook
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
