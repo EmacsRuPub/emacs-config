@@ -66,13 +66,6 @@
   (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
 
-;; Stop SLIME's REPL from grabbing DEL,
-;; which is annoying when backspacing over a '('
-(defun override-slime-repl-bindings-with-paredit ()
-  (define-key slime-repl-mode-map
-    (read-kbd-macro paredit-backward-delete-key) nil))
-(add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
-
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/comment-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
