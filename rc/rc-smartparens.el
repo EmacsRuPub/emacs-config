@@ -15,7 +15,7 @@
 (sp-pair "*" "*")
 
 (sp-local-pair 'html-mode "{" nil :actions '(:rem insert))
-(sp-with-modes '(html-mode)
+(sp-with-modes '(html-mode web-mode)
   (sp-local-pair "<" ">")
   (sp-local-pair "{%" "%}")
   (sp-local-pair "{{" "}}")

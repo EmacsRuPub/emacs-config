@@ -27,7 +27,8 @@
                            (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
                    'nxml-mode))
 
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 
 ;; HTML
 ;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))

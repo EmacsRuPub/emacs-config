@@ -16,6 +16,19 @@
 (autoload 'zencoding-mode "zencoding-mode")
 (autoload 'zencoding-expand-line "zencoding-mode")
 
+(require 'web-mode)
+
+(setq web-mode-engines-alist
+      '(("django" . "\\.html\\'"))
+        ;; ("blade" . "\\.blade\\."))
+      )
+
+(setq web-mode-markup-indent-offset 4)
+;; (setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-script-padding 4)
+(setq web-mode-block-padding 4)
+
 (eval-after-load "sgml-mode"
   '(progn
      (define-key html-mode-map (kbd "C-<down>") 'skip-to-next-blank-line)
