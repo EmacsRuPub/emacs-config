@@ -33,7 +33,6 @@
 
 (setq jedi:setup-keys t)
 
-
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
@@ -46,7 +45,7 @@
   (define-key python-mode-map (kbd "C-c l") 'pylint)
   (define-key python-mode-map (kbd "C-c p e") 'pep8)
   (define-key python-mode-map (kbd "C-c C-e") 'python-end-of-block)
-  )
+  (setq flycheck-checker 'python-flake8))
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
 (add-hook 'python-mode-hook 'common-hooks/comment-hook)

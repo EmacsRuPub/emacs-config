@@ -61,7 +61,7 @@
 (require 'rc-lang-go)
 (require 'rc-tools-doxygen)
 (require 'rc-tools-ecb)
-(require 'rc-tools-flymake)
+(require 'rc-tools-flycheck)
 (require 'rc-tools-gdb)
 (require 'rc-tools-smerge-mode)
 (require 'rc-ps-print)
