@@ -36,11 +36,14 @@
   (beginning-of-line)
   (insert "s/")
   (end-of-line)
-  (insert "//")
-  (backward-char 1))
+  (insert "/")
+  (yank)
+  (insert "/")
+  (search-backward "/" nil nil 2)
+  (forward-char 1))
 
 (defun custom-jabber/wrap-misreading ()
-  "Wraps current word in ed's 'replace' regexp"
+  "Wraps current word in 'misreading' tag"
   (interactive)
   (kill-ring-save (region-beginning) (region-end))
   (end-of-buffer)
