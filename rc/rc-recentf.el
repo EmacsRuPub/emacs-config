@@ -13,8 +13,8 @@
 ;; enable recent files mode.
 (recentf-mode t)
 
-; 50 files ought to be enough.
-(setq recentf-max-saved-items 150)
+(setq recentf-max-saved-items 250)
+(setq recentf-max-menu-items 15)
 
 (defun ido-recentf-open ()
   "Use `ido-completing-read' to \\[find-file] a recent file"
