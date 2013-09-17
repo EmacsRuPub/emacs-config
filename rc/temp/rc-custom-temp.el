@@ -23,6 +23,8 @@
 ;;  '(backup-by-copying-when-linked t)
 ;;  '(backup-directory-alist (quote (("." . "~/.saves"))))
 ;;  '(before-save-hook (quote (time-stamp delete-trailing-whitespace)))
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
+;; (add-hook 'makefile-mode-hook 'indent-tabs-mode)
 ;;  '(blink-cursor-delay 1)
 ;;  '(blink-cursor-interval 0.6)
 ;;  '(browse-url-xterm-program "urxvt")
