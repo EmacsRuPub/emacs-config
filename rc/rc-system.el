@@ -17,6 +17,8 @@
 ;; ;; Emacs freaks out if this isn't set.
 (setq warning-suppress-types nil)
 
+(global-set-key (kbd "C-x c") 'proced)
+
 (provide 'rc-system)
 
 ;;; rc-system.el ends here
