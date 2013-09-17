@@ -23,10 +23,7 @@
 
 (set-cursor-color "chartreuse2")
 
-
-;; (color-theme-tomorrow-night-eighties)
-(require 'naquadah-theme)
-;; (color-theme-zenburn)
+(color-theme-zenburn)
 
 ;#############################################################################
 ;#   Fonts
