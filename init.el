@@ -1,13 +1,11 @@
 (defun solidload (filename)
   (condition-case err
       (load filename)
-    (error (display-warning 'initialization (concat "Load of " filename " failed "
-                                                    (prin1-to-string err)) :warning))))
-
-;(defun solidload (filename)
-;  (condition-case err
-;      (load filename)
-;    (error (backtrace))))
+    (error (display-warning 'initialization
+                            (concat "Load of " filename " failed "
+                                    (prin1-to-string err)
+                                    (with-output-to-string (backtrace)))
+                            :warning))))
 
 ;; (setq debug-on-error t)
 ;; (setq stack-trace-on-error t)
@@ -21,6 +19,7 @@
                       (or (buffer-file-name) load-file-name)))
 
 (setq custom-file (concat config-basedir "customizations.el"))
+(load custom-file 'noerror)
 
 (add-to-list 'load-path (concat config-basedir "rc"))
 
