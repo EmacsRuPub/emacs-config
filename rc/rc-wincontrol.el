@@ -38,24 +38,10 @@
 (setq ibuffer-saved-filter-groups
       '(("default"
          ("dired" (mode . dired-mode))
-         ("source" (or
-                    (mode . c-mode)
-                    (mode . c++-mode)
-                    (mode . objc-mode)
-                    (mode . cperl-mode)
-                    (mode . perl-mode)
-                    (mode . java-mode)
-                    (filename . "\\.rb\\'")))
-         ("web" (or
-                 (filename . "\\.js\\'")
-                 (filename . "\\.erb\\'")
-                 (mode . html-mode)
-                 (mode . nxml-mode)
-                 (mode . nxhtml-mode)
-                 (mode . haml-mode)
-                 (mode . css-mode)
-                 (mode . sass-mode)
-                 (mode . coffee-mode)))
+         ("opossum" (filename . "opossum"))
+         ("webdrive" (filename . "webdrive"))
+         ("xmonad" (filename . "xmonad"))
+         ("emacs" (filename . "emacs"))
          ("doc" (or
                  (mode . latex-mode)
                  (mode . metapost-mode)
@@ -64,10 +50,7 @@
          ("build" (or
                    (mode . cmake-mode)
                    (mode . makefile-mode)
-                   (mode . makefile-gmake-mode)
-                   (filename . "Gemfile\\'")
-                   (filename . "Gemfile\\.lock\\'")
-                   (filename . "[Rr]akefile\\'")))
+                   (mode . makefile-gmake-mode)))
          ("pim" (or
                  (name . "^\\*Calendar\\*$")
                  (name . "^diary$")
