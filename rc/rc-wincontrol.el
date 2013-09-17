@@ -7,6 +7,11 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+
+(autoload 'save-current-configuration "revive" "Save status" t)
+(autoload 'resume "revive" "Resume Emacs" t)
+(autoload 'wipe "revive" "Wipe Emacs" t)
+
 (require 'window-number)
 (require 'buffer-move)
 (require 'buff-menu+)
@@ -96,6 +101,12 @@
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 
 (define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
+
+(define-prefix-command 'custom-windowing-keymap)
+(define-key custom-windowing-keymap (kbd "s") 'save-current-configuration)
+(define-key custom-windowing-keymap (kbd "r") 'resume)
+(define-key custom-windowing-keymap (kbd "c") 'wipe)
+(global-set-key (kbd "<f2>") 'custom-windowing-keymap)
 
 (provide 'rc-wincontrol)
 
