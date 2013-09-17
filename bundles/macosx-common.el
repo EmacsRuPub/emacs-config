@@ -59,6 +59,7 @@
 (require 'rc-lang-php)
 (require 'rc-lang-python)
 (require 'rc-lang-go)
+(require 'rc-pylookup)
 (require 'rc-tools-doxygen)
 (require 'rc-tools-ecb)
 (require 'rc-tools-flycheck)
