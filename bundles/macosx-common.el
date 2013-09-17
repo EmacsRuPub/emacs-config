@@ -30,6 +30,7 @@
 (require 'rc-region-bindings)
 (require 'rc-smartparens)
 (require 'rc-drag-stuff)
+(require 'rc-multiple-cursors)
 (require 'rc-rainbow-delimiters)
 (require 'rc-zencoding)
 (require 'rc-erc)
