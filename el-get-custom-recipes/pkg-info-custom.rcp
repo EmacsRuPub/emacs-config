@@ -1,0 +1,5 @@
+(:name pkg-info-custom
+       :type git
+       :url "https://github.com/lunaryorn/pkg-info.el.git"
+       :load "pkg-info.el"
+       :depends s-custom)

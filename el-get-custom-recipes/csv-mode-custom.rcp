@@ -1,0 +1,4 @@
+(:name csv-mode-custom
+       :type http
+       :url "http://www.emacswiki.org/emacs/download/csv-mode.el"
+       :load "csv-mode.el")

@@ -19,8 +19,6 @@
 (unless (boundp 'stack-trace-on-error)
   (defvar stack-trace-on-error nil))
 
-(load-file (concat config-basedir "ext/ecb/ecb.el"))
-
 (require 'ecb)
 
 (global-set-key (kbd "C-x t q") 'ecb-toggle-ecb-windows)

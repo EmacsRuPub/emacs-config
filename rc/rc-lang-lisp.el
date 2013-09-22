@@ -12,13 +12,14 @@
 ;############################################################################
 (require 'inf-lisp)
 (require 'slime)
+(require 'slime-autoloads)
 (require 'info-look)
 
 
 ;#############################################################################
 ;#   setup extensions
 ;############################################################################
-(setq slime-backend (concat config-basedir "ext/slime/swank-loader.lisp"))
+(setq slime-backend (concat config-basedir "el-get/slime/swank-loader.lisp"))
 
 ;; lookup information in hyperspec
 (info-lookup-add-help

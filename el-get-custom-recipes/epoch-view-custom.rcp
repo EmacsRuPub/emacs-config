@@ -1,0 +1,4 @@
+(:name epoch-view-custom
+       :type git
+       :url "https://github.com/emacsmirror/epoch-view"
+       :load "epoch-view.el")

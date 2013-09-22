@@ -1,0 +1,4 @@
+(:name region-bindings-mode-custom
+       :type git
+       :url "https://github.com/fgallina/region-bindings-mode.git"
+       :load-path ("."))

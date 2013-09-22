@@ -1,0 +1,4 @@
+(:name web-mode-custom
+       :type git
+       :url "https://github.com/fxbois/web-mode.git"
+       :load-path ("."))

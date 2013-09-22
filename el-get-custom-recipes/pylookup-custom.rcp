@@ -1,0 +1,4 @@
+(:name pylookup-custom
+       :type git
+       :url "https://github.com/tsgates/pylookup.git"
+       :load-path ("."))

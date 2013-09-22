@@ -16,16 +16,10 @@
      (end-of-buffer)
      (eval-print-last-sexp))))
 
-(load-file (concat config-basedir "el-get-sources/sources-common.el"))
-(load-file (concat config-basedir "el-get-sources/sources-emacswiki.el"))
-(load-file (concat config-basedir "el-get-sources/sources-custom.el"))
+(load-file (concat config-basedir "el-get-sources/packages.el"))
 
-(setq el-get-sources
-      (append
-       el-get-sources-common
-       el-get-sources-emacswiki
-       el-get-sources-custom))
+(add-to-list 'el-get-recipe-path (concat config-basedir "el-get-custom-recipes"))
 
-(el-get 'sync)
+(el-get 'sync el-get-packages)
 
 ;;; rc-el-get.el ends here

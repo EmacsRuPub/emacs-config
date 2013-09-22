@@ -1,0 +1,5 @@
+(:name ac-nrepl-custom
+       :type git
+       :url "https://github.com/clojure-emacs/ac-nrepl.git"
+       :load "ac-nrepl.el"
+       :depends (nrepl-custom auto-complete))

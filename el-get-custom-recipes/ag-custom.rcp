@@ -1,0 +1,4 @@
+(:name ag-custom
+       :type git
+       :url "https://github.com/wiedzmin/ag.el.git"
+       :load "ag.el")

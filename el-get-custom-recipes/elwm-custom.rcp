@@ -1,0 +1,4 @@
+(:name elwm-custom
+       :type git
+       :url "https://github.com/Fuco1/elwm.git"
+       :load "elwm.el")

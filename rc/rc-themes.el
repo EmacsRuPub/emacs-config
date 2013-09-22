@@ -23,15 +23,13 @@
 
 (set-cursor-color "chartreuse2")
 
-(color-theme-zenburn)
+(load-theme 'zenburn t)
 
 ;#############################################################################
 ;#   Fonts
 ;############################################################################
 
 (set-xwindows-font "consolas-base")
-
-;; (set-face-foreground 'paren-face "blue4")
 
 (provide 'rc-themes)
 

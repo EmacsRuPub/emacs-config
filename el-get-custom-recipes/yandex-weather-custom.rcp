@@ -1,0 +1,4 @@
+(:name yandex-weather-custom
+       :type git
+       :url "https://github.com/abstractionlayer/yandex-weather.el.git"
+       :load-path ("."))

@@ -1,0 +1,4 @@
+(:name dope-custom
+       :type git
+       :url "https://github.com/emacsmirror/dope.git"
+       :load "dope.el")

@@ -1,0 +1,4 @@
+(:name smartparens-custom
+       :type git
+       :url "https://github.com/Fuco1/smartparens.git"
+       :load-path ("."))

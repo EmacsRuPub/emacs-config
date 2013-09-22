@@ -14,10 +14,8 @@
 (setq yas/next-field-key '("<backtab>" "<S-tab>"))
 (setq yas/prev-field-key '("<C-tab>"))
 (setq yas/snippet-dirs custom/yasnippet-dir)
-(yas/initialize)
+(yas--initialize)
 (yas/load-directory custom/yasnippet-dir)
-
-(yasnippet-unbind-trigger-key)
 
 (setq yas/prompt-functions '(
                              yas/ido-prompt

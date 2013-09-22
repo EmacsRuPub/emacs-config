@@ -1,0 +1,4 @@
+(:name gitsum-custom
+       :type git
+       :url "git://github.com/chneukirchen/gitsum.git"
+       :load "gitsum.el")

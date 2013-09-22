@@ -10,6 +10,8 @@
 ;; (setq debug-on-error t)
 ;; (setq stack-trace-on-error t)
 
+(setq shell-file-name "/bin/bash")
+
 (setq message-log-max t)
 
 (setq home-directory (getenv "HOME"))
@@ -31,7 +33,7 @@
 ;;                              (let ((buffer-file-name (buffer-name)))
 ;;                                (set-auto-mode)))))
 
-(mapcar 'solidload
+(mapcar 'load ;;solidload
         (mapcar
          (lambda (path) (concat config-basedir path))
          '("rc-el-get.el"
@@ -39,8 +41,8 @@
            "constants.el"
            "credentials.el"
            "bundle.el"
-           "emacs-rc-auto-mode.el"
-           "rc-desktop.el")
-         ))
+           "rc-auto-modes.el"
+           "rc-desktop.el"
+           )))
 
 (load custom-file)

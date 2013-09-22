@@ -1,0 +1,8 @@
+(:name slime-custom
+       :description "Superior Lisp Interaction Mode for Emacs"
+       :type github
+       :features slime-autoloads
+       :pkgname "nablaone/slime"
+       :load-path ("." "contrib")
+       :post-init (slime-setup)
+       )

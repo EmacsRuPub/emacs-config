@@ -1,0 +1,4 @@
+(:name emacs-epc-custom
+       :type git
+       :url "https://github.com/kiwanami/emacs-epc.git"
+       :load-path ("."))
