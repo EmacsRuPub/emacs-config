@@ -187,6 +187,7 @@
 (define-key custom-edit-keymap (kbd "b") 'subword-mode)
 (define-key custom-edit-keymap (kbd "c") 'wc-mode)
 (define-key custom-edit-keymap (kbd "o") 'just-one-space)
+(define-key custom-edit-keymap (kbd "0") 'compact-spaces-in-region)
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
 (global-set-key (kbd "C-z") 'custom-edit-keymap)
