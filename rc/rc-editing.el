@@ -46,7 +46,7 @@
 (change-cursor-mode 1)
 
 (setq whitespace-modes 'awk-mode)
-(setq fill-column 120)                  ;80
+(setq-default fill-column 200)
 (setq indent-tabs-mode nil)
 (setq comment-style 'indent)
 (setq user-full-name (capitalize global-username))
