@@ -95,6 +95,7 @@
         pony-mode
         popwin
         pylookup-custom
+        python
         python-pep8
         rainbow-delimiters
         rainbow-mode
