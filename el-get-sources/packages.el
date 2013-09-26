@@ -47,7 +47,6 @@
         elwm-custom
         emacs-ctable-custom
         emacs-epc-custom
-        emacs-helm-gtags-custom
         emacs-jedi-custom
         emacs-w3m
         epoch-view-custom
@@ -66,7 +65,6 @@
         google-contacts
         haskellmode-emacs
         header2
-        helm
         highlight-symbol
         hl-line+
         hs-lint
