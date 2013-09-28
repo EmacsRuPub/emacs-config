@@ -29,7 +29,7 @@
         color-theme
         column-marker
         crosshairs
-        csv-mode ;;-custom
+        csv-mode
         cursor-chg
         deferred
         diminish
@@ -43,16 +43,16 @@
         ecb-custom
         egit
         elwm
-        jedi
         emacs-w3m
+        emacs-wgrep
         epoch-view
         erc-highlight-nicknames
         erefactor
         evil-nerd-commenter
         evil-surround
         f
-        flycheck-color-mode-line
         flycheck
+        flycheck-color-mode-line
         flymake-cursor
         ggtags
         git-emacs
@@ -69,14 +69,15 @@
         iedit
         ioccur
         iy-go-to-char
+        jedi
         joseph-file-util
         js2-highlight-vars
+        js2-mode
         json-mode
         key-chord
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
-        js2-mode
         multiple-cursors
         nav
         nrepl
