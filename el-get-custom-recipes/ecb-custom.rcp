@@ -1,0 +1,5 @@
+(:name ecb-custom
+       :description "Emacs Code Browser"
+       :type github
+       :pkgname "alexott/ecb"
+       :build `(("make" ,(concat "EMACS=" (shell-quote-argument el-get-emacs)))))

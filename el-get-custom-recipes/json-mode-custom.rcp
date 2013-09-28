@@ -1,4 +1,0 @@
-(:name json-mode-custom
-       :type git
-       :url "https://github.com/joshwnj/json-mode.git"
-       :load "json-mode.el")

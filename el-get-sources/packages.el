@@ -9,8 +9,8 @@
 
 (setq el-get-packages
       '(
-        ac-nrepl-custom
-        ac-php-doc-custom
+        ac-nrepl
+        ac-php-doc
         ac-slime
         ace-jump-mode
         ag-custom
@@ -24,43 +24,39 @@
         buffer-move
         c-eldoc
         calfw
-        cl-lib-custom
         clojure-mode
         col-highlight
         color-theme
         column-marker
         crosshairs
-        csv-mode-custom
+        csv-mode ;;-custom
         cursor-chg
-        dash-custom
         deferred
         diminish
         dired+
         dired-details
         dired-sort-menu
         django-mode
-        dope-custom
+        dope
         doxymacs
         drag-stuff
-        ecb
-        egit-custom
-        elwm-custom
-        emacs-ctable-custom
-        emacs-epc-custom
-        emacs-jedi-custom
+        ecb-custom
+        egit
+        elwm
+        jedi
         emacs-w3m
-        epoch-view-custom
+        epoch-view
         erc-highlight-nicknames
         erefactor
-        evil-nerd-commenter-custom
+        evil-nerd-commenter
         evil-surround
-        f-custom
-        flycheck-color-mode-line-custom
-        flycheck-custom
+        f
+        flycheck-color-mode-line
+        flycheck
         flymake-cursor
-        ggtags-custom
+        ggtags
         git-emacs
-        gitsum-custom
+        gitsum
         go-mode
         google-contacts
         haskellmode-emacs
@@ -74,44 +70,43 @@
         ioccur
         iy-go-to-char
         joseph-file-util
-        js2-highlight-vars-custom
-        json-mode-custom
+        js2-highlight-vars
+        json-mode
         key-chord
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
-        mooz-js2-mode-custom
+        js2-mode
         multiple-cursors
         nav
-        nrepl-custom
+        nrepl
         nxhtml
         oauth2
         org-mode
-        org-occur-goto-custom
+        org-occur-goto
         pdftools-custom
-        pkg-info-custom
         po-mode
         point-stack
         pony-mode
         popwin
-        pylookup-custom
+        pylookup
         python
         python-pep8
         rainbow-delimiters
         rainbow-mode
         rebox2
         regex-tool
-        region-bindings-mode-custom
+        region-bindings-mode
         replace+
         revive
         ropemacs
         rst-mode
-        s-custom
+        s
         sauron
         savekill
-        silentcomp-custom
+        silentcomp
         slime
-        smartparens-custom
+        smartparens
         smex
         sml-mode
         sr-speedbar
@@ -123,11 +118,11 @@
         volatile-highlights
         wc-mode
         wdired
-        web-mode-custom
+        web-mode
         whole-line-or-region
         window-number
         xgtags
-        yandex-weather-custom
+        yandex-weather
         yasnippet
         zenburn-theme
         zencoding-mode

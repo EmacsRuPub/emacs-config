@@ -1,4 +1,0 @@
-(:name s-custom
-       :type git
-       :url "https://github.com/magnars/s.el.git"
-       :load "s.el")

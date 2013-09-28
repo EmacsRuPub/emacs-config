@@ -1,4 +1,0 @@
-(:name emacs-jedi-custom
-       :type git
-       :url "https://github.com/tkf/emacs-jedi.git"
-       :load-path ("."))

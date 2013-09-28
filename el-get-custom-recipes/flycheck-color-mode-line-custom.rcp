@@ -1,5 +1,0 @@
-(:name flycheck-color-mode-line-custom
-       :type git
-       :url "https://github.com/syl20bnr/flycheck-color-mode-line.git"
-       :load "flycheck-color-mode-line.el"
-       :depends (dash-custom flycheck-custom))

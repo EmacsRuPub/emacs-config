@@ -1,4 +1,0 @@
-(:name emacs-ctable-custom
-       :type git
-       :url "https://github.com/kiwanami/emacs-ctable.git"
-       :load-path ("."))

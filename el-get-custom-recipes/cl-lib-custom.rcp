@@ -1,4 +1,0 @@
-(:name cl-lib-custom
-       :type git
-       :url "https://github.com/emacsmirror/cl-lib.git"
-       :load "cl-lib.el")

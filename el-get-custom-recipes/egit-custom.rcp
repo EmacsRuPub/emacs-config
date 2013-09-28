@@ -1,5 +1,0 @@
-(:name egit-custom
-       :type git
-       :url "https://github.com/jimhourihan/egit.git"
-       :load "egit.el"
-       :depends dash-custom)

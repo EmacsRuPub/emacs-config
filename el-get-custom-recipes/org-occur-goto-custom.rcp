@@ -1,4 +1,0 @@
-(:name org-occur-goto-custom
-       :type http
-       :url "http://www.emacswiki.org/emacs/download/org-occur-goto.el"
-       :load "org-occur-goto.el")
