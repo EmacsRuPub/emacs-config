@@ -9,12 +9,15 @@
 
 (add-to-list 'load-path (concat config-basedir "el-get/el-get"))
 
+(setq el-get-git-install-url "http://github.com/wiedzmin/el-get.git")
+
 (unless (require 'el-get nil t)
   (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   "https://github.com/wiedzmin/el-get/raw/master/el-get-install.el"
    (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp))))
+     (let (el-get-master-branch)
+       (end-of-buffer)
+       (eval-print-last-sexp)))))
 
 (load-file (concat config-basedir "el-get-sources/packages.el"))
 
