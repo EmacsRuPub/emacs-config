@@ -13,6 +13,7 @@
 (require 'ace-jump-mode)
 (require 'sr-speedbar)
 (require 'ag)
+(require 'wgrep-ag)
 
 (require 'defun-search)
 
