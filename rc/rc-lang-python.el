@@ -32,6 +32,7 @@
          (getenv "PYTHONPATH"))))
 
 (setq jedi:setup-keys t)
+(setq jedi:complete-on-dot t)
 
 ;#############################################################################
 ;#   Hooks
