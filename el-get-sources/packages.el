@@ -16,6 +16,11 @@
         ag-custom
         ahg
         auto-complete-rst
+        auto-complete-emacs-lisp
+        auto-complete-extension
+        auto-complete-latex
+        auto-complete-nxml
+        auto-complete-yasnippet
         autosmiley
         bookmark+
         breadcrumb

@@ -9,6 +9,11 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'ac-nrepl)
+(require 'auto-complete-extension)
+(require 'auto-complete-emacs-lisp)
+(require 'auto-complete-latex)
+(require 'auto-complete-nxml)
+(require 'auto-complete-yasnippet)
 
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
