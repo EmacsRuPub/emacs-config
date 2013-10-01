@@ -7,7 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'highlight-symbol)
 (require 're-builder)
 (require 'fuzzy)
 (require 'ace-jump-mode)
@@ -43,9 +42,6 @@
 (define-key custom-search-keymap (kbd "g") 'ag-project)
 (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
 (define-key custom-search-keymap (kbd "i") 'ioccur)
-(define-key custom-search-keymap (kbd "h") 'highlight-symbol-at-point)
-(define-key custom-search-keymap (kbd "<down>") 'highlight-symbol-next)
-(define-key custom-search-keymap (kbd "<up>") 'highlight-symbol-prev)
 (define-key custom-search-keymap (kbd "q") 'ag-find-file)
 (define-key custom-search-keymap (kbd "s") 'ido-goto-symbol)
 (define-key custom-search-keymap (kbd "8") 'ace-jump-char-mode)

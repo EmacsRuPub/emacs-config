@@ -21,6 +21,7 @@
         auto-complete-latex
         auto-complete-nxml
         auto-complete-yasnippet
+        auto-highlight-symbol
         autosmiley
         bookmark+
         breadcrumb
@@ -66,7 +67,6 @@
         google-contacts
         haskellmode-emacs
         header2
-        highlight-symbol
         hl-line+
         hs-lint
         ido-preview
