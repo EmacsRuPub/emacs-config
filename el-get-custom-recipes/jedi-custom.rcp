@@ -1,0 +1,6 @@
+(:name jedi-custom
+       :description "An awesome Python auto-completion for Emacs"
+       :type github
+       :pkgname "tkf/emacs-jedi"
+       :build (("git" "checkout" "4ee90bf075d9e255aa048b2a5ae2db7531cbac53"))
+       :depends (epc auto-complete))

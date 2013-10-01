@@ -69,7 +69,7 @@
         iedit
         ioccur
         iy-go-to-char
-        jedi
+        jedi-custom
         joseph-file-util
         js2-highlight-vars
         js2-mode
