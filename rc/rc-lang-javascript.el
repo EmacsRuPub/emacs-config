@@ -14,6 +14,7 @@
 (load-library "js2-mode")
 ;; (load-library "js2")
 (require 'js-comint)
+(require 'js2-refactor)
 
 (require 'defun-javascript)
 
@@ -98,6 +99,8 @@
                             (local-set-key "\C-cl" 'js-load-file-and-go)
                             (setq flycheck-checker 'javascript-jshint))
                             )
+
+(js2r-add-keybindings-with-prefix "C-c C-m")
 
 (provide 'rc-lang-javascript)
 
