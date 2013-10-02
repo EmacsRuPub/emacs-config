@@ -8,12 +8,16 @@
 
 (require 'ido)
 (require 'ido-ubiquitous)
+(require 'ido-vertical-mode)
+(require 'flx-ido)
 
 (require 'defun-ido)
 
 (ido-mode 'both)
 (ido-ubiquitous-mode 1)
 (ido-load-history)
+(ido-vertical-mode)
+(flx-ido-mode 1)
 
 (ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
 (ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
@@ -37,14 +41,13 @@
 (setq ido-use-virtual-buffers t)
 (setq ido-case-fold t) ; case insensitive
 (setq ido-max-prospects 16)
+(setq ido-use-faces nil)
+;; (setq flx-ido-use-faces nil)
 
 (setq ido-completing-read-use-initial-input-as-default-commands
       '(ibuffer-filter-by-mode
         ibuffer-filter-by-used-mode))
 
-;; Display ido results vertically, rather than horizontally
-(setq ido-decorations
-      '("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
 (set-default 'imenu-auto-rescan t) ;; Always rescan buffer for imenu
 

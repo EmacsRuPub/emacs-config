@@ -58,6 +58,7 @@
         evil-nerd-commenter
         evil-surround
         f
+        flx
         flycheck
         flycheck-color-mode-line
         flymake-cursor
@@ -70,8 +71,11 @@
         header2
         hl-line+
         hs-lint
+        ido-hacks
         ido-preview
         ido-ubiquitous
+        ido-vertical-mode
+        ido-yes-or-no
         iedit
         ioccur
         iy-go-to-char
