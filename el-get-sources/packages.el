@@ -45,6 +45,7 @@
         dired-details
         dired-details+
         dired-sort-menu
+        direx
         django-mode
         dope
         doxymacs

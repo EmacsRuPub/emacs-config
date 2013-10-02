@@ -127,6 +127,8 @@
   (if (equal major-mode 'dired-mode)
       (revert-buffer)))
 
+(global-set-key (kbd "C-c x") 'direx:jump-to-directory)
+
 (provide 'rc-dired)
 
 ;;; emacs-rc-dired.el ends here
