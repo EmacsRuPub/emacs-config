@@ -15,16 +15,16 @@
         ace-jump-mode
         ag-custom
         ahg
-        auto-complete-rst
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex
         auto-complete-nxml
+        auto-complete-rst
         auto-complete-yasnippet
         auto-highlight-symbol
         autosmiley
-        bookmark+
         birds-of-paradise-plus-theme
+        bookmark+
         breadcrumb
         browse-kill-ring
         buff-menu+
@@ -68,8 +68,8 @@
         flycheck-color-mode-line
         flymake-cursor
         ggtags
-        git-emacs
         git-commit-mode
+        git-emacs
         gitsum
         go-mode
         google-contacts
