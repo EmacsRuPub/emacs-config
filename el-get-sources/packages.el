@@ -63,6 +63,7 @@
         evil-nerd-commenter
         evil-surround
         f
+        fic-mode
         flx
         flycheck
         flycheck-color-mode-line
