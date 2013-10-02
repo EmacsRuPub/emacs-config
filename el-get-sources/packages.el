@@ -100,6 +100,10 @@
         key-chord
         lisppaste
         list-processes+
+        magit
+        magit-filenotify
+        magit-identities
+        magit-tramp
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
