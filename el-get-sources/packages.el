@@ -90,6 +90,7 @@
         ioccur
         jedi-custom
         joseph-file-util
+        js-comint
         js2-highlight-vars
         js2-mode
         json-mode

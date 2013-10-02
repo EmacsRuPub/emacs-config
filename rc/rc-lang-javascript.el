@@ -13,6 +13,7 @@
 ;; (add-to-list 'load-path custom-ext-path/ejacs)
 (load-library "js2-mode")
 ;; (load-library "js2")
+(require 'js-comint)
 
 (require 'defun-javascript)
 
@@ -21,6 +22,7 @@
 (autoload 'js-console "js-console" nil t)
 
 (require 'js2-imenu-extras)
+
 (js2-imenu-extras-setup)
 
 ;#############################################################################
@@ -81,6 +83,20 @@
                        (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
                        " *, *" t))
                 ))))
+
+
+(setenv "CLASSPATH"
+        (concat
+         "/usr/share/rhino-1.6/lib/js.jar:"
+         (getenv "CLASSPATH")))
+
+(add-hook 'js2-mode-hook '(lambda ()
+                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+                            (local-set-key "\C-cb" 'js-send-buffer)
+                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+                            (local-set-key "\C-cl" 'js-load-file-and-go)
+                            ))
 
 (provide 'rc-lang-javascript)
 
