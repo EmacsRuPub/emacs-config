@@ -28,7 +28,7 @@
 (require 'cursor-chg)
 
 (require 'iedit)
-(require 'iy-go-to-char)
+(require 'jump-char)
 
 (require 'defun-editing)
 (require 'defun-camelscore)
@@ -180,8 +180,8 @@
 (define-key custom-edit-keymap (kbd "<down>") 'move-line-down)
 (define-key custom-edit-keymap (kbd "[") 'comment-region)
 (define-key custom-edit-keymap (kbd "]") 'uncomment-region)
-(define-key custom-edit-keymap (kbd "<left>") 'iy-go-to-char-backward)
-(define-key custom-edit-keymap (kbd "<right>") 'iy-go-to-char)
+(define-key custom-edit-keymap (kbd "<left>") 'jump-char-backward)
+(define-key custom-edit-keymap (kbd "<right>") 'jump-char-forward)
 (define-key custom-edit-keymap (kbd "C-SPC") 'join-next-line-space-n)
 (define-key custom-edit-keymap (kbd "j") 'join-next-line-n)
 (define-key custom-edit-keymap (kbd "C-;") 'join-next-line-semicolon-n)

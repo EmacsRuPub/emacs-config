@@ -88,12 +88,12 @@
         ido-yes-or-no
         iedit
         ioccur
-        iy-go-to-char
         jedi-custom
         joseph-file-util
         js2-highlight-vars
         js2-mode
         json-mode
+        jump-char
         key-chord
         markdown-mode
         minibuf-electric-gnuemacs
