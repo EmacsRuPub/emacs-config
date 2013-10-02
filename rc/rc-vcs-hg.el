@@ -7,7 +7,10 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'mercurial)
+;; (require 'mercurial)
+(require 'monky)
+
+(setq monky-process-type 'cmdserver)
 
 (provide 'rc-vcs-hg)
 

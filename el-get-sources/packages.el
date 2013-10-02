@@ -100,6 +100,7 @@
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
+        monky
         multiple-cursors
         nav
         nginx-mode
