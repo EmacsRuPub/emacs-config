@@ -42,6 +42,7 @@
         diminish
         dired+
         dired-details
+        dired-details+
         dired-sort-menu
         django-mode
         dope
@@ -53,6 +54,7 @@
         emacs-w3m
         emacs-wgrep
         epoch-view
+        erc-extras
         erc-highlight-nicknames
         eredis
         erefactor
