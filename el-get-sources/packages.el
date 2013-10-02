@@ -72,6 +72,7 @@
         git-commit-mode
         git-emacs
         gitsum
+        go-autocomplete-custom
         go-mode
         google-contacts
         haskellmode-emacs

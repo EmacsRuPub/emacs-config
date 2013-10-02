@@ -14,6 +14,7 @@
 (require 'auto-complete-latex)
 (require 'auto-complete-nxml)
 (require 'auto-complete-yasnippet)
+(require 'go-autocomplete)
 
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
