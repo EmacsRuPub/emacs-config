@@ -79,6 +79,7 @@
         header2
         highlight-indentation
         hl-line+
+        hl-sexp
         hs-lint
         ido-hacks
         ido-preview

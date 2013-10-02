@@ -25,6 +25,7 @@
   (abbrev-mode 1)
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
+  (hl-sexp-mode)
   (local-set-key (kbd "C-c /") 'semantic-ia-complete-symbol))
 
 (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)

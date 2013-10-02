@@ -63,6 +63,7 @@
        (list (assoc 'sbcl slime-lisp-implementations)))
   (setq tab-width 2
   indent-tabs-mode t)
+  (hl-sexp-mode)
   (local-set-key (kbd "C-c ;") 'slime-insert-balanced-comments)
   (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
