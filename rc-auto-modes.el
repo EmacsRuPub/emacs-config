@@ -105,5 +105,7 @@
 (add-to-list 'auto-mode-alist '("cron" . crontab-mode))
 (add-to-list 'auto-mode-alist '("crontab" . crontab-mode))
 
+(add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-auto-modes.el ends here

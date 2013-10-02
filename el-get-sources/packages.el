@@ -68,6 +68,7 @@
         flymake-cursor
         ggtags
         git-emacs
+        git-commit-mode
         gitsum
         go-mode
         google-contacts
