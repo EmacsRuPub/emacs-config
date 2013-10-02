@@ -41,6 +41,7 @@
 (require 'rc-sh-mode)
 (require 'rc-browse-kill-ring)
 (require 'rc-search)
+(require 'rc-minimap)
 (require 'rc-tail)
 (require 'rc-wincontrol)
 (require 'rc-calfw)

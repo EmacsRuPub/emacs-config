@@ -106,6 +106,7 @@
         magit-tramp
         markdown-mode
         minibuf-electric-gnuemacs
+        minimap
         mo-git-blame
         monky
         multiple-cursors
