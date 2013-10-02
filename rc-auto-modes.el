@@ -107,5 +107,7 @@
 
 (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode))
 
+(add-to-list 'auto-mode-alist '("nginx" . nginx-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-auto-modes.el ends here

@@ -100,6 +100,7 @@
         mo-git-blame
         multiple-cursors
         nav
+        nginx-mode
         nrepl
         nxhtml
         oauth2
