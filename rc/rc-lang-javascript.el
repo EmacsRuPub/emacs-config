@@ -96,7 +96,8 @@
                             (local-set-key "\C-cb" 'js-send-buffer)
                             (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
                             (local-set-key "\C-cl" 'js-load-file-and-go)
-                            ))
+                            (setq flycheck-checker 'javascript-jshint))
+                            )
 
 (provide 'rc-lang-javascript)
 
