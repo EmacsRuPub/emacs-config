@@ -24,6 +24,7 @@
         auto-highlight-symbol
         autosmiley
         bookmark+
+        birds-of-paradise-plus-theme
         breadcrumb
         browse-kill-ring
         buff-menu+

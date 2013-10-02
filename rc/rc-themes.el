@@ -23,7 +23,8 @@
 
 (set-cursor-color "chartreuse2")
 
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
+(load-theme 'birds-of-paradise-plus t)
 
 ;#############################################################################
 ;#   Fonts
