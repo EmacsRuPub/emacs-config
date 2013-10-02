@@ -95,6 +95,7 @@
         json-mode
         jump-char
         key-chord
+        lisppaste
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
