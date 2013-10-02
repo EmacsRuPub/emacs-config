@@ -75,7 +75,7 @@
   )
 (add-hook 'erlang-mode-hook 'custom/erlang-mode-hook)
 (add-hook 'erlang-mode-hook 'common-hooks/comment-hook)
-(add-hook 'erlang-mode-hook 'common-hooks/show-prog-keywords)
+(add-hook 'erlang-mode-hook 'common-hooks/show-prog-helpers)
 (add-hook 'erlang-mode-hook 'common-hooks/newline-hook)
 (add-hook 'erlang-shell-mode-hook
           (lambda ()

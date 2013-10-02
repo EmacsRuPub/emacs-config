@@ -70,7 +70,7 @@
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/comment-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
-(add-hook 'lisp-mode-hook 'common-hooks/show-prog-keywords)
+(add-hook 'lisp-mode-hook 'common-hooks/show-prog-helpers)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))

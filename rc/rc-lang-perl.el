@@ -38,7 +38,7 @@
   )
 (add-hook 'perl-mode-hook 'custom/perl-mode-hook)
 (add-hook 'perl-mode-hook 'common-hooks/comment-hook)
-(add-hook 'perl-mode-hook 'common-hooks/show-prog-keywords)
+(add-hook 'perl-mode-hook 'common-hooks/show-prog-helpers)
 (add-hook 'perl-mode-hook 'common-hooks/newline-hook)
 
 (provide 'rc-lang-perl)

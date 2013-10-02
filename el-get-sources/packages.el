@@ -70,6 +70,7 @@
         google-contacts
         haskellmode-emacs
         header2
+        highlight-indentation
         hl-line+
         hs-lint
         ido-hacks

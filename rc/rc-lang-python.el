@@ -50,7 +50,7 @@
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
 (add-hook 'python-mode-hook 'common-hooks/comment-hook)
-(add-hook 'python-mode-hook 'common-hooks/show-prog-keywords)
+(add-hook 'python-mode-hook 'common-hooks/show-prog-helpers)
 ;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
 (add-hook 'python-mode-hook 'common-hooks/newline-hook)
 (add-hook 'python-mode-hook

@@ -29,7 +29,7 @@
 
 (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/comment-hook)
-(add-hook 'emacs-lisp-mode-hook 'common-hooks/show-prog-keywords)
+(add-hook 'emacs-lisp-mode-hook 'common-hooks/show-prog-helpers)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
 
