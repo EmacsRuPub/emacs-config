@@ -96,6 +96,7 @@
         jump-char
         key-chord
         lisppaste
+        list-processes+
         markdown-mode
         minibuf-electric-gnuemacs
         mo-git-blame
