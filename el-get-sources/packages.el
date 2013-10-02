@@ -35,6 +35,7 @@
         col-highlight
         color-theme
         column-marker
+        crontab-mode
         crosshairs
         csv-mode
         cursor-chg
