@@ -62,6 +62,7 @@
         erefactor
         evil-nerd-commenter
         evil-surround
+        expand-region
         f
         fic-mode
         flx
