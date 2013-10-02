@@ -54,6 +54,7 @@
         emacs-wgrep
         epoch-view
         erc-highlight-nicknames
+        eredis
         erefactor
         evil-nerd-commenter
         evil-surround

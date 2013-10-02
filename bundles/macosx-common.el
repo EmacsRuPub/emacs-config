@@ -48,6 +48,7 @@
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-prog-common)
+(require 'rc-tiny)
 ;; (require 'rc-generic)
 ;; (require 'rc-cedet)
 (require 'rc-global)
