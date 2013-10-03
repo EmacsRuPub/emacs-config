@@ -21,7 +21,6 @@
         auto-complete-nxml
         auto-complete-rst
         auto-complete-yasnippet
-        auto-highlight-symbol
         autosmiley
         birds-of-paradise-plus-theme
         bookmark+
@@ -79,6 +78,7 @@
         haskellmode-emacs
         header2
         highlight-indentation
+        highlight-symbol
         hl-line+
         hl-sexp
         hs-lint

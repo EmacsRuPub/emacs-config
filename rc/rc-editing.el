@@ -20,8 +20,7 @@
 (require 'savekill)
 (require 'volatile-highlights)
 (require 'whole-line-or-region) ;; if no region is active, act on current line
-(require 'auto-highlight-symbol)
-(require 'auto-highlight-symbol-config)
+(require 'highlight-symbol)
 
 (require 'cua-base)
 (require 'wc-mode)
