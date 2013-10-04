@@ -145,7 +145,9 @@
         sr-speedbar
         sunrise-commander
         tail
+        twilight-anti-bright-theme
         twittering-mode
+        ujelly-theme
         undo-tree
         vline
         volatile-highlights
