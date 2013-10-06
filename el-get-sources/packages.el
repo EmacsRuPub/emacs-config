@@ -123,7 +123,6 @@
         pony-mode
         popwin
         pylookup
-        python
         python-pep8
         rainbow-delimiters
         rainbow-mode
