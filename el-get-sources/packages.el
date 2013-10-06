@@ -143,6 +143,7 @@
         smartparens
         smex
         sml-mode
+        smooth-scrolling
         sr-speedbar
         sunrise-commander
         tail
