@@ -77,7 +77,6 @@
         google-contacts
         haskellmode-emacs
         header2
-        highlight-indentation
         highlight-symbol
         hl-line+
         hl-sexp
