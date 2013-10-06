@@ -49,7 +49,7 @@
 (add-hook 'scheme-mode-hook 'common-hooks/newline-hook)
 (add-hook 'scheme-mode-hook 'custom/scheme-mode-hook)
 (add-hook 'scheme-mode-hook 'common-hooks/comment-hook)
-(add-hook 'scheme-mode-hook 'common-hooks/show-prog-helpers)
+(add-hook 'scheme-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'inferior-scheme-mode-hook '(lambda () (split-window)))
 
 (provide 'rc-lang-scheme)

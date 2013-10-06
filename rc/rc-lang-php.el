@@ -23,7 +23,7 @@
 
 (add-hook 'php-mode-hook 'custom/php-mode-hook)
 (add-hook 'php-mode-hook 'set-up-php-ac)
-(add-hook 'php-mode-hook 'common-hooks/show-prog-helpers)
+(add-hook 'php-mode-hook 'common-hooks/prog-helpers)
 
 (provide 'rc-lang-php)
 

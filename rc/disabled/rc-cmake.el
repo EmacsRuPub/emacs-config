@@ -20,7 +20,7 @@
 ;############################################################################
 (add-hook 'cmake-mode-hook 'custom/cmake-mode-hook)
 (add-hook 'cmake-mode-hook 'common-hooks/comment-hook)
-(add-hook 'cmake-mode-hook 'common-hooks/show-prog-helpers)
+(add-hook 'cmake-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'cmake-mode-hook 'common-hooks/newline-hook)
 
 (provide 'rc-cmake)

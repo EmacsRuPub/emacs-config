@@ -71,7 +71,7 @@
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
 (add-hook 'haskell-mode-hook 'common-hooks/comment-hook)
-(add-hook 'haskell-mode-hook 'common-hooks/show-prog-helpers)
+(add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
 ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
@@ -133,7 +133,7 @@
 ;; (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 ;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
 ;; (add-hook 'haskell-mode-hook 'common-hooks/comment-hook)
-;; (add-hook 'haskell-mode-hook 'common-hooks/show-prog-helpers)
+;; (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
 ;; (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
 ;; ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 

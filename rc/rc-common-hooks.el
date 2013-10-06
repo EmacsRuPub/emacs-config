@@ -53,7 +53,7 @@
   (local-set-key (kbd "<return>") 'newline-and-indent))
 
 ;; show FIXME/TODO/BUG keywords
-(defun common-hooks/show-prog-helpers ()
+(defun common-hooks/prog-helpers ()
   ;; highlight additional keywords
   (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
   (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
@@ -63,6 +63,7 @@
   (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t)))
   (highlight-indentation-mode 1)
   (highlight-symbol-mode 1)
+  (smart-operator-mode-on)
   )
 
 (defun common-hooks/trailing-whitespace-hook ()

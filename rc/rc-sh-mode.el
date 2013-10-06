@@ -36,7 +36,7 @@
 
 (add-hook 'sh-mode-hook 'custom/sh-mode-hook)
 (add-hook 'sh-mode-hook 'common-hooks/comment-hook)
-(add-hook 'sh-mode-hook 'common-hooks/show-prog-helpers)
+(add-hook 'sh-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'sh-mode-hook 'common-hooks/newline-hook)
 
