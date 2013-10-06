@@ -117,6 +117,8 @@
         org-mode
         org-occur-goto
         pdftools-custom
+        php-electric-custom
+        php-mode-improved
         po-mode
         point-stack
         pony-mode

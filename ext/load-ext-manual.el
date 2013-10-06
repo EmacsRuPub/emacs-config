@@ -7,9 +7,7 @@
 
 (setq ext-files
       (quote
-       ("ext/php/php-mode/php-mode.el"
-        "ext/php/php-electric.el" ;; AFTER php-mode !!!
-        "ext/python/python-pylint.el"
+       ("ext/python/python-pylint.el"
         "ext/smerge-mode.el"
         )))
 
