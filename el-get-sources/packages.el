@@ -124,6 +124,7 @@
         popwin
         pylookup
         python-pep8
+        qmake-mode
         rainbow-delimiters
         rainbow-mode
         rebox2
