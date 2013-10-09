@@ -91,6 +91,27 @@
 ;;             (rng-validate-mode nil)
 ;;             (mumamo-post-command)))
 
+(require 'css-eldoc)
+(turn-on-css-eldoc)
+
+(defun isearch-forward-noeldoc ()
+  "close eldoc temperaily"
+  (interactive)
+  (eldoc-mode -1)
+  (isearch-forward)
+  (eldoc-mode 1))
+(add-hook 'less-css-mode-hook (lambda ()
+                (local-set-key [remap isearch-forward] 'isearch-forward-noeldoc)))
+
+(defun isearch-backward-noeldoc ()
+  "close eldoc temperaily"
+  (interactive)
+  (eldoc-mode -1)
+  (isearch-backward)
+  (eldoc-mode 1))
+(add-hook 'less-css-mode-hook (lambda ()
+                (local-set-key [remap isearch-backward] 'isearch-backward-noeldoc)))
+
 (provide 'rc-lang-markup)
 
 ;;; rc-markup.el ends here

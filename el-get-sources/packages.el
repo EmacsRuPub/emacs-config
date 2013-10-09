@@ -36,6 +36,7 @@
         column-marker
         crontab-mode
         crosshairs
+        css-eldoc
         csv-mode
         cursor-chg
         deferred
