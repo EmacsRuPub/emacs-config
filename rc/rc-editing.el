@@ -28,7 +28,6 @@
 
 (require 'iedit)
 (require 'jump-char)
-(require 'smart-operator)
 
 (require 'defun-editing)
 (require 'defun-camelscore)
