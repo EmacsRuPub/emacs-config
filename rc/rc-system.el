@@ -16,6 +16,7 @@
 
 ;; ;; Emacs freaks out if this isn't set.
 (setq warning-suppress-types nil)
+(setq enable-local-variables nil)
 
 (global-set-key (kbd "C-x c") 'proced)
 
