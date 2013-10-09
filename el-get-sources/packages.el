@@ -140,6 +140,7 @@
         savekill
         silentcomp
         slime
+        smart-forward
         smartparens
         smex
         sml-mode
