@@ -68,6 +68,8 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ;; (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
 
+(define-coding-system-alias 'UTF-8 'utf-8)
+
 ;; Redraw the entire screen before checking for pending input events.
 ;; This will improve performance in general but might degrade performance of
 ;; key repeat.
