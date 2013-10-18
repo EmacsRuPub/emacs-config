@@ -23,9 +23,9 @@
 
 (set-cursor-color "chartreuse2")
 
-;; (load-theme 'zenburn t)
+(load-theme 'zenburn t)
 ;; (load-theme 'birds-of-paradise-plus t)
-(load-theme 'twilight-anti-bright t)
+;; (load-theme 'twilight-anti-bright t)
 ;; (load-theme 'ujelly t)
 
 
