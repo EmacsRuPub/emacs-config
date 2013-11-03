@@ -1,0 +1,6 @@
+(:name projectile-custom
+       :description "Project navigation and management library for Emacs"
+       :type github
+       :pkgname "wiedzmin/projectile"
+       :depends (dash s pkg-info)
+       :features projectile)

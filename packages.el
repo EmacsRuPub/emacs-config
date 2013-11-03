@@ -130,7 +130,7 @@
         point-stack
         pony-mode
         popwin
-        projectile
+        projectile-custom
         pylookup
         python-pep8
         qmake-mode
