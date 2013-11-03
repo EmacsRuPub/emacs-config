@@ -8,7 +8,7 @@
   "User's font definitions")
 
 (defun set-xwindows-font (key)
-  (set-frame-font (gethash key custom/fonts-def)))
+  (set-face-attribute 'default nil :font (gethash key custom/fonts-def)))
 
 (setf (gethash "consolas-base" custom/fonts-def) "Consolas:size=12")
 (setf (gethash "terminus" custom/fonts-def) "Terminus:size=14")
