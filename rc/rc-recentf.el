@@ -5,6 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'recentf)
+(require 'recentf-ext)
 
 ;; get rid of `find-file-read-only' and replace it with something
 ;; more useful.
