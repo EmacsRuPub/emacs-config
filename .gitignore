@@ -1,10 +1,10 @@
 */#*#
 *log
-*projectile*
 *~
 .emacs.desktop
 .litable-lists.el
 .mc-lists.el
+.projectile
 .session
 /ext
 /tramp
@@ -21,6 +21,7 @@ games
 image-dired
 kill-ring-saved.el
 newsticker
+projectile.cache
 semanticdb
 srecode-map.el
 url
