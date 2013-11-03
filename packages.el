@@ -23,6 +23,7 @@
         auto-complete-yasnippet
         autosmiley
         birds-of-paradise-plus-theme
+        bm
         bookmark+
         breadcrumb
         browse-kill-ring
@@ -51,6 +52,7 @@
         doxymacs
         drag-stuff
         ecb-custom
+        ee
         egit
         elwm
         emacs-w3m
@@ -80,7 +82,6 @@
         header2
         highlight-symbol
         hl-line+
-        hl-sexp
         hs-lint
         ido-hacks
         ido-preview
@@ -100,6 +101,7 @@
         key-chord
         lisppaste
         list-processes+
+        litable-custom
         magit
         magit-filenotify
         magit-identities
@@ -112,7 +114,11 @@
         multiple-cursors
         nav
         nginx-mode
+        ;; ne2wm
+        nose
+        notify
         nrepl
+        nrepl-ritz
         nxhtml
         oauth2
         org-mode
@@ -124,12 +130,14 @@
         point-stack
         pony-mode
         popwin
+        projectile
         pylookup
         python-pep8
         qmake-mode
         rainbow-delimiters
         rainbow-mode
         rebox2
+        recentf-ext
         regex-tool
         region-bindings-mode
         replace+
@@ -139,6 +147,8 @@
         s
         sauron
         savekill
+        scratch
+        session
         silentcomp
         slime
         smart-forward
@@ -163,7 +173,7 @@
         xgtags
         yandex-weather
         yasnippet
-        zenburn-theme
+        zenburn-custom
         zencoding-mode
         ))
 

@@ -19,7 +19,7 @@
        (end-of-buffer)
        (eval-print-last-sexp)))))
 
-(load-file (concat config-basedir "el-get-sources/packages.el"))
+(load-file (concat config-basedir "packages.el"))
 
 (add-to-list 'el-get-recipe-path (concat config-basedir "el-get-custom-recipes"))
 
