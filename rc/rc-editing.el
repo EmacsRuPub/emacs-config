@@ -226,7 +226,7 @@
 ;; (global-set-key (kbd "C-p") 'go-back)
 ;; (global-set-key (kbd "<up>") 'go-back)
 
-(global-set-key (kbd "C-c n") 'spawn-buffer)
+(global-set-key (kbd "C-c n") 'scratch)
 
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
