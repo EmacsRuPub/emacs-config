@@ -1,0 +1,5 @@
+(:name zenburn-custom
+         :description "Zenburn theme for Emacs"
+         :type github
+         :pkgname "bbatsov/zenburn-emacs"
+         :features zenburn-theme)

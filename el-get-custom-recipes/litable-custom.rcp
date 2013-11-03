@@ -1,0 +1,6 @@
+(:name litable-custom
+       :description "On-the-fly evaluation/substitution of emacs lisp code"
+       :type github
+       :pkgname "Fuco1/litable"
+       :depends dash
+       :features litable))
