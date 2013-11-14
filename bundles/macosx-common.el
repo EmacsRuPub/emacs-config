@@ -70,6 +70,7 @@
 (require 'rc-tools-flycheck)
 (require 'rc-tools-gdb)
 (require 'rc-tools-smerge-mode)
+(require 'rc-gmail)
 (require 'rc-vcs-hg)
 (require 'rc-ps-print)
 (require 'rc-pdftools)

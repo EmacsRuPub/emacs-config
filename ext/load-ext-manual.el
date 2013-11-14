@@ -9,6 +9,7 @@
       (quote
        ("ext/python/python-pylint.el"
         "ext/smerge-mode.el"
+        "ext/gmail-notifier.el"
         )))
 
 (mapcar (lambda (ext-dir) (add-to-list 'load-path (concat config-basedir ext-dir))) ext-dirs)
