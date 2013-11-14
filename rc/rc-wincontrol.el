@@ -95,10 +95,10 @@
 (global-set-key (kbd "C-S-c <left>") 'buf-move-left)
 (global-set-key (kbd "C-S-c <right>") 'buf-move-right)
 
-(global-set-key (kbd "C-c <up>") 'windmove-up)
-(global-set-key (kbd "C-c <down>") 'windmove-down)
-(global-set-key (kbd "C-c <left>") 'windmove-left)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-s-<up>") 'windmove-up)
+(global-set-key (kbd "C-s-<down>") 'windmove-down)
+(global-set-key (kbd "C-s-<left>") 'windmove-left)
+(global-set-key (kbd "C-s-<right>") 'windmove-right)
 
 (define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
 
