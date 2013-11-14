@@ -38,7 +38,7 @@
 (define-key custom-search-keymap (kbd "l") 'locate)
 (define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
 (define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
-(define-key custom-search-keymap (kbd "g") 'projectile-grep)
+(define-key custom-search-keymap (kbd "g") 'projectile-ag)
 (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
 (define-key custom-search-keymap (kbd "i") 'ioccur)
 (define-key custom-search-keymap (kbd "q") 'projectile-find-file)
