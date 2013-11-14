@@ -72,6 +72,7 @@
 (require 'rc-tools-smerge-mode)
 (require 'rc-gmail)
 (require 'rc-vcs-hg)
+(require 'rc-vcs-git)
 (require 'rc-ps-print)
 (require 'rc-pdftools)
 (require 'rc-dired)

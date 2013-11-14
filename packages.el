@@ -74,6 +74,7 @@
         ggtags
         git-commit-mode
         git-emacs
+        git-gutter
         gitsum
         go-autocomplete-custom
         go-mode
