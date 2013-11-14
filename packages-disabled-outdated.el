@@ -7,17 +7,12 @@
       '(
         auctex
         distel
-        emacs-jabber
         ess
         haskell-mode
         todochiku
         cmake-mode
-        ecb
         mmm-mode
         psvn
-        pymacs
-        python
-        python-mode
         quack
         (:name haskell-mode-exts
                :type git
@@ -30,11 +25,8 @@
                           haskell-sort-imports
                           inf-haskell-send-cmd))
         (:name po-mode+ :type emacswiki :load "po-mode+.el")
-        (:name anything-extension :type emacswiki)
-        (:name anything-match-plugin :type emacswiki)
         (:name icicles-iswitchb :type emacswiki)
         (:name iswitchb-highlight :type emacswiki)
-        (:name anything-grep :type emacswiki)
         (:name lacarte :type emacswiki)
         (:name workspaces :type emacswiki :load "workspaces.el")
         (:name vlf :type emacswiki :load "vlf.el")
