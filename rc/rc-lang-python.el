@@ -26,8 +26,7 @@
   (setenv "PYTHONPATH"
         (concat
          python-libs-path
-         "/home/octocat/workspace/opossum/src:"
-         "/home/octocat/workspace/webdrive/python:"
+         (mapconcat 'identity private/python-path-job-projects "")
          (getenv "PYTHONPATH"))))
 
 (setq jedi:setup-keys t)
