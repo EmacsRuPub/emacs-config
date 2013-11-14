@@ -14,7 +14,6 @@
         ac-slime
         ace-jump-mode
         ag-custom
-        ahg
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex
@@ -22,7 +21,6 @@
         auto-complete-rst
         auto-complete-yasnippet
         autosmiley
-        birds-of-paradise-plus-theme
         bm
         bookmark+
         breadcrumb
@@ -52,7 +50,6 @@
         doxymacs
         drag-stuff
         ecb-custom
-        ee
         egit
         elwm
         emacs-w3m
@@ -71,7 +68,6 @@
         flycheck
         flycheck-color-mode-line
         flymake-cursor
-        ggtags
         git-commit-mode
         git-emacs
         git-gutter
@@ -93,7 +89,6 @@
         ioccur
         jedi-custom
         joseph-file-util
-        js-comint
         js2-highlight-vars
         js2-mode
         js2-refactor
@@ -114,8 +109,6 @@
         multiple-cursors
         nav
         nginx-mode
-        ;; ne2wm
-        nose
         notify
         nrepl
         nrepl-ritz
@@ -128,7 +121,6 @@
         php-mode-improved
         po-mode
         point-stack
-        pony-mode
         popwin
         projectile-custom
         python24
@@ -156,19 +148,14 @@
         smartparens
         smex
         sml-mode
-        smooth-scrolling
-        sr-speedbar
         sunrise-commander
         tail
-        twilight-anti-bright-theme
         twittering-mode
-        ujelly-theme
         undo-tree
         vline
         volatile-highlights
         wc-mode
         wdired
-        web-mode
         whole-line-or-region
         window-number
         xgtags

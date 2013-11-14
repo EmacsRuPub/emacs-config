@@ -10,7 +10,6 @@
 (require 're-builder)
 (require 'fuzzy)
 (require 'ace-jump-mode)
-(require 'sr-speedbar)
 (require 'ag)
 (require 'wgrep-ag)
 

@@ -13,7 +13,6 @@
 ;; (add-to-list 'load-path custom-ext-path/ejacs)
 (load-library "js2-mode")
 ;; (load-library "js2")
-(require 'js-comint)
 (require 'js2-refactor)
 
 (require 'defun-javascript)
