@@ -7,7 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'python)
 ;; (require 'django-html-mode)
 ;; (require 'django-mode)
 

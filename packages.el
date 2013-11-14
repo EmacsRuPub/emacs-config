@@ -131,6 +131,7 @@
         pony-mode
         popwin
         projectile-custom
+        python24
         pylookup
         python-pep8
         qmake-mode
