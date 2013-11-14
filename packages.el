@@ -154,6 +154,8 @@
         undo-tree
         vline
         volatile-highlights
+        w3m-session
+        w3m-type-ahead
         wc-mode
         wdired
         whole-line-or-region
