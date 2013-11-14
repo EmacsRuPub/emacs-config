@@ -36,8 +36,6 @@
 (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets)
 (define-key yas/keymap (kbd "C-e") 'yas/goto-end-of-active-field)
 (define-key yas/keymap (kbd "C-a") 'yas/goto-start-of-active-field)
-;; (key-chord-define-global "p=" 'yas-safer-expand)
-(key-chord-define-global "p=" 'yas/expand)
 ;; (define-key iy-map (kbd "M-/") 'yas-ido-insert-snippets)
 
 (provide 'rc-yasnippet)

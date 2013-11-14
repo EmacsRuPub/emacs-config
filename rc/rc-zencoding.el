@@ -13,8 +13,6 @@
 (add-hook 'nxml-mode-hook 'zencoding-mode)
 (add-hook 'django-mode 'zencoding-mode)
 
-(key-chord-define-global "p-" 'zencoding-expand-yas)
-
 (provide 'rc-zencoding)
 
 ;;; rc-zencoding.el ends here

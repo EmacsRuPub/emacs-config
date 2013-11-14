@@ -99,7 +99,6 @@
         js2-refactor
         json-mode
         jump-char
-        key-chord
         lisppaste
         list-processes+
         litable-custom
