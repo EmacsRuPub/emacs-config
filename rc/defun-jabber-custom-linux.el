@@ -44,6 +44,31 @@
         (x-urgency-hint (selected-frame) t))
       (setq jabber-activity-jids-count count))))
 
+(defun jabber-presence-urgency-hint (who oldstatus newstatus statustext proposed-alert)
+  (let ((bare-jid (symbol-name who)))
+    (when (member bare-jid *urgency-presence-jids*)
+        (custom/notify "jabber" (concat "Presence changed for " bare-jid)))))
+
+(defun custom/notify (title message)
+  "Notify the user using either the dbus based API or the `growl' one"
+  (unless (and (fboundp 'dbus-register-signal)
+               ;; avoid a bug in Emacs 24.0 under darwin
+               (ignore-errors (require 'notifications nil t)))
+    ;; else try notify.el
+    (unless (fboundp 'notify)
+      (ignore-errors (require 'notify nil 'noerror))))
+  (condition-case nil
+      (cond
+       ;; Graphical notification
+       ((fboundp 'notifications-notify) (notifications-notify :title title
+                                                              :app-name "emacs"
+                                                              :body message))
+       ((fboundp 'notify)               (notify title message))
+       ;; Fallback
+       (t                               (error "Fallback to `message'")))
+    ;; when notification function errored out, degrade gracefully to `message'
+    (error (message "%s: %s" title message))))
+
 (provide 'defun-jabber-custom-linux)
 
 ;;; defun-jabber-custom-linux.el ends here

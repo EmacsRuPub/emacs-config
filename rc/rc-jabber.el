@@ -98,6 +98,7 @@
   ;; usage example
   (defvar jabber-activity-jids-count 0)
   (add-hook 'jabber-activity-update-hook 'jabber-urgency-hint)
+  (add-hook 'jabber-alert-presence-hooks 'jabber-presence-urgency-hint)
   )
 
 
