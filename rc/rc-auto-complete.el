@@ -39,7 +39,7 @@
 (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode))
 
-(global-set-key (kbd "<tab>") 'auto-complete) ;; Create scratch buffer
+(global-set-key (kbd "C-<tab>") 'auto-complete)
 
 (provide 'rc-auto-complete)
 
