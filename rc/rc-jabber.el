@@ -121,15 +121,9 @@
   (let* ((state-data (fsm-get-state-data jc))
          (server (plist-get state-data :server)))
     (message "%s" server)
-    (if (string-equal server "gmail.com")
+    (if (string-equal server "igrade.ru")
         (progn
-          ;; (jabber-groupchat-join jc "devil@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "haskell@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "lisp@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "emacs@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "icfpc@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "wax@conference.jabber.ru" "ronin")
-          ;; (jabber-groupchat-join jc "erlang@conference.jabber.ru" "ronin")
+          (jabber-groupchat-join jc "it@conference.igrade.ru" "a-ermolov")
           ))))
 
 (add-hook 'jabber-chat-mode-hook 'custom/jabber-chat-mode-hook)
