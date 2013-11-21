@@ -77,6 +77,7 @@
         google-contacts
         haskellmode-emacs
         header2
+        helm-swoop
         highlight-symbol
         hl-line+
         hs-lint
@@ -86,7 +87,6 @@
         ido-vertical-mode
         ido-yes-or-no
         iedit
-        ioccur
         jedi-custom
         joseph-file-util
         js2-highlight-vars

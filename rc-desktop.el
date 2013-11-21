@@ -70,7 +70,6 @@
 ;#   Desktop list customizations
 ;############################################################################
 (add-to-list 'desktop-globals-to-save 'file-name-history)
-;; (add-to-list 'desktop-globals-to-save 'ioccur-history)
 (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
 (add-to-list 'desktop-locals-to-save 'tab-width)
 (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
