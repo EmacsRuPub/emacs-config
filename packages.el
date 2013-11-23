@@ -150,6 +150,7 @@
         smex
         sml-mode
         sunrise-commander
+        swank-js
         tail
         twittering-mode
         undo-tree
