@@ -21,6 +21,7 @@ games
 image-dired
 kill-ring-saved.el
 newsticker
+projectile-bookmarks.eld
 projectile.cache
 semanticdb
 srecode-map.el
