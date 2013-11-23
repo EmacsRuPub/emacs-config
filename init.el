@@ -24,6 +24,7 @@
 (load custom-file 'noerror)
 
 (add-to-list 'load-path (concat config-basedir "rc"))
+(add-to-list 'load-path (concat config-basedir "bundles"))
 
 ;; For a new non-file buffer set its major mode based on the buffer name.
 ;; http://thread.gmane.org/gmane.emacs.devel/115520/focus=115794
@@ -33,15 +34,21 @@
 ;;                              (let ((buffer-file-name (buffer-name)))
 ;;                                (set-auto-mode)))))
 
-(mapcar 'load ;;solidload
+(mapcar 'load
         (mapcar
          (lambda (path) (concat config-basedir path))
          '("rc-el-get.el"
            "ext/load-ext-manual.el"
            "constants.el"
            "credentials.el"
-           "bundle.el"
-           "rc-auto-modes.el"
+           )))
+
+(require 'bundle-main)
+
+(mapcar 'load
+        (mapcar
+         (lambda (path) (concat config-basedir path))
+         '("rc-auto-modes.el"
            "rc-desktop.el"
            )))
 

@@ -82,4 +82,5 @@
 (require 'rc-edit-portage)
 (require 'defun-recipes)
 
+(provide 'bundle-main)
 ;;; macosx-common.el ends here
