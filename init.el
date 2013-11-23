@@ -43,7 +43,7 @@
            "credentials.el"
            )))
 
-(require 'bundle-main)
+(require 'bundle-lean)
 
 (mapcar 'load
         (mapcar
