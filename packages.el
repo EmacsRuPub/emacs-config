@@ -9,6 +9,7 @@
 
 (setq el-get-packages
       '(
+        ac-math
         ac-nrepl
         ac-php-doc
         ac-slime
