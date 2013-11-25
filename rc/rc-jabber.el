@@ -20,6 +20,7 @@
 (require 'defun-jabber-custom-templates)
 (when (eq system-type 'darwin) (require 'defun-jabber-custom-darwin))
 (when (eq window-system 'x) (require 'defun-jabber-custom-linux))
+(require 'defun-jabber-tools)
 
 ;#############################################################################
 ;#   Account definitions
