@@ -47,6 +47,7 @@
 (define-key custom-search-keymap (kbd "9") 'ace-jump-word-mode)
 (define-key custom-search-keymap (kbd "n") 'sr-speedbar-toggle)
 (define-key custom-search-keymap (kbd "C-n") 'sr-speedbar-select-window)
+(define-key custom-search-keymap (kbd "h") 'helm-mini)
 (global-set-key (kbd "M-s") 'custom-search-keymap)
 
 (global-unset-key (kbd "C-s"))
