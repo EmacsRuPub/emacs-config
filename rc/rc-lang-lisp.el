@@ -36,6 +36,11 @@
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
      ))
 
+(defadvice slime-documentation-lookup
+  (around change-browse-url-browser-function activate)
+  "Use w3m for slime documentation lookup."
+  (let ((browse-url-browser-function 'w3m-browse-url))
+    ad-do-it))
 
 ;#############################################################################
 ;#   Customizations
@@ -47,7 +52,7 @@
 
 (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
 
-(setq common-lisp-hyperspec-root custom/hyperspec-root)
+(setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
 
 ;#############################################################################
 ;#   Hooks
