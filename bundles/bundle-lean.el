@@ -64,6 +64,7 @@
 (require 'rc-tools-gdb)
 (require 'rc-tools-smerge-mode)
 (require 'rc-tools-projectile)
+(require 'rc-tex)
 (require 'rc-gmail)
 (require 'rc-vcs-hg)
 (require 'rc-vcs-git)

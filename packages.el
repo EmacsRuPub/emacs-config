@@ -15,6 +15,7 @@
         ac-slime
         ace-jump-mode
         ag-custom
+        auctex
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex
