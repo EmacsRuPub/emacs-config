@@ -147,7 +147,6 @@
         session
         silentcomp
         slime
-        smart-forward
         smartparens
         smex
         sml-mode
