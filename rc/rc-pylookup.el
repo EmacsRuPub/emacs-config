@@ -24,6 +24,13 @@
 (autoload 'pylookup-update "pylookup"
   "Run pylookup-update and create the database at `pylookup-db-file'." t)
 
+(defadvice pylookup-lookup
+  (around change-browse-url-browser-function activate)
+  "Use w3m for slime documentation lookup."
+  (let ((browse-url-browser-function 'w3m-browse-url))
+    ad-do-it))
+
+
 (provide 'rc-pylookup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-pylookup.el ends here

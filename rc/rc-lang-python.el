@@ -43,6 +43,7 @@
   ;; (turn-on-eldoc-mode)
   (define-key python-mode-map (kbd "C-c l") 'pylint)
   (define-key python-mode-map (kbd "C-c p e") 'pep8)
+  (define-key python-mode-map (kbd "C-c h") 'pylookup-lookup-at-point)
   (define-key python-mode-map (kbd "C-c [") 'python-nav-beginning-of-block)
   (define-key python-mode-map (kbd "C-c 9") 'python-nav-beginning-of-statement)
   (define-key python-mode-map (kbd "C-c <up>") 'python-nav-backward-up-list)
