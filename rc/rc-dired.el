@@ -92,9 +92,6 @@
 ;############################################################################
 (setq wdired-allow-to-change-permissions t)
 
-(setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
-
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
@@ -107,13 +104,13 @@
      (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
-;; ;; Additions to dired
-;; ;; http://nflath.com/2009/07/dired/
+
+;; Additions to dired http://nflath.com/2009/07/dired/
 
 (setq wdired-allow-to-change-permissions 'advanced)
 (define-key dired-mode-map  (kbd "r") 'wdired-change-to-wdired-mode)
 
-;;Updated file system on all buffer switches if in dired mode
+;; Updated file system on all buffer switches if in dired mode
 (defadvice switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
   (if (equal major-mode 'dired-mode)
       (revert-buffer)))

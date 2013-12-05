@@ -43,8 +43,6 @@
         deferred
         diminish
         dired+
-        dired-details
-        dired-details+
         dired-sort-menu
         direx
         django-mode
