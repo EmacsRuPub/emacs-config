@@ -62,6 +62,7 @@
 (setq jabber-mode-line-mode t)
 (setq jabber-alert-presence-message-function
       (lambda (who oldstatus newstatus statustext) nil))
+(setq jabber-backlog-number 100)
 
 (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
 
