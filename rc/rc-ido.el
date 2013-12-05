@@ -51,14 +51,13 @@
 
 (set-default 'imenu-auto-rescan t) ;; Always rescan buffer for imenu
 
-
 (put 'diredp-do-bookmark-in-bookmark-file 'ido 'ignore)
 (put 'diredp-set-bookmark-file-bookmark-for-marked 'ido 'ignore)
 
 (ad-enable-advice
-'ido-read-internal
-'around
-'ido-completing-read-use-initial-input-as-default)
+ 'ido-read-internal
+ 'around
+ 'ido-completing-read-use-initial-input-as-default)
 
 (ad-activate 'ido-read-internal)
 
