@@ -34,7 +34,7 @@
 (define-prefix-command 'custom-search-keymap)
 (define-key custom-search-keymap (kbd "m") 'multi-occur-in-matching-buffers)
 (define-key custom-search-keymap (kbd "o") 'occur)
-(define-key custom-search-keymap (kbd "r") 're-builder)
+(define-key custom-search-keymap (kbd "r") 'rgrep)
 (define-key custom-search-keymap (kbd "l") 'locate)
 (define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
 (define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
