@@ -39,7 +39,15 @@ Returns the chat buffer."
         (switch-to-buffer-other-window buffer)
       (switch-to-buffer buffer))))
 
+(defun custom/jabber-muc-sendto (&optional other-window)
+  "Insert MUC participant nick into chat."
+  (interactive)
+  (end-of-buffer)
+  (insert (concat (ido-completing-read "Send to: "
+                     (jabber-muc-nicknames)) ": ")))
+
 (global-set-key "\C-x\C-j\C-j" 'my-jabber-chat-with)
+(global-set-key "\C-x\C-j\C-s" 'custom/jabber-muc-sendto)
 
 (provide 'defun-jabber-tools)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
