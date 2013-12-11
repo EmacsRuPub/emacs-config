@@ -11,7 +11,7 @@
 ;; (require 'django-mode)
 
 
-(yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
+;; (yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
 
 (autoload 'python-pylint "python-pylint")
 (autoload 'pylint "python-pylint")

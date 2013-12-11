@@ -10,8 +10,6 @@
 (setq el-get-packages
       '(
         ac-math
-        ac-nrepl
-        ac-php-doc
         ac-slime
         ace-jump-mode
         ag-custom
@@ -31,7 +29,6 @@
         buffer-move
         c-eldoc
         calfw
-        clojure-mode
         col-highlight
         color-theme
         column-marker
@@ -45,7 +42,6 @@
         dired+
         dired-sort-menu
         direx
-        django-mode
         dope
         doxymacs
         drag-stuff
@@ -67,7 +63,6 @@
         flx
         flycheck
         flycheck-color-mode-line
-        flymake-cursor
         git-commit-mode
         git-emacs
         git-gutter
@@ -98,31 +93,23 @@
         list-processes+
         litable-custom
         magit
-        magit-filenotify
-        magit-identities
-        magit-tramp
         markdown-mode
         minibuf-electric-gnuemacs
         minimap
         mo-git-blame
-        monky
         multiple-cursors
         nav
         nginx-mode
         notify
-        nrepl
-        nrepl-ritz
         nxhtml
         oauth2
         org-mode
         org-occur-goto
         pdftools-custom
-        php-electric-custom
-        php-mode-improved
         po-mode
         point-stack
         popwin
-        projectile-custom
+        projectile
         python24
         pylookup
         python-pep8
@@ -148,7 +135,6 @@
         smartparens
         smex
         sml-mode
-        sunrise-commander
         swank-js
         tail
         twittering-mode
@@ -161,11 +147,12 @@
         wdired
         whole-line-or-region
         window-number
-        xgtags
         yandex-weather
         yasnippet
         zenburn-custom
         zencoding-mode
         ))
+
+(provide 'packages-lean)
 
 ;;; sources-common.el ends here

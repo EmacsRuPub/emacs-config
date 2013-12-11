@@ -8,7 +8,6 @@
 
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'ac-nrepl)
 (require 'auto-complete-extension)
 (require 'auto-complete-emacs-lisp)
 (require 'auto-complete-latex)
@@ -33,11 +32,8 @@
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'slime-repl-mode))
 
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
 (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode))
 
 (global-set-key (kbd "C-<tab>") 'auto-complete)
 

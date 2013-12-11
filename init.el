@@ -25,6 +25,7 @@
 
 (add-to-list 'load-path (concat config-basedir "rc"))
 (add-to-list 'load-path (concat config-basedir "bundles"))
+(add-to-list 'load-path config-basedir)
 
 ;; For a new non-file buffer set its major mode based on the buffer name.
 ;; http://thread.gmane.org/gmane.emacs.devel/115520/focus=115794
