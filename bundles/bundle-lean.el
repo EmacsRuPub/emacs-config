@@ -64,6 +64,7 @@
 (require 'rc-tools-projectile)
 (require 'rc-tex)
 (require 'rc-gmail)
+(require 'rc-mingus)
 (require 'rc-vcs-git)
 (require 'rc-dired)
 (require 'rc-info)
