@@ -8,6 +8,5 @@
 (global-git-gutter-mode +1)
 
 (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
-(define-key magit-blame-map (kbd "C-o") 'magit-blame-locate-commit)
 
 (provide 'rc-vcs-git)
