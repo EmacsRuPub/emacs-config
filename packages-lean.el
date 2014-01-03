@@ -110,7 +110,7 @@
         region-bindings-mode
         replace+
         restclient-custom
-        revive
+        revive-plus
         ropemacs
         rst-mode
         s
