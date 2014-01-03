@@ -20,17 +20,13 @@
         auto-complete-nxml
         auto-complete-rst
         auto-complete-yasnippet
-        autosmiley
-        bm
         bookmark+
         breadcrumb
         browse-kill-ring
-        buff-menu+
         buffer-move
         c-eldoc
         calfw
         col-highlight
-        color-theme
         column-marker
         crontab-mode
         crosshairs
@@ -41,19 +37,16 @@
         diminish
         dired+
         dired-sort-menu
-        direx
         dope
         doxymacs
         drag-stuff
         ecb-custom
-        egit
         elwm
         emacs-w3m
         emacs-wgrep
         epoch-view
         erc-extras
         erc-highlight-nicknames
-        eredis
         erefactor
         evil-nerd-commenter
         evil-surround
@@ -66,7 +59,6 @@
         git-commit-mode
         git-emacs
         git-gutter
-        gitsum
         go-autocomplete-custom
         go-mode
         google-contacts
@@ -81,14 +73,12 @@
         ido-ubiquitous
         ido-vertical-mode
         ido-yes-or-no
-        iedit
         jedi-custom
         joseph-file-util
         js2-highlight-vars
         js2-mode
         js2-refactor
         json-mode
-        jump-char
         lisppaste
         list-processes+
         litable-custom
@@ -96,7 +86,6 @@
         markdown-mode
         minibuf-electric-gnuemacs
         minimap
-        mo-git-blame
         multiple-cursors
         nav
         nginx-mode
@@ -107,7 +96,6 @@
         org-occur-goto
         pdftools-custom
         po-mode
-        point-stack
         popwin
         projectile
         python24
@@ -129,7 +117,6 @@
         sauron
         savekill
         scratch
-        session
         silentcomp
         slime
         smartparens

@@ -14,7 +14,6 @@
 
 (require 'window-number)
 (require 'buffer-move)
-(require 'buff-menu+)
 
 (require 'defun-wincontrol)
 

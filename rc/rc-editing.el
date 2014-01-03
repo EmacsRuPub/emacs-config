@@ -15,7 +15,6 @@
 (require 'undo-tree)
 (require 'saveplace)
 (require 'saveplace)
-(require 'point-stack)
 (require 'rst)
 (require 'savekill)
 (require 'volatile-highlights)
@@ -25,9 +24,6 @@
 (require 'cua-base)
 (require 'wc-mode)
 (require 'cursor-chg)
-
-(require 'iedit)
-(require 'jump-char)
 
 (require 'defun-editing)
 (require 'defun-camelscore)

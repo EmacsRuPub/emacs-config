@@ -14,7 +14,7 @@
 (require 'jabber-autoloads) ;; For 0.7.90 and above:
 (require 'jabber-bookmarks)
 (require 'jabber-autoaway)
-(require 'autosmiley)
+;; (require 'autosmiley)
 
 (require 'defun-jabber-custom)
 (require 'defun-jabber-custom-templates)
