@@ -109,5 +109,7 @@
 
 (add-to-list 'auto-mode-alist '("nginx" . nginx-mode))
 
+(add-to-list 'auto-mode-alist '("diff" . diff-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-auto-modes.el ends here
