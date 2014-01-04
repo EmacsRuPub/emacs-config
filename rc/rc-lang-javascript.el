@@ -99,7 +99,7 @@
                             (setq flycheck-checker 'javascript-jshint))
                             )
 
-(js2r-add-keybindings-with-prefix "C-c C-m")
+(js2r-add-keybindings-with-prefix "C-c C-j")
 
 (provide 'rc-lang-javascript)
 
