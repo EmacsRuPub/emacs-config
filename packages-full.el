@@ -87,6 +87,7 @@
         ido-vertical-mode
         ido-yes-or-no
         iedit
+        init-paredit
         jedi-custom
         joseph-file-util
         js2-highlight-vars
@@ -117,6 +118,7 @@
         oauth2
         org-mode
         org-occur-goto
+        paredit
         pdftools-custom
         php-electric-custom
         php-mode-improved
@@ -146,7 +148,6 @@
         session
         silentcomp
         slime
-        smartparens
         smex
         sml-mode
         sunrise-commander
@@ -162,6 +163,7 @@
         wdired
         whole-line-or-region
         window-number
+        wrap-region
         xgtags
         yandex-weather
         yasnippet

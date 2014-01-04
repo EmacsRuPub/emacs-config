@@ -73,6 +73,7 @@
         ido-ubiquitous
         ido-vertical-mode
         ido-yes-or-no
+        init-paredit
         jedi-custom
         joseph-file-util
         js2-highlight-vars
@@ -94,6 +95,7 @@
         oauth2
         org-mode
         org-occur-goto
+        paredit
         pdftools-custom
         po-mode
         popwin
@@ -119,7 +121,6 @@
         scratch
         silentcomp
         slime
-        smartparens
         smex
         sml-mode
         swank-js
@@ -134,6 +135,7 @@
         wdired
         whole-line-or-region
         window-number
+        wrap-region
         yandex-weather
         yasnippet
         zenburn-custom
