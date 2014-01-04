@@ -101,6 +101,11 @@
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
 
+(add-to-list 'load-path (concat config-basedir "ext/tern"))
+(autoload 'tern-mode "emacs/tern.el" nil t)
+
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+
 (provide 'rc-lang-javascript)
 
 ;;; emacs-rc-javascript.el ends here
