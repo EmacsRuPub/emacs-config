@@ -7,6 +7,8 @@
 
 (global-git-gutter-mode +1)
 
+(global-set-key (kbd "C-c C-m C-s") 'magit-status)
+(global-set-key (kbd "C-c C-m C-l") 'magit-log)
 (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
 
 (provide 'rc-vcs-git)
