@@ -1,0 +1,5 @@
+(:name emmet-mode
+       :description "Unofficial emmet's support for emacs. http://www.emacswiki.org/emacs/ZenCoding"
+       :type github
+       :pkgname "smihica/emmet-mode"
+       :load-path ".")

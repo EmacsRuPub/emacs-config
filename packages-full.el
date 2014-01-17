@@ -54,6 +54,7 @@
         elwm
         emacs-w3m
         emacs-wgrep
+        emmet-mode
         epoch-view
         erc-extras
         erc-highlight-nicknames
@@ -169,7 +170,6 @@
         yasnippet
         zenburn-custom
         zen-and-art-custom
-        zencoding-mode
         ))
 
 (provide 'packages-full)
