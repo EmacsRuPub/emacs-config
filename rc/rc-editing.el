@@ -203,9 +203,6 @@
 
 (global-set-key (kbd "C-;") 'iedit-mode)
 
-(global-set-key (kbd "<f6>") 'point-stack-push)
-(global-set-key (kbd "<f7>") 'point-stack-pop)
-(global-set-key (kbd "<f8>") 'point-stack-forward-stack-pop)
 (global-set-key (kbd "M-\"") 'eval-region)
 
 ;I never use set-fill-column and I hate hitting it by accident.
