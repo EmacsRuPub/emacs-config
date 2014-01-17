@@ -7,8 +7,12 @@
 
 (global-git-gutter-mode +1)
 
-(global-set-key (kbd "C-c C-m C-s") 'magit-status)
-(global-set-key (kbd "C-c C-m C-l") 'magit-log)
+(global-set-key (kbd "C-c g s") 'magit-status)
+(global-set-key (kbd "C-c g l") 'magit-log)
+(global-set-key (kbd "C-c g c") 'magit-file-log)
 (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
+(global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
+(global-set-key (kbd "C-c g f") 'magit-fetch-current)
+(global-set-key (kbd "C-c g r") 'magit-rebase-step)
 
 (provide 'rc-vcs-git)
