@@ -95,6 +95,7 @@
         nxhtml
         oauth2
         org-mode
+        org-magit
         org-occur-goto
         paredit
         pdftools-custom
