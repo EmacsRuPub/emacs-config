@@ -69,6 +69,7 @@
         flycheck
         flycheck-color-mode-line
         flymake-cursor
+        framemove
         git-commit-mode
         git-emacs
         git-gutter

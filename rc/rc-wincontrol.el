@@ -10,10 +10,13 @@
 
 (require 'window-number)
 (require 'buffer-move)
+(require 'framemove)
 
 (require 'defun-wincontrol)
 
 (window-number-meta-mode)
+
+(setq framemove-hook-into-windmove t)
 
 ;#############################################################################
 ;#   Buffers management

@@ -57,6 +57,7 @@
         flx
         flycheck
         flycheck-color-mode-line
+        framemove
         git-commit-mode
         git-emacs
         git-gutter
