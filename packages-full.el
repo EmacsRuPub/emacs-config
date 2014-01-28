@@ -139,7 +139,6 @@
         region-bindings-mode
         replace+
         restclient-custom
-        revive
         ropemacs
         rst-mode
         s

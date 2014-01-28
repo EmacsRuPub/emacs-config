@@ -8,10 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 
-(autoload 'save-current-configuration "revive" "Save status" t)
-(autoload 'resume "revive" "Resume Emacs" t)
-(autoload 'wipe "revive" "Wipe Emacs" t)
-
 (require 'window-number)
 (require 'buffer-move)
 
@@ -71,10 +67,6 @@
 (setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
 (setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
 (setq special-display-regexps (remove "[ ]?\\*Messages\\*[ ]?" special-display-regexps))
-
-(require 'revive+)
-(setq revive-plus:all-frames t)
-(revive-plus:demo)
 
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
 (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
