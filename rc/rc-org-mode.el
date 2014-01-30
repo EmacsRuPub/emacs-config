@@ -154,12 +154,21 @@
   ;; (define-key yas/keymap (kbd "<tab>") 'yas/next-field-group)
   )
 
+(defun custom/org-todo-changed-hook ()
+  "Remove :current: tag, when DONE"
+  ;; TODO generalize
+  (let ((tags (org-get-tags)))
+    (when (and (equal org-state "DONE")
+               (member "current" tags))
+      (org-set-tags-to (delete "current" tags)))))
+
 (add-hook 'org-mode-hook 'custom/org-mode-hook)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'diary-display-hook 'fancy-diary-display)
 ;; (add-hook 'org-finalize-agenda-hook 'custom/org-agenda-to-appt) ;; org + appt ;; Run once, activate and schedule refresh
 ;; (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt) ;; Update appt each time agenda opened.
 ;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex) ;; doesn't work now
+(add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 
 
 ;#############################################################################
