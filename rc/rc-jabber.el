@@ -111,6 +111,7 @@
   (local-set-key (kbd "C-c C-l") 'custom-jabber/insert-inlove-smile)
   (local-set-key (kbd "C-c C-k") 'custom-jabber/insert-kiss-smile)
   (local-set-key (kbd "C-c C-y") 'custom-jabber/insert-shy-smile)
+  (local-set-key (kbd "C-c C-t") 'custom-jabber/insert-copyright-sign)
   (local-set-key (kbd "C-c u r") 'upcase-region)
   (local-set-key (kbd "C-M-r")   'custom-jabber/wrap-replace-regexp)
   (local-set-key (kbd "C-M-m")   'custom-jabber/wrap-misreading)

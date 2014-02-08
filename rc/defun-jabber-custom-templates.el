@@ -27,6 +27,11 @@
   (insert ":-[ ")
   (backward-char 4))
 
+(defun custom-jabber/insert-copyright-sign ()
+  "Insert (c) at cursor point."
+  (interactive)
+  (insert " (c)"))
+
 (defun custom-jabber/wrap-replace-regexp ()
   "Wraps current word in ed's 'replace' regexp"
   (interactive)
