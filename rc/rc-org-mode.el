@@ -134,12 +134,8 @@
 ;#############################################################################
 ;#   Setup
 ;############################################################################
-(custom/org-agenda-to-appt)
 (appt-activate t)
-;; Run once, activate and schedule refresh
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-(run-at-time "24:01" nil 'custom/org-agenda-to-appt)
-(run-at-time nil 3600 'org-agenda-to-appt)
 
 
 ;#############################################################################
