@@ -27,7 +27,8 @@
                            (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
                    'nxml-mode))
 
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . html-mode))
 
 ;; HTML
 (add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
@@ -37,7 +38,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|/TODO\\)$" . org-mode))
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.tagged\\'" . tagger-mode))
 
 (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
