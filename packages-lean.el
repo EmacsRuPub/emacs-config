@@ -102,6 +102,7 @@
         pdftools-custom
         po-mode
         popwin
+        prodigy
         projectile
         python24
         pylookup

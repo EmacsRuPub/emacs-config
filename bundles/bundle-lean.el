@@ -56,6 +56,7 @@
 (require 'rc-lang-go)
 (require 'rc-expand-region)
 (require 'rc-pylookup)
+(require 'rc-prodigy)
 (require 'rc-tools-doxygen)
 (require 'rc-tools-ecb)
 (require 'rc-tools-flycheck)
