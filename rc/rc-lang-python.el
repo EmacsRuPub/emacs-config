@@ -32,6 +32,18 @@
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
 
+
+(defun custom/insert-debugger-statements ()
+  "inserts debugger statements at point."
+  (interactive)
+  (push-mark)
+  (save-excursion
+    (insert "import ipdb\nipdb.set_trace()\n")
+    (beginning-of-line)
+    (python-indent-region (mark) (point)))
+  (pop-mark))
+
+
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
@@ -55,6 +67,7 @@
   (define-key python-mode-map (kbd "C-c 0") 'python-nav-end-of-statement)
   (define-key python-mode-map (kbd "C-c ]") 'python-nav-end-of-block)
   (define-key python-mode-map (kbd "C-M-f") 'python-nav-forward-sexp)
+  (define-key python-mode-map (kbd "C-c 6") 'custom/insert-debugger-statements)
   (setq flycheck-checker 'python-flake8))
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
