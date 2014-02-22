@@ -15,7 +15,6 @@
 (require 'org-install)
 (require 'org)
 (require 'org-agenda)
-(require 'org-contacts)
 
 (require 'defun-org-mode)
 
@@ -24,12 +23,6 @@
 ;#   Customizations
 ;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
-
-;; link abbrevs
-(add-to-list 'org-link-abbrev-alist '("emacswiki" . "http://www.emacswiki.org/cgi-bin/wiki/"))
-(add-to-list 'org-link-abbrev-alist '("google" . "http://www.google.com/search?q="))
-
-
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "STARTED(s)" "LATER(l)"
@@ -42,21 +35,6 @@
       '((daily today require-timed remove-match)
         "----------------"
         (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
-
-;;       org-tag-alist
-;;       '(("@home" . ?h)
-;;         ("@office" . ?o)
-;;         ("@phone" . ?p)
-;;         ("@cms" . ?w)
-;;         ("@computer" . ?c)
-;;         ("@errands" . ?e)
-;;         ("@bvc" . ?b)
-;;         ("@ltlunch" . ?l)
-;;         ("@2020" . ?2)
-;;         ("someday" . ?s)
-;;         ("@gul" . ?g)
-;;         ("flov" . ?f))
-
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
@@ -92,8 +70,6 @@
 (setq org-log-done t)
 (setq org-hide-leading-stars t)
 (setq org-use-property-inheritance t)
-;; (setq org-enforce-todo-dependencies t)
-;; (setq org-ctrl-k-protect-subtree t)
 (setq org-special-ctrl-a/e t)
 (setq org-special-ctrl-k t)
 (setq org-blank-before-new-entry (quote ((heading . auto) (plain-list-item))))
@@ -122,12 +98,6 @@
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation
-;; (setq appt-disp-window-function (function org-osd-display))
-;; (setq appt-display-format 'window) ;; Update appt each time agenda opened.
-;; 5 minute warning
-;; (setq appt-message-warning-time '60)
-;; (setq appt-display-interval '15)
-;; drawing diagrams with ditaa
 (setq org-ditaa-jar-path (concat config-basedir "resources/ditaa0_9.jar"))
 
 
@@ -143,12 +113,7 @@
 ;############################################################################
 (defun custom/org-mode-hook ()
   (local-set-key (kbd "C-x C-a") 'show-all)
-  (imenu-add-to-menubar "Imenu")
-  ;; (make-variable-buffer-local 'yas/trigger-key)
-  ;; (setq yas/trigger-key (kbd "<tab>"))
-  ;; (local-set-key (kbd "<tab>") 'yas/expand)
-  ;; (define-key yas/keymap (kbd "<tab>") 'yas/next-field-group)
-  )
+  (imenu-add-to-menubar "Imenu"))
 
 (defun custom/org-todo-changed-hook ()
   "Remove :current: tag, when DONE"
@@ -161,9 +126,6 @@
 (add-hook 'org-mode-hook 'custom/org-mode-hook)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'diary-display-hook 'fancy-diary-display)
-;; (add-hook 'org-finalize-agenda-hook 'custom/org-agenda-to-appt) ;; org + appt ;; Run once, activate and schedule refresh
-;; (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt) ;; Update appt each time agenda opened.
-;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex) ;; doesn't work now
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 
 
@@ -173,7 +135,6 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
-;; (global-set-key (kbd "C-c C-o C-l") 'org-agenda-open-link)
 (global-set-key (kbd "C-c t c") 'org-table-create)
 (global-set-key (kbd "C-c t s") 'org-sparse-tree)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
