@@ -86,6 +86,20 @@ Don't mess with special buffers."
    (window-buffer
     (next-window))))
 
+(defun update-frames (heads-count)
+  (interactive "sHeads count: ")
+  (let ((frames-count (length (frame-list)))
+        (heads (string-to-number heads-count)))
+    (cond
+     ((= heads 2)
+      (when (= frames-count 1)
+        (make-frame-command)))
+     ((= heads 1)
+      (when (> frames-count 1)
+        (delete-other-frames)))
+     (t
+      (delete-other-frames)))))
+
 (provide 'defun-wincontrol)
 
 ;;; defun-wincontrol.el ends here
