@@ -90,6 +90,11 @@
 (put 'transient-mark-mode 'permanent-local t)
 (setq-default transient-mark-mode t)
 
+;; enable some useful funcs
+(put 'erase-buffer 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
 ;; If something updates under us and we haven't changed the buffer
 ;; ourselves, reload without asking. Handy for git.
 (global-auto-revert-mode 1);; Auto refresh buffers
