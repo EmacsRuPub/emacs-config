@@ -25,8 +25,9 @@
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "GOING(g)" "PAUSE(p)" "WAITING(w@)" "STARTED(s)" "LATER(l)"
-                  "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELLED(c@)")))
+      '((sequence "TODO(t)" "GOING(g)" "WAITING(w@)" "LATER(l)"
+                  "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELLED(c@)")
+        (sequence "NEW(n)" "INPROGRESS(p)" "CHECKING(r)" "REWORK(f)" "|" "CLOSED(k)")))
 
 (setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "STARTED(s)")))
 (setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
@@ -39,10 +40,14 @@
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
         ("WAITING" . (:foreground "orange" :weight bold))
-        ("STARTED" . (:foreground "blue" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
-        ("CANCELLED" . (:foreground "cyan" :weight bold)))
-      )
+        ("CANCELLED" . (:foreground "cyan" :weight bold))
+        ("NEW" . (:foreground "red" :weight bold))
+        ("INPROGRESS" . (:foreground "yellow" :weight bold))
+        ("CHECKING" . (:foreground "orange" :weight bold))
+        ("REWORK" . (:foreground "red" :weight bold))
+        ("CLOSED" . (:foreground "green" :weight bold))))
+
 (setq org-priority-faces
       '((?A :foreground "red" :weight bold)
         (?B :foreground "#94bff3" :weight bold)
