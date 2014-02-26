@@ -23,6 +23,7 @@
         ("m" "system maintaining" entry (file+headline (concat org-dir "/projects/config/linux-system.org") "raw tickets") "* TODO %? %U :todo:system:")
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         ("j" "issues" entry (file+headline (concat org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
+        ("g" "github" entry (file (concat org-dir "-inventory/checklists/github.org")) "* %? %U :github:")
         ("b" "browser tabs")
         ("bc" "clojure" entry (file+olp (concat org-dir "/review/browser-tabs.org") "firefox tabs" "clojure (to process)") "* %? %U :clojure:")
         ("bh" "haskell" entry (file+olp (concat org-dir "/review/browser-tabs.org") "firefox tabs" "haskell") "* %? %U :haskell:")
