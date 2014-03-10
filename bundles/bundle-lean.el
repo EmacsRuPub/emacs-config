@@ -8,7 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 (require 'rc-abbrevs)
-;; (require 'rc-dir-locals)
 (require 'rc-recentf)
 (require 'rc-yasnippet)
 (require 'rc-bookmarks)
