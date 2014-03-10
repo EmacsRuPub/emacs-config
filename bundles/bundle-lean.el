@@ -47,6 +47,7 @@
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-prog-common)
+(require 'rc-evil)
 (require 'rc-lang-markup)
 (require 'rc-lang-elisp)
 (require 'rc-lang-javascript)
