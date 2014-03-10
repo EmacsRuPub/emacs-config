@@ -12,6 +12,7 @@
 (require 'rc-yasnippet)
 (require 'rc-bookmarks)
 (require 'rc-ido)
+(require 'rc-helm)
 (require 'rc-smex)
 (require 'rc-enable)
 (require 'rc-interface)
