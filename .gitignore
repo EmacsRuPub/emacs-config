@@ -1,5 +1,7 @@
 */#*#
 *log
+*org*
+*wconf*
 *~
 .emacs.desktop
 .litable-lists.el
