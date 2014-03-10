@@ -118,6 +118,7 @@
         nrepl-ritz
         nxhtml
         oauth2
+        openwith
         org-mode
         org-magit
         org-occur-goto

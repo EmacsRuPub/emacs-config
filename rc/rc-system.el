@@ -17,6 +17,11 @@
 ;; ;; Emacs freaks out if this isn't set.
 (setq warning-suppress-types nil)
 (setq enable-local-variables nil)
+(setq openwith-associations
+      '(("\\.pdf\\'" "zathura" (file))
+        ("\\.djvu\\'" "zathura" (file))
+        ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\)\\'" "vlc" (file))
+        ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))))
 
 (global-set-key (kbd "C-x c") 'proced)
 
