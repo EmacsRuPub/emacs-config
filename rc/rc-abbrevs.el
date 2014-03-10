@@ -10,6 +10,8 @@
 (setq-default abbrev-mode t) ;; ensure abbrev mode is always on
 (setq save-abbrevs 'silently)      ;; do not bug me about saving my abbreviations
 
+(global-set-key (kbd "C-S-<iso-lefttab>") 'dabbrev-expand)
+
 (provide 'rc-abbrevs)
 
 ;;; rc-abbrevs.el ends here
