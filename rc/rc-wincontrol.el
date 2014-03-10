@@ -38,34 +38,7 @@
               ("fundamental" ((mode . fundamental-mode)))
               ("haskell" ((mode . haskell-mode))))))
 
-(setq ibuffer-saved-filter-groups
-      '(("default"
-         ("dired" (mode . dired-mode))
-         ("opossum" (filename . "opossum"))
-         ("webdrive" (filename . "webdrive"))
-         ("xmonad" (filename . "xmonad"))
-         ("emacs" (filename . "emacs"))
-         ("doc" (or
-                 (mode . latex-mode)
-                 (mode . metapost-mode)
-                 (mode . doc-view-mode)
-                 (mode . markdown-mode)))
-         ("build" (or
-                   (mode . cmake-mode)
-                   (mode . makefile-mode)
-                   (mode . makefile-gmake-mode)))
-         ("pim" (or
-                 (name . "^\\*Calendar\\*$")
-                 (name . "^diary$")
-                 (mode . org-mode)))
-         ("system" (or
-                    (mode . help-mode)
-                    (mode . completion-list-mode)
-                    (mode . apropos-mode)
-                    (name . "^\\*.*\\*$")
-                    (filename . "\.emacs\.d")
-                    (mode . custom-mode))))))
-
+(setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
 
 (setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
 (setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
