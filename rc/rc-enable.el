@@ -26,6 +26,11 @@
 (put 'scroll-right 'disabled nil)
 ;;}}}
 
+;; some useful funcs
+(put 'erase-buffer 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
 (provide 'rc-enable)
 
 ;;; rc-enable.el ends here
