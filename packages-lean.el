@@ -133,6 +133,7 @@
         tail
         twittering-mode
         undo-tree
+        unicad
         vline
         volatile-highlights
         w3m-session

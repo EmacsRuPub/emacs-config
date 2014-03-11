@@ -24,6 +24,7 @@
 (require 'cua-base)
 (require 'wc-mode)
 (require 'cursor-chg)
+(require 'unicad)
 
 (require 'defun-editing)
 (require 'defun-camelscore)

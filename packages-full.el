@@ -159,6 +159,7 @@
         swank-js
         tail
         twittering-mode
+        unicad
         undo-tree
         vline
         volatile-highlights
