@@ -35,6 +35,7 @@
         cursor-chg
         deferred
         diminish
+        discover
         dired+
         dired-sort-menu
         dope
