@@ -17,6 +17,7 @@
 (require 'dired-x)
 ;; (require 'dash)
 ;; (require 'dired-details) ;; Make dired less verbose
+(require 'dired-toggle-sudo)
 
 (require 'defun-dired)
 
@@ -124,7 +125,14 @@
   (if (equal major-mode 'dired-mode)
       (revert-buffer)))
 
+(eval-after-load 'tramp
+  '(progn
+     ;; Allow to use: /sudo:user@host:/path/to/file
+     (add-to-list 'tramp-default-proxies-alist
+                  '(".*" "\\`.+\\'" "/ssh:%h:"))))
+
 (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
+(define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
 
 (provide 'rc-dired)
 

@@ -45,6 +45,7 @@
         discover
         dired+
         dired-sort-menu
+        dired-toggle-sudo
         direx
         django-mode
         dope
