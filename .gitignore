@@ -14,7 +14,7 @@ ac-comphist.dat
 anything-c-adaptive-history
 bookmarks
 bundle.el
-credentials.el
+credentials.el.gpg
 customizations.el
 el-get
 elpa

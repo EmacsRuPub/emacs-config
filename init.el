@@ -41,7 +41,7 @@
          '("rc-el-get.el"
            "ext/load-ext-manual.el"
            "constants.el"
-           "credentials.el"
+           "credentials.el.gpg"
            )))
 
 (require 'bundle-lean)

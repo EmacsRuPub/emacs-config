@@ -6,6 +6,8 @@
 ;; Keywords:
 ;; Requirements:
 
+(require 'epg)
+
 (setq password-cache-expiry 7200)
 
 ;; ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
