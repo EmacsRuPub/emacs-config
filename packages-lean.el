@@ -34,6 +34,7 @@
         csv-mode
         cursor-chg
         deferred
+        deft
         diminish
         discover
         dired+

@@ -14,6 +14,7 @@
 (require 'rc-ido)
 (require 'rc-helm)
 (require 'rc-smex)
+(require 'rc-deft)
 (require 'rc-enable)
 (require 'rc-interface)
 (require 'rc-system)
