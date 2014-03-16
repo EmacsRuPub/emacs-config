@@ -12,12 +12,15 @@
 
 (diminish 'abbrev-mode)
 (diminish 'auto-complete-mode " α")
-(diminish 'auto-fill-function "AF")
+(diminish 'auto-fill-function)
 (diminish 'global-visual-line-mode)
-;; (diminish 'highlight-parentheses-mode)
 (diminish 'undo-tree-mode)
 (diminish 'visual-line-mode)
 (diminish 'volatile-highlights-mode)
+(diminish 'projectile-mode "prj")
+(diminish 'git-gutter-mode)
+(diminish 'eldoc-mode "ED")
+(diminish 'whole-line-or-region-mode)
 
 (provide 'rc-diminish)
 
