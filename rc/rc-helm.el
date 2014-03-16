@@ -12,12 +12,13 @@
   (interactive)
   (helm-other-buffer '(
                        helm-c-source-buffers-list
-                       helm-source-bookmarks
                        helm-c-source-files-in-current-dir
                        helm-c-source-recentf
+                       helm-source-bookmarks
                        helm-source-file-name-history
-                       helm-source-occur
+                       helm-source-findutils
                        helm-source-locate
+                       helm-source-occur
                        )
                      "*helm-custom*"))
 
