@@ -22,10 +22,10 @@
 ;; (setq sauron-watch-nicks
 ;;       '("Tom" "Dick" "Harry"))
 
-(global-set-key (kbd "C-c s s") 'sauron-start)
-(global-set-key (kbd "C-c s p") 'sauron-start)
-(global-set-key (kbd "C-c s t") 'sauron-toggle-hide-show)
-(global-set-key (kbd "C-c s c") 'sauron-clear)
+(global-set-key (kbd "C-c r s") 'sauron-start)
+(global-set-key (kbd "C-c r p") 'sauron-stop)
+(global-set-key (kbd "C-c r t") 'sauron-toggle-hide-show)
+(global-set-key (kbd "C-c r c") 'sauron-clear)
 
 ;; ;; events to ignore
 ;; (add-hook 'sauron-event-block-functions
