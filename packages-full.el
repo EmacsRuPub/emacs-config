@@ -125,6 +125,7 @@
         org-mode
         org-magit
         org-occur-goto
+        org-pomodoro
         paredit
         pdftools-custom
         php-electric-custom

@@ -36,6 +36,7 @@
 (require 'rc-jabber)
 (require 'rc-jabber-faces)
 (require 'rc-twitter)
+(require 'rc-pomodoro)
 (require 'rc-shell)
 (require 'rc-tramp)
 (require 'rc-sh-mode)
