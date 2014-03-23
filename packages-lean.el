@@ -133,6 +133,7 @@
         sml-mode
         swank-js
         tail
+        tern
         twittering-mode
         undo-tree
         unicad

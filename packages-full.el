@@ -160,6 +160,7 @@
         sunrise-commander
         swank-js
         tail
+        tern
         twittering-mode
         unicad
         undo-tree
