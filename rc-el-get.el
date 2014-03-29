@@ -19,7 +19,7 @@
        (end-of-buffer)
        (eval-print-last-sexp)))))
 
-(require 'packages-lean)
+(require 'packages)
 
 (add-to-list 'el-get-recipe-path (concat config-basedir "el-get-custom-recipes"))
 

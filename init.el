@@ -44,7 +44,7 @@
            "credentials.el.gpg"
            )))
 
-(require 'bundle-lean)
+(require 'bundle-main)
 
 (mapcar 'load
         (mapcar

@@ -10,8 +10,6 @@
 (setq el-get-packages
       '(
         ac-math
-        ac-nrepl
-        ac-php-doc
         ac-slime
         ace-jump-mode
         ag-custom
@@ -22,18 +20,13 @@
         auto-complete-nxml
         auto-complete-rst
         auto-complete-yasnippet
-        autosmiley
-        bm
         bookmark+
         breadcrumb
         browse-kill-ring
-        buff-menu+
         buffer-move
         c-eldoc
         calfw
-        clojure-mode
         col-highlight
-        color-theme
         column-marker
         crontab-mode
         crosshairs
@@ -47,13 +40,10 @@
         dired+
         dired-sort-menu
         dired-toggle-sudo
-        direx
-        django-mode
         dope
         doxymacs
         drag-stuff
         ecb-custom
-        egit
         elwm
         emacs-w3m
         emacs-wgrep
@@ -61,7 +51,6 @@
         epoch-view
         erc-extras
         erc-highlight-nicknames
-        eredis
         erefactor
         evil-nerd-commenter
         evil-surround
@@ -71,12 +60,10 @@
         flx
         flycheck
         flycheck-color-mode-line
-        flymake-cursor
         framemove
         git-commit-mode
         git-emacs
         git-gutter
-        gitsum
         go-autocomplete-custom
         go-mode
         google-contacts
@@ -91,7 +78,6 @@
         ido-ubiquitous
         ido-vertical-mode
         ido-yes-or-no
-        iedit
         init-paredit
         jedi-custom
         joseph-file-util
@@ -99,26 +85,17 @@
         js2-mode
         js2-refactor
         json-mode
-        jump-char
         lisppaste
         list-processes+
         litable-custom
         magit
-        magit-filenotify
-        magit-identities
-        magit-tramp
         markdown-mode
-        ;; mingus
         minibuf-electric-gnuemacs
         minimap
-        mo-git-blame
-        monky
         multiple-cursors
         nav
         nginx-mode
         notify
-        nrepl
-        nrepl-ritz
         nxhtml
         oauth2
         openwith
@@ -128,12 +105,10 @@
         org-pomodoro
         paredit
         pdftools-custom
-        php-electric-custom
-        php-mode-improved
         po-mode
-        point-stack
         popwin
-        projectile-custom
+        prodigy
+        projectile
         python24
         pylookup
         python-pep8
@@ -152,18 +127,16 @@
         sauron
         savekill
         scratch
-        session
         silentcomp
         slime
         smex
         sml-mode
-        sunrise-commander
         swank-js
         tail
         tern
         twittering-mode
-        unicad
         undo-tree
+        unicad
         vline
         volatile-highlights
         w3m-session
@@ -173,13 +146,11 @@
         whole-line-or-region
         window-number
         wrap-region
-        xgtags
         yandex-weather
         yasnippet
         zenburn-custom
-        zen-and-art-custom
         ))
 
-(provide 'packages-full)
+(provide 'packages)
 
 ;;; sources-common.el ends here
