@@ -80,6 +80,7 @@
 (setq org-blank-before-new-entry (quote ((heading . auto) (plain-list-item))))
 (setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-enforce-todo-checkbox-dependencies t)
+(setq org-enforce-todo-dependencies t)
 
 (setq org-agenda-custom-commands
       (quote (("d" todo "DELEGATED" nil)
