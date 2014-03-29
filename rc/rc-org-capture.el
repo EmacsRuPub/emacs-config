@@ -36,6 +36,7 @@
         ("e" "keys to perform Emacs stuff")
         ("ee" "emacs try" entry (file+headline (concat org-dir "/projects/config/editors.org") "try") "* %? %U :emacs:try:")
         ("ep" "emacs practical todo" entry (file+headline (concat org-dir "/projects/config/editors.org") "практическое для Emacs") "* %? %U :emacs:todo:practical:")
+        ("l" "links" entry (file (concat org-dir "/links.org")) "* %? %U :links:send:")
         )))
 
 ;; Remove empty CLOCK drawers on clock out
