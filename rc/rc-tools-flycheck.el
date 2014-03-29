@@ -10,7 +10,7 @@
   '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
   )
 
-(setq flycheck-check-syntax-automatically '(save))
+(setq flycheck-check-syntax-automatically '(idle-change))
 
 (global-set-key (kbd "C-x <up>") 'flycheck-previous-error)
 (global-set-key (kbd "C-x <down>") 'flycheck-next-error)
