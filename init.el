@@ -39,7 +39,6 @@
         (mapcar
          (lambda (path) (concat config-basedir path))
          '("rc-el-get.el"
-           "ext/load-ext-manual.el"
            "constants.el"
            "credentials.el.gpg"
            )))
