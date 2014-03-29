@@ -45,6 +45,7 @@
         drag-stuff
         ecb-custom
         elwm
+        emacs-jabber
         emacs-w3m
         emacs-wgrep
         emmet-mode
@@ -64,6 +65,7 @@
         git-commit-mode
         git-emacs
         git-gutter
+        gmail-notifier
         go-autocomplete-custom
         go-mode
         google-contacts
@@ -90,6 +92,7 @@
         litable-custom
         magit
         markdown-mode
+        mingus
         minibuf-electric-gnuemacs
         minimap
         multiple-cursors
