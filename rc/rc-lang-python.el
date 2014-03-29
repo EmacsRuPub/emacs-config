@@ -13,8 +13,6 @@
 
 ;; (yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
 
-(autoload 'python-pylint "python-pylint")
-(autoload 'pylint "python-pylint")
 (autoload 'jedi:setup "jedi" nil t)
 
 (let ((python-libs-path
