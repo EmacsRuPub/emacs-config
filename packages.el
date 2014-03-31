@@ -27,11 +27,12 @@
         c-eldoc
         calfw
         col-highlight
+        color-theme-zenburn
         column-marker
         crontab-mode
         crosshairs
         css-eldoc
-        csv-mode
+        csv-mode-custom
         cursor-chg
         deferred
         deft
@@ -46,7 +47,7 @@
         elwm
         emacs-jabber
         emacs-w3m
-        emacs-wgrep
+        wgrep
         emmet-mode
         epoch-view
         erc-extras
@@ -88,7 +89,7 @@
         json-mode
         lisppaste
         list-processes+
-        litable-custom
+        litable
         magit
         markdown-mode
         mingus
@@ -106,7 +107,7 @@
         org-occur-goto
         org-pomodoro
         paredit
-        pdftools-custom
+        pdftools
         po-mode
         popwin
         prodigy
@@ -150,7 +151,6 @@
         wrap-region
         yandex-weather
         yasnippet
-        zenburn-custom
         ))
 
 (provide 'packages)
