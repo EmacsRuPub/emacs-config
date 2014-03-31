@@ -40,7 +40,6 @@
         dired+
         dired-sort-menu
         dired-toggle-sudo
-        dope
         doxymacs
         drag-stuff
         ecb-custom
