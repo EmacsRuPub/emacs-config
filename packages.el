@@ -69,7 +69,7 @@
         go-autocomplete-custom
         go-mode
         google-contacts
-        haskellmode-emacs
+        haskell-mode
         header2
         helm-swoop
         highlight-symbol
