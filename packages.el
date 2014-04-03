@@ -124,6 +124,7 @@
         region-bindings-mode
         replace+
         restclient
+        revbufs
         ropemacs
         rst-mode
         s
