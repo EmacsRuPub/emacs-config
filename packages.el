@@ -123,7 +123,7 @@
         regex-tool
         region-bindings-mode
         replace+
-        restclient-custom
+        restclient
         ropemacs
         rst-mode
         s
