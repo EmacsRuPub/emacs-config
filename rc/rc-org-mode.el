@@ -148,6 +148,8 @@
 (global-set-key (kbd "C-c o") 'oog)
 (global-set-key (kbd "C-c m s") 'org-insert-src-markers)
 (global-set-key (kbd "C-c m e") 'org-enclose-region-in-src-block)
+(global-set-key (kbd "C-c m m") 'org-agenda-bulk-mark-all)
+(global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
 
 (provide 'rc-org-mode)
 
