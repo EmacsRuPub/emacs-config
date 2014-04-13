@@ -29,6 +29,27 @@
         (if (< (point) end)
             (browse-url (thing-at-point 'url))))))
 
+;; uses s
+;; TODO maybe use s in some other similar utils
+(defun custom-jabber/cite-region ()
+  (interactive)
+  (let* ((content
+          (buffer-substring
+           (region-beginning) (region-end)))
+         (result nil))
+    (setq result
+          (mapcar (lambda (x)
+                    (if (s-starts-with? "[" x)
+                        (nth 2 (s-match "^\\(\\[[0-9-\\ :]+\\] \\)\\(.*\\)" x))
+                      x))
+                  (s-lines (s-trim-right content))))
+    (end-of-buffer)
+    (insert-for-yank-1
+     (s-append "\n"
+               (s-join "\n"
+                       (mapcar (lambda (x) (s-prepend "> " x)) result))))))
+
+
 ;#############################################################################
 ;#   Jabber smileys
 ;############################################################################
