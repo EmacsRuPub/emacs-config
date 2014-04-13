@@ -11,7 +11,6 @@
 
 (require 'defun-utils)
 
-(setq ielm-dynamic-return nil)
 
 ;#############################################################################
 ;#   Hooks
