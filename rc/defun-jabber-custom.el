@@ -37,17 +37,18 @@
           (buffer-substring
            (region-beginning) (region-end)))
          (result nil))
-    (setq result
-          (mapcar (lambda (x)
-                    (if (s-starts-with? "[" x)
-                        (nth 2 (s-match "^\\(\\[[0-9-\\ :]+\\] \\)\\(.*\\)" x))
-                      x))
-                  (s-lines (s-trim-right content))))
-    (end-of-buffer)
-    (insert-for-yank-1
-     (s-append "\n"
-               (s-join "\n"
-                       (mapcar (lambda (x) (s-prepend "> " x)) result))))))
+    (when (not (s-blank? content))
+      (setq result
+            (mapcar (lambda (x)
+                      (if (s-starts-with? "[" x)
+                          (nth 2 (s-match "^\\(\\[[0-9-\\ :]+\\] \\)\\(.*\\)" x))
+                        x))
+                    (s-lines (s-trim-right content))))
+      (end-of-buffer)
+      (insert-for-yank-1
+       (s-append "\n"
+                 (s-join "\n"
+                         (mapcar (lambda (x) (s-prepend "> " x)) result)))))))
 
 
 ;#############################################################################
