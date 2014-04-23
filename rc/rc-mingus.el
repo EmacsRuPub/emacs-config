@@ -7,6 +7,7 @@
 (global-set-key (kbd "C-c <right>") 'mingus-seek)
 (global-set-key (kbd "C-c <left>") 'mingus-seek-backward)
 (global-set-key (kbd "C-c s") 'mingus)
+(define-key mingus-playlist-map (kbd "<Backspace>") 'mingus-del)
 
 (provide 'rc-mingus)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
