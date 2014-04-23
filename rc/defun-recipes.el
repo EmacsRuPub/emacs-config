@@ -85,10 +85,9 @@
   (let* ((current-file (buffer-file-name))
          (project-root (file-truename (custom/project-root current-file)))
          (selection (substring current-file (length project-root))))
-    (x-select-text (substring current-file (length project-root)))
     (with-temp-buffer
       (insert selection)
-      (clipboard-kill-region (point-min) (point-max))))
+      (clipboard-kill-region (point-min) (point-max)))))
 
 (provide 'defun-recipes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
