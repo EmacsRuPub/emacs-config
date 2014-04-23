@@ -131,7 +131,6 @@
         sauron
         savekill
         scratch
-        silentcomp
         slime
         smex
         sml-mode
