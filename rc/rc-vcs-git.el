@@ -13,5 +13,6 @@
 (global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
 (global-set-key (kbd "C-c g r") 'magit-reflog)
 (global-set-key (kbd "C-c g c") 'magit-checkout)
+(global-set-key (kbd "C-c g r") 'magit-add-remote)
 
 (provide 'rc-vcs-git)
