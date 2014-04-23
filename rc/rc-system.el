@@ -24,7 +24,8 @@
         ("\\.djvu\\'" "zathura" (file))
         ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\)\\'" "vlc" (file))
         ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
-        ("\\.html\\'" "firefox" (file))))
+        ("\\.doc\\'" "abiword" (file))
+        ))
 
 (global-set-key (kbd "C-x c") 'proced)
 
