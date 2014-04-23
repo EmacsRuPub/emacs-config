@@ -67,6 +67,29 @@
       (while (re-search-forward "\\s-+" nil t)
         (replace-match "")))))
 
+
+;; FIXME code duplication, think of finding the widely used util or something similar
+(autoload 'vc-git-root "vc-git")
+(autoload 'vc-svn-root "vc-svn")
+(autoload 'vc-hg-root "vc-hg")
+
+(defun custom/project-root (file-path)
+  "Guess the project root of the given FILE-PATH."
+  (or (vc-git-root file-path)
+       (vc-svn-root file-path)
+       (vc-hg-root file-path)
+       file-path))
+
+(defun custom/copy-project-subpath ()
+  (interactive)
+  (let* ((current-file (buffer-file-name))
+         (project-root (file-truename (custom/project-root current-file)))
+         (selection (substring current-file (length project-root))))
+    (x-select-text (substring current-file (length project-root)))
+    (with-temp-buffer
+      (insert selection)
+      (clipboard-kill-region (point-min) (point-max))))
+
 (provide 'defun-recipes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; defun-recipes.el ends here
