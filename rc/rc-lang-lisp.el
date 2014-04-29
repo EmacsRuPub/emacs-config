@@ -63,7 +63,7 @@
   (abbrev-mode 1)
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
-  ;; (paredit-mode 1)
+  (paredit-mode 1)
   (set (make-local-variable 'slime-lisp-implementations)
        (list (assoc 'sbcl slime-lisp-implementations)))
   (setq tab-width 2
