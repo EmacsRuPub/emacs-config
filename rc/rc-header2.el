@@ -12,12 +12,9 @@
   (insert header-prefix-string  "-*- coding: utf-8 -*-\n"))
 
 (setq make-header-hook '(header-utf8
-                         ;; header-title
                          header-blank
                          header-file-name
                          header-creation-date
-                         ;; header-commentary
-                         ;; header-code
                          header-end-line
                          header-eof))
 

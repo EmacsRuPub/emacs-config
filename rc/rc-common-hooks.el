@@ -62,7 +62,6 @@
   ;; highlight too long lines
   (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t)))
   (highlight-symbol-mode 1)
-  ;; (smart-operator-mode-on)
   )
 
 (defun common-hooks/trailing-whitespace-hook ()
