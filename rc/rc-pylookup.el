@@ -30,7 +30,6 @@
   (let ((browse-url-browser-function 'w3m-browse-url))
     ad-do-it))
 
-
 (provide 'rc-pylookup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-pylookup.el ends here

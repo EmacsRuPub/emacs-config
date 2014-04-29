@@ -3,6 +3,7 @@
 ;; Filename: rc-expand-region.el
 ;; Created: Ср окт  2 15:46:55 2013 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'expand-region)
 
 (global-set-key (kbd "C-=") 'er/expand-region)

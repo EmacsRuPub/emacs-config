@@ -216,7 +216,6 @@
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
-
 (provide 'rc-editing)
 
 ;;; emacs-rc-editing.el ends here
