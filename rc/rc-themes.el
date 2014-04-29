@@ -7,8 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-;;(require 'color-theme)
-
 (require 'defun-themes)
 
 ;#############################################################################
