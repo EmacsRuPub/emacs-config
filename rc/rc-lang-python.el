@@ -73,6 +73,10 @@
 
 (setq mumamo-background-colors nil)
 
+(setq flake8-multi/exclude-patterns '("env" "site-packages" "old"))
+
+(global-set-key (kbd "C-c f") 'flake8-multi)
+
 (setenv "PYLINTRC"
         (concat
          config-basedir
