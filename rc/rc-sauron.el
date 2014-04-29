@@ -17,21 +17,11 @@
 (setq sauron-separate-frame nil)
 (setq sauron-hide-mode-line t)
 (setq sauron-max-line-length 120)
-;; (setq sauron-watch-patterns
-;;       '("emacs-fu" "emacsfu" "wombat" "capybara" "yak" "gnu" "\\bmu\\b"))
-;; (setq sauron-watch-nicks
-;;       '("Tom" "Dick" "Harry"))
 
 (global-set-key (kbd "C-c r s") 'sauron-start)
 (global-set-key (kbd "C-c r p") 'sauron-stop)
 (global-set-key (kbd "C-c r t") 'sauron-toggle-hide-show)
 (global-set-key (kbd "C-c r c") 'sauron-clear)
-
-;; ;; events to ignore
-;; (add-hook 'sauron-event-block-functions
-;;   (lambda (origin prio msg &optional props)
-;;     (or
-;;       (string-match "^*** Users" msg)))) ;; filter out IRC spam
 
 (provide 'rc-sauron)
 

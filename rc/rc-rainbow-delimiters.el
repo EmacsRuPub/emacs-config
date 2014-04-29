@@ -13,8 +13,6 @@
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'php-mode-hook 'rainbow-delimiters-mode)
 
-;; (global-rainbow-delimiters-mode)
-
 (provide 'rc-rainbow-delimiters)
 
 ;;; rc-rainbow-delimiters.el ends here

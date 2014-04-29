@@ -136,32 +136,6 @@ Position the cursor at it's beginning, according to the current mode."
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-;; ;; Smart beginning of the line
-;; (defun x4-smarter-beginning-of-line ()
-;;  "Move point to beginning-of-line or first non-whitespace character or first non-whitespace after a comment sign."
-;;  (interactive "^")
-;;  (let (
-;;        (oldpos (point))
-;;        (indentpos (progn
-;;                     (back-to-indentation)
-;;                     (point)
-;;                     )
-;;                   )
-;;        (textpos (progn
-;;                   (beginning-of-line-text)
-;;                   (point)
-;;                   )
-;;                 )
-;;        )
-;;    (cond
-;;     ((> oldpos textpos) (beginning-of-line-text))
-;;     ((and (<= oldpos textpos) (> oldpos indentpos)) (back-to-indentation))
-;;     ((and (<= oldpos indentpos) (> oldpos (line-beginning-position))) (beginning-of-line))
-;;     (t (beginning-of-line-text))
-;;     )
-;;    )
-;;  )
-
 (defun quote-string-with-period-and-nextline ()
   "Wraps current line in quotes, adds period and goes one down"
   (interactive)

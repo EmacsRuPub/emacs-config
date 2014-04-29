@@ -10,7 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-;; (require 'doc-mode)
 (require 'tempo)
 (require 'doxymacs)
 
@@ -31,7 +30,6 @@
 
 (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
-;; (add-hook 'c-mode-common-hook 'doc-mode)
 
 (provide 'rc-tools-doxygen)
 

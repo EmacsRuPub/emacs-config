@@ -72,10 +72,6 @@
 (autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
 
 (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv")))
-;; (setenv "TEXINPUTS" (concat (getenv "TEXINPUTS") ":path_to_whizzytex/src//"))
-;; (setenv "TEXINPUTS"
-;;         (concat (getenv "TEXINPUTS")
-;;                 ":/home/ott/tex/styles//:/home/ott/projects/fprog/journal-issues/class//"))
 
 (global-set-key (kbd "C-c m w") 'whizzytex-mode)
 

@@ -14,7 +14,6 @@
 (require 'jabber-autoloads) ;; For 0.7.90 and above:
 (require 'jabber-bookmarks)
 (require 'jabber-autoaway)
-;; (require 'autosmiley)
 
 (require 'defun-jabber-custom)
 (require 'defun-jabber-custom-templates)
@@ -58,7 +57,6 @@
 (setq jabber-chat-buffer-format "*-jc-%n-*")
 (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
 (setq jabber-rare-time-format "%e %b %Y %H:00")
-;; (setq jabber-debug-log-xml t)
 (setq jabber-mode-line-mode t)
 (setq jabber-alert-presence-message-function
       (lambda (who oldstatus newstatus statustext) nil))

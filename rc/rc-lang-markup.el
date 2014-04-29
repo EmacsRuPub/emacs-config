@@ -60,11 +60,6 @@
             (setq django-indent-width 4)
             (setq sgml-basic-offset 4)))
 
-;; (add-hook 'django-html-mode-hook
-;;           (lambda ()
-;;             (setq django-indent-width 4)
-;;             (setq sgml-basic-offset 4)))
-
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 
 (setq mumamo-background-colors nil)
@@ -82,14 +77,6 @@
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 
 (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
-
-;; ;; mumamo, like mumin
-;; (add-hook 'nxhtml-mumamo-mode-hook
-;;           (lambda ()
-;;             (setq nxhtml-validation-header-if-mumamo 1)
-;; ;;            (nxhtml-validation-header-mode 1)
-;;             (rng-validate-mode nil)
-;;             (mumamo-post-command)))
 
 (require 'css-eldoc)
 (turn-on-css-eldoc)

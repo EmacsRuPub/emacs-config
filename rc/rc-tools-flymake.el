@@ -57,12 +57,6 @@
 (global-set-key (kbd "C-x <up>") 'flymake-goto-prev-error)
 (global-set-key (kbd "C-x <down>") 'flymake-goto-next-error)
 
-;; ;;; Flymake
-
-;; (defface flymake-errline '((t (:background "#330000" :overline "red" :underline "red"))) nil)
-;; (defface flymake-warnline '((t (:background "#333300" :overline "yellow" :underline "yellow"))) nil)
-
-
 (provide 'rc-tools-flymake)
 
 ;;; rc-flymake.el ends here

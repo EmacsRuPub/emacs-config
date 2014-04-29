@@ -38,7 +38,6 @@
 (delete-selection-mode t)
 (volatile-highlights-mode t)
 (show-paren-mode t)
-;; (electric-indent-mode 1)
 (whole-line-or-region-mode 1)
 (toggle-cursor-type-when-idle 1)
 (change-cursor-mode 1)
@@ -63,7 +62,6 @@
 
 (setq x-select-enable-clipboard t);; Allow pasting selection outside of Emacs
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-;; (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
 
 (define-coding-system-alias 'UTF-8 'utf-8)
 
@@ -125,14 +123,12 @@
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-;; (add-hook 'minibuffer-setup-hook 'conditionally-enable-parens-mode)
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (cua-mode t)
   (setq mac-option-key-is-meta t)
   (setq mac-command-key-is-meta nil)
-  ;; (setq mac-control-key-is-meta nil)
   (setq process-connection-type nil)
   (setq mac-command-modifier 'hyper)    ;meta|super
   (setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
@@ -141,10 +137,6 @@
   (global-set-key [(hyper v)] 'cua-paste)
   (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
   (setq mac-control-modifier 'control)
-  ;; change command to meta, and ignore option to use weird Norwegian keyboard
-  ;; (setq mac-option-modifier 'none)
-  ;; (setq mac-command-modifier 'meta)
-  ;; (setq ns-function-modifier 'hyper)
   )
 (when (eq system-type 'gnu/linux)
   (setq x-alt-keysym 'meta))
@@ -216,9 +208,6 @@
 (global-set-key (kbd "M-t w") 'transpose-words)
 (global-set-key (kbd "M-t s") 'transpose-sexps)
 (global-set-key (kbd "M-t p") 'transpose-params)
-
-;; (global-set-key (kbd "C-p") 'go-back)
-;; (global-set-key (kbd "<up>") 'go-back)
 
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)

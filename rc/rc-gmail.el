@@ -3,8 +3,6 @@
 (gmail-notifier-start)
 (gmail-notifier-check)
 
-;; (setq gmail-notifier-timer-interval 120)
-
 (defun open-gmail ()
   (interactive)
   (browse-url "https://mail.google.com"))

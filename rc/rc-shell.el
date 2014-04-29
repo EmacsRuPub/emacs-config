@@ -18,12 +18,6 @@
                               eshell-last-output-end))
 (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 
-
-;#############################################################################
-;#   Shell
-;############################################################################
-;; (global-set-key (kbd "C-c z") (lambda () (interactive) (ansi-term "/bin/zsh")))
-
 (provide 'rc-shell)
 
 ;;; emacs-rc-shell.el ends here

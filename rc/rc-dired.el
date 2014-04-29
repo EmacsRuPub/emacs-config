@@ -15,8 +15,6 @@
 (require 'dired+)
 (require 'wdired)
 (require 'dired-x)
-;; (require 'dash)
-;; (require 'dired-details) ;; Make dired less verbose
 (require 'dired-toggle-sudo)
 
 (require 'defun-dired)

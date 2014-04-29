@@ -15,8 +15,6 @@
 (require 'crosshairs)
 (require 'breadcrumb)
 
-;(global-set-key (kbd "C-c m j") 'bmkp-jump-in-navlist)
-
 ;; TODO: See if we can customize Bookmarks[+] further
 
 (setq bc-bookmark-limit 1000)

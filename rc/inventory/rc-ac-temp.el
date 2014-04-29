@@ -101,4 +101,7 @@ ac-source-words-in-same-mode-buffers))
   ;; Enable auto-complete globally
   (global-auto-complete-mode t))
 
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;; (add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
 ;;; rc-ac-temp.el ends here

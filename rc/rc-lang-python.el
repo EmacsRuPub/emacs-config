@@ -7,12 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-;; (require 'django-html-mode)
-;; (require 'django-mode)
-
-
-;; (yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
-
 (autoload 'jedi:setup "jedi" nil t)
 
 (let ((python-libs-path
@@ -47,10 +41,8 @@
 ;############################################################################
 (defun custom/python-mode-hook ()
   (auto-fill-mode 1)
-  ;; (eldoc-mode 1)
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
-  ;; (turn-on-eldoc-mode)
   (define-key python-mode-map (kbd "C-c l") 'pylint)
   (define-key python-mode-map (kbd "C-c p e") 'pep8)
   (define-key python-mode-map (kbd "C-c h") 'pylookup-lookup-at-point)
@@ -71,7 +63,6 @@
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
 (add-hook 'python-mode-hook 'common-hooks/comment-hook)
 (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
-;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
 (add-hook 'python-mode-hook 'common-hooks/newline-hook)
 (add-hook 'python-mode-hook
   (lambda ()

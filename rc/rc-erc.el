@@ -20,14 +20,7 @@
 (require 'erc-menu)
 (require 'erc-ring)
 (require 'erc-match)
-;; (require 'erc-nicklist);; For bitlbee
 
-;; (and
-;;  (require 'erc-highlight-nicknames)
-;;  (add-to-list 'erc-modules 'highlight-nicknames)
-;;  )
-
-;; (add-to-list 'erc-modules 'scrolltobottom)
 (add-to-list 'erc-modules 'match)
 (erc-update-modules)
 
@@ -73,30 +66,7 @@
 (setq erc-nick-uniquifier "_")
 (setq erc-prompt-for-password nil)
 (setq erc-kill-queries-on-quit t)
-;; (setq erc-server-coding-system (quote (koi8-r . koi8-r)))
 (setq erc-server-coding-system (quote (cp1251 . cp1251)))
-
-
-;#############################################################################
-;#   Network and channel presets
-;############################################################################
-;; (setq erc-autojoin-channels-alist
-;;       '(("freenode.net" "#couchdb" "#haskell" "#git" "#xmonad")
-;;         ("irc.freenode.net" "#git")
-;;         ("freenode.net" "#clojure")
-;;         ("irc.int.ru" "#unix")
-;;         ("irc.fu-berlin.de" "#unix.ru" "#fidorus")
-;;         ("fu-berlin.de" "#unix.ru" "#fidorus")
-;;         ))
-
-;; (defun erc-connect ()
-;;   "Connect to IRC."
-;;   (interactive)
-;;   (progn
-;;     (erc-select :server "irc.int.ru" :port 6667 :nick custom/erc-nick)
-;;     (erc-select :server "irc.freenode.net" :port 6667 :nick custom/erc-nick)
-;;     ;; (erc-select :server "irc.fu-berlin.de" :port 6667 :nick "alexott")
-;;    ))
 
 
 ;#############################################################################
