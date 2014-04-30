@@ -9,28 +9,23 @@
 ;#############################################################################
 ;#   Jabber chat shortcuts
 ;############################################################################
-(defun custom-jabber/insert-inlove-smile ()
-  "Insert *IN LOVE* at cursor point."
-  (interactive)
-  (insert "*IN LOVE* ")
-  (backward-char 10))
 
-(defun custom-jabber/insert-kiss-smile ()
-  "Insert :-* at cursor point."
-  (interactive)
-  (insert ":-* ")
-  (backward-char 4))
+;; TODO move to utility or extract to project
+(defun concat-as-symbol (prefix suffix)
+  (intern (downcase (concatenate 'string prefix suffix))))
 
-(defun custom-jabber/insert-shy-smile ()
-  "Insert :-[ at cursor point."
-  (interactive)
-  (insert ":-[ ")
-  (backward-char 4))
+;; TODO move to utility or extract to project
+(defmacro custom/define-jabber-insertion (suffix str)
+  `(defun ,(concat-as-symbol "custom-jabber/insert-" suffix) ()
+     ,(format "Insert \"%s\" at cursor point." str)
+     (interactive)
+     (insert ,str)
+     (backward-char ,(length str))))
 
-(defun custom-jabber/insert-copyright-sign ()
-  "Insert (c) at cursor point."
-  (interactive)
-  (insert " (c)"))
+(custom/define-jabber-insertion "inlove-smile" "*IN LOVE* ")
+(custom/define-jabber-insertion "kiss-smile" ":-* ")
+(custom/define-jabber-insertion "shy-smile" ":-[ ")
+(custom/define-jabber-insertion "copyright-sign" " (c)")
 
 (defun custom-jabber/wrap-replace-regexp ()
   "Wraps current word in ed's 'replace' regexp"
