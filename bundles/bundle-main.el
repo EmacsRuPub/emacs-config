@@ -28,7 +28,6 @@
 (require 'rc-region-bindings)
 (require 'rc-wrap-region)
 (require 'rc-paredit)
-(require 'rc-discover)
 (require 'rc-drag-stuff)
 (require 'rc-multiple-cursors)
 (require 'rc-rainbow-delimiters)
