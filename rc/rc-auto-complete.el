@@ -15,6 +15,8 @@
 (require 'auto-complete-yasnippet)
 (require 'go-autocomplete)
 
+(require 'defun-autocomplete)
+
 (ac-config-default)
 (global-auto-complete-mode t)
 
@@ -22,9 +24,6 @@
 (require 'ac-slime)
 
 (setq ac-auto-start nil)
-
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
 
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)

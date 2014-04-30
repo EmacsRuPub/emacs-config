@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Filename: rc-auto-complete-yasnippet.el
-;; Created: Вт авг 20 11:27:31 2013 (+0400)
+;; Filename: defun-autocomplete.el
+;; Created: Ср апр 30 19:16:41 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'auto-complete)
@@ -48,6 +48,10 @@
     (selection-face . ac-yasnippet-selection-face))
   "Source for Yasnippet.")
 
-(provide 'defun-ac-yasnippet)
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+
+(provide 'defun-autocomplete)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; rc-auto-complete-yasnippet.el ends here
+;;; defun-autocomplete.el ends here
