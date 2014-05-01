@@ -1,4 +1,4 @@
-;;; defun-utils.el ---
+;;; util-various.el ---
 
 ;; Copyright (C) 2012 Alex Ermolov
 ;;
@@ -459,6 +459,6 @@ point and around or after mark are interchanged."
       (insert selection)
       (clipboard-kill-region (point-min) (point-max)))))
 
-(provide 'defun-utils)
+(provide 'custom-utils)
 
-;;; defun-utils.el ends here
+;;; util-various.el ends here

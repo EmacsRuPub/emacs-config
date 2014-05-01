@@ -26,8 +26,8 @@
 (require 'cursor-chg)
 (require 'unicad)
 
-(require 'defun-camelscore)
-(require 'defun-joinlines)
+(require 'custom-camelscore)
+(require 'custom-joinlines)
 
 
 ;#############################################################################

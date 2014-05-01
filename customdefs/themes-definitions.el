@@ -58,7 +58,7 @@
 (setf (gethash "urw-nimbus-mono-l-normal" custom/fonts-def) "-urw-Nimbus Mono L-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (setf (gethash "xos4-terminus-bold-16" custom/fonts-def) "-xos4-Terminus-bold-normal-normal-*-16-*-*-*-c-80-iso10646-1")
 
-(provide 'defun-themes)
+(provide 'themes-definitions)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; defun-themes.el ends here

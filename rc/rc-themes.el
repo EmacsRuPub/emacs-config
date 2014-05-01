@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'defun-themes)
+(require 'themes-definitions)
 
 ;#############################################################################
 ;#   Text coloring

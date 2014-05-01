@@ -43,6 +43,10 @@
            "credentials.el.gpg"
            )))
 
+(mapcar 'load
+  (all-files-under-dir-recursively
+   (concat config-basedir "customdefs")))
+
 (require 'bundle-main)
 
 (mapcar 'load

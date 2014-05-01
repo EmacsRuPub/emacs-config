@@ -1,4 +1,4 @@
-;;; defun-joinlines.el ---
+;;; util-joinlines.el ---
 
 ;; Copyright (C) 2011 Alex Ermolov
 ;;
@@ -68,6 +68,6 @@
                 (while (< (point) end)
                   (join-line 1)))))
 
-(provide 'defun-joinlines)
+(provide 'custom-joinlines)
 
-;;; defun-joinlines.el ends here
+;;; util-joinlines.el ends here

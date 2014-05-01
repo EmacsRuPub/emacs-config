@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Filename: defun-camelscore.el
+;; Filename: util-camelscore.el
 ;; Created: Чт апр 11 01:28:48 2013 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -53,7 +53,7 @@
   (if list
       (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
 
-(provide 'defun-camelscore)
+(provide 'custom-camelscore)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; defun-camelscore.el ends here
+;;; util-camelscore.el ends here
