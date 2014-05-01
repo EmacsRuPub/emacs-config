@@ -55,5 +55,19 @@
 ;;   (add-to-list 'flymake-allowed-file-name-masks
 ;;                '("\\.py\\'" flymake-pycheckers-init)))
 
+;; (require 'django-html-mode)
+;; (require 'django-mode)
+
+;; (yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
+
+(defun custom/python-mode-hook ()
+  ;; (eldoc-mode 1)
+  ;; (turn-on-eldoc-mode)
+  )
+
+;; (add-hook 'python-mode-hook 'flyspell-prog-mode)
+
+;; (setq flake8-multi/search-cwd t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-python.el ends here
