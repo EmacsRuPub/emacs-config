@@ -88,6 +88,6 @@
 (global-set-key (kbd "<C-f11>") 'slime-selector)
 (define-key slime-repl-mode-map (kbd "C-c h") 'slime-documentation-lookup)
 
-(provide 'rc-lang-lisp)
+(provide 'rc-lisp)
 
 ;;; emacs-rc-lisp.el ends here

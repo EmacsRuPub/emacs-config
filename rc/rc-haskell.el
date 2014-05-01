@@ -19,6 +19,6 @@
 (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
 (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
 
-(provide 'rc-lang-haskell)
+(provide 'rc-haskell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-lang-haskell.el ends here

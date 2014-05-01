@@ -25,6 +25,6 @@
 (global-set-key (kbd "C-x t a") 'ecb-activate)
 (global-set-key (kbd "C-x t d") 'ecb-deactivate)
 
-(provide 'rc-tools-ecb)
+(provide 'rc-ecb)
 
 ;;; rc-ecb.el ends here

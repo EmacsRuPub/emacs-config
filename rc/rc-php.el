@@ -25,6 +25,6 @@
 (add-hook 'php-mode-hook 'set-up-php-ac)
 (add-hook 'php-mode-hook 'common-hooks/prog-helpers)
 
-(provide 'rc-lang-php)
+(provide 'rc-php)
 
 ;;; rc-php.el ends here

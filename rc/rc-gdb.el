@@ -16,6 +16,6 @@
 (setq gud-tooltip-mode t)
 (setq gdb-use-separate-io-buffer t)
 
-(provide 'rc-tools-gdb)
+(provide 'rc-gdb)
 
 ;;; emacs-rc-gdb.el ends here

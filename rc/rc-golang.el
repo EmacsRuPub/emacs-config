@@ -6,6 +6,6 @@
 
 (setenv "GOPATH" "/home/octocat/workspace/gocode")
 
-(provide 'rc-lang-go)
+(provide 'rc-golang)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-lang-go.el ends here

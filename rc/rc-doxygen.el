@@ -31,6 +31,6 @@
 (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
 
-(provide 'rc-tools-doxygen)
+(provide 'rc-doxygen)
 
 ;;; emacs-rc-doxygen.el ends here

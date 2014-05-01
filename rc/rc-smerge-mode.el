@@ -16,6 +16,6 @@
       (smerge-mode 1))))
 (add-hook 'find-file-hooks 'sm-try-smerge t)
 
-(provide 'rc-tools-smerge-mode)
+(provide 'rc-smerge-mode)
 
 ;;; rc-smerge-mode.el ends here

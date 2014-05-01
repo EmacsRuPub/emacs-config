@@ -99,6 +99,6 @@
 (add-hook 'less-css-mode-hook (lambda ()
                 (local-set-key [remap isearch-backward] 'isearch-backward-noeldoc)))
 
-(provide 'rc-lang-markup)
+(provide 'rc-markup)
 
 ;;; rc-markup.el ends here

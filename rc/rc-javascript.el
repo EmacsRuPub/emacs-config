@@ -338,6 +338,6 @@
 
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
-(provide 'rc-lang-javascript)
+(provide 'rc-javascript)
 
 ;;; emacs-rc-javascript.el ends here

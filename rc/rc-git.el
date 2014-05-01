@@ -15,4 +15,4 @@
 (global-set-key (kbd "C-c g c") 'magit-checkout)
 (global-set-key (kbd "C-c g r") 'magit-add-remote)
 
-(provide 'rc-vcs-git)
+(provide 'rc-git)

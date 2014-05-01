@@ -16,7 +16,7 @@
 (global-set-key (kbd "C-x <down>") 'flycheck-next-error)
 (global-set-key (kbd "C-x !") 'flycheck-first-error)
 
-(provide 'rc-tools-flycheck)
+(provide 'rc-flycheck)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-tools-flycheck.el ends here
