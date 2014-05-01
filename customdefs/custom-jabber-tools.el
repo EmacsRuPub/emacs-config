@@ -49,6 +49,6 @@ Returns the chat buffer."
 (global-set-key "\C-x\C-j\C-j" 'my-jabber-chat-with)
 (global-set-key "\C-x\C-j\C-s" 'custom/jabber-muc-sendto)
 
-(provide 'defun-jabber-tools)
+(provide 'custom-jabber-tools)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; defun-jabber-tools.el ends here

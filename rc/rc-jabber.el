@@ -15,11 +15,11 @@
 (require 'jabber-bookmarks)
 (require 'jabber-autoaway)
 
-(require 'defun-jabber-custom)
-(require 'defun-jabber-custom-templates)
-(when (eq system-type 'darwin) (require 'defun-jabber-custom-darwin))
-(when (eq window-system 'x) (require 'defun-jabber-custom-linux))
-(require 'defun-jabber-tools)
+(require 'custom-jabber)
+(require 'custom-jabber-templates)
+(when (eq system-type 'darwin) (require 'custom-jabber-darwin))
+(when (eq window-system 'x) (require 'custom-jabber-linux))
+(require 'custom-jabber-tools)
 
 ;#############################################################################
 ;#   Account definitions

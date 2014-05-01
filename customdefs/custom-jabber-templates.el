@@ -54,6 +54,6 @@
   (insert "\" -> \"\"")
   (backward-char 1))
 
-(provide 'defun-jabber-custom-templates)
+(provide 'custom-jabber-templates)
 
 ;;; defun-jabber-templates.el ends here

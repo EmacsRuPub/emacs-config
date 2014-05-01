@@ -56,6 +56,6 @@
     (apply #'concat
            (mapcar (lambda (x) (format "%c" x)) ltext))))
 
-(provide 'defun-jabber-custom-darwin)
+(provide 'custom-jabber-darwin)
 
 ;;; defun-jabber-custom-darwin.el ends here

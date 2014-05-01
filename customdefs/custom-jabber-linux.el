@@ -69,6 +69,6 @@
     ;; when notification function errored out, degrade gracefully to `message'
     (error (message "%s: %s" title message))))
 
-(provide 'defun-jabber-custom-linux)
+(provide 'custom-jabber-linux)
 
 ;;; defun-jabber-custom-linux.el ends here
