@@ -44,10 +44,11 @@
         (x-urgency-hint (selected-frame) t))
       (setq jabber-activity-jids-count count))))
 
+;; depends on s
 (defun jabber-presence-urgency-hint (who oldstatus newstatus statustext proposed-alert)
-  (let ((bare-jid (symbol-name who)))
-    (when (member bare-jid *urgency-presence-jids*)
-        (custom/notify "jabber" (concat "Presence changed for " bare-jid)))))
+  (when (remove-if (lambda (jid) (not (s-starts-with? (symbol-name who) jid))) *urgency-presence-jids*)
+    (custom/notify "jabber" (format "Presence changed for %s: %s"
+                                    who (if (get who 'connected) "online" "offline")))))
 
 (defun custom/notify (title message)
   "Notify the user using either the dbus based API or the `growl' one"
