@@ -65,11 +65,9 @@
 ;;часы в статусе
 (display-time)
 
-(setq ;;visible-bell t
-      font-lock-maximum-decoration t
-      color-theme-is-global t
-      truncate-partial-width-windows nil)
-
+(setq font-lock-maximum-decoration t)
+(setq color-theme-is-global t)
+(setq truncate-partial-width-windows nil)
 
 (provide 'rc-interface)
 

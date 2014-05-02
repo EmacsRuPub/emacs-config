@@ -33,9 +33,9 @@
   (cperl-mode)
   (setq compile-command (concat "perl -cw " buffer-file-name))
   (cperl-mode 1)
-  (setq tab-width 2
-  indent-tabs-mode nil)
-  )
+  (setq tab-width 2)
+  (setq indent-tabs-mode nil))
+
 (add-hook 'perl-mode-hook 'custom/perl-mode-hook)
 (add-hook 'perl-mode-hook 'common-hooks/comment-hook)
 (add-hook 'perl-mode-hook 'common-hooks/prog-helpers)

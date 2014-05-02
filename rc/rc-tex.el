@@ -56,11 +56,11 @@
 (setq TeX-default-mode 'latex-mode)
 (setq TeX-open-quote "``")
 (setq TeX-close-quote "''")
-(setq TeX-PDF-mode t
-      font-latex-title-fontify 'color      ; this gets rid of
-      font-latex-title-fontity 'color      ; the large fonts
-      font-latex-fontify-sectioning 'color ; in sections etc
-      TeX-output-view-style
+(setq TeX-PDF-mode t)
+(setq font-latex-title-fontify 'color)      ; this gets rid of
+(setq font-latex-title-fontity 'color)      ; the large fonts
+(setq font-latex-fontify-sectioning 'color) ; in sections etc
+(setq TeX-output-view-style
       (cond
        ((eq system-type 'darwin)
         (quote

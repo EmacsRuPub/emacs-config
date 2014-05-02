@@ -98,10 +98,9 @@
     (let* ((smiley-dir (format "%s/%s/" smiley-base-directory pack ))
                                          (smiley-path (concat smiley-dir "emoticons.xml")))
       (when (file-exists-p smiley-path)
-        (setq
-         smiley-style 'low-color ;; this is done for compatibility reasons
-         smiley-data-directory smiley-dir
-         smiley-regexp-alist (smiley-parse-file smiley-path))
+        (setq smiley-style 'low-color) ;; this is done for compatibility reasons
+        (setq smiley-data-directory smiley-dir)
+        (setq smiley-regexp-alist (smiley-parse-file smiley-path))
         (smiley-update-cache))
       )))
 

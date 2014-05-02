@@ -50,14 +50,13 @@
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
-(setq w3m-coding-system 'utf-8
-      w3m-file-coding-system 'utf-8
-      w3m-file-name-coding-system 'utf-8
-      w3m-input-coding-system 'utf-8
-      w3m-output-coding-system 'utf-8
-      w3m-terminal-coding-system 'utf-8
-      w3m-use-cookies t
-      )
+(setq w3m-coding-system 'utf-8)
+(setq w3m-file-coding-system 'utf-8)
+(setq w3m-file-name-coding-system 'utf-8)
+(setq w3m-input-coding-system 'utf-8)
+(setq w3m-output-coding-system 'utf-8)
+(setq w3m-terminal-coding-system 'utf-8)
+(setq w3m-use-cookies t)
 
 (standard-display-ascii ?\200 [15])
 (standard-display-ascii ?\201 [21])
