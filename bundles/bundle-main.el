@@ -56,7 +56,6 @@
 (require 'rc-lisp)
 (require 'rc-haskell)
 (require 'rc-python)
-(require 'rc-golang)
 (require 'rc-expand-region)
 (require 'rc-pylookup)
 (require 'rc-prodigy)
