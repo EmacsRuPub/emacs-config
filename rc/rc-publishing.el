@@ -1,11 +1,8 @@
-;;; emacs-rc-ps-print.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-publishing.el
+;; Created: Вс май  4 22:50:32 2014 (+0400)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun unicode-cyrillic-to-8859-5 ()
   (interactive)
@@ -56,6 +53,10 @@
 (global-set-key (kbd "M-p") 'custom/ps-print-buffer-with-faces)
 (global-set-key (kbd "C-c M-p") 'custom/ps-print-region-with-faces)
 
-(provide 'rc-ps-print)
+(global-set-key (kbd "C-c C-p") 'pdf-save-buffer-with-faces)
+(global-set-key (kbd "C-c C-r") 'pdf-save-region-with-faces)
 
-;;; emacs-rc-ps-print.el ends here
+(provide 'rc-publishing)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-publishing.el ends here

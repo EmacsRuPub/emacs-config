@@ -20,6 +20,13 @@
 (require 'volatile-highlights)
 (require 'whole-line-or-region) ;; if no region is active, act on current line
 (require 'highlight-symbol)
+(require 'browse-kill-ring)
+(require 'expand-region)
+(require 'multiple-cursors)
+(require 'drag-stuff)
+(require 'region-bindings-mode)
+(require 'recentf)
+(require 'recentf-ext)
 
 (require 'cua-base)
 (require 'wc-mode)
@@ -28,7 +35,6 @@
 
 (require 'custom-camelscore)
 (require 'custom-joinlines)
-
 
 ;#############################################################################
 ;#   Custom definitions
@@ -283,6 +289,17 @@ instead."
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
 
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
+
+(eval-after-load "list-register"
+  (global-set-key (kbd "C-x r v") 'list-register)
+  )
+
 
 ;#############################################################################
 ;#   Customizations
@@ -294,6 +311,16 @@ instead."
 (whole-line-or-region-mode 1)
 (toggle-cursor-type-when-idle 1)
 (change-cursor-mode 1)
+
+(wrap-region-global-mode 1)
+(wrap-region-add-wrapper "*" "*")
+(wrap-region-add-wrapper "(" ")")
+(wrap-region-add-wrapper "{-" "-}" "#")
+(wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))
+
+(turn-off-drag-stuff-mode)
+
+(region-bindings-mode-enable)
 
 (setq whitespace-modes 'awk-mode)
 (setq-default fill-column 200)
@@ -317,6 +344,12 @@ instead."
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 (define-coding-system-alias 'UTF-8 'utf-8)
+
+;; enable recent files mode.
+(recentf-mode t)
+
+(setq recentf-max-saved-items 250)
+(setq recentf-max-menu-items 15)
 
 ;; Redraw the entire screen before checking for pending input events.
 ;; This will improve performance in general but might degrade performance of
@@ -357,6 +390,8 @@ instead."
     (yank whole-line-or-region-yank nil)
   ))
 
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -377,6 +412,15 @@ instead."
   )
 (when (eq system-type 'gnu/linux)
   (setq x-alt-keysym 'meta))
+
+(eval-after-load "paredit"
+  '(progn
+    (define-key paredit-mode-map (kbd "M-s") nil)
+    (define-key paredit-mode-map (kbd "M-<up>") nil)
+    (define-key paredit-mode-map (kbd "M-<down>") nil)
+    (define-key paredit-mode-map (kbd "C-<up>") nil)
+    (define-key paredit-mode-map (kbd "C-<down>") nil)
+    ))
 
 ;#############################################################################
 ;#   Keybindings
@@ -448,6 +492,40 @@ instead."
 
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)
+
+(global-set-key (kbd "C-c k") 'browse-kill-ring)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+
+(global-set-key (kbd "C-^") 'mc/edit-beginnings-of-lines)
+(global-set-key (kbd "C-$") 'mc/edit-ends-of-lines)
+
+(global-set-key (kbd "C-#") 'mc/mark-more-like-this-extended)
+(global-set-key (kbd "C-%") 'mc/mark-all-in-region)
+(global-set-key (kbd "C-(") 'mc/mark-all-like-this-in-defun)
+(global-set-key (kbd "C-)") 'mc/mark-all-like-this-dwim)
+
+(global-set-key (kbd "C-~") 'mc/sort-regions)
+(global-set-key (kbd "C-!") 'mc/insert-numbers)
+(global-set-key (kbd "C-|") 'mc/reverse-regions)
+
+(global-set-key (kbd "C-c i c") 'minimap-create)
+(global-set-key (kbd "C-c i k") 'minimap-kill)
+
+(global-set-key (kbd "C-c d e") 'turn-on-drag-stuff-mode)
+(global-set-key (kbd "C-c d d") 'turn-off-drag-stuff-mode)
+
+;; key definition example
+;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
+
+;; get rid of `find-file-read-only' and replace it with something
+;; more useful.
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]

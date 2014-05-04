@@ -1,11 +1,8 @@
-;;; rc-sh-mode.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-special-major-modes.el
+;; Created: Вс май  4 23:55:19 2014 (+0400)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;#############################################################################
 ;#   Custom definitions
@@ -56,6 +53,16 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'sh-mode-hook 'common-hooks/newline-hook)
 
-(provide 'rc-sh-mode)
+(autoload 'smerge-mode "smerge-mode" nil t)
 
-;;; rc-sh-mode.el ends here
+(defun sm-try-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode 1))))
+(add-hook 'find-file-hooks 'sm-try-smerge t)
+
+(provide 'rc-special-major-modes)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-special-major-modes.el ends here

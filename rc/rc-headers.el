@@ -1,11 +1,10 @@
-;;; rc-header2.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-headers.el
+;; Created: Вс май  4 23:45:25 2014 (+0400)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'rebox2)
 
 (defsubst header-utf8 ()
   "Insert utf-8 def."
@@ -27,6 +26,10 @@
 (add-hook 'lisp-mode-hook       'auto-make-header)
 (add-hook 'java-mode-hook       'auto-make-header)
 
-(provide 'rc-header2)
+(global-set-key (kbd "M-q") 'rebox-dwim)
+(global-set-key (kbd "S-M-q") 'rebox-cycle)
 
-;;; rc-header2.el ends here
+(provide 'rc-headers)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-headers.el ends here

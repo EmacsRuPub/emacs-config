@@ -15,6 +15,7 @@
 (require 'org-install)
 (require 'org)
 (require 'org-agenda)
+(require 'org-pomodoro)
 
 ;#############################################################################
 ;#   Custom definitions
@@ -181,6 +182,7 @@
 (global-set-key (kbd "C-c m e") 'org-enclose-region-in-src-block)
 (global-set-key (kbd "C-c m m") 'org-agenda-bulk-mark-all)
 (global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
+(global-set-key (kbd "<f12>") 'org-pomodoro)
 
 (provide 'rc-org-mode)
 

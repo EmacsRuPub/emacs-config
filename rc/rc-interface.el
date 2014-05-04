@@ -10,6 +10,8 @@
 
 (require 'uniquify)
 (require 'popwin)
+(require 'rainbow-delimiters)
+(require 'tail)
 
 (setq size-indication-mode t)
 (setq column-number-mode t)
@@ -47,6 +49,8 @@
 (setq uniquify-separator "/")
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
+(setq tail-max-size 20)
+
 (menu-bar-mode -1)
 
 ;; Blinking cursors are distracting - turn blink OFF
@@ -68,6 +72,13 @@
 (setq font-lock-maximum-decoration t)
 (setq color-theme-is-global t)
 (setq truncate-partial-width-windows nil)
+
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'php-mode-hook 'rainbow-delimiters-mode)
+
+(global-set-key (kbd "C-c t f") 'tail-file)
 
 (provide 'rc-interface)
 

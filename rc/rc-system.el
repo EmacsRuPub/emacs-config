@@ -27,6 +27,12 @@
         ("\\.doc\\'" "abiword" (file))
         ))
 
+(unless (and (string-equal "root" (getenv "USER"))
+             (server-running-p))
+  ;; Only start server mode if I'm not root and it is not running
+  (require 'server)
+  (server-start))
+
 (global-set-key (kbd "C-x c") 'proced)
 
 (provide 'rc-system)
