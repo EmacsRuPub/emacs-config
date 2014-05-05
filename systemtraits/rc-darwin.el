@@ -1,0 +1,43 @@
+;; -*- coding: utf-8 -*-
+;;
+;; Filename: rc-darwin.el
+;; Created: Пн май  5 19:47:43 2014 (+0400)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; key bindings
+(cua-mode t)
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta nil)
+(setq process-connection-type nil)
+(setq mac-command-modifier 'hyper)    ;meta|super
+(setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
+(global-set-key [(hyper x)] 'cua-cut-region)
+(global-set-key [(hyper c)] 'cua-copy-region)
+(global-set-key [(hyper v)] 'cua-paste)
+(global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+(setq mac-control-modifier 'control)
+
+;; Ignore .DS_Store files with ido mode
+(add-to-list 'ido-ignore-files "\\.DS_Store")
+
+(setq locate-command "mdfind")
+
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(if (< emacs-major-version 23)
+    (set-keyboard-coding-system 'utf-8))
+(set-clipboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+
+(eval-after-load "jabber"
+  '(progn
+     (require 'custom-jabber-darwin)
+     ;; Make jabber.el notify through growl when I get a new message
+     (setq jabber-message-alert-same-buffer nil)
+     (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
+     (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
+     (setq jabber-message-alert-same-buffer t)
+     ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-darwin.el ends here

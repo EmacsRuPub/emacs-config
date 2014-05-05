@@ -172,10 +172,6 @@
 
 (ad-activate 'ido-read-internal)
 
-(when (eq system-type 'darwin)
-  ;; Ignore .DS_Store files with ido mode
-  (add-to-list 'ido-ignore-files "\\.DS_Store")
-  )
 
 (add-to-list 'ido-work-directory-list-ignore-regexps tramp-file-name-regexp)
 

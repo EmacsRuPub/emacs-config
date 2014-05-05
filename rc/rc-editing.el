@@ -396,20 +396,6 @@ instead."
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; key bindings
-(when (eq system-type 'darwin) ;; mac specific settings
-  (cua-mode t)
-  (setq mac-option-key-is-meta t)
-  (setq mac-command-key-is-meta nil)
-  (setq process-connection-type nil)
-  (setq mac-command-modifier 'hyper)    ;meta|super
-  (setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
-  (global-set-key [(hyper x)] 'cua-cut-region)
-  (global-set-key [(hyper c)] 'cua-copy-region)
-  (global-set-key [(hyper v)] 'cua-paste)
-  (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
-  (setq mac-control-modifier 'control)
-  )
 (when (eq system-type 'gnu/linux)
   (setq x-alt-keysym 'meta))
 

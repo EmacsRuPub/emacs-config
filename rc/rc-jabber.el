@@ -17,7 +17,6 @@
 
 (require 'custom-jabber)
 (require 'custom-jabber-templates)
-(when (eq system-type 'darwin) (require 'custom-jabber-darwin))
 (when (eq window-system 'x) (require 'custom-jabber-linux))
 (require 'custom-jabber-tools)
 
@@ -67,6 +66,7 @@
 ;#############################################################################
 ;#   Jabber notifications
 ;############################################################################
+;; TODO extact system-specific parts
 (when (eq system-type 'gnu/linux)
   (defvar jabber-libnotify-icon ""
     "*Icon to be used on the notification pop-up. Default is empty")
@@ -74,14 +74,6 @@
     "*Specifies the timeout of the pop up window in millisecond")
   (add-to-list 'jabber-alert-message-hooks
                'jabber-libnotify-message-display)
-  )
-
-(when (eq system-type 'darwin)
-  ;; Make jabber.el notify through growl when I get a new message
-  (setq jabber-message-alert-same-buffer nil)
-  (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
-  (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
-  (setq jabber-message-alert-same-buffer t)
   )
 
 ;; Message alert hooks

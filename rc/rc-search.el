@@ -38,9 +38,6 @@
 (defadvice occur-mode-goto-occurrence (after close-occur activate)
   (delete-other-windows))
 
-(when (eq system-type 'darwin) ;; mac specific settings
-  (setq locate-command "mdfind"))
-
 (turn-on-fuzzy-isearch)
 
 (setq speedbar-use-images nil)

@@ -60,6 +60,7 @@
 (setq font-latex-title-fontify 'color)      ; this gets rid of
 (setq font-latex-title-fontity 'color)      ; the large fonts
 (setq font-latex-fontify-sectioning 'color) ; in sections etc
+;; TODO extact system-specific parts
 (setq TeX-output-view-style
       (cond
        ((eq system-type 'darwin)

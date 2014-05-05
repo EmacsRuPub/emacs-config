@@ -11,6 +11,7 @@
 
 (let ((python-libs-path
        (cond
+        ;; TODO extact system-specific parts
         ((eq system-type 'darwin)
          "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
         ((eq system-type 'gnu/linux)
