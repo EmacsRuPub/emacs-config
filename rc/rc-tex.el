@@ -60,17 +60,6 @@
 (setq font-latex-title-fontify 'color)      ; this gets rid of
 (setq font-latex-title-fontity 'color)      ; the large fonts
 (setq font-latex-fontify-sectioning 'color) ; in sections etc
-;; TODO extact system-specific parts
-(setq TeX-output-view-style
-      (cond
-       ((eq system-type 'darwin)
-        (quote
-         (("^pdf$" "." "open -a preview %s.pdf")
-          ("^html?$" "." "open %o"))))
-       ((eq system-type 'gnu/linux)
-        (quote
-         (("^pdf$" "." "zathura %s.pdf")
-          ("^html?$" "." "open %o"))))))
 
 ;; mark some variables as safe
 (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))

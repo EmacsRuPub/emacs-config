@@ -65,32 +65,11 @@
 ;#############################################################################
 ;#   Jabber notifications
 ;############################################################################
-;; TODO extact system-specific parts
-(when (eq system-type 'gnu/linux)
-  (defvar jabber-libnotify-icon ""
-    "*Icon to be used on the notification pop-up. Default is empty")
-  (defvar jabber-libnotify-timeout "7000"
-    "*Specifies the timeout of the pop up window in millisecond")
-  (add-to-list 'jabber-alert-message-hooks
-               'jabber-libnotify-message-display)
-  )
-
 ;; Message alert hooks
 (define-jabber-alert echo "Show a message in the echo area"
   (lambda (msg)
     (unless (minibuffer-prompt)
       (message "%s" msg))))
-
-
-;#############################################################################
-;#   Jabber urgency hints
-;############################################################################
-(when (eq window-system 'x)
-  ;; usage example
-  (defvar jabber-activity-jids-count 0)
-  (add-hook 'jabber-activity-update-hook 'jabber-urgency-hint)
-  (add-hook 'jabber-alert-presence-hooks 'jabber-presence-urgency-hint)
-  )
 
 
 ;#############################################################################

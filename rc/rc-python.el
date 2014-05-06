@@ -9,22 +9,14 @@
 
 (autoload 'jedi:setup "jedi" nil t)
 
-(let ((python-libs-path
-       (cond
-        ;; TODO extact system-specific parts
-        ((eq system-type 'darwin)
-         "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
-        ((eq system-type 'gnu/linux)
-         "/usr/lib64/python2.7:"))))
-  (setenv "PYTHONPATH"
+(setenv "PYTHONPATH"
         (concat
-         python-libs-path
+         custom/python-libs-path
          (mapconcat 'identity private/python-path-job-projects "")
-         (getenv "PYTHONPATH"))))
+         (getenv "PYTHONPATH")))
 
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
-
 
 (defun custom/insert-debugger-statements ()
   "inserts debugger statements at point."

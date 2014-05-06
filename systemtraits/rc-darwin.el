@@ -39,5 +39,10 @@
      (setq jabber-message-alert-same-buffer t)
      ))
 
+(setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
+(setq TeX-output-view-style (quote
+                             (("^pdf$" "." "open -a preview %s.pdf")
+                              ("^html?$" "." "open %o"))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-darwin.el ends here
