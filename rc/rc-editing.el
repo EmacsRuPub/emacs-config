@@ -396,9 +396,6 @@ instead."
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-(when (eq system-type 'gnu/linux)
-  (setq x-alt-keysym 'meta))
-
 (eval-after-load "paredit"
   '(progn
     (define-key paredit-mode-map (kbd "M-s") nil)

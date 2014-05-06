@@ -17,7 +17,6 @@
 
 (require 'custom-jabber)
 (require 'custom-jabber-templates)
-(when (eq window-system 'x) (require 'custom-jabber-linux))
 (require 'custom-jabber-tools)
 
 ;#############################################################################

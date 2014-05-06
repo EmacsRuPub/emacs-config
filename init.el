@@ -47,6 +47,8 @@
   (all-files-under-dir-recursively
    (concat config-basedir "customdefs")))
 
+(load (concat config-basedir "systemtraits.el"))
+
 (require 'bundle-main)
 
 (mapcar 'load

@@ -63,9 +63,9 @@ Works in Microsoft Windows, Mac OS X, Linux."
                  (y-or-n-p "Open more than 5 files?")))
     (when doIt
       (cond
+       ;; TODO extact system-specific parts
        ((string-equal system-type "windows-nt")
         (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t))) myFileList))
-       ;; TODO extact system-specific parts
        ((string-equal system-type "darwin")
         (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "open" fPath)))  myFileList))
        ((string-equal system-type "gnu/linux")
