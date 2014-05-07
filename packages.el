@@ -107,6 +107,7 @@
         org-occur-goto
         org-pomodoro
         paredit
+        paredit-everywhere
         pdftools
         po-mode
         popwin

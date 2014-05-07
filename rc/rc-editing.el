@@ -403,6 +403,7 @@ instead."
     (define-key paredit-mode-map (kbd "M-<down>") nil)
     (define-key paredit-mode-map (kbd "C-<up>") nil)
     (define-key paredit-mode-map (kbd "C-<down>") nil)
+    (paredit-everywhere-mode 1)
     ))
 
 ;#############################################################################
