@@ -8,6 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (require 'rc-bookmarks)
+(require 'rc-browser)
 (require 'rc-ido)
 (require 'rc-helm)
 (require 'rc-smex)
