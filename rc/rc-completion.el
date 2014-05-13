@@ -4,16 +4,6 @@
 ;; Created: Вс май  4 23:17:16 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(require 'auto-complete-extension)
-(require 'auto-complete-emacs-lisp)
-(require 'auto-complete-latex)
-(require 'auto-complete-nxml)
-(require 'auto-complete-yasnippet)
-(require 'go-autocomplete)
-(require 'yasnippet) ;; not yasnippet-bundle
-
 (defun ac-yasnippet-candidate ()
   (let ((table (yas/get-snippet-tables major-mode)))
     (if table
@@ -109,49 +99,61 @@
   (when (string-match "/resources/yasnippet" buffer-file-name)
     (yas/load-directory custom/yasnippet-dir)))
 
-(ac-config-default)
-(global-auto-complete-mode t)
+(autoload 'auto-complete "auto-complete" "Autocompletion for Emacs." t)
+(autoload 'yas-global-mode "yasnippet" "Yasnippet" t)
 
-;; add lisp autocomplete-support
-(require 'ac-slime)
+(eval-after-load "auto-complete"
+  '(progn
+     (require 'auto-complete-config)
+     (require 'auto-complete-extension)
+     (require 'auto-complete-emacs-lisp)
+     (require 'auto-complete-latex)
+     (require 'auto-complete-nxml)
+     (require 'auto-complete-yasnippet)
+     (require 'go-autocomplete)
+     (require 'ac-slime) ;; add lisp autocomplete-support
 
-(setq ac-auto-start nil)
+     (ac-config-default)
+     (global-auto-complete-mode t)
+     (setq ac-auto-start nil)
+     (add-to-list 'ac-modes 'slime-repl-mode)
+
+     (add-hook 'slime-mode-hook 'set-up-slime-ac)
+     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+     (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+     (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+     (global-set-key (kbd "C-<tab>") 'auto-complete)
+     ))
+
+(eval-after-load "yasnippet"
+  '(progn
+     (setq yas/next-field-key '("<backtab>" "<S-tab>"))
+     (setq yas/prev-field-key '("<C-tab>"))
+     (setq yas/snippet-dirs custom/yasnippet-dir)
+     (yas--initialize)
+     (yas/load-directory custom/yasnippet-dir)
+
+     (setq yas/prompt-functions
+           '(yas/ido-prompt
+             yas/completing-prompt
+             yas/x-prompt
+             yas/no-prompt))
+     ;; Wrap around region
+     (setq yas/wrap-around-region t)
+
+     (add-hook 'after-save-hook 'update-yasnippets-on-save)
+
+     ;; Jump to end of snippet definition
+     (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets)
+     (define-key yas/keymap (kbd "C-e") 'yas/goto-end-of-active-field)
+     (define-key yas/keymap (kbd "C-a") 'yas/goto-start-of-active-field)
+     ))
 
 (setq-default abbrev-mode t) ;; ensure abbrev mode is always on
 (setq save-abbrevs 'silently)      ;; do not bug me about saving my abbreviations
 
-(setq yas/next-field-key '("<backtab>" "<S-tab>"))
-(setq yas/prev-field-key '("<C-tab>"))
-(setq yas/snippet-dirs custom/yasnippet-dir)
-(yas--initialize)
-(yas/load-directory custom/yasnippet-dir)
-
-(setq yas/prompt-functions '(
-                             yas/ido-prompt
-                             yas/completing-prompt
-                             yas/x-prompt
-                             yas/no-prompt))
-
-;; Wrap around region
-(setq yas/wrap-around-region t)
-
-(add-hook 'after-save-hook 'update-yasnippets-on-save)
-
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete" '(add-to-list 'ac-modes 'slime-repl-mode))
-
-(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
-(global-set-key (kbd "C-<tab>") 'auto-complete)
-
 (global-set-key (kbd "C-S-<iso-lefttab>") 'dabbrev-expand)
-
-;; Jump to end of snippet definition
-(define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets)
-(define-key yas/keymap (kbd "C-e") 'yas/goto-end-of-active-field)
-(define-key yas/keymap (kbd "C-a") 'yas/goto-start-of-active-field)
 
 (provide 'rc-completion)
 
