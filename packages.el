@@ -81,7 +81,7 @@
         ido-vertical-mode
         ido-yes-or-no
         init-paredit
-        jedi-custom
+        jedi
         joseph-file-util
         js2-highlight-vars
         js2-mode
