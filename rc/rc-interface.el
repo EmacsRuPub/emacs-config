@@ -78,6 +78,24 @@
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'php-mode-hook 'rainbow-delimiters-mode)
 
+(defun custom/after-init-hook ()
+  (eval-after-load "diminish"
+    '(progn
+       (diminish 'abbrev-mode)
+       (diminish 'auto-complete-mode " α")
+       (diminish 'auto-fill-function)
+       (diminish 'global-visual-line-mode)
+       (diminish 'undo-tree-mode)
+       (diminish 'visual-line-mode)
+       (diminish 'volatile-highlights-mode)
+       (diminish 'projectile-mode "prj")
+       (diminish 'git-gutter-mode)
+       (diminish 'eldoc-mode "ED")
+       (diminish 'whole-line-or-region-mode)
+       )))
+
+(add-hook 'after-init-hook 'custom/after-init-hook)
+
 (global-set-key (kbd "C-c t f") 'tail-file)
 
 (provide 'rc-interface)

@@ -54,7 +54,6 @@
 (require 'rc-git)
 (require 'rc-dired)
 (require 'rc-info)
-(require 'rc-diminish)
 
 (provide 'bundle-main)
 ;;; macosx-common.el ends here
