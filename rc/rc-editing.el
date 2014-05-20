@@ -515,6 +515,13 @@ instead."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
+(global-set-key (kbd "\C-c r c") (lambda () (interactive) (sudo-find-file "/etc/portage/make.conf")))
+(global-set-key (kbd "\C-c r m") (lambda () (interactive) (sudo-find-file "/etc/portage/package.mask/main")))
+(global-set-key (kbd "\C-c r u") (lambda () (interactive) (sudo-find-file "/etc/portage/package.use")))
+(global-set-key (kbd "\C-c r l") (lambda () (interactive) (sudo-find-file "/etc/portage/package.license")))
+(global-set-key (kbd "\C-c r k") (lambda () (interactive) (sudo-find-file "/etc/portage/package.keywords")))
+(global-set-key (kbd "\C-c r a") (lambda () (interactive) (sudo-find-file "/etc/portage/package.accept_keywords")))
+
 (provide 'rc-editing)
 
 ;;; emacs-rc-editing.el ends here

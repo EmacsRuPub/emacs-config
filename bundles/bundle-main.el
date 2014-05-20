@@ -55,7 +55,6 @@
 (require 'rc-dired)
 (require 'rc-info)
 (require 'rc-diminish)
-(require 'rc-edit-portage)
 
 (provide 'bundle-main)
 ;;; macosx-common.el ends here
