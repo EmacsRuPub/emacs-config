@@ -406,6 +406,15 @@ instead."
     (paredit-everywhere-mode 1)
     ))
 
+(eval-after-load "evil"
+  '(progn
+     (require 'evil-nerd-commenter)
+     (require 'surround)
+     (evilnc-default-hotkeys)
+     (global-surround-mode 1)
+     (global-set-key (kbd "C-c v i") 'evil-mode)
+     ))
+
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################

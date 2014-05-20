@@ -34,7 +34,6 @@
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-prog-common)
-(require 'rc-evil)
 (require 'rc-markup)
 (require 'rc-elisp)
 (require 'rc-javascript)
