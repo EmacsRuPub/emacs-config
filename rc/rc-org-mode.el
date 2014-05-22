@@ -39,16 +39,16 @@
   (insert "#+END_SRC\n"))
 
 (defun org-enclose-region-in-src-block ()
-    (interactive)
-    (let* ((beg (if (region-active-p) (region-beginning) (point)))
-           (end (if (region-active-p) (region-end) (point))))
-      (goto-char end)
-      (unless (eq (char-before) ?\n) (insert "\n"))
-      (insert "#+END_SRC\n")
-      (goto-char beg)
-      (beginning-of-line)
-      (insert "#+BEGIN_SRC\n")
-      (backward-char)))
+  (interactive)
+  (let* ((beg (if (region-active-p) (region-beginning) (point)))
+         (end (if (region-active-p) (region-end) (point))))
+    (goto-char end)
+    (unless (eq (char-before) ?\n) (insert "\n"))
+    (insert "#+END_SRC\n")
+    (goto-char beg)
+    (beginning-of-line)
+    (insert "#+BEGIN_SRC\n")
+    (backward-char)))
 
 
 ;#############################################################################
