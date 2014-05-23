@@ -1,10 +1,44 @@
-;;; rc-interface.el ---
-
-;; Copyright (C) 2012 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
+;; Filename: rc-settings.el
+;; Created: Пт май 23 21:51:46 2014 (+0400)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Enable functions that are disabled by default
+
+;; Upcase and downcase regions
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; Sets the current horizontal position for C-n and C-p
+(put 'set-goal-column 'disabled nil)
+
+;; Restrict buffer editing to a region
+(put 'narrow-to-region 'disabled nil)
+
+;; Dired functions
+(put 'dired-find-alternate-file 'disabled nil)
+
+;;{{{ Horizontal scrolling
+(put 'scroll-left 'disabled nil)
+(put 'scroll-right 'disabled nil)
+;;}}}
+
+;; some useful funcs
+(put 'erase-buffer 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; encoding settings
+(prefer-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8 'utf-8-unix)
+(set-default buffer-file-coding-system 'utf-8-unix)
+(set-default default-buffer-file-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
 
 (load-library "time")
 
@@ -98,6 +132,7 @@
 
 (global-set-key (kbd "C-c t f") 'tail-file)
 
-(provide 'rc-interface)
+(provide 'rc-settings)
 
-;;; rc-interface.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-settings.el ends here
