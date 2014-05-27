@@ -61,6 +61,7 @@
 (define-key custom-search-keymap (kbd "g") 'projectile-ag)
 (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
 (define-key custom-search-keymap (kbd "i") 'helm-swoop) ;; was ioccur
+(define-key custom-search-keymap (kbd "b") 'helm-swoop-back-to-last-point)
 (define-key custom-search-keymap (kbd "q") 'projectile-find-file)
 (define-key custom-search-keymap (kbd "s") 'ido-goto-symbol)
 (define-key custom-search-keymap (kbd "8") 'ace-jump-char-mode)
