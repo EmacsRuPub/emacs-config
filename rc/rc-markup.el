@@ -13,8 +13,11 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(autoload 'zencoding-mode "zencoding-mode")
-(autoload 'zencoding-expand-line "zencoding-mode")
+(autoload 'emmet-mode "emmet-mode")
+(autoload 'emmet-expand-line "emmet-mode")
+(autoload 'markdown-mode "markdown-mode")
+
+(require 'css-eldoc)
 
 (eval-after-load "sgml-mode"
   '(progn
@@ -22,18 +25,45 @@
      (define-key html-mode-map (kbd "C-<up>") 'skip-to-previous-blank-line)
      (define-key html-mode-map (kbd "C-c C-w") 'html-wrap-in-tag)))
 
-(eval-after-load 'zencoding-mode
+(eval-after-load 'emmet-mode
   '(progn
-     (define-key zencoding-mode-keymap (kbd "C-j") nil)
-     (define-key zencoding-mode-keymap (kbd "<C-return>") nil)
-     (define-key zencoding-mode-keymap (kbd "C-c C-j") 'zencoding-expand-line)
-     (defun zencoding-indent (text)
-       "Indent the text"
-       (if text
-           (replace-regexp-in-string "\n" "\n " (concat "\n" text))
-         nil))
-     (diminish 'zencoding-mode)
+     (define-key emmet-mode-keymap (kbd "C-j") nil)
+     (define-key emmet-mode-keymap (kbd "<C-return>") nil)
+     (define-key emmet-mode-keymap (kbd "C-c C-j") 'emmet-expand-line)
+     (diminish 'emmet-mode)
      ))
+
+(eval-after-load 'markdown-mode
+  '(progn
+     (define-key markdown-mode-map (kbd "C-c C-v") 'markdown-preview)
+     (define-key markdown-mode-map (kbd "<tab>") 'yas/expand)
+     ))
+
+(turn-on-css-eldoc)
+
+(defun custom/nxml-mode-hook ()
+  (auto-fill-mode)
+  (hs-minor-mode 1)
+  (local-set-key (kbd "C-c /") 'nxml-finish-element)
+  (rng-validate-mode)
+  (setq ispell-skip-html t)
+  (unify-8859-on-decoding-mode)
+  )
+
+(defun isearch-forward-noeldoc ()
+  "close eldoc temperaily"
+  (interactive)
+  (eldoc-mode -1)
+  (isearch-forward)
+  (eldoc-mode 1))
+
+(defun isearch-backward-noeldoc ()
+  "close eldoc temperaily"
+  (interactive)
+  (eldoc-mode -1)
+  (isearch-backward)
+  (eldoc-mode 1))
+
 
 ;#############################################################################
 ;#   Customizations
@@ -41,6 +71,7 @@
 (setq nxml-auto-insert-xml-declaration-flag t)
 (setq nxml-bind-meta-tab-to-complete-flag t)
 (setq nxml-slash-auto-complete-flag t)
+(setq mumamo-background-colors nil)
 
 (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
@@ -51,53 +82,29 @@
                nil))
 
 (setq mumamo-submode-indent-offset 4)
+(setq emmet-move-cursor-between-quotes t)
 
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
+(add-hook 'nxml-mode-hook 'common-hooks/comment-hook)
+(add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
+(add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
+(add-hook 'css-mode-hook (lambda () (rainbow-mode)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'nxml-mode-hook 'emmet-mode)
+(add-hook 'django-mode 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook 'emmet-mode)
 (add-hook 'django-html-mumamo-mode-hook
           (lambda ()
             (setq django-indent-width 4)
             (setq sgml-basic-offset 4)))
-
-(add-hook 'sgml-mode-hook 'zencoding-mode)
-
-(setq mumamo-background-colors nil)
-
-(defun custom/nxml-mode-hook ()
-  (auto-fill-mode)
-  (hs-minor-mode 1)
-  (local-set-key (kbd "C-c /") 'nxml-finish-element)
-  (rng-validate-mode)
-  (setq ispell-skip-html t)
-  (unify-8859-on-decoding-mode)
-  )
-(add-hook 'nxml-mode-hook 'common-hooks/comment-hook)
-(add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
-(add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
-
-(add-hook 'css-mode-hook (lambda () (rainbow-mode)))
-
-(require 'css-eldoc)
-(turn-on-css-eldoc)
-
-(defun isearch-forward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-forward)
-  (eldoc-mode 1))
 (add-hook 'less-css-mode-hook (lambda ()
                 (local-set-key [remap isearch-forward] 'isearch-forward-noeldoc)))
-
-(defun isearch-backward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-backward)
-  (eldoc-mode 1))
 (add-hook 'less-css-mode-hook (lambda ()
                 (local-set-key [remap isearch-backward] 'isearch-backward-noeldoc)))
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 
 (provide 'rc-markup)
 

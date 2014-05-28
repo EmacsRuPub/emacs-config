@@ -19,7 +19,6 @@
 (require 'rc-editing)
 (require 'rc-completion)
 (require 'rc-headers)
-(require 'rc-zencoding)
 (require 'rc-erc)
 (require 'rc-jabber)
 (require 'rc-jabber-faces)
