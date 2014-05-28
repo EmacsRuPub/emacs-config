@@ -29,7 +29,6 @@
 (require 'rc-search)
 (require 'rc-wincontrol)
 (require 'rc-pim)
-(require 'rc-org-capture)
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-prog-common)
