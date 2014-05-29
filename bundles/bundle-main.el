@@ -9,9 +9,7 @@
 
 (require 'rc-bookmarks)
 (require 'rc-browser)
-(require 'rc-ido)
-(require 'rc-helm)
-(require 'rc-smex)
+(require 'rc-navigate)
 (require 'rc-settings)
 (require 'rc-system)
 (require 'rc-themes)
