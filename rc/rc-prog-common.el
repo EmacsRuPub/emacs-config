@@ -26,7 +26,6 @@
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
-(setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
 (setq ediff-window-setup-function 'ediff-setup-windows-plain-merge)
 
 ;; ;; eldoc mode for showing function calls in mode line
