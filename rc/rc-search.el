@@ -7,6 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+(autoload 'wgrep-ag-setup "wgrep-ag")
+
 (require 're-builder)
 (require 'fuzzy)
 (require 'ace-jump-mode)
@@ -47,6 +49,7 @@
 
 (setq ag-highlight-search t)
 
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
 
 ;#############################################################################
 ;#   Keybindings
@@ -79,8 +82,11 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+(define-key ag-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers)
+(define-key grep-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers)
 
 (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
+
 
 (provide 'rc-search)
 
