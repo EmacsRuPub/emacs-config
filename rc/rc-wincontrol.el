@@ -120,15 +120,15 @@ Don't mess with special buffers."
 (setq ibuffer-jump-offer-only-visible-buffers t)
 
 (setq ibuffer-saved-filters
-      (quote (("dired" ((mode . dired-mode)))
-              ("leechcraft" ((filename . "leechcraft")))
-              ("qxmpp" ((filename . "qxmpp")))
-              ("xmonad" ((filename . "xmonad")))
-              ("jabberchat" ((mode . jabber-chat-mode)))
-              ("orgmode" ((mode . org-mode)))
-              ("elisp" ((mode . emacs-lisp-mode)))
-              ("fundamental" ((mode . fundamental-mode)))
-              ("haskell" ((mode . haskell-mode))))))
+      '(("dired" ((mode . dired-mode)))
+        ("leechcraft" ((filename . "leechcraft")))
+        ("qxmpp" ((filename . "qxmpp")))
+        ("xmonad" ((filename . "xmonad")))
+        ("jabberchat" ((mode . jabber-chat-mode)))
+        ("orgmode" ((mode . org-mode)))
+        ("elisp" ((mode . emacs-lisp-mode)))
+        ("fundamental" ((mode . fundamental-mode)))
+        ("haskell" ((mode . haskell-mode)))))
 
 (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
 

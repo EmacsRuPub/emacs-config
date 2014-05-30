@@ -363,7 +363,7 @@ instead."
 
 (setq regex-tool-backend 'perl)
 
-(setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+(setq text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
 
 (setq fci-rule-color "#111122")
 

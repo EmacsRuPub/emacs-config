@@ -12,7 +12,7 @@
 (setq bbdb-use-pop-up nil)
 (setq bbdb-sounds-directory nil)
 (setq news-reply-header-hook nil)
-(setq bbdb-offer-save (quote savenoprompt)) ;'automatic
+(setq bbdb-offer-save 'savenoprompt) ;'automatic
 (setq bbdb-north-american-phone-numbers-p nil)
 (setq bbdb-complete-name-allow-cycling t)
 (setq bbdb-quiet-about-name-mismatches t)

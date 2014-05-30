@@ -19,7 +19,7 @@
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
-(setq-default c-default-style (quote ((java-mode . "java") (other . "bsd"))))
+(setq-default c-default-style '((java-mode . "java") (other . "bsd")))
 (setq c-eldoc-includes "-I~/exp/include -I./ -I../ ")
 
 

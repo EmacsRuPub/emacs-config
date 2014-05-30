@@ -24,9 +24,8 @@
        )))
 
 (setq custom/python-libs-path "/usr/lib64/python2.7:")
-(setq TeX-output-view-style (quote
-                             (("^pdf$" "." "zathura %s.pdf")
-                              ("^html?$" "." "open %o"))))
+(setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
+                              ("^html?$" "." "open %o")))
 
 (setq browse-url-browser-function 'browse-url-generic)
 (setq browse-url-generic-program "/usr/bin/firefox")

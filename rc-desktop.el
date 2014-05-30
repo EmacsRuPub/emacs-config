@@ -29,7 +29,7 @@
 ;#   Desktop-related variables
 ;############################################################################
 (setq-default desktop-missing-file-warning nil)
-(setq-default desktop-path (quote ("~")))
+(setq-default desktop-path '("~"))
 (setq-default desktop-save t)
 (setq-default desktop-save-mode t)
 (setq-default save-place t)

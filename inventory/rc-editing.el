@@ -6,7 +6,7 @@
 
 ;; (electric-indent-mode 1)
 
-;; (setq interprogram-paste-function (quote x-cut-buffer-or-selection-value))
+;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; (add-hook 'minibuffer-setup-hook 'conditionally-enable-parens-mode)
 

@@ -39,9 +39,9 @@
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
-(setq jabber-alert-info-message-hooks (quote (jabber-info-echo)))
-(setq jabber-alert-message-hooks (quote (jabber-message-beep jabber-message-scroll)))
-(setq jabber-alert-presence-hooks (quote (jabber-presence-update-roster)))
+(setq jabber-alert-info-message-hooks 'jabber-info-echo)
+(setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
+(setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
 (setq jabber-nickname (capitalize global-username))
 (setq jabber-resource custom/jabber-resource)
 (setq jabber-auto-reconnect t)

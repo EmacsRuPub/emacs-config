@@ -21,7 +21,7 @@
 ;#   Customizations
 ;############################################################################
 ;; PSVN customization
-;; (setq svn-status-svn-environment-var-list (quote ("LC_MESSAGES=C" "LANG=C" "LC_ALL=C"))))
+;; (setq svn-status-svn-environment-var-list '("LC_MESSAGES=C" "LANG=C" "LC_ALL=C"))
 (setq vc-handled-backends nil)
 
 (provide 'rc-vcs-common)

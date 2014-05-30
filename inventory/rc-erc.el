@@ -385,7 +385,7 @@ recenters the buffer so that prior history cannot be seen.
 
 ;; (add-to-list 'erc-modules 'scrolltobottom)
 
-;; (setq erc-server-coding-system (quote (koi8-r . koi8-r)))
+;; (setq erc-server-coding-system '(koi8-r . koi8-r))
 
 ;#############################################################################
 ;#   Network and channel presets

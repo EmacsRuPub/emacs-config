@@ -25,11 +25,10 @@
 ;; (eval-after-load "mailcrypt"
 ;;   '(setq mc-modes-alist
 ;;          (append
-;;           (quote
-;;            ((wl-draft-mode (encrypt . mc-encrypt-message)
+;;           '((wl-draft-mode (encrypt . mc-encrypt-message)
 ;;                            (sign . mc-sign-message))
 ;;             (wl-summary-mode (decrypt . mc-wl-decrypt-message)
-;;                              (verify . mc-wl-verify-signature))))
+;;                              (verify . mc-wl-verify-signature)))
 ;;           mc-modes-alist)))
 
 

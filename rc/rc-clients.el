@@ -47,16 +47,15 @@
            '((freenode     ((custom/erc-nick . custom/erc-nickserv-password)
                             (custom/erc-nick . custom/erc-nickserv-password)))))
      (setq erc-encoding-coding-alist
-           (quote
-            (("#debian-russian" . cyrillic-koi8)
+           '(("#debian-russian" . cyrillic-koi8)
              ("#altlinux" . cyrillic-koi8)
              ("#unix.ru" . cyrillic-koi8)
-             ("#fidorus" . cyrillic-koi8))))
+             ("#fidorus" . cyrillic-koi8)))
      (setq erc-nick custom/erc-main-nick)
      (setq erc-nick-uniquifier "_")
      (setq erc-prompt-for-password nil)
      (setq erc-kill-queries-on-quit t)
-     (setq erc-server-coding-system (quote (cp1251 . cp1251)))
+     (setq erc-server-coding-system '(cp1251 . cp1251))
 
      (defvar bitlbee-password "geheim")
 
