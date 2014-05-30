@@ -54,7 +54,7 @@
   (setq flycheck-checker 'python-flake8))
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
-(add-hook 'python-mode-hook 'common-hooks/comment-hook)
+
 (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'python-mode-hook 'common-hooks/newline-hook)
 (add-hook 'python-mode-hook

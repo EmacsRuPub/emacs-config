@@ -73,7 +73,7 @@
   )
 
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
-(add-hook 'lisp-mode-hook 'common-hooks/comment-hook)
+
 (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))

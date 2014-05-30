@@ -87,7 +87,7 @@
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
-(add-hook 'nxml-mode-hook 'common-hooks/comment-hook)
+
 (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 (add-hook 'css-mode-hook (lambda () (rainbow-mode)))

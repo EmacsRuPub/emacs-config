@@ -7,11 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(defun common-hooks/comment-hook ()
-  (local-set-key (kbd "C-{") 'uncomment-region)
-  (local-set-key (kbd "C-}") 'comment-region)
-  (local-set-key (kbd "M-]") 'custom/comment-or-uncomment-region))
-
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (local-set-key (kbd "<return>") 'newline-and-indent))
