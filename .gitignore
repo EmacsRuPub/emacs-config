@@ -1,11 +1,11 @@
 */#*#
 *log
-*org*
 *wconf*
 *~
 .emacs.desktop
 .litable-lists.el
 .mc-lists.el
+.org-id-locations
 .projectile
 .session
 /ext
