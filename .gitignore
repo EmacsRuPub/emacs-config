@@ -15,6 +15,7 @@ anything-c-adaptive-history
 bookmarks
 bundle.el
 credentials.el.gpg
+custom-sandbox.el
 customizations.el
 el-get
 elpa
@@ -28,4 +29,3 @@ projectile.cache
 semanticdb
 srecode-map.el
 url
-custom-sandbox.el
