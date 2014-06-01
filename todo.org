@@ -1,1 +1,17 @@
 * TODO rc-backups.el: move to settings
+* TODO rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.)
+* TODO rc-completion.el: extract yasnippet customdefs
+* TODO rc-dired.el: extract dired customdefs
+* TODO rc-editing.el: extract editing customdefs (check if we can break something)
+* TODO rc-elisp.el: review
+* TODO rc-generic.el: merge into editing
+* TODO rc-git.el: MAYBE merge into programming
+* TODO rc-gmail.el: MAYBE merge into clients
+* TODO rc-haskell.el: review + extend
+* TODO rc-headers.el: review + MAYBE merge (where?)
+* TODO rc-info.el: MAYBE rename (rc-help.el)
+** MAYBE extend with help+ and other stuff alike
+* TODO rc-search.el: merge into navigate
+* TODO rc-prodigy.el: review
+* TODO rc-tramp.el: MAYBE merge (where?)
+* TODO rc-wincontrol.el: extract customdefs
