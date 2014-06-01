@@ -14,5 +14,6 @@
 (global-set-key (kbd "C-c g r") 'magit-reflog)
 (global-set-key (kbd "C-c g c") 'magit-checkout)
 (global-set-key (kbd "C-c g r") 'magit-add-remote)
+(global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
 
 (provide 'rc-git)

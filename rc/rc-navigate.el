@@ -4,22 +4,15 @@
 ;; Created: Чт май 29 17:33:42 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun custom-helm ()
-  (interactive)
-  (helm-other-buffer '(
-                       helm-c-source-buffers-list
-                       helm-c-source-files-in-current-dir
-                       helm-c-source-recentf
-                       helm-source-bookmarks
-                       helm-source-file-name-history
-                       helm-source-findutils
-                       helm-source-locate
-                       helm-source-occur
-                       )
-                     "*helm-custom*"))
-
 (autoload 'smex "smex" nil t)
 (autoload 'custom-helm "helm" nil t)
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(autoload 'wgrep-ag-setup "wgrep-ag")
+
+(require 'ace-jump-mode)
+(require 'ag)
+(require 'fuzzy)
+(require 're-builder)
 
 (eval-after-load "helm"
   '(progn
@@ -124,6 +117,50 @@
      (global-set-key (kbd "M-X") 'smex-major-mode-commands)
      (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ; old M-x
      ))
+
+(eval-after-load "wgrep"
+  '(progn
+     (define-key ag-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers)
+     (define-key grep-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers)
+     ))
+
+(turn-on-fuzzy-isearch)
+
+(setq ag-highlight-search t)
+
+
+;#############################################################################
+;#   Keybindings
+;############################################################################
+;; isearch
+(global-unset-key (kbd "C-s"))
+(global-unset-key (kbd "C-r"))
+(global-unset-key (kbd "C-M-s"))
+(global-unset-key (kbd "C-M-r"))
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+
+;; custom search keymap
+(define-prefix-command 'custom-search-keymap)
+(define-key custom-search-keymap (kbd "m") 'multi-occur-in-matching-buffers)
+(define-key custom-search-keymap (kbd "o") 'helm-occur)
+(define-key custom-search-keymap (kbd "r") 'rgrep)
+(define-key custom-search-keymap (kbd "l") 'locate)
+(define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
+(define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
+(define-key custom-search-keymap (kbd "g") 'projectile-ag)
+(define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
+(define-key custom-search-keymap (kbd "i") 'helm-swoop) ;; was ioccur
+(define-key custom-search-keymap (kbd "b") 'helm-swoop-back-to-last-point)
+(define-key custom-search-keymap (kbd "q") 'projectile-find-file)
+(define-key custom-search-keymap (kbd "s") 'ido-goto-symbol)
+(define-key custom-search-keymap (kbd "8") 'ace-jump-char-mode)
+(define-key custom-search-keymap (kbd "9") 'ace-jump-word-mode)
+(define-key custom-search-keymap (kbd "n") 'sr-speedbar-toggle)
+(define-key custom-search-keymap (kbd "C-n") 'sr-speedbar-select-window)
+(define-key custom-search-keymap (kbd "h") 'helm-mini)
+(global-set-key (kbd "M-s") 'custom-search-keymap)
 
 (provide 'rc-navigate)
 

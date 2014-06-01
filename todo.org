@@ -19,7 +19,9 @@
 * TODO rc-headers.el: review + MAYBE merge (where?)
 * TODO rc-info.el: MAYBE rename (rc-help.el)
 ** MAYBE extend with help+ and other stuff alike
-* TODO rc-search.el: merge into navigate
+* DONE rc-search.el: merge into navigate
+  CLOSED: [2014-06-01 Вс 21:45]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:45]
 * TODO rc-prodigy.el: review
 * TODO rc-tramp.el: MAYBE merge (where?)
 * TODO rc-wincontrol.el: extract customdefs
