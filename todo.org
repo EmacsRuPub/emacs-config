@@ -24,6 +24,8 @@
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:45]
 * TODO rc-prodigy.el: review
 * TODO rc-tramp.el: MAYBE merge (where?)
-* TODO rc-wincontrol.el: extract customdefs
+* DONE rc-wincontrol.el: extract customdefs
+  CLOSED: [2014-06-01 Вс 21:58]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
 * TODO completion: review template engines (tempo, yasnippet, etc.)
 * TODO navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere)
