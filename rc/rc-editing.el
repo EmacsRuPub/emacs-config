@@ -30,6 +30,8 @@
 (require 'volatile-highlights)
 (require 'wc-mode)
 (require 'whole-line-or-region) ;; if no region is active, act on current line
+(require 'generic)
+(require 'generic-x)
 
 (require 'custom-camelscore)
 (require 'custom-joinlines)
@@ -411,6 +413,17 @@ instead."
      (global-surround-mode 1)
      (global-set-key (kbd "C-c v i") 'evil-mode)
      ))
+
+(define-generic-mode 'keymap-mode
+  '("#")
+  '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+  nil
+  '(".keymap\\'" ".map\\'")
+  nil)
+
+(setq generic-default-modes (delete 'javascript-generic-mode
+                                    generic-default-modes))
+
 
 ;#############################################################################
 ;#   Keybindings
