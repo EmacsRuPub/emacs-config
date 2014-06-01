@@ -10,28 +10,26 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(require 'table) ;; table
-(require 'hideshow) ;; Hide/Show mode
-(require 'undo-tree)
-(require 'saveplace)
-(require 'saveplace)
-(require 'rst)
-(require 'savekill)
-(require 'volatile-highlights)
-(require 'whole-line-or-region) ;; if no region is active, act on current line
-(require 'highlight-symbol)
 (require 'browse-kill-ring)
-(require 'expand-region)
-(require 'multiple-cursors)
+(require 'cua-base)
+(require 'cursor-chg)
 (require 'drag-stuff)
-(require 'region-bindings-mode)
+(require 'expand-region)
+(require 'hideshow) ;; Hide/Show mode
+(require 'highlight-symbol)
+(require 'multiple-cursors)
 (require 'recentf)
 (require 'recentf-ext)
-
-(require 'cua-base)
-(require 'wc-mode)
-(require 'cursor-chg)
+(require 'region-bindings-mode)
+(require 'rst)
+(require 'savekill)
+(require 'saveplace)
+(require 'table) ;; table
+(require 'undo-tree)
 (require 'unicad)
+(require 'volatile-highlights)
+(require 'wc-mode)
+(require 'whole-line-or-region) ;; if no region is active, act on current line
 
 (require 'custom-camelscore)
 (require 'custom-joinlines)
