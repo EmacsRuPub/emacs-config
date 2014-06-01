@@ -2,7 +2,9 @@
   CLOSED: [2014-06-01 Вс 12:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
 * TODO rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.)
-* TODO rc-completion.el: extract yasnippet customdefs
+* DONE rc-completion.el: extract yasnippet customdefs
+  CLOSED: [2014-06-01 Вс 20:53]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 20:53]
 * TODO rc-dired.el: extract dired customdefs
 * TODO rc-editing.el: extract editing customdefs (check if we can break something)
 * TODO rc-elisp.el: review
