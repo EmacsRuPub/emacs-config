@@ -21,3 +21,4 @@
 * TODO rc-prodigy.el: review
 * TODO rc-tramp.el: MAYBE merge (where?)
 * TODO rc-wincontrol.el: extract customdefs
+* TODO completion: review template engines (tempo, yasnippet, etc.)
