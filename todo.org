@@ -1,4 +1,6 @@
-* TODO rc-backups.el: move to settings
+* DONE rc-backups.el: move to settings
+  CLOSED: [2014-06-01 Вс 12:58]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
 * TODO rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.)
 * TODO rc-completion.el: extract yasnippet customdefs
 * TODO rc-dired.el: extract dired customdefs

@@ -13,7 +13,6 @@
 (require 'rc-settings)
 (require 'rc-system)
 (require 'rc-themes)
-(require 'rc-backups)
 (require 'rc-editing)
 (require 'rc-completion)
 (require 'rc-programming)
