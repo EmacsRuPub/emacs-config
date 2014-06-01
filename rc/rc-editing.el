@@ -46,8 +46,7 @@
 (defun custom/comment-or-uncomment-region (arg)
   (interactive "*P")
   (comment-normalize-vars)
-  (if
-      (and (not mark-active)
+  (if (and (not mark-active)
            (save-excursion (beginning-of-line) (not (looking-at "\\s-*$"))))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
