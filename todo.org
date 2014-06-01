@@ -26,3 +26,4 @@
 * TODO rc-tramp.el: MAYBE merge (where?)
 * TODO rc-wincontrol.el: extract customdefs
 * TODO completion: review template engines (tempo, yasnippet, etc.)
+* TODO navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere)
