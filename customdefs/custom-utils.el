@@ -29,7 +29,6 @@
     (split-window)
     (switch-to-buffer cur-buf)))
 
-
 (defun my-find-thing-at-point ()
   "Find variable, function or file at point."
   (interactive)
@@ -38,7 +37,6 @@
         ((function-called-at-point)
          (call-interactively 'describe-function))
         (t (find-file-at-point))))
-
 
 ;Make cursor stay in the same column when scrolling using pgup/dn.
 ;Previously pgup/dn clobbers column position, moving it to the
@@ -119,8 +117,6 @@
     (insert (iy-string-camel-to-underscore origin))))
 ;;}}}
 
-
-
 ;;{{{ Insert
 (defun iy-insert-user ()
   (interactive)
@@ -142,7 +138,6 @@
   (interactive)
   (insert (file-name-nondirectory (buffer-file-name))))
 
-
 (defun iy-dwim-downcase (arg)
   (interactive "p")
   (if (region-active-p)
@@ -161,8 +156,6 @@
   (if (region-active-p)
       (capitalize-region (region-beginning) (region-end))
     (capitalize-word (prefix-numeric-value arg))))
-
-
 
 (defun shrink-whitespaces ()
   "Remove white spaces around cursor to just one or none.
@@ -238,7 +231,6 @@ Calling this command 3 times will always result in no whitespaces around cursor.
         (setq ev (read-event))))
     (push ev unread-command-events)))
 
-
 ;; This override for transpose-words fixes what I consider to be a flaw with the
 ;; default implementation in simple.el. To traspose chars or lines, you always
 ;; put the point on the second char or line to transpose with the previous char
@@ -312,7 +304,6 @@ point and around or after mark are interchanged."
         (setq isearch-initial-string (buffer-substring begin end))
         (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
         (isearch-forward regexp-p no-recursive-edit)))))
-
 
 (defun string-camel-to-underscore (string)
   "Convert camel string to upcase one which concat words using underscore"
@@ -436,7 +427,6 @@ point and around or after mark are interchanged."
       (goto-char (point-min))
       (while (re-search-forward "\\s-+" nil t)
         (replace-match "")))))
-
 
 ;; FIXME code duplication, think of finding the widely used util or something similar
 (autoload 'vc-git-root "vc-git")
