@@ -53,6 +53,7 @@
      (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets)
      (define-key yas/keymap (kbd "C-e") 'yas/goto-end-of-active-field)
      (define-key yas/keymap (kbd "C-a") 'yas/goto-start-of-active-field)
+     (global-set-key (kbd "C-<return>") 'yas-expand)
      ))
 
 (setq-default abbrev-mode t) ;; ensure abbrev mode is always on
