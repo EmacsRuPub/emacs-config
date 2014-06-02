@@ -22,7 +22,6 @@
 (require 'rc-jabber-faces)
 (require 'rc-shell)
 (require 'rc-tramp)
-(require 'rc-search)
 (require 'rc-wincontrol)
 (require 'rc-pim)
 (require 'rc-org-mode)
