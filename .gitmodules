@@ -1,0 +1,3 @@
+[submodule "resources/yasnippet"]
+	path = resources/yasnippet
+	url = https://github.com/wiedzmin/yasnippet-snippets
