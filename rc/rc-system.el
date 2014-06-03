@@ -25,6 +25,7 @@
         ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\)\\'" "vlc" (file))
         ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
         ("\\.doc\\'" "abiword" (file))
+        ("\\.swf\\'" "swfdec-player" (file))
         ))
 
 (unless (and (string-equal "root" (getenv "USER"))
