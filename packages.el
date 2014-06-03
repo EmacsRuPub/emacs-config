@@ -27,7 +27,6 @@
         c-eldoc
         calfw
         col-highlight
-        color-theme-zenburn
         column-marker
         crontab-mode
         crosshairs
@@ -152,6 +151,7 @@
         wrap-region
         yandex-weather
         yasnippet
+        zenburn-theme
         ))
 
 (provide 'packages)
