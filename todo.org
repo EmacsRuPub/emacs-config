@@ -30,3 +30,5 @@
 * TODO completion: review template engines (tempo, yasnippet, etc.)
 * TODO navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere)
 * TODO fix keyboard layout (particularly improper quoting in russian layout)
+* TODO fix tramp-based sudo-find-file or change underlying implementation
+* TODO think of adding mode-specific TODO snippets to yasnippet
