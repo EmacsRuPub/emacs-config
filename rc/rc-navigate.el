@@ -142,7 +142,6 @@
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
 ;; custom search keymap
-(define-prefix-command 'custom-search-keymap)
 (define-key custom-search-keymap (kbd "m") 'multi-occur-in-matching-buffers)
 (define-key custom-search-keymap (kbd "o") 'helm-occur)
 (define-key custom-search-keymap (kbd "r") 'rgrep)
@@ -160,7 +159,6 @@
 (define-key custom-search-keymap (kbd "n") 'sr-speedbar-toggle)
 (define-key custom-search-keymap (kbd "C-n") 'sr-speedbar-select-window)
 (define-key custom-search-keymap (kbd "h") 'helm-mini)
-(global-set-key (kbd "M-s") 'custom-search-keymap)
 
 (provide 'rc-navigate)
 

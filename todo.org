@@ -28,7 +28,9 @@
   CLOSED: [2014-06-01 Вс 21:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
 * TODO completion: review template engines (tempo, yasnippet, etc.)
-* TODO navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere)
+* DONE navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere)
+  CLOSED: [2014-06-04 Ср 13:54]
+  - State "DONE"       from "TODO"       [2014-06-04 Ср 13:54]
 * TODO fix keyboard layout (particularly improper quoting in russian layout)
 * TODO fix tramp-based sudo-find-file or change underlying implementation
 * TODO think of adding mode-specific TODO snippets to yasnippet

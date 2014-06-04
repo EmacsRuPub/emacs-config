@@ -71,11 +71,9 @@
 
 (define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
 
-(define-prefix-command 'custom-windowing-keymap)
 (define-key custom-windowing-keymap (kbd "s") 'save-current-configuration)
 (define-key custom-windowing-keymap (kbd "r") 'resume)
 (define-key custom-windowing-keymap (kbd "c") 'wipe)
-(global-set-key (kbd "<f2>") 'custom-windowing-keymap)
 
 (provide 'rc-wincontrol)
 

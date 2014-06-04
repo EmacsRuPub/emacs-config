@@ -428,8 +428,6 @@ instead."
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
-(global-unset-key (kbd "C-z"))
-(define-prefix-command 'custom-edit-keymap)
 (define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)
@@ -466,7 +464,6 @@ instead."
 (define-key custom-edit-keymap (kbd "0") 'compact-spaces-in-region)
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
-(global-set-key (kbd "C-z") 'custom-edit-keymap)
 
 (global-set-key (kbd "M-<up>") 'smart-symbol-go-backward)
 (global-set-key (kbd "M-<down>") 'smart-symbol-go-forward)
