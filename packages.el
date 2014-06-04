@@ -45,6 +45,7 @@
         ecb-custom
         elwm
         emacs-jabber
+        emacs-swoop
         emacs-w3m
         wgrep
         emmet-mode
