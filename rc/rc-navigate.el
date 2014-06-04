@@ -143,15 +143,15 @@
 
 ;; custom search keymap
 (define-key custom-search-keymap (kbd "m") 'multi-occur-in-matching-buffers)
-(define-key custom-search-keymap (kbd "o") 'helm-occur)
+(define-key custom-search-keymap (kbd "o") 'swoop-multi)
 (define-key custom-search-keymap (kbd "r") 'rgrep)
 (define-key custom-search-keymap (kbd "l") 'locate)
 (define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
 (define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
 (define-key custom-search-keymap (kbd "g") 'projectile-ag)
 (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
-(define-key custom-search-keymap (kbd "i") 'helm-swoop) ;; was ioccur
-(define-key custom-search-keymap (kbd "b") 'helm-swoop-back-to-last-point)
+(define-key custom-search-keymap (kbd "i") 'swoop) ;; was ioccur
+(define-key custom-search-keymap (kbd "b") 'swoop-back-to-last-position)
 (define-key custom-search-keymap (kbd "q") 'projectile-find-file)
 (define-key custom-search-keymap (kbd "s") 'ido-goto-symbol)
 (define-key custom-search-keymap (kbd "8") 'ace-jump-char-mode)
