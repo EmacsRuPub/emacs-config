@@ -34,3 +34,4 @@
 * TODO fix keyboard layout (particularly improper quoting in russian layout)
 * TODO fix tramp-based sudo-find-file or change underlying implementation
 * TODO think of adding mode-specific TODO snippets to yasnippet
+* TODO check why arrows work in helm-occur but bounded differently in emacs-swoop
