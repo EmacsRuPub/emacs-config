@@ -35,3 +35,6 @@
 * TODO fix tramp-based sudo-find-file or change underlying implementation
 * TODO think of adding mode-specific TODO snippets to yasnippet
 * TODO check why arrows work in helm-occur but bounded differently in emacs-swoop
+* TODO unset <Tab> as 'yas-expand binding
+* TODO structured parenthesis editing in python mode
+* TODO make *magit-process* more verbose
