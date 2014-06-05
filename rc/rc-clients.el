@@ -28,6 +28,7 @@
      (erc-match-enable)
      (erc-match-mode 1)
      (erc-timestamp-mode t)
+     (erc-log-enable)
 
      (setq erc-user-full-name custom/erc-full-name)
      (setq erc-email-userid custom/gmail-address)
