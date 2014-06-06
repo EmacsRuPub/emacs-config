@@ -16,6 +16,18 @@
    :nick private/erc-nick-office
    :password private/erc-password-office))
 
+;; FIXME should be able to quit server
+;; being invoked from barely any buffer
+(defun leave-irc-server ()
+  (interactive)
+  (erc-quit-server "Leaving"))
+
+(eval-after-load "erc"
+  '(progn
+     (global-set-key (kbd "C-c r s") 'connect-office-irc)
+     (global-set-key (kbd "C-c r q") 'leave-irc-server)
+     ))
+
 (eval-after-load "twittering-mode"
   '(progn
      (setq twittering-use-master-password t)
@@ -29,7 +41,6 @@
      (define-key mingus-playlist-map (kbd "<Backspace>") 'mingus-del)
      ))
 
-(global-set-key (kbd "C-c C-i") 'connect-office-irc)
 
 (provide 'rc-clients)
 
