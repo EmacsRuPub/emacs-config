@@ -38,3 +38,4 @@
 * TODO unset <Tab> as 'yas-expand binding
 * TODO structured parenthesis editing in python mode
 * TODO make *magit-process* more verbose
+* TODO maybe generalize (otherwise reimplement) jabber quoting for ERC
