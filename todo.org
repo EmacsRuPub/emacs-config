@@ -39,3 +39,4 @@
 * TODO structured parenthesis editing in python mode
 * TODO make *magit-process* more verbose
 * TODO maybe generalize (otherwise reimplement) jabber quoting for ERC
+* TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers)
