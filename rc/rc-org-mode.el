@@ -33,28 +33,6 @@
   (osd-display msg msg -1 "center" "center" "Verdana 40")
   )
 
-(defun org-enclose-region-in-src-block ()
-  (interactive)
-  (let* ((beg (if (region-active-p) (region-beginning) (point)))
-         (end (if (region-active-p) (region-end) (point))))
-    (goto-char end)
-    (unless (eq (char-before) ?\n) (insert "\n"))
-    (insert "#+END_SRC\n")
-    (goto-char beg)
-    (beginning-of-line)
-    (insert "#+BEGIN_SRC\n")
-    (backward-char)))
-
-;; TODO make code more sane and less dumb
-(defun custom/org-insert-code-block (lang)
-  (interactive "slang: ")
-  (insert (format "#+BEGIN_EXAMPLE %s" lang))
-  (newline-and-indent)
-  (newline-and-indent)
-  (insert "#+END_EXAMPLE")
-  (previous-line) ;; TODO make indentation work
-  )
-
 
 ;#############################################################################
 ;#   Customizations
@@ -223,8 +201,6 @@
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
 (global-set-key (kbd "C-c o") 'oog)
-(global-set-key (kbd "C-c m s") 'custom/org-insert-code-block)
-(global-set-key (kbd "C-c m e") 'org-enclose-region-in-src-block)
 (global-set-key (kbd "C-c m m") 'org-agenda-bulk-mark-all)
 (global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
 (global-set-key (kbd "<f12>") 'org-pomodoro)
