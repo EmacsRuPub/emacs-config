@@ -18,16 +18,6 @@
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
 
-(defun custom/insert-debugger-statements ()
-  "inserts debugger statements at point."
-  (interactive)
-  (push-mark)
-  (save-excursion
-    (insert "import ipdb\nipdb.set_trace()\n")
-    (beginning-of-line)
-    (python-indent-region (mark) (point)))
-  (pop-mark))
-
 
 ;#############################################################################
 ;#   Hooks
