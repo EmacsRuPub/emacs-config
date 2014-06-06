@@ -1,0 +1,302 @@
+* try						       :try:modes:extensions:
+** http://www.emacswiki.org/emacs/CategorizingInformationManager [2012-07-26 Thu 23:14]					  :emacs:try:
+** http://emacswiki.org/emacs/GenericMode [2012-07-26 Thu 23:17]					  :emacs:try:
+** http://www.emacswiki.org/emacs/MuMaMo [2012-07-26 Thu 23:32]					  :emacs:try:
+** http://www.emacswiki.org/emacs/PredictiveMode [2012-08-08 Wed 00:34]					  :emacs:try:
+** django-mode [2012-08-08 Wed 15:51] 				  :emacs:try:
+** xahk-mode.el
+** window+.el
+** thingatpt+.el
+** http://emacswiki.org/emacs/strings.el
+** http://www.emacswiki.org/emacs/smart-operator.el
+** http://www.eskimo.com/~seldon/diminish.el
+**** ;; Diminish modeline clutter
+     (require 'diminish)
+     (diminish 'wrap-region-mode)
+     (diminish 'yas/minor-mode)
+** http://www.emacswiki.org/emacs/SuperCite
+
+;;; supercite.el ---
+
+;; Copyright (C) 2011 Alex Ermolov
+;;
+;; Author: aaermolov@gmail.com
+;; Keywords:
+;; Requirements:
+;; Status: not intended to be distributed yet
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Supercite
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'filladapt)
+;; (autoload 'sc-cite-original     "supercite" "Supercite 3.1" t)
+;; (autoload 'sc-submit-bug-report "supercite" "Supercite 3.1" t)
+;; (add-hook 'mail-citation-hook 'sc-cite-original)
+;; (add-hook 'sc-load-hook
+;;           (cond
+;;            ((eq system-type 'darwin)
+;;             'sc-setup-filladapt)
+;;            ((eq system-type 'windows-nt)
+;;             'sc-setup-filladapt)
+;;            ((eq system-type 'gnu/linux)
+;;                (lambda ()
+;;                  (filladapt-mode 1)))))
+;; (setq message-cite-function 'sc-cite-original
+;;       news-reply-header-hook nil
+;;       sc-citation-leader ""
+;;       sc-preferred-attribution-list
+;;       '("sc-lastchoice"
+;;         "x-attribution"
+;;         "sc-consult"
+;;         "initials"
+;;         "firstname"
+;;         "lastname")
+;;       sc-electric-references-p t  ; allows me to select header n,p,RET
+;;       sc-cite-region-limit t      ; no default citing to avoid filling
+;;       sc-nested-citation-p nil
+;;       sc-auto-fill-region-p nil
+;;       sc-blank-lines-after-headers nil
+;;       sc-attrib-selection-list
+;;       '(("sc-from-address" ((".*" . (bbdb/sc-consult-attr (sc-mail-field "sc-from-address"))))))
+;;       sc-mail-glom-frame
+;;       '((begin                        (setq sc-mail-headers-start (point)))
+;;         ("^x-attribution:[ \t]+.*$"   (sc-mail-fetch-field t) nil t)
+;;         ("^\\S +:.*$"                 (sc-mail-fetch-field) nil t)
+;;         ("^$"                         (progn (bbdb/sc-default)
+;;                                              (list 'abort '(step . 0))))
+;;         ("^[ \t]+"                    (sc-mail-append-field))
+;;         (sc-mail-warn-if-non-rfc822-p (sc-mail-error-in-mail-field))
+;;         (end                          (setq sc-mail-headers-end (point))))
+;;       )
+
+;;; supercite.el ends here
+
+** gpg 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GPG
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'epa-setup)
+;; (setq epg-gpg-program "gpg") ; why?
+
+;; hack to setenv GnuPG info in Emacs 23 on Mac,
+;; TODO: need alternative solution
+
+;; (setq ra/gpg-agent-info-file "~/.gpg-agent-info")
+;; (defun ra/gpg-agent-info-from-file (file)
+;;   "Reads the GnuPG agent info file and returns a list"
+;;   (with-temp-buffer
+;;     (insert-file-contents file)
+;;     (split-string (buffer-string) "\n" t)))
+;; (defun ra/gpg-agent-info (file)
+;;   "Sets environment variables in the GnuPG agent info file"
+;;   (mapcar '(lambda (gpg-info-pair)
+;;              (setenv (nth 0 gpg-info-pair) (nth 1 gpg-info-pair)))
+;;            (mapcar '(lambda (gpg-info-row)
+;;                       (split-string gpg-info-row "=" t))
+;;                    (ra/gpg-agent-info-from-file file))))
+;; (if (and (eq system-type 'darwin)
+;;          (file-readable-p ra/gpg-agent-info-file))
+;;     (ra/gpg-agent-info ra/gpg-agent-info-file)
+;;   )
+
+;;; rc-gpg.el ends here
+
+** http://www.emacswiki.org/emacs/ProfileDotEmacs
+** http://emacswiki.org/emacs/lusty-explorer.el
+;; LustyExplorer
+(setq load-path (cons "~/.emacs.d/vendor/lusty-emacs" load-path))
+(require 'lusty-explorer)
+(when (featurep 'lusty-explorer)
+  (global-set-key "\C-x\C-f" 'lusty-file-explorer)
+  (global-set-key "\C-xb" 'lusty-buffer-explorer))
+** http://emacswiki.org/emacs/WcheckMode
+** https://github.com/emacsmirror/adaptive-wrap-prefix
+    (require 'adaptive-wrap-prefix)
+    (global-adaptive-wrap-prefix-mode 1)
+    (setq visual-line-fringe-indicators '(nil right-curly-arrow))
+** https://github.com/doitian/alternative-files-el
+;;{{{ Alternative File
+
+(push 'alternative-files el-get-packages)
+(define-key iy-map "a" 'alternative-files-find-file)
+(define-key iy-map (kbd "M-a") 'alternative-files-find-file)
+(define-key iy-map (kbd "A") 'alternative-files-create-file)
+
+(defun alternative-files-factories-finder (&optional file)
+  (let ((file (or file (alternative-files--detect-file-name))))
+    (cond
+     ((string-match "^\\(.*\\)/app/models/\\(.+\\)\\.rb$" file)
+      (let ((root (match-string 1 file))
+            (name (match-string 2 file)))
+        (list
+         (concat root "/spec/factories/" (alternative-files--pluralize-string name) ".rb"))))
+
+     ((string-match "^\\(.*\\)/spec/factories/\\(.+\\).rb$" file)
+      (let ((root (match-string 1 file))
+            (name (match-string 2 file)))
+        (list
+         (concat root "/app/models/" (alternative-files--singularize-string name) ".rb")))))))
+
+(defun iy-el-get-after-alternative-files ()
+  (push 'alternative-files-factories-finder alternative-files-functions))
+
+;;}}}
+
+** http://www.emacswiki.org/emacs/NyanMode
+    ;; nyan nyan nyan
+    (require 'nyan-mode)
+    (nyan-mode t)
+    (setq nyan-bar-length 15)
+** http://www.emacswiki.org/emacs/RainbowDelimiters
+    (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+
+** http://www.emacswiki.org/emacs/PickBackup
+** http://www.emacswiki.org/emacs/FullAck
+** http://www.emacswiki.org/emacs/AutoInsertMode
+** CEDET
+(require 'semantic/bovine/c)
+(require 'semantic/bovine/gcc)
+(require 'semantic/bovine/clang)
+(require 'semantic/ia)
+(require 'semantic/decorate/include)
+(require 'semantic/lex-spp)
+(require 'eassist)
+
+(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+
+;; need to add CEDET contrib to bring in eassist
+(add-to-list 'load-path (expand-file-name
+(concat
+qdot/emacs-autoinst-elisp-dir "cedet/contrib")))
+
+;; (global-ede-mode 1)
+
+(setq-default semanticdb-default-save-directory "~/.emacs_meta/semanticdb/"
+semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
+
+(defun qdot/cedet-hook ()
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
+  (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  (local-set-key "\C-cj" 'semantic-ia-fast-jump)
+  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  )
+(add-hook 'c-mode-common-hook 'qdot/cedet-hook)
+(add-hook 'lisp-mode-hook 'qdot/cedet-hook)
+(add-hook 'emacs-lisp-mode-hook 'qdot/cedet-hook)
+
+(defun qdot/c-mode-cedet-hook ()
+  (local-set-key (kbd "C-c o") 'eassist-switch-h-cpp)
+  (local-set-key (kbd "C-c C-r") 'semantic-symref))
+(add-hook 'c-mode-common-hook 'qdot/c-mode-cedet-hook)
+** cscope
+(defun iy-el-get-after-xcscope ()
+  (defcustom cscope-ignore-case t
+    "*Whether to ignore case while searching."
+    :group 'cscope
+    :type 'boolean)
+
+  (defun cscope-toggle-case ()
+    (interactive)
+    (setq cscope-ignore-case (not cscope-ignore-case))
+    (cscope-tell-ignore-case))
+  (defun cscope-tell-ignore-case ()
+    (interactive)
+    (message "Cscope Ignore Case (%s)"
+              (if cscope-ignore-case "Enable" "Disable")))
+
+  (define-key cscope:map "\C-csv" 'cscope-toggle-case)
+  (define-key cscope:map "\C-csV" 'cscope-tell-ignore-case)
+  (define-key cscope-list-entry-keymap "v" 'cscope-toggle-case)
+  (define-key cscope-list-entry-keymap "V" 'cscope-tell-ignore-case)
+
+  (defadvice cscope-call (before ignore-case activate)
+    "ignore case in cscope search"
+     (when cscope-ignore-case
+       (ad-set-arg 1 (cons "-C" (ad-get-arg 1))))))
+** someth for portage highlight
+** http://www.emacswiki.org/emacs/TimeStamp
+(add-hook 'before-save-hook 'time-stamp)
+(setq time-stamp-active t
+      time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S"
+      time-stamp-start "[Uu]pdated\\(_at\\)?[ \t]*:?[ \t]+<"
+      time-stamp-end ">")
+** http://emacswiki.org/emacs/HippieExpand
+** http://emacswiki.org/emacs/AutomaticFileHeaders
+** http://www.emacswiki.org/emacs/UnicodeFonts
+** http://www.emacswiki.org/emacs/DynamicFonts
+** http://www.emacswiki.org/emacs/UcsUtils
+** https://github.com/purcell/elisp-slime-nav
+** https://github.com/nex3/magithub/blob/master/magithub.el
+** http://www.emacswiki.org/emacs/ParenFace
+** https://github.com/wiedzmin/elpastebin
+** https://code.google.com/p/emacs-freex/wiki/Introduction [2013-04-20 Сб 20:27]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/ScreencastMode [2013-04-21 Вс 21:10]                                      :emacs:try:
+** http://elnode.org/ [2013-04-21 Вс 23:39]                                      :emacs:try:
+** https://github.com/zk-phi/phi-search.git [2013-05-01 Ср 09:49]                                      :emacs:try:
+** https://github.com/tlh/workgroups.el [2013-05-01 Ср 23:41]                                      :emacs:try:
+** https://github.com/nex3/perspective-el [2013-05-02 Чт 00:19]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/workspaces.el [2013-05-02 Чт 00:22]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/oneonone.el [2013-05-02 Чт 13:36]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/OneOnOneEmacs [2013-05-02 Чт 16:22]                                      :emacs:try:
+** http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/ [2013-05-22 Ср 00:57]                                      :emacs:try:
+** http://www.gentei.org/~yuuji/software/windows.el [2013-06-11 Вт 21:33]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/EmacsEclim [2013-06-16 Вс 12:42]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/TipOfTheDay [2013-06-16 Вс 13:41]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/VisibleMark [2013-06-16 Вс 14:16]                                      :emacs:try:
+** https://github.com/overtone/emacs-live [2013-06-16 Вс 16:06]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/PosTip [2014-02-04 Вт 16:10]                                      :emacs:try:
+** https://github.com/tkf/emacs-ipython-notebook [2014-02-04 Вт 16:11]                                      :emacs:try:
+** https://github.com/kiwanami/emacs-ctable [2014-02-04 Вт 16:11]                                      :emacs:try:
+** https://raw.github.com/emacsmirror/emacswiki.org/master/win-switch.el [2014-02-04 Вт 16:12]                                      :emacs:try:
+** https://github.com/purcell/capture.el [2014-02-12 Ср 15:13]                                      :emacs:try:
+** https://github.com/purcell/wolfram-mode [2014-02-12 Ср 15:37]                                      :emacs:try:
+** https://github.com/purcell/ido-at-point [2014-02-12 Ср 15:38]                                      :emacs:try:
+** https://github.com/purcell/flymake-easy [2014-02-12 Ср 15:39]                                      :emacs:try:
+** https://github.com/purcell/emacs-plsense [2014-02-12 Ср 15:39]                                      :emacs:try:
+** https://github.com/purcell/emacs-wonderland [2014-02-12 Ср 15:40]                                      :emacs:try:
+** https://github.com/purcell/refheap.el [2014-02-12 Ср 15:53]                                      :emacs:try:
+** https://github.com/purcell/ix.el [2014-02-12 Ср 15:54]                                      :emacs:try:
+** https://github.com/purcell/evil-matchit [2014-02-12 Ср 16:01]                                      :emacs:try:
+** https://github.com/purcell/projector.el [2014-02-12 Ср 16:03]                                      :emacs:try:
+** https://github.com/purcell/shampoo-emacs [2014-02-12 Ср 16:13]                                      :emacs:try:
+** https://github.com/purcell/helm-c-moccur.el [2014-02-12 Ср 16:16]                                      :emacs:try:
+** https://github.com/purcell/string-inflection [2014-02-12 Ср 16:17]                                      :emacs:try:
+** https://github.com/purcell/ac-js2 [2014-02-12 Ср 16:22]                                      :emacs:try:
+** https://github.com/purcell/ibuffer-vc [2014-02-12 Ср 16:43]                                      :emacs:try:
+** https://github.com/purcell/frame-restore.el/blob/master/frame-restore.el [2014-02-12 Ср 16:44]                                      :emacs:try:
+** https://github.com/purcell/password-vault [2014-02-12 Ср 16:45]                                      :emacs:try:
+** https://github.com/purcell/ace-jump-buffer [2014-02-12 Ср 16:45]                                      :emacs:try:
+** https://github.com/purcell/el-spice [2014-02-12 Ср 16:47]                                      :emacs:try:
+** https://github.com/purcell/helm-dictionary [2014-02-12 Ср 16:47]                                      :emacs:try:
+** https://github.com/purcell/mmm-mode [2014-02-12 Ср 16:47]                                      :emacs:try:
+** https://github.com/purcell/paredit-everywhere [2014-02-12 Ср 17:21]                                      :emacs:try:
+** org-attach [2014-02-24 Пн 01:59]                              :emacs:try:
+** https://github.com/abo-abo/lispy [2014-03-04 Вт 19:29]                                      :emacs:try:
+** lisp/ses.el [2014-03-11 Вт 19:03]                             :emacs:try:
+** http://paul.elms.pro/blog/2013/04/11/emacs-theme-change/ [2014-03-13 Чт 02:05]                                      :emacs:try:
+** https://github.com/chrisbarrett/emacs-refactor?goback=.gde_1058217_member_266626534 [2014-03-13 Чт 14:21]                                      :emacs:try:
+** http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/ [2014-03-28 Пт 01:14]                                      :emacs:try:
+** https://github.com/emacsattic/bind-key [2014-04-03 Чт 19:16]                                      :emacs:try:
+** https://github.com/jwiegley/use-package [2014-04-03 Чт 19:16]                                      :emacs:try:
+** http://www.emacswiki.org/emacs/GoogleClient [2014-04-04 Пт 23:19]                                      :emacs:try:
+** http://chrisdone.com/posts/god-mode [2014-05-20 Вт 19:36]                                      :emacs:try:
+** https://github.com/ShingoFukuyama/ov.el [2014-06-04 Ср 13:18]                                      :emacs:try:
+** https://github.com/ShingoFukuyama/matchar [2014-06-04 Ср 13:22]                                      :emacs:try:
+** https://github.com/ShingoFukuyama/helm-recentd [2014-06-04 Ср 13:26]                                      :emacs:try:
