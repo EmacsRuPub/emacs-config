@@ -40,3 +40,5 @@
 * TODO make *magit-process* more verbose
 * TODO maybe generalize (otherwise reimplement) jabber quoting for ERC
 * TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers)
+* TODO filter out obsolete items from totry.org
+* TODO place old emacs tickets org content here and organize
