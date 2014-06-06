@@ -93,10 +93,7 @@
   (let* ((state-data (fsm-get-state-data jc))
          (server (plist-get state-data :server)))
     (message "%s" server)
-    (if (string-equal server "igrade.ru")
-        (progn
-          (jabber-groupchat-join jc "it@conference.igrade.ru" "a-ermolov")
-          ))))
+    ))
 
 (add-hook 'jabber-chat-mode-hook 'custom/jabber-chat-mode-hook)
 (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
