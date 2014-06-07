@@ -42,3 +42,37 @@
 * TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers)
 * TODO filter out obsolete items from totry.org
 * TODO place old emacs tickets org content here and organize
+* TODO maybe generalize url opening someway for org mode and mode-agnostic
+* TODO orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
+  При открытии url с помощью C-c C-o (org-open-at-point)
+  UTF8-escaped адреса открываются некорректно
+  Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4
+* TODO MAYBE use history rotation in jabber.el
+* TODO fix orgmode export
+* TODO review redmine + emacs connectivity options
+* TODO fix sudo-find-file (actually tramp) or substitute current implementation
+* TODO setup org refiling
+* TODO MAYBE add {todo.org, totry.org} to agenda
+* TODO think of some reflection layer such as bool vars for particular emacs version, etc.
+* TODO check for options to move to crypted credentials
+* TODO find out how to customize holidays in org-mode
+* TODO maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC)
+* TODO some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever)
+* TODO MAYBE some setup above emacs registers
+* TODO some setup for Wanderlust (and probably org-mode integration)
+* TODO Wanderlust: fix std11 encoding problem in mail headers
+* TODO Erlang setup: review and extend (from inventory or right there)
+* TODO Messages for package app-text/xdvik-22.84.16:   :emacs:ticket:tex:old:
+    * Add
+    *      (add-to-list 'load-path "/usr/share/emacs/site-lisp/tex-utils")
+    *      (require 'xdvi-search)
+    * to your ~/.emacs file
+* TODO w3m-emacs: setup, review, maybe view docs there, maybe customize keybindings
+* TODO review http://ru-emacs.livejournal.com/59415.html
+* TODO review http://thread.gmane.org/gmane.emacs.devel/56602/focus=57384
+* TODO find out some (maybe, persistent) way to add file to org-agenda-files
+* TODO w3m-emacs batch urls opening
+* TODO org-mode tables setup
+* TODO review diary extension
+* TODO tex: auctex: "Adding Support for Macros" chapter in documentation
+* TODO some setup for autopairing + process regions (e.g. upcase)
