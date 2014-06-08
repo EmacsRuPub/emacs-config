@@ -26,6 +26,7 @@
   '(progn
      (global-set-key (kbd "C-c r s") 'connect-office-irc)
      (global-set-key (kbd "C-c r q") 'leave-irc-server)
+     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"))
      ))
 
 (eval-after-load "twittering-mode"
