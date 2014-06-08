@@ -79,3 +79,8 @@
 * TODO tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
 * TODO some setup for autopairing + process regions (e.g. upcase) :investigate:
 * TODO maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
+* TODO consider using yas-selected-text in snippets             :investigate:
+* TODO ERC: separate list of joined channels to switch          :investigate:
+* TODO ERC: nick and other things highlighting
+* TODO ERC: modules
+* TODO ERC: navigate URLs as in jabber chats
