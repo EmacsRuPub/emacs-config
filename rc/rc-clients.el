@@ -22,10 +22,17 @@
   (interactive)
   (erc-quit-server "Leaving"))
 
+(defun select-erc-buffer ()
+  (interactive)
+  (switch-to-buffer
+   (ido-completing-read
+    "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
+
 (eval-after-load "erc"
   '(progn
      (global-set-key (kbd "C-c r s") 'connect-office-irc)
      (global-set-key (kbd "C-c r q") 'leave-irc-server)
+     (global-set-key (kbd "C-c r b") 'select-erc-buffer)
      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"))
      ))
 
