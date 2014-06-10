@@ -14,6 +14,9 @@
 (define-prefix-command 'custom-windowing-keymap)
 (global-set-key (kbd "<f2>") 'custom-windowing-keymap)
 
+(define-prefix-command 'custom-clients-keymap)
+(global-set-key (kbd "<f10>") 'custom-clients-keymap)
+
 (provide 'custom-keymaps)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

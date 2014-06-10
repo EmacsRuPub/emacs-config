@@ -30,9 +30,11 @@
 
 (eval-after-load "erc"
   '(progn
-     (global-set-key (kbd "C-c r s") 'connect-office-irc)
-     (global-set-key (kbd "C-c r q") 'leave-irc-server)
-     (global-set-key (kbd "C-c r b") 'select-erc-buffer)
+     (require 'erc-pcomplete)
+     (erc-pcomplete-mode 1)
+     (define-key custom-clients-keymap (kbd "s") 'connect-office-irc)
+     (define-key custom-clients-keymap (kbd "q") 'leave-irc-server)
+     (define-key custom-clients-keymap (kbd "b") 'select-erc-buffer)
      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
                                      "324" "329" "332" "333" "353" "477"))
      ))
