@@ -87,3 +87,5 @@
 * TODO ERC: modules
 * TODO ERC: navigate URLs as in jabber chats
 * TODO advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
+* TODO review emacs-jedi for the subject of tweaking
+* TODO review extensions with "workgroups"-like functionality (again)
