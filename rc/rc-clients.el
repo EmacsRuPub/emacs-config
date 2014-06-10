@@ -33,7 +33,8 @@
      (global-set-key (kbd "C-c r s") 'connect-office-irc)
      (global-set-key (kbd "C-c r q") 'leave-irc-server)
      (global-set-key (kbd "C-c r b") 'select-erc-buffer)
-     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"))
+     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
+                                     "324" "329" "332" "333" "353" "477"))
      ))
 
 (eval-after-load "twittering-mode"
