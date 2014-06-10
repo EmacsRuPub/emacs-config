@@ -33,6 +33,9 @@
 
 (eval-after-load "yasnippet"
   '(progn
+     ;; unset both to remove ALL translations
+     (define-key yas-minor-mode-map [(tab)] nil)
+     (define-key yas-minor-mode-map (kbd "TAB") nil)
      (setq yas/next-field-key '("<backtab>" "<S-tab>"))
      (setq yas/prev-field-key '("<C-tab>"))
      (setq yas/snippet-dirs custom/yasnippet-dir)
