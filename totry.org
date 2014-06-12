@@ -303,3 +303,4 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** remem http://www.remem.org/index.html
 ** https://github.com/clojure-emacs
 ** https://github.com/clojure/tools.nrepl
+** http://www.emacswiki.org/emacs/DiredSorting

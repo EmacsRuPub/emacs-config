@@ -89,3 +89,5 @@
 * TODO advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
 * TODO review emacs-jedi for the subject of tweaking
 * TODO review extensions with "workgroups"-like functionality (again)
+* TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message")
+* TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself
