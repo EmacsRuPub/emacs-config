@@ -28,6 +28,13 @@
    (ido-completing-read
     "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
 
+(defun insert-erc-nick ()
+  (interactive)
+  (insert
+   (concatenate 'string
+                (ido-completing-read "nick" (pcomplete-erc-nicks)) ": ")
+   ))
+
 (eval-after-load "erc"
   '(progn
      (require 'erc-pcomplete)
@@ -35,6 +42,7 @@
      (define-key custom-clients-keymap (kbd "s") 'connect-office-irc)
      (define-key custom-clients-keymap (kbd "q") 'leave-irc-server)
      (define-key custom-clients-keymap (kbd "b") 'select-erc-buffer)
+     (define-key custom-clients-keymap (kbd "i") 'insert-erc-nick)
      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
                                      "324" "329" "332" "333" "353" "477"))
      ))
