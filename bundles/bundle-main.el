@@ -32,7 +32,6 @@
 (require 'rc-lisp)
 (require 'rc-haskell)
 (require 'rc-python)
-(require 'rc-prodigy)
 (require 'rc-special-major-modes)
 (require 'rc-tex)
 (require 'rc-gmail)

@@ -304,3 +304,4 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** https://github.com/clojure-emacs
 ** https://github.com/clojure/tools.nrepl
 ** http://www.emacswiki.org/emacs/DiredSorting
+** prodigy.el
