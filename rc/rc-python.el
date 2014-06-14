@@ -18,6 +18,18 @@
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
 
+;; TODO maybe replace occur
+(defun custom/py-occur-definitions ()
+  "Display an occur buffer of all definitions in the current buffer.
+   Also, switch to that buffer."
+  (interactive)
+  (let ((list-matching-lines-face nil))
+    (occur "^ *\\(def\\|class\\) "))
+  (let ((window (get-buffer-window "*Occur*")))
+    (if window
+        (select-window window)
+      (switch-to-buffer "*Occur*"))))
+
 
 ;#############################################################################
 ;#   Hooks
