@@ -63,6 +63,8 @@
 (setq save-abbrevs 'silently)      ;; do not bug me about saving my abbreviations
 
 (global-set-key (kbd "C-S-<iso-lefttab>") 'dabbrev-expand)
+(global-set-key (kbd "C-c C-y C-v") 'yas-visit-snippet-file)
+(global-set-key (kbd "C-c C-y C-n") 'yas-insert-snippet)
 
 (provide 'rc-completion)
 
