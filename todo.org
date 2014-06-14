@@ -95,3 +95,4 @@
 ** https://github.com/pashinin/workgroups2
 * TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message")
 * TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself
+* TODO search https://github.com/jorgenschaefer/elpy for some handy features to borrow
