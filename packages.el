@@ -12,6 +12,7 @@
         ac-math
         ac-slime
         ace-jump-mode
+        actionscript-mode
         ag-custom
         auctex
         auto-complete-emacs-lisp
