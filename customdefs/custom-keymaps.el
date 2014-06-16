@@ -14,8 +14,9 @@
 (define-prefix-command 'custom-windowing-keymap)
 (global-set-key (kbd "<f2>") 'custom-windowing-keymap)
 
+(global-unset-key (kbd "C-q")) ;; was 'quoted-insert
 (define-prefix-command 'custom-clients-keymap)
-(global-set-key (kbd "<f10>") 'custom-clients-keymap)
+(global-set-key (kbd "C-q") 'custom-clients-keymap)
 
 (provide 'custom-keymaps)
 
