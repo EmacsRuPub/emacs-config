@@ -463,6 +463,25 @@ point and around or after mark are interchanged."
   (interactive)
   (re-search-forward url-regexp nil t))
 
+(defun elisp-var-printable (var)
+  (if (boundp var)
+      (let* ((var-value (symbol-value var))
+             (is-string-value (stringp var-value)))
+        (format "(setq %s %s)"
+                (symbol-name var)
+                (if is-string-value
+                    (concat "\"" var-value "\"")
+                  var-value)))
+    nil))
+
+(defun write-string-to-file (string file)
+  (with-temp-buffer
+    (insert string)
+    (when (file-writable-p file)
+      (write-region (point-min)
+                    (point-max)
+                    file))))
+
 (provide 'custom-utils)
 
 ;;; util-various.el ends here
