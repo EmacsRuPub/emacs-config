@@ -8,6 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (setq org-dir (concat home-directory "/org"))
+(setq org-inventory-dir (concat home-directory "/org-inventory"))
 
 ;#############################################################################
 ;#   Abbreviation
