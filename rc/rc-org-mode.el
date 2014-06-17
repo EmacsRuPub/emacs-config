@@ -134,7 +134,7 @@
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         ("j" "job")
         ("ji" "issues" entry (file+headline (concat org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
-        ("jp" "plan" entry (file (concat org-dir "/job/plan.org")) "* %? %U :work:planning:%(symbol-value 'last-scrum-timestamp)")
+        ("jp" "plan" entry (file (concat org-dir "/job/plan.org")) "* TODO %? %U :work:planning:%(symbol-value 'last-scrum-timestamp)")
         ("g" "github" entry (file (concat org-dir "-inventory/checklists/github.org")) "* %? %U :github:")
         ("b" "browser tabs")
         ("bc" "clojure" entry (file+olp (concat org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "clojure (to process)") "* %? %U :clojure:")
