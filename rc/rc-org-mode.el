@@ -156,6 +156,7 @@
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 
+(load (concat config-basedir "last-scrum-timestamp"))
 
 ;#############################################################################
 ;#   Hooks
