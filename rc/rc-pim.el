@@ -26,7 +26,7 @@
 (eval-after-load "deft"
   '(progn
      (setq deft-extension "org")
-     (setq deft-directory "~/org/deft/")
+     (setq deft-directory "~/deft/")
      (setq deft-text-mode 'org-mode)
 
      ;; (global-set-key (kbd "<f12>") 'deft)
