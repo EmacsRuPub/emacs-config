@@ -162,6 +162,8 @@
 ;############################################################################
 (defun custom/org-mode-hook ()
   (local-set-key (kbd "C-x C-a") 'show-all)
+  (local-unset-key (kbd "C-c ["))
+  (local-unset-key (kbd "C-c ]"))
   (imenu-add-to-menubar "Imenu"))
 
 (defun custom/org-todo-changed-hook ()
