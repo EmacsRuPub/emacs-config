@@ -43,6 +43,8 @@
      (define-key custom-clients-keymap (kbd "q") 'leave-irc-server)
      (define-key custom-clients-keymap (kbd "b") 'select-erc-buffer)
      (define-key custom-clients-keymap (kbd "i") 'insert-erc-nick)
+     (define-key erc-mode-map (kbd "M-<up>") 'custom/find-url-backward)
+     (define-key erc-mode-map (kbd "M-<down>") 'custom/find-url-forward)
      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
                                      "324" "329" "332" "333" "353" "477"))
      ))

@@ -465,9 +465,6 @@ instead."
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
 
-(global-set-key (kbd "M-<up>") 'smart-symbol-go-backward)
-(global-set-key (kbd "M-<down>") 'smart-symbol-go-forward)
-
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
 (global-set-key (kbd "C-c h m") 'woman)
