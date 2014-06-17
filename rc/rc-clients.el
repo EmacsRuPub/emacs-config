@@ -60,6 +60,10 @@
      (define-key mingus-playlist-map (kbd "<Backspace>") 'mingus-del)
      ))
 
+(eval-after-load "restclient"
+  '(progn
+     (global-set-key (kbd "C-c C-r C-s") 'create-restclient-sandbox)
+    ))
 
 (provide 'rc-clients)
 

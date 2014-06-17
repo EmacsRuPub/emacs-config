@@ -449,6 +449,12 @@ point and around or after mark are interchanged."
       (insert selection)
       (clipboard-kill-region (point-min) (point-max)))))
 
+(defun create-restclient-sandbox ()
+  (interactive)
+  (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
+    (switch-to-buffer restbuffer)
+    (restclient-mode)))
+
 (provide 'custom-utils)
 
 ;;; util-various.el ends here
