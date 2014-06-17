@@ -455,6 +455,14 @@ point and around or after mark are interchanged."
     (switch-to-buffer restbuffer)
     (restclient-mode)))
 
+(defun custom/find-url-backward ()
+  (interactive)
+  (re-search-backward url-regexp nil t))
+
+(defun custom/find-url-forward ()
+  (interactive)
+  (re-search-forward url-regexp nil t))
+
 (provide 'custom-utils)
 
 ;;; util-various.el ends here

@@ -9,14 +9,6 @@
 
 (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
 
-(defun custom/find-url-backward ()
-  (interactive)
-  (re-search-backward url-regexp nil t))
-
-(defun custom/find-url-forward ()
-  (interactive)
-  (re-search-forward url-regexp nil t))
-
 ;; fails on some URLs, i.e. opens too many times
 (defun open-urls-in-region ()
   (interactive)
