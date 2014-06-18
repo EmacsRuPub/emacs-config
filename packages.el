@@ -153,7 +153,7 @@
         wrap-region
         yandex-weather
         yasnippet
-        zenburn-theme
+        zenburn-emacs
         ))
 
 (provide 'packages)
