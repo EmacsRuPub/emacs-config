@@ -21,7 +21,6 @@
                       (or (buffer-file-name) load-file-name)))
 
 (setq custom-file (concat config-basedir "customizations.el"))
-(load custom-file 'noerror)
 
 (add-to-list 'load-path (concat config-basedir "rc"))
 (add-to-list 'load-path (concat config-basedir "bundles"))
@@ -57,5 +56,3 @@
          '("rc-auto-modes.el"
            "rc-desktop.el"
            )))
-
-(load custom-file)
