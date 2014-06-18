@@ -36,6 +36,11 @@
   (let ((org-refile-targets `((,(concat org-dir "/job/done.org") :level . 1))))
     (call-interactively 'org-refile)))
 
+;; TODO some handle for getting 'done' tasks within particular time range
+;; TODO some tag for those tasks not directly needed for job tasks (e.g. my own setups, ssh, etc)
+;; TODO save done.org after refiling finished
+;; TODO auto change status TODO --> DONE before refiling
+
 (provide 'custom-orgmode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
