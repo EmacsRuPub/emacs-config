@@ -115,7 +115,9 @@
                  (lambda nil
                    (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
                                              (quote regexp) "<[^>\n]+>")))
-                (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+                (org-agenda-overriding-header "Unscheduled TODO entries: ")))
+              ("jp" tags "+work+planning")
+              )))
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation
