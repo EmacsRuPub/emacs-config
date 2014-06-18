@@ -23,6 +23,8 @@
 
 (load-theme 'zenburn t)
 
+(set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
+
 ;#############################################################################
 ;#   Fonts
 ;############################################################################
