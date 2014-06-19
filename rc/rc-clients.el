@@ -6,7 +6,10 @@
 
 (autoload 'twit "twittering-mode" nil t)
 (autoload 'mingus "mingus" nil t)
+(autoload 'gmail-notifier-start "gmail-notifier" nil t)
 
+(gmail-notifier-start)
+(gmail-notifier-check)
 
 (defun connect-office-irc ()
   (interactive)
@@ -34,6 +37,10 @@
    (concatenate 'string
                 (ido-completing-read "nick" (pcomplete-erc-nicks)) ": ")
    ))
+
+(defun open-gmail ()
+  (interactive)
+  (browse-url "https://mail.google.com"))
 
 (eval-after-load "erc"
   '(progn
@@ -66,6 +73,12 @@
   '(progn
      (global-set-key (kbd "C-c C-r C-s") 'create-restclient-sandbox)
     ))
+
+(eval-after-load "gmail-notifier"
+  '(progn
+     (global-set-key [f8] 'open-gmail)
+     (global-set-key [f9] 'gmail-notifier-check)
+     ))
 
 (provide 'rc-clients)
 

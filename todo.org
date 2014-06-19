@@ -18,7 +18,9 @@
 * DONE rc-git.el: merge into programming                           :relocate:
   CLOSED: [2014-06-19 Чт 23:46]
   - State "DONE"       from "TODO"       [2014-06-19 Чт 23:46]
-* TODO rc-gmail.el: merge into clients                             :relocate:
+* DONE rc-gmail.el: merge into clients                             :relocate:
+  CLOSED: [2014-06-19 Чт 23:50]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:50]
 * TODO rc-haskell.el                         :review:extend:
 * TODO rc-headers.el         :review:relocate:
 * TODO rc-info.el: MAYBE rename (rc-help.el)                         :extend:
