@@ -8,7 +8,9 @@
 * DONE rc-dired.el: extract dired customdefs                        :extract:
   CLOSED: [2014-06-01 Вс 21:03]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:03]
-* TODO rc-editing.el: extract editing customdefs (check if we can break something) :extract:
+* DONE rc-editing.el: extract editing customdefs (check if we can break something) :extract:
+  CLOSED: [2014-06-19 Чт 23:39]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:39]
 * TODO rc-elisp.el                                           :review:
 * DONE rc-generic.el: merge into editing                           :relocate:
   CLOSED: [2014-06-01 Вс 21:12]
