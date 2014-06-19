@@ -80,6 +80,12 @@
      (global-set-key [f9] 'gmail-notifier-check)
      ))
 
+(eval-after-load "tramp"
+  '(progn
+     (setq tramp-default-method "ssh")
+     (setq tramp-chunksize 500)
+     ))
+
 (provide 'rc-clients)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

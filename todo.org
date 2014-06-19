@@ -29,7 +29,9 @@
   CLOSED: [2014-06-01 Вс 21:45]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:45]
 * TODO rc-prodigy.el                                         :review:
-* TODO rc-tramp.el: merge to clients                               :relocate:
+* DONE rc-tramp.el: merge to clients                               :relocate:
+  CLOSED: [2014-06-20 Пт 00:13]
+  - State "DONE"       from "TODO"       [2014-06-20 Пт 00:13]
 * DONE rc-wincontrol.el: extract customdefs                         :extract:
   CLOSED: [2014-06-01 Вс 21:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
