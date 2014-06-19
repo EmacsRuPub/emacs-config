@@ -21,7 +21,6 @@
 (require 'rc-jabber)
 (require 'rc-jabber-faces)
 (require 'rc-shell)
-(require 'rc-tramp)
 (require 'rc-wincontrol)
 (require 'rc-pim)
 (require 'rc-org-mode)
@@ -34,8 +33,6 @@
 (require 'rc-python)
 (require 'rc-special-major-modes)
 (require 'rc-tex)
-(require 'rc-gmail)
-(require 'rc-git)
 (require 'rc-dired)
 (require 'rc-info)
 
