@@ -85,6 +85,24 @@
     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
     ))
 
+(eval-after-load "magit"
+  '(
+    (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
+    (global-set-key (kbd "C-c g s") 'magit-status)
+    (global-set-key (kbd "C-c g l") 'magit-file-log)
+    (global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
+    (global-set-key (kbd "C-c g r") 'magit-reflog)
+    (global-set-key (kbd "C-c g c") 'magit-checkout)
+    (global-set-key (kbd "C-c g r") 'magit-add-remote)
+    (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
+    ))
+
+(eval-after-load "git-gutter"
+  '(progn
+     ;TODO: add keys for hunk navigation
+     (global-git-gutter-mode +1)
+     ))
+
 ;; TODO try to autoload someway
 (setq gdb-many-windows t)
 (setq gdb-show-main t)
