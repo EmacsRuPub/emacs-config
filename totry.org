@@ -306,3 +306,4 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** http://www.emacswiki.org/emacs/DiredSorting
 ** prodigy.el
 ** http://www.emacswiki.org/emacs/auto-yasnippet.el
+** http://www.emacswiki.org/emacs-en/minibuffer-tray.el [2014-06-20 Пт 18:03]                                       :emacs:try:
