@@ -34,6 +34,7 @@
 (autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization."        t)
 (autoload 'whitespace-toggle-options "whitespace" "Toggle local `whitespace-mode' options." t)
 (autoload 'turn-on-eldoc-mode "eldoc" nil t)
+(autoload 'magit-status "magit" nil t)
 
 (eval-after-load "doxymacs"
   '(progn
@@ -86,16 +87,14 @@
     ))
 
 (eval-after-load "magit"
-  '(
-    (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
-    (global-set-key (kbd "C-c g s") 'magit-status)
-    (global-set-key (kbd "C-c g l") 'magit-file-log)
-    (global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
-    (global-set-key (kbd "C-c g r") 'magit-reflog)
-    (global-set-key (kbd "C-c g c") 'magit-checkout)
-    (global-set-key (kbd "C-c g r") 'magit-add-remote)
-    (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
-    ))
+  '(progn
+     (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
+     (global-set-key (kbd "C-c g l") 'magit-file-log)
+     (global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
+     (global-set-key (kbd "C-c g r") 'magit-reflog)
+     (global-set-key (kbd "C-c g c") 'magit-checkout)
+     (global-set-key (kbd "C-c g r") 'magit-add-remote)
+     ))
 
 (eval-after-load "git-gutter"
   '(progn
@@ -111,6 +110,9 @@
 (setq gdb-use-separate-io-buffer t)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain-merge)
+
+(global-set-key (kbd "C-c g s") 'magit-status)
+(global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
 
 (provide 'rc-programming)
 
