@@ -86,6 +86,11 @@
      (setq tramp-chunksize 500)
      ))
 
+(eval-after-load "wicd-mode"
+  '(progn
+     (global-set-key (kbd "C-c C-w") 'wicd-mode)
+     ))
+
 (provide 'rc-clients)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
