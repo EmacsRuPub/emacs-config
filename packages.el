@@ -149,6 +149,7 @@
         wc-mode
         wdired
         whole-line-or-region
+        wicd-mode
         window-number
         wrap-region
         yandex-weather
