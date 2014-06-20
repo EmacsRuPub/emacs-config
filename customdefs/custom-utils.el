@@ -482,6 +482,23 @@ point and around or after mark are interchanged."
                     (point-max)
                     file))))
 
+;TODO: maybe remove code duplication (watch similar functions over here)
+(defun file-string (file)
+    "Read the contents of a file and return as a string."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (buffer-string)))
+
+(defun custom/get-file-md5 ()
+  (interactive)
+  (when (derived-mode-p 'dired-mode)
+    (let ((abs-file-name (dired-get-filename)))
+      (unless (file-directory-p abs-file-name)
+        (with-temp-buffer
+          (let ((prefix-arg t))
+            (shell-command (format "md5sum %s" abs-file-name))
+            (buffer-string)))))))
+
 (provide 'custom-utils)
 
 ;;; util-various.el ends here

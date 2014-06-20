@@ -115,6 +115,7 @@
 
 (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
 (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
+(define-key dired-mode-map (kbd "C-c C-m") 'custom/get-file-md5)
 
 (provide 'rc-dired)
 
