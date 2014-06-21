@@ -9,19 +9,6 @@
 (require 'doxymacs)
 (require 'projectile)
 
-;; WARNING keep 'semantic' + 'ecb' clauses below
-(require 'semantic/analyze)
-(provide 'semantic-analyze)
-(provide 'semantic-ctxt)
-(provide 'semanticdb)
-(provide 'semanticdb-find)
-(provide 'semanticdb-mode)
-(provide 'semantic-load)
-;; fix for emacs 24
-(unless (boundp 'stack-trace-on-error)
-  (defvar stack-trace-on-error nil))
-(require 'ecb)
-
 (require 'filecache)
 (require 'imenu)
 (require 'compile)
@@ -36,6 +23,7 @@
 (autoload 'turn-on-eldoc-mode "eldoc" nil t)
 (autoload 'magit-status "magit" nil t)
 (autoload 'global-git-gutter-mode "git-gutter" nil t)
+(autoload 'ecb-activate "ecb" nil t)
 
 (eval-after-load "doxymacs"
   '(progn
@@ -65,7 +53,6 @@
 (eval-after-load "ecb"
   '(progn
      (global-set-key (kbd "C-x t q") 'ecb-toggle-ecb-windows)
-     (global-set-key (kbd "C-x t a") 'ecb-activate)
      (global-set-key (kbd "C-x t d") 'ecb-deactivate)
      ))
 
@@ -115,6 +102,7 @@
 
 (global-set-key (kbd "C-c g s") 'magit-status)
 (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
+(global-set-key (kbd "C-x t a") 'ecb-activate)
 
 (provide 'rc-programming)
 
