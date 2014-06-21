@@ -86,8 +86,9 @@
 
 (eval-after-load "git-gutter"
   '(progn
-     ;TODO: add keys for hunk navigation
      (setq git-gutter:modified-sign "?")
+     (global-set-key (kbd "C-c <prior>") 'git-gutter:next-hunk)
+     (global-set-key (kbd "C-c <next>") 'git-gutter:previous-hunk)
      (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
      (set-face-attribute 'git-gutter:added nil :inverse-video nil)
      (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
