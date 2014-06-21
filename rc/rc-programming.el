@@ -87,6 +87,11 @@
 (eval-after-load "git-gutter"
   '(progn
      ;TODO: add keys for hunk navigation
+     (setq git-gutter:modified-sign "?")
+     (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
+     (set-face-attribute 'git-gutter:added nil :inverse-video nil)
+     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
+     (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
      ))
 
 ;; TODO try to autoload someway
