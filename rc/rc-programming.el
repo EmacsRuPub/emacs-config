@@ -35,6 +35,7 @@
 (autoload 'whitespace-toggle-options "whitespace" "Toggle local `whitespace-mode' options." t)
 (autoload 'turn-on-eldoc-mode "eldoc" nil t)
 (autoload 'magit-status "magit" nil t)
+(autoload 'global-git-gutter-mode "git-gutter" nil t)
 
 (eval-after-load "doxymacs"
   '(progn
@@ -99,7 +100,6 @@
 (eval-after-load "git-gutter"
   '(progn
      ;TODO: add keys for hunk navigation
-     (global-git-gutter-mode +1)
      ))
 
 ;; TODO try to autoload someway
@@ -110,6 +110,8 @@
 (setq gdb-use-separate-io-buffer t)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain-merge)
+
+(global-git-gutter-mode +1)
 
 (global-set-key (kbd "C-c g s") 'magit-status)
 (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
