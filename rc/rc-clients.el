@@ -83,7 +83,6 @@
 (eval-after-load "tramp"
   '(progn
      (setq tramp-default-method "ssh")
-     (setq tramp-chunksize 500)
      ))
 
 (eval-after-load "wicd-mode"
