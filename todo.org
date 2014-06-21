@@ -113,3 +113,4 @@
 * TODO maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
 * TODO maybe fix invalid args messages in magit bisect
 * TODO find how to invert fg/bg for git-gutter with bbatsov's zenburn
+* TODO find how to suppress ecb dialog for upgraded settings on activate
