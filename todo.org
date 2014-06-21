@@ -111,3 +111,5 @@
 * TODO make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
 * TODO maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
+* TODO maybe fix invalid args messages in magit bisect
+* TODO find how to invert fg/bg for git-gutter with bbatsov's zenburn
