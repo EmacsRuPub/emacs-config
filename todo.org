@@ -51,7 +51,6 @@
   CLOSED: [2014-06-11 Ср 00:56]
   - State "DONE"       from "TODO"       [2014-06-11 Ср 00:56]
 * TODO structured parenthesis editing in python mode            :investigate:
-* TODO [#A] make *magit-process* more verbose                   :investigate:
 * TODO maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
 * TODO filter out obsolete items from totry.org                      :review:
@@ -67,7 +66,7 @@
 * TODO orgmode export                                                   :fix:
 * TODO review redmine + emacs connectivity options              :investigate:
 * TODO fix sudo-find-file (actually tramp) or substitute current implementation :fix:
-* TODO [#A] setup org refiling                           :investigate:review:
+* TODO [#B] setup org refiling                           :investigate:review:
 * TODO MAYBE add {todo.org, totry.org} to agenda                :investigate:
 * TODO think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
 * TODO check for options to move to crypted credentials              :review:
@@ -110,7 +109,7 @@
 * TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
 * TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
 * TODO search https://github.com/jorgenschaefer/elpy for some handy features to borrow
-* TODO [#A] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
+* TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
 * TODO maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
 * TODO maybe fix invalid args messages in magit bisect
