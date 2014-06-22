@@ -120,6 +120,10 @@
                                              (quote regexp) "<[^>\n]+>")))
                 (org-agenda-overriding-header "Unscheduled TODO entries: ")))
               ("jp" tags "+work+planning")
+              ("U" "Prioritized tasks"
+               ((tags-todo "+PRIORITY=\"A\"")
+                (tags-todo "+PRIORITY=\"B\"")
+                (tags-todo "+PRIORITY=\"C\"")))
               )))
 
 (setq org-insert-mode-line-in-empty-file t)
