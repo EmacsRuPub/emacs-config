@@ -307,3 +307,12 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** prodigy.el
 ** http://www.emacswiki.org/emacs/auto-yasnippet.el
 ** http://www.emacswiki.org/emacs-en/minibuffer-tray.el [2014-06-20 Пт 18:03]                                       :emacs:try:
+** https://github.com/paetzke/py-isort.el [2014-06-22 Вс 23:10]                                       :emacs:try:
+** https://github.com/syohex/emacs-helm-pydoc [2014-06-22 Вс 23:42]                                       :emacs:try:
+** https://github.com/benma/visual-regexp-steroids.el [2014-06-22 Вс 23:45]                                       :emacs:try:
+** https://github.com/benma/visual-regexp.el [2014-06-22 Вс 23:45]                                       :emacs:try:
+** http://www.emacswiki.org/emacs/python-magic.el [2014-06-22 Вс 23:45]                                       :emacs:try:
+** https://github.com/anaconda-mode/anaconda-mode [2014-06-22 Вс 23:55]                                       :emacs:try:
+** http://tkf.github.io/emacs-ipython-notebook/ [2014-06-23 Пн 00:00]                                       :emacs:try:
+** http://www.emacswiki.org/cgi-bin/wiki/goto-last-change.el [2014-06-23 Пн 00:21]                                       :emacs:try:
+** https://github.com/portante/pycscope [2014-06-23 Пн 00:24]                                       :emacs:try:

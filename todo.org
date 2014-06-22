@@ -52,7 +52,7 @@
   - State "DONE"       from "TODO"       [2014-06-11 Ср 00:56]
 * TODO structured parenthesis editing in python mode            :investigate:
 * TODO [#A] make *magit-process* more verbose                   :investigate:
-* TODO maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:
+* TODO maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
 * TODO filter out obsolete items from totry.org                      :review:
 * DONE place old emacs tickets org content here and organize         :review:
@@ -94,10 +94,10 @@
 * TODO some setup for autopairing + process regions (e.g. upcase) :investigate:
 * TODO maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
 * TODO consider using yas-selected-text in snippets             :investigate:
-* TODO ERC: separate list of joined channels to switch          :investigate:
-* TODO ERC: nick and other things highlighting
-* TODO ERC: modules
-* DONE ERC: navigate URLs as in jabber chats
+* TODO ERC: separate list of joined channels to switch      :investigate:erc:
+* TODO ERC: nick and other things highlighting                          :erc:
+* TODO ERC: modules                                                     :erc:
+* DONE ERC: navigate URLs as in jabber chats                            :erc:
   CLOSED: [2014-06-22 Вс 01:23]
   - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
 * TODO [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
@@ -107,8 +107,8 @@
 ** http://www.wickeddutch.com/2014/01/03/gaining-some-perspective-in-emacs/
 ** http://emacsrookie.com/2011/09/25/workspaces/
 ** https://github.com/pashinin/workgroups2
-* TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message")
-* TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself
+* TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
+* TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
 * TODO search https://github.com/jorgenschaefer/elpy for some handy features to borrow
 * TODO [#A] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
@@ -118,3 +118,9 @@
   CLOSED: [2014-06-22 Вс 01:16]
   - State "DONE"       from "TODO"       [2014-06-22 Вс 01:16]
 * TODO find how to suppress ecb dialog for upgraded settings on activate
+* TODO
+** http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
+** http://www.emacswiki.org/emacs/ShellMode#toc5
+** http://rope.sourceforge.net/ropemacs.html
+* TODO ERC: generalize credentials provision (e.g. for multiple accounts)[2014-06-23 Пн 00:18] :emacs:ticket:erc:
+* TODO ERC: bots [2014-06-23 Пн 00:22]                     :emacs:ticket:erc:
