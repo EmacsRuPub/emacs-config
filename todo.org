@@ -97,7 +97,9 @@
 * TODO ERC: separate list of joined channels to switch          :investigate:
 * TODO ERC: nick and other things highlighting
 * TODO ERC: modules
-* TODO ERC: navigate URLs as in jabber chats
+* DONE ERC: navigate URLs as in jabber chats
+  CLOSED: [2014-06-22 Вс 01:23]
+  - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
 * TODO advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
 * TODO review emacs-jedi for the subject of tweaking
 * TODO review extensions with "workgroups"-like functionality (again)
