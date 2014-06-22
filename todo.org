@@ -1,7 +1,7 @@
 * DONE rc-backups.el: move to settings                             :relocate:
   CLOSED: [2014-06-01 Вс 12:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
-* TODO rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
+* TODO [#C] rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
 * DONE rc-completion.el: extract yasnippet customdefs               :extract:
   CLOSED: [2014-06-01 Вс 20:53]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 20:53]
@@ -11,7 +11,7 @@
 * DONE rc-editing.el: extract editing customdefs (check if we can break something) :extract:
   CLOSED: [2014-06-19 Чт 23:39]
   - State "DONE"       from "TODO"       [2014-06-19 Чт 23:39]
-* TODO rc-elisp.el                                           :review:
+* TODO [#C] rc-elisp.el                                              :review:
 * DONE rc-generic.el: merge into editing                           :relocate:
   CLOSED: [2014-06-01 Вс 21:12]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:12]
@@ -21,9 +21,9 @@
 * DONE rc-gmail.el: merge into clients                             :relocate:
   CLOSED: [2014-06-19 Чт 23:50]
   - State "DONE"       from "TODO"       [2014-06-19 Чт 23:50]
-* TODO rc-haskell.el                         :review:extend:
-* TODO rc-headers.el         :review:relocate:
-* TODO rc-info.el: MAYBE rename (rc-help.el)                         :extend:
+* TODO [#C] rc-haskell.el                                     :review:extend:
+* TODO [#C] rc-headers.el                                   :review:relocate:
+* TODO [#B] rc-info.el: MAYBE rename (rc-help.el)                    :extend:
 ** MAYBE extend with help+ and other stuff alike
 * DONE rc-search.el: merge into navigate                           :relocate:
   CLOSED: [2014-06-01 Вс 21:45]
@@ -37,89 +37,99 @@
 * DONE rc-wincontrol.el: extract customdefs                         :extract:
   CLOSED: [2014-06-01 Вс 21:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
-* TODO completion: review template engines (tempo, yasnippet, etc.)  :review:
+* DONE completion: review template engines (tempo, yasnippet, etc.)  :review:
+  CLOSED: [2014-06-23 Пн 00:56]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
 * DONE navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere) :relocate:extract:
   CLOSED: [2014-06-04 Ср 13:54]
   - State "DONE"       from "TODO"       [2014-06-04 Ср 13:54]
-* TODO fix keyboard layout (particularly improper quoting in russian layout) :fix:
-* TODO fix tramp-based sudo-find-file or change underlying implementation :fix:
+* TODO [#B] fix keyboard layout (particularly improper quoting in russian layout) :fix:
+* DONE fix tramp-based sudo-find-file or change underlying implementation :fix:
+  CLOSED: [2014-06-23 Пн 00:56]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
 * DONE think of adding mode-specific TODO snippets to yasnippet      :extend:
   CLOSED: [2014-06-19 Чт 23:42]
   - State "DONE"       from "TODO"       [2014-06-19 Чт 23:42]
-* TODO check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
+* TODO [#B] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
 * DONE unset <Tab> as 'yas-expand binding                               :fix:
   CLOSED: [2014-06-11 Ср 00:56]
   - State "DONE"       from "TODO"       [2014-06-11 Ср 00:56]
-* TODO structured parenthesis editing in python mode            :investigate:
-* TODO maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
-* TODO find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
-* TODO filter out obsolete items from totry.org                      :review:
+* TODO [#C] structured parenthesis editing in python mode       :investigate:
+* TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
+* TODO [#B] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
+* TODO [#A] filter out obsolete items from totry.org                 :review:
 * DONE place old emacs tickets org content here and organize         :review:
   CLOSED: [2014-06-08 Вс 16:44]
   - State "DONE"       from "TODO"       [2014-06-08 Вс 16:44]
-* TODO maybe generalize url opening someway for org mode and mode-agnostic :investigate:
-* TODO orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
+* TODO [#B] maybe generalize url opening someway for org mode and mode-agnostic :investigate:
+* TODO [#A] orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
   При открытии url с помощью C-c C-o (org-open-at-point)
   UTF8-escaped адреса открываются некорректно
   Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4
-* TODO MAYBE use history rotation in jabber.el              :investigate:fix:
-* TODO orgmode export                                                   :fix:
-* TODO review redmine + emacs connectivity options              :investigate:
-* TODO fix sudo-find-file (actually tramp) or substitute current implementation :fix:
+* TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
+* TODO [#A] orgmode export                                              :fix:
+* TODO [#B] review redmine + emacs connectivity options         :investigate:
 * TODO [#B] setup org refiling                           :investigate:review:
-* TODO MAYBE add {todo.org, totry.org} to agenda                :investigate:
-* TODO think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
-* TODO check for options to move to crypted credentials              :review:
-* TODO find out how to customize holidays in org-mode       :investigate:fix:
-* TODO maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
-* TODO some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
-* TODO MAYBE some setup above emacs registers                   :investigate:
-* TODO some setup for Wanderlust (and probably org-mode integration) :investigate:review:
-* TODO Wanderlust: fix std11 encoding problem in mail headers           :fix:
-* TODO Erlang setup: review and extend (from inventory or right there) :review:extend:
-* TODO Messages for package app-text/xdvik-22.84.16:   :emacs:ticket:tex:old:
+* DONE MAYBE add {todo.org, totry.org} to agenda                :investigate:
+  CLOSED: [2014-06-23 Пн 00:58]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:58]
+* TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
+* TODO [#A] check for options to move to crypted credentials         :review:
+* TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
+* TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
+* TODO [#B] some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
+* TODO [#C] MAYBE some setup above emacs registers              :investigate:
+* TODO [#C] some setup for Wanderlust (and probably org-mode integration) :investigate:review:
+* TODO [#C] Wanderlust: fix std11 encoding problem in mail headers      :fix:
+* TODO [#C] Erlang setup: review and extend (from inventory or right there) :review:extend:
+* TODO [#C] Messages for package app-text/xdvik-22.84.16: :emacs:ticket:tex:old:
     * Add
     *      (add-to-list 'load-path "/usr/share/emacs/site-lisp/tex-utils")
     *      (require 'xdvi-search)
     * to your ~/.emacs file
-* TODO w3m-emacs: setup, review, maybe view docs there, maybe customize keybindings :review:
-* TODO http://ru-emacs.livejournal.com/59415.html             :review:
-* TODO http://thread.gmane.org/gmane.emacs.devel/56602/focus=57384 :review:
-* TODO find out some (maybe, persistent) way to add file to org-agenda-files :investigate:
-* TODO w3m-emacs batch urls opening                             :investigate:
-* TODO org-mode tables setup                             :investigate:review:
-* TODO diary extension                                        :review:
-* TODO tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
-* TODO some setup for autopairing + process regions (e.g. upcase) :investigate:
-* TODO maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
-* TODO consider using yas-selected-text in snippets             :investigate:
-* TODO ERC: separate list of joined channels to switch      :investigate:erc:
-* TODO ERC: nick and other things highlighting                          :erc:
+* TODO [#C] w3m-emacs: setup, review, maybe view docs there, maybe customize keybindings :review:
+* TODO [#C] http://ru-emacs.livejournal.com/59415.html               :review:
+* TODO [#C] http://thread.gmane.org/gmane.emacs.devel/56602/focus=57384 :review:
+* TODO [#B] find out some (maybe, persistent) way to add file to org-agenda-files :investigate:
+* TODO [#C] w3m-emacs batch urls opening                        :investigate:
+* TODO [#C] org-mode tables setup                        :investigate:review:
+* TODO [#B] diary extension                                          :review:
+* TODO [#C] tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
+* TODO [#B] some setup for autopairing + process regions (e.g. upcase) :investigate:
+* TODO [#C] maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
+* TODO [#C] consider using yas-selected-text in snippets        :investigate:
+* DONE ERC: separate list of joined channels to switch      :investigate:erc:
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+* TODO [#A] ERC: nick and other things highlighting                     :erc:
 * TODO ERC: modules                                                     :erc:
 * DONE ERC: navigate URLs as in jabber chats                            :erc:
   CLOSED: [2014-06-22 Вс 01:23]
   - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
 * TODO [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
-* TODO review emacs-jedi for the subject of tweaking
-* TODO review extensions with "workgroups"-like functionality (again)
+* DONE review emacs-jedi for the subject of tweaking
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+* TODO [#C] review extensions with "workgroups"-like functionality (again)
 ** https://github.com/nex3/perspective-el
 ** http://www.wickeddutch.com/2014/01/03/gaining-some-perspective-in-emacs/
 ** http://emacsrookie.com/2011/09/25/workspaces/
 ** https://github.com/pashinin/workgroups2
-* TODO add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
-* TODO add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
-* TODO search https://github.com/jorgenschaefer/elpy for some handy features to borrow
+* TODO [#A] add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
+* TODO [#A] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
+* TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
 * TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
-* TODO extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
-* TODO maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
-* TODO maybe fix invalid args messages in magit bisect
+* DONE extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+* TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
+* TODO [#C] maybe fix invalid args messages in magit bisect
 * DONE find how to invert fg/bg for git-gutter with bbatsov's zenburn
   CLOSED: [2014-06-22 Вс 01:16]
   - State "DONE"       from "TODO"       [2014-06-22 Вс 01:16]
-* TODO find how to suppress ecb dialog for upgraded settings on activate
-* TODO
+* TODO [#B] find how to suppress ecb dialog for upgraded settings on activate
+* TODO [#C] emacs python integration
 ** http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
 ** http://www.emacswiki.org/emacs/ShellMode#toc5
 ** http://rope.sourceforge.net/ropemacs.html
-* TODO ERC: generalize credentials provision (e.g. for multiple accounts)[2014-06-23 Пн 00:18] :emacs:ticket:erc:
-* TODO ERC: bots [2014-06-23 Пн 00:22]                     :emacs:ticket:erc:
+* TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
