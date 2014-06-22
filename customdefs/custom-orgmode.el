@@ -27,6 +27,10 @@
   (replace-regexp-in-string
    "[:-]" "_" (symbol-value 'last-scrum-timestamp)))
 
+(defun custom/insert-scrum-timestamp-tag ()
+  (interactive)
+  (insert (custom/scrum-timestamp-as-tag)))
+
 ;; TODO maybe squash functions below some way
 (defun mark-with-finished-timestamp ()
   (interactive)
