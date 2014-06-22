@@ -17,6 +17,8 @@
 
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
+(setq jedi:goto-definition-marker-ring-length 32)
+
 
 ;; TODO maybe replace occur
 (defun custom/py-occur-definitions ()
@@ -53,6 +55,7 @@
   (define-key python-mode-map (kbd "C-c ]") 'python-nav-end-of-block)
   (define-key python-mode-map (kbd "C-M-f") 'python-nav-forward-sexp)
   (define-key python-mode-map (kbd "C-c 6") 'custom/insert-debugger-statements)
+  (define-key python-mode-map (kbd "C-c r") 'helm-jedi-related-names) ;NOTE: just to memory the existence for the first time
   (setq flycheck-checker 'python-flake8))
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
