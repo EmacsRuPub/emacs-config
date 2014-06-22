@@ -69,6 +69,9 @@
         (?C :foreground "#6f6f6f")))
 
 (setq org-agenda-files (all-files-under-dir-recursively org-dir "org"))
+;TODO: maybe do it less straightforward
+(add-to-list 'org-agenda-files (concat config-basedir "/todo.org"))
+(add-to-list 'org-agenda-files (concat config-basedir "/totry.org"))
 
 ; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
