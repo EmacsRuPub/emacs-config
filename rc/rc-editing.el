@@ -270,6 +270,7 @@
 
 (global-set-key (kbd "\C-c r c") (lambda () (interactive) (sudo-find-file "/etc/portage/make.conf")))
 (global-set-key (kbd "\C-c r m") (lambda () (interactive) (sudo-find-file "/etc/portage/package.mask/main")))
+(global-set-key (kbd "\C-c r M") (lambda () (interactive) (sudo-find-file "/etc/portage/package.unmask")))
 (global-set-key (kbd "\C-c r u") (lambda () (interactive) (sudo-find-file "/etc/portage/package.use")))
 (global-set-key (kbd "\C-c r l") (lambda () (interactive) (sudo-find-file "/etc/portage/package.license")))
 (global-set-key (kbd "\C-c r k") (lambda () (interactive) (sudo-find-file "/etc/portage/package.keywords")))
