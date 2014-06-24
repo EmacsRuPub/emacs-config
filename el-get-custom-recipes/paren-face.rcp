@@ -1,0 +1,4 @@
+(:name paren-face
+       :description "A face dedicated to lisp parentheses"
+       :type github
+       :pkgname "tarsius/paren-face")
