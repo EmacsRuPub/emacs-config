@@ -1,19 +1,9 @@
 * try						       :try:modes:extensions:
 ** http://www.emacswiki.org/emacs/CategorizingInformationManager [2012-07-26 Thu 23:14]					  :emacs:try:
-** http://emacswiki.org/emacs/GenericMode [2012-07-26 Thu 23:17]					  :emacs:try:
 ** http://www.emacswiki.org/emacs/MuMaMo [2012-07-26 Thu 23:32]					  :emacs:try:
-** http://www.emacswiki.org/emacs/PredictiveMode [2012-08-08 Wed 00:34]					  :emacs:try:
-** django-mode [2012-08-08 Wed 15:51] 				  :emacs:try:
-** xahk-mode.el
-** window+.el
-** thingatpt+.el
+** http://www.emacswiki.org/emacs/window+.el
+** http://www.emacswiki.org/emacs/thingatpt+.el
 ** http://emacswiki.org/emacs/strings.el
-** http://www.emacswiki.org/emacs/smart-operator.el
-** http://www.eskimo.com/~seldon/diminish.el
-**** ;; Diminish modeline clutter
-     (require 'diminish)
-     (diminish 'wrap-region-mode)
-     (diminish 'yas/minor-mode)
 ** http://www.emacswiki.org/emacs/SuperCite
 
 ;;; supercite.el ---
@@ -105,13 +95,6 @@
 ;;; rc-gpg.el ends here
 
 ** http://www.emacswiki.org/emacs/ProfileDotEmacs
-** http://emacswiki.org/emacs/lusty-explorer.el
-;; LustyExplorer
-(setq load-path (cons "~/.emacs.d/vendor/lusty-emacs" load-path))
-(require 'lusty-explorer)
-(when (featurep 'lusty-explorer)
-  (global-set-key "\C-x\C-f" 'lusty-file-explorer)
-  (global-set-key "\C-xb" 'lusty-buffer-explorer))
 ** http://emacswiki.org/emacs/WcheckMode
 ** https://github.com/emacsmirror/adaptive-wrap-prefix
     (require 'adaptive-wrap-prefix)
@@ -145,17 +128,7 @@
 
 ;;}}}
 
-** http://www.emacswiki.org/emacs/NyanMode
-    ;; nyan nyan nyan
-    (require 'nyan-mode)
-    (nyan-mode t)
-    (setq nyan-bar-length 15)
-** http://www.emacswiki.org/emacs/RainbowDelimiters
-    (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-
 ** http://www.emacswiki.org/emacs/PickBackup
-** http://www.emacswiki.org/emacs/FullAck
-** http://www.emacswiki.org/emacs/AutoInsertMode
 ** CEDET
 (require 'semantic/bovine/c)
 (require 'semantic/bovine/gcc)
@@ -230,22 +203,13 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
     "ignore case in cscope search"
      (when cscope-ignore-case
        (ad-set-arg 1 (cons "-C" (ad-get-arg 1))))))
-** someth for portage highlight
 ** http://www.emacswiki.org/emacs/TimeStamp
 (add-hook 'before-save-hook 'time-stamp)
 (setq time-stamp-active t
       time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S"
       time-stamp-start "[Uu]pdated\\(_at\\)?[ \t]*:?[ \t]+<"
       time-stamp-end ">")
-** http://emacswiki.org/emacs/HippieExpand
-** http://emacswiki.org/emacs/AutomaticFileHeaders
-** http://www.emacswiki.org/emacs/UnicodeFonts
-** http://www.emacswiki.org/emacs/DynamicFonts
-** http://www.emacswiki.org/emacs/UcsUtils
-** https://github.com/purcell/elisp-slime-nav
-** https://github.com/nex3/magithub/blob/master/magithub.el
-** http://www.emacswiki.org/emacs/ParenFace
-** https://github.com/wiedzmin/elpastebin
+** https://github.com/nicferrier/elpastebin
 ** https://code.google.com/p/emacs-freex/wiki/Introduction [2013-04-20 Сб 20:27]                                      :emacs:try:
 ** http://www.emacswiki.org/emacs/ScreencastMode [2013-04-21 Вс 21:10]                                      :emacs:try:
 ** http://elnode.org/ [2013-04-21 Вс 23:39]                                      :emacs:try:
@@ -253,8 +217,6 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** https://github.com/tlh/workgroups.el [2013-05-01 Ср 23:41]                                      :emacs:try:
 ** https://github.com/nex3/perspective-el [2013-05-02 Чт 00:19]                                      :emacs:try:
 ** http://www.emacswiki.org/emacs/workspaces.el [2013-05-02 Чт 00:22]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/oneonone.el [2013-05-02 Чт 13:36]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/OneOnOneEmacs [2013-05-02 Чт 16:22]                                      :emacs:try:
 ** http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/ [2013-05-22 Ср 00:57]                                      :emacs:try:
 ** http://www.gentei.org/~yuuji/software/windows.el [2013-06-11 Вт 21:33]                                      :emacs:try:
 ** http://www.emacswiki.org/emacs/EmacsEclim [2013-06-16 Вс 12:42]                                      :emacs:try:
