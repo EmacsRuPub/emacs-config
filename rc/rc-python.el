@@ -56,6 +56,7 @@
   (define-key python-mode-map (kbd "C-M-f") 'python-nav-forward-sexp)
   (define-key python-mode-map (kbd "C-c 6") 'custom/insert-debugger-statements)
   (define-key python-mode-map (kbd "C-c r") 'helm-jedi-related-names) ;NOTE: just to memory the existence for the first time
+  (flycheck-mode)
   (setq flycheck-checker 'python-flake8))
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)

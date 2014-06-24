@@ -59,7 +59,6 @@
 (eval-after-load "flycheck"
   '(progn
      (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-     (add-hook 'after-init-hook #'global-flycheck-mode)
      (setq flycheck-check-syntax-automatically '(idle-change))
 
      (global-set-key (kbd "C-x <up>") 'flycheck-previous-error)
