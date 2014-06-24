@@ -44,7 +44,6 @@
 
 (require 'uniquify)
 (require 'popwin)
-(require 'rainbow-delimiters)
 (require 'tail)
 
 (setq size-indication-mode t)
@@ -106,11 +105,6 @@
 (setq font-lock-maximum-decoration t)
 (setq color-theme-is-global t)
 (setq truncate-partial-width-windows nil)
-
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'php-mode-hook 'rainbow-delimiters-mode)
 
 (defun custom/after-init-hook ()
   (eval-after-load "diminish"
