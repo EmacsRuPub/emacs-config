@@ -133,3 +133,5 @@
 ** http://www.emacswiki.org/emacs/ShellMode#toc5
 ** http://rope.sourceforge.net/ropemacs.html
 * TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
+* TODO [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
+* TODO [#A] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:

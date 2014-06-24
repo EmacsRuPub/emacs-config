@@ -316,3 +316,4 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** http://tkf.github.io/emacs-ipython-notebook/ [2014-06-23 Пн 00:00]                                       :emacs:try:
 ** http://www.emacswiki.org/cgi-bin/wiki/goto-last-change.el [2014-06-23 Пн 00:21]                                       :emacs:try:
 ** https://github.com/portante/pycscope [2014-06-23 Пн 00:24]                                       :emacs:try:
+** http://www.emacswiki.org/emacs/HowmMode [2014-06-23 Пн 01:17]                                       :emacs:try:
