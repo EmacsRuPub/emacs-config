@@ -3,7 +3,6 @@
 ** http://www.emacswiki.org/emacs/MuMaMo [2012-07-26 Thu 23:32]					  :emacs:try:
 ** http://www.emacswiki.org/emacs/window+.el
 ** http://www.emacswiki.org/emacs/thingatpt+.el
-** http://emacswiki.org/emacs/strings.el
 ** http://www.emacswiki.org/emacs/SuperCite
 
 ;;; supercite.el ---
@@ -62,38 +61,6 @@
 
 ;;; supercite.el ends here
 
-** gpg 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; GPG
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (require 'epa-setup)
-;; (setq epg-gpg-program "gpg") ; why?
-
-;; hack to setenv GnuPG info in Emacs 23 on Mac,
-;; TODO: need alternative solution
-
-;; (setq ra/gpg-agent-info-file "~/.gpg-agent-info")
-;; (defun ra/gpg-agent-info-from-file (file)
-;;   "Reads the GnuPG agent info file and returns a list"
-;;   (with-temp-buffer
-;;     (insert-file-contents file)
-;;     (split-string (buffer-string) "\n" t)))
-;; (defun ra/gpg-agent-info (file)
-;;   "Sets environment variables in the GnuPG agent info file"
-;;   (mapcar '(lambda (gpg-info-pair)
-;;              (setenv (nth 0 gpg-info-pair) (nth 1 gpg-info-pair)))
-;;            (mapcar '(lambda (gpg-info-row)
-;;                       (split-string gpg-info-row "=" t))
-;;                    (ra/gpg-agent-info-from-file file))))
-;; (if (and (eq system-type 'darwin)
-;;          (file-readable-p ra/gpg-agent-info-file))
-;;     (ra/gpg-agent-info ra/gpg-agent-info-file)
-;;   )
-
-;;; rc-gpg.el ends here
-
 ** http://www.emacswiki.org/emacs/ProfileDotEmacs
 ** http://emacswiki.org/emacs/WcheckMode
 ** https://github.com/emacsmirror/adaptive-wrap-prefix
@@ -129,80 +96,6 @@
 ;;}}}
 
 ** http://www.emacswiki.org/emacs/PickBackup
-** CEDET
-(require 'semantic/bovine/c)
-(require 'semantic/bovine/gcc)
-(require 'semantic/bovine/clang)
-(require 'semantic/ia)
-(require 'semantic/decorate/include)
-(require 'semantic/lex-spp)
-(require 'eassist)
-
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-
-;; need to add CEDET contrib to bring in eassist
-(add-to-list 'load-path (expand-file-name
-(concat
-qdot/emacs-autoinst-elisp-dir "cedet/contrib")))
-
-;; (global-ede-mode 1)
-
-(setq-default semanticdb-default-save-directory "~/.emacs_meta/semanticdb/"
-semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
-
-(defun qdot/cedet-hook ()
-  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-  (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
-  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-  (local-set-key "\C-cj" 'semantic-ia-fast-jump)
-  (local-set-key "\C-cq" 'semantic-ia-show-doc)
-  (local-set-key "\C-cs" 'semantic-ia-show-summary)
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-  )
-(add-hook 'c-mode-common-hook 'qdot/cedet-hook)
-(add-hook 'lisp-mode-hook 'qdot/cedet-hook)
-(add-hook 'emacs-lisp-mode-hook 'qdot/cedet-hook)
-
-(defun qdot/c-mode-cedet-hook ()
-  (local-set-key (kbd "C-c o") 'eassist-switch-h-cpp)
-  (local-set-key (kbd "C-c C-r") 'semantic-symref))
-(add-hook 'c-mode-common-hook 'qdot/c-mode-cedet-hook)
-** cscope
-(defun iy-el-get-after-xcscope ()
-  (defcustom cscope-ignore-case t
-    "*Whether to ignore case while searching."
-    :group 'cscope
-    :type 'boolean)
-
-  (defun cscope-toggle-case ()
-    (interactive)
-    (setq cscope-ignore-case (not cscope-ignore-case))
-    (cscope-tell-ignore-case))
-  (defun cscope-tell-ignore-case ()
-    (interactive)
-    (message "Cscope Ignore Case (%s)"
-              (if cscope-ignore-case "Enable" "Disable")))
-
-  (define-key cscope:map "\C-csv" 'cscope-toggle-case)
-  (define-key cscope:map "\C-csV" 'cscope-tell-ignore-case)
-  (define-key cscope-list-entry-keymap "v" 'cscope-toggle-case)
-  (define-key cscope-list-entry-keymap "V" 'cscope-tell-ignore-case)
-
-  (defadvice cscope-call (before ignore-case activate)
-    "ignore case in cscope search"
-     (when cscope-ignore-case
-       (ad-set-arg 1 (cons "-C" (ad-get-arg 1))))))
 ** http://www.emacswiki.org/emacs/TimeStamp
 (add-hook 'before-save-hook 'time-stamp)
 (setq time-stamp-active t
@@ -229,7 +122,6 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** https://raw.github.com/emacsmirror/emacswiki.org/master/win-switch.el [2014-02-04 Вт 16:12]                                      :emacs:try:
 ** https://github.com/purcell/capture.el [2014-02-12 Ср 15:13]                                      :emacs:try:
 ** https://github.com/purcell/wolfram-mode [2014-02-12 Ср 15:37]                                      :emacs:try:
-** https://github.com/purcell/ido-at-point [2014-02-12 Ср 15:38]                                      :emacs:try:
 ** https://github.com/purcell/flymake-easy [2014-02-12 Ср 15:39]                                      :emacs:try:
 ** https://github.com/purcell/emacs-plsense [2014-02-12 Ср 15:39]                                      :emacs:try:
 ** https://github.com/purcell/emacs-wonderland [2014-02-12 Ср 15:40]                                      :emacs:try:
@@ -237,7 +129,6 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** https://github.com/purcell/ix.el [2014-02-12 Ср 15:54]                                      :emacs:try:
 ** https://github.com/purcell/evil-matchit [2014-02-12 Ср 16:01]                                      :emacs:try:
 ** https://github.com/purcell/projector.el [2014-02-12 Ср 16:03]                                      :emacs:try:
-** https://github.com/purcell/shampoo-emacs [2014-02-12 Ср 16:13]                                      :emacs:try:
 ** https://github.com/purcell/helm-c-moccur.el [2014-02-12 Ср 16:16]                                      :emacs:try:
 ** https://github.com/purcell/string-inflection [2014-02-12 Ср 16:17]                                      :emacs:try:
 ** https://github.com/purcell/ac-js2 [2014-02-12 Ср 16:22]                                      :emacs:try:
@@ -248,12 +139,9 @@ semanticdb-default-system-save-directory "~/.emacs_meta/semanticdb/")
 ** https://github.com/purcell/el-spice [2014-02-12 Ср 16:47]                                      :emacs:try:
 ** https://github.com/purcell/helm-dictionary [2014-02-12 Ср 16:47]                                      :emacs:try:
 ** https://github.com/purcell/mmm-mode [2014-02-12 Ср 16:47]                                      :emacs:try:
-** https://github.com/purcell/paredit-everywhere [2014-02-12 Ср 17:21]                                      :emacs:try:
-** org-attach [2014-02-24 Пн 01:59]                              :emacs:try:
 ** https://github.com/abo-abo/lispy [2014-03-04 Вт 19:29]                                      :emacs:try:
 ** lisp/ses.el [2014-03-11 Вт 19:03]                             :emacs:try:
-** http://paul.elms.pro/blog/2013/04/11/emacs-theme-change/ [2014-03-13 Чт 02:05]                                      :emacs:try:
-** https://github.com/chrisbarrett/emacs-refactor?goback=.gde_1058217_member_266626534 [2014-03-13 Чт 14:21]                                      :emacs:try:
+** https://github.com/chrisbarrett/emacs-refactor [2014-03-13 Чт 14:21]                                      :emacs:try:
 ** http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/ [2014-03-28 Пт 01:14]                                      :emacs:try:
 ** https://github.com/emacsattic/bind-key [2014-04-03 Чт 19:16]                                      :emacs:try:
 ** https://github.com/jwiegley/use-package [2014-04-03 Чт 19:16]                                      :emacs:try:
