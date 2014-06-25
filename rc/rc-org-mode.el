@@ -22,35 +22,6 @@
 ;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "GOING(g)" "WAITING(w@)" "LATER(l)"
-                  "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELLED(c@)")
-        (sequence "NEW(n)" "INPROGRESS(p)" "CHECKING(r)" "REWORK(f)" "|" "CLOSED(k)")))
-
-(setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "STARTED(s)")))
-(setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
-
-(setq org-agenda-time-grid
-      '((daily today require-timed remove-match)
-        "----------------"
-        (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
-
-(setq org-todo-keyword-faces
-      '(("TODO" . (:foreground "red" :weight bold))
-        ("WAITING" . (:foreground "orange" :weight bold))
-        ("DONE" . (:foreground "green" :weight bold))
-        ("CANCELLED" . (:foreground "cyan" :weight bold))
-        ("NEW" . (:foreground "red" :weight bold))
-        ("INPROGRESS" . (:foreground "yellow" :weight bold))
-        ("CHECKING" . (:foreground "orange" :weight bold))
-        ("REWORK" . (:foreground "red" :weight bold))
-        ("CLOSED" . (:foreground "green" :weight bold))))
-
-(setq org-priority-faces
-      '((?A :foreground "red" :weight bold)
-        (?B :foreground "#94bff3" :weight bold)
-        (?C :foreground "#6f6f6f")))
-
 (setq org-agenda-files (all-files-under-dir-recursively org-dir "org"))
 ;TODO: maybe do it less straightforward
 (add-to-list 'org-agenda-files (concat config-basedir "/todo.org"))
@@ -60,7 +31,6 @@
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
 (setq org-refile-use-outline-path (quote file))
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
-
 (setq org-agenda-span 'month)
 (setq org-deadline-warning-days 14)
 (setq org-agenda-show-all-dates t)
@@ -82,37 +52,60 @@
 (setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-enforce-todo-dependencies t)
-
-(setq org-agenda-custom-commands
-      (quote (("d" todo "DELEGATED" nil)
-              ("c" todo "DONE|DEFERRED|CANCELLED" nil)
-              ("w" todo "WAITING" nil)
-              ("et" tags "+ticket+emacs")
-              ("xt" tags "+ticket+xmonad")
-              ("W" agenda "" ((org-agenda-ndays 21)))
-              ("A" agenda ""
-               ((org-agenda-skip-function
-                 (lambda nil
-                   (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-                (org-agenda-ndays 1)
-                (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-              ("u" alltodo ""
-               ((org-agenda-skip-function
-                 (lambda nil
-                   (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-                                             (quote regexp) "<[^>\n]+>")))
-                (org-agenda-overriding-header "Unscheduled TODO entries: ")))
-              ("jp" tags "+work+planning")
-              ("U" "Prioritized tasks"
-               ((tags-todo "+PRIORITY=\"A\"")
-                (tags-todo "+PRIORITY=\"B\"")
-                (tags-todo "+PRIORITY=\"C\"")))
-              )))
-
+(setq org-default-notes-file custom/org-capture-file)
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation
 (setq org-ditaa-jar-path (concat config-basedir "resources/ditaa0_9.jar"))
 
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "GOING(g)" "WAITING(w@)" "LATER(l)"
+                  "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELLED(c@)")
+        (sequence "NEW(n)" "INPROGRESS(p)" "CHECKING(r)" "REWORK(f)" "|" "CLOSED(k)")))
+(setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "GOING(g)"
+                                               "NEW(n)" "INPROGRESS(p)" "REWORK(f)")))
+(setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
+(setq org-agenda-time-grid
+      '((daily today require-timed remove-match)
+        "----------------"
+        (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "red" :weight bold))
+        ("NEW" . (:foreground "red" :weight bold))
+        ("REWORK" . (:foreground "red" :weight bold))
+        ("INPROGRESS" . (:foreground "yellow" :weight bold))
+        ("WAITING" . (:foreground "orange" :weight bold))
+        ("CANCELLED" . (:foreground "cyan" :weight bold))
+        ("CHECKING" . (:foreground "orange" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CLOSED" . (:foreground "green" :weight bold))))
+(setq org-priority-faces
+      '((?A :foreground "red" :weight bold)
+        (?B :foreground "#94bff3" :weight bold)
+        (?C :foreground "#6f6f6f")))
+(setq org-agenda-custom-commands
+      '(("c" todo "DONE|SOMEDAY|CANCELLED|CLOSED" nil)
+        ("w" todo "WAITING|LATER" nil)
+        ("W" agenda "" ((org-agenda-ndays 21)))
+        ("A" agenda ""
+         ((org-agenda-skip-function
+           (lambda nil
+             (org-agenda-skip-entry-if 'notregexp)))
+          (org-agenda-ndays 1)
+          (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+        ("u" alltodo ""
+         ((org-agenda-skip-function
+           (lambda nil
+             (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
+                                       (quote regexp) "<[^>\n]+>")))
+          (org-agenda-overriding-header "Unscheduled TODO entries: ")))
+        ("U" "Prioritized tasks"
+         ((tags-todo "+PRIORITY=\"A\"")
+          (tags-todo "+PRIORITY=\"B\"")
+          (tags-todo "+PRIORITY=\"C\"")))
+        ("jp" tags "+work+planning")
+        ("te" tags "+ticket+emacs")
+        ("tx" tags "+ticket+xmonad")
+        ))
 (setq org-capture-templates
       (quote
        (("d" "todo")
@@ -141,13 +134,11 @@
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         )))
 
-
 ;#############################################################################
 ;#   Setup
 ;############################################################################
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-
 (load (concat config-basedir "last-scrum-timestamp"))
 
 ;#############################################################################
@@ -165,14 +156,10 @@
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 
-(setq org-default-notes-file custom/org-capture-file)
-
-(global-set-key (kbd "C-c e") 'org-capture)
-
-
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
+(global-set-key (kbd "C-c e") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
