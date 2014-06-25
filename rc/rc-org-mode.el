@@ -18,23 +18,6 @@
 (require 'org-pomodoro)
 
 ;#############################################################################
-;#   Custom definitions
-;############################################################################
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40"))
-
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40")
-  )
-
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40")
-  )
-
-
-;#############################################################################
 ;#   Customizations
 ;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
@@ -175,21 +158,6 @@
   (local-unset-key (kbd "C-c ["))
   (local-unset-key (kbd "C-c ]"))
   (imenu-add-to-menubar "Imenu"))
-
-(defun custom/org-todo-changed-hook ()
-  "Remove :current: tag, when DONE"
-  ;; TODO generalize
-  (let ((tags (org-get-tags)))
-    (when (and (equal org-state "DONE")
-               (member "current" tags))
-      (org-set-tags-to (delete "current" tags)))))
-
-;; Remove empty CLOCK drawers on clock out
-(defun custom/remove-empty-drawer-on-clock-out ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line 0)
-    (org-remove-empty-drawer-at "CLOCK" (point))))
 
 (add-hook 'org-mode-hook 'custom/org-mode-hook)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
