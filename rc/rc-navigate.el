@@ -20,7 +20,18 @@
      (require 'helm-info)
      (require 'helm-locate)
      (require 'helm-misc)
+     (require 'helm-recentd)
+     (setq helm-recentd--action
+           (append
+            helm-recentd--action
+            (cond ((executable-find "urxvt")
+                   '(("Open in Urxvt"
+                      . (lambda (ignored)
+                          (shell-command (format "urxvt -e $SHELL -c 'cd %s && $SHELL' &"
+                                                 (helm-recentd--get-target-string))))))))))
+     (setq helm-recentd-sort 'frequency)
      (global-set-key (kbd "C-&") 'custom-helm)
+     (global-set-key (kbd "C-x C-d") 'helm-recentd)
      ))
 
 (eval-after-load "ido"

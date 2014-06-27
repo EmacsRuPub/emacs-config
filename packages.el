@@ -72,6 +72,7 @@
         google-contacts
         haskell-mode
         header2
+        helm-recentd
         helm-swoop
         highlight-symbol
         hl-line+
