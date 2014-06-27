@@ -115,6 +115,10 @@
 ** http://www.wickeddutch.com/2014/01/03/gaining-some-perspective-in-emacs/
 ** http://emacsrookie.com/2011/09/25/workspaces/
 ** https://github.com/pashinin/workgroups2
+** http://www.gentei.org/~yuuji/software/windows.el
+** https://github.com/tlh/workgroups.el
+** https://github.com/nex3/perspective-el
+** http://www.emacswiki.org/emacs/workspaces.el
 * TODO [#A] add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
 * TODO [#A] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
