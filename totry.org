@@ -1,88 +1,30 @@
 * try						       :try:modes:extensions:
-** http://www.emacswiki.org/emacs/window+.el
-** http://www.emacswiki.org/emacs/SuperCite
-** http://www.emacswiki.org/emacs/ProfileDotEmacs
-** http://emacswiki.org/emacs/WcheckMode
-** https://github.com/emacsmirror/adaptive-wrap-prefix
-    (require 'adaptive-wrap-prefix)
-    (global-adaptive-wrap-prefix-mode 1)
-    (setq visual-line-fringe-indicators '(nil right-curly-arrow))
-** https://github.com/doitian/alternative-files-el
-;;{{{ Alternative File
-
-(push 'alternative-files el-get-packages)
-(define-key iy-map "a" 'alternative-files-find-file)
-(define-key iy-map (kbd "M-a") 'alternative-files-find-file)
-(define-key iy-map (kbd "A") 'alternative-files-create-file)
-
-(defun alternative-files-factories-finder (&optional file)
-  (let ((file (or file (alternative-files--detect-file-name))))
-    (cond
-     ((string-match "^\\(.*\\)/app/models/\\(.+\\)\\.rb$" file)
-      (let ((root (match-string 1 file))
-            (name (match-string 2 file)))
-        (list
-         (concat root "/spec/factories/" (alternative-files--pluralize-string name) ".rb"))))
-
-     ((string-match "^\\(.*\\)/spec/factories/\\(.+\\).rb$" file)
-      (let ((root (match-string 1 file))
-            (name (match-string 2 file)))
-        (list
-         (concat root "/app/models/" (alternative-files--singularize-string name) ".rb")))))))
-
-(defun iy-el-get-after-alternative-files ()
-  (push 'alternative-files-factories-finder alternative-files-functions))
-
-;;}}}
-
-** http://www.emacswiki.org/emacs/PickBackup
-** https://github.com/nicferrier/elpastebin
-** https://code.google.com/p/emacs-freex/wiki/Introduction [2013-04-20 Сб 20:27]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/ScreencastMode [2013-04-21 Вс 21:10]                                      :emacs:try:
-** http://elnode.org/ [2013-04-21 Вс 23:39]                                      :emacs:try:
-** https://github.com/zk-phi/phi-search.git [2013-05-01 Ср 09:49]                                      :emacs:try:
-** http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/ [2013-05-22 Ср 00:57]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/EmacsEclim [2013-06-16 Вс 12:42]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/VisibleMark [2013-06-16 Вс 14:16]                                      :emacs:try:
-** [#B] https://github.com/overtone/emacs-live [2013-06-16 Вс 16:06] :emacs:try:
-** https://github.com/kiwanami/emacs-ctable [2014-02-04 Вт 16:11]                                      :emacs:try:
-** https://raw.github.com/emacsmirror/emacswiki.org/master/win-switch.el [2014-02-04 Вт 16:12]                                      :emacs:try:
-** https://github.com/purcell/wolfram-mode [2014-02-12 Ср 15:37]                                      :emacs:try:
-** https://github.com/purcell/flymake-easy [2014-02-12 Ср 15:39]                                      :emacs:try:
-** https://github.com/purcell/emacs-wonderland [2014-02-12 Ср 15:40]                                      :emacs:try:
-** https://github.com/purcell/ix.el [2014-02-12 Ср 15:54]                                      :emacs:try:
-** https://github.com/purcell/evil-matchit [2014-02-12 Ср 16:01]                                      :emacs:try:
-** https://github.com/purcell/projector.el [2014-02-12 Ср 16:03]                                      :emacs:try:
-** https://github.com/purcell/helm-c-moccur.el [2014-02-12 Ср 16:16]                                      :emacs:try:
-** https://github.com/purcell/string-inflection [2014-02-12 Ср 16:17]                                      :emacs:try:
-** https://github.com/purcell/ac-js2 [2014-02-12 Ср 16:22]                                      :emacs:try:
-** https://github.com/purcell/ibuffer-vc [2014-02-12 Ср 16:43]                                      :emacs:try:
-** https://github.com/purcell/frame-restore.el/blob/master/frame-restore.el [2014-02-12 Ср 16:44]                                      :emacs:try:
-** https://github.com/purcell/password-vault [2014-02-12 Ср 16:45]                                      :emacs:try:
-** https://github.com/purcell/ace-jump-buffer [2014-02-12 Ср 16:45]                                      :emacs:try:
-** https://github.com/purcell/helm-dictionary [2014-02-12 Ср 16:47]                                      :emacs:try:
-** https://github.com/purcell/mmm-mode [2014-02-12 Ср 16:47]                                      :emacs:try:
-** lisp/ses.el [2014-03-11 Вт 19:03]                             :emacs:try:
-** https://github.com/chrisbarrett/emacs-refactor [2014-03-13 Чт 14:21]                                      :emacs:try:
-** http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/ [2014-03-28 Пт 01:14]                                      :emacs:try:
-** https://github.com/jwiegley/use-package [2014-04-03 Чт 19:16]                                      :emacs:try:
-** http://www.emacswiki.org/emacs/GoogleClient [2014-04-04 Пт 23:19]                                      :emacs:try:
-** http://chrisdone.com/posts/god-mode [2014-05-20 Вт 19:36]                                      :emacs:try:
-** https://github.com/ShingoFukuyama/matchar [2014-06-04 Ср 13:22]                                      :emacs:try:
-** https://github.com/clojure-emacs
-** https://github.com/clojure/tools.nrepl
-** http://www.emacswiki.org/emacs/DiredSorting
-** prodigy.el
-** http://www.emacswiki.org/emacs/auto-yasnippet.el
-** http://www.emacswiki.org/emacs-en/minibuffer-tray.el [2014-06-20 Пт 18:03]                                       :emacs:try:
-** https://github.com/paetzke/py-isort.el [2014-06-22 Вс 23:10]                                       :emacs:try:
-** https://github.com/syohex/emacs-helm-pydoc [2014-06-22 Вс 23:42]                                       :emacs:try:
-** https://github.com/benma/visual-regexp-steroids.el [2014-06-22 Вс 23:45]                                       :emacs:try:
-** https://github.com/benma/visual-regexp.el [2014-06-22 Вс 23:45]                                       :emacs:try:
-** http://www.emacswiki.org/emacs/python-magic.el [2014-06-22 Вс 23:45]                                       :emacs:try:
-** https://github.com/anaconda-mode/anaconda-mode [2014-06-22 Вс 23:55]                                       :emacs:try:
-** http://www.emacswiki.org/cgi-bin/wiki/goto-last-change.el [2014-06-23 Пн 00:21]                                       :emacs:try:
-** https://github.com/portante/pycscope [2014-06-23 Пн 00:24]                                       :emacs:try:
-** http://www.emacswiki.org/emacs/HowmMode [2014-06-23 Пн 01:17]                                       :emacs:try:
-** https://github.com/chriskempson/tomorrow-theme
-** https://github.com/gabrielelanaro/emacs-for-python
+** [#C] http://www.emacswiki.org/emacs/PickBackup
+** [#C] https://code.google.com/p/emacs-freex/wiki/Introduction [2013-04-20 小斜 20:27] :emacs:try:
+** [#C] https://github.com/zk-phi/phi-search.git [2013-05-01 小褉 09:49] :emacs:try:
+** [#C] http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/ [2013-05-22 小褉 00:57] :emacs:try:
+** [#C] http://www.emacswiki.org/emacs/VisibleMark [2013-06-16 袙褋 14:16] :emacs:try:
+** [#B] https://github.com/overtone/emacs-live [2013-06-16 袙褋 16:06] :emacs:try:
+** [#C] https://github.com/kiwanami/emacs-ctable [2014-02-04 袙褌 16:11] :emacs:try:
+** [#C] https://github.com/purcell/evil-matchit [2014-02-12 小褉 16:01] :emacs:try:
+** [#C] https://github.com/purcell/projector.el [2014-02-12 小褉 16:03] :emacs:try:
+** [#C] https://github.com/purcell/helm-c-moccur.el [2014-02-12 小褉 16:16] :emacs:try:
+** [#C] https://github.com/purcell/string-inflection [2014-02-12 小褉 16:17] :emacs:try:
+** [#C] https://github.com/purcell/ac-js2 [2014-02-12 小褉 16:22] :emacs:try:
+** [#C] https://github.com/purcell/ibuffer-vc [2014-02-12 小褉 16:43] :emacs:try:
+** [#B] https://github.com/purcell/ace-jump-buffer [2014-02-12 小褉 16:45] :emacs:try:
+** [#B] https://github.com/purcell/helm-dictionary [2014-02-12 小褉 16:47] :emacs:try:
+** [#A] https://github.com/purcell/mmm-mode [2014-02-12 小褉 16:47] :emacs:try:
+** [#C] http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet [2014-03-11 袙褌 19:03] :emacs:try:
+** [#C] https://github.com/chrisbarrett/emacs-refactor [2014-03-13 效褌 14:21] :emacs:try:
+** [#C] http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/ [2014-03-28 袩褌 01:14] :emacs:try:
+** [#B] https://github.com/jwiegley/use-package [2014-04-03 效褌 19:16] :emacs:try:
+** [#B] https://github.com/ShingoFukuyama/matchar [2014-06-04 小褉 13:22] :emacs:try:
+** [#B] http://www.emacswiki.org/emacs/DiredSorting
+** [#B] https://github.com/rejeep/prodigy.el
+** [#C] https://github.com/syohex/emacs-helm-pydoc [2014-06-22 袙褋 23:42] :emacs:try:
+** [#C] http://www.emacswiki.org/emacs/python-magic.el [2014-06-22 袙褋 23:45] :emacs:try:
+** [#B] http://www.emacswiki.org/cgi-bin/wiki/goto-last-change.el [2014-06-23 袩薪 00:21] :emacs:try:
+** [#C] http://www.emacswiki.org/emacs/HowmMode [2014-06-23 袩薪 01:17] :emacs:try:
+** [#C] https://github.com/chriskempson/tomorrow-theme
+** [#C] https://github.com/chriskempson/base16
