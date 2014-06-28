@@ -1,0 +1,5 @@
+(:name helm-recentd
+       :description "Save directory history to file, and view with helm. Emacs"
+       :type github
+       :pkgname "ShingoFukuyama/helm-recentd"
+       :depends helm)
