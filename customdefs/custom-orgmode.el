@@ -70,6 +70,15 @@
   (let ((org-refile-targets `((,(concat org-dir "/job/done.org") :level . 1))))
     (call-interactively 'org-refile)))
 
+(defadvice browse-url-at-point (before org-position-url activate)
+  (when (derived-mode-p 'org-mode)
+    (let ((end nil))
+      (save-excursion
+        (org-back-to-heading t)
+        (setq end (save-excursion (outline-next-heading) (point))))
+      (org-back-to-heading t)
+      (re-search-forward url-regexp end t))))
+
 ;; TODO some handle for getting 'done' tasks within particular time range
 ;; TODO some tag for those tasks not directly needed for job tasks (e.g. my own setups, ssh, etc)
 ;; TODO save done.org after refiling finished
