@@ -119,7 +119,7 @@
         ("dp" "project ideas" entry (file (concat org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
         ("dx" "xmonad tickets" entry (file+headline (concat org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
         ("ds" "stumpwm tickets" entry (file+headline (concat org-dir "/projects/config/stumpwm.org") "tickets") "* %? %U :stumpwm:ticket:")
-        ("dw" "workplace fixes" entry (file (concat org-dir "/workplace-fixes.org")) "* TODO %? %U :workplace:")
+        ("dw" "workplace tasks" entry (file (concat org-dir "/workplace-tasks.org")) "* TODO %? %U :workplace:")
         ("j" "job")
         ("ji" "issues" entry (file+headline (concat org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
         ("jp" "plan" entry (file (concat org-dir "/job/plan.org")) "* TODO %? %U :work:planning:%(custom/scrum-timestamp-as-tag):")
