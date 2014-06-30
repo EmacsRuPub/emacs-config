@@ -115,7 +115,6 @@
         ("de" "emacs")
         ("det" "emacs todo" entry (file (concat config-basedir "/todo.org")) "* TODO %? %U :emacs:ticket:")
         ("dey" "emacs try" entry (file+headline (concat config-basedir "/totry.org") "try") "* %? %U :emacs:try:")
-        ("dm" "system maintaining" entry (file+headline (concat org-dir "/projects/config/linux-system.org") "raw tickets") "* TODO %? %U :todo:system:")
         ("dp" "project ideas" entry (file (concat org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
         ("dx" "xmonad tickets" entry (file+headline (concat org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
         ("ds" "stumpwm tickets" entry (file+headline (concat org-dir "/projects/config/stumpwm.org") "tickets") "* %? %U :stumpwm:ticket:")
