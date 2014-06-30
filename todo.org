@@ -69,7 +69,10 @@
   CLOSED: [2014-06-08 Вс 16:44]
   - State "DONE"       from "TODO"       [2014-06-08 Вс 16:44]
 * TODO [#B] maybe generalize url opening someway for org mode and mode-agnostic :investigate:
-* TODO [#A] orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
+* DONE [#A] orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
+  CLOSED: [2014-06-30 Пн 19:36]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:36]
+    substituted by 'browse-url-at-point
   При открытии url с помощью C-c C-o (org-open-at-point)
   UTF8-escaped адреса открываются некорректно
   Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4

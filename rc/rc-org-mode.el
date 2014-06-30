@@ -147,6 +147,8 @@
   (local-set-key (kbd "C-x C-a") 'show-all)
   (local-unset-key (kbd "C-c ["))
   (local-unset-key (kbd "C-c ]"))
+  (local-unset-key (kbd "C-c C-o"))
+  (local-set-key (kbd "C-c C-o C-l") 'browse-url-at-point)
   (imenu-add-to-menubar "Imenu"))
 
 (add-hook 'org-mode-hook 'custom/org-mode-hook)
