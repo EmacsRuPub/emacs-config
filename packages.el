@@ -21,6 +21,7 @@
         auto-complete-nxml
         auto-complete-rst
         auto-complete-yasnippet
+        bm
         bookmark+
         breadcrumb
         browse-kill-ring

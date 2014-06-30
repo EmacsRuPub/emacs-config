@@ -31,6 +31,8 @@
      (add-hook 'kill-emacs-hook '(lambda nil
                                    (bm-buffer-save-all)
                                    (bm-repository-save)))
+     (set-face-attribute 'bm-face nil :foreground "yellow" :inverse-video nil)
+     (set-face-attribute 'bm-persistent-face nil :foreground "yellow" :inverse-video nil)
      (global-set-key (kbd "<M-f2>") 'bm-toggle)
      (global-set-key (kbd "<f2>")   'bm-next)
      (global-set-key (kbd "<S-f2>") 'bm-previous)
