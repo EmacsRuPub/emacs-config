@@ -43,7 +43,10 @@
 * DONE navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere) :relocate:extract:
   CLOSED: [2014-06-04 Ср 13:54]
   - State "DONE"       from "TODO"       [2014-06-04 Ср 13:54]
-* TODO [#B] fix keyboard layout (particularly improper quoting in russian layout) :fix:
+* DONE [#A] fix keyboard layout (particularly improper quoting in russian layout) :fix:
+  CLOSED: [2014-06-30 Пн 16:00]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 16:00]
+** HINT /etc/X11/xorg.conf.d/input.conf
 * DONE fix tramp-based sudo-find-file or change underlying implementation :fix:
   CLOSED: [2014-06-23 Пн 00:56]
   - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
@@ -57,7 +60,9 @@
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#B] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
-* TODO [#A] filter out obsolete items from totry.org                 :review:
+* DONE [#A] filter out obsolete items from totry.org                 :review:
+  CLOSED: [2014-06-28 Сб 13:30]
+  - State "DONE"       from "TODO"       [2014-06-28 Сб 13:30]
 * DONE place old emacs tickets org content here and organize         :review:
   CLOSED: [2014-06-08 Вс 16:44]
   - State "DONE"       from "TODO"       [2014-06-08 Вс 16:44]
@@ -76,8 +81,10 @@
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
 * TODO [#A] check for options to move to crypted credentials         :review:
 * TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
+** C-h v calendar-holidays
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
 * TODO [#B] some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
+** http://emacswiki.org/emacs/AutomaticFileHeaders
 * TODO [#C] MAYBE some setup above emacs registers              :investigate:
 * TODO [#C] some setup for Wanderlust (and probably org-mode integration) :investigate:review:
 * TODO [#C] Wanderlust: fix std11 encoding problem in mail headers      :fix:
@@ -139,3 +146,16 @@
 * TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
 * TODO [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
 * TODO [#A] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
+* TODO find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
+* DONE [#A] review org-agenda-custom-commands [2014-06-25 Ср 20:17] :emacs:ticket:
+  CLOSED: [2014-06-28 Сб 15:08]
+  - State "DONE"       from "TODO"       [2014-06-28 Сб 15:08]
+* TODO [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:
+* TODO sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
+** https://github.com/paetzke/py-isort.el
+* CANCELLED [#A] find if there is any way to mark org files as agenda [2014-06-25 Ср 21:15] :emacs:ticket:
+  CLOSED: [2014-06-30 Пн 16:01]
+  - State "CANCELLED"  from "TODO"       [2014-06-30 Пн 16:01] \\
+    nope, it doesn't make sense
+* TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
+* TODO fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
