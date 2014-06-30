@@ -34,7 +34,7 @@
 (require 'rc-special-major-modes)
 (require 'rc-tex)
 (require 'rc-dired)
-(require 'rc-info)
+(require 'rc-help)
 
 (provide 'bundle-main)
 ;;; macosx-common.el ends here
