@@ -75,6 +75,7 @@
         header2
         helm-recentd
         helm-swoop
+        help+
         highlight-symbol
         hl-line+
         hs-lint

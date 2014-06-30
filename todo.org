@@ -23,7 +23,9 @@
   - State "DONE"       from "TODO"       [2014-06-19 Чт 23:50]
 * TODO [#C] rc-haskell.el                                     :review:extend:
 * TODO [#C] rc-headers.el                                   :review:relocate:
-* TODO [#B] rc-info.el: MAYBE rename (rc-help.el)                    :extend:
+* DONE [#B] rc-info.el: MAYBE rename (rc-help.el)                    :extend:
+  CLOSED: [2014-06-30 Пн 19:01]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:01]
 ** MAYBE extend with help+ and other stuff alike
 * DONE rc-search.el: merge into navigate                           :relocate:
   CLOSED: [2014-06-01 Вс 21:45]

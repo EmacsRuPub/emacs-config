@@ -20,6 +20,8 @@
 (push "/usr/share/info" Info-directory-list)
 (setenv "MANPATH" "/usr/share/man:/usr/local/man")
 
-(provide 'rc-info)
+(global-set-key [f1] 'help-on-click/key)
+
+(provide 'rc-help)
 
 ;;; emacs-rc-info.el ends here
