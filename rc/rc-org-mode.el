@@ -58,9 +58,9 @@
 (setq org-ditaa-jar-path (concat config-basedir "resources/ditaa0_9.jar"))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "GOING(g)" "WAITING(w@)" "LATER(l)"
-                  "|" "DONE(d!/@)" "SOMEDAY(s)" "CANCELLED(c@)")
-        (sequence "NEW(n)" "INPROGRESS(p)" "CHECKING(r)" "REWORK(f)" "|" "CLOSED(k)")))
+      '((sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)"
+                  "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)")
+        (sequence "NEW(n)" "INPROGRESS(p!)" "CHECKING(r!)" "REWORK(f!@)" "|" "CLOSED(k!)")))
 (setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "GOING(g)"
                                                "NEW(n)" "INPROGRESS(p)" "REWORK(f)")))
 (setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
