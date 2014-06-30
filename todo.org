@@ -1,7 +1,9 @@
 * DONE rc-backups.el: move to settings                             :relocate:
   CLOSED: [2014-06-01 Вс 12:58]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
-* TODO [#C] rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
+* DONE [#C] rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
+  CLOSED: [2014-06-30 Пн 18:55]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 18:55]
 * DONE rc-completion.el: extract yasnippet customdefs               :extract:
   CLOSED: [2014-06-01 Вс 20:53]
   - State "DONE"       from "TODO"       [2014-06-01 Вс 20:53]
@@ -165,4 +167,7 @@
   - State "CANCELLED"  from "TODO"       [2014-06-30 Пн 16:01] \\
     nope, it doesn't make sense
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
-* TODO fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
+* TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
+* TODO [#B] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
+* TODO [#B] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
+* TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
