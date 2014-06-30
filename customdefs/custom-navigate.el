@@ -43,6 +43,19 @@
 (defadvice occur-mode-goto-occurrence (after close-occur activate)
   (delete-other-windows))
 
+(defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
+  (if custom/suppress-projectile-symbol-at-point
+    (setq ad-return-value "")
+    (setq ad-return-value ad-do-it)))
+
+(defun custom/projectile-ag (arg)
+  (interactive "p")
+  (message "arg: %s" arg)
+  (if (equal arg 4)
+      (setq custom/suppress-projectile-symbol-at-point nil)
+    (setq custom/suppress-projectile-symbol-at-point t))
+  (call-interactively 'projectile-ag))
+
 (provide 'custom-navigate)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

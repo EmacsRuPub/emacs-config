@@ -118,7 +118,9 @@
 * DONE ERC: navigate URLs as in jabber chats                            :erc:
   CLOSED: [2014-06-22 Вс 01:23]
   - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
-* TODO [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
+* DONE [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
+  CLOSED: [2014-06-30 Пн 20:14]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 20:14]
 * DONE review emacs-jedi for the subject of tweaking
   CLOSED: [2014-06-23 Пн 01:00]
   - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
