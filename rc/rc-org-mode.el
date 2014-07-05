@@ -22,7 +22,7 @@
 ;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
-(setq org-agenda-files (all-files-under-dir-recursively org-dir "org"))
+(setq org-agenda-files (all-files-under-dir-recursively (concat org-dir "/main") "org"))
 ;TODO: maybe do it less straightforward
 (add-to-list 'org-agenda-files (concat config-basedir "/todo.org"))
 (add-to-list 'org-agenda-files (concat config-basedir "/totry.org"))
