@@ -16,6 +16,7 @@
 (require 'org)
 (require 'org-agenda)
 (require 'org-pomodoro)
+(require 'org-protocol)
 (require 'ox-html)
 
 ;#############################################################################
