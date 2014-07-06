@@ -1,96 +1,18 @@
-* DONE rc-backups.el: move to settings                             :relocate:
-  CLOSED: [2014-06-01 Вс 12:58]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
-* DONE [#C] rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
-  CLOSED: [2014-06-30 Пн 18:55]
-  - State "DONE"       from "TODO"       [2014-06-30 Пн 18:55]
-* DONE rc-completion.el: extract yasnippet customdefs               :extract:
-  CLOSED: [2014-06-01 Вс 20:53]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 20:53]
-* DONE rc-dired.el: extract dired customdefs                        :extract:
-  CLOSED: [2014-06-01 Вс 21:03]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:03]
-* DONE rc-editing.el: extract editing customdefs (check if we can break something) :extract:
-  CLOSED: [2014-06-19 Чт 23:39]
-  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:39]
 * TODO [#C] rc-elisp.el                                              :review:
-* DONE rc-generic.el: merge into editing                           :relocate:
-  CLOSED: [2014-06-01 Вс 21:12]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:12]
-* DONE rc-git.el: merge into programming                           :relocate:
-  CLOSED: [2014-06-19 Чт 23:46]
-  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:46]
-* DONE rc-gmail.el: merge into clients                             :relocate:
-  CLOSED: [2014-06-19 Чт 23:50]
-  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:50]
 * TODO [#C] rc-haskell.el                                     :review:extend:
 * TODO [#C] rc-headers.el                                   :review:relocate:
-* DONE [#B] rc-info.el: MAYBE rename (rc-help.el)                    :extend:
-  CLOSED: [2014-06-30 Пн 19:01]
-  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:01]
-** MAYBE extend with help+ and other stuff alike
-* DONE rc-search.el: merge into navigate                           :relocate:
-  CLOSED: [2014-06-01 Вс 21:45]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:45]
-* DONE rc-prodigy.el                                                 :review:
-  CLOSED: [2014-06-20 Пт 00:13]
-  - State "DONE"       from "TODO"       [2014-06-20 Пт 00:13]
-* DONE rc-tramp.el: merge to clients                               :relocate:
-  CLOSED: [2014-06-20 Пт 00:13]
-  - State "DONE"       from "TODO"       [2014-06-20 Пт 00:13]
-* DONE rc-wincontrol.el: extract customdefs                         :extract:
-  CLOSED: [2014-06-01 Вс 21:58]
-  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
-* DONE completion: review template engines (tempo, yasnippet, etc.)  :review:
-  CLOSED: [2014-06-23 Пн 00:56]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
-* DONE navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere) :relocate:extract:
-  CLOSED: [2014-06-04 Ср 13:54]
-  - State "DONE"       from "TODO"       [2014-06-04 Ср 13:54]
-* DONE [#A] fix keyboard layout (particularly improper quoting in russian layout) :fix:
-  CLOSED: [2014-06-30 Пн 16:00]
-  - State "DONE"       from "TODO"       [2014-06-30 Пн 16:00]
-** HINT /etc/X11/xorg.conf.d/input.conf
-* DONE fix tramp-based sudo-find-file or change underlying implementation :fix:
-  CLOSED: [2014-06-23 Пн 00:56]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
-* DONE think of adding mode-specific TODO snippets to yasnippet      :extend:
-  CLOSED: [2014-06-19 Чт 23:42]
-  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:42]
 * TODO [#B] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
-* DONE unset <Tab> as 'yas-expand binding                               :fix:
-  CLOSED: [2014-06-11 Ср 00:56]
-  - State "DONE"       from "TODO"       [2014-06-11 Ср 00:56]
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#B] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
-* DONE [#A] filter out obsolete items from totry.org                 :review:
-  CLOSED: [2014-06-28 Сб 13:30]
-  - State "DONE"       from "TODO"       [2014-06-28 Сб 13:30]
-* DONE place old emacs tickets org content here and organize         :review:
-  CLOSED: [2014-06-08 Вс 16:44]
-  - State "DONE"       from "TODO"       [2014-06-08 Вс 16:44]
 * TODO [#B] maybe generalize url opening someway for org mode and mode-agnostic :investigate:
-* DONE [#A] orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
-  CLOSED: [2014-06-30 Пн 19:36]
-  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:36]
-    substituted by 'browse-url-at-point
-  При открытии url с помощью C-c C-o (org-open-at-point)
-  UTF8-escaped адреса открываются некорректно
-  Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4
 * TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
-* DONE [#A] orgmode export                                              :fix:
-  CLOSED: [2014-07-06 Вс 02:05]
-  - State "DONE"       from "TODO"       [2014-07-06 Вс 02:05]
 * TODO [#B] review redmine + emacs connectivity options         :investigate:
 * TODO [#A] setup org refiling                           :investigate:review:
 ** наладить refile из разных org-файлов в "текущие дела" (сюда) [2013-03-31 Вс 18:50] :todo:orgmode:
 ** разобраться с org-refile [2013-03-31 Вс 18:50]              :todo:orgmode:
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
 ** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
-* DONE MAYBE add {todo.org, totry.org} to agenda                :investigate:
-  CLOSED: [2014-06-23 Пн 00:58]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:58]
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
 * TODO [#A] check for options to move to crypted credentials         :review:
 * TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
@@ -119,20 +41,8 @@
 ** https://github.com/m2ym/autopair-el
 * TODO [#C] maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
 * TODO [#C] consider using yas-selected-text in snippets        :investigate:
-* DONE ERC: separate list of joined channels to switch      :investigate:erc:
-  CLOSED: [2014-06-23 Пн 01:00]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
 * TODO [#A] ERC: nick and other things highlighting                     :erc:
 * TODO ERC: modules                                                     :erc:
-* DONE ERC: navigate URLs as in jabber chats                            :erc:
-  CLOSED: [2014-06-22 Вс 01:23]
-  - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
-* DONE [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
-  CLOSED: [2014-06-30 Пн 20:14]
-  - State "DONE"       from "TODO"       [2014-06-30 Пн 20:14]
-* DONE review emacs-jedi for the subject of tweaking
-  CLOSED: [2014-06-23 Пн 01:00]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
 * TODO [#C] review extensions with "workgroups"-like functionality (again)
 ** https://github.com/nex3/perspective-el
 ** http://www.wickeddutch.com/2014/01/03/gaining-some-perspective-in-emacs/
@@ -146,14 +56,8 @@
 * TODO [#A] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
 * TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
-* DONE extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
-  CLOSED: [2014-06-23 Пн 01:00]
-  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
 * TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
 * TODO [#C] maybe fix invalid args messages in magit bisect
-* DONE find how to invert fg/bg for git-gutter with bbatsov's zenburn
-  CLOSED: [2014-06-22 Вс 01:16]
-  - State "DONE"       from "TODO"       [2014-06-22 Вс 01:16]
 * TODO [#B] find how to suppress ecb dialog for upgraded settings on activate
 * TODO [#C] emacs python integration
 ** http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
@@ -163,16 +67,9 @@
 * TODO [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
-* DONE [#A] review org-agenda-custom-commands [2014-06-25 Ср 20:17] :emacs:ticket:
-  CLOSED: [2014-06-28 Сб 15:08]
-  - State "DONE"       from "TODO"       [2014-06-28 Сб 15:08]
 * TODO [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:
 * TODO sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
-* CANCELLED [#A] find if there is any way to mark org files as agenda [2014-06-25 Ср 21:15] :emacs:ticket:
-  CLOSED: [2014-06-30 Пн 16:01]
-  - State "CANCELLED"  from "TODO"       [2014-06-30 Пн 16:01] \\
-    nope, it doesn't make sense
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
 * TODO [#B] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:

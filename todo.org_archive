@@ -1,0 +1,330 @@
+
+Archived entries from file /home/octocat/.emacs.d/todo.org
+
+
+* DONE rc-backups.el: move to settings                             :relocate:
+  CLOSED: [2014-06-01 Вс 12:58]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 12:58]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:55
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#C] rc-bookmarks.el: review additional extensions (e.g. bm, breadcrumbs, etc.) :review:
+  CLOSED: [2014-06-30 Пн 18:55]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 18:55]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-completion.el: extract yasnippet customdefs               :extract:
+  CLOSED: [2014-06-01 Вс 20:53]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 20:53]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-dired.el: extract dired customdefs                        :extract:
+  CLOSED: [2014-06-01 Вс 21:03]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:03]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-editing.el: extract editing customdefs (check if we can break something) :extract:
+  CLOSED: [2014-06-19 Чт 23:39]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:39]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-generic.el: merge into editing                           :relocate:
+  CLOSED: [2014-06-01 Вс 21:12]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:12]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-git.el: merge into programming                           :relocate:
+  CLOSED: [2014-06-19 Чт 23:46]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:46]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-gmail.el: merge into clients                             :relocate:
+  CLOSED: [2014-06-19 Чт 23:50]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:50]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] rc-info.el: MAYBE rename (rc-help.el)                    :extend:
+  CLOSED: [2014-06-30 Пн 19:01]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:01]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** MAYBE extend with help+ and other stuff alike
+
+* DONE rc-search.el: merge into navigate                           :relocate:
+  CLOSED: [2014-06-01 Вс 21:45]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:45]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-prodigy.el                                                 :review:
+  CLOSED: [2014-06-20 Пт 00:13]
+  - State "DONE"       from "TODO"       [2014-06-20 Пт 00:13]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-tramp.el: merge to clients                               :relocate:
+  CLOSED: [2014-06-20 Пт 00:13]
+  - State "DONE"       from "TODO"       [2014-06-20 Пт 00:13]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE rc-wincontrol.el: extract customdefs                         :extract:
+  CLOSED: [2014-06-01 Вс 21:58]
+  - State "DONE"       from "TODO"       [2014-06-01 Вс 21:58]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE completion: review template engines (tempo, yasnippet, etc.)  :review:
+  CLOSED: [2014-06-23 Пн 00:56]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE navigate: decentralize custom-search-keymap (e.g. to be able to define keys elsewhere) :relocate:extract:
+  CLOSED: [2014-06-04 Ср 13:54]
+  - State "DONE"       from "TODO"       [2014-06-04 Ср 13:54]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] fix keyboard layout (particularly improper quoting in russian layout) :fix:
+  CLOSED: [2014-06-30 Пн 16:00]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 16:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** HINT /etc/X11/xorg.conf.d/input.conf
+
+* DONE fix tramp-based sudo-find-file or change underlying implementation :fix:
+  CLOSED: [2014-06-23 Пн 00:56]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:56]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE think of adding mode-specific TODO snippets to yasnippet      :extend:
+  CLOSED: [2014-06-19 Чт 23:42]
+  - State "DONE"       from "TODO"       [2014-06-19 Чт 23:42]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE unset <Tab> as 'yas-expand binding                               :fix:
+  CLOSED: [2014-06-11 Ср 00:56]
+  - State "DONE"       from "TODO"       [2014-06-11 Ср 00:56]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] filter out obsolete items from totry.org                 :review:
+  CLOSED: [2014-06-28 Сб 13:30]
+  - State "DONE"       from "TODO"       [2014-06-28 Сб 13:30]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE place old emacs tickets org content here and organize         :review:
+  CLOSED: [2014-06-08 Вс 16:44]
+  - State "DONE"       from "TODO"       [2014-06-08 Вс 16:44]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] orgmode url opening [2011-04-15 Птн 03:28] 	       :emacs:ticket:orgmode
+  CLOSED: [2014-06-30 Пн 19:36]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 19:36]
+    substituted by 'browse-url-at-point
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+  При открытии url с помощью C-c C-o (org-open-at-point)
+  UTF8-escaped адреса открываются некорректно
+  Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4
+
+* DONE [#A] orgmode export                                              :fix:
+  CLOSED: [2014-07-06 Вс 02:05]
+  - State "DONE"       from "TODO"       [2014-07-06 Вс 02:05]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE MAYBE add {todo.org, totry.org} to agenda                :investigate:
+  CLOSED: [2014-06-23 Пн 00:58]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 00:58]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE ERC: separate list of joined channels to switch      :investigate:erc:
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE ERC: navigate URLs as in jabber chats                            :erc:
+  CLOSED: [2014-06-22 Вс 01:23]
+  - State "DONE"       from "TODO"       [2014-06-22 Вс 01:23]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] advice projectile-ag/grep/whatever to accept prefix argument and don't insert TAP as search term
+  CLOSED: [2014-06-30 Пн 20:14]
+  - State "DONE"       from "TODO"       [2014-06-30 Пн 20:14]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE review emacs-jedi for the subject of tweaking
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE extension for showing md5 of file in minibuffer [2014-06-20 Пт 18:11] :emacs:ticket:
+  CLOSED: [2014-06-23 Пн 01:00]
+  - State "DONE"       from "TODO"       [2014-06-23 Пн 01:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE find how to invert fg/bg for git-gutter with bbatsov's zenburn
+  CLOSED: [2014-06-22 Вс 01:16]
+  - State "DONE"       from "TODO"       [2014-06-22 Вс 01:16]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] review org-agenda-custom-commands [2014-06-25 Ср 20:17] :emacs:ticket:
+  CLOSED: [2014-06-28 Сб 15:08]
+  - State "DONE"       from "TODO"       [2014-06-28 Сб 15:08]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED [#A] find if there is any way to mark org files as agenda [2014-06-25 Ср 21:15] :emacs:ticket:
+  CLOSED: [2014-06-30 Пн 16:01]
+  - State "CANCELLED"  from "TODO"       [2014-06-30 Пн 16:01] \\
+    nope, it doesn't make sense
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-06 Вс 22:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
