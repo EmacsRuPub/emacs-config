@@ -28,3 +28,21 @@
 ** [#C] http://www.emacswiki.org/emacs/HowmMode [2014-06-23 袩薪 01:17] :emacs:try:
 ** [#C] https://github.com/chriskempson/tomorrow-theme
 ** [#C] https://github.com/chriskempson/base16
+** https://github.com/pheaver/breadcrumb [2014-06-30 Пн 18:55]                                       :emacs:try:
+** http://code.google.com/p/emacs-google/wiki/googlecontacts [2014-07-01 Вт 02:25]                                       :emacs:try:
+** https://github.com/martialboniou/emacs-revival [2014-07-01 Вт 02:36]                                       :emacs:try:
+** BBDB
+*** http://bbdb.sourceforge.net/
+*** http://bbdb.sourceforge.net/faq.html
+*** http://bbdb.sourceforge.net/bbdb.html
+*** http://sachachua.com/blog/2008/02/wicked-cool-emacs-bbdb-keeping-track-of-contact-dates/
+*** http://sachachua.com/blog/2008/04/wicked-cool-emacs-bbdb-set-up-bbdb/
+*** http://sachachua.com/blog/2008/04/wicked-cool-emacs-bbdb-import-csv-and-vcard-files/
+*** http://emacs-fu.blogspot.com/2009/08/managing-e-mail-addresses-with-bbdb.html
+*** http://www.jwz.org/bbdb/
+*** http://www.emacswiki.org/emacs/BbdbImporters
+*** http://www.emacswiki.org/emacs/BbdbConfiguration
+*** http://www.emacswiki.org/emacs/SplitMailUsingBbdbs
+*** http://rpatterson.net/software/bbdb.gmailfilter
+*** http://sunsite.ualberta.ca/Documentation/Gnu/emacs-21.1/html_node/eudc_4.html
+*** http://julien.danjou.info/blog/2010.html#Emacs_Google_Maps_and_BBDB

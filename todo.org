@@ -79,9 +79,15 @@
   UTF8-escaped адреса открываются некорректно
   Пример: http://ru.wikipedia.org/wiki/%D1%CA%C4
 * TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
-* TODO [#A] orgmode export                                              :fix:
+* DONE [#A] orgmode export                                              :fix:
+  CLOSED: [2014-07-06 Вс 02:05]
+  - State "DONE"       from "TODO"       [2014-07-06 Вс 02:05]
 * TODO [#B] review redmine + emacs connectivity options         :investigate:
-* TODO [#B] setup org refiling                           :investigate:review:
+* TODO [#A] setup org refiling                           :investigate:review:
+** наладить refile из разных org-файлов в "текущие дела" (сюда) [2013-03-31 Вс 18:50] :todo:orgmode:
+** разобраться с org-refile [2013-03-31 Вс 18:50]              :todo:orgmode:
+** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
+** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * DONE MAYBE add {todo.org, totry.org} to agenda                :investigate:
   CLOSED: [2014-06-23 Пн 00:58]
   - State "DONE"       from "TODO"       [2014-06-23 Пн 00:58]
@@ -110,6 +116,7 @@
 * TODO [#B] diary extension                                          :review:
 * TODO [#C] tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
 * TODO [#B] some setup for autopairing + process regions (e.g. upcase) :investigate:
+** https://github.com/m2ym/autopair-el
 * TODO [#C] maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
 * TODO [#C] consider using yas-selected-text in snippets        :investigate:
 * DONE ERC: separate list of joined channels to switch      :investigate:erc:
@@ -154,7 +161,7 @@
 ** http://rope.sourceforge.net/ropemacs.html
 * TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
 * TODO [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
-* TODO [#A] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
+* TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
 * DONE [#A] review org-agenda-custom-commands [2014-06-25 Ср 20:17] :emacs:ticket:
   CLOSED: [2014-06-28 Сб 15:08]
@@ -171,3 +178,61 @@
 * TODO [#B] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
 * TODO [#B] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
+* TODO [#B] advise 'browse-url-at-point to be able to aumatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
+* TODO [#C] fix indents cycling in haskell-mode [2014-07-01 Вт 00:45] :emacs:ticket:
+* TODO [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
+* TODO emacs - associative memory [2013-04-01 Пн 18:36]     :todo:chaos:idea:
+  показывать множество буферов  сеткой, для ассоциации буферов и мест в коде на которых они открыты
+  множество буферов задается явно, или по критериям (например - 10
+  последних посещенных)
+** http://www.remem.org/
+** http://alumni.media.mit.edu/~rhodes/Papers/mnotes-iui00.html
+* TODO smart reminders - emacs [2013-04-01 Пн 18:42]        :todo:chaos:idea:
+  напоминалка, всплывает при приближении к коду, где она написана,
+  например TODO всплывет в отдельном буфере
+* TODO emacs client for delicious [2014-07-01 Вт 02:40]        :emacs:ticket:
+** HINT resclient
+
+* TODO emacs - несколько локаций в коде [2013-04-01 Пн 19:08] :todo:chaos:idea:
+  отслеживание нескольких локаций в коде и их состояния - продумать
+  идею
+* TODO fix 'browse-url-at-point advice to fall back to org-machinery for all but URLs  [2014-07-01 Вт 02:42] :emacs:ticket:
+* TODO find out why emacs moves between frames within dual head setup and fails to otherwise [2014-07-01 Вт 03:03] :emacs:ticket:
+* TODO play with org-sync and its redmine backend particularly [2014-07-01 Вт 03:06] :emacs:ticket:
+  http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/backends.html#sec-2-3
+  https://github.com/emacsmirror/org-sync
+  http://www.youtube.com/watch?v=kbj6-j0teCY
+  http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/index.html
+  http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/tutorial/index.html
+* TODO compare emmet-mode capabilities with the original zencoding [2014-07-01 Вт 03:08] :emacs:ticket:
+* TODO some kind of fix for pep8 checkers (flycheck/etc.) (mainly flake8 config appreciation) [2014-07-02 Ср 02:01] :emacs:ticket:
+** https://bitbucket.org/jek/sandbox/src/9705f596a2a2/pycheckers
+** http://stackoverflow.com/questions/1259873/how-can-i-use-emacs-flymake-mode-for-python-with-pyflakes-and-pylint-checking-co
+* TODO [#B] some way to change python indentation more sanely than line-by-line [2014-07-02 Ср 16:16] :emacs:ticket:
+* TODO check el-get setup coupling with any particular linux distro, including current (Gentoo) [2014-07-02 Ср 23:46] :emacs:ticket:el:get:
+* TODO review and maybe fix current TeX setup [2014-07-02 Ср 23:49] :emacs:ticket:tex:
+* TODO config deployment automation [2014-07-02 Ср 23:53]      :emacs:ticket:
+** shell (not mandatory) deployment scripts (OS-aware or -agnostic)
+** el-get bootstrapping (maybe implemented already)
+* TODO review notification options for emacs, includeing jabber [2014-07-03 Чт 09:39] :emacs:ticket:
+  http://emacs-fu.blogspot.com/2009/11/showing-pop-ups.html
+* TODO [#B] review various TAP options [2014-07-03 Чт 09:43]   :emacs:ticket:
+** http://www.emacswiki.org/emacs/thingatpt+.el [2011-01-23 Вск 00:38]
+** http://www.emacswiki.org/emacs-en/ThingAtPoint
+** FindFileAtPoint [2011-01-21 Птн 01:58]
+* TODO review and save old BBDB data (search for old bbdb file) [2014-07-03 Чт 09:53] :emacs:ticket:
+* TODO review formatting settings in various major modes [2014-07-03 Чт 09:56] :emacs:ticket:
+  Ex.: https://github.com/zamotivator/emacs/blob/master/common.config and maybe others in place
+* TODO review setup for unique buffers renaming, maybe fix [2014-07-03 Чт 09:58] :emacs:ticket:
+* TODO email imap sieve setup (wl) [2014-07-03 Чт 10:00]       :emacs:ticket:
+* TODO customdef for recursive files lists (idea: particularly paths from bookmarks) [2014-07-03 Чт 13:08] :emacs:ticket:
+* TODO customdef framework for in-emacs strings processing (or find existing) [2014-07-03 Чт 15:29] :emacs:ticket:
+* TODO find out if there is a way to build temporary agenda (of some file list) [2014-07-03 Чт 16:20] :emacs:ticket:
+* TODO review googlecl usage [2014-07-03 Чт 16:33]             :emacs:ticket:
+* TODO add org-mastering to agenda [2014-07-03 Чт 17:00]       :emacs:ticket:
+* TODO increase detail level for 'search' org-capture template(s) (e.g. for english/other translation) [2014-07-03 Чт 17:02] :emacs:ticket:
+* TODO check and update work-capture template for stumpwm todo [2014-07-03 Чт 17:04] :emacs:ticket:
+* TODO maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
+* TODO find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
+* TODO make some harness for custom major mode automatic activation (HINT: +auto-mode-alist) [2014-07-05 Сб 22:52] :emacs:ticket:
+* TODO find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
