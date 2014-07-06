@@ -18,6 +18,7 @@
 (require 'org-pomodoro)
 (require 'org-protocol)
 (require 'ox-html)
+(require 'org-archive)
 
 ;#############################################################################
 ;#   Customizations
