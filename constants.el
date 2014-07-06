@@ -7,8 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq org-dir (concat home-directory "/org"))
-(setq org-inventory-dir (concat home-directory "/org-inventory"))
+(setq org-dir (concat home-directory "/org/main"))
+(setq org-inventory-dir (concat home-directory "/org/inventory"))
 
 ;#############################################################################
 ;#   Abbreviation
