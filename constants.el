@@ -46,4 +46,9 @@
 
 (setq custom/maildir-folder "~/Mail")
 
+;; pylookup
+(setq pylookup-dir (concat config-basedir "/el-get/pylookup"))
+
+(defconst emacs-tmp-dir "~/.emacs-backups")
+
 ;;; constants.el ends here

@@ -126,8 +126,6 @@
 
 (global-set-key (kbd "C-c t f") 'tail-file)
 
-(defconst emacs-tmp-dir "~/.emacs-backups")
-
 (setq backup-by-copying t)              ; don't clobber symlinks
 (setq backup-by-copying-when-linked t)  ; Copy linked files, don't rename.
 (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))    ; don't litter my fs tree

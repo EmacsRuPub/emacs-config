@@ -82,10 +82,6 @@
          config-basedir
          "contrib/.pylintrc"))
 
-;; pylookup
-;; add pylookup to your loadpath, ex) ~/.emacs.d/pylookup
-(setq pylookup-dir "/home/octocat/.emacs.d/el-get/pylookup") ;; TODO use constants
-
 ;; load pylookup when compile time
 (eval-when-compile (require 'pylookup))
 
