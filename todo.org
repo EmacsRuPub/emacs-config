@@ -64,7 +64,9 @@
 ** http://www.emacswiki.org/emacs/ShellMode#toc5
 ** http://rope.sourceforge.net/ropemacs.html
 * TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
-* TODO [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
+* DONE [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
+  CLOSED: [2014-07-08 Вт 00:56]
+  - State "DONE"       from "TODO"       [2014-07-08 Вт 00:56]
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
 * TODO [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:

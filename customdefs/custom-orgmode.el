@@ -70,6 +70,12 @@
   (let ((org-refile-targets `((,(concat org-dir "/job/done.org") :level . 1))))
     (call-interactively 'org-refile)))
 
+(defun process-task-done ()
+  (interactive)
+  (org-todo 'done)
+  (mark-with-finished-timestamp)
+  (refile-job-done))
+
 (defadvice browse-url-at-point (before org-position-url activate)
   (when (derived-mode-p 'org-mode)
     (let ((end nil))

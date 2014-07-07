@@ -158,6 +158,7 @@
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
+(add-hook 'org-after-refile-insert-hook 'save-buffer)
 
 ;#############################################################################
 ;#   Keybindings
