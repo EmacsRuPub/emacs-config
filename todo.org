@@ -14,7 +14,9 @@
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
 ** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
-* TODO [#A] check for options to move to crypted credentials         :review:
+* DONE [#A] check for options to move to crypted credentials         :review:
+  CLOSED: [2014-07-07 Пн 17:57]
+  - State "DONE"       from "TODO"       [2014-07-07 Пн 17:57]
 * TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
 ** C-h v calendar-holidays
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
@@ -41,7 +43,7 @@
 ** https://github.com/m2ym/autopair-el
 * TODO [#C] maybe sychronize jabber custom tools with values of jabber-el vars (e.g. jabber-chat-foreign-prompt-format, jabber-chat-local-prompt-format) :investigate:
 * TODO [#C] consider using yas-selected-text in snippets        :investigate:
-* TODO [#A] ERC: nick and other things highlighting                     :erc:
+* TODO [#C] ERC: nick and other things highlighting                     :erc:
 * TODO [#C] ERC: modules                                                :erc:
 * TODO [#C] review extensions with "workgroups"-like functionality (again)
 ** https://github.com/nex3/perspective-el
@@ -52,8 +54,8 @@
 ** https://github.com/tlh/workgroups.el
 ** https://github.com/nex3/perspective-el
 ** http://www.emacswiki.org/emacs/workspaces.el
-* TODO [#A] add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
-* TODO [#A] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
+* TODO [#C] add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
+* TODO [#C] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
 * TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
@@ -69,7 +71,9 @@
   - State "DONE"       from "TODO"       [2014-07-08 Вт 00:56]
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
-* TODO [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:
+* DONE [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:
+  CLOSED: [2014-07-08 Вт 00:25]
+  - State "DONE"       from "TODO"       [2014-07-08 Вт 00:25]
 * TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
@@ -96,6 +100,7 @@
   отслеживание нескольких локаций в коде и их состояния - продумать
   идею
 * TODO [#A] fix 'browse-url-at-point advice to fall back to org-machinery for all but URLs  [2014-07-01 Вт 02:42] :emacs:ticket:
+** HINT org-open-at-point-functions
 * TODO [#B] find out why emacs moves between frames within dual head setup and fails to otherwise [2014-07-01 Вт 03:03] :emacs:ticket:
 * TODO [#B] play with org-sync and its redmine backend particularly [2014-07-01 Вт 03:06] :emacs:ticket:
   http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/backends.html#sec-2-3
@@ -135,3 +140,8 @@
 * TODO [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
 * TODO [#A] make some harness for custom major mode automatic activation (HINT: +auto-mode-alist) [2014-07-05 Сб 22:52] :emacs:ticket:
 * TODO [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
+* TODO [#B] choose between breadcrumb and bm [2014-07-07 Пн 14:54] :emacs:ticket:bookmarks:
+* TODO [#B] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:
+* TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
+* TODO [#B] review slime-setup extensions [2014-07-07 Пн 16:15] :emacs:ticket:
+* TODO [#A] check why calfw fails to run (maybe not loaded) [2014-07-07 Пн 16:18] :emacs:ticket:
