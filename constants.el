@@ -14,6 +14,7 @@
 ;#   Abbreviation
 ;############################################################################
 (setq custom/yasnippet-dir (concat config-basedir "resources/yasnippet/"))
+(setq custom/yasnippet-private-dir (concat config-basedir "resources/yasnippet-private/"))
 (setq custom/auto-insert-dir (concat config-basedir "resources/auto-insert/"))
 
 

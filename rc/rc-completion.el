@@ -38,9 +38,10 @@
      (define-key yas-minor-mode-map (kbd "TAB") nil)
      (setq yas/next-field-key '("<backtab>" "<S-tab>"))
      (setq yas/prev-field-key '("<C-tab>"))
-     (setq yas/snippet-dirs custom/yasnippet-dir)
+     (setq yas-snippet-dirs nil)
+     (push custom/yasnippet-dir yas-snippet-dirs)
+     (push custom/yasnippet-private-dir yas-snippet-dirs)
      (yas--initialize)
-     (yas/load-directory custom/yasnippet-dir)
 
      (setq yas/prompt-functions
            '(yas/ido-prompt
