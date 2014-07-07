@@ -336,35 +336,6 @@ point and around or after mark are interchanged."
   "Revert buffer without confirmation."
   (interactive) (flet ((yes-or-no-p (prompt) t)) (revert-buffer)))
 
-(defvar *copypaste-file-list* nil)
-(defvar *copypaste-path* nil)
-(defvar *copypaste-extension* nil)
-
-(defun create-files ()
-  (interactive)
-  (mapcar
-   (lambda (elem)
-     (let ((cur-file-name (concatenate 'string *test-path* elem "." *copypaste-extension*)))
-       (when (not (file-exists-p cur-file-name))
-         (find-file cur-file-name)
-         (clipboard-yank))))
-   *copypaste-file-list*))
-
-(setq *copypaste-extension* "html")
-
-(setq *copypaste-file-list*
-      '("robokassa_qiwiwallet"
-        "robokassa_yandexmoney"
-        "robokassa_mts"
-        "robokassa_megafon"
-        "robokassa_euroset"
-        "robokassa_svyaznoy"
-        "robokassa_alphaclick"
-        "mobw_megafon"
-        "mobw_mts"
-        "mobw_beeline"))
-(setq *test-path* "/home/octocat/workspace/webdrive/python/webdrive/ui/user/templates/finance/payment_helpers/")
-
 (defun get-all-template-variables-django ()
   (interactive)
   (beginning-of-buffer)
@@ -378,35 +349,6 @@ point and around or after mark are interchanged."
     (dolist (variable (nreverse variables-list))
       (insert variable)
       (insert "\n"))))
-
-(defun generate-debug-print-python ()
-  (interactive)
-  (insert "print '")
-  (yank)
-  (insert ":', ")
-  (yank))
-
-(defvar domain-regexp-ru "[0-9a-z\-]*\\.ru")
-(defvar domain-regexp-rf "[0-9а-я\-]*\\.рф")
-
-(defvar domain-regexp-ru-op "[0-9a-z\-]*\\.ru\s*.Opossum")
-(defvar domain-regexp-rf-op "[0-9а-я\-]*\\.рф\s*.Opossum")
-
-(defun custom/find-domain-regexp-ru-forward ()
-  (interactive)
-  (re-search-forward domain-regexp-ru-op nil t))
-
-(defun custom/find-domain-regexp-rf-forward ()
-  (interactive)
-  (re-search-forward domain-regexp-rf nil t))
-
-(defun custom/find-domain-regexp-ru-backward ()
-  (interactive)
-  (re-search-backward domain-regexp-ru-op nil t))
-
-(defun custom/find-domain-regexp-rf-backward ()
-  (interactive)
-  (re-search-backward domain-regexp-rf nil t))
 
 (defun join-region (beg end)
   "Apply join-line over region."
