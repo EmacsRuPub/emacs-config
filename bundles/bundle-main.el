@@ -19,7 +19,6 @@
 (require 'rc-headers)
 (require 'rc-clients)
 (require 'rc-jabber)
-(require 'rc-jabber-faces)
 (require 'rc-shell)
 (require 'rc-wincontrol)
 (require 'rc-pim)

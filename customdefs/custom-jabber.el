@@ -8,6 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
+(defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
 
 ;; fails on some URLs, i.e. opens too many times
 (defun open-urls-in-region ()
