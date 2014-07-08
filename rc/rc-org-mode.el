@@ -64,9 +64,8 @@
       '((sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)"
                   "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)")
         (sequence "NEW(n)" "INPROGRESS(p!)" "CHECKING(r!)" "REWORK(f!@)" "|" "CLOSED(k!)")))
-(setq org-todo-keywords-for-agenda '((sequence "TODO(t)" "WAITING(w)" "GOING(g)"
-                                               "NEW(n)" "INPROGRESS(p)" "REWORK(f)")))
-(setq org-done-keywords-for-agenda '((sequence "DONE(d)" "CANCELLED(c)")))
+(setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEW(n)" "INPROGRESS(p)" "REWORK(f)"))
+(setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
         "----------------"
