@@ -119,7 +119,7 @@
         ("dey" "emacs try" entry (file+headline (concat config-basedir "/totry.org") "try") "* %? %U :emacs:try:")
         ("dp" "project ideas" entry (file (concat org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
         ("dx" "xmonad tickets" entry (file+headline (concat org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
-        ("ds" "stumpwm tickets" entry (file+headline (concat org-dir "/projects/config/stumpwm.org") "tickets") "* %? %U :stumpwm:ticket:")
+        ("ds" "stumpwm tickets" entry (file (concat home-directory "/.stumpwm.d/todo.org") "tickets") "* TODO %? %U :stumpwm:ticket:")
         ("dw" "workplace tasks" entry (file (concat org-dir "/workplace-tasks.org")) "* TODO %? %U :workplace:")
         ("j" "job")
         ("ji" "issues" entry (file+headline (concat org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
