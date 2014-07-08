@@ -140,7 +140,9 @@
   - State "DONE"       from "TODO"       [2014-07-08 Вт 15:08]
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
-* TODO [#A] make some harness for custom major mode automatic activation (HINT: +auto-mode-alist) [2014-07-05 Сб 22:52] :emacs:ticket:
+* DONE [#A] make some harness for custom major mode automatic activation (HINT: +auto-mode-alist) [2014-07-05 Сб 22:52] :emacs:ticket:
+  CLOSED: [2014-07-08 Вт 16:10]
+  - State "DONE"       from "TODO"       [2014-07-08 Вт 16:10]
 * TODO [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
 * TODO [#B] choose between breadcrumb and bm [2014-07-07 Пн 14:54] :emacs:ticket:bookmarks:
 * TODO [#B] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:

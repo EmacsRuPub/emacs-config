@@ -114,5 +114,8 @@
 
 (add-to-list 'auto-mode-alist '("diff" . diff-mode))
 
+(add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode))
+(add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-auto-modes.el ends here
