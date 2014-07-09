@@ -14,9 +14,6 @@
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
 ** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
-* DONE [#A] check for options to move to crypted credentials         :review:
-  CLOSED: [2014-07-07 Пн 17:57]
-  - State "DONE"       from "TODO"       [2014-07-07 Пн 17:57]
 * TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
 ** C-h v calendar-holidays
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
@@ -66,14 +63,8 @@
 ** http://www.emacswiki.org/emacs/ShellMode#toc5
 ** http://rope.sourceforge.net/ropemacs.html
 * TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
-* DONE [#A] make command to change task status, timestamping and refiling atomically (for plan.org/done.org) [2014-06-23 Пн 01:03] :emacs:ticket:
-  CLOSED: [2014-07-08 Вт 00:56]
-  - State "DONE"       from "TODO"       [2014-07-08 Вт 00:56]
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
-* DONE [#A] find out-of-the-box machinery for commenting state transitions in org-mode and where it may be useful if any [2014-06-25 Ср 21:07] :emacs:ticket:
-  CLOSED: [2014-07-08 Вт 00:25]
-  - State "DONE"       from "TODO"       [2014-07-08 Вт 00:25]
 * TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
@@ -135,17 +126,11 @@
 * TODO [#C] review googlecl usage [2014-07-03 Чт 16:33]        :emacs:ticket:
 * TODO [#B] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
 * TODO [#A] increase detail level for 'search' org-capture template(s) (e.g. for english/other translation) [2014-07-03 Чт 17:02] :emacs:ticket:
-* DONE [#A] check and update org-capture template for stumpwm todo [2014-07-03 Чт 17:04] :emacs:ticket:
-  CLOSED: [2014-07-08 Вт 15:08]
-  - State "DONE"       from "TODO"       [2014-07-08 Вт 15:08]
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
-* DONE [#A] make some harness for custom major mode automatic activation (HINT: +auto-mode-alist) [2014-07-05 Сб 22:52] :emacs:ticket:
-  CLOSED: [2014-07-08 Вт 16:10]
-  - State "DONE"       from "TODO"       [2014-07-08 Вт 16:10]
 * TODO [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
 * TODO [#B] choose between breadcrumb and bm [2014-07-07 Пн 14:54] :emacs:ticket:bookmarks:
 * TODO [#B] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
 * TODO [#B] review slime-setup extensions [2014-07-07 Пн 16:15] :emacs:ticket:
-* TODO [#A] check why calfw fails to run (maybe not loaded) [2014-07-07 Пн 16:18] :emacs:ticket:
+* TODO [#B] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:
