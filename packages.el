@@ -45,6 +45,7 @@
         doxymacs
         drag-stuff
         ecb-custom
+        el-spice
         elwm
         emacs-jabber
         emacs-swoop
