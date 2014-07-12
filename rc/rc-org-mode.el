@@ -130,7 +130,11 @@
         ("l" "links" entry (file (concat org-dir "/links.org")) "* %? %U :links:send:")
         ("g" "github" entry (file (concat org-inventory-dir "/checklists/github.org")) "* %? %U :github:")
         ("k" "knowledge base" entry (file (concat org-inventory-dir "/kb.org")) "* %? %U :kb:raw:")
-        ("s" "search" entry (file (concat org-inventory-dir "/search.org")) "* TODO %? %U :search:")
+        ("s" "search")
+        ("sb" "book" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:book:")
+        ("sf" "food" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:food:")
+        ("st" "token" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:token:")
+        ("sl" "by link" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:link:")
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         )))
 

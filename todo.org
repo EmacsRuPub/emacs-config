@@ -125,7 +125,6 @@
 * TODO [#C] find out if there is a way to build temporary agenda (of some file list) [2014-07-03 Чт 16:20] :emacs:ticket:
 * TODO [#C] review googlecl usage [2014-07-03 Чт 16:33]        :emacs:ticket:
 * TODO [#B] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
-* TODO [#A] increase detail level for 'search' org-capture template(s) (e.g. for english/other translation) [2014-07-03 Чт 17:02] :emacs:ticket:
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
 * TODO [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:

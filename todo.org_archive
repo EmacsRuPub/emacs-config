@@ -388,3 +388,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] increase detail level for 'search' org-capture template(s) (e.g. for english/other translation) [2014-07-03 Чт 17:02] :emacs:ticket:
+  CLOSED: [2014-07-12 Сб 15:37]
+  - State "DONE"       from "TODO"       [2014-07-12 Сб 15:37]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-12 Сб 15:37
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
