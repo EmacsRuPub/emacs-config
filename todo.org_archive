@@ -398,3 +398,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
+  CLOSED: [2014-07-12 Сб 21:46]
+  - State "DONE"       from "TODO"       [2014-07-12 Сб 21:46]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-12 Сб 22:16
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

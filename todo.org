@@ -4,11 +4,11 @@
 * TODO [#B] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
-* TODO [#B] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
+* TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
 * TODO [#B] maybe generalize url opening someway for org mode and mode-agnostic :investigate:
 * TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
 * TODO [#B] review redmine + emacs connectivity options         :investigate:
-* TODO [#A] setup org refiling                           :investigate:review:
+* TODO [#B] setup org refiling                           :investigate:review:
 ** наладить refile из разных org-файлов в "текущие дела" (сюда) [2013-03-31 Вс 18:50] :todo:orgmode:
 ** разобраться с org-refile [2013-03-31 Вс 18:50]              :todo:orgmode:
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
@@ -34,7 +34,7 @@
 * TODO [#B] find out some (maybe, persistent) way to add file to org-agenda-files :investigate:
 * TODO [#C] w3m-emacs batch urls opening                        :investigate:
 * TODO [#C] org-mode tables setup                        :investigate:review:
-* TODO [#B] diary extension                                          :review:
+* TODO [#C] diary extension                                          :review:
 * TODO [#C] tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
 * TODO [#B] some setup for autopairing + process regions (e.g. upcase) :investigate:
 ** https://github.com/m2ym/autopair-el
@@ -62,17 +62,17 @@
 ** http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
 ** http://www.emacswiki.org/emacs/ShellMode#toc5
 ** http://rope.sourceforge.net/ropemacs.html
-* TODO [#B] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
+* TODO [#C] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
 * TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
-* TODO [#B] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
-* TODO [#B] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
+* TODO [#A] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
+* TODO [#A] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
-* TODO [#B] advise 'browse-url-at-point to be able to aumatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
+* TODO [#A] advise 'browse-url-at-point to be able to aumatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
 * TODO [#C] fix indents cycling in haskell-mode [2014-07-01 Вт 00:45] :emacs:ticket:
 * TODO [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
 * TODO [#C] emacs - associative memory [2013-04-01 Пн 18:36] :todo:chaos:idea:
@@ -103,7 +103,7 @@
 * TODO [#B] some kind of fix for pep8 checkers (flycheck/etc.) (mainly flake8 config appreciation) [2014-07-02 Ср 02:01] :emacs:ticket:
 ** https://bitbucket.org/jek/sandbox/src/9705f596a2a2/pycheckers
 ** http://stackoverflow.com/questions/1259873/how-can-i-use-emacs-flymake-mode-for-python-with-pyflakes-and-pylint-checking-co
-* TODO [#B] some way to change python indentation more sanely than line-by-line [2014-07-02 Ср 16:16] :emacs:ticket:
+* TODO [#A] some way to change python indentation more sanely than line-by-line [2014-07-02 Ср 16:16] :emacs:ticket:
 * TODO [#C] check el-get setup coupling with any particular linux distro, including current (Gentoo) [2014-07-02 Ср 23:46] :emacs:ticket:el:get:
 * TODO [#C] review and maybe fix current TeX setup [2014-07-02 Ср 23:49] :emacs:ticket:tex:
 * TODO [#C] config deployment automation [2014-07-02 Ср 23:53] :emacs:ticket:
@@ -126,10 +126,14 @@
 * TODO [#C] review googlecl usage [2014-07-03 Чт 16:33]        :emacs:ticket:
 * TODO [#B] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
-* TODO [#A] find out how to make projectile ignore .gitignore files in project subdirs or search for a new project management extension (or try to fix it) [2014-07-05 Сб 00:52] :emacs:ticket:
 * TODO [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
-* TODO [#B] choose between breadcrumb and bm [2014-07-07 Пн 14:54] :emacs:ticket:bookmarks:
-* TODO [#B] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:
+* TODO [#A] choose between breadcrumb and bm [2014-07-07 Пн 14:54] :emacs:ticket:bookmarks:
+* TODO [#A] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
-* TODO [#B] review slime-setup extensions [2014-07-07 Пн 16:15] :emacs:ticket:
-* TODO [#B] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:
+* TODO [#A] review slime-setup extensions [2014-07-07 Пн 16:15] :emacs:ticket:
+* TODO [#A] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:
+* TODO [#C] some ways to make sqli (sql-postgres) more handy and usable [2014-07-10 Чт 20:17] :emacs:ticket:investigate:
+* TODO [#C] review foreign configs [2014-07-10 Чт 23:57]   :emacs:ticket:erc:
+** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]
+** [[https://github.com/mbriggs/.emacs.d/blob/master/init/init-erc.el][.emacs.d/init/init-erc.el at master · mbriggs/.emacs.d]]
+** [[https://github.com/Niluge-KiWi/dotfiles/blob/master/.emacs.d/erc.el][dotfiles/.emacs.d/erc.el at master · Niluge-KiWi/dotfiles]]
