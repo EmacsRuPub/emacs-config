@@ -101,7 +101,6 @@
 * TODO [#B] some kind of fix for pep8 checkers (flycheck/etc.) (mainly flake8 config appreciation) [2014-07-02 Ср 02:01] :emacs:ticket:
 ** https://bitbucket.org/jek/sandbox/src/9705f596a2a2/pycheckers
 ** http://stackoverflow.com/questions/1259873/how-can-i-use-emacs-flymake-mode-for-python-with-pyflakes-and-pylint-checking-co
-* TODO [#A] some way to change python indentation more sanely than line-by-line [2014-07-02 Ср 16:16] :emacs:ticket:
 * TODO [#C] check el-get setup coupling with any particular linux distro, including current (Gentoo) [2014-07-02 Ср 23:46] :emacs:ticket:el:get:
 * TODO [#C] review and maybe fix current TeX setup [2014-07-02 Ср 23:49] :emacs:ticket:tex:
 * TODO [#C] config deployment automation [2014-07-02 Ср 23:53] :emacs:ticket:
