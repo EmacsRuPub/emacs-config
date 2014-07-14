@@ -408,3 +408,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
+  CLOSED: [2014-07-13 Вс 00:40]
+  - State "DONE"       from "TODO"       [2014-07-13 Вс 00:40]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-14 Пн 14:23
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

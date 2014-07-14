@@ -69,7 +69,6 @@
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
-* TODO [#A] fix slime installation with el-get (byte-compiling is someway broken) [2014-06-30 Пн 19:30] :emacs:ticket:
 * TODO [#A] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
 * TODO [#A] advise 'browse-url-at-point to be able to aumatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
