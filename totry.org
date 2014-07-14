@@ -46,3 +46,9 @@
 *** http://rpatterson.net/software/bbdb.gmailfilter
 *** http://sunsite.ualberta.ca/Documentation/Gnu/emacs-21.1/html_node/eudc_4.html
 *** http://julien.danjou.info/blog/2010.html#Emacs_Google_Maps_and_BBDB
+**  http://www.emacswiki.org/emacs/PostgreSQL [2014-07-11 Пт 15:31] :emacs:try:
+** Dimitri Fountaine's emacs customizations for postgresql development [2014-07-14 Пн 18:57] :emacs:try:ATTACH:
+   :PROPERTIES:
+   :Attachments: pgsrc.el dim-pgsql.el
+   :ID:       f9c53018-ca47-469a-9610-5ca08434e198
+   :END:
