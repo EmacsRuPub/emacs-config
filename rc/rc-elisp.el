@@ -8,7 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 (require 'erefactor)
-(require 'custom-utils)
 
 
 ;#############################################################################

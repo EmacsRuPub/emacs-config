@@ -15,10 +15,6 @@
 (require 'jabber-bookmarks)
 (require 'jabber-autoaway)
 
-(require 'custom-jabber)
-(require 'custom-jabber-templates)
-(require 'custom-jabber-tools)
-
 (eval-after-load "jabber"
   '(progn
      (when use-zenburn-in-jabber

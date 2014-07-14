@@ -438,3 +438,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] search for extra 'require statements, particularly from customdefs [2014-07-07 Пн 15:12] :emacs:ticket:
+  CLOSED: [2014-07-14 Пн 17:50]
+  - State "DONE"       from "TODO"       [2014-07-14 Пн 17:50]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-14 Пн 17:50
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

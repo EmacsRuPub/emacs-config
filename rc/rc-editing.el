@@ -33,9 +33,6 @@
 (require 'generic)
 (require 'generic-x)
 
-(require 'custom-camelscore)
-(require 'custom-joinlines)
-
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
