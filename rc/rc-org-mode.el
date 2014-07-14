@@ -19,6 +19,7 @@
 (require 'org-protocol)
 (require 'ox-html)
 (require 'org-archive)
+(require 'org-attach)
 
 ;#############################################################################
 ;#   Customizations
@@ -59,6 +60,7 @@
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation
 (setq org-ditaa-jar-path (concat config-basedir "resources/ditaa0_9.jar"))
+(setq org-attach-directory "org-attach-data")
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)"
