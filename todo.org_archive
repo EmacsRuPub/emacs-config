@@ -468,3 +468,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] review slime-setup extensions [2014-07-07 Пн 16:15] :emacs:ticket:
+  CLOSED: [2014-07-15 Вт 01:17]
+  - State "DONE"       from "TODO"       [2014-07-15 Вт 01:17]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-15 Вт 01:17
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
