@@ -448,3 +448,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] find back Dimitri Fountaine's emacs customizations for postgresql development [2014-07-06 Вс 11:33] :emacs:ticket:
+  CLOSED: [2014-07-14 Пн 18:56]
+  - State "DONE"       from "TODO"       [2014-07-14 Пн 18:56]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-14 Пн 18:57
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
