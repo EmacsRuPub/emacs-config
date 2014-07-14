@@ -7,7 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'rc-bookmarks)
 (require 'rc-browser)
 (require 'rc-navigate)
 (require 'rc-settings)

@@ -8,11 +8,21 @@
 (autoload 'custom-helm "helm" nil t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (autoload 'wgrep-ag-setup "wgrep-ag")
+(autoload 'bc-set               "breadcrumb" "Set bookmark in current point."   t)
+(autoload 'bc-previous          "breadcrumb" "Go to previous bookmark."         t)
+(autoload 'bc-next              "breadcrumb" "Go to next bookmark."             t)
+(autoload 'bc-local-previous    "breadcrumb" "Go to previous local bookmark."   t)
+(autoload 'bc-local-next        "breadcrumb" "Go to next local bookmark."       t)
+(autoload 'bc-goto-current      "breadcrumb" "Go to the current bookmark."      t)
+(autoload 'bc-list              "breadcrumb" "List all bookmarks in menu mode." t)
+(autoload 'bc-clear             "breadcrumb" "Clear all bookmarks."             t)
 
 (require 'ace-jump-mode)
 (require 'ag)
 (require 'fuzzy)
 (require 're-builder)
+(require 'bookmark+)
+(require 'crosshairs)
 
 (eval-after-load "helm"
   '(progn
@@ -170,8 +180,12 @@
 (define-key custom-search-keymap (kbd "n") 'sr-speedbar-toggle)
 (define-key custom-search-keymap (kbd "C-n") 'sr-speedbar-select-window)
 (define-key custom-search-keymap (kbd "h") 'helm-mini)
+(define-key custom-search-keymap (kbd "j") 'bc-list)
+(define-key custom-search-keymap (kbd "SPC") 'bc-set)
 
 (provide 'rc-navigate)
+
+;; TODO: See if we can customize Bookmarks[+] further
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-navigate.el ends here
