@@ -418,3 +418,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] find/maybe eliminate cause of "desktop file is in use by pid..." [2014-06-30 Пн 22:13] :emacs:ticket:
+  CLOSED: [2014-07-14 Пн 14:24]
+  - State "DONE"       from "TODO"       [2014-07-14 Пн 14:24]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-14 Пн 14:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

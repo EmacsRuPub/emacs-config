@@ -62,7 +62,6 @@
      (regexp-search-ring       . 20)
      (search-ring              . 20)
      (shell-command-history    . 50)))
-  (desktop-read)
   )
 
 
