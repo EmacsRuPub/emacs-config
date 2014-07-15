@@ -8,14 +8,6 @@
 (autoload 'custom-helm "helm" nil t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (autoload 'wgrep-ag-setup "wgrep-ag")
-(autoload 'bc-set               "breadcrumb" "Set bookmark in current point."   t)
-(autoload 'bc-previous          "breadcrumb" "Go to previous bookmark."         t)
-(autoload 'bc-next              "breadcrumb" "Go to next bookmark."             t)
-(autoload 'bc-local-previous    "breadcrumb" "Go to previous local bookmark."   t)
-(autoload 'bc-local-next        "breadcrumb" "Go to next local bookmark."       t)
-(autoload 'bc-goto-current      "breadcrumb" "Go to the current bookmark."      t)
-(autoload 'bc-list              "breadcrumb" "List all bookmarks in menu mode." t)
-(autoload 'bc-clear             "breadcrumb" "Clear all bookmarks."             t)
 
 (require 'ace-jump-mode)
 (require 'ag)
@@ -23,6 +15,7 @@
 (require 're-builder)
 (require 'bookmark+)
 (require 'crosshairs)
+(require 'breadcrumb)
 
 (eval-after-load "helm"
   '(progn
