@@ -1,11 +1,7 @@
-(defun solidload (filename)
-  (condition-case err
-      (load filename)
-    (error (display-warning 'initialization
-                            (concat "Load of " filename " failed "
-                                    (prin1-to-string err)
-                                    (with-output-to-string (backtrace)))
-                            :warning))))
+(setq config-basedir (file-name-directory
+                      (or (buffer-file-name) load-file-name)))
+
+(load (concat config-basedir "base.el"))
 
 ;; (setq debug-on-error t)
 ;; (setq stack-trace-on-error t)
