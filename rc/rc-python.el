@@ -80,8 +80,7 @@
 (global-set-key (kbd "C-c f") 'flake8-multi)
 
 (setenv "PYLINTRC"
-        (concat
-         config-basedir
+        (at-config-basedir
          "contrib/.pylintrc"))
 
 ;; load pylookup when compile time

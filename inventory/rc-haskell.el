@@ -14,7 +14,7 @@
 (autoload 'haskell-indent-cycle "haskell-indent" "Indentation cycle for Haskell" t)
 ;; (autoload 'ghc-init "ghc" nil t)
 
-(load (concat config-basedir "ext/haskell-mode/haskell-site-file.el"))
+(load (at-config-basedir "ext/haskell-mode/haskell-site-file.el"))
 
 (require 'hs-lint)
 (require 'inf-haskell)

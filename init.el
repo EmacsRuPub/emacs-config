@@ -18,7 +18,7 @@
 
 (mapcar 'load
         (mapcar
-         (lambda (path) (concat config-basedir path))
+         (lambda (path) (at-config-basedir path))
          '("rc-el-get.el"
            "constants.el"
            "credentials.el.gpg"
@@ -26,15 +26,15 @@
 
 (mapcar 'load
   (all-files-under-dir-recursively
-   (concat config-basedir "customdefs")))
+   (at-config-basedir "customdefs")))
 
-(load (concat config-basedir "systemtraits.el"))
+(load (at-config-basedir "systemtraits.el"))
 
 (require 'bundle-main)
 
 (mapcar 'load
         (mapcar
-         (lambda (path) (concat config-basedir path))
+         (lambda (path) (at-config-basedir path))
          '("rc-auto-modes.el"
            "rc-desktop.el"
            )))

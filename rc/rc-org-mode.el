@@ -28,8 +28,8 @@
 
 (setq org-agenda-files (all-files-under-dir-recursively (concat org-dir "/main") "org"))
 ;TODO: maybe do it less straightforward
-(add-to-list 'org-agenda-files (concat config-basedir "/todo.org"))
-(add-to-list 'org-agenda-files (concat config-basedir "/totry.org"))
+(add-to-list 'org-agenda-files (at-config-basedir "/todo.org"))
+(add-to-list 'org-agenda-files (at-config-basedir "/totry.org"))
 
 ; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
@@ -59,7 +59,7 @@
 (setq org-default-notes-file custom/org-capture-file)
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t) ;; read documentation
-(setq org-ditaa-jar-path (concat config-basedir "resources/ditaa0_9.jar"))
+(setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
 (setq org-attach-directory "org-attach-data")
 
 (setq org-todo-keywords
@@ -117,8 +117,8 @@
         ("dn" "tomorrow" entry (file (concat org-dir "/todo.org")) "* TODO %? %U :todo:tomorrow")
         ("do" "ordering" entry (file (concat org-dir "/ordering.org")) "* TODO %? %U :todo:ordering")
         ("de" "emacs")
-        ("det" "emacs todo" entry (file (concat config-basedir "/todo.org")) "* TODO %? %U :emacs:ticket:")
-        ("dey" "emacs try" entry (file+headline (concat config-basedir "/totry.org") "try") "* %? %U :emacs:try:")
+        ("det" "emacs todo" entry (file (at-config-basedir "/todo.org")) "* TODO %? %U :emacs:ticket:")
+        ("dey" "emacs try" entry (file+headline (at-config-basedir "/totry.org") "try") "* %? %U :emacs:try:")
         ("dp" "project ideas" entry (file (concat org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
         ("dx" "xmonad tickets" entry (file+headline (concat org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
         ("ds" "stumpwm tickets" entry (file (concat home-directory "/.stumpwm.d/todo.org") "tickets") "* TODO %? %U :stumpwm:ticket:")
@@ -145,7 +145,7 @@
 ;############################################################################
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-(load (concat config-basedir "last-scrum-timestamp"))
+(load (at-config-basedir "last-scrum-timestamp"))
 
 ;#############################################################################
 ;#   Hooks

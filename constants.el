@@ -13,9 +13,9 @@
 ;#############################################################################
 ;#   Abbreviation
 ;############################################################################
-(setq custom/yasnippet-dir (concat config-basedir "resources/yasnippet/"))
-(setq custom/yasnippet-private-dir (concat config-basedir "resources/yasnippet-private/"))
-(setq custom/auto-insert-dir (concat config-basedir "resources/auto-insert/"))
+(setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
+(setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
+(setq custom/auto-insert-dir (at-config-basedir "resources/auto-insert/"))
 
 
 ;#############################################################################
@@ -47,7 +47,7 @@
 (setq custom/maildir-folder "~/Mail")
 
 ;; pylookup
-(setq pylookup-dir (concat config-basedir "el-get/pylookup"))
+(setq pylookup-dir (at-config-basedir "el-get/pylookup"))
 
 (defconst emacs-tmp-dir "~/.emacs-backups")
 

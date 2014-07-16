@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(add-to-list 'load-path (concat config-basedir "el-get/el-get"))
+(add-to-list 'load-path (at-config-basedir "el-get/el-get"))
 
 (setq el-get-git-install-url "http://github.com/wiedzmin/el-get.git")
 
@@ -21,7 +21,7 @@
 
 (require 'packages)
 
-(add-to-list 'el-get-recipe-path (concat config-basedir "el-get-custom-recipes"))
+(add-to-list 'el-get-recipe-path (at-config-basedir "el-get-custom-recipes"))
 
 (el-get 'sync el-get-packages)
 

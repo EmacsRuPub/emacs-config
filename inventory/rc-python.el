@@ -58,7 +58,7 @@
 ;; (require 'django-html-mode)
 ;; (require 'django-mode)
 
-;; (yas-load-directory (concat config-basedir "el-get/django-mode/snippets"))
+;; (yas-load-directory (at-config-basedir "el-get/django-mode/snippets"))
 
 (defun custom/python-mode-hook ()
   ;; (eldoc-mode 1)

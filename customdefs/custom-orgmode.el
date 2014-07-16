@@ -38,7 +38,7 @@
           (custom/strip-org-timestamp (custom/get-org-timestamp)))
   (write-string-to-file
    (elisp-var-printable 'last-scrum-timestamp)
-   (concat config-basedir "last-scrum-timestamp")))
+   (at-config-basedir "last-scrum-timestamp")))
 
 (defun custom/get-org-timestamp ()
   (with-temp-buffer

@@ -19,7 +19,7 @@
 ;#############################################################################
 ;#   setup extensions
 ;############################################################################
-(setq slime-backend (concat config-basedir "el-get/slime/swank-loader.lisp"))
+(setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
 
 ;; lookup information in hyperspec
 (info-lookup-add-help
