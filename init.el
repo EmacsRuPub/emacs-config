@@ -4,9 +4,6 @@
 
 (load-library "base")
 
-;; (setq debug-on-error t)
-;; (setq stack-trace-on-error t)
-
 (setq shell-file-name "/bin/bash")
 
 (setq message-log-max t)
@@ -18,14 +15,6 @@
 
 (add-to-list 'load-path (at-config-basedir "rc"))
 (add-to-list 'load-path (at-config-basedir "bundles"))
-
-;; For a new non-file buffer set its major mode based on the buffer name.
-;; http://thread.gmane.org/gmane.emacs.devel/115520/focus=115794
-;; (setq-default major-mode (lambda ()
-;;                            (if buffer-file-name
-;;                                (fundamental-mode)
-;;                              (let ((buffer-file-name (buffer-name)))
-;;                                (set-auto-mode)))))
 
 (mapcar 'load
         (mapcar
