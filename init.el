@@ -13,9 +13,6 @@
 (setq home-directory (getenv "HOME"))
 (setq global-username user-login-name)
 
-(setq config-basedir (file-name-directory
-                      (or (buffer-file-name) load-file-name)))
-
 (setq custom-file (concat config-basedir "customizations.el"))
 
 (add-to-list 'load-path (concat config-basedir "rc"))
