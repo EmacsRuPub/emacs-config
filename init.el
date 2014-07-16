@@ -1,7 +1,8 @@
 (setq config-basedir (file-name-directory
                       (or (buffer-file-name) load-file-name)))
+(add-to-list 'load-path config-basedir)
 
-(load (concat config-basedir "base.el"))
+(load-library "base")
 
 ;; (setq debug-on-error t)
 ;; (setq stack-trace-on-error t)
@@ -13,11 +14,10 @@
 (setq home-directory (getenv "HOME"))
 (setq global-username user-login-name)
 
-(setq custom-file (concat config-basedir "customizations.el"))
+(setq custom-file (at-config-basedir "customizations.el"))
 
-(add-to-list 'load-path (concat config-basedir "rc"))
-(add-to-list 'load-path (concat config-basedir "bundles"))
-(add-to-list 'load-path config-basedir)
+(add-to-list 'load-path (at-config-basedir "rc"))
+(add-to-list 'load-path (at-config-basedir "bundles"))
 
 ;; For a new non-file buffer set its major mode based on the buffer name.
 ;; http://thread.gmane.org/gmane.emacs.devel/115520/focus=115794

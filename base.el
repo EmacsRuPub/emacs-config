@@ -13,5 +13,8 @@
                                     (with-output-to-string (backtrace)))
                             :warning))))
 
+(defun at-config-basedir (suffix)
+  (concat config-basedir suffix))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; base.el ends here
