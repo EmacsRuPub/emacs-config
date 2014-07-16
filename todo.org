@@ -14,7 +14,7 @@
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
 ** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
-* TODO [#B] find out how to customize holidays in org-mode  :investigate:fix:
+* TODO [#A] find out how to customize holidays in org-mode  :investigate:fix:
 ** C-h v calendar-holidays
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
 * TODO [#B] some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
@@ -65,7 +65,7 @@
 * TODO [#C] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
-* TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
+* TODO [#A] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
@@ -117,11 +117,11 @@
   Ex.: https://github.com/zamotivator/emacs/blob/master/common.config and maybe others in place
 * TODO [#B] review setup for unique buffers renaming, maybe fix [2014-07-03 Чт 09:58] :emacs:ticket:
 * TODO [#C] email imap sieve setup (wl) [2014-07-03 Чт 10:00]  :emacs:ticket:
-* TODO [#B] customdef for recursive files lists (idea: particularly paths from bookmarks) [2014-07-03 Чт 13:08] :emacs:ticket:
+* TODO [#A] customdef for recursive files lists (idea: particularly paths from bookmarks) [2014-07-03 Чт 13:08] :emacs:ticket:
 * TODO [#C] customdef framework for in-emacs strings processing (or find existing) [2014-07-03 Чт 15:29] :emacs:ticket:
 * TODO [#C] find out if there is a way to build temporary agenda (of some file list) [2014-07-03 Чт 16:20] :emacs:ticket:
 * TODO [#C] review googlecl usage [2014-07-03 Чт 16:33]        :emacs:ticket:
-* TODO [#B] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
+* TODO [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
 * TODO [#A] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:
@@ -130,5 +130,5 @@
 ** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]
 ** [[https://github.com/mbriggs/.emacs.d/blob/master/init/init-erc.el][.emacs.d/init/init-erc.el at master · mbriggs/.emacs.d]]
 ** [[https://github.com/Niluge-KiWi/dotfiles/blob/master/.emacs.d/erc.el][dotfiles/.emacs.d/erc.el at master · Niluge-KiWi/dotfiles]]
-* TODO [#B] fork breadcrumb and try to add bookmarked line displaying [2014-07-14 Пн 20:51] :emacs:ticket:
+* TODO [#A] fork breadcrumb and try to add bookmarked line displaying [2014-07-14 Пн 20:51] :emacs:ticket:
 ** https://github.com/joodland/bm review references usefulness
