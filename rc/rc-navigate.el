@@ -7,6 +7,7 @@
 (autoload 'smex "smex" nil t)
 (autoload 'custom-helm "helm" nil t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
 (autoload 'wgrep-ag-setup "wgrep-ag")
 
 (require 'ace-jump-mode)
@@ -142,6 +143,19 @@
 
 (setq ag-highlight-search t)
 
+(eval-after-load "helm-gtags"
+  '(progn
+     (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+     (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+     (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+     (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+     (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+     (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+     (setq helm-gtags-path-style 'relative)
+     (setq helm-gtags-ignore-case t)
+     (setq helm-gtags-auto-update t)
+     ))
 
 ;#############################################################################
 ;#   Keybindings

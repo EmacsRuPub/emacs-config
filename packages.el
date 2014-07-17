@@ -65,6 +65,7 @@
         flycheck
         flycheck-color-mode-line
         framemove
+        ggtags
         git-commit-mode
         git-emacs
         git-gutter
@@ -74,6 +75,7 @@
         google-contacts
         haskell-mode
         header2
+        helm-gtags
         helm-recentd
         helm-swoop
         help+
