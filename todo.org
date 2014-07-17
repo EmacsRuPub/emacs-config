@@ -130,5 +130,3 @@
 ** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]
 ** [[https://github.com/mbriggs/.emacs.d/blob/master/init/init-erc.el][.emacs.d/init/init-erc.el at master · mbriggs/.emacs.d]]
 ** [[https://github.com/Niluge-KiWi/dotfiles/blob/master/.emacs.d/erc.el][dotfiles/.emacs.d/erc.el at master · Niluge-KiWi/dotfiles]]
-* TODO [#A] fork breadcrumb and try to add bookmarked line displaying [2014-07-14 Пн 20:51] :emacs:ticket:
-** https://github.com/joodland/bm review references usefulness

@@ -478,3 +478,14 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] fork breadcrumb and try to add bookmarked line displaying [2014-07-14 Пн 20:51] :emacs:ticket:
+  CLOSED: [2014-07-17 Чт 22:58]
+  - State "DONE"       from "TODO"       [2014-07-17 Чт 22:58]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-07-17 Чт 22:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** https://github.com/joodland/bm review references usefulness
