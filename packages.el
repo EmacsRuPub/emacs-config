@@ -23,7 +23,7 @@
         auto-complete-yasnippet
         bm
         bookmark+
-        breadcrumb
+        breadcrumb-custom
         browse-kill-ring
         buffer-move
         c-eldoc

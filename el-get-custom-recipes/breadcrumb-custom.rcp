@@ -1,0 +1,4 @@
+(:name breadcrumb-custom
+       :description "Breadcrumb for Emacs http://breadcrumbemacs.sourceforge.net/"
+       :type github
+       :pkgname "wiedzmin/breadcrumb")
