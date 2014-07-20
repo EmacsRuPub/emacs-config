@@ -130,3 +130,4 @@
 ** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]
 ** [[https://github.com/mbriggs/.emacs.d/blob/master/init/init-erc.el][.emacs.d/init/init-erc.el at master · mbriggs/.emacs.d]]
 ** [[https://github.com/Niluge-KiWi/dotfiles/blob/master/.emacs.d/erc.el][dotfiles/.emacs.d/erc.el at master · Niluge-KiWi/dotfiles]]
+* TODO [#B] search modes and commands that will be useful/handy to expose via discover.el [2014-07-20 Вс 04:11] :emacs:ticket:
