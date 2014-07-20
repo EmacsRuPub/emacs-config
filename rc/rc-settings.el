@@ -81,6 +81,7 @@
 (setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-separator "/")
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+(setq uniquify-strip-common-suffix nil)
 
 (setq tail-max-size 20)
 
