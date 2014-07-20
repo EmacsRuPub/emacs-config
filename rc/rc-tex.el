@@ -100,3 +100,5 @@
 (provide 'rc-tex)
 
 ;;; emacs-rc-tex.el ends here
+
+;TODO: investigate TEXT_INPUTS usage
