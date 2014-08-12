@@ -34,6 +34,11 @@
   (require 'server)
   (server-start))
 
+(add-hook 'server-visit-hook
+          (lambda () (local-set-key (kbd "C-c C-c") 'server-save-edit)))
+
+;; (add-hook 'kill-emacs-hook 'save-buffer-clients-on-exit)
+
 (global-set-key (kbd "C-x c") 'proced)
 
 (provide 'rc-system)
