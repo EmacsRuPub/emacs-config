@@ -140,6 +140,23 @@
         ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         )))
 
+
+(setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
+(setq holiday-personal-holidays nil) ; personal anniversaries, etc.
+
+(setq holiday-other-holidays
+      (append holiday-orthodox-holidays holiday-personal-holidays))
+
+;; remove all foreign holidays from holidays set
+(setq holiday-general-holidays nil)
+(setq holiday-local-holidays nil)
+(setq holiday-christian-holidays nil)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
+(setq holiday-bahai-holidays nil)
+(setq holiday-oriental-holidays nil)
+
+
 ;#############################################################################
 ;#   Setup
 ;############################################################################
