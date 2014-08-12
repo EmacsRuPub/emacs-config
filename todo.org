@@ -52,7 +52,11 @@
 ** https://github.com/nex3/perspective-el
 ** http://www.emacswiki.org/emacs/workspaces.el
 * TODO [#C] add some neat snippets or custom defuns for erc commands (e.g. "/MSG user-or-channel message") :erc:
-* TODO [#C] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:
+* TODO [#C] add some kind of regexp to select-erc-buffer to exclude server buffer itself :erc:ATTACH:
+  :PROPERTIES:
+  :Attachments: init-erc.el
+  :ID:       4990919e-a4f4-4b7c-a580-e457c4076cfe
+  :END:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
 * TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
@@ -124,10 +128,21 @@
 * TODO [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
-* TODO [#A] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:
+* TODO [#A] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: tlh-registers.el
+  :ID:       58cb5813-f85c-4f07-a96c-c2cbc2dcdb4b
+  :END:
 * TODO [#C] some ways to make sqli (sql-postgres) more handy and usable [2014-07-10 Чт 20:17] :emacs:ticket:investigate:
 * TODO [#C] review foreign configs [2014-07-10 Чт 23:57]   :emacs:ticket:erc:
 ** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]
 ** [[https://github.com/mbriggs/.emacs.d/blob/master/init/init-erc.el][.emacs.d/init/init-erc.el at master · mbriggs/.emacs.d]]
 ** [[https://github.com/Niluge-KiWi/dotfiles/blob/master/.emacs.d/erc.el][dotfiles/.emacs.d/erc.el at master · Niluge-KiWi/dotfiles]]
 * TODO [#B] search modes and commands that will be useful/handy to expose via discover.el [2014-07-20 Вс 04:11] :emacs:ticket:
+* TODO some case study for multiplatform config here [2014-07-21 Пн 01:08] :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: tlh-system.el
+  :ID:       54455088-b852-4bd1-8735-a0f0f6a68dc2
+  :END:
+* TODO [#B] customdef for emailing org->html-converted data in chunks (ex: links.org) [2014-07-22 Вт 01:03] :emacs:ticket:
+* TODO [#A] functionality for narrowing single sexp (in case of long one) [2014-08-07 Чт 13:06] :emacs:ticket:
