@@ -22,7 +22,7 @@
 (setq openwith-associations
       '(("\\.pdf\\'" "zathura" (file))
         ("\\.djvu\\'" "zathura" (file))
-        ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\)\\'" "vlc" (file))
+        ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
         ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
         ("\\.doc\\'" "abiword" (file))
         ("\\.swf\\'" "swfdec-player" (file))
