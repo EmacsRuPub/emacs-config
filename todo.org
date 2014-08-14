@@ -145,5 +145,4 @@
   :ID:       54455088-b852-4bd1-8735-a0f0f6a68dc2
   :END:
 * TODO [#B] customdef for emailing org->html-converted data in chunks (ex: links.org) [2014-07-22 Вт 01:03] :emacs:ticket:
-* TODO [#A] functionality for narrowing single sexp (in case of long one) [2014-08-07 Чт 13:06] :emacs:ticket:
 * TODO [#C] find out how to open *magit-log-edit* [2014-08-13 Ср 01:08] :emacs:ticket:

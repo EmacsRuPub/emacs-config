@@ -489,3 +489,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_TODO: DONE
   :END:
 ** https://github.com/joodland/bm review references usefulness
+
+* DONE [#A] functionality for narrowing single sexp (e.g. list) (in case of long one) [2014-08-07 Чт 13:06] :emacs:ticket:
+  CLOSED: [2014-08-15 Пт 00:57]
+  - State "DONE"       from "TODO"       [2014-08-15 Пт 00:57]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-08-15 Пт 00:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

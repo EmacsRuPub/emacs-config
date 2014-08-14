@@ -260,6 +260,15 @@ instead."
       (message "Opening file...")
     (message "Aborting")))
 
+(defun narrow-to-list (&optional arg)
+  (interactive)
+  (let (beg end)
+    (backward-up-list)
+    (setq beg (point))
+    (forward-sexp)
+    (setq end (point))
+    (narrow-to-region beg end)))
+
 (provide 'custom-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
