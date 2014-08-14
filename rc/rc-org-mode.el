@@ -147,14 +147,10 @@
 (setq holiday-other-holidays
       (append holiday-orthodox-holidays holiday-personal-holidays))
 
-;; remove all foreign holidays from holidays set
-(setq holiday-general-holidays nil)
-(setq holiday-local-holidays nil)
-(setq holiday-christian-holidays nil)
-(setq holiday-hebrew-holidays nil)
-(setq holiday-islamic-holidays nil)
-(setq holiday-bahai-holidays nil)
-(setq holiday-oriental-holidays nil)
+(setq calendar-holidays
+  (append holiday-other-holidays
+          holiday-solar-holidays))
+
 
 
 ;#############################################################################
