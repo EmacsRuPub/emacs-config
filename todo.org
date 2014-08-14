@@ -14,8 +14,6 @@
 ** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
 ** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
-* TODO [#A] find out how to customize holidays in org-mode  :investigate:fix:
-** C-h v calendar-holidays
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
 * TODO [#B] some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
 ** http://emacswiki.org/emacs/AutomaticFileHeaders
