@@ -32,6 +32,7 @@
 (require 'whole-line-or-region) ;; if no region is active, act on current line
 (require 'generic)
 (require 'generic-x)
+(require 'rebox2)
 
 ;#############################################################################
 ;#   Customizations
@@ -124,9 +125,25 @@
 
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
+(setq make-header-hook '(header-utf8
+                         header-blank
+                         header-file-name
+                         header-creation-date
+                         header-end-line
+                         header-eof))
+
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+(add-hook 'write-file-hooks 'auto-update-file-header)
+
+(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+(add-hook 'python-mode-hook     'auto-make-header)
+(add-hook 'php-mode-hook        'auto-make-header)
+(add-hook 'sh-mode-hook         'auto-make-header)
+(add-hook 'lisp-mode-hook       'auto-make-header)
+(add-hook 'java-mode-hook       'auto-make-header)
 
 (eval-after-load "paredit"
   '(progn
@@ -157,6 +174,10 @@
   nil
   '(".keymap\\'" ".map\\'")
   nil)
+
+(defsubst header-utf8 ()
+  "Insert utf-8 def."
+  (insert header-prefix-string  "-*- coding: utf-8 -*-\n"))
 
 (setq generic-default-modes (delete 'javascript-generic-mode
                                     generic-default-modes))
@@ -272,6 +293,9 @@
 (global-set-key (kbd "\C-c r l") (lambda () (interactive) (sudo-find-file "/etc/portage/package.license")))
 (global-set-key (kbd "\C-c r k") (lambda () (interactive) (sudo-find-file "/etc/portage/package.keywords")))
 (global-set-key (kbd "\C-c r a") (lambda () (interactive) (sudo-find-file "/etc/portage/package.accept_keywords")))
+
+(global-set-key (kbd "M-q") 'rebox-dwim)
+(global-set-key (kbd "S-M-q") 'rebox-cycle)
 
 (provide 'rc-editing)
 

@@ -15,7 +15,6 @@
 (require 'rc-editing)
 (require 'rc-completion)
 (require 'rc-programming)
-(require 'rc-headers)
 (require 'rc-clients)
 (require 'rc-jabber)
 (require 'rc-shell)
