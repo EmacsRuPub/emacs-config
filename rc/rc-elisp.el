@@ -32,6 +32,9 @@
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
 
+(dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+  (add-hook hook 'elisp-slime-nav-mode))
+
 (provide 'rc-elisp)
 
 ;;; emacs-rc-elisp.el ends here
