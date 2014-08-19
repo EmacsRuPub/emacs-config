@@ -46,6 +46,7 @@
         drag-stuff
         ecb-custom
         el-spice
+        elisp-slime-nav
         elwm
         emacs-jabber
         emacs-swoop
