@@ -71,7 +71,9 @@
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
-* TODO [#A] advise 'browse-url-at-point to be able to aumatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
+* DONE [#A] advise 'browse-url-at-point to be able to automatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
+  CLOSED: [2014-08-21 Чт 01:16]
+  - State "DONE"       from "TODO"       [2014-08-21 Чт 01:16]
 * TODO [#C] fix indents cycling in haskell-mode [2014-07-01 Вт 00:45] :emacs:ticket:
 * TODO [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
 * TODO [#C] emacs - associative memory [2013-04-01 Пн 18:36] :todo:chaos:idea:

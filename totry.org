@@ -53,3 +53,4 @@
    :ID:       f9c53018-ca47-469a-9610-5ca08434e198
    :END:
 ** https://github.com/mickeynp/sona.el [2014-07-20 Вс 04:10]                                       :emacs:try:
+** [[https://github.com/purcell/password-vault][purcell/password-vault]] [2014-08-20 Ср 01:50]                                       :emacs:try:
