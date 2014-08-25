@@ -54,3 +54,4 @@
    :END:
 ** https://github.com/mickeynp/sona.el [2014-07-20 Вс 04:10]                                       :emacs:try:
 ** [[https://github.com/purcell/password-vault][purcell/password-vault]] [2014-08-20 Ср 01:50]                                       :emacs:try:
+** http://nschum.de/src/emacs/pick-backup/ [2014-08-21 Чт 01:30]                                       :emacs:try:

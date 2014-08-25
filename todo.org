@@ -1,6 +1,6 @@
 * TODO [#C] rc-elisp.el                                              :review:
 * TODO [#C] rc-haskell.el                                     :review:extend:
-* TODO [#B] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
+* TODO [#A] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
@@ -66,14 +66,11 @@
 * TODO [#C] ERC: bots [2014-06-23 Пн 00:22]                :emacs:ticket:erc:
 * TODO [#C] make custom/get-file-md5 insert hash into clipboard [2014-06-23 Пн 02:14] :emacs:ticket:
 * TODO [#C] find out if there is a chance to have more then 3 priority levels in orgmode [2014-06-25 Ср 19:54] :emacs:ticket:
-* TODO [#A] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
+* TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
 * TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
-* DONE [#A] advise 'browse-url-at-point to be able to automatically move point inside url on the line, if any [2014-07-01 Вт 00:28] :emacs:ticket:
-  CLOSED: [2014-08-21 Чт 01:16]
-  - State "DONE"       from "TODO"       [2014-08-21 Чт 01:16]
 * TODO [#C] fix indents cycling in haskell-mode [2014-07-01 Вт 00:45] :emacs:ticket:
 * TODO [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
 * TODO [#C] emacs - associative memory [2013-04-01 Пн 18:36] :todo:chaos:idea:
@@ -145,3 +142,6 @@
   :END:
 * TODO [#B] customdef for emailing org->html-converted data in chunks (ex: links.org) [2014-07-22 Вт 01:03] :emacs:ticket:
 * TODO [#C] find out how to open *magit-log-edit* [2014-08-13 Ср 01:08] :emacs:ticket:
+* TODO [#A] review custom keybindings again [2014-08-21 Чт 13:42] :emacs:ticket:
+* TODO [#B] make slime use ONE COMMON browser for all documentation lookups, either graphical or w3m [2014-08-21 Чт 18:09] :emacs:ticket:
+* TODO [#B] find out how to manage recentf list more straightforward [2014-08-25 Пн 15:15] :emacs:ticket:
