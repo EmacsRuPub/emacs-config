@@ -4,6 +4,9 @@
 ;; Created: Ср июл 16 11:52:25 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq home-directory (getenv "HOME"))
+(setq global-username user-login-name)
+
 (defun solidload (filename)
   (condition-case err
       (load filename)
@@ -13,8 +16,7 @@
                                     (with-output-to-string (backtrace)))
                             :warning))))
 
-(defun at-config-basedir (suffix)
-  (concat config-basedir suffix))
+(load-library "pathutil")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; base.el ends here

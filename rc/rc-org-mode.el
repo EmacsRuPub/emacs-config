@@ -26,10 +26,10 @@
 ;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
-(setq org-agenda-files (all-files-under-dir-recursively (concat org-dir "/main") "org"))
+(setq org-agenda-files (all-files-under-dir-recursively (at-org-dir) "org"))
 ;TODO: maybe do it less straightforward
-(add-to-list 'org-agenda-files (at-config-basedir "/todo.org"))
-(add-to-list 'org-agenda-files (at-config-basedir "/totry.org"))
+(add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
+(add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
 
 ; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
@@ -112,36 +112,35 @@
 (setq org-capture-templates
       (quote
        (("d" "todo")
-        ("dc" "chaos" entry (file (concat org-dir "/todo.org")) "* SOMEDAY %? %U :todo:chaos:")
-        ("dt" "today" entry (file (concat org-dir "/todo.org")) "* TODO %? %U :todo:today:")
-        ("dn" "tomorrow" entry (file (concat org-dir "/todo.org")) "* TODO %? %U :todo:tomorrow")
-        ("do" "ordering" entry (file (concat org-dir "/ordering.org")) "* TODO %? %U :todo:ordering")
-        ("dg" "gmail todo" entry (file (concat org-dir "/ordering.org")) "* TODO %? %U :todo:ordering:gmail:")
+        ("dc" "chaos" entry (file (at-org-dir "/todo.org")) "* SOMEDAY %? %U :todo:chaos:")
+        ("dt" "today" entry (file (at-org-dir "/todo.org")) "* TODO %? %U :todo:today:")
+        ("dn" "tomorrow" entry (file (at-org-dir "/todo.org")) "* TODO %? %U :todo:tomorrow")
+        ("do" "ordering" entry (file (at-org-dir "/ordering.org")) "* TODO %? %U :todo:ordering")
+        ("dg" "gmail todo" entry (file (at-org-dir "/ordering.org")) "* TODO %? %U :todo:ordering:gmail:")
         ("de" "emacs")
         ("det" "emacs todo" entry (file (at-config-basedir "/todo.org")) "* TODO %? %U :emacs:ticket:")
         ("dey" "emacs try" entry (file+headline (at-config-basedir "/totry.org") "try") "* %? %U :emacs:try:")
-        ("dp" "project ideas" entry (file (concat org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
-        ("dx" "xmonad tickets" entry (file+headline (concat org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
-        ("ds" "stumpwm tickets" entry (file (concat home-directory "/.stumpwm.d/todo.org") "tickets") "* TODO %? %U :stumpwm:ticket:")
-        ("dw" "workplace tasks" entry (file (concat org-dir "/workplace-tasks.org")) "* TODO %? %U :workplace:")
+        ("dp" "project ideas" entry (file (at-org-dir "/projects/ideas/projectideas.org")) "* %? %U :project:idea:")
+        ("dx" "xmonad tickets" entry (file+headline (at-org-dir "/projects/config/xmonad.org") "tickets") "* %? %U :xmonad:ticket:")
+        ("ds" "stumpwm tickets" entry (file (at-homedir "/.stumpwm.d/todo.org") "tickets") "* TODO %? %U :stumpwm:ticket:")
+        ("dw" "workplace tasks" entry (file (at-org-dir "/workplace-tasks.org")) "* TODO %? %U :workplace:")
         ("j" "job")
-        ("ji" "issues" entry (file+headline (concat org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
-        ("jp" "plan" entry (file (concat org-dir "/job/plan.org")) "* TODO %? %U :work:planning:%(custom/scrum-timestamp-as-tag):")
+        ("ji" "issues" entry (file+headline (at-org-dir "/job/issues.org") "list") "* %? %U :work:tasks:")
+        ("jp" "plan" entry (file (at-org-dir "/job/plan.org")) "* TODO %? %U :work:planning:%(custom/scrum-timestamp-as-tag):")
         ("b" "browser tabs")
-        ("bc" "clojure" entry (file+olp (concat org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "clojure (to process)") "* %? %U :clojure:")
-        ("bh" "haskell" entry (file+olp (concat org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "haskell") "* %? %U :haskell:")
-        ("bv" "video" entry (file+olp (concat org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "video") "* %? %U :video:")
-        ("l" "links" entry (file (concat org-dir "/links.org")) "* %? %U :links:send:")
-        ("g" "github" entry (file (concat org-inventory-dir "/checklists/github.org")) "* %? %U :github:")
-        ("k" "knowledge base" entry (file (concat org-inventory-dir "/kb.org")) "* %? %U :kb:raw:")
+        ("bc" "clojure" entry (file+olp (at-org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "clojure (to process)") "* %? %U :clojure:")
+        ("bh" "haskell" entry (file+olp (at-org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "haskell") "* %? %U :haskell:")
+        ("bv" "video" entry (file+olp (at-org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "video") "* %? %U :video:")
+        ("l" "links" entry (file (at-org-dir "/links.org")) "* %? %U :links:send:")
+        ("g" "github" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:")
+        ("k" "knowledge base" entry (file (at-org-inventory-dir "/kb.org")) "* %? %U :kb:raw:")
         ("s" "search")
-        ("sb" "book" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:book:")
-        ("sf" "food" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:food:")
-        ("st" "token" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:token:")
-        ("sl" "by link" entry (file (concat org-dir "/search.org")) "* TODO %? %U :search:link:")
-        ("n" "newspaper articles" entry (file+headline (concat org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
+        ("sb" "book" entry (file (at-org-dir "/search.org")) "* TODO %? %U :search:book:")
+        ("sf" "food" entry (file (at-org-dir "/search.org")) "* TODO %? %U :search:food:")
+        ("st" "token" entry (file (at-org-dir "/search.org")) "* TODO %? %U :search:token:")
+        ("sl" "by link" entry (file (at-org-dir "/search.org")) "* TODO %? %U :search:link:")
+        ("n" "newspaper articles" entry (file+headline (at-org-dir "/checklists/from_newspapers.org") "unsorted") "* %? %U :newspaper:toread:")
         )))
-
 
 (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
 (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
@@ -152,7 +151,6 @@
 (setq calendar-holidays
   (append holiday-other-holidays
           holiday-solar-holidays))
-
 
 
 ;#############################################################################

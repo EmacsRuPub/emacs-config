@@ -124,11 +124,6 @@
 * TODO [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
-* TODO [#A] maybe create bundle of functions for getting some common path (e.g. path within config root, org root, etc) [2014-07-08 Вт 13:31] :emacs:ticket:ATTACH:
-  :PROPERTIES:
-  :Attachments: tlh-registers.el
-  :ID:       58cb5813-f85c-4f07-a96c-c2cbc2dcdb4b
-  :END:
 * TODO [#C] some ways to make sqli (sql-postgres) more handy and usable [2014-07-10 Чт 20:17] :emacs:ticket:investigate:
 * TODO [#C] review foreign configs [2014-07-10 Чт 23:57]   :emacs:ticket:erc:
 ** [[https://github.com/tlh/emacs-config/blob/master/tlh-erc.el][emacs-config/tlh-erc.el at master · tlh/emacs-config]]

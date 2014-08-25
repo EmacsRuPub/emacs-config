@@ -7,9 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq org-dir (concat home-directory "/org/main"))
-(setq org-inventory-dir (concat home-directory "/org/inventory"))
-
 ;#############################################################################
 ;#   Abbreviation
 ;############################################################################
@@ -21,13 +18,13 @@
 ;#############################################################################
 ;#   Org
 ;############################################################################
-(setq custom/org-capture-file (concat org-dir "/refile.org"))
+(setq custom/org-capture-file (at-org-dir "/refile.org"))
 
 
 ;#############################################################################
 ;#   Jabber
 ;############################################################################
-(setq custom/jabber-history-dir "~/.emacs-jabber")
+(setq custom/jabber-history-dir (at-homedir "/.emacs-jabber"))
 
 
 ;#############################################################################
@@ -47,8 +44,9 @@
 (setq custom/maildir-folder "~/Mail")
 
 ;; pylookup
-(setq pylookup-dir (at-config-basedir "el-get/pylookup"))
+(defun at-pylookup-dir (&optional suffix)
+  (concat (at-config-basedir "el-get/pylookup") suffix))
 
-(defconst emacs-tmp-dir "~/.emacs-backups")
+(defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
 
 ;;; constants.el ends here

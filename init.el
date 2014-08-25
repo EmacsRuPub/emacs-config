@@ -8,9 +8,6 @@
 
 (setq message-log-max t)
 
-(setq home-directory (getenv "HOME"))
-(setq global-username user-login-name)
-
 (setq custom-file (at-config-basedir "customizations.el"))
 
 (add-to-list 'load-path (at-config-basedir "rc"))

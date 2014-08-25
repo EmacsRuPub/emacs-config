@@ -67,7 +67,7 @@
 
 (defun refile-job-done ()
   (interactive)
-  (let ((org-refile-targets `((,(concat org-dir "/job/done.org") :level . 1))))
+  (let ((org-refile-targets `((,(at-org-dir "/job/done.org") :level . 1))))
     (call-interactively 'org-refile)))
 
 (defun process-task-done ()
