@@ -55,7 +55,6 @@
   :ID:       4990919e-a4f4-4b7c-a580-e457c4076cfe
   :END:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
-* TODO [#B] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
 * TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
 * TODO [#C] maybe fix invalid args messages in magit bisect
 * TODO [#B] find how to suppress ecb dialog for upgraded settings on activate

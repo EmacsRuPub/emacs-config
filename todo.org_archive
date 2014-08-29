@@ -542,3 +542,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] make acpid (lid.sh) eval emacs commands successfully (particularly 'emacsclient --eval "(jabber-disconnect)"') [2014-06-19 Чт 15:16] :emacs:ticket:
+  CLOSED: [2014-08-29 Пт 23:27]
+  - State "DONE"       from "TODO"       [2014-08-29 Пт 23:27]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-08-29 Пт 23:27
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
