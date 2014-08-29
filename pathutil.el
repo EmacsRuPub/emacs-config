@@ -18,5 +18,8 @@
 (defun at-org-inventory-dir (&optional suffix)
  (concat (at-homedir "/org/inventory") suffix))
 
+(defun at-org-mastering-dir (&optional suffix)
+ (concat (at-homedir "/org/mastering") suffix))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; pathutil.el ends here
