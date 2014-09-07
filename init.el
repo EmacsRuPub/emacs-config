@@ -4,6 +4,8 @@
 
 (load-library "base")
 
+(reverse-input-method 'russian-computer)
+
 (setq shell-file-name "/bin/bash")
 
 (setq message-log-max t)
