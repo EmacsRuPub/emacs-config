@@ -98,6 +98,7 @@
         lisppaste
         list-processes+
         litable
+        lua-mode
         magit
         markdown-mode
         mingus
