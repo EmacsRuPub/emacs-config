@@ -149,6 +149,7 @@
         twittering-mode
         undo-tree
         unicad
+        vimrc-mode
         vline
         volatile-highlights
         w3m-session
