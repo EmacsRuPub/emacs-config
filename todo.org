@@ -120,7 +120,9 @@
 * TODO [#C] customdef framework for in-emacs strings processing (or find existing) [2014-07-03 Чт 15:29] :emacs:ticket:
 * TODO [#C] find out if there is a way to build temporary agenda (of some file list) [2014-07-03 Чт 16:20] :emacs:ticket:
 * TODO [#C] review googlecl usage [2014-07-03 Чт 16:33]        :emacs:ticket:
-* TODO [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
+* DONE [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
+  CLOSED: [2014-08-27 Ср 15:33]
+  - State "DONE"       from "TODO"       [2014-08-27 Ср 15:33]
 * TODO [#B] maybe add some so-called "toprocess" org file for entries not being classified but needed to be written down immediately [2014-07-03 Чт 17:15] :emacs:ticket:
 * TODO [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
 * TODO [#C] some ways to make sqli (sql-postgres) more handy and usable [2014-07-10 Чт 20:17] :emacs:ticket:investigate:
