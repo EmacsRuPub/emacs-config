@@ -15,6 +15,21 @@
         (server-save-edit)
       (save-buffers-kill-emacs t)))
 
+;TODO: maybe implement as advice
+(defun custom/toggle-input-method ()
+  "Toggle input method while keeping system keyboard layout in latin.
+   Essential for WMs without this functionality built-in."
+  (interactive)
+  (toggle-input-method)
+  (when (executable-find "kbdd")
+    (start-process "dbus-send"
+                   nil
+                   "dbus-send"
+                   "--dest=ru.gentoo.KbddService"
+                   "/ru/gentoo/KbddService"
+                   "ru.gentoo.kbdd.set_layout"
+                   "uint32:1")))
+
 (provide 'custom-system)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
