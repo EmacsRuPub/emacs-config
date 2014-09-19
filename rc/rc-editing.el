@@ -230,8 +230,6 @@
 (global-set-key (kbd "M-]") 'custom/comment-or-uncomment-region)
 (global-set-key (kbd "C-c C-u C-r") 'rename-uniquely)
 
-(global-set-key (kbd "C-;") 'iedit-mode)
-
 (global-set-key (kbd "M-\"") 'eval-region)
 
 ;I never use set-fill-column and I hate hitting it by accident.
