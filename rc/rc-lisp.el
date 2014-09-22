@@ -8,56 +8,6 @@
 ;; Status: not intended to be distributed yet
 
 ;#############################################################################
-;#   Load extensions
-;############################################################################
-(require 'inf-lisp)
-(require 'slime)
-(require 'slime-autoloads)
-(require 'info-look)
-
-
-;#############################################################################
-;#   setup extensions
-;############################################################################
-(setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
-
-;; lookup information in hyperspec
-(info-lookup-add-help
- :mode 'lisp-mode
- :regexp "[^][()'\" \t\n]+"
- :ignore-case t
- :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
-
-(eval-after-load "slime"
-  '(progn
-     (slime-setup
-      '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
-        slime-hyperdoc slime-motd slime-package-fu slime-references
-        slime-snapshot slime-sprof slime-trace-dialog slime-xref-browser slime-asdf slime-autodoc
-        slime-banner slime-fancy slime-fuzzy slime-repl slime-sbcl-exts)) ;helm-slime
-     (setq slime-complete-symbol*-fancy t)
-     (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-     ))
-
-(defadvice slime-documentation-lookup
-  (around change-browse-url-browser-function activate)
-  "Use w3m for slime documentation lookup."
-  (let ((browse-url-browser-function 'w3m-browse-url))
-    ad-do-it))
-
-;#############################################################################
-;#   Customizations
-;############################################################################
-(setq inferior-lisp-program "sbcl")
-(setq slime-net-coding-system 'utf-8-unix)
-(setq slime-lisp-implementations '((clojure ("clj-cmd") :init swank-clojure-init)))
-(setq slime-use-autodoc-mode nil)
-
-(add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
-
-(setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
-
-;#############################################################################
 ;#   Hooks
 ;############################################################################
 (defun custom/lisp-mode-hook ()
@@ -80,21 +30,64 @@
   (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
 
-(add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
-(add-hook 'lisp-mode-hook 'custom/slime-hook)
+;#############################################################################
+;#   Load extensions
+;############################################################################
+(require 'inf-lisp)
+(require 'info-look)
 
-(add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
-(add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-(add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
-
+(use-package slime
+  :init
+  (progn
+    (use-package slime-autoloads)
+    (add-hook 'lisp-mode-hook 'custom/slime-hook)
+    (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+    (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
+    (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
+    (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
+    (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers))
+  :config
+  (progn
+    (slime-setup
+     '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
+                             slime-hyperdoc slime-motd slime-package-fu slime-references
+                             slime-snapshot slime-sprof slime-trace-dialog slime-xref-browser
+                             slime-asdf slime-autodoc slime-banner slime-fancy slime-fuzzy
+                             slime-repl slime-sbcl-exts))
+    (setq slime-complete-symbol*-fancy t)
+    (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+    (setq slime-net-coding-system 'utf-8-unix)
+    (setq slime-lisp-implementations '((clojure ("clj-cmd") :init swank-clojure-init)))
+    (setq slime-use-autodoc-mode nil)
+    (setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
+    (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
+    (bind-key "<f5>" 'slime)
+    (bind-key "<C-f11>" 'slime-selector)
+    (bind-key "C-c h" 'slime-documentation-lookup slime-repl-mode-map)
+    ))
 
 ;#############################################################################
-;#   Keybindings
+;#   setup extensions
 ;############################################################################
-(global-set-key (kbd "<f5>") 'slime)
-(global-set-key (kbd "<C-f11>") 'slime-selector)
-(define-key slime-repl-mode-map (kbd "C-c h") 'slime-documentation-lookup)
+
+;; lookup information in hyperspec
+(info-lookup-add-help
+ :mode 'lisp-mode
+ :regexp "[^][()'\" \t\n]+"
+ :ignore-case t
+ :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
+
+(defadvice slime-documentation-lookup
+  (around change-browse-url-browser-function activate)
+  "Use w3m for slime documentation lookup."
+  (let ((browse-url-browser-function 'w3m-browse-url))
+    ad-do-it))
+
+;#############################################################################
+;#   Customizations
+;############################################################################
+(setq inferior-lisp-program "sbcl")
+(setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
 
 (provide 'rc-lisp)
 
