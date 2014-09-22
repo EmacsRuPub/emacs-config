@@ -49,6 +49,7 @@
         js-mode
         js2-mode
         html-mode
+        lua-mode
 ))
 
 ;; untabify some modes
