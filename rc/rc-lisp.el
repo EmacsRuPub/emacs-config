@@ -68,19 +68,23 @@
   (turn-on-eldoc-mode)
   (paredit-mode 1)
   (paren-face-mode)
+  (setq tab-width 2)
+  (setq indent-tabs-mode t)
+  )
+
+(defun custom/slime-hook ()
+  (slime-mode t)
   (set (make-local-variable 'slime-lisp-implementations)
        (list (assoc 'sbcl slime-lisp-implementations)))
-  (setq tab-width 2
-  indent-tabs-mode t)
   (local-set-key (kbd "C-c ;") 'slime-insert-balanced-comments)
   (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
 
 (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
+(add-hook 'lisp-mode-hook 'custom/slime-hook)
 
 (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
-(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
 
