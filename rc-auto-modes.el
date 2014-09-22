@@ -117,7 +117,5 @@
 (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode))
 (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
 
-(add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-auto-modes.el ends here

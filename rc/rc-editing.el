@@ -168,6 +168,9 @@
   (global-set-key (kbd "C-x r v") 'list-register)
   )
 
+(use-package vimrc-mode
+             :mode ".vim\\(rc\\)?$")
+
 (define-generic-mode 'keymap-mode
   '("#")
   '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")

@@ -29,6 +29,8 @@
 
 (load (at-config-basedir "systemtraits.el"))
 
+(require 'use-package)
+
 (require 'bundle-main)
 
 (mapcar 'load
