@@ -198,6 +198,10 @@
 (global-set-key (kbd "C-c C-o C-m") 'mark-with-finished-timestamp)
 (global-set-key (kbd "C-c C-o C-d") 'refile-job-done)
 
+(define-key custom-orgmode-keymap (kbd "g") 'org-clock-goto)
+(define-key custom-orgmode-keymap (kbd "p") 'org-set-property)
+(define-key custom-orgmode-keymap (kbd "d") 'org-delete-property)
+
 (provide 'rc-org-mode)
 
 ;;; emacs-rc-org-mode.el ends here

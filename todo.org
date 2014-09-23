@@ -141,7 +141,5 @@
 * TODO [#A] review custom keybindings again [2014-08-21 Чт 13:42] :emacs:ticket:
 * TODO [#B] make slime use ONE COMMON browser for all documentation lookups, either graphical or w3m [2014-08-21 Чт 18:09] :emacs:ticket:
 * TODO [#B] find out how to manage recentf list more straightforward [2014-08-25 Пн 15:15] :emacs:ticket:
-* TODO [#A] maybe rebind org-clock-goto and org-set-property more sanely [2014-09-22 Пн 01:37] :emacs:ticket:orgmode:
-* TODO [#A] review keybindings in http://doc.norang.ca/org-mode.html#text-KeyBindings according to current needs [2014-09-22 Пн 01:40] :emacs:ticket:orgmode:
 * TODO [#C] setup erc logging [2014-09-22 Пн 23:00]        :emacs:ticket:erc:
 * TODO [#C] process rc-dired.el [2014-09-22 Пн 23:19] :emacs:ticket:use:package:

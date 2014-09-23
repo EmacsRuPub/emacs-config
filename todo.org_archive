@@ -552,3 +552,23 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] maybe rebind org-clock-goto and org-set-property more sanely [2014-09-22 Пн 01:37] :emacs:ticket:orgmode:
+  CLOSED: [2014-09-23 Вт 14:21]
+  - State "DONE"       from "TODO"       [2014-09-23 Вт 14:21]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-09-23 Вт 14:21
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] review keybindings in http://doc.norang.ca/org-mode.html#text-KeyBindings according to current needs [2014-09-22 Пн 01:40] :emacs:ticket:orgmode:
+  CLOSED: [2014-09-23 Вт 14:30]
+  - State "DONE"       from "TODO"       [2014-09-23 Вт 14:30]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-09-23 Вт 14:30
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
