@@ -189,7 +189,6 @@
 (global-set-key (kbd "C-c t s") 'org-sparse-tree)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
 (global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
-(global-set-key (kbd "C-c o") 'oog)
 (global-set-key (kbd "C-c m m") 'org-agenda-bulk-mark-all)
 (global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
 (global-set-key (kbd "<f12>") 'org-pomodoro)
