@@ -56,3 +56,5 @@
 ** [[https://github.com/purcell/password-vault][purcell/password-vault]] [2014-08-20 Ср 01:50]                                       :emacs:try:
 ** http://nschum.de/src/emacs/pick-backup/ [2014-08-21 Чт 01:30]                                       :emacs:try:
 ** [[http://www.emacswiki.org/emacs/WebKit][EmacsWiki: Web Kit]] [2014-08-31 Вс 21:08]                                       :emacs:try:
+** orgmode: todo state triggers [2014-09-23 Вт 14:54]             :emacs:try:
+   http://doc.norang.ca/org-mode.html#ToDoStateTriggers

@@ -142,4 +142,6 @@
 * TODO [#B] make slime use ONE COMMON browser for all documentation lookups, either graphical or w3m [2014-08-21 Чт 18:09] :emacs:ticket:
 * TODO [#B] find out how to manage recentf list more straightforward [2014-08-25 Пн 15:15] :emacs:ticket:
 * TODO [#C] setup erc logging [2014-09-22 Пн 23:00]        :emacs:ticket:erc:
-* TODO [#C] process rc-dired.el [2014-09-22 Пн 23:19] :emacs:ticket:use:package:
+* TODO [#C] process rc-dired.el [2014-09-22 Пн 23:19] :package:use:ticket:emacs:
+* TODO [#A] remove yandex weather display from orgmode [2014-09-24 Ср 00:49] :emacs:ticket:
+* TODO [#A] attach shared google calendar to clfw [2014-09-24 Ср 00:49] :emacs:ticket:
