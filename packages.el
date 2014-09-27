@@ -116,6 +116,7 @@
         org-magit
         org-occur-goto
         org-pomodoro
+        org-trello
         paredit
         paredit-everywhere
         pdftools
