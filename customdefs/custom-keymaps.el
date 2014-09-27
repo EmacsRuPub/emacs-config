@@ -18,6 +18,9 @@
 (define-prefix-command 'custom-clients-keymap)
 (global-set-key (kbd "C-q") 'custom-clients-keymap)
 
+(define-prefix-command 'custom-orgmode-keymap)
+(global-set-key (kbd "<f7>") 'custom-orgmode-keymap)
+
 (provide 'custom-keymaps)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
