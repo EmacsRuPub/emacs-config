@@ -1,0 +1,273 @@
+* 1
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+* 2
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+* 3
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+* 4
+(provide 'move-text)
+* 5
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+* 6
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+* 7
+(defun come-here ()
+        "Bring content from *Shell Command Output* to current buffer"
+        (interactive)
+        (insert-buffer-substring (get-buffer "*Shell Command Output*")))
+* 8
+(defun insert-buffer-name ()
+       "Insert current buffer name at point"
+        (interactive)
+        (insert-string (buffer-name (current-buffer))))
+* 9 (binary search)
+(global-set-key "\C-\M-b" 'backward-midpoint)
+(global-set-key "\C-\M-f" 'forward-midpoint)
+
+(defun backward-midpoint ( )
+"Move backward to midpoint between current position and beginning of line."
+(interactive)
+(backward-char (/ (- (point) (line-beginning-position)) 2)))
+
+(defun forward-midpoint ( )
+"Move forward to midpoint between current position and end of line."
+(interactive)
+(forward-char (/ (- (line-end-position) (point)) 2)))
+* 10
+Скрыть ненужные файлы в dired-mode и C-x C-f Tab
+чтобы не мозолили глаза всякие *.pyc:
+
+;; dired mode
+(eval-after-load "dired"
+  '(require 'dired-x))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode 1)))
+
+;; completion
+(defadvice completion--file-name-table (after
+                                        ignoring-backups-f-n-completion
+                                        activate)
+  "filter out results when the have completion-ignored-extensions"
+  (let ((res ad-return-value))
+    (if (and (listp res)
+	     (stringp (car res))
+	     (cdr res))                 ; length > 1, don't ignore sole match
+	(setq ad-return-value
+	      (completion-pcm--filename-try-filter res)))))
+* 11
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+ (filename (buffer-file-name)))
+    (if (not filename)
+ (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+   (message "A buffer named '%s' already exists!" new-name)
+ (progn
+   (rename-file name new-name 1)
+   (rename-buffer new-name)
+   (set-visited-file-name new-name)
+   (set-buffer-modified-p nil))))))
+* 12
+(defadvice show-paren-function (after show-matching-paren-offscreen
+                                      activate)
+  "If the matching paren is offscreen, show the matching line in the                               
+echo area. Has no effect if the character before point is not of                                   
+the syntax class ')'."
+  (interactive)
+  (let ((matching-text nil))
+    ;; Only call `blink-matching-open' if the character before point                               
+    ;; is a close parentheses type character. Otherwise, there's not                               
+    ;; really any point, and `blink-matching-open' would just echo                                 
+    ;; "Mismatched parentheses", which gets really annoying.                                       
+    (if (char-equal (char-syntax (char-before (point))) ?\))
+        (setq matching-text (blink-matching-open)))
+    (if (not (null matching-text))
+        (message matching-text))))
+
+;;;;;;;;;;;;;;;
+;; UTF-8
+;;;;;;;;;;;;;;;;;;;;
+;; set up unicode
+(prefer-coding-system       'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+;; This from a japanese individual.  I hope it works.
+(setq default-buffer-file-coding-system 'utf-8)
+;; From Emacs wiki
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+;; Wwindows clipboard is UTF-16LE 
+(set-clipboard-coding-system 'utf-16le-dos)
+
+
+(defun jonnay-timestamp ()
+  "Spit out the current time"
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
+
+(defun jonnay-sign ()
+  "spit out my name, email and the current time"
+  (interactive)
+  (insert "-- Jonathan Arkell (jonathana@criticalmass.com)")
+  (jonnay-timestamp))
+
+
+;; Cygwin requires some seriosu setting up to work the way i likes it
+(message "Setting up Cygwin...")
+(let* ((cygwin-root "c:")
+       (cygwin-bin (concat cygwin-root "/bin"))
+       (gambit-bin "/usr/local/Gambit-C/4.0b22/bin/")
+       (snow-bin "/usr/local/snow/current/bin")
+       (mysql-bin "/wamp/bin/mysql/mysql5.0.51a/bin/"))
+   (setenv "PATH" (concat cygwin-bin ";" ;
+                                          snow-bin ";" 
+                                          gambit-bin ";"
+                                          mysql-bin ";"
+                                          ".;")  
+           (getenv "PATH"))
+   (setq exec-path (cons cygwin-bin exec-path)))
+
+(setq shell-file-name "bash")
+(setq explicit-shell-file-name "bash")
+
+(require 'cygwin-mount)
+(cygwin-mount-activate)
+(message "Setting up Cygwin...Done")
+
+
+; Completion isn't perfect, but close
+(defun my-shell-setup ()
+   "For Cygwin bash under Emacs 20+"
+   (setq comint-scroll-show-maximum-output 'this)
+   (setq comint-completion-addsuffix t)
+   (setq comint-eol-on-send t)
+   (setq w32-quote-process-args ?\")
+   (make-variable-buffer-local 'comint-completion-addsuffix))
+
+(setq shell-mode-hook 'my-shell-setup)
+(add-hook 'emacs-startup-hook 'cygwin-shell)
+
+
+; Change how home key works
+(global-set-key [home] 'beginning-or-indentation)
+(substitute-key-definition 'beginning-of-line 'beginning-or-indentation global-map)
+
+
+(defun yank-and-down ()
+  "Yank the text and go down a line."
+  (interactive)
+  (yank)
+  (exchange-point-and-mark)
+  (next-line))
+
+(defun kill-syntax (&optional arg)
+  "Kill ARG sets of syntax characters after point."
+  (interactive "p")
+  (let ((arg (or arg 1))
+    (inc (if (and arg (< arg 0)) 1 -1))
+    (opoint (point)))
+    (while (not (= arg 0))
+      (if (> arg 0)
+      (skip-syntax-forward (string (char-syntax (char-after))))
+    (skip-syntax-backward (string (char-syntax (char-before)))))
+      (setq arg (+ arg inc)))
+    (kill-region opoint (point))))
+
+(defun kill-syntax-backward (&optional arg)
+  "Kill ARG sets of syntax characters preceding point."
+  (interactive "p")
+  (kill-syntax (- 0 (or arg 1))))
+
+(global-set-key [(control shift y)] 'yank-and-down)
+(global-set-key [(shift backspace)] 'kill-syntax-backward)
+(global-set-key [(shift delete)] 'kill-syntax)
+
+
+(defun insert-file-name (arg filename)
+  "Insert name of file FILENAME into buffer after point.
+  Set mark after the inserted text.
+
+  Prefixed with \\[universal-argument], expand the file name to
+  its fully canocalized path.
+
+  See `expand-file-name'."
+  ;; Based on insert-file in Emacs -- ashawley 2008-09-26
+  (interactive "*P\nfInsert file name: ")
+  (if arg
+      (insert (expand-file-name filename))
+      (insert filename)))
+
+(defun kill-ring-save-filename ()
+  "Copy the current filename to the kill ring"
+  (interactive)
+  (kill-new (buffer-file-name)))
+
+(defun insert-file-name ()
+  "Insert the name of the current file."
+  (interactive)
+  (insert (buffer-file-name)))
+
+(defun insert-directory-name ()
+  "Insert the name of the current directory"
+  (interactive)
+  (insert (file-name-directory (buffer-file-name))))
+
+(defun jonnay-toggle-debug ()
+  "Toggle debugging by toggling icicles, and debug on error"
+  (interactive)
+  (toggle-debug-on-error)
+  (icicle-mode))
+
+
+(defvar programming-modes
+  '(emacs-lisp-mode scheme-mode lisp-mode c-mode c++-mode 
+    objc-mode latex-mode plain-tex-mode java-mode
+    php-mode css-mode js2-mode nxml-mode nxhtml-mode)
+  "List of modes related to programming")
+
+; Text-mate style indenting
+(defadvice yank (after indent-region activate)
+  (if (member major-mode programming-modes)
+      (indent-region (region-beginning) (region-end) nil)))
+* 13
+;; byte compile config file if changed
+(add-hook 'after-save-hook
+          '(lambda ()
+                   (when (string-match
+                          (concat (expand-file-name "~/.elisp/cfg/") ".*\.el$")
+                          buffer-file-name)
+           (byte-compile-file buffer-file-name))))
