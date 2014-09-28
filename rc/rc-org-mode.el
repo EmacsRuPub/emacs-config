@@ -203,6 +203,7 @@
 (define-key custom-orgmode-keymap (kbd "g") 'org-clock-goto)
 (define-key custom-orgmode-keymap (kbd "p") 'org-set-property)
 (define-key custom-orgmode-keymap (kbd "d") 'org-delete-property)
+(define-key custom-orgmode-keymap (kbd "t") 'org-trello-mode)
 
 (provide 'rc-org-mode)
 
