@@ -106,7 +106,7 @@
         minibuf-electric-gnuemacs
         minimap
         multiple-cursors
-        nav
+        neotree
         nginx-mode
         notify
         nxhtml
