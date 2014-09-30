@@ -145,3 +145,8 @@
 * TODO [#C] process rc-dired.el [2014-09-22 Пн 23:19] :package:use:ticket:emacs:
 * TODO [#A] remove yandex weather display from orgmode [2014-09-24 Ср 00:49] :emacs:ticket:
 * TODO [#A] attach shared google calendar to clfw [2014-09-24 Ср 00:49] :emacs:ticket:
+* TODO [#C] develop some dates/anniversaries handling either using org 'holidays' machinery or some file-based solution [2014-09-28 Вс 19:46] :emacs:ticket:
+  HINT: %%(org-bbdb-anniversaries)
+* TODO [#A] make 'sudo-find-file being called using prefix argument to 'find-file [2014-09-30 Вт 01:38]                             :emacs:ticket:
+* TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
+* TODO [#A] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
