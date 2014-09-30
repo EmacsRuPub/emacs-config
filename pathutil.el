@@ -21,5 +21,8 @@
 (defun at-org-mastering-dir (&optional suffix)
  (concat (at-homedir "/org/mastering") suffix))
 
+(defun at-org-job-dir (&optional suffix)
+ (concat (at-homedir "/org/job") suffix))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; pathutil.el ends here
