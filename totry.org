@@ -58,3 +58,11 @@
 ** [[http://www.emacswiki.org/emacs/WebKit][EmacsWiki: Web Kit]] [2014-08-31 Вс 21:08]                                       :emacs:try:
 ** orgmode: todo state triggers [2014-09-23 Вт 14:54]             :emacs:try:
    http://doc.norang.ca/org-mode.html#ToDoStateTriggers
+** [[https://github.com/syohex/emacs-anzu][syohex/emacs-anzu]] [2014-10-01 Ср 00:13]                                       :emacs:try:
+** [[https://github.com/pidu/git-timemachine][pidu/git-timemachine]] [2014-10-01 Ср 00:20]                                       :emacs:try:
+** [[https://github.com/ikame/tagedit][ikame/tagedit]] [2014-10-01 Ср 00:28]                                       :emacs:try:
+** auto-complete-c-headers [2014-10-05 Вс 02:09]                                       :emacs:try:
+** flymake-google-cpplint [2014-10-05 Вс 02:13]                                       :emacs:try:
+** google-c-style  [2014-10-05 Вс 02:13]                                       :emacs:try:
+** http://barisyuksel.com/cppmode/.emacs [2014-10-05 Вс 02:21]                                       :emacs:try:
+** https://github.com/Sarcasm/irony-mode [2014-10-05 Вс 20:14]                                       :emacs:try:
