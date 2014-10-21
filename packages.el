@@ -118,6 +118,7 @@
         org-occur-goto
         org-pomodoro
         org-trello
+        org-toodledo
         paredit
         paredit-everywhere
         pdftools
