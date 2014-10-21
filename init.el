@@ -29,6 +29,10 @@
 
 (load (at-config-basedir "systemtraits.el"))
 
+(mapcar 'load
+  (all-files-under-dir-recursively
+   (at-config-basedir "private")))
+
 (require 'use-package)
 
 (require 'bundle-main)
