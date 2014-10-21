@@ -19,6 +19,11 @@
     (beginning-of-line 0)
     (org-remove-empty-drawer-at "CLOCK" (point))))
 
+;; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
 (defun org-osd-display (min-to-app new-time msg)
   (osd-display msg msg -1 "center" "center" "Verdana 40"))
 

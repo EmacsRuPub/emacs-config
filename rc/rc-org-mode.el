@@ -34,8 +34,11 @@
 
 ; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
-(setq org-refile-use-outline-path (quote file))
-(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+(setq org-completion-use-ido t)
+(setq org-indirect-buffer-display 'current-window)
 (setq org-agenda-span 'month)
 (setq org-deadline-warning-days 14)
 (setq org-agenda-show-all-dates t)
@@ -47,6 +50,7 @@
 (setq org-agenda-include-all-todo t)
 (setq org-reverse-note-order t)
 (setq org-fast-tag-selection-single-key (quote expert))
+(setq org-use-fast-tag-selection t)
 (setq org-startup-folded nil)
 (setq org-log-done t)
 (setq org-hide-leading-stars t)
@@ -62,11 +66,14 @@
 (setq org-log-done t) ;; read documentation
 (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
 (setq org-attach-directory "org-attach-data")
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
 
+
+(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)" "NEXT(x)"
+                  "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)"))
+(setq kw-seq-work '(sequence "NEW(n)" "INPROGRESS(p!)" "CHECKING(r!)" "REWORK(f!@)" "|" "CLOSED(k!)"))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)"
-                  "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)")
-        (sequence "NEW(n)" "INPROGRESS(p!)" "CHECKING(r!)" "REWORK(f!@)" "|" "CLOSED(k!)")))
+      `(,kw-seq-common ,kw-seq-work))
 (setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEW(n)" "INPROGRESS(p)" "REWORK(f)"))
 (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
 (setq org-agenda-time-grid

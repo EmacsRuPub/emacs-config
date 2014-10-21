@@ -75,6 +75,8 @@
      (setq ido-case-fold t) ; case insensitive
      (setq ido-max-prospects 16)
      (setq ido-use-faces nil)
+     (setq ido-default-file-method 'selected-window)
+     (setq ido-default-buffer-method 'selected-window)
 
      (setq ido-completing-read-use-initial-input-as-default-commands
            '(ibuffer-filter-by-mode
