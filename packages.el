@@ -105,6 +105,7 @@
         mingus
         minibuf-electric-gnuemacs
         minimap
+        multifiles
         multiple-cursors
         neotree
         nginx-mode

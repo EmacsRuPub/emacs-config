@@ -274,6 +274,8 @@
 (global-set-key (kbd "C-c d e") 'turn-on-drag-stuff-mode)
 (global-set-key (kbd "C-c d d") 'turn-off-drag-stuff-mode)
 
+(global-set-key (kbd "C-`") 'mf/mirror-region-in-multifile)
+
 ;; key definition example
 ;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
 

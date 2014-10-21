@@ -1,0 +1,4 @@
+(:name multifiles
+       :type github
+       :pkgname "magnars/multifiles.el"
+       :features multifiles)
