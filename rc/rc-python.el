@@ -60,7 +60,9 @@
   (define-key python-mode-map (kbd "C-M-,") 'python-indent-shift-left)
   (flycheck-mode)
   (paren-face-mode)
-  (setq flycheck-checker 'python-flake8))
+  (setq flycheck-checker 'python-flake8)
+  (setq flycheck-flake8rc (or (find-project-flake8-config) flycheck-flake8rc))
+  )
 
 (add-hook 'python-mode-hook 'custom/python-mode-hook)
 
