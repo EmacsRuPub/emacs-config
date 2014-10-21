@@ -66,3 +66,12 @@
 ** google-c-style  [2014-10-05 Вс 02:13]                                       :emacs:try:
 ** http://barisyuksel.com/cppmode/.emacs [2014-10-05 Вс 02:21]                                       :emacs:try:
 ** https://github.com/Sarcasm/irony-mode [2014-10-05 Вс 20:14]                                       :emacs:try:
+** [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-10-12 Вс 13:51]                                       :emacs:try:
+** [[http://www.emacswiki.org/Htmlize][EmacsWiki: Htmlize]] [2014-10-12 Вс 14:02]                                       :emacs:try:
+** [[https://github.com/dbrock/volume-el/blob/master/volume.el][volume-el/volume.el at master · dbrock/volume-el]] [2014-10-12 Вс 16:34]                                       :emacs:try:
+** [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-10-12 Вс 18:00]                                       :emacs:try:
+** [[https://github.com/d11wtq/fiplr][d11wtq/fiplr]] [2014-10-12 Вс 18:11]                                       :emacs:try:
+** [[https://github.com/kai2nenobu/guide-key][kai2nenobu/guide-key]] [2014-10-12 Вс 18:12]                                       :emacs:try:
+** [[https://github.com/zk-phi/sublimity][zk-phi/sublimity]] [2014-10-15 Ср 14:00]                                       :emacs:try:
+** [[https://github.com/unic0rn/powerline][unic0rn/powerline]] [2014-10-15 Ср 14:00]                                       :emacs:try:
+** [[https://github.com/raugturi/powerline-evil][raugturi/powerline-evil]] [2014-10-15 Ср 14:01]                                       :emacs:try:
