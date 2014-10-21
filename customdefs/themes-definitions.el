@@ -14,8 +14,6 @@
 (setf (gethash "terminus" custom/fonts-def) "Terminus:size=14")
 (setf (gethash "terminus-bold" custom/fonts-def) "TerminusBold:size=12")
 (setf (gethash "monaco" custom/fonts-def) "Monaco:size=12")
-(setf (gethash "code2000" custom/fonts-def) "Code2000:size=12")
-(setf (gethash "consolamono" custom/fonts-def) "ConsolaMono:size=12")
 (setf (gethash "ptmono" custom/fonts-def) "PTMono:size=12")
 (setf (gethash "adobe-courier-bold-14" custom/fonts-def) "-Adobe-Courier-bold-normal-normal-*-14-*-*-*-m-90-iso10646-1")
 (setf (gethash "adobe-helvetica-bold-12" custom/fonts-def) "-Adobe-Helvetica-bold-normal-normal-*-12-*-*-*-*-70-iso10646-1")
@@ -57,6 +55,7 @@
 (setf (gethash "urw-nimbus-mono-l-bold" custom/fonts-def) "-urw-Nimbus Mono L-bold-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 (setf (gethash "urw-nimbus-mono-l-normal" custom/fonts-def) "-urw-Nimbus Mono L-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (setf (gethash "xos4-terminus-bold-16" custom/fonts-def) "-xos4-Terminus-bold-normal-normal-*-16-*-*-*-c-80-iso10646-1")
+(setf (gethash "bsvera-sans-mono" custom/fonts-def) "Bitstream Vera Sans Mono:size=12")
 
 (provide 'themes-definitions)
 
