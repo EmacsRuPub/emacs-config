@@ -29,6 +29,7 @@ oauth2.plstore
 private
 projectile-bookmarks.eld
 projectile.cache
+request
 semanticdb
 srecode-map.el
 url
