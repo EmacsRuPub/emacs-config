@@ -50,7 +50,6 @@
 (setq org-agenda-include-all-todo t)
 (setq org-reverse-note-order t)
 (setq org-fast-tag-selection-single-key (quote expert))
-(setq org-use-fast-tag-selection t)
 (setq org-startup-folded nil)
 (setq org-log-done t)
 (setq org-hide-leading-stars t)
