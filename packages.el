@@ -101,6 +101,7 @@
         litable
         lua-mode
         magit
+        magit-filenotify
         markdown-mode
         mingus
         minibuf-electric-gnuemacs

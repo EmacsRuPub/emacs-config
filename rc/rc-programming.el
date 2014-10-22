@@ -81,6 +81,7 @@
      (global-set-key (kbd "C-c g r") 'magit-reflog)
      (global-set-key (kbd "C-c g c") 'magit-checkout)
      (global-set-key (kbd "C-c g r") 'magit-add-remote)
+     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
      ))
 
 (eval-after-load "git-gutter"
