@@ -72,6 +72,7 @@
 (setq delete-by-moving-to-trash t);; Move files to trash when deleting
 (setq-default truncate-lines t);; Don't break lines for me, please
 (setq mark-even-if-inactive t)
+(setq kmacro-ring-max 16)
 
 (setq x-select-enable-clipboard t);; Allow pasting selection outside of Emacs
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
