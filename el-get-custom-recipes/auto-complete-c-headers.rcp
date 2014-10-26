@@ -2,4 +2,5 @@
        :description "An auto-complete source for C/C++ header files"
        :type github
        :pkgname "mooz/auto-complete-c-headers"
-       :features auto-complete-c-headers)
+       :features auto-complete-c-headers
+       :depends auto-complete)
