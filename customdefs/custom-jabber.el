@@ -10,17 +10,15 @@
 (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
 (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
 
-;; fails on some URLs, i.e. opens too many times
-(defun open-urls-in-region ()
-  (interactive)
+(defun custom/open-urls-in-region (beg end)
+  "Open URLs between BEG and END."
+  (interactive "r")
   (save-excursion
-    (setq beginning (region-beginning))
-    (setq end (region-end))
-    (goto-char beginning)
-    (while (< (point) end)
-        (re-search-forward url-regexp nil t)
-        (if (< (point) end)
-            (browse-url (thing-at-point 'url))))))
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward org-plain-link-re nil t)
+        (org-open-at-point)))))
 
 ;; uses s
 ;; TODO maybe use s in some other similar utils
