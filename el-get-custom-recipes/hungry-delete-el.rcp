@@ -1,0 +1,4 @@
+(:name hungry-delete-el
+       :type github
+       :pkgname "soutaro/hungry-delete.el"
+       :features hungry-delete)

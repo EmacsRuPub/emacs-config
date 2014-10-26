@@ -88,6 +88,7 @@
         highlight-symbol
         hl-line+
         hs-lint
+        hungry-delete-el
         ido-hacks
         ido-preview
         ido-ubiquitous
@@ -101,6 +102,7 @@
         js2-mode
         js2-refactor
         json-mode
+        latex-preview-pane
         lisppaste
         list-processes+
         litable
