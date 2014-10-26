@@ -25,75 +25,71 @@
 (autoload 'global-git-gutter-mode "git-gutter" nil t)
 (autoload 'ecb-activate "ecb" nil t)
 
-(eval-after-load "doxymacs"
-  '(progn
-     (setq-default doxymacs-doxygen-style "JavaDoc")
+(use-package doxymacs
+  :config
+  (progn
+    (setq-default doxymacs-doxygen-style "JavaDoc")
 
-     (defun custom/doxymacs-font-lock-hook ()
-       (if (or (eq major-mode 'c-mode)
-               (eq major-mode 'c++-mode))
-           (doxymacs-font-lock)))
+    (defun custom/doxymacs-font-lock-hook ()
+      (if (or (eq major-mode 'c-mode)
+              (eq major-mode 'c++-mode))
+          (doxymacs-font-lock)))
 
-     (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
-     (add-hook 'c-mode-common-hook 'doxymacs-mode)
-     ))
+    (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
+    (add-hook 'c-mode-common-hook 'doxymacs-mode)))
 
-(eval-after-load "projectile"
-  '(progn
-     (require 'helm-projectile)
+(use-package projectile
+  :commands (projectile-find-file custom/projectile-ag)
+  :bind ("C-c h p" . helm-projectile)
+  :init
+  (use-package helm-projectile)
+  :config
+  (progn
+    (projectile-global-mode) ;; to enable in all buffers
+    (setq projectile-enable-caching t)
+    (setq projectile-tags-command
+          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")))
 
-     (projectile-global-mode) ;; to enable in all buffers
-     (setq projectile-enable-caching t)
-     (setq projectile-tags-command
-           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+(use-package ecb
+  :bind (("C-x t q" . ecb-toggle-ecb-windows)
+         ("C-x t d" . ecb-deactivate)))
 
-     (global-set-key (kbd "C-c h p") 'helm-projectile)
-     ))
+(use-package flycheck
+  :bind (("C-x <up>" . flycheck-previous-error)
+         ("C-x <down>" . flycheck-next-error)
+         ("C-x !" . flycheck-first-error))
+  :config
+  (progn
+    (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
+    (setq flycheck-check-syntax-automatically '(idle-change))))
 
-(eval-after-load "ecb"
-  '(progn
-     (global-set-key (kbd "C-x t q") 'ecb-toggle-ecb-windows)
-     (global-set-key (kbd "C-x t d") 'ecb-deactivate)
-     ))
-
-(eval-after-load "flycheck"
-  '(progn
-     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-     (setq flycheck-check-syntax-automatically '(idle-change))
-
-     (global-set-key (kbd "C-x <up>") 'flycheck-previous-error)
-     (global-set-key (kbd "C-x <down>") 'flycheck-next-error)
-     (global-set-key (kbd "C-x !") 'flycheck-first-error)
-     ))
-
-(eval-after-load "eldoc"
-  '(progn
+(use-package eldoc
+  :init
+  (progn
     (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-    ))
+    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
 
-(eval-after-load "magit"
-  '(progn
-     (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
-     (global-set-key (kbd "C-c g l") 'magit-file-log)
-     (global-set-key (kbd "C-c g w") 'magit-diff-working-tree)
-     (global-set-key (kbd "C-c g r") 'magit-reflog)
-     (global-set-key (kbd "C-c g c") 'magit-checkout)
-     (global-set-key (kbd "C-c g r") 'magit-add-remote)
-     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-     ))
+(use-package magit
+  :bind (("C-c C-g" . magit-blame-mode)
+         ("C-c g l" . magit-file-log)
+         ("C-c g w" . magit-diff-working-tree)
+         ("C-c g r" . magit-reflog)
+         ("C-c g c" . magit-checkout)
+         ("C-c g r" . magit-add-remote))
+  :init
+  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
 
-(eval-after-load "git-gutter"
-  '(progn
-     (setq git-gutter:modified-sign "?")
-     (global-set-key (kbd "C-c <prior>") 'git-gutter:next-hunk)
-     (global-set-key (kbd "C-c <next>") 'git-gutter:previous-hunk)
-     (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
-     (set-face-attribute 'git-gutter:added nil :inverse-video nil)
-     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-     (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-     ))
+(use-package git-gutter
+  :bind (("C-c <prior>" . git-gutter:next-hunk)
+         ("C-c <next>" . git-gutter:previous-hunk))
+  :init
+  (progn
+    (setq git-gutter:modified-sign "?")
+    (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
+    (set-face-attribute 'git-gutter:added nil :inverse-video nil)
+    (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
+    (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)))
 
 ;; TODO try to autoload someway
 (setq gdb-many-windows t)
