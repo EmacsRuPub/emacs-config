@@ -223,6 +223,7 @@
 (define-key custom-edit-keymap (kbd "0") 'compact-spaces-in-region)
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
+(define-key custom-edit-keymap (kbd "2") 'duplicate-line)
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)

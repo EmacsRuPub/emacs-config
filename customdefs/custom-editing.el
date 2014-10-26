@@ -269,6 +269,20 @@ instead."
     (setq end (point))
     (narrow-to-region beg end)))
 
+;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
+(defun duplicate-line (arg)
+  "comment line at point; if COMMENTFIRST is non-nil, comment the original"
+  (interactive "P")
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (let ((str (buffer-substring (region-beginning) (region-end))))
+    (when arg
+      (comment-region (region-beginning) (region-end)))
+    (insert-string
+     (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (forward-line -1)))
+
 (provide 'custom-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
