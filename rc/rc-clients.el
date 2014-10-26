@@ -79,6 +79,45 @@
   (add-to-list 'tramp-default-proxies-alist
                   '(".*" "\\`.+\\'" "/ssh:%h:")))
 
+(use-package w3m
+  :commands w3m
+  :init
+  (progn
+    (use-package w3m-search)
+    (add-hook 'w3m-display-hook
+              (lambda (url)
+                (rename-buffer
+                 (format "*w3m: %s*" (or w3m-current-title
+                                         w3m-current-url)) t))))
+  :config
+  (progn
+    (setq w3m-coding-system 'utf-8)
+    (setq w3m-file-coding-system 'utf-8)
+    (setq w3m-file-name-coding-system 'utf-8)
+    (setq w3m-input-coding-system 'utf-8)
+    (setq w3m-output-coding-system 'utf-8)
+    (setq w3m-terminal-coding-system 'utf-8)
+    (setq w3m-use-cookies t)
+    ;; special chars
+    (standard-display-ascii ?\200 [15])
+    (standard-display-ascii ?\201 [21])
+    (standard-display-ascii ?\202 [24])
+    (standard-display-ascii ?\203 [13])
+    (standard-display-ascii ?\204 [22])
+    (standard-display-ascii ?\205 [25])
+    (standard-display-ascii ?\206 [12])
+    (standard-display-ascii ?\210 [23])
+    (standard-display-ascii ?\211 [14])
+    (standard-display-ascii ?\212 [18])
+    (standard-display-ascii ?\214 [11])
+    (standard-display-ascii ?\222 [?\'])
+    (standard-display-ascii ?\223 [?\"])
+    (standard-display-ascii ?\224 [?\"])
+    (standard-display-ascii ?\227 " -- ")
+    (add-to-list 'w3m-search-engine-alist
+                 '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
+
+
 ;TODO: try use-package
 (eval-after-load "gmail-notifier"
   '(progn

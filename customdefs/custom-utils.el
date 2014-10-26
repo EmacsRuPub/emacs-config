@@ -29,6 +29,17 @@
     (split-window)
     (switch-to-buffer cur-buf)))
 
+(defun w3m-open-current-page-in-firefox ()
+  "Opens the current URL in Mozilla Firefox."
+  (interactive)
+  (browse-url-firefox w3m-current-url))
+
+(defun w3m-open-link-or-image-in-firefox ()
+  "Opens the current link or image in Firefox."
+  (interactive)
+  (browse-url-firefox (or (w3m-anchor)
+                          (w3m-image))))
+
 (defun my-find-thing-at-point ()
   "Find variable, function or file at point."
   (interactive)

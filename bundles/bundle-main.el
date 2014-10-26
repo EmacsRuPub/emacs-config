@@ -7,7 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'rc-browser)
 (require 'rc-navigate)
 (require 'rc-settings)
 (require 'rc-system)
