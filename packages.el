@@ -11,10 +11,12 @@
       '(
         ac-math
         ac-slime
+        ac-irony
         ace-jump-mode
         actionscript-mode
         ag-custom
         auctex
+        auto-complete-c-headers
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex
@@ -28,6 +30,7 @@
         buffer-move
         c-eldoc
         calfw
+        cedet
         col-highlight
         color-theme-zenburn
         column-marker
@@ -45,6 +48,7 @@
         dired-toggle-sudo
         doxymacs
         drag-stuff
+        dtrt-indent
         ecb-custom
         el-spice
         elisp-slime-nav
@@ -90,6 +94,7 @@
         ido-vertical-mode
         ido-yes-or-no
         init-paredit
+        irony-mode
         jedi
         joseph-file-util
         js2-highlight-vars

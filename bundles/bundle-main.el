@@ -28,6 +28,7 @@
 (require 'rc-lisp)
 (require 'rc-haskell)
 (require 'rc-python)
+;; (require 'rc-cc)
 (require 'rc-special-major-modes)
 (require 'rc-tex)
 (require 'rc-dired)
