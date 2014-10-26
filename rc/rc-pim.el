@@ -83,6 +83,7 @@
         (list
          (cfw:org-create-source "Green")  ; orgmode source
          (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
+         (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")
          )))
      ))
 
