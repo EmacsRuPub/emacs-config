@@ -77,13 +77,13 @@
          ("C-c g r" . magit-reflog)
          ("C-c g c" . magit-checkout)
          ("C-c g r" . magit-add-remote))
-  :init
+  :config
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
 
 (use-package git-gutter
   :bind (("C-c <prior>" . git-gutter:next-hunk)
          ("C-c <next>" . git-gutter:previous-hunk))
-  :init
+  :config
   (progn
     (setq git-gutter:modified-sign "?")
     (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
