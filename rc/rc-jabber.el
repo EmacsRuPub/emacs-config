@@ -99,7 +99,8 @@
   (local-set-key (kbd "C-M-r")   'custom-jabber/wrap-replace-regexp)
   (local-set-key (kbd "C-M-m")   'custom-jabber/wrap-misreading)
   (local-set-key (kbd "<M-down>") 'custom/find-url-forward)
-  (local-set-key (kbd "<M-up>") 'custom/find-url-backward))
+  (local-set-key (kbd "<M-up>") 'custom/find-url-backward)
+  (local-set-key (kbd "C-c C-o C-l") 'browse-url))
 
 
 (defun my-jabber-connect-hook (jc)
@@ -119,7 +120,6 @@
 ;############################################################################
 (global-set-key (kbd "C-x C-j C-r") 'jabber-switch-to-roster-buffer)
 (global-set-key (kbd "C-x C-j C-a") 'jabber-activity-switch-to)
-(global-set-key (kbd "C-c C-o C-l") 'browse-url)
 (global-set-key (kbd "C-c C-o C-r") 'custom/open-urls-in-region)
 
 (provide 'rc-jabber)
