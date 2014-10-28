@@ -87,8 +87,6 @@
 * TODO [#C] emacs - несколько локаций в коде [2013-04-01 Пн 19:08] :todo:chaos:idea:
   отслеживание нескольких локаций в коде и их состояния - продумать
   идею
-* TODO [#A] fix 'browse-url-at-point advice to fall back to org-machinery for all but URLs  [2014-07-01 Вт 02:42] :emacs:ticket:
-** HINT org-open-at-point-functions
 * TODO [#B] find out why emacs moves between frames within dual head setup and fails to otherwise [2014-07-01 Вт 03:03] :emacs:ticket:
 * TODO [#B] play with org-sync and its redmine backend particularly [2014-07-01 Вт 03:06] :emacs:ticket:
   http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/backends.html#sec-2-3

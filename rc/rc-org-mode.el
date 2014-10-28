@@ -174,7 +174,7 @@
   (local-unset-key (kbd "C-c ["))
   (local-unset-key (kbd "C-c ]"))
   (local-unset-key (kbd "C-c C-o"))
-  (local-set-key (kbd "C-c C-o C-l") 'browse-url-at-point)
+  (local-set-key (kbd "C-c C-o C-l") 'open-or-browse-at-point)
   (imenu-add-to-menubar "Imenu"))
 
 (add-hook 'org-mode-hook 'custom/org-mode-hook)

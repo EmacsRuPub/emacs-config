@@ -572,3 +572,15 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] fix 'browse-url-at-point advice to fall back to org-machinery for all but URLs  [2014-07-01 Вт 02:42] :emacs:ticket:
+  CLOSED: [2014-10-28 Вт 19:02]
+  - State "DONE"       from "TODO"       [2014-10-28 Вт 19:02]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-10-28 Вт 19:03
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** HINT org-open-at-point-functions
+** org-open-at-point-functions work another way than we want, so a workaround for existing solution was introduced

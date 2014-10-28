@@ -81,6 +81,12 @@
   (mark-with-finished-timestamp)
   (refile-job-done))
 
+(defun open-or-browse-at-point (arg)
+  (interactive "P")
+  (if arg
+      (browse-url-at-point)
+    (org-open-at-point)))
+
 (defadvice browse-url-at-point (before org-position-url activate)
   (when (derived-mode-p 'org-mode)
     (let ((end nil))
