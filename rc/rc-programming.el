@@ -48,7 +48,8 @@
     (projectile-global-mode) ;; to enable in all buffers
     (setq projectile-enable-caching t)
     (setq projectile-tags-command
-          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")))
+          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+    (diminish 'projectile-mode "prj")))
 
 (use-package ecb
   :bind (("C-x t q" . ecb-toggle-ecb-windows)
@@ -68,7 +69,8 @@
   (progn
     (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
+    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+    (diminish 'eldoc-mode "ED")))
 
 (use-package magit
   :bind (("C-c C-g" . magit-blame-mode)
@@ -89,7 +91,8 @@
     (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
     (set-face-attribute 'git-gutter:added nil :inverse-video nil)
     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-    (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)))
+    (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
+    (diminish 'git-gutter-mode)))
 
 ;; TODO try to autoload someway
 (setq gdb-many-windows t)

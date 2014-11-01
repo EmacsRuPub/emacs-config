@@ -113,12 +113,8 @@
        (diminish 'auto-complete-mode " α")
        (diminish 'auto-fill-function)
        (diminish 'global-visual-line-mode)
-       (diminish 'undo-tree-mode)
        (diminish 'visual-line-mode)
        (diminish 'volatile-highlights-mode)
-       (diminish 'projectile-mode "prj")
-       (diminish 'git-gutter-mode)
-       (diminish 'eldoc-mode "ED")
        (diminish 'whole-line-or-region-mode)
        )))
 
