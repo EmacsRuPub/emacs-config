@@ -58,6 +58,8 @@
 (setq custom-buffer-done-kill t)
 (setq initial-scratch-message nil)
 (setq enable-recursive-minibuffers t)
+(setq visible-bell t)
+(setq inhibit-startup-echo-area-message "octocat")
 
 (setq echo-keystrokes 0.1);; Show keystrokes in progress
 
@@ -75,7 +77,7 @@
   '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 
 (setq disabled-command-function nil)
-(and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 
 ;; uniquify
 (setq uniquify-buffer-name-style 'post-forward)
@@ -87,10 +89,7 @@
 
 (menu-bar-mode -1)
 
-;; Blinking cursors are distracting - turn blink OFF
-(and (fboundp 'blink-cursor-mode) (blink-cursor-mode (- (*) (*) (*))))
-
-(blink-cursor-mode t)
+(blink-cursor-mode 0)
 (tool-bar-mode 0)
 (global-hl-line-mode t)
 (tooltip-mode nil)
