@@ -75,3 +75,4 @@
 ** [[https://github.com/zk-phi/sublimity][zk-phi/sublimity]] [2014-10-15 Ср 14:00]                                       :emacs:try:
 ** [[https://github.com/unic0rn/powerline][unic0rn/powerline]] [2014-10-15 Ср 14:00]                                       :emacs:try:
 ** [[https://github.com/raugturi/powerline-evil][raugturi/powerline-evil]] [2014-10-15 Ср 14:01]                                       :emacs:try:
+** [[http://kostafey.blogspot.ru/2012/10/mode-line.html][Kostafey's Blog: Функциональная и информативная mode-line]] [2014-11-01 Сб 01:05]                                       :emacs:try:

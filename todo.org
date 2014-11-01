@@ -4,7 +4,6 @@
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
-* TODO [#B] maybe generalize url opening someway for org mode and mode-agnostic :investigate:
 * TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
 * TODO [#B] review redmine + emacs connectivity options         :investigate:
 * TODO [#B] setup org refiling                           :investigate:review:
@@ -55,7 +54,6 @@
   :ID:       4990919e-a4f4-4b7c-a580-e457c4076cfe
   :END:
 * TODO [#B] search https://github.com/jorgenschaefer/elpy for some handy features to borrow
-* TODO [#C] maybe use ffap-file-at-point/ffap-url-at-point in existing code (e.g. for opening urls from jabber chats)
 * TODO [#C] maybe fix invalid args messages in magit bisect
 * TODO [#B] find how to suppress ecb dialog for upgraded settings on activate
 * TODO [#C] emacs python integration
@@ -148,3 +146,6 @@
 * TODO [#A] make 'sudo-find-file being called using prefix argument to 'find-file [2014-09-30 Вт 01:38]                             :emacs:ticket:
 * TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
 * TODO [#A] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
+* TODO [#A] fix details displaying in dired (broken by 24.4) [2014-10-26 Вс 19:41] :emacs:ticket:
+* TODO [#A] add "(provide '<basename>) for elisp file template" [2014-10-26 Вс 19:46] :emacs:ticket:
+* TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
