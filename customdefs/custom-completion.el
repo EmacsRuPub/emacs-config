@@ -122,6 +122,22 @@
         (insert key)
         (yas-expand)))))
 
+(defun ac-page-next ()
+  "Select next completion candidate per `ac-menu-height' range.
+ Pages down through completion menu."
+  (interactive)
+  (let ((counter 0))
+    (dotimes (counter (1- ac-menu-height))
+      (ac-next))))
+
+(defun ac-page-previous ()
+  "Select previous completion candidate per `ac-menu-height' range.
+ Pages up through completion menu."
+  (interactive)
+  (let ((counter 0))
+    (dotimes (counter (1- ac-menu-height))
+      (ac-previous))))
+
 (provide 'custom-completion)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

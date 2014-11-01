@@ -29,7 +29,12 @@
     (add-hook 'slime-mode-hook 'set-up-slime-ac)
     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
     (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-    (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)))
+    (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+    (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+    (define-key ac-complete-mode-map [next] 'ac-page-next)
+    (define-key ac-complete-mode-map [prior] 'ac-page-previous)
+    (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+    ))
 
 (use-package yasnippet
   :commands yas-ido-expand
