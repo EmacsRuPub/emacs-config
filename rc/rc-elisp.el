@@ -31,6 +31,7 @@
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
 
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'elisp-slime-nav-mode))
