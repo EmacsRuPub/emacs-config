@@ -95,6 +95,7 @@
           wdired-abort-changes)
         (eval `(defadvice ,it (after revert-buffer activate)
                  (revert-buffer))))
+;TODO: try use-package
 (eval-after-load "wdired"
   '(progn
      (define-key wdired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
