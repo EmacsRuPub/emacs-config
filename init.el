@@ -1,8 +1,9 @@
 (setq config-basedir (file-name-directory
                       (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path config-basedir)
+(add-to-list 'load-path (concat config-basedir "system"))
 
 (load-library "base")
+(load-library "pathutil")
 
 (reverse-input-method 'russian-computer)
 

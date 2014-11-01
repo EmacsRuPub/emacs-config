@@ -1,9 +1,3 @@
-;; -*- coding: utf-8 -*-
-;;
-;; Filename: base.el
-;; Created: Ср июл 16 11:52:25 2014 (+0400)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (setq home-directory (getenv "HOME"))
 (setq global-username user-login-name)
 
@@ -38,8 +32,3 @@
                 (vector (append mod (list to)))))))))
     (when input-method
       (activate-input-method current))))
-
-(load-library "pathutil")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; base.el ends here

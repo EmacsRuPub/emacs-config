@@ -17,6 +17,7 @@
         ag-custom
         auctex
         auto-complete-c-headers
+        auto-complete-clang
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex

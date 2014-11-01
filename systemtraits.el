@@ -5,9 +5,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (eq system-type 'darwin)
-  (load "systemtraits/rc-darwin.el"))
+  (load "rc-darwin.el"))
 (when (eq system-type 'gnu/linux)
-  (load "systemtraits/rc-linux.el"))
+  (load "rc-linux.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; systemtraits.el ends here

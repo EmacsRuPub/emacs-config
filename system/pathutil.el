@@ -1,9 +1,3 @@
-;; -*- coding: utf-8 -*-
-;;
-;; Filename: pathutil.el
-;; Created: Пн авг 25 23:27:14 2014 (+0400)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;TODO: unify slashes usage
 
 (defun at-config-basedir (&optional suffix)
@@ -23,6 +17,3 @@
 
 (defun at-org-job-dir (&optional suffix)
   (concat (at-homedir "/org/job") suffix))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; pathutil.el ends here
