@@ -132,8 +132,6 @@
         ("j" "job")
         ("ji" "issues" entry (file+headline (at-org-job-dir "/issues.org") "list") "* %? %U :work:tasks:")
         ("jp" "plan" entry (file (at-org-job-dir "/plan.org")) "* TODO %? %U :work:planning:%(custom/scrum-timestamp-as-tag):")
-        ("b" "browser tabs")
-        ("bv" "video" entry (file+olp (at-org-inventory-dir "/review/browser-tabs.org") "firefox tabs" "video") "* %? %U :video:")
         ("l" "links" entry (file (at-org-dir "/links.org")) "* %? %U :links:send:")
         ("g" "github")
         ("gc" "common" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:")
