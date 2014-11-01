@@ -174,6 +174,7 @@
         wrap-region
         yandex-weather
         yasnippet
+        zen-and-art-theme
         ))
 
 (provide 'packages)
