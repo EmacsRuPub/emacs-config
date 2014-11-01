@@ -27,6 +27,7 @@
 (setq diredp-rare-priv 'white-red-face)
 (setq diredp-compressed-file-suffix 'darkyellow-face)
 (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
+(setq dired-dwim-target t)
 
 ;; TODO: get rid of custom-set-faces below
 (custom-set-faces '(diredp-display-msg
