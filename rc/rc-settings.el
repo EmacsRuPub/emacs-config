@@ -91,7 +91,7 @@
 
 (blink-cursor-mode 0)
 (tool-bar-mode 0)
-(global-hl-line-mode t)
+;; (global-hl-line-mode t) ;FIXME: regeression (24.4): corresponding overlay value is nil
 (tooltip-mode nil)
 (global-font-lock-mode t)
 (display-battery-mode 1)
