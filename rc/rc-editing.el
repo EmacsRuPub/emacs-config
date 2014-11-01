@@ -25,7 +25,6 @@
 (require 'savekill)
 (require 'saveplace)
 (require 'table) ;; table
-(require 'undo-tree)
 (require 'unicad)
 (require 'volatile-highlights)
 (require 'wc-mode)
@@ -37,13 +36,15 @@
 ;#############################################################################
 ;#   Customizations
 ;############################################################################
-(global-undo-tree-mode t)
 (delete-selection-mode t)
 (volatile-highlights-mode t)
 (show-paren-mode t)
 (whole-line-or-region-mode 1)
 (toggle-cursor-type-when-idle 1)
 (change-cursor-mode 1)
+
+(eval-after-load "undo-tree"
+  '(global-undo-tree-mode t))
 
 (wrap-region-global-mode 1)
 (wrap-region-add-wrapper "*" "*")
