@@ -192,7 +192,7 @@
 
 (eval-after-load "neotree"
   '(progn
-     (define-key custom-search-keymap (kbd "n") 'neotree)))
+     (define-key custom-search-keymap (kbd "n") 'neotree-toggle)))
 
 (eval-after-load "breadcrumb"
   '(progn
