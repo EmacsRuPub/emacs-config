@@ -174,6 +174,9 @@
 
 (eval-after-load "ace-jump-mode"
   '(progn
+     (setq ace-jump-mode-scope 'visible)
+     (ace-jump-mode-enable-mark-sync)
+     (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
      (define-key custom-search-keymap (kbd "a") 'ace-jump-char-mode)
      (define-key custom-search-keymap (kbd "A") 'ace-jump-word-mode)))
 
