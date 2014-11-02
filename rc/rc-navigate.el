@@ -37,6 +37,10 @@
                           (shell-command (format "urxvt -e $SHELL -c 'cd %s && $SHELL' &"
                                                  (helm-recentd--get-target-string))))))))))
      (setq helm-recentd-sort 'frequency)
+     (setq helm-quick-update t)
+     (setq helm-split-window-in-side-p t)
+     (setq helm-ff-search-library-in-sexp t)
+     (setq helm-ff-file-name-history-use-recentf t)
      (global-set-key (kbd "C-&") 'custom-helm)
      (global-set-key (kbd "C-x C-d") 'helm-recentd)
      (define-key custom-search-keymap (kbd "h") 'helm-mini)
