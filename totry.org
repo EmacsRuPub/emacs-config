@@ -76,3 +76,29 @@
 ** [[https://github.com/unic0rn/powerline][unic0rn/powerline]] [2014-10-15 Ср 14:00]                                       :emacs:try:
 ** [[https://github.com/raugturi/powerline-evil][raugturi/powerline-evil]] [2014-10-15 Ср 14:01]                                       :emacs:try:
 ** [[http://kostafey.blogspot.ru/2012/10/mode-line.html][Kostafey's Blog: Функциональная и информативная mode-line]] [2014-11-01 Сб 01:05]                                       :emacs:try:
+** [[https://github.com/dengste/doc-present][dengste/doc-present]] [2014-11-01 Сб 18:30]                                       :emacs:try:
+** [[https://github.com/capitaomorte/sly][capitaomorte/sly]] [2014-11-02 Вс 00:36]                                       :emacs:try:
+** [[https://github.com/sabof/project-explorer][sabof/project-explorer]] [2014-11-02 Вс 00:42]                                       :emacs:try:
+** [[https://github.com/d11wtq/fiplr][d11wtq/fiplr]] [2014-11-02 Вс 01:19]                                       :emacs:try:
+** [[https://github.com/coldnew/linum-relative][coldnew/linum-relative]] [2014-11-02 Вс 16:46]                                       :emacs:try:
+** [[https://github.com/senny/emacs-eclim][senny/emacs-eclim]] [2014-11-02 Вс 16:47]                                       :emacs:try:
+** [[https://github.com/kai2nenobu/guide-key][kai2nenobu/guide-key]] [2014-11-02 Вс 17:00]                                       :emacs:try:
+** [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e: an e-mail client for emacs]] [2014-11-02 Вс 17:10]                                       :emacs:try:
+** [[http://notmuchmail.org/][notmuch]] [2014-11-02 Вс 17:10]                                       :emacs:try:
+** [[https://github.com/syohex/emacs-helm-ag][syohex/emacs-helm-ag]] [2014-11-02 Вс 18:06]                                       :emacs:try:
+** [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]] [2014-11-02 Вс 21:15]              :emacs:try:clojure:
+** [[https://github.com/clojure-emacs/clojure-mode][clojure-emacs/clojure-mode]] [2014-11-02 Вс 21:16]                                 :emacs:try:clojure:
+** [[https://github.com/mpenet/clojure-snippets][mpenet/clojure-snippets]] [2014-11-02 Вс 21:16]          :emacs:try:clojure:
+** [[https://github.com/n3mo/cyberpunk-theme.el][n3mo/cyberpunk-theme.el]] [2014-11-02 Вс 21:17]                                       :emacs:try:
+** [[http://web-mode.org/][web-mode.el - html template editing for emacs]] (another try, check if anything changed) [2014-11-02 Вс 21:26] :emacs:try:
+** [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-11-02 Вс 21:27]                                       :emacs:try:
+** [[http://mwolson.org/projects/EmacsMuse.html][Projects - Emacs Muse]] [2014-11-02 Вс 21:27]                                       :emacs:try:
+** [[https://github.com/dgtized/github-clone.el][dgtized/github-clone.el]] [2014-11-02 Вс 21:56]                                       :emacs:try:
+** [[https://github.com/magit/git-modes][magit/git-modes]] [2014-11-02 Вс 22:20]                                       :emacs:try:
+** [[https://github.com/chrisdone/structured-haskell-mode][chrisdone/structured-haskell-mode]] [2014-11-02 Вс 22:32]                                       :emacs:try:
+** [[https://github.com/alanz/HaRe][alanz/HaRe]] [2014-11-02 Вс 22:32]                                       :emacs:try:
+** [[https://github.com/purcell/exec-path-from-shell][purcell/exec-path-from-shell]] [2014-11-02 Вс 22:41]                                       :emacs:try:
+** [[https://github.com/benma/visual-regexp.el][benma/visual-regexp.el]] [2014-11-02 Вс 22:42]                                       :emacs:try:
+** [[https://github.com/benma/visual-regexp-steroids.el/][benma/visual-regexp-steroids.el]] [2014-11-02 Вс 22:42]                                       :emacs:try:
+** [[https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md][emacs-haskell-tutorial/tutorial.md at master · serras/emacs-haskell-tutorial]] [2014-11-02 Вс 22:42]                                       :emacs:try:
+** [[http://www.mew.org/~kazu/proj/ghc-mod/en/][Happy Haskell Programming]] [2014-11-02 Вс 22:42]                                       :emacs:try:

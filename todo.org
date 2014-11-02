@@ -149,3 +149,9 @@
 * TODO [#A] fix details displaying in dired (broken by 24.4) [2014-10-26 Вс 19:41] :emacs:ticket:
 * TODO [#A] add "(provide '<basename>) for elisp file template" [2014-10-26 Вс 19:46] :emacs:ticket:
 * TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
+* TODO [#C] resurrect keybindings for highlight-symbol [2014-11-02 Вс 13:13] :emacs:ticket:
+* TODO [#B] find a way to break the circle of autoload/eval-after-load with consequences, when customizing installed packages [2014-11-02 Вс 15:29] :emacs:ticket:
+* TODO [#C] see what can be added in jedi-direx (pop-buffer orientation, buffer singleton, etc.) [2014-11-02 Вс 15:52] :emacs:ticket:
+* TODO [#C] idea: bundle packages with customizations, including el-get packages [2014-11-02 Вс 17:37] :emacs:ticket:
+* TODO [#B] review navigation activities, where helm may be appropriate [2014-11-02 Вс 21:02] :emacs:ticket:
+  http://tuhdo.github.io/helm-intro.html
