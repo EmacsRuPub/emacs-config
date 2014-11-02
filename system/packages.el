@@ -81,6 +81,7 @@
         go-autocomplete-custom
         go-mode
         google-contacts
+        google-translate
         haskell-mode
         header2
         helm-gtags

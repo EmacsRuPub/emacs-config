@@ -125,6 +125,13 @@
      (global-set-key [f9] 'gmail-notifier-check)
      ))
 
+(eval-after-load "google-translate"
+  '(progn
+     (require 'google-translate-default-ui)
+     (define-key custom-search-keymap (kbd "t") 'google-translate-at-point)
+     (define-key custom-search-keymap (kbd "T") 'google-translate-query-translate)
+     ))
+
 (provide 'rc-clients)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
