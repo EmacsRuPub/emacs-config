@@ -1,5 +1,0 @@
-(:name nrepl-custom
-       :type git
-       :url "https://github.com/kingtim/nrepl.el.git"
-       :load "nrepl.el"
-       :depends (clojure-mode dash-custom pkg-info-custom cl-lib-custom))
