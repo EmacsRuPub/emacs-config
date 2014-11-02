@@ -15,6 +15,7 @@
         ace-jump-mode
         actionscript-mode
         ag-custom
+        ample-theme
         auctex
         auto-complete-c-headers
         auto-complete-clang
