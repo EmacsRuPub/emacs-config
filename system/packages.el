@@ -84,7 +84,6 @@
         header2
         helm-gtags
         helm-recentd
-        helm-swoop
         help+
         highlight-symbol
         hl-line+
