@@ -49,7 +49,9 @@
     (setq projectile-enable-caching t)
     (setq projectile-tags-command
           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-    (diminish 'projectile-mode "prj")))
+    (diminish 'projectile-mode "prj")
+    (define-key custom-search-keymap (kbd "g") 'custom/projectile-ag)
+    (define-key custom-search-keymap (kbd "q") 'projectile-find-file)))
 
 (use-package ecb
   :bind (("C-x t q" . ecb-toggle-ecb-windows)

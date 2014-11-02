@@ -17,6 +17,8 @@
 (require 'bookmark+)
 (require 'crosshairs)
 (require 'breadcrumb)
+(require 'neotree)
+(require 'swoop)
 
 (eval-after-load "helm"
   '(progn
@@ -37,6 +39,8 @@
      (setq helm-recentd-sort 'frequency)
      (global-set-key (kbd "C-&") 'custom-helm)
      (global-set-key (kbd "C-x C-d") 'helm-recentd)
+     (define-key custom-search-keymap (kbd "h") 'helm-mini)
+     (define-key custom-search-keymap (kbd "o") 'helm-occur)
      ))
 
 (eval-after-load "ido"
@@ -168,6 +172,31 @@
      (add-hook 'c++-mode-hook 'helm-gtags-mode)
      ))
 
+(eval-after-load "ace-jump-mode"
+  '(progn
+     (define-key custom-search-keymap (kbd "a") 'ace-jump-char-mode)
+     (define-key custom-search-keymap (kbd "A") 'ace-jump-word-mode)))
+
+(eval-after-load "swoop"
+  '(progn
+     (define-key custom-search-keymap (kbd "m") 'swoop-multi)
+     (define-key custom-search-keymap (kbd "i") 'swoop)
+     ))
+
+(eval-after-load "ag"
+  '(progn
+     (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)))
+
+(eval-after-load "neotree"
+  '(progn
+     (define-key custom-search-keymap (kbd "n") 'neotree)))
+
+(eval-after-load "breadcrumb"
+  '(progn
+     (define-key custom-search-keymap (kbd "j") 'bc-list)
+     (define-key custom-search-keymap (kbd "SPC") 'bc-set)))
+
+
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
@@ -179,23 +208,10 @@
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
-
 ;; custom search keymap
-(define-key custom-search-keymap (kbd "m") 'swoop-multi)
-(define-key custom-search-keymap (kbd "o") 'helm-occur)
 (define-key custom-search-keymap (kbd "r") 'rgrep)
 (define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
 (define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
-(define-key custom-search-keymap (kbd "g") 'custom/projectile-ag)
-(define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)
-(define-key custom-search-keymap (kbd "i") 'swoop)
-(define-key custom-search-keymap (kbd "q") 'projectile-find-file)
-(define-key custom-search-keymap (kbd "a") 'ace-jump-char-mode)
-(define-key custom-search-keymap (kbd "A") 'ace-jump-word-mode)
-(define-key custom-search-keymap (kbd "n") 'neotree)
-(define-key custom-search-keymap (kbd "h") 'helm-mini)
-(define-key custom-search-keymap (kbd "j") 'bc-list)
-(define-key custom-search-keymap (kbd "SPC") 'bc-set)
 
 (provide 'rc-navigate)
 
