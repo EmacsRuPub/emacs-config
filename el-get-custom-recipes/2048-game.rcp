@@ -1,0 +1,5 @@
+(:name 2048-game
+       :description "This is an implementation of 2048 in Emacs."
+       :type hg
+       :url "https://bitbucket.org/zck/2048.el"
+       :load ("2048-game.el"))
