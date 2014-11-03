@@ -101,3 +101,5 @@
 (provide 'rc-javascript)
 
 ;;; emacs-rc-javascript.el ends here
+
+;TODO: play with js2-refactor
