@@ -150,6 +150,7 @@
         revbufs
         ropemacs
         rst-mode
+        rtags
         s
         sauron
         savekill
