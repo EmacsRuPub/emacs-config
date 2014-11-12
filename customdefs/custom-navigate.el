@@ -52,8 +52,8 @@
   (interactive "p")
   (message "arg: %s" arg)
   (if (equal arg 4)
-      (setq custom/suppress-projectile-symbol-at-point nil)
-    (setq custom/suppress-projectile-symbol-at-point t))
+      (setq custom/suppress-projectile-symbol-at-point t)
+    (setq custom/suppress-projectile-symbol-at-point nil))
   (call-interactively 'projectile-ag))
 
 (provide 'custom-navigate)
