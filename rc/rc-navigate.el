@@ -43,6 +43,7 @@
      (setq helm-ff-file-name-history-use-recentf t)
      (global-set-key (kbd "C-&") 'custom-helm)
      (global-set-key (kbd "C-x C-d") 'helm-recentd)
+     (global-set-key (kbd "C-x b") 'helm-buffers-list)
      (define-key custom-search-keymap (kbd "h") 'helm-mini)
      (define-key custom-search-keymap (kbd "o") 'helm-occur)
      ))
@@ -189,10 +190,6 @@
      (define-key custom-search-keymap (kbd "m") 'swoop-multi)
      (define-key custom-search-keymap (kbd "i") 'swoop)
      ))
-
-(eval-after-load "ag"
-  '(progn
-     (define-key custom-search-keymap (kbd "p") 'ag-regexp-project-at-point)))
 
 (eval-after-load "neotree"
   '(progn
