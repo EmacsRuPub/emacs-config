@@ -115,7 +115,8 @@
     (standard-display-ascii ?\224 [?\"])
     (standard-display-ascii ?\227 " -- ")
     (add-to-list 'w3m-search-engine-alist
-                 '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
+                 '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
+    (define-key custom-search-keymap (kbd "w") 'w3m-select-buffer)))
 
 
 ;TODO: try use-package
