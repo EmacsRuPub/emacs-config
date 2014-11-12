@@ -14,6 +14,7 @@
         ac-irony
         ace-jump-mode
         actionscript-mode
+        adaptive-wrap
         ag-custom
         ample-theme
         auctex
@@ -77,6 +78,7 @@
         git-commit-mode
         git-emacs
         git-gutter
+        git-timemachine
         gmail-notifier
         go-autocomplete-custom
         go-mode
@@ -87,6 +89,7 @@
         helm-gtags
         helm-recentd
         help+
+        hide-comnt
         highlight-symbol
         hl-line+
         hs-lint
