@@ -4,19 +4,16 @@
 ;; Created: Вс июн  1 21:30:30 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun custom-helm ()
+(defun custom/helm-find-files ()
   (interactive)
   (helm-other-buffer '(
-                       helm-c-source-buffers-list
-                       helm-c-source-files-in-current-dir
-                       helm-c-source-recentf
-                       helm-source-bookmarks
+                       helm-source-files-in-current-dir
+                       helm-source-recentf
                        helm-source-file-name-history
                        helm-source-findutils
                        helm-source-locate
-                       helm-source-occur
                        )
-                     "*helm-custom*"))
+                     "*helm-find-files*"))
 
 (defadvice ack-and-a-half-arguments-from-options (after search-text-files disable)
   (let ((current-arguments ad-return-value))

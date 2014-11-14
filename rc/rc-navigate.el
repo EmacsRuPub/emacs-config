@@ -5,7 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'smex "smex" nil t)
-(autoload 'custom-helm "helm" nil t)
+(autoload 'custom/helm-find-files "helm" nil t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (autoload 'wgrep-ag-setup "wgrep-ag")
@@ -41,11 +41,11 @@
      (setq helm-split-window-in-side-p t)
      (setq helm-ff-search-library-in-sexp t)
      (setq helm-ff-file-name-history-use-recentf t)
-     (global-set-key (kbd "C-&") 'custom-helm)
      (global-set-key (kbd "C-x C-d") 'helm-recentd)
      (global-set-key (kbd "C-x b") 'helm-buffers-list)
      (define-key custom-search-keymap (kbd "h") 'helm-mini)
      (define-key custom-search-keymap (kbd "o") 'helm-occur)
+     (define-key custom-search-keymap (kbd "f") 'custom/helm-find-files)
      ))
 
 (eval-after-load "ido"
@@ -214,7 +214,6 @@
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 ;; custom search keymap
 (define-key custom-search-keymap (kbd "r") 'rgrep)
-(define-key custom-search-keymap (kbd "f") 'find-lisp-find-dired)
 (define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
 
 (provide 'rc-navigate)
