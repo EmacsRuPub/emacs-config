@@ -46,6 +46,7 @@
      (define-key custom-search-keymap (kbd "h") 'helm-mini)
      (define-key custom-search-keymap (kbd "o") 'helm-occur)
      (define-key custom-search-keymap (kbd "f") 'custom/helm-find-files)
+     (helm-mode 1)
      ))
 
 (eval-after-load "ido"
@@ -200,6 +201,9 @@
      (define-key custom-search-keymap (kbd "j") 'bc-list)
      (define-key custom-search-keymap (kbd "SPC") 'bc-set)))
 
+(eval-after-load "bookmark+"
+  '(global-set-key (kbd "C-x j j") 'helm-bookmarks))
+
 
 ;#############################################################################
 ;#   Keybindings
@@ -214,7 +218,7 @@
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 ;; custom search keymap
 (define-key custom-search-keymap (kbd "r") 'rgrep)
-(define-key custom-search-keymap (kbd "s") 'find-lisp-find-dired-subdirectories)
+(define-key custom-search-keymap (kbd "s") 'helm-semantic-or-imenu)
 
 (provide 'rc-navigate)
 
