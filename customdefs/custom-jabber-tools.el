@@ -26,7 +26,7 @@
        jabber-connections)
       (error "cannot determine connection for %s" jid)))
 
-(defun my-jabber-chat-with (jid &optional other-window)
+(defun custom/jabber-chat-with (jid &optional other-window)
   "Open an empty chat window for chatting with JID.
 With a prefix argument, open buffer in other window.
 Returns the chat buffer."
@@ -45,7 +45,7 @@ Returns the chat buffer."
   (insert (concat (ido-completing-read "Send to: "
                      (jabber-muc-nicknames)) ": ")))
 
-(global-set-key "\C-x\C-j\C-j" 'my-jabber-chat-with)
+(global-set-key "\C-x\C-j\C-j" 'custom/jabber-chat-with)
 (global-set-key "\C-x\C-j\C-s" 'custom/jabber-muc-sendto)
 
 (provide 'custom-jabber-tools)
