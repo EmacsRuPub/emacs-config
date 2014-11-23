@@ -46,7 +46,6 @@
      (define-key custom-search-keymap (kbd "h") 'helm-mini)
      (define-key custom-search-keymap (kbd "o") 'helm-occur)
      (define-key custom-search-keymap (kbd "f") 'custom/helm-find-files)
-     (helm-mode 1)
      ))
 
 (eval-after-load "ido"
@@ -201,8 +200,8 @@
      (define-key custom-search-keymap (kbd "j") 'bc-list)
      (define-key custom-search-keymap (kbd "SPC") 'bc-set)))
 
-(eval-after-load "bookmark+"
-  '(global-set-key (kbd "C-x j j") 'helm-bookmarks))
+;; (eval-after-load "bookmark+"
+;;   '(global-set-key (kbd "C-x j j") 'helm-bookmarks))
 
 
 ;#############################################################################
