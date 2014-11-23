@@ -101,3 +101,22 @@
 * [[https://github.com/benma/visual-regexp-steroids.el/][benma/visual-regexp-steroids.el]] [2014-11-02 Вс 22:42]           :emacs:try:
 * [[https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md][emacs-haskell-tutorial/tutorial.md at master · serras/emacs-haskell-tutorial]] [2014-11-02 Вс 22:42] :emacs:try:
 * [[http://www.mew.org/~kazu/proj/ghc-mod/en/][Happy Haskell Programming]] [2014-11-02 Вс 22:42]                 :emacs:try:
+* tabbar buffer groups [2014-11-10 Пн 00:42]                      :emacs:try:
+* [[http://lukego.livejournal.com/23379.html][Luke's Weblog - lively.el 0.1]] [2014-11-11 Вт 21:12] :emacs:try:
+* [[https://github.com/chrisdone/god-mode][chrisdone/god-mode]] [2014-11-12 Ср 00:10] :emacs:try:
+* [[https://github.com/baohaojun/ajoke][baohaojun/ajoke]] [2014-11-12 Ср 00:13] :emacs:try:
+* [[http://www.skybert.net/emacs/java/][java]] [2014-11-12 Ср 00:13] :emacs:try:
+* voice coding (search for infosources) [2014-11-12 Ср 00:46]     :emacs:try:
+* [[https://github.com/nonsequitur/git-modes][nonsequitur/git-modes]] [2014-11-12 Ср 23:56] :emacs:try:
+* [[https://github.com/nonsequitur/orglink][nonsequitur/orglink]] [2014-11-12 Ср 23:56] :emacs:try:
+* org-cycle-include-plain-lists [2014-11-14 Пт 01:26] :emacs:try:
+* [[http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/][A peek at Emacs 24.4: superword-mode - Emacs Redux]] [2014-11-19 Ср 19:13] :emacs:try:
+* [[https://github.com/tonini/gitconfig.el][tonini/gitconfig.el]] [2014-11-19 Ср 19:17] :emacs:try:
+* [[http://www.emacswiki.org/emacs-en/GoobookMode][EmacsWiki: Goobook Mode]] [2014-11-19 Ср 21:26] :emacs:try:
+* [[https://github.com/tonini/karma.el][tonini/karma.el]] [2014-11-19 Ср 21:45] :emacs:try:
+* [[https://github.com/senny/cabbage][senny/cabbage]] [2014-11-19 Ср 21:45] :emacs:try:
+* [[http://www.emacswiki.org/emacs-en/HideIfDef][EmacsWiki: Hide If Def]] [2014-11-19 Ср 21:51] :emacs:try:
+* [[https://github.com/terranpro/magit-gerrit][terranpro/magit-gerrit]] [2014-11-19 Ср 22:09] :emacs:try:
+* [[http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/][A peek at Emacs 24.4: prettify-symbols-mode - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
+* [[http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/][A peek at Emacs 24.4: Focus Hooks - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
+* [[http://www.emacswiki.org/emacs/ImenuMode#toc10][EmacsWiki: Imenu Mode]] [2014-11-23 Вс 20:11] :emacs:try:

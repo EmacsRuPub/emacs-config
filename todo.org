@@ -155,3 +155,32 @@
 * TODO [#C] idea: bundle packages with customizations, including el-get packages [2014-11-02 Вс 17:37] :emacs:ticket:
 * TODO [#B] review navigation activities, where helm may be appropriate [2014-11-02 Вс 21:02] :emacs:ticket:
   http://tuhdo.github.io/helm-intro.html
+* TODO [#A] check all custom major mode hooks if they are too heavy [2014-11-03 Пн 21:02] :emacs:ticket:
+* TODO [#B] find if some navigation activities can be laid upon helm (including unexplored ones) [2014-11-13 Чт 00:41] :workplace:
+* TODO [#A] try various helm sources [2014-11-15 Сб 01:08]     :emacs:ticket:
+  helm-source-fixme (maybe setup my own, using the idea)
+  helm-source-jabber-contacts
+  helm-source-stumpwm-commands
+  helm-source-session
+  helm-source-org-headline
+  helm-source-bookmark-files&dirs
+  helm-source-advice
+  helm-source-org-keywords
+  helm-source-evaluation-result
+  helm-source-bookmarks-ssh
+  helm-source-bmkext-addressbook
+  helm-source-bookmark-man
+  helm-source-imenu
+  helm-source-picklist
+  helm-source-gentoo
+  helm-source-ff-file-name-history
+  helm-source-simple-call-tree-functions-callers
+  helm-source-emacs-lisp-expectations
+  helm-source-tracker-search
+  helm-source-emacs-process
+  helm-source-esh
+  helm-source-use-flags
+  helm-source-pp-bookmarks
+  helm-man-woman
+* TODO [#B] eval-after-load --> with-eval-after-load [2014-11-17 Пн 02:02] :emacs:ticket:
+* TODO [#A] fix renaming within dired buffers [2014-11-17 Пн 23:49] :emacs:ticket:
