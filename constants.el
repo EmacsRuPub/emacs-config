@@ -49,4 +49,6 @@
 
 (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
 
+(setq custom/php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
+
 ;;; constants.el ends here

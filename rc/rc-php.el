@@ -7,11 +7,11 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'php-mode) ;;подгружаем php режим
-(require 'php-electric) ;;режим autocompletion конструкций языка
+(require 'php-mode)
+(require 'php-electric) ;; autocompletion
 (require 'ac-php-doc)
 
-(setq php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
+(setq php-manual-path custom/php-manual-path)
 
 (defun custom/php-mode-hook ()
   ;; style customization
