@@ -60,6 +60,7 @@
 (setq enable-recursive-minibuffers t)
 (setq visible-bell t)
 (setq inhibit-startup-echo-area-message "octocat")
+(setq eval-expression-print-length nil)
 
 (setq echo-keystrokes 0.1);; Show keystrokes in progress
 
