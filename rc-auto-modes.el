@@ -54,6 +54,9 @@
 (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
 
 (add-to-list 'auto-mode-alist '("\\.hsc$" . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.[hg]s$"  . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.hi$"     . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.l[hg]s$" . literate-haskell-mode))
 
 (add-to-list 'auto-mode-alist '("\\.el" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
