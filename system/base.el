@@ -1,6 +1,8 @@
 (setq home-directory (getenv "HOME"))
 (setq global-username user-login-name)
 
+(setq diredp-hide-details-initially-flag nil)
+
 (defun solidload (filename)
   (condition-case err
       (load filename)
