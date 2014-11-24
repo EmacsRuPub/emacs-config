@@ -12,7 +12,6 @@
 ;############################################################################
 (setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
 (setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
-(setq custom/auto-insert-dir (at-config-basedir "resources/auto-insert/"))
 
 
 ;#############################################################################
