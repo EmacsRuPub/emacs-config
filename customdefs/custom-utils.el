@@ -267,7 +267,7 @@ point and around or after mark are interchanged."
   (interactive)
   (forward-line -1))
 
-(defun esk-remove-elc-on-save ()
+(defun custom/remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook
