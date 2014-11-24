@@ -21,6 +21,7 @@
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
 (setq locate-command "mdfind")
+(setq helm-locate-command "mdfind")
 
 (prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
