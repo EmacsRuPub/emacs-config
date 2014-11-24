@@ -25,6 +25,7 @@
     (ac-config-default)
     (global-auto-complete-mode t)
     (setq ac-auto-start nil)
+    (setq ac-quick-help-delay 0.5)
     (add-to-list 'ac-modes 'slime-repl-mode)
     (add-hook 'slime-mode-hook 'set-up-slime-ac)
     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
