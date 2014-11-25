@@ -42,6 +42,8 @@
 (whole-line-or-region-mode 1)
 (toggle-cursor-type-when-idle 1)
 (change-cursor-mode 1)
+(electric-indent-mode -1)
+(dtrt-indent-mode)
 
 (eval-after-load "undo-tree"
   '(global-undo-tree-mode t))
