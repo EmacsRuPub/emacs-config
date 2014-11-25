@@ -83,8 +83,14 @@
          ("C-c g r" . magit-reflog)
          ("C-c g c" . magit-checkout)
          ("C-c g r" . magit-add-remote))
+  :init
+  (progn
+    (use-package diminish)
+    (use-package magit-filenotify))
   :config
-  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
+  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+  (diminish 'magit-filenotify-mode "FN")
+  )
 
 (use-package git-gutter
   :bind (("C-c <prior>" . git-gutter:next-hunk)
