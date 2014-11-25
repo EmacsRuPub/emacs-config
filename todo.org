@@ -184,3 +184,4 @@
   helm-man-woman
 * TODO [#B] eval-after-load --> with-eval-after-load [2014-11-17 Пн 02:02] :emacs:ticket:
 * TODO [#A] fix renaming within dired buffers [2014-11-17 Пн 23:49] :emacs:ticket:
+* TODO [#A] compare output of project files with ido and helm (maybe helm's includes subprojects contents) [2014-11-25 Вт 01:09] :emacs:ticket:
