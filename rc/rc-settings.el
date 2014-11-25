@@ -113,7 +113,6 @@
        (diminish 'abbrev-mode)
        (diminish 'auto-complete-mode " α")
        (diminish 'auto-fill-function)
-       (diminish 'global-visual-line-mode)
        (diminish 'visual-line-mode)
        (diminish 'volatile-highlights-mode)
        (diminish 'whole-line-or-region-mode)
