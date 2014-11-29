@@ -12,9 +12,6 @@
 (require 'tex-site)
 (require 'preview-latex)
 
-(defun flymake-get-tex-args (file-name)
-  (list "pdflatex" (list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
-
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
