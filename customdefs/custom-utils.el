@@ -228,20 +228,6 @@ Calling this command 3 times will always result in no whitespaces around cursor.
     )
   )
 
-(defun iy-highlight-symbol-navigation ()
-  "highlighted symbol navigation"
-  (interactive)
-  (let ((done nil)
-        (ev last-command-event)
-        (echo-keystrokes nil))
-    (while (not done)
-      (cond ((eq ev ?9) (highlight-symbol-prev))
-            ((eq ev ?0) (highlight-symbol-next))
-            (t (setq done t)))
-      (when (not done)
-        (setq ev (read-event))))
-    (push ev unread-command-events)))
-
 ;; This override for transpose-words fixes what I consider to be a flaw with the
 ;; default implementation in simple.el. To traspose chars or lines, you always
 ;; put the point on the second char or line to transpose with the previous char

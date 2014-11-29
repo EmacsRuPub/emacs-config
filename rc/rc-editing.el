@@ -16,7 +16,6 @@
 (require 'drag-stuff)
 (require 'expand-region)
 (require 'hideshow) ;; Hide/Show mode
-(require 'highlight-symbol)
 (require 'multiple-cursors)
 (require 'recentf)
 (require 'recentf-ext)
@@ -158,13 +157,6 @@
     (define-key paredit-mode-map (kbd "C-<down>") nil)
     (paredit-everywhere-mode 1)
     ))
-
-(eval-after-load "evil"
-  '(progn
-     (require 'evil-nerd-commenter)
-     (evilnc-default-hotkeys)
-     (global-set-key (kbd "C-c v i") 'evil-mode)
-     ))
 
 (eval-after-load "list-register"
   (global-set-key (kbd "C-x r v") 'list-register)

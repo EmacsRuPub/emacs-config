@@ -20,7 +20,6 @@
   (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
   ;; highlight too long lines
   (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t)))
-  (highlight-symbol-mode 1)
   )
 
 (defun common-hooks/trailing-whitespace-hook ()

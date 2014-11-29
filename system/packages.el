@@ -16,24 +16,19 @@
         actionscript-mode
         adaptive-wrap
         ag-custom
-        ample-theme
         auctex
         auto-complete-c-headers
         auto-complete-clang
         auto-complete-emacs-lisp
         auto-complete-extension
         auto-complete-latex
-        auto-complete-nxml
-        auto-complete-rst
         auto-complete-yasnippet
-        bm
         bookmark+
         breadcrumb-custom
         browse-kill-ring
         buffer-move
         c-eldoc
         calfw
-        cedet
         col-highlight
         color-theme-zenburn
         column-marker
@@ -42,7 +37,6 @@
         css-eldoc
         csv-mode-custom
         cursor-chg
-        deferred
         deft
         diminish
         discover
@@ -55,7 +49,6 @@
         ecb-custom
         el-spice
         elisp-slime-nav
-        elwm
         emacs-jabber
         emacs-swoop
         emacs-w3m
@@ -65,10 +58,7 @@
         erc-extras
         erc-highlight-nicknames
         erefactor
-        evil-nerd-commenter
-        evil-surround
         expand-region
-        f
         fic-mode
         flx
         flycheck
@@ -80,8 +70,6 @@
         git-gutter
         git-timemachine
         gmail-notifier
-        go-autocomplete-custom
-        go-mode
         google-contacts
         google-translate
         haskell-mode
@@ -90,7 +78,6 @@
         helm-recentd
         help+
         hide-comnt
-        highlight-symbol
         hl-line+
         hs-lint
         hungry-delete-el
@@ -108,9 +95,7 @@
         js2-refactor
         json-mode
         latex-preview-pane
-        lisppaste
         list-processes+
-        litable
         lua-mode
         magit
         magit-filenotify
@@ -129,19 +114,16 @@
         org-magit
         org-occur-goto
         org-pomodoro
-        org-trello
         org-toodledo
         paredit
         paredit-everywhere
         pdftools
         po-mode
         popwin
-        prodigy
         projectile
         python24
         pylookup
         python-pep8
-        qmake-mode
         rainbow-mode
         rebox2
         recentf-ext
@@ -150,16 +132,13 @@
         replace+
         restclient
         revbufs
-        ropemacs
         rst-mode
         rtags
-        s
         sauron
         savekill
         scratch
         slime
         smex
-        sml-mode
         swank-js
         tail
         tern
