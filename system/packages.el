@@ -138,6 +138,7 @@
         savekill
         scratch
         slime
+        smart-forward
         smex
         swank-js
         tail
