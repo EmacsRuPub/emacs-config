@@ -594,3 +594,33 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] fix details displaying in dired (broken by 24.4) [2014-10-26 Вс 19:41] :emacs:ticket:
+  CLOSED: [2014-11-30 Вс 23:50]
+  - State "DONE"       from "TODO"       [2014-11-30 Вс 23:50]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-11-30 Вс 23:51
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] remove yandex weather display from orgmode [2014-09-24 Ср 00:49] :emacs:ticket:
+  CLOSED: [2014-11-30 Вс 23:53]
+  - State "DONE"       from "TODO"       [2014-11-30 Вс 23:53]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-11-30 Вс 23:53
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] make 'sudo-find-file being called using prefix argument to 'find-file [2014-09-30 Вт 01:38] :emacs:ticket:
+  CLOSED: [2014-12-01 Пн 01:59]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 01:59]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 01:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
