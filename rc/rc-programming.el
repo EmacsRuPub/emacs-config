@@ -77,8 +77,7 @@
     (diminish 'eldoc-mode "ED")))
 
 (use-package magit
-  :bind (("C-c C-g" . magit-blame-mode)
-         ("C-c g l" . magit-file-log)
+  :bind (("C-c g l" . magit-file-log)
          ("C-c g w" . magit-diff-working-tree)
          ("C-c g r" . magit-reflog)
          ("C-c g c" . magit-checkout)
@@ -86,10 +85,12 @@
   :init
   (progn
     (use-package diminish)
-    (use-package magit-filenotify))
+    (use-package magit-filenotify)
+    (use-package magit-blame-mode))
   :config
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (diminish 'magit-filenotify-mode "FN")
+  (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
   )
 
 (use-package git-gutter
