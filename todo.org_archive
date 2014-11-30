@@ -584,3 +584,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :END:
 ** HINT org-open-at-point-functions
 ** org-open-at-point-functions work another way than we want, so a workaround for existing solution was introduced
+
+* DONE [#A] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
+  CLOSED: [2014-11-30 Вс 23:46]
+  - State "DONE"       from "TODO"       [2014-11-30 Вс 23:46]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-11-30 Вс 23:46
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

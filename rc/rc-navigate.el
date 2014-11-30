@@ -189,6 +189,8 @@
   '(progn
      (define-key custom-search-keymap (kbd "m") 'swoop-multi)
      (define-key custom-search-keymap (kbd "i") 'swoop)
+     (define-key swoop-map (kbd "<down>") 'swoop-action-goto-line-next)
+     (define-key swoop-map (kbd "<up>") 'swoop-action-goto-line-prev)
      ))
 
 (eval-after-load "neotree"

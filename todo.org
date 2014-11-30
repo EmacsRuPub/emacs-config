@@ -1,6 +1,5 @@
 * TODO [#C] rc-elisp.el                                              :review:
 * TODO [#C] rc-haskell.el                                     :review:extend:
-* TODO [#A] check why arrows work in helm-occur but bounded differently in emacs-swoop :investigate:
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
