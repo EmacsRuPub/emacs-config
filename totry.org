@@ -120,3 +120,7 @@
 * [[http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/][A peek at Emacs 24.4: prettify-symbols-mode - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
 * [[http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/][A peek at Emacs 24.4: Focus Hooks - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
 * [[http://www.emacswiki.org/emacs/ImenuMode#toc10][EmacsWiki: Imenu Mode]] [2014-11-23 Вс 20:11] :emacs:try:
+* [[https://github.com/chrisdone/structured-haskell-mode][chrisdone/structured-haskell-mode]] [2014-11-25 Вт 23:47] :emacs:try:
+* [[http://sachachua.com/blog/2014/11/using-org-mode-keep-process-journal/][Using Org Mode to keep a process journal - sacha chua :: living an awesome life]] [2014-11-28 Пт 01:24] :emacs:try:
+* [[https://github.com/magnars/string-edit.el][magnars/string-edit.el]] [2014-11-29 Сб 23:48] :emacs:try:
+* [[https://github.com/magnars/change-inner.el][magnars/change-inner.el]] [2014-11-29 Сб 23:48] :emacs:try:
