@@ -60,6 +60,7 @@
         erefactor
         expand-region
         fic-mode
+        file-template
         flx
         flycheck
         flycheck-color-mode-line
@@ -73,7 +74,6 @@
         google-contacts
         google-translate
         haskell-mode
-        header2
         helm-gtags
         helm-recentd
         help+

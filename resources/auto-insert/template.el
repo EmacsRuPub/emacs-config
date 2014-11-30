@@ -1,4 +1,4 @@
-;;; (>>FILE<<) ---
+;;; %b ---
 
 ;; Copyright (C) 2012 Alex Ermolov
 ;;
@@ -7,4 +7,6 @@
 ;; Requirements:
 
 
-;;; (>>FILE<<) ends here
+(provide '%F)
+
+;;; %b ends here

@@ -7,6 +7,8 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+(autoload 'file-template-auto-insert "file-template" nil t)
+
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
@@ -128,25 +130,18 @@
 
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-(setq make-header-hook '(header-utf8
-                         header-blank
-                         header-file-name
-                         header-creation-date
-                         header-end-line
-                         header-eof))
+(setq file-template-paths `(,(concat config-basedir "resources/auto-insert"))) ;TODO: move to constants
+(setq file-template-mapping-alist
+      '(("\\.el$" . "template.el")
+        ("\\.py$" . "template.py")
+        ("\\.sh$" . "template.sh")
+        ))
+(push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
+(push '("D" . (current-time-string)) file-template-tag-alist)
 
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-(add-hook 'write-file-hooks 'auto-update-file-header)
-
-(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-(add-hook 'python-mode-hook     'auto-make-header)
-(add-hook 'php-mode-hook        'auto-make-header)
-(add-hook 'sh-mode-hook         'auto-make-header)
-(add-hook 'lisp-mode-hook       'auto-make-header)
-(add-hook 'java-mode-hook       'auto-make-header)
 
 (eval-after-load "paredit"
   '(progn
@@ -171,10 +166,6 @@
   nil
   '(".keymap\\'" ".map\\'")
   nil)
-
-(defsubst header-utf8 ()
-  "Insert utf-8 def."
-  (insert header-prefix-string  "-*- coding: utf-8 -*-\n"))
 
 (setq generic-default-modes (delete 'javascript-generic-mode
                                     generic-default-modes))
