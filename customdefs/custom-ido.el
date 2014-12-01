@@ -45,10 +45,10 @@
 
 ;; Fix ido-ubiquitous for newer packages
 (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
-  `(eval-after-load ,package
-     '(defadvice ,cmd (around ido-ubiquitous-new activate)
-        (let ((ido-ubiquitous-enable-compatibility nil))
-          ad-do-it))))
+  `(with-eval-after-load ,package
+     (defadvice ,cmd (around ido-ubiquitous-new activate)
+       (let ((ido-ubiquitous-enable-compatibility nil))
+         ad-do-it))))
 
 (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
 

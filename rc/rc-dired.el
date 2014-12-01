@@ -97,11 +97,10 @@
         (eval `(defadvice ,it (after revert-buffer activate)
                  (revert-buffer))))
 ;TODO: try use-package
-(eval-after-load "wdired"
-  '(progn
-     (define-key wdired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
-     (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-     (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
+(with-eval-after-load "wdired"
+  (define-key wdired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
+  (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+  (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom))
 
 
 ;; Additions to dired http://nflath.com/2009/07/dired/

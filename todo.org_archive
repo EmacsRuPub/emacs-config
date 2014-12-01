@@ -725,3 +725,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#B] eval-after-load --> with-eval-after-load [2014-11-17 Пн 02:02] :emacs:ticket:
+  CLOSED: [2014-12-02 Вт 00:52]
+  - State "DONE"       from "TODO"       [2014-12-02 Вт 00:52]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-02 Вт 00:52
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

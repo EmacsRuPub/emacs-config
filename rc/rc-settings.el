@@ -108,15 +108,14 @@
 (setq truncate-partial-width-windows nil)
 
 (defun custom/after-init-hook ()
-  (eval-after-load "diminish"
-    '(progn
-       (diminish 'abbrev-mode)
-       (diminish 'auto-complete-mode " α")
-       (diminish 'auto-fill-function)
-       (diminish 'visual-line-mode)
-       (diminish 'volatile-highlights-mode)
-       (diminish 'whole-line-or-region-mode)
-       )))
+  (with-eval-after-load "diminish"
+    (diminish 'abbrev-mode)
+    (diminish 'auto-complete-mode " α")
+    (diminish 'auto-fill-function)
+    (diminish 'visual-line-mode)
+    (diminish 'volatile-highlights-mode)
+    (diminish 'whole-line-or-region-mode)
+    ))
 
 (add-hook 'after-init-hook 'custom/after-init-hook)
 

@@ -120,18 +120,14 @@
 
 
 ;TODO: try use-package
-(eval-after-load "gmail-notifier"
-  '(progn
-     (global-set-key [f8] 'open-gmail)
-     (global-set-key [f9] 'gmail-notifier-check)
-     ))
+(with-eval-after-load "gmail-notifier"
+  (global-set-key [f8] 'open-gmail)
+  (global-set-key [f9] 'gmail-notifier-check))
 
-(eval-after-load "google-translate"
-  '(progn
-     (require 'google-translate-default-ui)
-     (define-key custom-search-keymap (kbd "t") 'google-translate-at-point)
-     (define-key custom-search-keymap (kbd "T") 'google-translate-query-translate)
-     ))
+(with-eval-after-load "google-translate"
+  (require 'google-translate-default-ui)
+  (define-key custom-search-keymap (kbd "t") 'google-translate-at-point)
+  (define-key custom-search-keymap (kbd "T") 'google-translate-query-translate))
 
 (provide 'rc-clients)
 

@@ -7,8 +7,6 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(autoload 'file-template-auto-insert "file-template" nil t)
-
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
@@ -33,6 +31,7 @@
 (require 'generic)
 (require 'generic-x)
 (require 'rebox2)
+(require 'file-template)
 
 ;#############################################################################
 ;#   Customizations
@@ -46,8 +45,8 @@
 (electric-indent-mode -1)
 (dtrt-indent-mode)
 
-(eval-after-load "undo-tree"
-  '(global-undo-tree-mode t))
+(with-eval-after-load "undo-tree"
+  (global-undo-tree-mode t))
 
 (wrap-region-global-mode 1)
 (wrap-region-add-wrapper "*" "*")
@@ -143,19 +142,16 @@
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-(eval-after-load "paredit"
-  '(progn
-    (define-key paredit-mode-map (kbd "M-s") nil)
-    (define-key paredit-mode-map (kbd "M-<up>") nil)
-    (define-key paredit-mode-map (kbd "M-<down>") nil)
-    (define-key paredit-mode-map (kbd "C-<up>") nil)
-    (define-key paredit-mode-map (kbd "C-<down>") nil)
-    (paredit-everywhere-mode 1)
-    ))
+(with-eval-after-load "paredit"
+  (define-key paredit-mode-map (kbd "M-s") nil)
+  (define-key paredit-mode-map (kbd "M-<up>") nil)
+  (define-key paredit-mode-map (kbd "M-<down>") nil)
+  (define-key paredit-mode-map (kbd "C-<up>") nil)
+  (define-key paredit-mode-map (kbd "C-<down>") nil)
+  (paredit-everywhere-mode 1))
 
-(eval-after-load "list-register"
-  (global-set-key (kbd "C-x r v") 'list-register)
-  )
+(with-eval-after-load "list-register"
+  (global-set-key (kbd "C-x r v") 'list-register))
 
 (use-package vimrc-mode
              :mode ".vim\\(rc\\)?$")

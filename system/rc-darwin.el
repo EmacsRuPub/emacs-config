@@ -30,15 +30,13 @@
 (set-clipboard-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 
-(eval-after-load "jabber"
-  '(progn
-     (require 'custom-jabber-darwin)
-     ;; Make jabber.el notify through growl when I get a new message
-     (setq jabber-message-alert-same-buffer nil)
-     (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
-     (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
-     (setq jabber-message-alert-same-buffer t)
-     ))
+(with-eval-after-load "jabber"
+  (require 'custom-jabber-darwin)
+  ;; Make jabber.el notify through growl when I get a new message
+  (setq jabber-message-alert-same-buffer nil)
+  (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
+  (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
+  (setq jabber-message-alert-same-buffer t))
 
 (setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
 (setq TeX-output-view-style '(("^pdf$" "." "open -a preview %s.pdf")

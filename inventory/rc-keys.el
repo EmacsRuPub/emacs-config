@@ -301,8 +301,8 @@
 (define-key iy-map (kbd "C-r") 'isearch-forward-at-point)
 
 (global-set-key (kbd "C-r") ctl-x-r-map)
-(eval-after-load 'bookmark+
-  '(global-set-key (kbd "C-x r") 'set-rectangular-region-anchor))
+(with-eval-after-load 'bookmark+
+  (global-set-key (kbd "C-x r") 'set-rectangular-region-anchor))
 
 (global-set-key (kbd "C-8") 'pop-tag-mark)
 

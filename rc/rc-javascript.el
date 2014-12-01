@@ -91,10 +91,9 @@
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
 
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+(with-eval-after-load 'tern
+  (require 'tern-auto-complete)
+  (tern-ac-setup))
 
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 

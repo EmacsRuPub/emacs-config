@@ -108,7 +108,7 @@
 * TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
 * TODO [#B] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
 * TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
-* TODO [#B] find a way to break the circle of autoload/eval-after-load with consequences, when customizing installed packages [2014-11-02 Вс 15:29] :emacs:ticket:
+* TODO [#B] find a way to break the circle of autoload/with-eval-after-load with consequences, when customizing installed packages [2014-11-02 Вс 15:29] :emacs:ticket:
 * TODO [#C] idea: bundle packages with customizations, including el-get packages [2014-11-02 Вс 17:37] :emacs:ticket:
 * TODO [#B] review navigation activities, where helm may be appropriate [2014-11-02 Вс 21:02] :emacs:ticket:
   http://tuhdo.github.io/helm-intro.html
@@ -139,6 +139,5 @@
   helm-source-use-flags
   helm-source-pp-bookmarks
   helm-man-woman
-* TODO [#B] eval-after-load --> with-eval-after-load [2014-11-17 Пн 02:02] :emacs:ticket:
 * TODO [#B] fix renaming within dired buffers [2014-11-17 Пн 23:49] :emacs:ticket:
 * TODO [#A] compare output of project files with ido and helm (maybe helm's includes subprojects contents) [2014-11-25 Вт 01:09] :emacs:ticket:

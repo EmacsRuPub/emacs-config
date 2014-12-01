@@ -19,25 +19,20 @@
 
 (require 'css-eldoc)
 
-(eval-after-load "sgml-mode"
-  '(progn
-     (define-key html-mode-map (kbd "C-<down>") 'skip-to-next-blank-line)
-     (define-key html-mode-map (kbd "C-<up>") 'skip-to-previous-blank-line)
-     (define-key html-mode-map (kbd "C-c C-w") 'html-wrap-in-tag)))
+(with-eval-after-load "sgml-mode"
+  (define-key html-mode-map (kbd "C-<down>") 'skip-to-next-blank-line)
+  (define-key html-mode-map (kbd "C-<up>") 'skip-to-previous-blank-line)
+  (define-key html-mode-map (kbd "C-c C-w") 'html-wrap-in-tag))
 
-(eval-after-load 'emmet-mode
-  '(progn
-     (define-key emmet-mode-keymap (kbd "C-j") nil)
-     (define-key emmet-mode-keymap (kbd "<C-return>") nil)
-     (define-key emmet-mode-keymap (kbd "C-c C-j") 'emmet-expand-line)
-     (diminish 'emmet-mode)
-     ))
+(with-eval-after-load 'emmet-mode
+  (define-key emmet-mode-keymap (kbd "C-j") nil)
+  (define-key emmet-mode-keymap (kbd "<C-return>") nil)
+  (define-key emmet-mode-keymap (kbd "C-c C-j") 'emmet-expand-line)
+  (diminish 'emmet-mode))
 
-(eval-after-load 'markdown-mode
-  '(progn
-     (define-key markdown-mode-map (kbd "C-c C-v") 'markdown-preview)
-     (define-key markdown-mode-map (kbd "<tab>") 'yas/expand)
-     ))
+(with-eval-after-load 'markdown-mode
+  (define-key markdown-mode-map (kbd "C-c C-v") 'markdown-preview)
+  (define-key markdown-mode-map (kbd "<tab>") 'yas/expand))
 
 (turn-on-css-eldoc)
 
