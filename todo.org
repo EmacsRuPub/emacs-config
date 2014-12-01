@@ -1,4 +1,3 @@
-* TODO [#C] rc-elisp.el                                              :review:
 * TODO [#C] rc-haskell.el                                     :review:extend:
 * TODO [#C] structured parenthesis editing in python mode       :investigate:
 * TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:

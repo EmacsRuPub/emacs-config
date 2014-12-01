@@ -9,10 +9,6 @@
 
 (require 'erefactor)
 
-
-;#############################################################################
-;#   Hooks
-;############################################################################
 (add-hook 'emacs-lisp-mode-hook
        (lambda ()
          (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map)))
