@@ -135,11 +135,10 @@
         ("\\.py$" . "template.py")
         ("\\.sh$" . "template.sh")
         ))
+(setq file-template-insert-automatically t)
 (push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
 (push '("D" . (current-time-string)) file-template-tag-alist)
-(add-hook 'emacs-lisp-mode-hook 'file-template-auto-insert)
-(add-hook 'python-mode-hook 'file-template-auto-insert)
-(add-hook 'shell-mode-hook 'file-template-auto-insert)
+(add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)
 
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
