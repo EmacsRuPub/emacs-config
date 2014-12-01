@@ -143,7 +143,6 @@
   HINT: %%(org-bbdb-anniversaries)
 * TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
 * TODO [#B] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
-* TODO [#A] add "(provide '<basename>) for elisp file template" [2014-10-26 Вс 19:46] :emacs:ticket:
 * TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
 * TODO [#C] resurrect keybindings for highlight-symbol [2014-11-02 Вс 13:13] :emacs:ticket:
 * TODO [#B] find a way to break the circle of autoload/eval-after-load with consequences, when customizing installed packages [2014-11-02 Вс 15:29] :emacs:ticket:

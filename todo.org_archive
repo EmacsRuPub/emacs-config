@@ -624,3 +624,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] add "(provide '<basename>) for elisp file template" [2014-10-26 Вс 19:46] :emacs:ticket:
+  CLOSED: [2014-12-01 Пн 22:44]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 22:44]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 22:44
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
