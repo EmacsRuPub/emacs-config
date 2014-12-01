@@ -644,3 +644,84 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#C] rc-haskell.el                                     :review:extend:
+  CLOSED: [2014-12-01 Пн 23:10]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 23:10]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 23:10
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] some hook (maybe interactive) or programmatic solution to customize new source files header (e.g. GPL|MIT|whatever) :investigate:
+  CLOSED: [2014-12-01 Пн 23:12]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 23:12]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 23:12
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** http://emacswiki.org/emacs/AutomaticFileHeaders
+
+* DONE [#C] w3m-emacs: setup, review, maybe view docs there, maybe customize keybindings :review:
+  CLOSED: [2014-12-01 Пн 23:29]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 23:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 23:29
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#C] review extensions with "workgroups"-like functionality (again)
+  CLOSED: [2014-12-01 Пн 23:36]
+  - State "DONE"       from "TODO"       [2014-12-01 Пн 23:36]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-01 Пн 23:36
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** https://github.com/nex3/perspective-el
+** http://www.wickeddutch.com/2014/01/03/gaining-some-perspective-in-emacs/
+** http://emacsrookie.com/2011/09/25/workspaces/
+** https://github.com/pashinin/workgroups2
+** http://www.gentei.org/~yuuji/software/windows.el
+** https://github.com/tlh/workgroups.el
+** https://github.com/nex3/perspective-el
+** http://www.emacswiki.org/emacs/workspaces.el
+
+* DONE [#C] fix indents cycling in haskell-mode [2014-07-01 Вт 00:45] :emacs:ticket:
+  CLOSED: [2014-12-02 Вт 00:08]
+  - State "DONE"       from "TODO"       [2014-12-02 Вт 00:08]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-02 Вт 00:08
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] some kind of fix for pep8 checkers (flycheck/etc.) (mainly flake8 config appreciation) [2014-07-02 Ср 02:01] :emacs:ticket:
+  CLOSED: [2014-12-02 Вт 00:23]
+  - State "DONE"       from "TODO"       [2014-12-02 Вт 00:23]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-02 Вт 00:23
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** https://bitbucket.org/jek/sandbox/src/9705f596a2a2/pycheckers
+** http://stackoverflow.com/questions/1259873/how-can-i-use-emacs-flymake-mode-for-python-with-pyflakes-and-pylint-checking-co
+
+* DONE [#A] add org-mastering to agenda [2014-07-03 Чт 17:00]  :emacs:ticket:
+  CLOSED: [2014-08-27 Ср 15:33]
+  - State "DONE"       from "TODO"       [2014-08-27 Ср 15:33]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2014-12-02 Вт 00:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
