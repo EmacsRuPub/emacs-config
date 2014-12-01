@@ -137,6 +137,9 @@
         ))
 (push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
 (push '("D" . (current-time-string)) file-template-tag-alist)
+(add-hook 'emacs-lisp-mode-hook 'file-template-auto-insert)
+(add-hook 'python-mode-hook 'file-template-auto-insert)
+(add-hook 'shell-mode-hook 'file-template-auto-insert)
 
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
