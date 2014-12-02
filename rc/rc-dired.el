@@ -29,47 +29,6 @@
 (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
 (setq dired-dwim-target t)
 
-;; TODO: get rid of custom-set-faces below
-(custom-set-faces '(diredp-display-msg
-                    ((((type tty)) :foreground "blue")
-                     (t :foreground "cornflower blue"))))
-(custom-set-faces '(diredp-dir-heading
-                    ((((type tty)) :foreground "yellow")
-                     (t :foreground "goldenrod1"))))
-(custom-set-faces '(diredp-executable-tag
-                    ((((type tty)) :foreground "green")
-                     (t :foreground "chartreuse"))))
-(custom-set-faces '(diredp-dir-priv
-                    ((((type tty)) :foreground "blue")
-                     (t :foreground "SteelBlue3"))))
-(custom-set-faces '(diredp-link-priv
-                    ((((type tty)) :foreground "blue")
-                     (t :foreground "LightSkyBlue4"))))
-(custom-set-faces '(diredp-symlink
-                    ((((type tty)) :foreground "blue")
-                     (t :foreground "LightSkyBlue4"))))
-(custom-set-faces '(diredp-read-priv
-                    ((((type tty)) :foreground "yellow")
-                     (t :foreground "yellow4"))))
-(custom-set-faces '(diredp-write-priv
-                    ((((type tty)) :foreground "red")
-                     (t :foreground "IndianRed4"))))
-(custom-set-faces '(diredp-exec-priv
-                    ((((type tty)) :foreground "green")
-                     (t :foreground "chartreuse"))))
-(custom-set-faces '(diredp-file-name
-                    ((((type tty)) :foreground "gray")
-                     (t :foreground "gray60"))))
-(custom-set-faces '(diredp-file-suffix
-                    ((((type tty)) :foreground "gray")
-                     (t :foreground "gray80"))))
-(custom-set-faces '(diredp-compressed-file-suffix
-                    ((((type tty)) :foreground "yellow")
-                     (t :foreground "DarkOrange1"))))
-(custom-set-faces '(diredp-inode+size
-                    ((((type tty)) :foreground "yellow")
-                     (t :foreground "gold3"))))
-
 
 ;#############################################################################
 ;#   Keybindings
