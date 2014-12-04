@@ -150,6 +150,7 @@
   (define-key paredit-mode-map (kbd "M-<down>") nil)
   (define-key paredit-mode-map (kbd "C-<up>") nil)
   (define-key paredit-mode-map (kbd "C-<down>") nil)
+  (define-key paredit-mode-map (kbd "C-M-s") 'paredit-splice-sexp)
   (paredit-everywhere-mode 1))
 
 (with-eval-after-load "list-register"
