@@ -28,10 +28,10 @@
 ;; (erc-scrolltobottom-disable)
 ;; (add-hook 'erc-mode-hook 'erc-add-scroll-to-bottom)
 ;; (setq erc-keywords '((".*Online.*" (:foreground "green"))
-;; (".*Busy" (:foreground "red"))
-;; (".*Away" (:foreground "red"))
-;; (".*Idle" (:foreground "orange"))
-;; ))
+;;                     (".*Busy" (:foreground "red"))
+;;                     (".*Away" (:foreground "red"))
+;;                     (".*Idle" (:foreground "orange"))
+;;                     ))
 
 (setq erc-keywords nil)
 (make-variable-buffer-local 'erc-fill-column)
@@ -49,10 +49,10 @@
     (walk-windows
      (lambda (w)
        (let ((buffer (window-buffer w)))
-(set-buffer buffer)
-(when (eq major-mode 'erc-mode)
-(message "Window size: %d" (window-width w))
-(setq erc-fill-column (- (window-width w) 2))))))))
+         (set-buffer buffer)
+         (when (eq major-mode 'erc-mode)
+           (message "Window size: %d" (window-width w))
+           (setq erc-fill-column (- (window-width w) 2))))))))
 
 (setq window-configuration-change-hook (cddr window-configuration-change-hook))
 
@@ -93,10 +93,10 @@
       ((bitlbee-window (get-buffer-window "&bitlbee" t)))
     (when bitlbee-window
       (let*
-((bitlbee-window-list (window-list (window-frame bitlbee-window)))
-(free-window-list (qdot/filter 'qdot/free-query-window-p bitlbee-window-list)))
-(when (not (memq buffer (mapcar 'window-buffer bitlbee-window-list)))
-(set-window-buffer (car free-window-list) buffer))))))
+          ((bitlbee-window-list (window-list (window-frame bitlbee-window)))
+           (free-window-list (qdot/filter 'qdot/free-query-window-p bitlbee-window-list)))
+        (when (not (memq buffer (mapcar 'window-buffer bitlbee-window-list)))
+          (set-window-buffer (car free-window-list) buffer))))))
 
 (defun qdot/erc-privmsg-query-allocate (proc parsed)
   ;; Find the frame holding the bitlbee& buffer. We'll consider that our privmsg window
@@ -109,10 +109,10 @@
            (target (car (erc-response.command-args parsed)))
            (msg (erc-response.contents parsed))
            (query (if (not erc-query-on-unjoined-chan-privmsg)
-nick
-(if (erc-current-nick-p target)
-nick
-target))))
+                      nick
+                    (if (erc-current-nick-p target)
+                        nick
+                      target))))
 
         ;;If the buffer doesn't even exist yet, go ahead and run auto-query to make it happen
         (if (not (erc-get-buffer query proc))
@@ -195,7 +195,7 @@ target))))
 (defun qdot/bitlbee-reallocate-query-buffers ()
   ;; For each already opened query window, reallocate
   (mapc (lambda (buf) (qdot/erc-move-query-to-placeholder buf))
-(qdot/filter 'erc-query-buffer-p (buffer-list))))
+        (qdot/filter 'erc-query-buffer-p (buffer-list))))
 
 (defun qdot/bitlbee-resume-layout ()
   (interactive)
@@ -221,7 +221,7 @@ target))))
 
 ;; Don't track common events
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-"324" "329" "332" "333" "353" "477"))
+                                "324" "329" "332" "333" "353" "477"))
 
 (setq erc-current-nick-highlight-type 'nick)
 
@@ -236,16 +236,16 @@ target))))
 (defun erc-display-buffer-list (buffer)
   "Sanitize a 'buffer' name or list, and convert to a buffer-name list."
   (cond ((bufferp buffer) (list buffer))
-((listp buffer) buffer)
-((processp buffer) (list (process-buffer buffer)))
-((eq 'all buffer)
-;; Hmm, or all of the same session server?
-(erc-buffer-list nil erc-server-process))
-((and (eq 'active buffer) (erc-active-buffer))
-(list (erc-active-buffer)))
-((erc-server-buffer-live-p)
-(list (process-buffer erc-server-process)))
-(t (list (current-buffer)))))
+        ((listp buffer) buffer)
+        ((processp buffer) (list (process-buffer buffer)))
+        ((eq 'all buffer)
+         ;; Hmm, or all of the same session server?
+         (erc-buffer-list nil erc-server-process))
+        ((and (eq 'active buffer) (erc-active-buffer))
+         (list (erc-active-buffer)))
+        ((erc-server-buffer-live-p)
+         (list (process-buffer erc-server-process)))
+        (t (list (current-buffer)))))
 
 (defun erc-display-message (parsed type buffer msg &rest args)
   "Display MSG in BUFFER.
@@ -257,43 +257,43 @@ See also `erc-format-message' and `erc-display-line'.
 NOTE: PATCHED VERSION that takes into account that erc-hide-list
 is buffer local"
   (let ((string (if (symbolp msg)
-(apply 'erc-format-message msg args)
-msg)))
+                    (apply 'erc-format-message msg args)
+                  msg)))
     (setq string
-(cond
-((null type)
-string)
-((listp type)
-(mapc (lambda (type)
-(setq string
-(erc-display-message-highlight type string)))
-type)
-string)
-((symbolp type)
-(erc-display-message-highlight type string))))
+          (cond
+           ((null type)
+            string)
+           ((listp type)
+            (mapc (lambda (type)
+                    (setq string
+                          (erc-display-message-highlight type string)))
+                  type)
+            string)
+           ((symbolp type)
+            (erc-display-message-highlight type string))))
 
     (if (not (erc-response-p parsed))
-(erc-display-line string buffer)
+        (erc-display-line string buffer)
       (erc-put-text-property 0 (length string) 'erc-parsed parsed string)
       (erc-put-text-property 0 (length string) 'rear-sticky t string)
       (dolist (buf (erc-display-buffer-list buffer))
-(unless (member (erc-response.command parsed)
-(if (bufferp buf)
-(with-current-buffer buf erc-hide-list)
-erc-hide-list))
-(erc-display-line string buf))))))
+        (unless (member (erc-response.command parsed)
+                        (if (bufferp buf)
+                            (with-current-buffer buf erc-hide-list)
+                          erc-hide-list))
+          (erc-display-line string buf))))))
 
 (setq qdot/erc-event-channels '("&bitlbee"))
 
 (add-hook 'erc-join-hook
-(lambda ()
-(make-local-variable 'blink-matching-paren)
-(setq blink-matching-paren nil)
-"Only show joins/hides/quits for channels we
+          (lambda ()
+            (make-local-variable 'blink-matching-paren)
+            (setq blink-matching-paren nil)
+            "Only show joins/hides/quits for channels we
 specify in qdot/erc-event-channels"
-(when (not (member (buffer-name (current-buffer))
-qdot/erc-event-channels))
-(setq erc-hide-list '( "PART" "QUIT" "JOIN")))))
+            (when (not (member (buffer-name (current-buffer))
+                               qdot/erc-event-channels))
+              (setq erc-hide-list '( "PART" "QUIT" "JOIN")))))
 
 (defun qdot/clear-irc-buffer ()
   "If the current buffer is and ERC buffer, clear all text out of
@@ -329,8 +329,8 @@ recenters the buffer so that prior history cannot be seen.
   (dolist (channel (erc-buffer-list))
     (when (string-match-p "#" (buffer-name channel))
       (save-excursion
-(set-buffer channel)
-(kill-buffer)))))
+        (set-buffer channel)
+        (kill-buffer)))))
 
 ;; Walk all of the server buffers first
 ;; Close those first, which autodetaches us from channels
@@ -340,15 +340,15 @@ recenters the buffer so that prior history cannot be seen.
   (mapcar
    (lambda (arg)
      (when (and (erc-server-buffer-p arg)
-(if bitlbee
-(string-match (buffer-name arg) "znc-bitlbee")
-(not (string-match (buffer-name arg) "znc-bitlbee"))))
+                (if bitlbee
+                    (string-match (buffer-name arg) "znc-bitlbee")
+                  (not (string-match (buffer-name arg) "znc-bitlbee"))))
        (save-excursion
-(set-buffer arg)
-(erc-quit-server "Wheee.")
-(if (get-buffer-process arg)
-(delete-process (get-buffer-process arg)))
-(kill-buffer))))
+         (set-buffer arg)
+         (erc-quit-server "Wheee.")
+         (if (get-buffer-process arg)
+             (delete-process (get-buffer-process arg)))
+         (kill-buffer))))
    (buffer-list)))
 
 (defun qdot/kill-irc ()
@@ -366,11 +366,11 @@ recenters the buffer so that prior history cannot be seen.
 
 (defun qdot/filter-bitlbee-joins-parts (msg)
   (when (and (string= "&bitlbee" (buffer-name (current-buffer)))
-(= (string-match "***" msg) 0))
+             (= (string-match "***" msg) 0))
     (setq erc-insert-this nil)
     (dolist (nick qdot/bitlbee-status-nicks)
       (if (string-match nick msg)
-(setq erc-insert-this t)))))
+          (setq erc-insert-this t)))))
 
 (add-hook 'erc-insert-pre-hook 'qdot/filter-bitlbee-joins-parts)
 (setq erc-insert-pre-hook nil)
