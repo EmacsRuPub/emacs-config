@@ -40,6 +40,7 @@
   (setq helm-split-window-in-side-p t)
   (setq helm-ff-search-library-in-sexp t)
   (setq helm-ff-file-name-history-use-recentf t)
+  (pushnew 'python-mode helm-buffers-favorite-modes)
   (global-set-key (kbd "C-x C-d") 'helm-recentd)
   (global-set-key (kbd "C-x b") 'helm-buffers-list)
   (define-key custom-search-keymap (kbd "h") 'helm-mini)
