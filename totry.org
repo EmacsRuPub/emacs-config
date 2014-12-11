@@ -124,3 +124,6 @@
 * [[http://sachachua.com/blog/2014/11/using-org-mode-keep-process-journal/][Using Org Mode to keep a process journal - sacha chua :: living an awesome life]] [2014-11-28 Пт 01:24] :emacs:try:
 * [[https://github.com/magnars/string-edit.el][magnars/string-edit.el]] [2014-11-29 Сб 23:48] :emacs:try:
 * [[https://github.com/magnars/change-inner.el][magnars/change-inner.el]] [2014-11-29 Сб 23:48] :emacs:try:
+* [[http://welinux.ru/post/7588/][welinux.ru / Emacs — dict + dictem или словари в Emacs]] [2014-12-07 Вс 19:58] :emacs:try:
+* [[http://orgmode.org/worg/org-contrib/org-drill.html][org-drill.el – flashcards and spaced repetition for org-mode]] [2014-12-07 Вс 22:29] :emacs:try:
+* [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html?source%3Drss][Introducing Names: practical namespaces for Emacs-Lisp · Endless Parentheses]] [2014-12-11 Чт 12:31] :emacs:try:
