@@ -10,7 +10,6 @@
 ;#############################################################################
 ;#   Load extensions
 ;############################################################################
-(require 'browse-kill-ring)
 (require 'cua-base)
 (require 'cursor-chg)
 (require 'drag-stuff)
@@ -238,7 +237,7 @@
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)
 
-(global-set-key (kbd "C-c k") 'browse-kill-ring)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

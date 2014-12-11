@@ -25,7 +25,6 @@
         auto-complete-yasnippet
         bookmark+
         breadcrumb-custom
-        browse-kill-ring
         buffer-move
         c-eldoc
         calfw
