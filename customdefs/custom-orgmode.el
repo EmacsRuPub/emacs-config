@@ -27,14 +27,6 @@
 (defun org-osd-display (min-to-app new-time msg)
   (osd-display msg msg -1 "center" "center" "Verdana 40"))
 
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40"))
-
-;; on screen display
-(defun org-osd-display (min-to-app new-time msg)
-  (osd-display msg msg -1 "center" "center" "Verdana 40"))
-
 (defun open-or-browse-at-point (arg)
   (interactive "P")
   (if arg
