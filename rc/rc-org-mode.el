@@ -31,6 +31,7 @@
 ;TODO: maybe do it less straightforward
 (add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
 (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
+(add-to-list 'org-agenda-files "/home/octocat/.stumpwm.d/todo.org")
 
 ; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
@@ -118,8 +119,8 @@
         ))
 (setq org-capture-templates
       '(("d" "todo")
-       ("dr" "IRL tasks" entry (file (at-org-dir "/todo.org")) "* TODO [#C] %? %U :irl:")
-       ("dv" "virt tasks" entry (file (at-org-dir "/todo.org")) "* TODO [#C] %? %U :virt:")
+       ("dr" "IRL tasks" entry (file (at-org-dir "/irl-tasks.org")) "* TODO [#C] %? %U :irl:")
+       ("dv" "virt tasks" entry (file (at-org-dir "/virt-tasks.org")) "* TODO [#C] %? %U :virt:")
        ("dw" "workplace tasks" entry (file (at-org-dir "/workplace-tasks.org")) "* TODO [#C] %? %U :workplace:")
        ("de" "emacs")
        ("det" "emacs todo" entry (file (at-config-basedir "todo.org")) "* TODO [#C] %? %U :emacs:ticket:")
@@ -133,12 +134,12 @@
        ("jp" "plan" entry (file (at-org-job-dir "/plan.org")) "* TODO %? %U :work:planning:%(custom/scrum-timestamp-as-tag):")
        ("l" "links" entry (file (at-org-dir "/links.org")) "* %? %U :links:send:")
        ("g" "github")
-       ("gc" "common" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:")
-       ("gd" "dotfiles" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:dotfiles:")
-       ("ge" "emacs config" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:emacs-config:")
-       ("ga" "awesome config" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:awesome-config:")
-       ("gs" "stumpwm config" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:stumpwm-config:")
-       ("gl" "CL repo to review" entry (file (at-org-inventory-dir "/checklists/github.org")) "* %? %U :github:common-lisp:")
+       ("gc" "common" entry (file (at-org-dir "/github.org")) "* %? %U :github:")
+       ("gd" "dotfiles" entry (file (at-org-dir "/github.org")) "* %? %U :github:dotfiles:")
+       ("ge" "emacs config" entry (file (at-org-dir "/github.org")) "* %? %U :github:emacs-config:")
+       ("ga" "awesome config" entry (file (at-org-dir "/github.org")) "* %? %U :github:awesome-config:")
+       ("gs" "stumpwm config" entry (file (at-org-dir "/github.org")) "* %? %U :github:stumpwm-config:")
+       ("gl" "CL repo to review" entry (file+headline (at-org-mastering-dir "/cl.org") "repos") "* %? %U :github:common-lisp:")
        ("k" "knowledge base" entry (file (at-org-inventory-dir "/kb.org")) "* %? %U :kb:raw:")
        ("s" "search")
        ("sb" "book" entry (file (at-org-dir "/search.org")) "* TODO %? %U :search:book:")
