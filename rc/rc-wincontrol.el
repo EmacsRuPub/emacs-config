@@ -56,8 +56,7 @@
 (global-set-key (kbd "<C-M-left>") 'win-resize-enlarge-horiz)
 
 ;; buffer controls
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "<f11>") 'buffer-menu)
+(global-unset-key (kbd "C-x C-b"))
 
 (global-set-key (kbd "C-S-c <up>") 'buf-move-up)
 (global-set-key (kbd "C-S-c <down>") 'buf-move-down)
