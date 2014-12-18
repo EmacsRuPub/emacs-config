@@ -16,6 +16,7 @@
         actionscript-mode
         adaptive-wrap
         ag-custom
+        anchored-transpose
         auctex
         auto-complete-c-headers
         auto-complete-clang

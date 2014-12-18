@@ -233,6 +233,7 @@
 (global-set-key (kbd "M-t w") 'transpose-words)
 (global-set-key (kbd "M-t s") 'transpose-sexps)
 (global-set-key (kbd "M-t p") 'transpose-params)
+(global-set-key (kbd "M-t a") 'anchored-transpose)
 
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)
