@@ -68,12 +68,11 @@
 (setq org-refile-target-verify-function 'custom/verify-refile-target)
 
 
-(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)" "NEXT(x)"
+(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "NEXT(x)"
                   "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)"))
-(setq kw-seq-work '(sequence "NEW(n)" "INPROGRESS(p!)" "CHECKING(r!)" "REWORK(f!@)" "|" "CLOSED(k!)"))
 (setq org-todo-keywords
-      `(,kw-seq-common ,kw-seq-work))
-(setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEW(n)" "INPROGRESS(p)" "REWORK(f)"))
+      `(,kw-seq-common))
+(setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEXT(x)"))
 (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
