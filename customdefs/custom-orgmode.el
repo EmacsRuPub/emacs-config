@@ -20,7 +20,7 @@
     (org-remove-empty-drawer-at "CLOCK" (point))))
 
 ;; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
+(defun custom/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 

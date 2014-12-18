@@ -65,7 +65,7 @@
 (setq org-log-done t) ;; read documentation
 (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
 (setq org-attach-directory "org-attach-data")
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
+(setq org-refile-target-verify-function 'custom/verify-refile-target)
 
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "LATER(l@)" "NEXT(x)"
