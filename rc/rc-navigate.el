@@ -42,7 +42,7 @@
   (setq helm-ff-file-name-history-use-recentf t)
   (pushnew 'python-mode helm-buffers-favorite-modes)
   (global-set-key (kbd "C-x C-d") 'helm-recentd)
-  (global-set-key (kbd "C-x b") 'helm-buffers-list)
+  (global-set-key (kbd "C-x b") 'ido-switch-buffer)
   (define-key custom-search-keymap (kbd "h") 'helm-mini)
   (define-key custom-search-keymap (kbd "o") 'helm-occur)
   (define-key custom-search-keymap (kbd "f") 'custom/helm-find-files))
