@@ -48,6 +48,23 @@
   (interactive)
   (browse-url "https://mail.google.com"))
 
+(defun custom/term-exec-hook ()
+  (let* ((buff (current-buffer))
+         (proc (get-buffer-process buff)))
+    (set-process-sentinel
+     proc
+     `(lambda (process event)
+        (if (string= event "finished\n")
+            (kill-buffer ,buff))))))
+
+(use-package term
+  :config
+  (progn
+    (add-hook 'term-exec-hook 'custom/term-exec-hook)
+    (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+    (setq explicit-shell-file-name "/bin/zsh")
+    ))
+
 (use-package erc
   :init
   (use-package erc-pcomplete)
