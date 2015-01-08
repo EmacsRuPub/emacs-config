@@ -68,8 +68,8 @@
 (setq org-refile-target-verify-function 'custom/verify-refile-target)
 
 
-(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "WAITING(w@/!)" "NEXT(x)"
-                  "|" "DONE(d!/@)" "SOMEDAY(s@)" "CANCELLED(c@/!)"))
+(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
+                  "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
 (setq org-todo-keywords
       `(,kw-seq-common))
 (setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEXT(x)"))
@@ -80,14 +80,9 @@
         (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
-        ("NEW" . (:foreground "red" :weight bold))
-        ("REWORK" . (:foreground "red" :weight bold))
-        ("INPROGRESS" . (:foreground "yellow" :weight bold))
         ("WAITING" . (:foreground "orange" :weight bold))
         ("CANCELLED" . (:foreground "cyan" :weight bold))
-        ("CHECKING" . (:foreground "orange" :weight bold))
-        ("DONE" . (:foreground "green" :weight bold))
-        ("CLOSED" . (:foreground "green" :weight bold))))
+        ("DONE" . (:foreground "green" :weight bold))))
 (setq org-priority-faces
       '((?A :foreground "red" :weight bold)
         (?B :foreground "#94bff3" :weight bold)
