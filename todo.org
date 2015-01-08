@@ -144,4 +144,3 @@
 * TODO [#A] fix magit filenotify issue with deleted files (e.g. "cannot add watch...") [2014-12-09 Вт 13:58] :emacs:ticket:
 * TODO [#B] try to incorporate https://github.com/Bruce-Connor/names to automate namespaces (maybe additional benefits can be found) [2014-12-11 Чт 12:38] :emacs:ticket:
 * TODO [#A] fix yasnippet expansion (looks like it cannot find snippets) [2014-12-11 Чт 14:34] :emacs:ticket:
-* TODO [#A] fix emacs-swoop [2014-12-12 Пт 00:33]              :emacs:ticket:
