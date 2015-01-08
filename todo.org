@@ -143,4 +143,12 @@
 * TODO [#A] compare output of project files with ido and helm (maybe helm's includes subprojects contents) [2014-11-25 Вт 01:09] :emacs:ticket:
 * TODO [#A] fix magit filenotify issue with deleted files (e.g. "cannot add watch...") [2014-12-09 Вт 13:58] :emacs:ticket:
 * TODO [#B] try to incorporate https://github.com/Bruce-Connor/names to automate namespaces (maybe additional benefits can be found) [2014-12-11 Чт 12:38] :emacs:ticket:
-* TODO [#A] fix yasnippet expansion (looks like it cannot find snippets) [2014-12-11 Чт 14:34] :emacs:ticket:
+* TODO [#A] fix yasnippet expansion (looks like it cannot find snippets (particularly in python mode)) [2014-12-11 Чт 14:34] :emacs:ticket:
+* TODO [#A] try to switch sauron back on, for orgmode notifications [2014-12-12 Пт 00:35] :emacs:ticket:
+* TODO [#A] display files of different types in dired using different colors [2014-12-22 Пн 15:22] :emacs:ticket:
+* TODO [#A] some window ruling handles, e.g.: [2014-12-22 Пн 19:14] :emacs:ticket:
+  open magit commit info in another frame if exists
+  rotate window splits (AFAIK there is an existing extension for it)
+* TODO [#A] a simple customdef to place .projectile file in current dir [2014-12-28 Вс 21:44] :emacs:ticket:
+* TODO [#C] search for 'local-set-key' uses and try to eliminate [2015-01-04 Вс 23:47] :emacs:ticket:
+* TODO [#B] bind view-lossage [2015-01-05 Пн 18:51]            :emacs:ticket:

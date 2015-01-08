@@ -127,3 +127,43 @@
 * [[http://welinux.ru/post/7588/][welinux.ru / Emacs — dict + dictem или словари в Emacs]] [2014-12-07 Вс 19:58] :emacs:try:
 * [[http://orgmode.org/worg/org-contrib/org-drill.html][org-drill.el – flashcards and spaced repetition for org-mode]] [2014-12-07 Вс 22:29] :emacs:try:
 * [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html?source%3Drss][Introducing Names: practical namespaces for Emacs-Lisp · Endless Parentheses]] [2014-12-11 Чт 12:31] :emacs:try:
+* [[http://definitelyaplug.b0.cx/post/dlist-a-major-mode-tutorial-5/][dlist: A Major Mode Tutorial | Definitely a plug.]] [2014-12-14 Вс 17:57] :emacs:try:
+* [[https://github.com/novoid/lazyblorg][novoid/lazyblorg]] [2014-12-14 Вс 22:28] :emacs:try:
+* [[https://github.com/novoid/Memacs][novoid/Memacs]] [2014-12-14 Вс 22:28] :emacs:try:
+* [[http://endlessparentheses.com/new-on-elpa-and-in-emacs-25-1-let-alist.html?source%3Drss][New on Elpa and in Emacs 25.1: let-alist · Endless Parentheses]] [2014-12-16 Вт 13:50] :emacs:try:
+* [[https://github.com/abo-abo/keyfreq][abo-abo/keyfreq]] [2014-12-29 Пн 15:26] :emacs:try:
+* [[https://github.com/abo-abo/ace-link][abo-abo/ace-link]] [2014-12-29 Пн 15:27] :emacs:try:
+* [[https://github.com/abo-abo/make-it-so][abo-abo/make-it-so]] [2014-12-29 Пн 15:28] :emacs:try:
+* [[https://github.com/abo-abo/auto-yasnippet][abo-abo/auto-yasnippet]] [2014-12-29 Пн 15:28] :emacs:try:
+* [[http://oremacs.com/2014/12/26/the-little-package-that-could/][tiny.el - the little package that could · (or emacs]] [2014-12-29 Пн 15:41] :emacs:try:
+* [[https://github.com/Bruce-Connor/erc-gitter][Bruce-Connor/erc-gitter]] [2014-12-30 Вт 16:13] :emacs:try:
+* [[http://oremacs.com/2015/01/02/wrap-with-latex/][Wrap a region with a LaTeX environment · (or emacs]] [2015-01-03 Сб 16:37] :emacs:try:
+* [[http://mbork.pl/2014-12-27_Info_dispatch][Marcin Borkowski: 2014-12-27 Info dispatch]] [2015-01-03 Сб 16:53] :emacs:try:
+* [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]] [2015-01-04 Вс 19:13] :emacs:try:
+* [[https://github.com/tarsius/auto-compile][tarsius/auto-compile]] [2015-01-04 Вс 23:26] :emacs:try:
+* [[https://github.com/chrisbarrett/emacs-refactor][chrisbarrett/emacs-refactor]] [2015-01-04 Вс 23:27] :emacs:try:
+* [[http://www.wisdomandwonder.com/link/9401/the-emacs-widget-library][The Emacs Widget Library | Wisdom and Wonder]] [2015-01-05 Пн 00:11] :emacs:try:
+* [[https://github.com/syohex/emacs-quickrun][syohex/emacs-quickrun]] [2015-01-05 Пн 16:51] :emacs:try:
+* [[https://github.com/syohex/emacs-editutil][syohex/emacs-editutil]] [2015-01-05 Пн 17:16] :emacs:try:
+* [[https://github.com/syohex/docean.el][syohex/docean.el]] [2015-01-05 Пн 17:17] :emacs:try:
+* [[https://github.com/syohex/emacs-dired-k][syohex/emacs-dired-k]] [2015-01-05 Пн 17:18] :emacs:try:
+* [[https://github.com/syohex/emacs-emamux][syohex/emacs-emamux]] [2015-01-05 Пн 17:19] :emacs:try:
+* [[https://github.com/syohex/shut-up.el][syohex/shut-up.el]] [2015-01-05 Пн 17:19] :emacs:try:
+* [[https://github.com/syohex/elmacro][syohex/elmacro]] [2015-01-05 Пн 17:20] :emacs:try:
+* [[https://github.com/syohex/emacs-utils][syohex/emacs-utils]] [2015-01-05 Пн 17:21] :emacs:try:
+* [[https://github.com/syohex/emacs-gitignore][syohex/emacs-gitignore]] [2015-01-05 Пн 17:21] :emacs:try:
+* [[https://github.com/syohex/emacs-ac-tmux-complete][syohex/emacs-ac-tmux-complete]] [2015-01-05 Пн 17:22] :emacs:try:
+* [[https://github.com/syohex/coverlay.el][syohex/coverlay.el]] [2015-01-05 Пн 17:23] :emacs:try:
+* [[https://github.com/syohex/emacs-inertial-scroll][syohex/emacs-inertial-scroll]] [2015-01-05 Пн 17:24] :emacs:try:
+* [[https://github.com/syohex/rectangle-utils][syohex/rectangle-utils]] [2015-01-05 Пн 17:24] :emacs:try:
+* [[https://github.com/syohex/zop-to-char][syohex/zop-to-char]] [2015-01-05 Пн 17:25] :emacs:try:
+* [[https://github.com/syohex/psession][syohex/psession]] [2015-01-05 Пн 17:25] :emacs:try:
+* [[http://www.wisdomandwonder.com/link/9401/the-emacs-widget-library][The Emacs Widget Library | Wisdom and Wonder]] [2015-01-05 Пн 17:49] :emacs:try:
+* TODO [#A] [[https://marmalade-repo.org/packages/web][web @ Marmalade]] [2015-01-05 Пн 18:28]                 :emacs:try:
+* [[http://stackoverflow.com/questions/1054903/how-do-you-get-python-documentation-in-texinfo-info-format][emacs - How do you get Python documentation in Texinfo Info format? - Stack Overflow]] [2015-01-05 Пн 18:50] :emacs:try:
+* [[http://oremacs.com/2015/01/06/rushing-headlong/][Rushing headlong · (or emacs]] [2015-01-08 Чт 00:10] :emacs:try:
+* [[https://github.com/tam17aki/ace-isearch][tam17aki/ace-isearch]] [2015-01-08 Чт 00:11] :emacs:try:
+* [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][orgpaper/orgpapers.org at master · vikasrawal/orgpaper]] [2015-01-08 Чт 00:18] :emacs:try:
+* [[https://github.com/ahungry/ahungry-blog][ahungry/ahungry-blog]] [2015-01-08 Чт 15:14] :emacs:try:
+* [[https://github.com/Bruce-Connor/rich-minority][Bruce-Connor/rich-minority]] [2015-01-08 Чт 16:39] :emacs:try:
+* [[https://github.com/Bruce-Connor/smart-mode-line/][Bruce-Connor/smart-mode-line]] [2015-01-08 Чт 16:39] :emacs:try:
