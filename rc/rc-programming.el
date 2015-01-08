@@ -41,18 +41,16 @@
 (use-package projectile
   :commands (projectile-find-file custom/projectile-ag)
   :bind ("C-c h p" . helm-projectile)
-  :init
-  (use-package helm-projectile)
   :config
   (progn
     (projectile-global-mode) ;; to enable in all buffers
     (setq projectile-enable-caching t)
-    (setq projectile-completion-system 'helm)
+    (setq projectile-completion-system 'ido)
     (setq projectile-tags-command
           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
     (diminish 'projectile-mode "prj")
     (define-key custom-search-keymap (kbd "g") 'custom/projectile-ag)
-    (define-key custom-search-keymap (kbd "q") 'helm-projectile)
+    (define-key custom-search-keymap (kbd "q") 'projectile-find-file)
     ))
 
 (use-package ecb
