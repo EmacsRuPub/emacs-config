@@ -73,6 +73,7 @@
 (define-key custom-windowing-keymap (kbd "s") 'save-current-configuration)
 (define-key custom-windowing-keymap (kbd "r") 'resume)
 (define-key custom-windowing-keymap (kbd "c") 'wipe)
+(define-key custom-windowing-keymap (kbd "w") 'ace-window)
 
 (provide 'rc-wincontrol)
 
