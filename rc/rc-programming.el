@@ -26,6 +26,7 @@
 (autoload 'ecb-activate "ecb" nil t)
 
 (use-package doxymacs
+  :defer t
   :config
   (progn
     (setq-default doxymacs-doxygen-style "JavaDoc")
@@ -55,10 +56,12 @@
     ))
 
 (use-package ecb
+  :defer t
   :bind (("C-x t q" . ecb-toggle-ecb-windows)
          ("C-x t d" . ecb-deactivate)))
 
 (use-package flycheck
+  :defer t
   :bind (("C-x <up>" . flycheck-previous-error)
          ("C-x <down>" . flycheck-next-error)
          ("C-x !" . flycheck-first-error))
@@ -68,12 +71,14 @@
     (setq flycheck-check-syntax-automatically '(idle-change))))
 
 (use-package eldoc
+  :defer t
   :init
   (progn
     (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-    (diminish 'eldoc-mode "ED")))
+    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode))
+  :idle
+  (diminish 'eldoc-mode "ED"))
 
 (use-package magit
   :bind (("C-c g l" . magit-file-log)

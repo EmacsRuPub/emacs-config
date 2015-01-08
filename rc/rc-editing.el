@@ -156,7 +156,8 @@
   (global-set-key (kbd "C-x r v") 'list-register))
 
 (use-package vimrc-mode
-             :mode ".vim\\(rc\\)?$")
+  :defer t
+  :mode ".vim\\(rc\\)?$")
 
 (define-generic-mode 'keymap-mode
   '("#")

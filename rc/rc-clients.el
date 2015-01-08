@@ -66,6 +66,7 @@
     ))
 
 (use-package erc
+  :defer t
   :init
   (use-package erc-pcomplete)
   :config
@@ -81,11 +82,13 @@
                                     "324" "329" "332" "333" "353" "477"))))
 
 (use-package twittering-mode
+  :defer t
   :commands twit
   :init
   (setq twittering-use-master-password t))
 
 (use-package mingus
+  :defer t
   :commands mingus
   :bind (("C-c <right>" . mingus-seek)
          ("C-c <left>" . mingus-seek-backward)
@@ -94,6 +97,7 @@
   (bind-key "<Backspace>" 'mingus-del mingus-playlist-map))
 
 (use-package restclient
+  :defer t
   :bind ("C-c C-r C-s" . create-restclient-sandbox))
 
 (use-package tramp
@@ -105,6 +109,7 @@
                   '(".*" "\\`.+\\'" "/ssh:%h:")))
 
 (use-package w3m
+  defer t
   :commands w3m
   :init
   (progn

@@ -37,6 +37,7 @@
 (require 'info-look)
 
 (use-package slime
+  :defer t
   :init
   (progn
     (use-package slime-autoloads)
