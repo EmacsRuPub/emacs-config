@@ -45,6 +45,7 @@
   (progn
     (projectile-global-mode) ;; to enable in all buffers
     (setq projectile-enable-caching t)
+    (setq projectile-require-project-root nil)
     (setq projectile-completion-system 'ido)
     (setq projectile-tags-command
           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
