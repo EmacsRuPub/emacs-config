@@ -13,6 +13,7 @@
         ac-slime
         ac-irony
         ace-jump-mode
+        ace-link
         ace-window
         actionscript-mode
         adaptive-wrap
