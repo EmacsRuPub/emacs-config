@@ -160,6 +160,7 @@
         yandex-weather
         yasnippet
         zen-and-art-theme
+        zoom-window
         ))
 
 (provide 'packages)

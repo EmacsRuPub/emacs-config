@@ -191,6 +191,10 @@
 ;; (with-eval-after-load "bookmark+"
 ;;   (global-set-key (kbd "C-x j j") 'helm-bookmarks))
 
+(use-package zoom-window
+  :bind ("C-x C-z" . zoom-window-zoom)
+  :config
+  (setq zoom-window-mode-line-color "DarkGreen"))
 
 ;#############################################################################
 ;#   Keybindings
