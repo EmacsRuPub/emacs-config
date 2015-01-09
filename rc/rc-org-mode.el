@@ -203,6 +203,8 @@
 (define-key custom-orgmode-keymap (kbd "d") 'org-delete-property)
 (define-key custom-orgmode-keymap (kbd "t") 'org-trello-mode)
 
+(define-key org-mode-map (kbd "C-'") nil)
+
 (provide 'rc-org-mode)
 
 ;;; emacs-rc-org-mode.el ends here

@@ -81,11 +81,6 @@
   (diminish 'eldoc-mode "ED"))
 
 (use-package magit
-  :bind (("C-c g l" . magit-file-log)
-         ("C-c g w" . magit-diff-working-tree)
-         ("C-c g r" . magit-reflog)
-         ("C-c g c" . magit-checkout)
-         ("C-c g r" . magit-add-remote))
   :init
   (progn
     (use-package diminish)
@@ -95,6 +90,12 @@
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (diminish 'magit-filenotify-mode "FN")
   (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
+  ;FIXME:make these custom key use :bind/whatever-appropriate
+  (define-key custom-vcs-keymap (kbd "s") 'magit-status)
+  (define-key custom-vcs-keymap (kbd "l") 'magit-file-log)
+  (define-key custom-vcs-keymap (kbd "w") 'magit-diff-working-tree)
+  (define-key custom-vcs-keymap (kbd "r") 'magit-reflog)
+  (define-key custom-vcs-keymap (kbd "c") 'magit-checkout)
   )
 
 (use-package git-gutter
@@ -120,9 +121,10 @@
 
 (global-git-gutter-mode +1)
 
-(global-set-key (kbd "C-c g s") 'magit-status)
 (global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
 (global-set-key (kbd "C-x t a") 'ecb-activate)
+
+(define-key custom-vcs-keymap (kbd "t") 'git-timemachine)
 
 (provide 'rc-programming)
 
