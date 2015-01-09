@@ -5,7 +5,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'smex "smex" nil t)
-(autoload 'custom/helm-find-files "helm" nil t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (autoload 'wgrep-ag-setup "wgrep-ag")
@@ -18,6 +17,7 @@
 (require 'crosshairs)
 (require 'breadcrumb)
 (require 'neotree)
+(require 'helm)
 (require 'swoop)
 
 (with-eval-after-load "helm"
