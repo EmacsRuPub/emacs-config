@@ -4,23 +4,26 @@
 ;; Created: Вс май  4 23:29:48 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'sauron-start "sauron" "Sauron" t)
 (autoload 'deft "deft" "Deft" t)
 
 (require 'calfw)
 
-(with-eval-after-load "sauron"
+(use-package sauron
   ;; note, you add (setq sauron-debug t) to get errors which can debug if
   ;; there's something wrong; normally, we catch such errors, since e.g an error
   ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
   ;; trough).
-  (setq sauron-separate-frame nil)
-  (setq sauron-hide-mode-line t)
-  (setq sauron-max-line-length 120)
-  (global-set-key (kbd "C-c r s") 'sauron-start)
-  (global-set-key (kbd "C-c r p") 'sauron-stop)
-  (global-set-key (kbd "C-c r t") 'sauron-toggle-hide-show)
-  (global-set-key (kbd "C-c r c") 'sauron-clear))
+  :defer t
+  :bind (("C-c r s" . sauron-start)
+         ("C-c r p" . sauron-stop)
+         ("C-c r t" . sauron-toggle-hide-show)
+         ("C-c r c" . sauron-clear))
+  :config
+  (progn
+    (setq sauron-separate-frame nil)
+    (setq sauron-hide-mode-line t)
+    (setq sauron-max-line-length 120)
+    ))
 
 (with-eval-after-load "deft"
   (setq deft-extension "org")
