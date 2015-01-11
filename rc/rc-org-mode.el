@@ -212,6 +212,8 @@
 (define-key custom-orgmode-keymap (kbd "g") 'org-clock-goto)
 (define-key custom-orgmode-keymap (kbd "p") 'org-set-property)
 (define-key custom-orgmode-keymap (kbd "d") 'org-delete-property)
+(define-key custom-orgmode-keymap (kbd "s") 'org-schedule)
+(define-key custom-orgmode-keymap (kbd "l") 'org-deadline)
 (define-key custom-orgmode-keymap (kbd "t") 'org-trello-mode)
 
 (define-key org-mode-map (kbd "C-'") nil)
