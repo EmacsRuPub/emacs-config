@@ -28,6 +28,7 @@
 (setq diredp-compressed-file-suffix 'darkyellow-face)
 (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
 (setq dired-dwim-target t)
+(setq dired-listing-switches "-lah1v --group-directories-first")
 
 
 ;#############################################################################
