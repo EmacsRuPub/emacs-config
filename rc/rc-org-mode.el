@@ -98,12 +98,14 @@
       '(("d" . "some non-straightforward TODO statuses")
         ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
         ("dw" todo "WAITING|LATER" nil)
-        ("h" agenda "" ((org-agenda-ndays 21)))
+        ("dg" todo "GOING" nil)
         ("c" . "by context")
         ("ch" tags "+@home")
-        ("cw" tags "+@work")
-        ("cp" tags "+@workplace")
+        ("co" tags "+@work")
+        ("cw" tags "+@workplace")
         ("cj" tags "+@journey")
+        ("cp" tags "+@phonecall")
+        ("cs" tags "+@someday")
         ("e" . "by essence")
         ("ec" tags "+current")
         ("em" tags "+master")
@@ -111,12 +113,18 @@
         ("ef" tags "+fix")
         ("ed" tags "+develop")
         ("ei" tags "+investigate")
-        ("u" alltodo ""
+        ("u" . "unassigned")
+        ("uu" alltodo ""
          ((org-agenda-skip-function
            (lambda nil
              (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
           (org-agenda-overriding-header "Unscheduled TODO entries: ")))
-        ("U" "Prioritized tasks"
+        ("up" alltodo ""
+         ((org-agenda-skip-function
+           (lambda nil
+             (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
+          (org-agenda-overriding-header "Unprioritized TODO entries: ")))
+        ("P" "Prioritized tasks"
          ((tags-todo "+PRIORITY=\"A\"")
           (tags-todo "+PRIORITY=\"B\"")
           (tags-todo "+PRIORITY=\"C\"")))
