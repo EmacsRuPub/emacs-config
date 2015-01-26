@@ -125,7 +125,7 @@
         ("do" "tasks at work" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@work:")
         ("dw" "workplace tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@workplace:")
         ("dj" "tasks on the way" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@journey:")
-        ("dp" "purchase" entry (file (at-org-dir "/tasks.org")) "* %? %U :purchase:")
+        ("dp" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@phonecall:")
         ("ds" "someday" entry (file (at-org-dir "/tasks.org")) "* %? %U :@someday:")
         ("de" "emacs")
         ("det" "emacs todo" entry (file (at-config-basedir "todo.org")) "* TODO [#C] %? %U :emacs:ticket:")
@@ -134,6 +134,7 @@
         ("ip" "project ideas" entry (file (at-org-dir "/sink.org")) "* %? %U :project/idea:")
         ("in" "job notes" entry (file (at-org-dir "/sink.org")) "* %? %U :@work:note:")
         ("ia" "newspaper articles" entry (file (at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
+        ("il" "side links" entry (file (at-org-dir "/sink.org")) "* %? %U :side_link:")
         ("is" "search")
         ("isb" "book" entry (file (at-org-dir "/sink.org")) "* TODO %? %U :search:book:")
         ("isf" "food" entry (file (at-org-dir "/sink.org")) "* TODO %? %U :search:food:")
@@ -150,8 +151,10 @@
         ("ge" "emacs config" entry (file (at-org-dir "/github.org")) "* %? %U :github:emacs-config:")
         ("ga" "awesome config" entry (file (at-org-dir "/github.org")) "* %? %U :github:awesome-config:")
         ("gs" "stumpwm config" entry (file (at-org-dir "/github.org")) "* %? %U :github:stumpwm-config:")
-        ("gl" "CL repo to review" entry (file+olp (at-org-dir "/mastering.org") "languages" "Common Lisp" "repos") "* %? %U :github:common-lisp:")
+        ("gl" "CL repo to review" entry (file+olp (at-org-dir "/mastering.org") "languages" "Common Lisp" "repos") "* %? %U :github:common_lisp:")
         ("m" "mastering" entry (file+headline (at-org-dir "/mastering.org") "inbox") "* %? %U")
+        ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :project:")
+        ("j" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
         ))
 
 (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
