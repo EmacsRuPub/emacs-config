@@ -41,8 +41,6 @@
 (define-key dired-mode-map (vector 'remap 'smart-down) 'dired-jump-to-bottom)
 (define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete) ;; Delete with C-x C-k to match file buffers and magit
 
-(define-key dired-mode-map (kbd "C-o") 'open-in-external-app)
-
 
 ;#############################################################################
 ;#   Customizations
