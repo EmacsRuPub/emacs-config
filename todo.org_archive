@@ -746,3 +746,13 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_TODO: DONE
   :END:
   extension sources was accidentally screwed
+
+* DONE [#A] use sauron again for orgmode agenda notifications (check any issues pending) [2015-01-11 Вс 00:02] :emacs:ticket:
+  CLOSED: [2015-01-11 Вс 11:13] SCHEDULED: <2015-01-11 Вс 21:00>
+  - State "DONE"       from "TODO"       [2015-01-11 Вс 11:13]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-01-11 Вс 11:13
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

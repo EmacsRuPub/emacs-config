@@ -104,7 +104,8 @@
 * TODO [#C] process rc-dired.el [2014-09-22 Пн 23:19] :package:use:ticket:emacs:
 * TODO [#B] attach shared google calendar to clfw [2014-09-24 Ср 00:49] :emacs:ticket:
 * TODO [#C] develop some dates/anniversaries handling either using org 'holidays' machinery or some file-based solution [2014-09-28 Вс 19:46] :emacs:ticket:
-  HINT: %%(org-bbdb-anniversaries)
+** HINT: %%(org-bbdb-anniversaries)
+** idea: plainly use org scheduling facility
 * TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
 * TODO [#B] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
 * TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
@@ -113,7 +114,7 @@
 * TODO [#B] review navigation activities, where helm may be appropriate [2014-11-02 Вс 21:02] :emacs:ticket:
   http://tuhdo.github.io/helm-intro.html
 * TODO [#A] check all custom major mode hooks if they are too heavy [2014-11-03 Пн 21:02] :emacs:ticket:
-* TODO [#B] find if some navigation activities can be laid upon helm (including unexplored ones) [2014-11-13 Чт 00:41] :workplace:
+* TODO [#B] find if some navigation activities can be laid upon helm (including unexplored ones) [2014-11-13 Чт 00:41] :@workplace:
 * TODO [#A] try various helm sources [2014-11-15 Сб 01:08]     :emacs:ticket:
   helm-source-fixme (maybe setup my own, using the idea)
   helm-source-jabber-contacts

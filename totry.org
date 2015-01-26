@@ -171,3 +171,18 @@
 * TODO [#C] [[http://oremacs.com/2015/01/08/org-protocol-2/][My org-protocol setup, part 2. · (or emacs]] [2015-01-09 Пт 00:52] :emacs:try:
 * TODO [#C] [[http://www.russet.org.uk/blog/3035][An Exercise in Irrelevance » Blog Archive » Lenticular Text: Looking at code from different angles]] [2015-01-09 Пт 19:57] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/01/09/ido-find-file-tilde/][tilde in ido-find-file · (or emacs]] [2015-01-09 Пт 20:45] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/worf][abo-abo/worf]] [2015-01-10 Сб 16:24] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/function-args][abo-abo/function-args]] [2015-01-10 Сб 16:25] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/lispy][abo-abo/lispy]] [2015-01-10 Сб 16:25] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2014/12/23/upcase-word-you-silly/][upcase-word, you so silly · (or emacs]] [2015-01-10 Сб 18:02] :emacs:try:
+* TODO [#C] [[https://github.com/adamrt/sane-term][adamrt/sane-term]] [2015-01-11 Вс 10:46] :emacs:try:
+* TODO [#C] howm [2015-01-15 Чт 23:56]                            :emacs:try:
+* TODO [#C] [[https://github.com/novoid/Memacs][novoid/Memacs]] [2015-01-18 Вс 00:38] :emacs:try:
+* TODO [#C] [[http://www.lunaryorn.com/2014/12/23/bug-reference-mode.html][TIL about Bug Reference Mode – lunarsite]] [2015-01-24 Сб 23:06] :emacs:try:
+* TODO [#C] [[https://github.com/joddie/macrostep][joddie/macrostep]] [2015-01-25 Вс 00:24] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/19/lispy.0.21.0-is-out/][lispy 0.21.0 is out · (or emacs]] [2015-01-25 Вс 00:53] :emacs:try:
+* TODO [#A] [[http://oremacs.com/2015/01/20/introducing-hydra/][Behold The Mighty Hydra! · (or emacs]] [2015-01-25 Вс 22:10]                                :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/25/exploring-emacs-packages/][Exploring Emacs packages · (or emacs]] [2015-01-26 Пн 01:13] :emacs:try:
+* TODO [#C] [[http://irreal.org/blog/?p%3D3624][Sacha on Emacs Micro-Habits | Irreal]] [2015-01-26 Пн 01:14] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/23/eltex/][ElTeX - generate full LaTeX documents from Emacs Lisp · (or emacs]] [2015-01-26 Пн 01:18] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/24/after-select-window/][Do things after selecting window · (or emacs]] [2015-01-26 Пн 01:18] :emacs:try:
