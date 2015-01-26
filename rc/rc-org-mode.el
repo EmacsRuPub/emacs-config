@@ -87,6 +87,13 @@
       '((?A :foreground "red" :weight bold)
         (?B :foreground "#94bff3" :weight bold)
         (?C :foreground "#6f6f6f")))
+(setq org-tag-alist '(("current" . ?c)
+                      ("orgmode" . ?g)
+                      ("purchase" . ?p)
+                      ("master" . ?m)
+                      ("process" . ?r)
+                      ("ordering" . ?o)
+                      ("home_improvements" . ?h)))
 (setq org-agenda-custom-commands
       '(("d" . "some non-straightforward TODO statuses")
         ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
