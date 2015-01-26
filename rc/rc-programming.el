@@ -117,7 +117,9 @@
 (setq gud-tooltip-mode t)
 (setq gdb-use-separate-io-buffer t)
 
-(setq ediff-window-setup-function 'ediff-setup-windows-plain-merge)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-diff-options "-w")
 
 (global-git-gutter-mode +1)
 
