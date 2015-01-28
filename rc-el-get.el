@@ -23,6 +23,6 @@
 
 (add-to-list 'el-get-recipe-path (at-config-basedir "el-get-custom-recipes"))
 
-(el-get 'sync el-get-packages)
+(el-get nil el-get-packages)
 
 ;;; rc-el-get.el ends here
