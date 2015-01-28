@@ -6,40 +6,6 @@
 ;; Keywords:
 ;; Requirements:
 
-(defun tcp-send (server port &optional timeout)
-  "Отправить текст текущего буфера на server:port"
-  (if (not timeout) (setq timeout 60))
-
-  (let* ((res "*TCP/Result*")
-         (cur-buf (buffer-name))
-         (proc (open-network-stream "HttpRequest"
-                                    (progn (switch-to-buffer (get-buffer-create res))
-                                           (erase-buffer)
-                                           (switch-to-buffer cur-buf) res)
-                                    server port)))
-
-    (process-send-string proc (buffer-string))
-    (while (equal (process-status proc) 'open)
-      (when (not (accept-process-output proc timeout))
-        (delete-process proc)
-        (error "Network timeout.")))
-
-    (switch-to-buffer res)
-    (beginning-of-buffer)
-    (split-window)
-    (switch-to-buffer cur-buf)))
-
-(defun w3m-open-current-page-in-firefox ()
-  "Opens the current URL in Mozilla Firefox."
-  (interactive)
-  (browse-url-firefox w3m-current-url))
-
-(defun w3m-open-link-or-image-in-firefox ()
-  "Opens the current link or image in Firefox."
-  (interactive)
-  (browse-url-firefox (or (w3m-anchor)
-                          (w3m-image))))
-
 (defun my-find-thing-at-point ()
   "Find variable, function or file at point."
   (interactive)
@@ -69,20 +35,6 @@
   (shell-command-on-region (point) (point) "uuidgen" t)
   (delete-backward-char 1))
 
-;; http://stackoverflow.com/questions/2238418/emacs-lisp-how-to-get-buffer-major-mode
-(defun custom/buffer-mode (buffer-or-string)
-  "Returns the major mode associated with a buffer."
-  (save-excursion
-    (set-buffer buffer-or-string)
-    major-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Edit files as root
-;; http://nflath.com/2009/08/tramp/
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defun sudo-edit-current-file ()
   (interactive)
   (let ((pos (point)))
@@ -102,16 +54,6 @@
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 
-(defun eval-and-replace ()
-  "Replace the preceding sexp with its value."
-  (interactive)
-  (backward-kill-sexp)
-  (condition-case nil
-      (prin1 (eval (read (current-kill 0)))
-             (current-buffer))
-    (error (message "Invalid expression")
-           (insert (current-kill 0)))))
-
 ;;{{{ String functions
 (defun iy-string-camel-to-underscore (string)
   "Convert camel string to upcase one which concat words using underscore"
@@ -128,26 +70,6 @@
     (insert (iy-string-camel-to-underscore origin))))
 ;;}}}
 
-;;{{{ Insert
-(defun iy-insert-user ()
-  (interactive)
-  (insert (user-full-name)))
-
-(defun iy-insert-time ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d %H:%M:%S")))
-
-(defun iy-insert-timestamp ()
-  (interactive)
-  (insert (format-time-string "%s")))
-
-(defun iy-insert-date ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d")))
-
-(defun iy-insert-file-name ()
-  (interactive)
-  (insert (file-name-nondirectory (buffer-file-name))))
 
 (defun iy-dwim-downcase (arg)
   (interactive "p")
@@ -168,66 +90,6 @@
       (capitalize-region (region-beginning) (region-end))
     (capitalize-word (prefix-numeric-value arg))))
 
-(defun shrink-whitespaces ()
-  "Remove white spaces around cursor to just one or none.
-If current line does not contain non-white space chars, then remove blank lines to just one.
-If current line contains non-white space chars, then shrink any whitespace char surrounding cursor to just one space.
-If current line is a single space, remove that space.
-
-Calling this command 3 times will always result in no whitespaces around cursor."
-  (interactive)
-  (let (
-        cursor-point
-        line-has-meat-p ; current line contains non-white space chars
-        spaceTabNeighbor-p
-        whitespace-begin whitespace-end
-        space-or-tab-begin space-or-tab-end
-        line-begin-pos line-end-pos
-        )
-    (save-excursion
-      ;; todo: might consider whitespace as defined by syntax table, and also consider whitespace chars in unicode if syntax table doesn't already considered it.
-      (setq cursor-point (point))
-
-      (setq spaceTabNeighbor-p (if (or (looking-at " \\|\t") (looking-back " \\|\t")) t nil) )
-      (move-beginning-of-line 1) (setq line-begin-pos (point) )
-      (move-end-of-line 1) (setq line-end-pos (point) )
-      ;; (re-search-backward "\n$") (setq line-begin-pos (point) )
-      ;; (re-search-forward "\n$") (setq line-end-pos (point) )
-      (setq line-has-meat-p (if (< 0 (count-matches "[[:graph:]]" line-begin-pos line-end-pos)) t nil) )
-      (goto-char cursor-point)
-
-      (skip-chars-backward "\t ")
-      (setq space-or-tab-begin (point))
-
-      (skip-chars-backward "\t \n")
-      (setq whitespace-begin (point))
-
-      (goto-char cursor-point) (skip-chars-forward "\t ")
-      (setq space-or-tab-end (point))
-      (skip-chars-forward "\t \n")
-      (setq whitespace-end (point))
-      )
-
-    (if line-has-meat-p
-        (let (deleted-text)
-          (when spaceTabNeighbor-p
-            ;; remove all whitespaces in the range
-            (setq deleted-text (delete-and-extract-region space-or-tab-begin space-or-tab-end))
-            ;; insert a whitespace only if we have removed something
-            ;; different that a simple whitespace
-            (if (not (string= deleted-text " "))
-                (insert " ") ) ) )
-
-      (progn
-        ;; (delete-region whitespace-begin whitespace-end)
-        ;; (insert "\n")
-        (delete-blank-lines)
-        )
-      ;; todo: possibly code my own delete-blank-lines here for better efficiency, because delete-blank-lines seems complex.
-      )
-    )
-  )
-
 ;; This override for transpose-words fixes what I consider to be a flaw with the
 ;; default implementation in simple.el. To traspose chars or lines, you always
 ;; put the point on the second char or line to transpose with the previous char
@@ -246,12 +108,6 @@ point and around or after mark are interchanged."
   (if (eolp) (forward-char -1))
   (transpose-subr 'backward-word arg)
   (forward-word (+ arg 1)))
-
-;; Let's see how long it takes to forget I put this here even though it's just a
-;; fix for a HEAD issue.
-(defun go-back ()
-  (interactive)
-  (forward-line -1))
 
 (defun custom/remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
@@ -290,18 +146,6 @@ point and around or after mark are interchanged."
   (goto-char start)
   (yank-rectangle))
 
-(defun isearch-forward-at-point (&optional regexp-p no-recursive-edit)
-  "Interactive search forward for the symbol at point."
-  (interactive "P\np")
-  (if regexp-p (isearch-forward regexp-p no-recursive-edit)
-    (let* ((end (progn (skip-syntax-forward "w_") (point)))
-           (begin (progn (skip-syntax-backward "w_") (point))))
-      (if (eq begin end)
-          (isearch-forward regexp-p no-recursive-edit)
-        (setq isearch-initial-string (buffer-substring begin end))
-        (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
-        (isearch-forward regexp-p no-recursive-edit)))))
-
 (defun string-camel-to-underscore (string)
   "Convert camel string to upcase one which concat words using underscore"
   (let ((case-fold-search nil))
@@ -316,22 +160,11 @@ point and around or after mark are interchanged."
     (delete-region start end)
     (insert (iy-string-camel-to-underscore origin))))
 
-(defun find-alternative-file-with-sudo ()
-  (interactive)
-  (when buffer-file-name
-    (find-alternate-file
-     (concat "/sudo:root@localhost:"
-             buffer-file-name))))
-
 (defun back-to-indentation-or-beginning ()
   (interactive)
   (if (= (point) (save-excursion (back-to-indentation) (point)))
       (beginning-of-line)
     (back-to-indentation)))
-
-(defun revert-buffer-no-confirm ()
-  "Revert buffer without confirmation."
-  (interactive) (flet ((yes-or-no-p (prompt) t)) (revert-buffer)))
 
 (defun get-all-template-variables-django ()
   (interactive)
@@ -346,16 +179,6 @@ point and around or after mark are interchanged."
     (dolist (variable (nreverse variables-list))
       (insert variable)
       (insert "\n"))))
-
-(defun join-region (beg end)
-  "Apply join-line over region."
-  (interactive "r")
-  (if mark-active
-      (let ((beg (region-beginning))
-            (end (copy-marker (region-end))))
-        (goto-char beg)
-        (while (< (point) end)
-          (join-line 1)))))
 
 (defun compact-spaces-in-region (beg end)
   "replace all whitespace in the region with single spaces"
@@ -420,13 +243,6 @@ point and around or after mark are interchanged."
       (write-region (point-min)
                     (point-max)
                     file))))
-
-;TODO: maybe remove code duplication (watch similar functions over here)
-(defun file-string (file)
-    "Read the contents of a file and return as a string."
-    (with-temp-buffer
-      (insert-file-contents file)
-      (buffer-string)))
 
 (defun custom/get-file-md5 ()
   (interactive)

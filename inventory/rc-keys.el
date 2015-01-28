@@ -269,7 +269,6 @@
 (global-set-key (kbd "C-'") 'negative-argument)
 (global-set-key (kbd "M-'") 'negative-argument)
 (setq repeat-on-final-keystroke "z")
-(global-set-key (kbd "C-x C-o") 'shrink-whitespaces)
 
 (define-key iy-map (kbd "e") 'iy-eshell-toggle)
 (define-key iy-map (kbd "E") 'iy-eshell-here)
@@ -294,11 +293,6 @@
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key (kbd "C-S-z") 'iy-go-to-char-backward)
 (global-set-key (kbd "M-M") 'iy-go-to-char-backward)
-
-(define-key iy-map (kbd "*") 'isearch-forward-at-point)
-(define-key iy-map (kbd "8") 'isearch-forward-at-point)
-(define-key iy-map (kbd "C-s") 'isearch-forward-at-point)
-(define-key iy-map (kbd "C-r") 'isearch-forward-at-point)
 
 (global-set-key (kbd "C-r") ctl-x-r-map)
 (with-eval-after-load 'bookmark+
@@ -338,21 +332,12 @@
 
 ;;{{{ Insert
 
-(define-key iy-map (kbd "q u") 'iy-insert-user)
-(define-key iy-map (kbd "q t") 'iy-insert-time)
-(define-key iy-map (kbd "q s") 'iy-insert-timestamp)
-(define-key iy-map (kbd "q d") 'iy-insert-date)
-(define-key iy-map (kbd "q f") 'iy-insert-file-name)
 (define-key iy-map (kbd "q b") 'jared/insert-file-or-buffer-name)
 
 (global-set-key (kbd "M-<return>") 'iy-next-line-and-open-it-if-not-empty)
 
 (global-set-key (kbd "M-u") 'iy-dwim-underscore)
 (global-set-key (kbd "M-l") 'iy-dwim-dash)
-(global-set-key (kbd "M-c") 'iy-dwim-capitalize)
-(global-set-key (kbd "M-U") 'iy-dwim-upcase)
-(global-set-key (kbd "M-L") 'iy-dwim-downcase)
-(global-set-key (kbd "M-C") 'iy-dwim-capitalize)
 
 ;;}}}
 

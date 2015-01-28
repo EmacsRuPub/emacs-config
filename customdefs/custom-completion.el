@@ -37,17 +37,6 @@
   '((t (:background "coral3" :foreground "white")))
   "Face for the yasnippet selected candidate.")
 
-(defvar ac-source-yasnippet
-  '((candidates . ac-yasnippet-candidate)
-    (action . yas/expand)
-    (limit . 3)
-    (candidate-face . ac-yasnippet-candidate-face)
-    (selection-face . ac-yasnippet-selection-face))
-  "Source for Yasnippet.")
-
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-
 ;; Inter-field navigation
 (defun yas/goto-end-of-active-field ()
   (interactive)
@@ -64,35 +53,6 @@
     (if (= (point) position)
         (move-beginning-of-line)
       (goto-char position))))
-
-(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
-  (when (featurep 'popup)
-    (popup-menu*
-     (mapcar
-      (lambda (choice)
-        (popup-make-item
-         (or (and display-fn (funcall display-fn choice))
-             choice)
-         :value choice))
-      choices)
-     :prompt prompt
-     :isearch t
-     )))
-
-(defun yas-safer-expand ()
-  (let ((yas/fallback-behavior 'return-nil))
-    (call-interactively 'yas/expand)))
-
-(defun yas-ido-insert-snippets (&optional no-condition)
-  (interactive "P")
-  (let ((yas-prompt-functions '(yas/ido-prompt)))
-    (yas/insert-snippet)))
-
-(defun yasnippet-unbind-trigger-key ()
-  "Unbind `yas/trigger-key'."
-  (let ((key yas/trigger-key))
-    (setq yas/trigger-key nil)
-    (yas/trigger-key-reload key)))
 
 ;; hook for automatic reloading of changed snippets
 (defun update-yasnippets-on-save ()
