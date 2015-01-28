@@ -70,20 +70,19 @@
     (insert (iy-string-camel-to-underscore origin))))
 ;;}}}
 
-
-(defun iy-dwim-downcase (arg)
+(defun downcase-dwim (arg)
   (interactive "p")
   (if (region-active-p)
       (downcase-region (region-beginning) (region-end))
     (downcase-word arg)))
 
-(defun iy-dwim-upcase (arg)
+(defun upcase-dwim (arg)
   (interactive "p")
   (if (region-active-p)
       (upcase-region (region-beginning) (region-end))
     (upcase-word arg)))
 
-(defun iy-dwim-capitalize (arg)
+(defun capitalize-dwim (arg)
   (interactive "P")
   (when (consp arg) (setq arg 1))
   (if (region-active-p)
