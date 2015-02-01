@@ -149,20 +149,29 @@
         ("ed" tags "+develop")
         ("ei" tags "+investigate")
         ("u" . "unassigned")
-        ("uu" alltodo ""
+        ("uu" alltodo "Unscheduled TODO entries"
          ((org-agenda-skip-function
            (lambda nil
              (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
+          (org-tags-match-list-sublevels 'indented)
+          (org-agenda-sorting-strategy
+           '((agenda time-up priority-down tag-up) ))
           (org-agenda-overriding-header "Unscheduled TODO entries: ")))
-        ("up" alltodo ""
+        ("up" alltodo "Unprioritized TODO entries"
          ((org-agenda-skip-function
            (lambda nil
              (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
+          (org-tags-match-list-sublevels 'indented)
+          (org-agenda-sorting-strategy
+           '((agenda time-up priority-down tag-up) ))
           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
-        ("P" "Prioritized tasks"
-         ((tags-todo "+PRIORITY=\"A\"")
-          (tags-todo "+PRIORITY=\"B\"")
-          (tags-todo "+PRIORITY=\"C\"")))
+        ("u" . "unassigned")
+        ("Pa" "Prioritized tasks A"
+         ((tags-todo "+PRIORITY=\"A\"") ))
+        ("Pb" "Prioritized tasks B"
+         ((tags-todo "+PRIORITY=\"B\"")))
+        ("Pc" "Prioritized tasks C"
+         ((tags-todo "+PRIORITY=\"C\"")))
         ("p" tags "+purchase")
         ("t" . "tickets")
         ("te" tags "+ticket+emacs")
