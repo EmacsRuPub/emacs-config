@@ -127,7 +127,9 @@
                       ("master" . ?m)
                       ("process" . ?r)
                       ("ordering" . ?o)
-                      ("home_improvements" . ?h)))
+                      ("home_improvements" . ?h)
+                      ("entertainment" . ?e)
+                      ))
 (setq org-tags-exclude-from-inheritance '("project"))
 (setq org-agenda-custom-commands
       '(("d" . "some non-straightforward TODO statuses")
@@ -148,6 +150,7 @@
         ("ef" tags "+fix")
         ("ed" tags "+develop")
         ("ei" tags "+investigate")
+        ("ee" tags "+entertainment")
         ("u" . "unassigned")
         ("uu" alltodo "Unscheduled TODO entries"
          ((org-agenda-skip-function
