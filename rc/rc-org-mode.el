@@ -194,6 +194,8 @@
         ("in" "job notes" entry (file (at-org-dir "/sink.org")) "* %? %U :@work:note:")
         ("ia" "newspaper articles" entry (file (at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
         ("il" "side links" entry (file (at-org-dir "/sink.org")) "* %? %U :side_link:")
+        ("ic" "code snippet" entry (file (at-org-dir "/sink.org"))
+         "* %^{title} %^g :code_snippet:\n :PROPERTIES:\n :CREATED: %U\n :END:\n\n#+BEGIN_SRC %^{lang}\n %i%?\n#+END_SRC\n")
         ("is" "search")
         ("isb" "book" entry (file (at-org-dir "/sink.org")) "* TODO %? %U :search:book:")
         ("isf" "food" entry (file (at-org-dir "/sink.org")) "* TODO %? %U :search:food:")
