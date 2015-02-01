@@ -231,7 +231,13 @@
 (define-key custom-orgmode-keymap (kbd "d") 'org-delete-property)
 (define-key custom-orgmode-keymap (kbd "s") 'org-schedule)
 (define-key custom-orgmode-keymap (kbd "l") 'org-deadline)
-(define-key custom-orgmode-keymap (kbd "t") 'org-trello-mode)
+(define-key custom-orgmode-keymap (kbd ".") 'org-clock-in)
+(define-key custom-orgmode-keymap (kbd ",") 'org-clock-out)
+(define-key custom-orgmode-keymap (kbd "k") 'org-clock-display)
+(define-key custom-orgmode-keymap (kbd "c") 'org-agenda-columns)
+(define-key custom-orgmode-keymap (kbd "n") 'org-footnote-action)
+(define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
+(define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
 
 (define-key org-mode-map (kbd "C-'") nil)
 
