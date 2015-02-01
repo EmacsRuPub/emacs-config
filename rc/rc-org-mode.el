@@ -128,6 +128,7 @@
                       ("process" . ?r)
                       ("ordering" . ?o)
                       ("home_improvements" . ?h)))
+(setq org-tags-exclude-from-inheritance '("project"))
 (setq org-agenda-custom-commands
       '(("d" . "some non-straightforward TODO statuses")
         ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
