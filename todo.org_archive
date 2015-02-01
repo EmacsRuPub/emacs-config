@@ -756,3 +756,60 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] make shortcuts for widely used tags [2015-01-15 Чт 23:31] :emacs:ticket:orgmode:
+  CLOSED: [2015-01-18 Вс 01:24] SCHEDULED: <2015-01-17 Сб>
+  - State "DONE"       from "TODO"       [2015-01-18 Вс 01:24]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-01-26 Пн 23:55
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** code example
+   (setq org-tag-alist '(("URGENT" . ?u)
+                         ("@PHONE" . ?p)
+                         ("@ERRANDS" . ?e)))
+
+* DONE [#A] do not show headlines with inherited tags in agenda [2015-01-18 Вс 13:50] :orgmode:emacs:ticket:
+  CLOSED: [2015-01-18 Вс 22:05]
+  - State "DONE"       from "TODO"       [2015-01-18 Вс 22:05]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-01-26 Пн 23:55
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] automate projects capturing [2015-01-18 Вс 15:06]  :emacs:ticket:
+  CLOSED: [2015-01-18 Вс 15:28] SCHEDULED: <2015-01-18 Вс>
+  - State "DONE"       from "GOING"      [2015-01-18 Вс 15:28]
+  CLOCK: [2015-01-18 Вс 15:26]--[2015-01-18 Вс 15:28] =>  0:02
+  CLOCK: [2015-01-18 Вс 15:24]--[2015-01-18 Вс 15:26] =>  0:02
+  - State "GOING"      from "TODO"       [2015-01-18 Вс 15:24]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-01-26 Пн 23:55
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] think of capturing side links when processing some infosources [2015-01-18 Вс 15:08] :orgmode:emacs:ticket:
+  CLOSED: [2015-01-18 Вс 17:55] SCHEDULED: <2015-01-18 Вс>
+  - State "DONE"       from "TODO"       [2015-01-18 Вс 17:55]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-01-26 Пн 23:55
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] try to switch sauron back on, for orgmode notifications [2014-12-12 Пт 00:35] :emacs:ticket:
+  CLOSED: [2015-01-27 Вт 23:07]
+  - State "DONE"       from "TODO"       [2015-01-27 Вт 23:07]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-02-01 Вс 22:16
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

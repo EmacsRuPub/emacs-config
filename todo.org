@@ -145,7 +145,6 @@
 * TODO [#A] fix magit filenotify issue with deleted files (e.g. "cannot add watch...") [2014-12-09 Вт 13:58] :emacs:ticket:
 * TODO [#B] try to incorporate https://github.com/Bruce-Connor/names to automate namespaces (maybe additional benefits can be found) [2014-12-11 Чт 12:38] :emacs:ticket:
 * TODO [#A] fix yasnippet expansion (looks like it cannot find snippets (particularly in python mode)) [2014-12-11 Чт 14:34] :emacs:ticket:
-* TODO [#A] try to switch sauron back on, for orgmode notifications [2014-12-12 Пт 00:35] :emacs:ticket:
 * TODO [#A] display files of different types in dired using different colors [2014-12-22 Пн 15:22] :emacs:ticket:
 * TODO [#A] some window ruling handles, e.g.: [2014-12-22 Пн 19:14] :emacs:ticket:
   open magit commit info in another frame if exists
@@ -153,3 +152,29 @@
 * TODO [#A] a simple customdef to place .projectile file in current dir [2014-12-28 Вс 21:44] :emacs:ticket:
 * TODO [#C] search for 'local-set-key' uses and try to eliminate [2015-01-04 Вс 23:47] :emacs:ticket:
 * TODO [#B] bind view-lossage [2015-01-05 Пн 18:51]            :emacs:ticket:
+* TODO [#B] explore http://batsov.com/projectile/ for overlooked features [2015-01-09 Пт 22:24] :emacs:ticket:
+* WAITING [#A] make magit-blame-mode stop activating while running org-capture [2015-01-11 Вс 00:00] :emacs:ticket:
+  - State "WAITING"    from "TODO"       [2015-01-11 Вс 22:28] \\
+    cannot reproduce right now
+* TODO [#B] find cause of "blah-blah iswitchb is obsolete" message [2015-01-11 Вс 11:40] :emacs:ticket:
+* TODO [#B] maybe macro for binding a couple of functions to a keybinding, using prefix arg for alternate function call [2015-01-13 Вт 13:38] :emacs:ticket:
+* TODO [#A] bind 'dired-jump [2015-01-13 Вт 13:41]             :emacs:ticket:
+* TODO [#B] try to implement org workload display [2015-01-13 Вт 14:04] :emacs:ticket:orgmode:
+** TODO refer to :code_snippets: (make org link here)
+   SCHEDULED: <2015-02-01 Вс>
+* TODO [#A] random orgmode code from sachac [2015-01-15 Чт 23:46] :emacs:ticket:orgmode:
+** TODO refer to :code_snippets: (make org link here)
+   SCHEDULED: <2015-02-01 Вс>
+* TODO [#B] more harness for ediff [2015-01-17 Сб 23:11]       :emacs:ticket:
+* TODO [#B] [[http://sachachua.com/blog/2013/08/emacs-how-i-organize-my-org-files/][Emacs: How I organize my Org files - sacha chua :: living an awesome life]] - ideas about org files organizing and layout [2015-01-18 Вс 20:46] :emacs:ticket:
+* TODO [#B] play with org-download - http://oremacs.com/2015/01/18/sprucing-up-org-download/ [2015-01-18 Вс 21:02] :emacs:ticket:
+* TODO [#B] grab some actions verbs from http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html and maybe set thems as new tags/contexts [2015-01-20 Вт 00:14] :emacs:ticket:
+* TODO [#B] think of exploiting http://orgmode.org/manual/Effort-estimates.html [2015-01-20 Вт 00:21]         :emacs:ticket:
+* TODO [#A] customdef for placing org links for dired entities [2015-01-20 Вт 16:03] :emacs:ticket:
+* TODO [#A] 'multiple-cursors' do not work in orgmode [2015-01-20 Вт 16:04] :emacs:ticket:
+* TODO [#A] insert dired path as orgmode file link someway [2015-01-26 Пн 00:44] :orgmode:emacs:ticket:
+* TODO [#B] various tips from http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/ [2015-01-26 Пн 23:58]                             :emacs:ticket:
+* TODO [#A] agenda command for displaying headlines without any TODO states (and maybe without priorities) [2015-01-29 Чт 00:19] :orgmode:emacs:ticket:
+  HINT: setup stuck projects rules
+  SCHEDULED: <2015-01-30 Пт>
+* TODO [#B] resetup sauron [2015-02-01 Вс 21:33]               :emacs:ticket:
