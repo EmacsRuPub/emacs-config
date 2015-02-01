@@ -11,15 +11,14 @@
 ;#   Load extensions
 ;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
+(setq org-modules
+      '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
+        org-checklist org-clock org-docview org-expiry org-habit org-id org-indent org-info
+        org-inlinetask org-irc org-man org-protocol <C>org-pomodoro org-timer
+        org-w3m))
 
-(require 'org-install)
 (require 'org)
-(require 'org-agenda)
-(require 'org-pomodoro)
-(require 'org-protocol)
 (require 'ox-html)
-(require 'org-archive)
-(require 'org-attach)
 
 ;#############################################################################
 ;#   Customizations
