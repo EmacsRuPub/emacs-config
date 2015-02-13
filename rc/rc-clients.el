@@ -9,45 +9,6 @@
 (gmail-notifier-start)
 (gmail-notifier-check)
 
-(defun connect-office-irc ()
-  (interactive)
-  (erc-tls
-   :server private/erc-server-office
-   :full-name private/erc-full-name
-   :nick private/erc-nick-office
-   :password private/erc-password-office))
-
-(defun connect-gitter-irc ()
-  (interactive)
-  (erc-tls
-   :server private/erc-server-gitter
-   :full-name private/erc-full-name
-   :nick private/erc-nick-gitter
-   :password private/erc-password-gitter))
-
-;; FIXME should be able to quit server
-;; being invoked from barely any buffer
-(defun leave-irc-server ()
-  (interactive)
-  (erc-quit-server "Leaving"))
-
-(defun select-erc-buffer ()
-  (interactive)
-  (switch-to-buffer
-   (ido-completing-read
-    "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
-
-(defun insert-erc-nick ()
-  (interactive)
-  (insert
-   (concatenate 'string
-                (ido-completing-read "nick" (pcomplete-erc-nicks)) ": ")
-   ))
-
-(defun open-gmail ()
-  (interactive)
-  (browse-url "https://mail.google.com"))
-
 (defun custom/term-exec-hook ()
   (let* ((buff (current-buffer))
          (proc (get-buffer-process buff)))
@@ -147,7 +108,6 @@
     (add-to-list 'w3m-search-engine-alist
                  '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
     (define-key custom-search-keymap (kbd "w") 'w3m-select-buffer)))
-
 
 ;TODO: try use-package
 (with-eval-after-load "gmail-notifier"

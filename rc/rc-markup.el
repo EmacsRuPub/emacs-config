@@ -45,20 +45,6 @@
   (unify-8859-on-decoding-mode)
   )
 
-(defun isearch-forward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-forward)
-  (eldoc-mode 1))
-
-(defun isearch-backward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-backward)
-  (eldoc-mode 1))
-
 
 ;#############################################################################
 ;#   Customizations
