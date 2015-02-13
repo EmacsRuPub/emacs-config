@@ -1,7 +1,0 @@
-(:name discover
-       :description "Discover more of emacs with context menus!
-http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/"
-       :type github
-       :pkgname "mickeynp/discover.el"
-       :depends makey
-       :load-path ".")
