@@ -26,6 +26,7 @@
         auto-complete-extension
         auto-complete-latex
         auto-complete-yasnippet
+        bbdb
         bookmark+
         breadcrumb-custom
         buffer-move

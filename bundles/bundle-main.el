@@ -19,6 +19,7 @@
 (require 'rc-shell)
 (require 'rc-wincontrol)
 (require 'rc-pim)
+(require 'rc-bbdb)
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-markup)
