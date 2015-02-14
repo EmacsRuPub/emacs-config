@@ -1,0 +1,4 @@
+(:name gmail2bbdb
+       :description "convert gmail contacts to BBDB file, easy to use, robust, no dependency"
+       :type github
+       :pkgname "redguardtoo/gmail2bbdb")
