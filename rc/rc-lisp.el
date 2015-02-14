@@ -26,9 +26,8 @@
   (slime-mode t)
   (set (make-local-variable 'slime-lisp-implementations)
        (list (assoc 'sbcl slime-lisp-implementations)))
-  (local-set-key (kbd "C-c ;") 'slime-insert-balanced-comments)
-  (local-set-key (kbd "C-c M-;") 'slime-remove-balanced-comments)
   )
+
 
 ;#############################################################################
 ;#   Load extensions
@@ -65,6 +64,8 @@
     (bind-key "<f5>" 'slime)
     (bind-key "<C-f11>" 'slime-selector)
     (bind-key "C-c h" 'slime-documentation-lookup slime-repl-mode-map)
+    (bind-key "C-c ;" 'slime-insert-balanced-comments lisp-mode-map)
+    (bind-key "C-c M-;" 'slime-remove-balanced-comments lisp-mode-map)
     ))
 
 ;#############################################################################

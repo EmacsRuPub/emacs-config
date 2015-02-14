@@ -29,11 +29,6 @@
        ad-do-it)
    ad-do-it))
 
-(defun custom/ido-navigation ()
-  (local-set-key (kbd "<up>") 'ido-prev-match)
-  (local-set-key (kbd "<down>") 'ido-next-match)
-  )
-
 ;; func accepts buffer and must return a string or nil
 (defun make-buffer-alist-by (func)
  (let ((hash (make-hash-table :test 'equal))

@@ -43,12 +43,6 @@
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
-(defun custom/sh-mode-hook ()
-  (local-set-key (kbd "C-c l") 'custom/sh-check-syntax)
-  )
-
-(add-hook 'sh-mode-hook 'custom/sh-mode-hook)
-
 (add-hook 'sh-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'sh-mode-hook 'common-hooks/newline-hook)
@@ -61,6 +55,8 @@
     (when (re-search-forward "^<<<<<<< " nil t)
       (smerge-mode 1))))
 (add-hook 'find-file-hooks 'sm-try-smerge t)
+
+(define-key sh-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
 
 (provide 'rc-special-major-modes)
 

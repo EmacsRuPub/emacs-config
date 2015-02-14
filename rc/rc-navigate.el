@@ -105,9 +105,6 @@
 
   (add-to-list 'ido-work-directory-list-ignore-regexps tramp-file-name-regexp)
 
-  (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
-  (add-hook 'ido-minibuffer-setup-hook 'custom/ido-navigation)
-
   (add-hook 'ido-setup-hook
             (lambda()
               (define-key ido-completion-map (kbd "C-M-p") (lookup-key ido-completion-map (kbd "C-p")))
@@ -115,21 +112,26 @@
               (define-key ido-completion-map (kbd "C-p") 'ido-preview-backward)
               (define-key ido-completion-map (kbd "C-n") 'ido-preview-forward)
               (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
-              ))
-  (add-hook 'ido-setup-hook
-            (lambda ()
-              ;; Use C-w to go back up a dir to better match normal usage of C-w
-              ;; - insert current file name with C-x C-w instead.
               (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
-              (define-key ido-file-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name)))
-
+              (define-key ido-file-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name)
+              ))
   ;; Increase minibuffer size when ido completion is active
   (add-hook 'ido-minibuffer-setup-hook
-            (function
-             (lambda ()
-               (make-local-variable 'resize-minibuffer-window-max-height)
-               (setq resize-minibuffer-window-max-height 1))))
-
+            (lambda ()
+              (make-local-variable 'resize-minibuffer-window-max-height)
+              (setq resize-minibuffer-window-max-height 1)
+              (ido-disable-line-truncation)
+              (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
+              (define-key ido-common-completion-map (kbd "<up>") 'ido-prev-match)
+              (define-key ido-buffer-completion-map (kbd "<up>") 'ido-prev-match)
+              (define-key ido-file-completion-map (kbd "<up>") 'ido-prev-match)
+              (define-key ido-file-dir-completion-map (kbd "<up>") 'ido-prev-match)
+              (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+              (define-key ido-common-completion-map (kbd "<down>") 'ido-next-match)
+              (define-key ido-buffer-completion-map (kbd "<down>") 'ido-next-match)
+              (define-key ido-file-completion-map (kbd "<down>") 'ido-next-match)
+              (define-key ido-file-dir-completion-map (kbd "<down>") 'ido-next-match)
+              ))
   (global-set-key (kbd "M-s b") 'ido-switch-buffer-by-major-mode)
   (global-set-key (kbd "M-s B") 'ido-switch-buffer-by-ext-name))
 

@@ -9,10 +9,6 @@
 
 (require 'erefactor)
 
-(add-hook 'emacs-lisp-mode-hook
-       (lambda ()
-         (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map)))
-
 (defun custom/elisp-mode-hook ()
   (setq indent-tabs-mode t)
   (setq tab-width 2)
@@ -31,6 +27,8 @@
 
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'elisp-slime-nav-mode))
+
+(define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map)
 
 (provide 'rc-elisp)
 

@@ -81,13 +81,14 @@
          (getenv "CLASSPATH")))
 
 (add-hook 'js2-mode-hook '(lambda ()
-                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-                            (local-set-key "\C-cb" 'js-send-buffer)
-                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-                            (local-set-key "\C-cl" 'js-load-file-and-go)
-                            (setq flycheck-checker 'javascript-jshint))
-                            )
+                            (setq flycheck-checker 'javascript-jshint)
+                            (tern-mode t)))
+
+(define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+(define-key js2-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
+(define-key js2-mode-map (kbd "C-c b") 'js-send-buffer)
+(define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
+(define-key js2-mode-map (kbd "C-c l") 'js-load-file-and-go)
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
 
@@ -95,7 +96,7 @@
   (require 'tern-auto-complete)
   (tern-ac-setup))
 
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js2-mode-hook (lambda () ))
 
 (provide 'rc-javascript)
 

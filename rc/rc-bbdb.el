@@ -40,13 +40,10 @@
 (global-set-key (kbd "C-c C-b c") 'bbdb-create)
 (global-set-key (kbd "C-c C-b s") 'bbdb)
 
-(defun my-bbdb-mode-hook ()
-  (local-set-key (kbd "C-c C-e") 'bbdb-edit-current-field)
-  (local-set-key (kbd "C-c C-d") 'bbdb-delete-current-record)
-  (local-set-key (kbd "C-c C-f d") 'bbdb-delete-current-field-or-record)
-  (local-set-key (kbd "C-c C-f i") 'bbdb-insert-new-field)
-  )
-(add-hook 'bbdb-mode-hook 'my-bbdb-mode-hook)
+(define-key bbdb-mode-map (kbd "C-c C-e") 'bbdb-edit-current-field)
+(define-key bbdb-mode-map (kbd "C-c C-d") 'bbdb-delete-current-record)
+(define-key bbdb-mode-map (kbd "C-c C-f d") 'bbdb-delete-current-field-or-record)
+(define-key bbdb-mode-map (kbd "C-c C-f i") 'bbdb-insert-new-field)
 
 (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
 

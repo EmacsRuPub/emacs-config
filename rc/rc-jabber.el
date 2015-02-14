@@ -87,20 +87,6 @@
 ;#############################################################################
 ;#   Custom definitions and hooks
 ;############################################################################
-(defun custom/jabber-chat-mode-hook ()
-  (local-set-key (kbd "C-c C-l") 'custom-jabber/insert-inlove-smile)
-  (local-set-key (kbd "C-c C-k") 'custom-jabber/insert-kiss-smile)
-  (local-set-key (kbd "C-c C-y") 'custom-jabber/insert-shy-smile)
-  (local-set-key (kbd "C-c C-t") 'custom-jabber/insert-copyright-sign)
-  (local-set-key (kbd "C-c C-e") 'custom-jabber/cite-region)
-  (local-set-key (kbd "C-c u r") 'upcase-region)
-  (local-set-key (kbd "C-M-r")   'custom-jabber/wrap-replace-regexp)
-  (local-set-key (kbd "C-M-m")   'custom-jabber/wrap-misreading)
-  (local-set-key (kbd "<M-down>") 'custom/find-url-forward)
-  (local-set-key (kbd "<M-up>") 'custom/find-url-backward)
-  (local-set-key (kbd "C-c C-o C-l") 'browse-url))
-
-
 (defun my-jabber-connect-hook (jc)
   (jabber-send-presence "" "I'm online" 10)
   (let* ((state-data (fsm-get-state-data jc))
@@ -108,7 +94,6 @@
     (message "%s" server)
     ))
 
-(add-hook 'jabber-chat-mode-hook 'custom/jabber-chat-mode-hook)
 (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
 (add-hook 'jabber-chat-mode-hook 'goto-address)
 (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
@@ -116,6 +101,18 @@
 ;#############################################################################
 ;#   Keybindings
 ;############################################################################
+(define-key jabber-chat-mode-map (kbd "C-c C-l") 'custom-jabber/insert-inlove-smile)
+(define-key jabber-chat-mode-map (kbd "C-c C-k") 'custom-jabber/insert-kiss-smile)
+(define-key jabber-chat-mode-map (kbd "C-c C-y") 'custom-jabber/insert-shy-smile)
+(define-key jabber-chat-mode-map (kbd "C-c C-t") 'custom-jabber/insert-copyright-sign)
+(define-key jabber-chat-mode-map (kbd "C-c C-e") 'custom-jabber/cite-region)
+(define-key jabber-chat-mode-map (kbd "C-c u r") 'upcase-region)
+(define-key jabber-chat-mode-map (kbd "C-M-r")   'custom-jabber/wrap-replace-regexp)
+(define-key jabber-chat-mode-map (kbd "C-M-m")   'custom-jabber/wrap-misreading)
+(define-key jabber-chat-mode-map (kbd "<M-down>") 'custom/find-url-forward)
+(define-key jabber-chat-mode-map (kbd "<M-up>") 'custom/find-url-backward)
+(define-key jabber-chat-mode-map (kbd "C-c C-o C-l") 'browse-url)
+
 (global-set-key (kbd "C-x C-j C-r") 'jabber-switch-to-roster-buffer)
 (global-set-key (kbd "C-x C-j C-a") 'jabber-activity-switch-to)
 (global-set-key (kbd "C-c C-o C-r") 'custom/open-urls-in-region)

@@ -242,15 +242,6 @@
 ;#############################################################################
 ;#   Hooks
 ;############################################################################
-(defun custom/org-mode-hook ()
-  (local-set-key (kbd "C-x C-a") 'show-all)
-  (local-unset-key (kbd "C-c ["))
-  (local-unset-key (kbd "C-c ]"))
-  (local-unset-key (kbd "C-c C-o"))
-  (local-set-key (kbd "C-c C-o C-l") 'open-or-browse-at-point)
-  (imenu-add-to-menubar "Imenu"))
-
-(add-hook 'org-mode-hook 'custom/org-mode-hook)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
@@ -290,6 +281,12 @@
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
 
 (define-key org-mode-map (kbd "C-'") nil)
+(define-key org-mode-map (kbd "C-c [") nil)
+(define-key org-mode-map (kbd "C-c ]") nil)
+(define-key org-mode-map (kbd "C-c C-o") nil)
+
+(define-key org-mode-map (kbd "C-x C-a") 'show-all)
+(define-key org-mode-map (kbd "C-c C-o C-l") 'open-or-browse-at-point)
 
 (provide 'rc-org-mode)
 
