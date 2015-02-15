@@ -44,6 +44,12 @@
 ;; TODO save done.org after refiling finished
 ;; TODO auto change status TODO --> DONE before refiling
 
+;TODO: customize "todo-only" parameter for "org-tags-view"
+(defun custom/follow-tag-link (tag)
+  "Display a list of TODO headlines with tag TAG.
+With prefix argument, also display headlines without a TODO keyword."
+  (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
+
 (provide 'custom-orgmode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -235,6 +235,7 @@
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 (load (at-config-basedir "last-scrum-timestamp"))
+(org-add-link-type "tag" 'custom/follow-tag-link)
 
 ;#############################################################################
 ;#   Hooks
