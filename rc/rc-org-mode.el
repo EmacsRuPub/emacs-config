@@ -8,6 +8,10 @@
 ;#   Load extensions
 ;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
+(autoload 'org-footnote-action "org-footnote" nil t)
+(autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
+(autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+
 (setq org-modules
       '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
         org-checklist org-clock org-docview org-expiry org-habit
