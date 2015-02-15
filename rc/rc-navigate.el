@@ -5,8 +5,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'smex "smex" nil t)
-(add-hook 'ag-mode-hook 'wgrep-ag-setup)
-(add-hook 'c-mode-hook 'helm-gtags-mode)
 (autoload 'wgrep-ag-setup "wgrep-ag")
 
 (require 'ace-jump-mode)
@@ -19,6 +17,10 @@
 (require 'neotree)
 (require 'helm)
 (require 'swoop)
+(require 'window-number)
+(require 'buffer-move)
+(require 'framemove)
+(require 'ibuffer)
 
 (with-eval-after-load "helm"
   (require 'helm-files)
@@ -146,10 +148,6 @@
   (define-key ag-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers)
   (define-key grep-mode-map (kbd "C-x C-s") 'wgrep-save-all-buffers))
 
-(turn-on-fuzzy-isearch)
-
-(setq ag-highlight-search t)
-
 (with-eval-after-load "helm-gtags"
   (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
   (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
@@ -198,20 +196,59 @@
   :config
   (setq zoom-window-mode-line-color "DarkGreen"))
 
-;#############################################################################
-;#   Keybindings
-;############################################################################
-;; isearch
+(window-number-meta-mode)
+(turn-on-fuzzy-isearch)
+
+(setq ag-highlight-search t)
+(setq framemove-hook-into-windmove t)
+(setq ibuffer-default-sorting-mode 'major-mode) ;recency
+(setq ibuffer-always-show-last-buffer :nomini)
+(setq ibuffer-default-shrink-to-minimum-size t)
+(setq ibuffer-jump-offer-only-visible-buffers t)
+(setq ibuffer-saved-filters
+      '(("dired" ((mode . dired-mode)))
+        ("leechcraft" ((filename . "leechcraft")))
+        ("qxmpp" ((filename . "qxmpp")))
+        ("xmonad" ((filename . "xmonad")))
+        ("jabberchat" ((mode . jabber-chat-mode)))
+        ("orgmode" ((mode . org-mode)))
+        ("elisp" ((mode . emacs-lisp-mode)))
+        ("fundamental" ((mode . fundamental-mode)))
+        ("haskell" ((mode . haskell-mode)))))
+(setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
+(setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+(setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
+(setq special-display-regexps (remove "[ ]?\\*Messages\\*[ ]?" special-display-regexps))
+
+(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
+(add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))
 (global-unset-key (kbd "C-M-s"))
 (global-unset-key (kbd "C-M-r"))
+(global-unset-key (kbd "C-x C-b"))
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "<C-M-down>") 'win-resize-minimize-vert)
+(global-set-key (kbd "<C-M-up>") 'win-resize-enlarge-vert)
+(global-set-key (kbd "<C-M-right>") 'win-resize-minimize-horiz)
+(global-set-key (kbd "<C-M-left>") 'win-resize-enlarge-horiz)
+(global-set-key (kbd "C-S-c <up>") 'buf-move-up)
+(global-set-key (kbd "C-S-c <down>") 'buf-move-down)
+(global-set-key (kbd "C-S-c <left>") 'buf-move-left)
+(global-set-key (kbd "C-S-c <right>") 'buf-move-right)
+(global-set-key (kbd "C-s-<up>") 'windmove-up)
+(global-set-key (kbd "C-s-<down>") 'windmove-down)
+(global-set-key (kbd "C-s-<left>") 'windmove-left)
+(global-set-key (kbd "C-s-<right>") 'windmove-right)
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
-;; custom search keymap
 (define-key custom-search-keymap (kbd "r") 'rgrep)
 (define-key custom-search-keymap (kbd "s") 'helm-semantic-or-imenu)
+(define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
+(define-key custom-windowing-keymap (kbd "w") 'ace-window)
 
 (provide 'rc-navigate)
 
