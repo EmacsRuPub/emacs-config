@@ -56,6 +56,11 @@
   (interactive)
   (browse-url "https://mail.google.com"))
 
+(defun comint-clear-buffer ()
+  (interactive)
+  (let ((comint-buffer-maximum-size 0))
+    (comint-truncate-buffer)))
+
 (provide 'custom-clients)
 
 ;;; custom-clients.el ends here

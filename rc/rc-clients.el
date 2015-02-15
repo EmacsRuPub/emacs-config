@@ -119,6 +119,8 @@
   (define-key custom-search-keymap (kbd "t") 'google-translate-at-point)
   (define-key custom-search-keymap (kbd "T") 'google-translate-query-translate))
 
+(define-key comint-mode-map "\C-c\M-o" #'comint-clear-buffer)
+
 (provide 'rc-clients)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
