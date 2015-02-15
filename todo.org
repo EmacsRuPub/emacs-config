@@ -159,12 +159,8 @@
 * TODO [#B] find cause of "blah-blah iswitchb is obsolete" message [2015-01-11 Вс 11:40] :emacs:ticket:
 * TODO [#B] maybe macro for binding a couple of functions to a keybinding, using prefix arg for alternate function call [2015-01-13 Вт 13:38] :emacs:ticket:
 * TODO [#A] bind 'dired-jump [2015-01-13 Вт 13:41]             :emacs:ticket:
-* TODO [#B] try to implement org workload display [2015-01-13 Вт 14:04] :emacs:ticket:orgmode:
-** TODO refer to :code_snippets: (make org link here)
-   SCHEDULED: <2015-02-01 Вс>
-* TODO [#A] random orgmode code from sachac [2015-01-15 Чт 23:46] :emacs:ticket:orgmode:
-** TODO refer to :code_snippets: (make org link here)
-   SCHEDULED: <2015-02-01 Вс>
+* TODO [#B] try to implement org workload display - [[tag:+code_snippet][code snippets]] [2015-01-13 Вт 14:04] :emacs:ticket:orgmode:
+* TODO [#A] random orgmode code from sachac - [[tag:+code_snippet][code snippets]] [2015-01-15 Чт 23:46] :emacs:ticket:orgmode:
 * TODO [#B] more harness for ediff [2015-01-17 Сб 23:11]       :emacs:ticket:
 * TODO [#B] [[http://sachachua.com/blog/2013/08/emacs-how-i-organize-my-org-files/][Emacs: How I organize my Org files - sacha chua :: living an awesome life]] - ideas about org files organizing and layout [2015-01-18 Вс 20:46] :emacs:ticket:
 * TODO [#B] play with org-download - http://oremacs.com/2015/01/18/sprucing-up-org-download/ [2015-01-18 Вс 21:02] :emacs:ticket:
@@ -174,7 +170,13 @@
 * TODO [#A] 'multiple-cursors' do not work in orgmode [2015-01-20 Вт 16:04] :emacs:ticket:
 * TODO [#A] insert dired path as orgmode file link someway [2015-01-26 Пн 00:44] :orgmode:emacs:ticket:
 * TODO [#B] various tips from http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/ [2015-01-26 Пн 23:58]                             :emacs:ticket:
-* TODO [#A] agenda command for displaying headlines without any TODO states (and maybe without priorities) [2015-01-29 Чт 00:19] :orgmode:emacs:ticket:
-  HINT: setup stuck projects rules
-  SCHEDULED: <2015-01-30 Пт>
 * TODO [#B] resetup sauron [2015-02-01 Вс 21:33]               :emacs:ticket:
+* TODO [#A] arbitrary reports for orgmode timers [2015-02-01 Вс 23:45] :orgmode:emacs:ticket:
+* TODO [#A] for @journey make templates with prerequisites (as tag or in some other way) maybe automate/generalize [2015-02-01 Вс 23:47] :emacs:ticket:
+* TODO [#A] a way to eliminate duplicates within org-capture workflow [2015-02-06 Пт 13:02] :emacs:ticket:
+* TODO [#B] sync/update el-get and recipes (push custom, etc.) [2015-02-07 Сб 22:59] :emacs:ticket:
+* TODO [#B] extend [[https://github.com/wiedzmin/gmail2bbdb][wiedzmin/gmail2bbdb]] to process phone numbers too [2015-02-13 Пт 20:46] :emacs:ticket:
+* TODO [#A] починить grep ("grep: предупреждение: GREP_OPTIONS устарел; используйте псевдоним или сценарий") [2015-02-14 Сб 21:19] :emacs:ticket:
+* TODO [#B] automate dired-garbage-files-regexp population (and add .pyc there) [2015-02-14 Сб 22:53] :emacs:ticket:
+* TODO [#B] bind 'toggle-debug-on-error to some key [2015-02-14 Сб 23:59] :emacs:ticket:
+* TODO [#A] make new file templates insert EN datetimes [2015-02-15 Вс 16:27] :emacs:ticket:

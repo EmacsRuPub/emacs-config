@@ -813,3 +813,30 @@ Archived entries from file /home/octocat/.emacs.d/todo.org
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] agenda command for displaying headlines without any TODO states (and maybe without priorities) [2015-01-29 Чт 00:19] :orgmode:emacs:ticket:
+CLOSED: [2015-02-04 Ср 23:50]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2015-02-04 Ср 23:50]
+:END:
+  HINT: setup stuck projects rules
+  SCHEDULED: <2015-01-30 Пт>
+:PROPERTIES:
+:ARCHIVE_TIME: 2015-02-16 Пн 00:30
+:ARCHIVE_FILE: ~/.emacs.d/todo.org
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* CANCELLED [#B] increase or disable timeout for pinentry if possible [2015-02-05 Чт 19:12] :emacs:ticket:
+CLOSED: [2015-02-06 Пт 19:47] SCHEDULED: <2015-02-06 Пт>
+:LOGBOOK:
+- State "CANCELLED"  from "TODO"       [2015-02-06 Пт 19:47] \\
+  Too hard to get simple
+:END:
+:PROPERTIES:
+:ARCHIVE_TIME: 2015-02-16 Пн 00:30
+:ARCHIVE_FILE: ~/.emacs.d/todo.org
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: CANCELLED
+:END:
