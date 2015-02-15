@@ -10,9 +10,9 @@
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
 (setq org-modules
       '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
-        org-checklist org-clock org-docview org-expiry org-habit org-id org-indent org-info
-        org-inlinetask org-irc org-man org-protocol <C>org-pomodoro org-timer
-        org-w3m))
+        org-checklist org-clock org-docview org-expiry org-habit
+        org-id org-info org-inlinetask org-irc org-man org-protocol
+        <C>org-pomodoro org-timer org-w3m))
 
 (require 'org)
 (require 'ox-html)
@@ -74,8 +74,6 @@
 (setq org-global-properties '(("STYLE_ALL" . "habit")))
 (setq org-habit-graph-column 50)
 (setq org-hide-leading-stars t)
-(setq org-indent-indentation-per-level 2)
-(setq org-indent-mode t)
 (setq org-indirect-buffer-display 'current-window)
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t)
