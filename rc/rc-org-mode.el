@@ -41,7 +41,7 @@
 (setq org-agenda-skip-timestamp-if-done t)
 (setq org-agenda-span 'month)
 (setq org-agenda-start-on-weekday nil)
-(setq org-agenda-sticky t)
+(setq org-agenda-sticky nil)            ;otherwise agenda behaves strangely on non-stuck projects
 (setq org-agenda-tags-todo-honor-ignore-options t)
 (setq org-agenda-todo-ignore-deadlines 'all)
 (setq org-agenda-todo-ignore-scheduled 'all)
@@ -93,7 +93,7 @@
 (setq org-special-ctrl-k t)
 (setq org-src-fontify-natively t)
 (setq org-startup-folded nil)
-(setq org-stuck-projects '("+LEVEL=2/-DONE" ("TODO" "GOING" "NEXT" "WAITING") nil ""))
+(setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "CANCELLED") nil ""))
 (setq org-tags-column -80)
 (setq org-use-property-inheritance t)
 (setq org-use-speed-commands t)
