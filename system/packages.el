@@ -27,6 +27,7 @@
         auto-complete-latex
         auto-complete-yasnippet
         bbdb
+        bitlbee
         bookmark+
         breadcrumb-custom
         buffer-move
