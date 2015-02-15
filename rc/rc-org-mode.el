@@ -124,6 +124,8 @@
                       ("ordering" . ?o)
                       ("home_improvements" . ?h)
                       ("entertainment" . ?e)
+                      ("interesting" . ?i)
+                      ("fix" . ?f)
                       ))
 (setq org-tags-exclude-from-inheritance '("project"))
 (setq org-agenda-custom-commands
