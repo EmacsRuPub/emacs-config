@@ -1,11 +1,8 @@
-;;; emacs-rc-org-mode.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-org-mode.el
+;; Created:  Fri May 24 22:41:54 2013 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;#############################################################################
 ;#   Load extensions
@@ -290,4 +287,5 @@
 
 (provide 'rc-org-mode)
 
-;;; emacs-rc-org-mode.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-org-mode.el ends here

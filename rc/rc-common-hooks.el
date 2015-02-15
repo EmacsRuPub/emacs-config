@@ -1,11 +1,8 @@
-;;; emacs-rc-common-hooks.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-common-hooks.el
+;; Created:  Fri May 24 22:41:54 2013 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
@@ -74,4 +71,5 @@
 
 (provide 'rc-common-hooks)
 
-;;; emacs-rc-common-hooks.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-common-hooks.el ends here

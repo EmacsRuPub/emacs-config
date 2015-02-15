@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-completion.el
-;; Created: Вс май  4 23:17:16 2014 (+0400)
+;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'auto-complete "auto-complete" "Autocompletion for Emacs." t)

@@ -1,11 +1,8 @@
-;;; emacs-rc-elisp.el --- Settings for Emacs Lisp editing
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-elisp.el
+;; Created:  Thu May 1 16:30:43 2014 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'erefactor)
 
@@ -32,4 +29,5 @@
 
 (provide 'rc-elisp)
 
-;;; emacs-rc-elisp.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-elisp.el ends here

@@ -1,11 +1,8 @@
-;;; emacs-rc-tex.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-tex.el
+;; Created:  Fri May 24 22:41:54 2013 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TODO: get rid of whizzytex from package manager
 
@@ -88,8 +85,9 @@
 (setq reftex-save-parse-info t)
 (setq reftex-use-multiple-selection-buffers t)
 
+;TODO: investigate TEXT_INPUTS usage
+
 (provide 'rc-tex)
 
-;;; emacs-rc-tex.el ends here
-
-;TODO: investigate TEXT_INPUTS usage
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-tex.el ends here

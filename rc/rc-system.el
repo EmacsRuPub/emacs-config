@@ -1,10 +1,8 @@
-;;; rc-system.el ---
-
-;; Copyright (C) 2012 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
+;; Filename: rc-system.el
+;; Created:  Fri May 24 22:41:54 2013 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'epg)
 
@@ -43,4 +41,5 @@
 
 (provide 'rc-system)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-system.el ends here

@@ -1,11 +1,8 @@
-;;; emacs-rc-python.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-python.el
+;; Created:  Thu May 1 16:30:43 2014 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'jedi:setup "jedi" nil t)
 
@@ -112,4 +109,5 @@
 
 (provide 'rc-python)
 
-;;; emacs-rc-python.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-python.el ends here

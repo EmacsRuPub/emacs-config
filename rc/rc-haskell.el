@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Filename: rc-lang-haskell.el
-;; Created: Сб июн  8 22:10:12 2013 (+0400)
+;; Filename: rc-haskell.el
+;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'haskell-mode)
@@ -41,5 +41,6 @@
 ;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
 
 (provide 'rc-haskell)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; rc-lang-haskell.el ends here
+;;; rc-haskell.el ends here

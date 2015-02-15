@@ -1,10 +1,8 @@
-;;; rc-markup.el ---
-
-;; Copyright (C) 2012 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
+;; Filename: rc-markup.el
+;; Created:  Thu May 1 16:30:43 2014 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TODO: integrate docbook-menu into el-get, probable relevant links below
 ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
@@ -89,4 +87,5 @@
 
 (provide 'rc-markup)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-markup.el ends here

@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-programming.el
-;; Created: Пт май 30 22:43:47 2014 (+0400)
+;; Created:  Fri May 30 23:45:51 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TODO check if we can use some autoloads below

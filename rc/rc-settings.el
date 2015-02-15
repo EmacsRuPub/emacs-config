@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-settings.el
-;; Created: Пт май 23 21:51:46 2014 (+0400)
+;; Created:  Fri May 23 23:08:51 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Enable functions that are disabled by default

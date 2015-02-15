@@ -1,3 +1,9 @@
+;; -*- coding: utf-8 -*-
+;;
+;; Filename: rc-cc.el
+;; Created:  Sun Nov 30 18:41:23 2014 +0300
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'cc-mode)
 (require 'info-look)
 (require 'auto-complete-clang)
@@ -44,3 +50,6 @@
 (define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
 
 (provide 'rc-cc)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-cc.el ends here

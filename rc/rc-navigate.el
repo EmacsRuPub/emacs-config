@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-navigate.el
-;; Created: Чт май 29 17:33:42 2014 (+0400)
+;; Created:  Thu May 29 17:37:11 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'smex "smex" nil t)

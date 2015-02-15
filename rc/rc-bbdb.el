@@ -1,11 +1,8 @@
-;;; emacs-rc-bbdb.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-bbdb.el
+;; Created:  Fri Feb 13 21:07:03 2015 +0300
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'bbdb)
 
@@ -49,4 +46,5 @@
 
 (provide 'rc-bbdb)
 
-;;; emacs-rc-bbdb.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-bbdb.el ends here

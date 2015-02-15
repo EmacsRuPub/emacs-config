@@ -1,11 +1,8 @@
-;;; emacs-rc-javascript.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-javascript.el
+;; Created:  Thu May 1 16:30:43 2014 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;#############################################################################
 ;#   Load extensions
@@ -98,8 +95,9 @@
 
 (add-hook 'js2-mode-hook (lambda () ))
 
+;TODO: play with js2-refactor
+
 (provide 'rc-javascript)
 
-;;; emacs-rc-javascript.el ends here
-
-;TODO: play with js2-refactor
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-javascript.el ends here

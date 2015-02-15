@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-publishing.el
-;; Created: Вс май  4 22:50:32 2014 (+0400)
+;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TODO: fix encoding issues (questions marks instead of russian letters)

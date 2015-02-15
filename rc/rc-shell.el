@@ -1,11 +1,8 @@
-;;; emacs-rc-shell.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-shell.el
+;; Created:  Fri May 24 22:41:54 2013 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;#############################################################################
 ;#   Eshell
@@ -20,4 +17,5 @@
 
 (provide 'rc-shell)
 
-;;; emacs-rc-shell.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-shell.el ends here

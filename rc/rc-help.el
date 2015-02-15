@@ -1,11 +1,8 @@
-;;; emacs-rc-info.el ---
-
-;; Copyright (C) 2011 Alex Ermolov
+;; -*- coding: utf-8 -*-
 ;;
-;; Author: aaermolov@gmail.com
-;; Keywords:
-;; Requirements:
-;; Status: not intended to be distributed yet
+;; Filename: rc-help.el
+;; Created:  Mon Jun 30 19:02:26 2014 +0400
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;#############################################################################
 ;#   Load extension
@@ -24,4 +21,5 @@
 
 (provide 'rc-help)
 
-;;; emacs-rc-info.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; rc-help.el ends here

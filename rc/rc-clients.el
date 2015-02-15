@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;
 ;; Filename: rc-clients.el
-;; Created: Пт май 30 18:58:37 2014 (+0400)
+;; Created:  Fri May 30 19:10:47 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'gmail-notifier-start "gmail-notifier" nil t)
