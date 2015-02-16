@@ -27,10 +27,6 @@
   (when (member major-mode custom/untabify-modes)
     (untabify (point-min) (point-max))))
 
-
-;#############################################################################
-;#   Customizations
-;############################################################################
 ;; clean trailing whitespaces automatically
 (setq custom/trailing-whitespace-modes
       '(
@@ -59,12 +55,6 @@
         clojure-mode
         python-mode
 ))
-
-
-;#############################################################################
-;#   Hooks
-;############################################################################
-;; common settings for different text & programming modes
 
 (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)

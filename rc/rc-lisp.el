@@ -4,9 +4,6 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;#############################################################################
-;#   Hooks
-;############################################################################
 (defun custom/lisp-mode-hook ()
   (setq tab-width 4)
   (setq indent-tabs-mode t)
@@ -26,9 +23,6 @@
   )
 
 
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (require 'inf-lisp)
 (require 'info-look)
 
@@ -65,10 +59,6 @@
     (bind-key "C-c M-;" 'slime-remove-balanced-comments lisp-mode-map)
     ))
 
-;#############################################################################
-;#   setup extensions
-;############################################################################
-
 ;; lookup information in hyperspec
 (info-lookup-add-help
  :mode 'lisp-mode
@@ -82,9 +72,6 @@
   (let ((browse-url-browser-function 'w3m-browse-url))
     ad-do-it))
 
-;#############################################################################
-;#   Customizations
-;############################################################################
 (setq inferior-lisp-program "sbcl")
 (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
 

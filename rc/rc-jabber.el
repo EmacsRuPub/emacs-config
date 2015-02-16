@@ -4,9 +4,6 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (require 'jabber)
 (require 'jabber-autoloads) ;; For 0.7.90 and above:
 (require 'jabber-bookmarks)
@@ -28,9 +25,6 @@
     (set-face-attribute 'jabber-chat-prompt-foreign nil :foreground "#dfaf8f" :weight 'bold)
     (set-face-attribute 'jabber-rare-time-face nil :foreground "#8fb28f")))
 
-;#############################################################################
-;#   Account definitions
-;############################################################################
 ;; 'custom/jabber-account-list' has similar layout as below:
 ;;
 ;; (setq custom/jabber-account-list '(("abc@gmail.com/emacs"
@@ -45,9 +39,6 @@
 
 (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
 
-;#############################################################################
-;#   Customizations
-;############################################################################
 (setq jabber-alert-info-message-hooks 'jabber-info-echo)
 (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
 (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
@@ -71,9 +62,6 @@
 
 (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
 
-;#############################################################################
-;#   Jabber notifications
-;############################################################################
 ;; Message alert hooks
 (define-jabber-alert echo "Show a message in the echo area"
   (lambda (msg)
@@ -81,9 +69,6 @@
       (message "%s" msg))))
 
 
-;#############################################################################
-;#   Custom definitions and hooks
-;############################################################################
 (defun my-jabber-connect-hook (jc)
   (jabber-send-presence "" "I'm online" 10)
   (let* ((state-data (fsm-get-state-data jc))
@@ -95,9 +80,6 @@
 (add-hook 'jabber-chat-mode-hook 'goto-address)
 (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
 
-;#############################################################################
-;#   Keybindings
-;############################################################################
 (define-key jabber-chat-mode-map (kbd "C-c C-l") 'custom-jabber/insert-inlove-smile)
 (define-key jabber-chat-mode-map (kbd "C-c C-k") 'custom-jabber/insert-kiss-smile)
 (define-key jabber-chat-mode-map (kbd "C-c C-y") 'custom-jabber/insert-shy-smile)

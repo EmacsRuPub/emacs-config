@@ -9,9 +9,6 @@
 (require 'tex-site)
 (require 'preview-latex)
 
-;#############################################################################
-;#   Hooks
-;############################################################################
 (defun custom/texinfo-hook ()
   (local-set-key [delete]  'delete-char)
   (setq delete-key-deletes-forward t))
@@ -31,11 +28,6 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
-
-;#############################################################################
-;#   Common
-;############################################################################
-
 (autoload 'turn-on-bib-cite "bib-cite")
 
 (setq-default TeX-master nil)
@@ -53,10 +45,6 @@
 (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
 (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
 
-
-;#############################################################################
-;#   CDLaTeX
-;############################################################################
 (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 
@@ -64,20 +52,12 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
 (add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
 
-
-;#############################################################################
-;#   WhizzyTex
-;############################################################################
 (autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
 
 (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv")))
 
 (global-set-key (kbd "C-c m w") 'whizzytex-mode)
 
-
-;#############################################################################
-;#   RefTex
-;############################################################################
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 

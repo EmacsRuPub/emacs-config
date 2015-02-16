@@ -29,10 +29,6 @@
         (select-window window)
       (switch-to-buffer "*Occur*"))))
 
-
-;#############################################################################
-;#   Hooks
-;############################################################################
 (defun custom/python-mode-hook ()
   (auto-fill-mode 1)
   (setq indent-tabs-mode nil)

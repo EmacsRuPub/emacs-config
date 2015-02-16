@@ -8,21 +8,11 @@
 ;; TODO: investigate how to deal with bright letters on bright
 ;; background being printed (in such cases letters are almost invisible)
 
-;#############################################################################
-;#   Fonts and encoding
-;############################################################################
 (setq ps-multibyte-buffer 'bdf-font-except-latin)
 
-;#############################################################################
-;#   Custom definitions
-;############################################################################
 (defvar ps-print-path "~/ps-print"
   "Path for ps-print output")
 
-
-;#############################################################################
-;#   Keybindings
-;############################################################################
 (global-set-key (kbd "M-p") 'custom/ps-print-buffer-with-faces)
 (global-set-key (kbd "C-c M-p") 'custom/ps-print-region-with-faces)
 

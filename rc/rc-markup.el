@@ -8,9 +8,6 @@
 ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
 ;; http://www.emacswiki.org/emacs/DocbookXmlMode
 
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (autoload 'emmet-mode "emmet-mode")
 (autoload 'emmet-expand-line "emmet-mode")
 (autoload 'markdown-mode "markdown-mode")
@@ -43,10 +40,6 @@
   (unify-8859-on-decoding-mode)
   )
 
-
-;#############################################################################
-;#   Customizations
-;############################################################################
 (setq nxml-auto-insert-xml-declaration-flag t)
 (setq nxml-bind-meta-tab-to-complete-flag t)
 (setq nxml-slash-auto-complete-flag t)
@@ -62,10 +55,6 @@
 
 (setq mumamo-submode-indent-offset 4)
 (setq emmet-move-cursor-between-quotes t)
-
-;#############################################################################
-;#   Hooks
-;############################################################################
 
 (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)

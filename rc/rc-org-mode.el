@@ -4,9 +4,6 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
 (autoload 'org-footnote-action "org-footnote" nil t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
@@ -21,9 +18,6 @@
 (require 'org)
 (require 'ox-html)
 
-;#############################################################################
-;#   Customizations
-;############################################################################
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
 (setq org-agenda-files (append (all-files-under-dir-recursively (at-org-dir) "org")))
@@ -238,27 +232,17 @@
   (append holiday-other-holidays
           holiday-solar-holidays))
 
-
-;#############################################################################
-;#   Setup
-;############################################################################
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 (load (at-config-basedir "last-scrum-timestamp"))
 (org-add-link-type "tag" 'custom/follow-tag-link)
 
-;#############################################################################
-;#   Hooks
-;############################################################################
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 (add-hook 'org-after-refile-insert-hook 'save-buffer)
 
-;#############################################################################
-;#   Keybindings
-;############################################################################
 (global-set-key (kbd "C-c e") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)

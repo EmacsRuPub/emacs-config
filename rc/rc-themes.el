@@ -6,9 +6,6 @@
 
 (require 'themes-definitions)
 
-;#############################################################################
-;#   Text coloring
-;############################################################################
 (defvar bg-colors "emacs background colors list")
 (defvar fg-colors "emacs foreground colors list")
 
@@ -23,10 +20,6 @@
 (when (boundp 'zenburn-colors-alist)
   (set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
-
-;#############################################################################
-;#   Fonts
-;############################################################################
 
 (set-xwindows-font "consolas-base")
 

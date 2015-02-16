@@ -4,9 +4,6 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (require 'cua-base)
 (require 'cursor-chg)
 (require 'drag-stuff)
@@ -29,9 +26,6 @@
 (require 'rebox2)
 (require 'file-template)
 
-;#############################################################################
-;#   Customizations
-;############################################################################
 (delete-selection-mode t)
 (volatile-highlights-mode t)
 (show-paren-mode t)
@@ -166,10 +160,6 @@
 (setq generic-default-modes (delete 'javascript-generic-mode
                                     generic-default-modes))
 
-
-;#############################################################################
-;#   Keybindings
-;############################################################################
 (define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)

@@ -4,9 +4,6 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;#############################################################################
-;#   Custom definitions
-;############################################################################
 (defun custom/sh-check-finish-hook (buf msg)
   "Function, that is executed at the end of sh check"
   (when (not (string-match "finished" msg))
@@ -21,16 +18,8 @@
                        'sh-check-mode))
   )
 
-
-;#############################################################################
-;#   Load extensions
-;############################################################################
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 
-
-;#############################################################################
-;#   Custom definitions
-;############################################################################
 (define-compilation-mode sh-check-mode "SH"
   "Mode for check sh source code."
   (set (make-local-variable 'compilation-disable-input) t)
@@ -39,10 +28,6 @@
        (list 'custom/sh-check-finish-hook))
   )
 
-
-;#############################################################################
-;#   Hooks
-;############################################################################
 (add-hook 'sh-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'sh-mode-hook 'common-hooks/newline-hook)
