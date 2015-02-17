@@ -17,7 +17,6 @@
 (require 'rc-clients)
 (require 'rc-jabber)
 (require 'rc-shell)
-(require 'rc-wincontrol)
 (require 'rc-pim)
 (require 'rc-bbdb)
 (require 'rc-org-mode)
