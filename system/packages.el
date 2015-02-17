@@ -85,6 +85,7 @@
         hl-line+
         hs-lint
         hungry-delete-el
+        hydra
         ido-hacks
         ido-preview
         ido-ubiquitous

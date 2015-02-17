@@ -1,0 +1,5 @@
+(:name ido-vertical-mode-custom
+       :type github
+       :pkgname "abo-abo/hydra"
+       :description "make Emacs bindings that stick around"
+       :features hydra)
