@@ -61,6 +61,12 @@
   (let ((comint-buffer-maximum-size 0))
     (comint-truncate-buffer)))
 
+(defun my-bbdb-tab-complete ()
+  (interactive)
+  (if (mail-abbrev-in-expansion-header-p)
+      (bbdb-complete-name)
+    (message-tab)))
+
 (provide 'custom-clients)
 
 ;;; custom-clients.el ends here

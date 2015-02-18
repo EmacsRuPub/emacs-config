@@ -18,7 +18,6 @@
 (require 'rc-jabber)
 (require 'rc-shell)
 (require 'rc-pim)
-(require 'rc-bbdb)
 (require 'rc-org-mode)
 (require 'rc-common-hooks)
 (require 'rc-markup)
