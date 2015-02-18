@@ -180,3 +180,5 @@
 * TODO [#B] automate dired-garbage-files-regexp population (and add .pyc there) [2015-02-14 Сб 22:53] :emacs:ticket:
 * TODO [#B] bind 'toggle-debug-on-error to some key [2015-02-14 Сб 23:59] :emacs:ticket:
 * TODO [#A] make new file templates insert EN datetimes [2015-02-15 Вс 16:27] :emacs:ticket:
+* TODO [#A] add some kind of job-related <filter/whatever> to ibuffer [2015-02-17 Вт 16:44] :emacs:ticket:
+* TODO [#A] define hydra for flycheck errors navigation [2015-02-17 Вт 19:55] :emacs:ticket:
