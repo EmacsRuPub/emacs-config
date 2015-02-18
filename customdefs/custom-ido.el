@@ -68,6 +68,15 @@
      (file-name-extension (or (buffer-file-name buf) "")))
    ido-switch-buffer-by-ext-name-hist))
 
+(defun ido-backspace ()
+  "Forward to `backward-delete-char'.
+On error (read-only), quit without selecting."
+  (interactive)
+  (condition-case nil
+      (backward-delete-char 1)
+    (error
+     (minibuffer-keyboard-quit))))
+
 (defalias 'modb 'ido-switch-buffer-by-major-mode)
 (defalias 'extb 'ido-switch-buffer-by-ext-name)
 

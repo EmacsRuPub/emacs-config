@@ -133,6 +133,7 @@
               (define-key ido-buffer-completion-map (kbd "<down>") 'ido-next-match)
               (define-key ido-file-completion-map (kbd "<down>") 'ido-next-match)
               (define-key ido-file-dir-completion-map (kbd "<down>") 'ido-next-match)
+              (define-key ido-common-completion-map (kbd "DEL") 'ido-backspace)
               ))
   (global-set-key (kbd "M-s b") 'ido-switch-buffer-by-major-mode)
   (global-set-key (kbd "M-s B") 'ido-switch-buffer-by-ext-name))
