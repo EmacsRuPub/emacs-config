@@ -89,7 +89,7 @@
         ido-hacks
         ido-preview
         ido-ubiquitous
-        ido-vertical-mode
+        ido-vertical-mode-custom
         ido-yes-or-no
         init-paredit
         irony-mode

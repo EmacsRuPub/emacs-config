@@ -1,0 +1,5 @@
+(:name ido-vertical-mode-custom
+       :type github
+       :pkgname "abo-abo/ido-vertical-mode.el"
+       :description "makes ido-mode display vertically"
+       :features ido-vertical-mode)
