@@ -263,6 +263,26 @@ point and around or after mark are interchanged."
      proc
      (concat "cd ~/Downloads && youtube-dl " str "\n"))))
 
+;;;###autoload
+(defun keys-describe-prefixes ()
+  (interactive)
+  (with-output-to-temp-buffer "*Bindings*"
+    (dolist (letter-group (list
+                           (cl-loop for c from ?a to ?z
+                                    collect (string c))
+                           (cl-loop for c from ?α to ?ω
+                                    collect (string c))))
+      (dolist (prefix '("" "C-" "M-" "C-M-"))
+        (princ (mapconcat
+                (lambda (letter)
+                  (let ((key (concat prefix letter)))
+                    (format ";; (global-set-key (kbd \"%s\") '%S)"
+                            key
+                            (key-binding (kbd key)))))
+                letter-group
+                "\n"))
+        (princ "\n\n")))))
+
 (provide 'custom-utils)
 
 ;;; util-various.el ends here

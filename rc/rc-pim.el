@@ -7,6 +7,7 @@
 (autoload 'deft "deft" "Deft" t)
 
 (require 'calfw)
+(require 'keyfreq)
 
 (use-package sauron
   ;; note, you add (setq sauron-debug t) to get errors which can debug if
@@ -114,7 +115,11 @@
       (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
       (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")))))
 
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+
 (global-set-key (kbd "C-c c") 'custom/calfw-open-calendar)
+(global-set-key (kbd "C-c k") 'keyfreq-show)
 
 (provide 'rc-pim)
 

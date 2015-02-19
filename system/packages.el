@@ -99,6 +99,7 @@
         js2-mode
         js2-refactor
         json-mode
+        keyfreq
         latex-preview-pane
         list-processes+
         lua-mode
