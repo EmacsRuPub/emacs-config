@@ -67,6 +67,14 @@
                    (aref v 1) (aref v 2)))
        (format "cd '%s'\n" current-dir)))))
 
+(defun sudo-dired ()
+  (interactive)
+  (require 'tramp)
+  (let ((dir (expand-file-name default-directory)))
+    (if (string-match "^/sudo:" dir)
+        (user-error "Already in sudo")
+      (dired (concat "/sudo::" dir)))))
+
 (provide 'custom-dired)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
