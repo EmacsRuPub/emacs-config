@@ -70,7 +70,7 @@
                   '(".*" "\\`.+\\'" "/ssh:%h:")))
 
 (use-package w3m
-  defer t
+  :defer t
   :commands w3m
   :init
   (progn
