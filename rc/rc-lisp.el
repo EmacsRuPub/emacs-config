@@ -52,8 +52,6 @@
     (setq slime-use-autodoc-mode nil)
     (setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
     (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
-    (bind-key "<f5>" 'slime)
-    (bind-key "<C-f11>" 'slime-selector)
     (bind-key "C-c h" 'slime-documentation-lookup slime-repl-mode-map)
     (bind-key "C-c ;" 'slime-insert-balanced-comments lisp-mode-map)
     (bind-key "C-c M-;" 'slime-remove-balanced-comments lisp-mode-map)

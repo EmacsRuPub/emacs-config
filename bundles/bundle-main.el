@@ -31,6 +31,7 @@
 (require 'rc-tex)
 (require 'rc-dired)
 (require 'rc-help)
+(require 'rc-hydras)
 
 (provide 'bundle-main)
 ;;; macosx-common.el ends here

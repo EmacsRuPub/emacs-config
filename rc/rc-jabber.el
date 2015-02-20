@@ -88,8 +88,6 @@
 (define-key jabber-chat-mode-map (kbd "C-c u r") 'upcase-region)
 (define-key jabber-chat-mode-map (kbd "C-M-r")   'custom-jabber/wrap-replace-regexp)
 (define-key jabber-chat-mode-map (kbd "C-M-m")   'custom-jabber/wrap-misreading)
-(define-key jabber-chat-mode-map (kbd "<M-down>") 'custom/find-url-forward)
-(define-key jabber-chat-mode-map (kbd "<M-up>") 'custom/find-url-backward)
 (define-key jabber-chat-mode-map (kbd "C-c C-o C-l") 'browse-url)
 
 (global-set-key (kbd "C-x C-j C-r") 'jabber-switch-to-roster-buffer)

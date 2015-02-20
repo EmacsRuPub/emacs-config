@@ -250,32 +250,6 @@
 (define-key custom-search-keymap (kbd "s") 'helm-semantic-or-imenu)
 (define-key ibuffer-mode-map (kbd "/ .") 'ibuffer-filter-by-extname)
 
-(defhydra hydra-window (global-map "<f2>")
-  "window"
-  ("<left>" windmove-left "left")
-  ("<down>" windmove-down "down")
-  ("<up>" windmove-up "up")
-  ("<right>" windmove-right "right")
-  ("w" ace-window "ace" :color blue)
-  ("3" (lambda ()
-         (interactive)
-         (split-window-right)
-         (windmove-right)
-         (switch-to-next-buffer))
-   "vert")
-  ("2" (lambda ()
-         (interactive)
-         (split-window-below)
-         (windmove-down)
-         (switch-to-next-buffer))
-   "horiz")
-  ("u" hydra-universal-argument "universal")
-  ("s" (lambda () (interactive) (ace-window 4)) "swap" :color blue)
-  ("d" (lambda () (interactive) (ace-window 16)) "delete" :color blue)
-  ("o" delete-other-windows "1" :color blue)
-  ("i" ace-maximize-window "a1" :color blue)
-  ("q" nil "cancel"))
-
 (provide 'rc-navigate)
 
 ;; TODO: See if we can customize Bookmarks[+] further
