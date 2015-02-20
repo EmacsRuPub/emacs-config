@@ -182,3 +182,8 @@
 * TODO [#A] make new file templates insert EN datetimes [2015-02-15 Вс 16:27] :emacs:ticket:
 * TODO [#A] add some kind of job-related <filter/whatever> to ibuffer [2015-02-17 Вт 16:44] :emacs:ticket:
 * TODO [#A] define hydra for flycheck errors navigation [2015-02-17 Вт 19:55] :emacs:ticket:
+* TODO [#C] try some erc-cmd-XXX [2015-02-19 Чт 23:59]            :emacs:ticket:
+* TODO [#B] enhance hydra for entries [2015-02-19 Чт 23:59]       :emacs:ticket:
+** introduce function and bind it on Enter fro example, which watches thing under cursor and takes appropriate action
+*** for example URL --> open in browser, flycheck error --> do nothing, compiler error link --> goto source, etc.
+* TODO [#A] get rid of org indent mode everywhere [2015-02-19 Чт 23:59] :orgmode:emacs:ticket:
