@@ -151,7 +151,6 @@
         tern
         twittering-mode
         undo-tree
-        unicad
         use-package
         vimrc-mode
         vline

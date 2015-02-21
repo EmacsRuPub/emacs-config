@@ -17,7 +17,6 @@
 (require 'savekill)
 (require 'saveplace)
 (require 'table) ;; table
-(require 'unicad)
 (require 'volatile-highlights)
 (require 'wc-mode)
 (require 'whole-line-or-region) ;; if no region is active, act on current line
