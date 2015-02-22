@@ -69,17 +69,19 @@
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq delete-old-versions -1)
 (setq version-control t)
+(setq locale-coding-system 'utf-8)
+
+(set-default buffer-file-coding-system 'utf-8-unix)
+(set-default default-buffer-file-coding-system 'utf-8-unix)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (prefer-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
-(set-default buffer-file-coding-system 'utf-8-unix)
-(set-default default-buffer-file-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
-(setq locale-coding-system 'utf-8)
 (menu-bar-mode -1)
 (scroll-bar-mode 0)
 (blink-cursor-mode 0)
@@ -89,7 +91,6 @@
 (global-font-lock-mode t)
 (display-battery-mode 1)
 (display-time)
-(fset 'yes-or-no-p 'y-or-n-p)
 
 (defun custom/after-init-hook ()
   (use-package diminish

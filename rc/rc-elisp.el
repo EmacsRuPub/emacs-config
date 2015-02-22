@@ -15,13 +15,11 @@
   (paren-face-mode))
 
 (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
-
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
 (add-hook 'emacs-lisp-mode-hook 'custom/remove-elc-on-save)
 (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
 (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
-
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'elisp-slime-nav-mode))
 

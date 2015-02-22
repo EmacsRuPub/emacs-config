@@ -4,8 +4,6 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'themes-definitions)
-
 (defvar bg-colors "emacs background colors list")
 (defvar fg-colors "emacs foreground colors list")
 
@@ -14,14 +12,13 @@
 (setq mouse-colors '("firebrick" "yellow"))
 
 (set-cursor-color "chartreuse2")
+(set-xwindows-font "consolas-base")
 
 (load-theme 'zenburn t)
 
 (when (boundp 'zenburn-colors-alist)
   (set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
-
-(set-xwindows-font "consolas-base")
 
 (provide 'rc-themes)
 

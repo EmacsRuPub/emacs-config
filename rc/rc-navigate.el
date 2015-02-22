@@ -4,6 +4,10 @@
 ;; Created:  Thu May 29 17:37:11 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+(setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
+(setq special-display-regexps (remove "[ ]?\\*Messages\\*[ ]?" special-display-regexps))
+
 (use-package bookmark+
   :init
   (use-package crosshairs))
@@ -259,10 +263,6 @@
    ("C-S-c <down>" . buf-move-down)
    ("C-S-c <left>" . buf-move-left)
    ("C-S-c <right>" . buf-move-right)))
-
-(setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
-(setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
-(setq special-display-regexps (remove "[ ]?\\*Messages\\*[ ]?" special-display-regexps))
 
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))

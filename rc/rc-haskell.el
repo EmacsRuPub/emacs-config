@@ -19,15 +19,11 @@
 (setq haskell-doc-show-global-types t)
 (setq haskell-program-name "ghci \"+.\"")
 
-(defun custom/haskell-mode-hook ()
-  (setq tab-width 4))
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
 (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
-(add-hook 'haskell-mode-hook 'custom/haskell-mode-hook)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
 
 (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)

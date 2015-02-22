@@ -7,13 +7,9 @@
 (require 'epg)
 
 (setq password-cache-expiry 7200)
-
 ;; ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
 ;; ;; that you can always see what's happening.
 (setq eval-expression-print-level nil)
-
-(auto-compression-mode t)
-
 ;; ;; Emacs freaks out if this isn't set.
 (setq warning-suppress-types nil)
 (setq enable-local-variables nil)
@@ -26,6 +22,7 @@
         ("\\.swf\\'" "swfdec-player" (file))
         ))
 
+(auto-compression-mode t)
 (unless (and (string-equal "root" (getenv "USER"))
              (server-running-p))
   ;; Only start server mode if I'm not root and it is not running
@@ -34,7 +31,6 @@
 
 (add-hook 'server-visit-hook
           (lambda () (local-set-key (kbd "C-c C-c") 'server-save-edit)))
-
 ;; (add-hook 'kill-emacs-hook 'save-buffer-clients-on-exit)
 
 (global-set-key (kbd "C-x c") 'proced)

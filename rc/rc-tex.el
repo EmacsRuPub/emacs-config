@@ -4,10 +4,31 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; TODO: get rid of whizzytex from package manager
+(autoload 'turn-on-bib-cite "bib-cite")
+(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+(autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
 
 (require 'tex-site)
 (require 'preview-latex)
+
+(setq-default TeX-master nil)
+(setq TeX-parse-self t)
+(setq TeX-auto-save t)
+(setq TeX-default-mode 'latex-mode)
+(setq TeX-open-quote "``")
+(setq TeX-close-quote "''")
+(setq TeX-PDF-mode t)
+(setq font-latex-title-fontify 'color)      ; this gets rid of
+(setq font-latex-title-fontity 'color)      ; the large fonts
+(setq font-latex-fontify-sectioning 'color) ; in sections etc
+(setq reftex-enable-partial-scans t)
+(setq reftex-save-parse-info t)
+(setq reftex-use-multiple-selection-buffers t)
+(setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv")))
+
+(add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
+(add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
 
 (defun custom/texinfo-hook ()
   (local-set-key [delete]  'delete-char)
@@ -27,43 +48,12 @@
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
-(autoload 'turn-on-bib-cite "bib-cite")
-
-(setq-default TeX-master nil)
-(setq TeX-parse-self t)
-(setq TeX-auto-save t)
-(setq TeX-default-mode 'latex-mode)
-(setq TeX-open-quote "``")
-(setq TeX-close-quote "''")
-(setq TeX-PDF-mode t)
-(setq font-latex-title-fontify 'color)      ; this gets rid of
-(setq font-latex-title-fontity 'color)      ; the large fonts
-(setq font-latex-fontify-sectioning 'color) ; in sections etc
-
-;; mark some variables as safe
-(add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
-(add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
-
-(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
-
-;; CDLaTeX mode
 (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
 (add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
-
-(autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
-
-(setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv")))
-
-(global-set-key (kbd "C-c m w") 'whizzytex-mode)
-
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
-(setq reftex-enable-partial-scans t)
-(setq reftex-save-parse-info t)
-(setq reftex-use-multiple-selection-buffers t)
+(global-set-key (kbd "C-c m w") 'whizzytex-mode)
 
 ;TODO: investigate TEXT_INPUTS usage
 

@@ -18,22 +18,6 @@
 (setq dired-dwim-target t)
 (setq dired-listing-switches "-lah1v --group-directories-first")
 
-;; (global-set-key (kbd "C-c C-j") 'dired-jump)
-(define-key dired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
-(define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-(define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
-(define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
-(define-key dired-mode-map (vector 'remap 'smart-down) 'dired-jump-to-bottom)
-(define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete) ;; Delete with C-x C-k to match file buffers and magit
-(define-key dired-mode-map (kbd "`") 'dired-open-term)
-
-;; Reload dired after making changes
-(--each '(dired-do-rename
-          dired-create-directory
-          wdired-abort-changes)
-        (eval `(defadvice ,it (after revert-buffer activate)
-                 (revert-buffer))))
-
 (use-package wdired
   :defer t
   :config
@@ -46,10 +30,25 @@
     (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
     ))
 
+;; Reload dired after making changes
+(--each '(dired-do-rename
+          dired-create-directory
+          wdired-abort-changes)
+        (eval `(defadvice ,it (after revert-buffer activate)
+                 (revert-buffer))))
+
 (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
 (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
 (define-key dired-mode-map (kbd "C-c C-m") 'custom/get-file-md5)
 (define-key dired-mode-map (kbd "!") 'sudo-dired)
+;; (global-set-key (kbd "C-c C-j") 'dired-jump)
+(define-key dired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
+(define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+(define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
+(define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+(define-key dired-mode-map (vector 'remap 'smart-down) 'dired-jump-to-bottom)
+(define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete) ;; Delete with C-x C-k to match file buffers and magit
+(define-key dired-mode-map (kbd "`") 'dired-open-term)
 
 (provide 'rc-dired)
 

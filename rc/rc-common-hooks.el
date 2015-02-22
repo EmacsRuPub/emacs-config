@@ -4,6 +4,34 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; clean trailing whitespaces automatically
+(setq custom/trailing-whitespace-modes
+      '(
+        c++-mode
+        c-mode
+        haskell-mode
+        emacs-lisp-mode
+        lisp-mode
+        scheme-mode
+        erlang-mode
+        python-mode
+        js-mode
+        js2-mode
+        html-mode
+        lua-mode
+))
+;; untabify some modes
+(setq custom/untabify-modes
+      '(
+        haskell-mode
+        emacs-lisp-mode
+        lisp-mode
+        scheme-mode
+        erlang-mode
+        clojure-mode
+        python-mode
+))
+
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (local-set-key (kbd "<return>") 'newline-and-indent))
@@ -26,35 +54,6 @@
 (defun common-hooks/untabify-hook ()
   (when (member major-mode custom/untabify-modes)
     (untabify (point-min) (point-max))))
-
-;; clean trailing whitespaces automatically
-(setq custom/trailing-whitespace-modes
-      '(
-        c++-mode
-        c-mode
-        haskell-mode
-        emacs-lisp-mode
-        lisp-mode
-        scheme-mode
-        erlang-mode
-        python-mode
-        js-mode
-        js2-mode
-        html-mode
-        lua-mode
-))
-
-;; untabify some modes
-(setq custom/untabify-modes
-      '(
-        haskell-mode
-        emacs-lisp-mode
-        lisp-mode
-        scheme-mode
-        erlang-mode
-        clojure-mode
-        python-mode
-))
 
 (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)
