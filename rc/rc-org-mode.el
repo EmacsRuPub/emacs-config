@@ -73,7 +73,6 @@
 (setq org-indirect-buffer-display 'current-window)
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-log-done t)
-(setq org-log-done t) ;; read documentation
 (setq org-log-into-drawer t)
 (setq org-loop-over-headlines-in-active-region t)
 (setq org-outline-path-complete-in-steps nil)
@@ -92,6 +91,7 @@
 (setq org-use-property-inheritance t)
 (setq org-use-speed-commands t)
 (setq org-use-sub-superscripts nil)
+(setq org-agenda-restore-windows-after-quit t)
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
@@ -235,6 +235,10 @@
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 (load (at-config-basedir "last-scrum-timestamp"))
 (org-add-link-type "tag" 'custom/follow-tag-link)
+(ignore-errors (org-agenda-to-appt))
+(add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+(org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
+(run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
