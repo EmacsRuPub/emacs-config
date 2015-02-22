@@ -27,10 +27,8 @@
 (add-to-list 'org-agenda-files "/home/octocat/.stumpwm.d/todo.org")
 
 (setq calendar-date-style 'european)
-(setq calendar-mark-diary-entries-flag t)
 (setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-agenda-include-all-todo t)
-(setq org-agenda-include-diary t)
 (setq org-agenda-repeating-timestamp-show-all nil)
 (setq org-agenda-show-all-dates t)
 (setq org-agenda-show-inherited-tags nil)
@@ -238,7 +236,6 @@
 (org-add-link-type "tag" 'custom/follow-tag-link)
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
-(add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 (add-hook 'org-after-refile-insert-hook 'save-buffer)
