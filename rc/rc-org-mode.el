@@ -160,6 +160,7 @@
           (org-tags-match-list-sublevels 'indented)
           (org-agenda-sorting-strategy
            '((agenda time-up priority-down tag-up) ))
+          ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
         ("u" . "unassigned")
         ("Pa" "Prioritized tasks A"
