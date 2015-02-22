@@ -257,13 +257,6 @@
   :config
   (setq framemove-hook-into-windmove t))
 
-(use-package buffer-move
-  :bind
-  (("C-S-c <up>" . buf-move-up)
-   ("C-S-c <down>" . buf-move-down)
-   ("C-S-c <left>" . buf-move-left)
-   ("C-S-c <right>" . buf-move-right)))
-
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))
 (global-unset-key (kbd "C-M-s"))
@@ -271,10 +264,6 @@
 (global-unset-key (kbd "C-x C-b"))
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "<C-M-down>") 'win-resize-minimize-vert)
-(global-set-key (kbd "<C-M-up>") 'win-resize-enlarge-vert)
-(global-set-key (kbd "<C-M-right>") 'win-resize-minimize-horiz)
-(global-set-key (kbd "<C-M-left>") 'win-resize-enlarge-horiz)
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 (define-key custom-search-keymap (kbd "r") 'rgrep)
 

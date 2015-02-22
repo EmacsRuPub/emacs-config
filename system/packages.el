@@ -30,7 +30,6 @@
         bitlbee
         bookmark+
         breadcrumb-custom
-        buffer-move
         c-eldoc
         calfw
         col-highlight
