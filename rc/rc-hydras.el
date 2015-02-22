@@ -50,6 +50,10 @@
   ("<next>" custom/find-url-forward "next url")
   ("q" nil "cancel"))
 
+(defhydra hydra-toggle (global-map "<f11>" :color blue)
+  ("d" toggle-debug-on-error "debug on error")
+  ("w" whitespace-mode "whitespace mode"))
+
 (provide 'rc-hydras)
 
 ;;; rc-hydras.el ends here
