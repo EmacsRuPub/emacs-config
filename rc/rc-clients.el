@@ -33,14 +33,14 @@
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (define-key custom-clients-keymap (kbd "s") 'connect-office-irc)
-    (define-key custom-clients-keymap (kbd "q") 'leave-irc-server)
-    (define-key custom-clients-keymap (kbd "b") 'select-erc-buffer)
-    (define-key custom-clients-keymap (kbd "i") 'insert-erc-nick)
-    (define-key erc-mode-map (kbd "M-<up>") 'custom/find-url-backward)
-    (define-key erc-mode-map (kbd "M-<down>") 'custom/find-url-forward)
     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
                                     "324" "329" "332" "333" "353" "477"))))
+    (bind-key "s" 'connect-office-irc custom-clients-keymap)
+    (bind-key "q" 'leave-irc-server custom-clients-keymap)
+    (bind-key "b" 'select-erc-buffer custom-clients-keymap)
+    (bind-key "i" 'insert-erc-nick custom-clients-keymap)
+    (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
+    (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
 
 (use-package twittering-mode
   :defer t
