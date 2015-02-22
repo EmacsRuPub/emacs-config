@@ -4,8 +4,6 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'auto-complete "auto-complete" "Autocompletion for Emacs." t)
-(autoload 'yas-global-mode "yasnippet" "Yasnippet" t)
 
 (use-package auto-complete
   :commands auto-complete

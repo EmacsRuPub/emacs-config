@@ -6,7 +6,6 @@
 
 (require 'dired)
 (require 'dired+)
-(require 'wdired)
 (require 'dired-x)
 (require 'dired-toggle-sudo)
 
@@ -28,25 +27,24 @@
 (define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete) ;; Delete with C-x C-k to match file buffers and magit
 (define-key dired-mode-map (kbd "`") 'dired-open-term)
 
-(setq wdired-allow-to-change-permissions t)
-
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
           wdired-abort-changes)
         (eval `(defadvice ,it (after revert-buffer activate)
                  (revert-buffer))))
-;TODO: try use-package
-(with-eval-after-load "wdired"
-  (define-key wdired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
-  (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-  (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom))
 
-
-;; Additions to dired http://nflath.com/2009/07/dired/
-
-(setq wdired-allow-to-change-permissions 'advanced)
-(define-key dired-mode-map  (kbd "r") 'wdired-change-to-wdired-mode)
+(use-package wdired
+  :defer t
+  :config
+  (progn
+    (setq wdired-allow-to-change-permissions 'advanced)
+    (setq wdired-allow-to-change-permissions t)
+    (bind-key "C-a" 'dired-back-to-start-of-files wdired-mode-map)
+    (bind-key (vector 'remap 'beginning-of-buffer) 'dired-back-to-top wdired-mode-map)
+    (bind-key (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom wdired-mode-map)
+    (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
+    ))
 
 (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
 (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)

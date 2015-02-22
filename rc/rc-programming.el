@@ -4,26 +4,12 @@
 ;; Created:  Fri May 30 23:45:51 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; TODO check if we can use some autoloads below
-(require 'tempo)
-(require 'doxymacs)
-(require 'projectile)
-
 (require 'filecache)
 (require 'imenu)
 (require 'compile)
-(require 'eldoc)
 
-(autoload 'smerge-mode "smerge-mode" nil t)
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 (autoload 'gtags-mode "gtags" "" t)
-(autoload 'footnote-mode "footnote" nil t) ;; footnote mode
-(autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization."        t)
-(autoload 'whitespace-toggle-options "whitespace" "Toggle local `whitespace-mode' options." t)
-(autoload 'turn-on-eldoc-mode "eldoc" nil t)
-(autoload 'magit-status "magit" nil t)
-(autoload 'global-git-gutter-mode "git-gutter" nil t)
-(autoload 'ecb-activate "ecb" nil t)
 
 (use-package doxymacs
   :defer t
@@ -41,7 +27,6 @@
 
 (use-package projectile
   :commands (projectile-find-file custom/projectile-ag)
-  :bind ("C-c h p" . helm-projectile)
   :config
   (progn
     (projectile-global-mode) ;; to enable in all buffers
@@ -59,7 +44,8 @@
 (use-package ecb
   :defer t
   :bind (("C-x t q" . ecb-toggle-ecb-windows)
-         ("C-x t d" . ecb-deactivate)))
+         ("C-x t d" . ecb-deactivate)
+         ("C-x t a" . ecb-activate)))
 
 (use-package flycheck
   :defer t
@@ -109,23 +95,26 @@
     (set-face-attribute 'git-gutter:added nil :inverse-video nil)
     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
     (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
+    (global-git-gutter-mode +1)
     (diminish 'git-gutter-mode)))
 
-;; TODO try to autoload someway
-(setq gdb-many-windows t)
-(setq gdb-show-main t)
-(setq gud-chdir-before-run nil)
-(setq gud-tooltip-mode t)
-(setq gdb-use-separate-io-buffer t)
+(use-package gud
+  :init
+  (use-package gdb-mi)
+  :config
+  (progn
+    (setq gdb-many-windows t)
+    (setq gdb-show-main t)
+    (setq gdb-use-separate-io-buffer t)
+    (setq gud-chdir-before-run nil)
+    (setq gud-tooltip-mode t)))
 
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-diff-options "-w")
-
-(global-git-gutter-mode +1)
-
-(global-set-key [(control f9)] (lambda () (interactive) (magit-status default-directory)))
-(global-set-key (kbd "C-x t a") 'ecb-activate)
+(use-package ediff
+  :config
+  (progn
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (setq ediff-split-window-function 'split-window-horizontally)
+    (setq ediff-diff-options "-w")))
 
 (define-key custom-vcs-keymap (kbd "t") 'git-timemachine)
 

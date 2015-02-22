@@ -8,28 +8,39 @@
 ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
 ;; http://www.emacswiki.org/emacs/DocbookXmlMode
 
-(autoload 'emmet-mode "emmet-mode")
-(autoload 'emmet-expand-line "emmet-mode")
-(autoload 'markdown-mode "markdown-mode")
+(use-package css-eldoc
+  :config
+  (turn-on-css-eldoc))
 
-(require 'css-eldoc)
+(use-package sgml-mode
+  :config
+  (progn
+    (bind-key "C-<down>" 'skip-to-next-blank-line html-mode-map)
+    (bind-key "C-<up>" 'skip-to-previous-blank-line html-mode-map)
+    (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
-(with-eval-after-load "sgml-mode"
-  (define-key html-mode-map (kbd "C-<down>") 'skip-to-next-blank-line)
-  (define-key html-mode-map (kbd "C-<up>") 'skip-to-previous-blank-line)
-  (define-key html-mode-map (kbd "C-c C-w") 'html-wrap-in-tag))
+(use-package emmet-mode
+  :config
+  (progn
+    (bind-key "C-j" nil emmet-mode-keymap)
+    (bind-key "<C-return>" nil emmet-mode-keymap)
+    (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
+    (setq emmet-move-cursor-between-quotes t)
+    (diminish 'emmet-mode)
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'nxml-mode-hook 'emmet-mode)
+    (add-hook 'django-mode 'emmet-mode)
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'css-mode-hook 'emmet-mode)
+    (add-hook 'emmet-mode-hook
+              (lambda () (setq emmet-indentation 2)))
+    ))
 
-(with-eval-after-load 'emmet-mode
-  (define-key emmet-mode-keymap (kbd "C-j") nil)
-  (define-key emmet-mode-keymap (kbd "<C-return>") nil)
-  (define-key emmet-mode-keymap (kbd "C-c C-j") 'emmet-expand-line)
-  (diminish 'emmet-mode))
-
-(with-eval-after-load 'markdown-mode
-  (define-key markdown-mode-map (kbd "C-c C-v") 'markdown-preview)
-  (define-key markdown-mode-map (kbd "<tab>") 'yas/expand))
-
-(turn-on-css-eldoc)
+(use-package markdown-mode
+  :config
+  (progn
+    (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
+    (bind-key "<tab>" 'yas/expand markdown-mode-map)))
 
 (defun custom/nxml-mode-hook ()
   (auto-fill-mode)
@@ -54,16 +65,10 @@
                nil))
 
 (setq mumamo-submode-indent-offset 4)
-(setq emmet-move-cursor-between-quotes t)
 
 (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
 (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'nxml-mode-hook 'emmet-mode)
-(add-hook 'django-mode 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook 'emmet-mode)
 (add-hook 'django-html-mumamo-mode-hook
           (lambda ()
             (setq django-indent-width 4)
@@ -72,7 +77,6 @@
                 (local-set-key [remap isearch-forward] 'isearch-forward-noeldoc)))
 (add-hook 'less-css-mode-hook (lambda ()
                 (local-set-key [remap isearch-backward] 'isearch-backward-noeldoc)))
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 
 (provide 'rc-markup)
 

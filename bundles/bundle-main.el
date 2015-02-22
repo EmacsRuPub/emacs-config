@@ -15,7 +15,6 @@
 (require 'rc-completion)
 (require 'rc-programming)
 (require 'rc-clients)
-(require 'rc-jabber)
 (require 'rc-shell)
 (require 'rc-pim)
 (require 'rc-org-mode)

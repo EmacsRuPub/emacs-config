@@ -4,160 +4,202 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cua-base)
-(require 'cursor-chg)
-(require 'drag-stuff)
-(require 'expand-region)
-(require 'hideshow) ;; Hide/Show mode
-(require 'multiple-cursors)
-(require 'recentf)
-(require 'recentf-ext)
-(require 'region-bindings-mode)
+(autoload 'footnote-mode "footnote" nil t) ;; footnote mode
+
 (require 'rst)
 (require 'savekill)
 (require 'saveplace)
 (require 'table) ;; table
-(require 'volatile-highlights)
-(require 'wc-mode)
-(require 'whole-line-or-region) ;; if no region is active, act on current line
-(require 'generic)
-(require 'generic-x)
-(require 'rebox2)
-(require 'file-template)
 
 (delete-selection-mode t)
-(volatile-highlights-mode t)
-(show-paren-mode t)
-(whole-line-or-region-mode 1)
-(toggle-cursor-type-when-idle 1)
-(change-cursor-mode 1)
-(electric-indent-mode -1)
 (dtrt-indent-mode)
+(electric-indent-mode -1)
+(global-auto-revert-mode 1);; Auto refresh buffers
+(show-paren-mode t)
+(toggle-cursor-type-when-idle 1)
+(transient-mark-mode 1)
 
-(with-eval-after-load "undo-tree"
-  (global-undo-tree-mode t))
-
-(wrap-region-global-mode 1)
-(wrap-region-add-wrapper "*" "*")
-(wrap-region-add-wrapper "(" ")")
-(wrap-region-add-wrapper "{-" "-}" "#")
-(wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))
-
-(turn-off-drag-stuff-mode)
-
-(region-bindings-mode-enable)
-
-(setq whitespace-modes 'awk-mode)
-(setq-default fill-column 200)
-(setq indent-tabs-mode nil)
+(setq auto-revert-verbose nil)
 (setq comment-style 'indent)
-(setq user-full-name (capitalize global-username))
-(setq kill-whole-line t)
-(setq next-line-add-newlines nil)
-(setq tab-always-indent t)
-(setq tab-width 4)
-(setq transient-mark-mode t)
-(setq whitespace-global-mode nil)
-(setq whitespace-silent t)
-(setq sentence-end-double-space nil)
-(setq undo-limit 1000000)
+(setq default-input-method 'russian-computer)
 (setq delete-by-moving-to-trash t);; Move files to trash when deleting
-(setq-default truncate-lines t);; Don't break lines for me, please
-(setq mark-even-if-inactive t)
+(setq global-auto-revert-non-file-buffers t)
+(setq indent-tabs-mode nil)
+(setq kill-whole-line t)
 (setq kmacro-ring-max 16)
-
+(setq mark-even-if-inactive t)
+(setq next-line-add-newlines nil)
+(setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
+(setq sentence-end-double-space nil)
+(setq tab-always-indent t)
+(setq transient-mark-mode t)
+(setq undo-limit 1000000)
+(setq user-full-name (capitalize global-username))
 (setq x-select-enable-clipboard t);; Allow pasting selection outside of Emacs
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
-(define-coding-system-alias 'UTF-8 'utf-8)
-
-;; enable recent files mode.
-(recentf-mode t)
-
-(setq recentf-max-saved-items 250)
-(setq recentf-max-menu-items 15)
-
-;; Redraw the entire screen before checking for pending input events.
-;; This will improve performance in general but might degrade performance of
-;; key repeat.
-(setq redisplay-dont-pause t)
-
-(setq-default save-place t)
-(setq default-input-method 'russian-computer)
-(setq-default indicate-empty-lines t)
 (set-default 'indent-tabs-mode nil);; Never insert tabs
+(setq-default fill-column 200)
+(setq-default indicate-empty-lines t)
+(setq-default save-place t)
+(setq-default tab-width 4)
+(setq-default transient-mark-mode t)
+(setq-default truncate-lines t);; Don't break lines for me, please
 
-(setq regex-tool-backend 'perl)
-
-(setq text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
-
-(setq fci-rule-color "#111122")
-
-(setq undo-tree-mode-lighter "");; Represent undo-history as an actual tree (visualize with C-x u)
-
-;; Show active region
-(transient-mark-mode 1)
 (make-variable-buffer-local 'transient-mark-mode)
 (put 'transient-mark-mode 'permanent-local t)
-(setq-default transient-mark-mode t)
 
-;; If something updates under us and we haven't changed the buffer
-;; ourselves, reload without asking. Handy for git.
-(global-auto-revert-mode 1);; Auto refresh buffers
-;; Also auto refresh dired, but be quiet about it
-(setq global-auto-revert-non-file-buffers t)
-(setq auto-revert-verbose nil)
-
-(setq whole-line-or-region-extensions-alist
-  '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
-    (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
-    (kill-region whole-line-or-region-kill-region nil)
-    (kill-ring-save whole-line-or-region-kill-ring-save nil)
-    (yank whole-line-or-region-yank nil)
-  ))
-
-(setq browse-kill-ring-quit-action 'save-and-restore)
-
-(setq file-template-paths `(,(concat config-basedir "resources/auto-insert"))) ;TODO: move to constants
-(setq file-template-mapping-alist
-      '(("\\.el$" . "template.el")
-        ("\\.py$" . "template.py")
-        ("\\.sh$" . "template.sh")
-        ))
-(setq file-template-insert-automatically t)
-(push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
-(push '("D" . (current-time-string)) file-template-tag-alist)
-(add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)
-
+(define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+(use-package cursor-chg
+  :config
+  (change-cursor-mode 1))
 
-(with-eval-after-load "paredit"
-  (define-key paredit-mode-map (kbd "M-s") nil)
-  (define-key paredit-mode-map (kbd "M-<up>") nil)
-  (define-key paredit-mode-map (kbd "M-<down>") nil)
-  (define-key paredit-mode-map (kbd "C-<up>") nil)
-  (define-key paredit-mode-map (kbd "C-<down>") nil)
-  (define-key paredit-mode-map (kbd "C-M-s") 'paredit-splice-sexp)
-  (paredit-everywhere-mode 1))
+(use-package drag-stuff
+  :defer t
+  :bind
+  (("C-c d e" . turn-on-drag-stuff-mode)
+   ("C-c d d" . turn-off-drag-stuff-mode))
+  :config
+  (progn
+    (turn-off-drag-stuff-mode)
+    ))
 
-(with-eval-after-load "list-register"
-  (global-set-key (kbd "C-x r v") 'list-register))
+(use-package expand-region
+  :defer t
+  :bind ("C-=" . er/expand-region))
+
+(use-package undo-tree
+  :config
+  (progn
+    (global-undo-tree-mode t)
+    (setq undo-tree-mode-lighter "")))
+
+(use-package multiple-cursors
+  :defer t
+  :bind
+  (("C-S-c C-S-c" . mc/edit-lines)
+   ("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-*" . mc/mark-all-like-this)
+   ("C-^" . mc/edit-beginnings-of-lines)
+   ("C-$" . mc/edit-ends-of-lines)
+   ("C-#" . mc/mark-more-like-this-extended)
+   ("C-%" . mc/mark-all-in-region)
+   ("C-(" . mc/mark-all-like-this-in-defun)
+   ("C-)" . mc/mark-all-like-this-dwim)
+   ("C-~" . mc/sort-regions)
+   ("C-!" . mc/insert-numbers)
+   ("C-|" . mc/reverse-regions)))
+
+(use-package recentf
+  :defer t
+  :init
+  (use-package recentf-ext)
+  :config
+  (progn
+    (recentf-mode t) ;enable recent files mode.
+    (setq recentf-max-saved-items 250)
+    (setq recentf-max-menu-items 15)
+    ;; get rid of `find-file-read-only' and replace it with something more useful.
+    (global-set-key (kbd "C-x C-r") 'ido-recentf-open)))
+
+(use-package region-bindings-mode
+  :config
+  (region-bindings-mode-enable))
+
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
+
+(use-package wc-mode
+  :config
+  (bind-key "c" 'wc-mode custom-edit-keymap))
+
+(use-package whole-line-or-region ;; if no region is active, act on current line
+  :defer t
+  :config
+  (progn
+    (whole-line-or-region-mode 1)
+    (diminish 'whole-line-or-region-mode)
+    (setq whole-line-or-region-extensions-alist
+          '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
+            (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
+            (kill-region whole-line-or-region-kill-region nil)
+            (kill-ring-save whole-line-or-region-kill-ring-save nil)
+            (yank whole-line-or-region-yank nil)
+            ))))
+
+(use-package generic
+  :defer t
+  :init
+  (use-package generic-x)
+  :config
+  (progn
+    (define-generic-mode 'keymap-mode
+      '("#")
+      '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+      nil
+      '(".keymap\\'" ".map\\'")
+      nil)
+    (setq generic-default-modes (delete 'javascript-generic-mode
+                                        generic-default-modes))))
+
+(use-package file-template
+  :config
+  (progn
+    (setq file-template-paths `(,(concat config-basedir "resources/auto-insert"))) ;TODO: move to constants
+    (setq file-template-mapping-alist
+          '(("\\.el$" . "template.el")
+            ("\\.py$" . "template.py")
+            ("\\.sh$" . "template.sh")
+            ))
+    (setq file-template-insert-automatically t)
+    (push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
+    (push '("D" . (current-time-string)) file-template-tag-alist)
+    (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)))
+
+(use-package rebox2
+  :bind (("M-q" . rebox-dwim)
+         ("S-M-q" . rebox-cycle)))
+
+(use-package paredit
+  :defer t
+  :config
+  (progn
+    (bind-key "M-s" nil paredit-mode-map)
+    (bind-key "M-<up>" nil paredit-mode-map)
+    (bind-key "M-<down>" nil paredit-mode-map)
+    (bind-key "C-<up>" nil paredit-mode-map)
+    (bind-key "C-<down>" nil paredit-mode-map)
+    (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map)
+    (paredit-everywhere-mode 1)
+    ))
 
 (use-package vimrc-mode
   :defer t
   :mode ".vim\\(rc\\)?$")
 
-(define-generic-mode 'keymap-mode
-  '("#")
-  '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-  nil
-  '(".keymap\\'" ".map\\'")
-  nil)
+(use-package whitespace
+  :defer t
+  :config
+  (progn
+    (bind-key "p" 'whitespace-mode custom-edit-keymap)
+    (bind-key "t" 'delete-trailing-whitespace custom-edit-keymap)))
 
-(setq generic-default-modes (delete 'javascript-generic-mode
-                                    generic-default-modes))
+(use-package wrap-region
+  :config
+  (progn
+    (wrap-region-global-mode 1)
+    (wrap-region-add-wrapper "*" "*")
+    (wrap-region-add-wrapper "(" ")")
+    (wrap-region-add-wrapper "{-" "-}" "#")
+    (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
+
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'text-mode-hook-identify)
 
 (define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
@@ -169,8 +211,6 @@
 (define-key custom-edit-keymap (kbd "SPC") 'untabify)
 (define-key custom-edit-keymap (kbd "n") 'narrow-to-region)
 (define-key custom-edit-keymap (kbd "w") 'widen)
-(define-key custom-edit-keymap (kbd "p") 'whitespace-mode)
-(define-key custom-edit-keymap (kbd "t") 'delete-trailing-whitespace)
 (define-key custom-edit-keymap (kbd "M-a") 'indent-region)
 (define-key custom-edit-keymap (kbd "C-SPC") 'comment-dwim)
 (define-key custom-edit-keymap (kbd "v") 'view-mode)
@@ -190,7 +230,6 @@
 (define-key custom-edit-keymap (kbd "C-;") 'join-next-line-semicolon-n)
 (define-key custom-edit-keymap (kbd "C-r") 'join-region)
 (define-key custom-edit-keymap (kbd "b") 'subword-mode)
-(define-key custom-edit-keymap (kbd "c") 'wc-mode)
 (define-key custom-edit-keymap (kbd "o") 'just-one-space)
 (define-key custom-edit-keymap (kbd "0") 'compact-spaces-in-region)
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
@@ -226,40 +265,14 @@
 (global-set-key (kbd "C-c y") 'revbufs)
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
-
-(global-set-key (kbd "C-^") 'mc/edit-beginnings-of-lines)
-(global-set-key (kbd "C-$") 'mc/edit-ends-of-lines)
-
-(global-set-key (kbd "C-#") 'mc/mark-more-like-this-extended)
-(global-set-key (kbd "C-%") 'mc/mark-all-in-region)
-(global-set-key (kbd "C-(") 'mc/mark-all-like-this-in-defun)
-(global-set-key (kbd "C-)") 'mc/mark-all-like-this-dwim)
-
-(global-set-key (kbd "C-~") 'mc/sort-regions)
-(global-set-key (kbd "C-!") 'mc/insert-numbers)
-(global-set-key (kbd "C-|") 'mc/reverse-regions)
 
 (global-set-key (kbd "C-c i c") 'minimap-create)
 (global-set-key (kbd "C-c i k") 'minimap-kill)
-
-(global-set-key (kbd "C-c d e") 'turn-on-drag-stuff-mode)
-(global-set-key (kbd "C-c d d") 'turn-off-drag-stuff-mode)
 
 (global-set-key (kbd "C-`") 'mf/mirror-region-in-multifile)
 
 ;; key definition example
 ;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
-
-;; get rid of `find-file-read-only' and replace it with something
-;; more useful.
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
@@ -272,9 +285,6 @@
 (global-set-key (kbd "C-c r l") (lambda () (interactive) (sudo-find-file "/etc/portage/package.license")))
 (global-set-key (kbd "C-c r k") (lambda () (interactive) (sudo-find-file "/etc/portage/package.keywords")))
 (global-set-key (kbd "C-c r a") (lambda () (interactive) (sudo-find-file "/etc/portage/package.accept_keywords")))
-
-(global-set-key (kbd "M-q") 'rebox-dwim)
-(global-set-key (kbd "S-M-q") 'rebox-cycle)
 
 (provide 'rc-editing)
 

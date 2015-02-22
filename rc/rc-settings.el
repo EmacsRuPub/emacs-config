@@ -6,9 +6,21 @@
 
 (load-library "time")
 
-(require 'uniquify)
 (require 'popwin)
-(require 'tail)
+
+(use-package uniquify
+  :config
+  (progn
+    (setq uniquify-buffer-name-style 'post-forward)
+    (setq uniquify-separator "/")
+    (setq uniquify-ignore-buffers-re "^\\*")
+    (setq uniquify-strip-common-suffix nil)))
+
+(use-package tail
+  :bind
+  ("C-c t f" . tail-file)
+  :config
+  (setq tail-max-size 20))
 
 ;;; Enable functions that are disabled by default
 (put 'upcase-region 'disabled nil)
@@ -48,11 +60,6 @@
 (setq display-time-string-forms
   '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 (setq disabled-command-function nil)
-(setq uniquify-buffer-name-style 'post-forward)
-(setq uniquify-separator "/")
-(setq uniquify-ignore-buffers-re "^\\*")
-(setq uniquify-strip-common-suffix nil)
-(setq tail-max-size 20)
 (setq font-lock-maximum-decoration t)
 (setq color-theme-is-global t)
 (setq truncate-partial-width-windows nil)
@@ -85,18 +92,17 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (defun custom/after-init-hook ()
-  (with-eval-after-load "diminish"
-    (diminish 'abbrev-mode)
-    (diminish 'auto-complete-mode " α")
-    (diminish 'auto-fill-function)
-    (diminish 'visual-line-mode)
-    (diminish 'volatile-highlights-mode)
-    (diminish 'whole-line-or-region-mode)
-    ))
+  (use-package diminish
+    :config
+    (progn
+      (diminish 'abbrev-mode)
+      (diminish 'auto-complete-mode " α")
+      (diminish 'auto-fill-function)
+      (diminish 'visual-line-mode)
+      (diminish 'volatile-highlights-mode)
+      )))
 
 (add-hook 'after-init-hook 'custom/after-init-hook)
-
-(global-set-key (kbd "C-c t f") 'tail-file)
 
 (provide 'rc-settings)
 
