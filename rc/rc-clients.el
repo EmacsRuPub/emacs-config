@@ -4,11 +4,6 @@
 ;; Created:  Fri May 30 19:10:47 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'gmail-notifier-start "gmail-notifier" nil t)
-
-(gmail-notifier-start)
-(gmail-notifier-check)
-
 (defun custom/term-exec-hook ()
   (let* ((buff (current-buffer))
          (proc (get-buffer-process buff)))
@@ -152,15 +147,22 @@
                  '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
     (define-key custom-search-keymap (kbd "w") 'w3m-select-buffer)))
 
-;TODO: try use-package
-(with-eval-after-load "gmail-notifier"
-  (global-set-key [f8] 'open-gmail)
-  (global-set-key [f9] 'gmail-notifier-check))
+(use-package gmail-notifier
+  :defer t
+  :bind (("<f8>" . open-gmail)
+         ("<f9>" . gmail-notifier-check))
+  :config
+  (progn
+    (gmail-notifier-start)
+    (gmail-notifier-check)))
 
-(with-eval-after-load "google-translate"
-  (require 'google-translate-default-ui)
-  (define-key custom-search-keymap (kbd "t") 'google-translate-at-point)
-  (define-key custom-search-keymap (kbd "T") 'google-translate-query-translate))
+(use-package google-translate
+  :defer t
+  :init
+  (progn
+    (use-package google-translate-default-ui)
+    (bind-key "t" 'google-translate-at-point custom-search-keymap)
+    (bind-key "T" 'google-translate-query-translate custom-search-keymap)))
 
 (define-key comint-mode-map "\C-c\M-o" #'comint-clear-buffer)
 
