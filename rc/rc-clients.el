@@ -30,17 +30,60 @@
   :defer t
   :init
   (use-package erc-pcomplete)
+  (use-package erc-join)
+  (use-package erc-lang)
+  (use-package erc-fill)
+  (use-package erc-log)
+  (use-package erc-autoaway)
+  (use-package erc-services)
+  (use-package erc-menu)
+  (use-package erc-ring)
+  (use-package erc-match)
+  (use-package erc-nicklist)
+  (use-package erc-highlight-nicknames)
+  (use-package erc-scrolltobottom)
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"
-                                    "324" "329" "332" "333" "353" "477"))))
     (bind-key "s" 'connect-office-irc custom-clients-keymap)
     (bind-key "q" 'leave-irc-server custom-clients-keymap)
     (bind-key "b" 'select-erc-buffer custom-clients-keymap)
     (bind-key "i" 'insert-erc-nick custom-clients-keymap)
     (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
     (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
+    (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                    "324" "329" "332" "333" "353" "477"))
+    (setq erc-kill-queries-on-quit t)
+    (setq erc-autojoin-channels-alist
+          '(("irc.freenode.net" "#git" "#stumpwm")
+            ))
+    (setq erc-keywords '((".*Online.*" (:foreground "green"))
+                         (".*Busy" (:foreground "red"))
+                         (".*Away" (:foreground "red"))
+                         (".*Idle" (:foreground "orange"))
+                         ))
+    (setq erc-nickserv-passwords
+          '((freenode ((private/erc-nick-main . private/erc-password-main)
+                       (private/erc-nick-work . private/erc-password-work)))))
+    (setq erc-prompt-for-nickserv-password nil)
+    (setq erc-nick private/erc-nick-main)
+    (setq erc-track-priority-faces-only 'all)
+    (setq erc-log-channels-directory custom/erc-logs-directory)
+    (setq erc-autoaway-message custom/erc-autoaway-message)
+    (setq erc-auto-query 'buffer)
+    (setq erc-log-channels t)
+    (setq erc-log-insert-log-on-open t)
+    (setq erc-max-buffer-size 20000)
+
+    (erc-autojoin-mode t)
+    (erc-fill-mode t)
+    (erc-nickserv-mode 1)
+    (erc-ring-mode t)
+    (erc-match-enable)
+    (erc-match-mode 1)
+    (erc-timestamp-mode t)
+    (erc-log-enable)
+    ))
 
 (use-package twittering-mode
   :defer t
