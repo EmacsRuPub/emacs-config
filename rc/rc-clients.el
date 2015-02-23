@@ -80,9 +80,7 @@
 (use-package mingus
   :defer t
   :commands mingus
-  :bind (("C-c <right>" . mingus-seek)
-         ("C-c <left>" . mingus-seek-backward)
-         ("C-c s" . mingus))
+  :bind ("C-c s" . mingus)
   :config
   (bind-key "<Backspace>" 'mingus-del mingus-playlist-map))
 

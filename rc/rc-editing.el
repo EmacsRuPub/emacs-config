@@ -77,21 +77,20 @@
     (setq undo-tree-mode-lighter "")))
 
 (use-package multiple-cursors
-  :defer t
-  :bind
-  (("C-S-c C-S-c" . mc/edit-lines)
-   ("C->" . mc/mark-next-like-this)
-   ("C-<" . mc/mark-previous-like-this)
-   ("C-*" . mc/mark-all-like-this)
-   ("C-^" . mc/edit-beginnings-of-lines)
-   ("C-$" . mc/edit-ends-of-lines)
-   ("C-#" . mc/mark-more-like-this-extended)
-   ("C-%" . mc/mark-all-in-region)
-   ("C-(" . mc/mark-all-like-this-in-defun)
-   ("C-)" . mc/mark-all-like-this-dwim)
-   ("C-~" . mc/sort-regions)
-   ("C-!" . mc/insert-numbers)
-   ("C-|" . mc/reverse-regions)))
+  :config
+  (progn
+    (bind-key "<right>" 'mc/mark-next-like-this custom-mc-keymap)
+    (bind-key "<left>" 'mc/mark-previous-like-this custom-mc-keymap)
+    (bind-key "8" 'mc/mark-all-like-this custom-mc-keymap)
+    (bind-key "6" 'mc/edit-beginnings-of-lines custom-mc-keymap)
+    (bind-key "4" 'mc/edit-ends-of-lines custom-mc-keymap)
+    (bind-key "3" 'mc/mark-more-like-this-extended custom-mc-keymap)
+    (bind-key "5" 'mc/mark-all-in-region custom-mc-keymap)
+    (bind-key "9" 'mc/mark-all-like-this-in-defun custom-mc-keymap)
+    (bind-key "0" 'mc/mark-all-like-this-dwim custom-mc-keymap)
+    (bind-key "`" 'mc/sort-regions custom-mc-keymap)
+    (bind-key "1" 'mc/insert-numbers custom-mc-keymap)
+    (bind-key "<up>" 'mc/reverse-regions custom-mc-keymap)))
 
 (use-package recentf
   :defer t
@@ -209,18 +208,12 @@
 (define-key custom-edit-keymap (kbd "s") 'sort-lines)
 (define-key custom-edit-keymap [tab] 'tabify)
 (define-key custom-edit-keymap (kbd "SPC") 'untabify)
-(define-key custom-edit-keymap (kbd "n") 'narrow-to-region)
-(define-key custom-edit-keymap (kbd "w") 'widen)
 (define-key custom-edit-keymap (kbd "M-a") 'indent-region)
 (define-key custom-edit-keymap (kbd "C-SPC") 'comment-dwim)
 (define-key custom-edit-keymap (kbd "v") 'view-mode)
 (define-key custom-edit-keymap (kbd "4") 'camelscore-word-at-point)
 (define-key custom-edit-keymap (kbd "9") 'quote-string-with-period-and-nextline)
 (define-key custom-edit-keymap (kbd "S-9") 'double-quote-string-with-period-and-nextline)
-(define-key custom-edit-keymap (kbd "<left>") 'previous-error)
-(define-key custom-edit-keymap (kbd "<right>") 'next-error)
-(define-key custom-edit-keymap (kbd "<up>") 'move-line-up)
-(define-key custom-edit-keymap (kbd "<down>") 'move-line-down)
 (define-key custom-edit-keymap (kbd "[") 'comment-region)
 (define-key custom-edit-keymap (kbd "]") 'uncomment-region)
 (define-key custom-edit-keymap (kbd "<left>") 'jump-char-backward)
@@ -235,10 +228,6 @@
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
 (define-key custom-edit-keymap (kbd "2") 'duplicate-line)
-(define-key custom-edit-keymap (kbd "h") 'smart-backward)
-(define-key custom-edit-keymap (kbd "j") 'smart-down)
-(define-key custom-edit-keymap (kbd "k") 'smart-up)
-(define-key custom-edit-keymap (kbd "l") 'smart-forward)
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
@@ -252,14 +241,6 @@
 ;I never use set-fill-column and I hate hitting it by accident.
 (global-set-key "\C-x\ f" 'find-file)
 (global-set-key (kbd "C-x r M-k") 'kill-save-rectangle) ;; Give it a memorable key binding
-
-;; Transpose stuff with M-t
-(global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-(global-set-key (kbd "M-t l") 'transpose-lines)
-(global-set-key (kbd "M-t w") 'transpose-words)
-(global-set-key (kbd "M-t s") 'transpose-sexps)
-(global-set-key (kbd "M-t p") 'transpose-params)
-(global-set-key (kbd "M-t a") 'anchored-transpose)
 
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)

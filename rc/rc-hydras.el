@@ -48,11 +48,50 @@
   ("<down>" flycheck-next-error "next error")
   ("<prior>" custom/find-url-backward "previous url")
   ("<next>" custom/find-url-forward "next url")
+  ("<left>" previous-error "previous error")
+  ("<right>" next-error "next error")
   ("q" nil "cancel"))
 
 (defhydra hydra-toggle (global-map "<f11>" :color blue)
   ("d" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode"))
+
+(defhydra hydra-mingus (global-map "C-c m s")
+  ("s" mingus "open mingus")
+  ("<right>" mingus-seek "seek forward")
+  ("<left>" mingus-seek-backward "seek backward")
+  ("q" nil "cancel"))
+
+(defhydra hydra-smart-moving (global-map "C-c 9")
+  ("<left>" smart-backward "smart seek backward")
+  ("<down>" smart-down "smart seek down")
+  ("<up>" smart-up "smart seek up")
+  ("<right>" smart-forward "smart seek forward")
+  ("q" nil "cancel"))
+
+;; Transpose stuff with M-t
+(global-unset-key (kbd "M-t")) ;; which used to be transpose-words
+(defhydra hydra-transpose (global-map "M-t")
+  ("M-b" backward-word "prev word")
+  ("M-f" forward-word "next word")
+  ("<up>" previous-line "prev line")
+  ("<down>" next-line "next line")
+  ("<left>" backward-char "prev char")
+  ("<right>" forward-char "next char")
+  ("C-_" undo-tree-undo "undo last")
+  ("w" transpose-words "on words")
+  ("s" transpose-sexps "on sexps")
+  ("p" transpose-params "on params")
+  ("a" anchored-transpose "anchored")
+  ("q" nil "cancel"))
+
+(defhydra hydra-scope (global-map "C-x s") ; was save-some-buffers
+  ("r" narrow-to-region)
+  ("d" narrow-to-defun)
+  ("c" narrow-to-defun+comments-above)
+  ("w" widen)
+  ;TODO: maybe add org narrowing
+  ("q" nil "cancel"))
 
 (provide 'rc-hydras)
 
