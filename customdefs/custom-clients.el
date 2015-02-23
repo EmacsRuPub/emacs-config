@@ -17,13 +17,13 @@
 
 (defalias 'tt 'terminal)
 
-(defun connect-office-irc ()
+(defun connect-slack-irc ()
   (interactive)
   (erc-tls
-   :server private/erc-server-office
+   :server private/mira-slack-host
    :full-name private/erc-full-name
-   :nick private/erc-nick-office
-   :password private/erc-password-office))
+   :nick private/mira-slack-nick
+   :password private/mira-slack-password))
 
 (defun connect-gitter-irc ()
   (interactive)
