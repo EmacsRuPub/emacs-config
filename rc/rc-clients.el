@@ -58,7 +58,6 @@
     (setq erc-autoaway-message custom/erc-autoaway-message)
     (setq erc-auto-query 'buffer)
     (setq erc-log-channels t)
-    (setq erc-log-insert-log-on-open t)
     (setq erc-max-buffer-size 20000)
 
     (erc-autojoin-mode t)
