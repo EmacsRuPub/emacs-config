@@ -50,6 +50,7 @@
   ("<next>" custom/find-url-forward "next url")
   ("<left>" previous-error "previous error")
   ("<right>" next-error "next error")
+  ("<return>" process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
 
 (defhydra hydra-toggle (global-map "<f11>" :color blue)

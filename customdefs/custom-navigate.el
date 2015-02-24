@@ -67,6 +67,15 @@
   (isearch-backward)
   (eldoc-mode 1))
 
+;TODO: make implemetation less straightforward or find "right way" to do it
+(defun process-thing-at-point ()
+  (interactive)
+  (when (equal major-mode 'ag-mode)
+    (compile-goto-error))
+  (when (or (equal major-mode 'jabber-chat-mode)
+            (equal major-mode 'erc-mode))
+    (browse-url (thing-at-point 'url t))))
+
 (provide 'custom-navigate)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
