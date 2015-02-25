@@ -45,6 +45,15 @@
    (ido-completing-read
     "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
 
+(defun select-erc-unread-buffer ()
+  (interactive)
+  (switch-to-buffer
+   (ido-completing-read
+    "Select unread ERC buffer:"
+    (mapcar #'buffer-name
+            (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
+;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
+
 (defun insert-erc-nick ()
   (interactive)
   (insert
