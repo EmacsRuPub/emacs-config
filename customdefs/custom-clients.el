@@ -54,11 +54,13 @@
             (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
 ;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
 
-(defun insert-erc-nick ()
+(defun insert-erc-nick (&optional atsign)
   (interactive)
   (insert
    (concatenate 'string
-                (ido-completing-read "nick" (pcomplete-erc-nicks)) ": ")
+                (when atsign
+                  "@")
+                (ido-completing-read "nick: " (pcomplete-erc-nicks)) ": ")
    ))
 
 (defun open-gmail ()

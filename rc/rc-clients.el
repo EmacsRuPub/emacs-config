@@ -31,10 +31,11 @@
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (bind-key "s" 'connect-office-irc custom-clients-keymap)
+    (bind-key "s" 'connect-slack-irc custom-clients-keymap)
     (bind-key "q" 'leave-irc-server custom-clients-keymap)
-    (bind-key "b" 'select-erc-unread-buffer custom-clients-keymap)
-    (bind-key "i" 'insert-erc-nick custom-clients-keymap)
+    (bind-key "b" 'select-erc-buffer custom-clients-keymap)
+    (bind-key "u" 'select-erc-unread-buffer custom-clients-keymap)
+    (bind-key "i" '(lambda () (interactive) (insert-erc-nick t)) custom-clients-keymap)
     (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
     (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
