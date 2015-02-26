@@ -96,6 +96,14 @@
   ;TODO: maybe add org narrowing
   ("q" nil "cancel"))
 
+(defhydra hydra-insert (global-map "<f6>")
+  ("8" custom-jabber/insert-kiss-smile ":-*")
+  ("l" custom-jabber/insert-inlove-smile "*IN LOVE*")
+  ("y" custom-jabber/insert-shy-smile ":-[")
+  ("t" custom-jabber/insert-copyright-sign "(c)*")
+  ;TODO: move other insertions here, for example, current time, etc.
+  ("q" nil "cancel"))
+
 (provide 'rc-hydras)
 
 ;;; rc-hydras.el ends here
