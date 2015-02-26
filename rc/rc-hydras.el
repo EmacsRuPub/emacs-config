@@ -50,6 +50,8 @@
   ("<next>" custom/find-url-forward "next url")
   ("<left>" previous-error "previous error")
   ("<right>" next-error "next error")
+  ("k" smerge-prev "previous conflict")
+  ("j" smerge-next "next conflict")
   ("<return>" process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
 
