@@ -32,5 +32,7 @@
 (require 'rc-help)
 (require 'rc-hydras)
 
+(require 'staging)
+
 (provide 'bundle-main)
 ;;; macosx-common.el ends here
