@@ -24,6 +24,7 @@
   (progn
     (ac-config-default)
     (global-auto-complete-mode t)
+    (diminish 'auto-complete-mode " α")
     (setq ac-auto-start nil)
     (setq ac-quick-help-delay 0.5)
     (add-to-list 'ac-modes 'slime-repl-mode)

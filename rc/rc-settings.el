@@ -97,10 +97,8 @@
     :config
     (progn
       (diminish 'abbrev-mode)
-      (diminish 'auto-complete-mode " α")
       (diminish 'auto-fill-function)
       (diminish 'visual-line-mode)
-      (diminish 'volatile-highlights-mode)
       )))
 
 (add-hook 'after-init-hook 'custom/after-init-hook)

@@ -110,7 +110,8 @@
 
 (use-package volatile-highlights
   :config
-  (volatile-highlights-mode t))
+  (volatile-highlights-mode t)
+  (diminish 'volatile-highlights-mode))
 
 (use-package wc-mode
   :config
