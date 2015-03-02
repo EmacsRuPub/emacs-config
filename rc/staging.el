@@ -6,6 +6,14 @@
 ;; Keywords:
 ;; Requirements:
 
+(use-package ace-window
+  :init
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-background nil)
+  (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0))))))
+
 (provide 'staging)
 
 ;;; staging.el ends here
