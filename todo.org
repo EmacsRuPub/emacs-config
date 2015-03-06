@@ -156,7 +156,6 @@
 * WAITING [#A] make magit-blame-mode stop activating while running org-capture [2015-01-11 Вс 00:00] :emacs:ticket:
   - State "WAITING"    from "TODO"       [2015-01-11 Вс 22:28] \\
     cannot reproduce right now
-* TODO [#B] find cause of "blah-blah iswitchb is obsolete" message [2015-01-11 Вс 11:40] :emacs:ticket:
 * TODO [#B] maybe macro for binding a couple of functions to a keybinding, using prefix arg for alternate function call [2015-01-13 Вт 13:38] :emacs:ticket:
 * TODO [#A] bind 'dired-jump [2015-01-13 Вт 13:41]             :emacs:ticket:
 * TODO [#B] try to implement org workload display - [[tag:+code_snippet][code snippets]] [2015-01-13 Вт 14:04] :emacs:ticket:orgmode:
@@ -187,3 +186,10 @@
 ** introduce function and bind it on Enter fro example, which watches thing under cursor and takes appropriate action
 *** for example URL --> open in browser, flycheck error --> do nothing, compiler error link --> goto source, etc.
 * TODO [#A] get rid of org indent mode everywhere [2015-02-19 Чт 23:59] :orgmode:emacs:ticket:
+* TODO [#A] review file header templates and bring them to some common standard [2015-02-20 Пт 20:10] :emacs:ticket:
+* TODO [#B] leverage narrow/widen machinery more widely [2015-02-21 Сб 13:23] :emacs:ticket:
+* TODO [#A] perform diminishing on behalf of use-package [2015-02-22 Вс 23:48] :emacs:ticket:
+* TODO [#C] make desktop notifocations for ERC [2015-02-24 Вт 17:25] :emacs:ticket:
+* TODO [#B] introduce some way of tracking erc status for various running servers, e.g. to not attach to some server twice [2015-02-26 Чт 23:59] :emacs:ticket:
+* TODO [#C] some customdef to turn off some major/minor mode in all open buffers [2015-02-27 Пт 16:51] :emacs:ticket:
+* TODO [#B] somwhow fix magit behaviour on deleted files/dirs (cannot add watch) [2015-03-01 Вс 23:38] :emacs:ticket:
