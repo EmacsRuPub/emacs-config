@@ -2,5 +2,4 @@
        :description "Quickly switch windows using `ace-jump-mode'"
        :type github
        :pkgname "abo-abo/ace-window"
-       :features ace-window
-       :depends ace-jump-mode)
+       :features ace-window)
