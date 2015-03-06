@@ -172,16 +172,6 @@
     (add-hook 'c-mode-hook 'helm-gtags-mode)
     (add-hook 'c++-mode-hook 'helm-gtags-mode)))
 
-(use-package ace-jump-mode
-  :defer t
-  :bind ("C-x SPC" . ace-jump-mode-pop-mark)
-  :config
-  (progn
-    (setq ace-jump-mode-scope 'visible)
-    (ace-jump-mode-enable-mark-sync)
-    (bind-key "a" 'ace-jump-char-mode custom-search-keymap)
-    (bind-key "A" 'ace-jump-word-mode custom-search-keymap)))
-
 (use-package swoop
   :config
   (progn

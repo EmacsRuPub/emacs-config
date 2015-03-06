@@ -34,6 +34,8 @@
   ("<C-down>" win-resize-enlarge-vert "move splitter dow")
   ("<C-left>" win-resize-minimize-horiz "move splitter left")
   ("<C-right>" win-resize-enlarge-horiz "move splitter right")
+  ("g" avi-goto-char "goto char within window" :color blue)
+  ("G" avi-goto-word-0 "goto word within window" :color blue)
   ("q" nil "cancel"))
 
 (defhydra hydra-programming (global-map "M-P")
