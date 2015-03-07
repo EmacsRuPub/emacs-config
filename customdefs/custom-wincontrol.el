@@ -67,14 +67,12 @@
   (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
 
 (defun update-frames (heads-count)
-  (interactive "sHeads count: ")
-  (let ((frames-count (length (frame-list)))
-        (heads (string-to-number heads-count)))
+  (let ((frames-count (length (frame-list))))
     (cond
-     ((= heads 2)
+     ((= heads-count 2)
       (when (= frames-count 1)
         (make-frame-command)))
-     ((= heads 1)
+     ((= heads-count 1)
       (when (> frames-count 1)
         (delete-other-frames)))
      (t
