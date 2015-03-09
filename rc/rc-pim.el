@@ -9,16 +9,14 @@
   ;; there's something wrong; normally, we catch such errors, since e.g an error
   ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
   ;; trough).
-  :defer t
-  :bind (("C-c r s" . sauron-start)
-         ("C-c r p" . sauron-stop)
-         ("C-c r t" . sauron-toggle-hide-show)
-         ("C-c r c" . sauron-clear))
   :config
   (progn
     (setq sauron-separate-frame nil)
     (setq sauron-hide-mode-line t)
-    (setq sauron-max-line-length 120)
+    (setq sauron-max-line-length 200)
+    (bind-key "C-c r t" 'sauron-toggle-hide-show)
+    (bind-key "C-c r c" 'sauron-clear)
+    (sauron-start)
     ))
 
 (use-package bbdb-loaddefs
