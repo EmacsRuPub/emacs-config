@@ -146,6 +146,7 @@
         smart-forward
         smex
         swank-js
+        swiper
         tail
         tern
         twittering-mode

@@ -15,6 +15,10 @@
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
+(use-package swiper
+  :config
+  (bind-key "i" 'swiper custom-search-keymap))
+
 (provide 'staging)
 
 ;;; staging.el ends here
