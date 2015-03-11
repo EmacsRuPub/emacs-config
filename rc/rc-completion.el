@@ -4,9 +4,6 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default abbrev-mode t) ;; ensure abbrev mode is always on
-(setq save-abbrevs 'silently)      ;; do not bug me about saving my abbreviations
-
 (use-package auto-complete
   :commands auto-complete
   :bind ("C-<tab>" . auto-complete)
@@ -66,7 +63,7 @@
     (global-set-key (kbd "C-c C-y C-n") 'yas-insert-snippet)
     ))
 
-(global-set-key (kbd "C-S-<iso-lefttab>") 'dabbrev-expand)
+(global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand)
 
 (provide 'rc-completion)
 
