@@ -10,14 +10,14 @@
   :init
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq aw-background nil)
-  (setq aw-leading-char-style 'path)
+  (setq aw-leading-char-style 'char)
   (custom-set-faces
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
 (use-package swiper
   :config
-  (bind-key "i" 'swiper custom-search-keymap))
+  (bind-key "o" 'swiper custom-search-keymap))
 
 (provide 'staging)
 
