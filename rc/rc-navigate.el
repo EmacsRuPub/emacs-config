@@ -42,7 +42,6 @@
     (setq helm-ff-file-name-history-use-recentf t)
     (pushnew 'python-mode helm-buffers-favorite-modes)
     (bind-key "h" 'helm-mini  custom-search-keymap)
-    (bind-key "o" 'helm-occur  custom-search-keymap)
     (bind-key "f" 'custom/helm-find-files custom-search-keymap)
     (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)))
 
@@ -177,6 +176,7 @@
   (progn
     (bind-key "m" 'swoop-multi custom-search-keymap)
     (bind-key "i" 'swoop custom-search-keymap)
+    (bind-key "o" '(lambda () (interactive) (swoop "")) custom-search-keymap)
     (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
     (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
 

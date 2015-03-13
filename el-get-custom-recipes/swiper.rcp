@@ -1,6 +1,0 @@
-(:name swiper
-       :type github
-       :pkgname "abo-abo/swiper"
-       :description "Emacs isearch with an overview. Oh, man!"
-       :features swiper
-       :depends helm)
