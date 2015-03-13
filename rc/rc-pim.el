@@ -4,21 +4,6 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package sauron
-  ;; note, you add (setq sauron-debug t) to get errors which can debug if
-  ;; there's something wrong; normally, we catch such errors, since e.g an error
-  ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
-  ;; trough).
-  :config
-  (progn
-    (setq sauron-separate-frame nil)
-    (setq sauron-hide-mode-line t)
-    (setq sauron-max-line-length 200)
-    (bind-key "C-c r t" 'sauron-toggle-hide-show)
-    (bind-key "C-c r c" 'sauron-clear)
-    (sauron-start)
-    ))
-
 (use-package bbdb-loaddefs
   :defer t
   :commands bbdb
