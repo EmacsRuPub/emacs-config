@@ -273,6 +273,7 @@
 (define-key custom-orgmode-keymap (kbd "n") 'org-footnote-action)
 (define-key custom-orgmode-keymap (kbd "w") 'org-store-link)
 (define-key custom-orgmode-keymap (kbd "y") 'org-insert-link)
+(define-key custom-orgmode-keymap (kbd "i") 'update-timestamp-with-time)
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
 
