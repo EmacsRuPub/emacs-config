@@ -193,3 +193,5 @@
 * TODO [#B] introduce some way of tracking erc status for various running servers, e.g. to not attach to some server twice [2015-02-26 Чт 23:59] :emacs:ticket:
 * TODO [#C] some customdef to turn off some major/minor mode in all open buffers [2015-02-27 Пт 16:51] :emacs:ticket:
 * TODO [#B] somwhow fix magit behaviour on deleted files/dirs (cannot add watch) [2015-03-01 Вс 23:38] :emacs:ticket:
+* TODO [#A] customdef for interoperating with autopep, for python pep8 enforcing automation [2015-03-09 Пн 23:13] :emacs:ticket:
+* TODO [#B] try to make sauron notifications using dunst instead of emacs frame popup [2015-03-11 Ср 20:14] :emacs:ticket:
