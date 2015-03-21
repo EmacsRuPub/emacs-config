@@ -16,6 +16,8 @@
 
 (load-theme 'zenburn t)
 
+(unicode-fonts-setup)
+
 (when (boundp 'zenburn-colors-alist)
   (set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))

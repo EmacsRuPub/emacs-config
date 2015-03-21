@@ -150,6 +150,7 @@
         tern
         twittering-mode
         undo-tree
+        unicode-fonts
         use-package
         vimrc-mode
         vline
