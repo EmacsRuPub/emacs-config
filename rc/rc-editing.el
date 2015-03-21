@@ -154,6 +154,7 @@
           '(("\\.el$" . "template.el")
             ("\\.py$" . "template.py")
             ("\\.sh$" . "template.sh")
+            ("\\.org$" . "template.org")
             ))
     (setq file-template-insert-automatically t)
     (push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
