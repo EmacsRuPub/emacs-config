@@ -38,7 +38,7 @@
         crontab-mode
         crosshairs
         css-eldoc
-        csv-mode-custom
+        csv-mode
         cursor-chg
         deft
         diminish
