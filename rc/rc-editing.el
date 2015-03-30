@@ -102,7 +102,7 @@
     (setq recentf-max-saved-items 250)
     (setq recentf-max-menu-items 15)
     ;; get rid of `find-file-read-only' and replace it with something more useful.
-    (global-set-key (kbd "C-x C-r") 'ido-recentf-open)))
+    (global-set-key (kbd "C-x C-r") 'helm-recentf)))
 
 (use-package region-bindings-mode
   :config

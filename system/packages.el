@@ -16,7 +16,6 @@
         ace-window
         actionscript-mode
         adaptive-wrap
-        ag-custom
         anchored-transpose
         auctex
         auto-complete-c-headers
@@ -77,6 +76,7 @@
         google-contacts
         google-translate
         haskell-mode
+        helm-ag
         helm-gtags
         helm-recentd
         help+
@@ -144,7 +144,6 @@
         scratch
         slime
         smart-forward
-        smex
         swank-js
         tail
         tern
@@ -158,7 +157,6 @@
         w3m-session
         w3m-type-ahead
         wc-mode
-        wdired
         whole-line-or-region
         window-number
         wrap-region

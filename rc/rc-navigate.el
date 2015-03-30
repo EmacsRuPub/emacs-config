@@ -19,12 +19,14 @@
   :defer t
   :bind ("C-x C-d" . helm-recentd)
   :init
+  (use-package helm-config)
   (use-package helm-files)
   (use-package helm-info)
   (use-package helm-locate)
   (use-package helm-misc)
   (use-package helm-recentd)
   (use-package helm-grep)
+  (use-package helm-projectile)
   :config
   (progn
     (setq helm-recentd--action
@@ -40,10 +42,29 @@
     (setq helm-split-window-in-side-p t)
     (setq helm-ff-search-library-in-sexp t)
     (setq helm-ff-file-name-history-use-recentf t)
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-move-to-line-cycle-in-source t)
     (pushnew 'python-mode helm-buffers-favorite-modes)
+    (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
+    (bind-key "<next>" 'helm-next-source helm-map)
+    (bind-key "<prior>" 'helm-previous-source helm-map)
     (bind-key "h" 'helm-mini  custom-search-keymap)
+    (bind-key "C-x b" 'helm-buffers-list)
+    (bind-key "C-x j j" 'helm-filtered-bookmarks)
+    (bind-key "C-x C-f" 'helm-find-files)
+    (bind-key "M-x" 'helm-M-x)
+    (bind-key "q" 'helm-projectile custom-search-keymap)
+    (bind-key "r" 'helm-do-grep custom-search-keymap)
+    (bind-key "C-h a" 'helm-apropos)
     (bind-key "f" 'custom/helm-find-files custom-search-keymap)
-    (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)))
+    (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)
+    (helm-mode t)
+    ))
+
+(use-package helm-ag
+  :config
+  (setq helm-ag-insert-at-point 'symbol)
+  (bind-key "g" 'helm-ag-project-root custom-search-keymap))
 
 (use-package ido
   :init
@@ -52,9 +73,6 @@
   (use-package flx-ido)
   (use-package thingatpt)
   (use-package imenu)
-  :bind (("C-x b" . ido-switch-buffer)
-         ("M-s b" . ido-switch-buffer-by-major-mode)
-         ("M-s B" . ido-switch-buffer-by-ext-name))
   :config
   (progn
     (ido-mode 'both)
@@ -132,21 +150,6 @@
                 (define-key ido-file-dir-completion-map (kbd "<down>") 'ido-next-match)
                 (define-key ido-common-completion-map (kbd "DEL") 'ido-backspace)
                 ))))
-
-(use-package smex
-  :init
-  (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c C-c M-x" . execute-extended-command)))
-
-(use-package wgrep
-  :defer t
-  :config
-  (progn
-    (add-hook 'ag-mode-hook 'wgrep-ag-setup)
-    (bind-key "C-x C-s" 'wgrep-save-all-buffers ag-mode-map)
-    (bind-key "C-x C-s" 'wgrep-save-all-buffers grep-mode-map)))
 
 (use-package helm-gtags
   :defer t
@@ -255,7 +258,6 @@
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
-(define-key custom-search-keymap (kbd "r") 'rgrep)
 
 (provide 'rc-navigate)
 

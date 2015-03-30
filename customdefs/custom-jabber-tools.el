@@ -26,18 +26,6 @@
        jabber-connections)
       (error "cannot determine connection for %s" jid)))
 
-(defun custom/jabber-chat-with (jid &optional other-window)
-  "Open an empty chat window for chatting with JID.
-With a prefix argument, open buffer in other window.
-Returns the chat buffer."
-  (interactive (list (my-jabber-read-jid-completing "Chat with: ")
-                     current-prefix-arg))
-  (let* ((jc (my-jabber-jid-connection jid))
-         (buffer (jabber-chat-create-buffer jc jid)))
-    (if other-window
-        (switch-to-buffer-other-window buffer)
-      (switch-to-buffer buffer))))
-
 (defun custom/jabber-muc-sendto (&optional other-window)
   "Insert MUC participant nick into chat."
   (interactive)
@@ -45,7 +33,25 @@ Returns the chat buffer."
   (insert (concat (ido-completing-read "Send to: "
                      (jabber-muc-nicknames)) ": ")))
 
-(global-set-key "\C-x\C-j\C-j" 'custom/jabber-chat-with)
+
+(defvar custom/helm-source-jabber-contact-jids
+  '((name . "Jabber Contacts")
+    (init . (lambda () (require 'jabber)))
+    (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
+    (action . (lambda (x)
+                (jabber-chat-with
+                 (jabber-read-account)
+                 x)))))
+
+(defun custom/helm-jabber-chat-with (arg)
+  (interactive "P")
+  (if (= (prefix-numeric-value arg) 4)
+      (helm-other-buffer '(custom/helm-source-jabber-contact-jids)
+                     "*jabber: chat with*")
+    (helm-other-buffer '(helm-source-jabber-contacts)
+                     "*jabber: chat with*")))
+
+(global-set-key "\C-x\C-j\C-j" 'custom/helm-jabber-chat-with)
 (global-set-key "\C-x\C-j\C-s" 'custom/jabber-muc-sendto)
 
 (provide 'custom-jabber-tools)
