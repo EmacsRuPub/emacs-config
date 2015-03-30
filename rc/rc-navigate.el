@@ -45,7 +45,6 @@
     (setq helm-buffers-fuzzy-matching t)
     (setq helm-move-to-line-cycle-in-source t)
     (pushnew 'python-mode helm-buffers-favorite-modes)
-    (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
     (bind-key "<next>" 'helm-next-source helm-map)
     (bind-key "<prior>" 'helm-previous-source helm-map)
     (bind-key "h" 'helm-mini  custom-search-keymap)
