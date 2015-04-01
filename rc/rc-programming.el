@@ -69,11 +69,11 @@
   :init
   (progn
     (use-package diminish)
-    (use-package magit-filenotify)
+    ;; (use-package magit-filenotify)
     (use-package magit-blame-mode))
   :config
-  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-  (diminish 'magit-filenotify-mode "FN")
+  ;; (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+  ;; (diminish 'magit-filenotify-mode "FN")
   (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
   ;FIXME:make these custom key use :bind/whatever-appropriate
   (define-key custom-vcs-keymap (kbd "s") 'magit-status)
