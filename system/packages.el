@@ -99,7 +99,7 @@
         list-processes+
         lua-mode
         magit
-        magit-filenotify
+        magit-filenotify-custom
         markdown-mode
         mingus
         minibuf-electric-gnuemacs
