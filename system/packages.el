@@ -12,6 +12,7 @@
         ac-math
         ac-slime
         ac-irony
+        ac-helm
         ace-link
         ace-window
         actionscript-mode
@@ -63,7 +64,6 @@
         expand-region
         fic-mode
         file-template
-        flx
         flycheck
         flycheck-color-mode-line
         framemove
@@ -77,6 +77,7 @@
         google-translate
         haskell-mode
         helm-ag
+        helm-c-yasnippet
         helm-gtags
         helm-recentd
         help+
@@ -85,11 +86,6 @@
         hs-lint
         hungry-delete-el
         hydra
-        ido-hacks
-        ido-preview
-        ido-ubiquitous
-        ido-vertical-mode-custom
-        ido-yes-or-no
         init-paredit
         irony-mode
         jedi

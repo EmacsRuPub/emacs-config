@@ -54,7 +54,6 @@
 (setq org-clock-out-remove-zero-time-clocks t)
 (setq org-clock-persist t)
 (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
-(setq org-completion-use-ido t)
 (setq org-confirm-elisp-link-function 'y-or-n-p)
 (setq org-ctrl-k-protect-subtree t)
 (setq org-cycle-include-plain-lists 'integrate)
@@ -260,6 +259,8 @@
 (global-set-key (kbd "C-c C-o C-s") 'save-last-scrum-timestamp)
 (global-set-key (kbd "C-c C-o C-m") 'mark-with-finished-timestamp)
 (global-set-key (kbd "C-c C-o C-d") 'refile-job-done)
+
+(define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
 (define-key custom-orgmode-keymap (kbd "g") 'org-clock-goto)
 (define-key custom-orgmode-keymap (kbd "p") 'org-set-property)

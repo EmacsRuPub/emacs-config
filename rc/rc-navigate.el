@@ -45,8 +45,8 @@
     (setq helm-buffers-fuzzy-matching t)
     (setq helm-move-to-line-cycle-in-source t)
     (pushnew 'python-mode helm-buffers-favorite-modes)
-    (bind-key "<next>" 'helm-next-source helm-map)
-    (bind-key "<prior>" 'helm-previous-source helm-map)
+    (bind-key "C-<down>" 'helm-next-source helm-map)
+    (bind-key "C-<up>" 'helm-previous-source helm-map)
     (bind-key "h" 'helm-mini  custom-search-keymap)
     (bind-key "C-x b" 'helm-buffers-list)
     (bind-key "C-x j j" 'helm-filtered-bookmarks)
@@ -57,98 +57,19 @@
     (bind-key "C-h a" 'helm-apropos)
     (bind-key "f" 'custom/helm-find-files custom-search-keymap)
     (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)
+    (bind-key "p" 'helm-projectile-switch-project custom-search-keymap)
+    ;TODO: investigate and bind 'helm-resume
     (helm-mode t)
     ))
 
 (use-package helm-ag
   :config
   (setq helm-ag-insert-at-point 'symbol)
-  (bind-key "g" 'helm-ag-project-root custom-search-keymap))
+  (bind-key "g" 'helm-do-ag-project-root custom-search-keymap))
 
-(use-package ido
-  :init
-  (use-package ido-ubiquitous)
-  (use-package ido-vertical-mode)
-  (use-package flx-ido)
-  (use-package thingatpt)
-  (use-package imenu)
+(use-package helm-ls-git
   :config
-  (progn
-    (ido-mode 'both)
-    (ido-ubiquitous-mode 1)
-    (ido-load-history)
-    (ido-vertical-mode)
-    (flx-ido-mode 1)
-    (ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
-    (ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
-
-    (setq ido-enable-flex-matching t)
-    (setq ido-enable-regexp t)
-    (setq ido-everywhere t)
-    (setq ido-enable-prefix nil)
-    (setq ido-auto-merge-work-directories-length -1)
-    (setq ido-create-new-buffer 'always)
-    (setq ido-use-filename-at-point 'guess)
-    (setq ido-show-dot-for-dired t)
-    (setq confirm-nonexistent-file-or-buffer nil)
-    (setq ido-enable-tramp-completion nil)
-    (setq ido-enable-last-directory-history t)
-    (setq ido-confirm-unique-completion nil)
-    (setq ido-max-work-directory-list 30)
-    (setq ido-max-work-file-list 100)
-    (setq ido-max-directory-size 1000000)
-    (setq ido-use-url-at-point t)
-    (setq ido-use-virtual-buffers t)
-    (setq ido-case-fold t) ; case insensitive
-    (setq ido-max-prospects 16)
-    (setq ido-use-faces nil)
-    (setq ido-default-file-method 'selected-window)
-    (setq ido-default-buffer-method 'selected-window)
-    (setq ido-completing-read-use-initial-input-as-default-commands
-          '(ibuffer-filter-by-mode
-            ibuffer-filter-by-used-mode))
-    (set-default 'imenu-auto-rescan t) ;; Always rescan buffer for imenu
-
-    (put 'diredp-do-bookmark-in-bookmark-file 'ido 'ignore)
-    (put 'diredp-set-bookmark-file-bookmark-for-marked 'ido 'ignore)
-
-    (ad-enable-advice
-     'ido-read-internal
-     'around
-     'ido-completing-read-use-initial-input-as-default)
-
-    (ad-activate 'ido-read-internal)
-
-    (add-to-list 'ido-work-directory-list-ignore-regexps tramp-file-name-regexp)
-
-    (add-hook 'ido-setup-hook
-              (lambda()
-                (define-key ido-completion-map (kbd "C-M-p") (lookup-key ido-completion-map (kbd "C-p")))
-                (define-key ido-completion-map (kbd "C-M-n") (lookup-key ido-completion-map (kbd "C-n"))) ; currently, this makes nothing. Maybe they'll make C-n key lately.
-                (define-key ido-completion-map (kbd "C-p") 'ido-preview-backward)
-                (define-key ido-completion-map (kbd "C-n") 'ido-preview-forward)
-                (define-key ido-completion-map (kbd "M-m") 'ido-merge-work-directories)
-                (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
-                (define-key ido-file-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name)
-                ))
-    ;; Increase minibuffer size when ido completion is active
-    (add-hook 'ido-minibuffer-setup-hook
-              (lambda ()
-                (make-local-variable 'resize-minibuffer-window-max-height)
-                (setq resize-minibuffer-window-max-height 1)
-                (ido-disable-line-truncation)
-                (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
-                (define-key ido-common-completion-map (kbd "<up>") 'ido-prev-match)
-                (define-key ido-buffer-completion-map (kbd "<up>") 'ido-prev-match)
-                (define-key ido-file-completion-map (kbd "<up>") 'ido-prev-match)
-                (define-key ido-file-dir-completion-map (kbd "<up>") 'ido-prev-match)
-                (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-                (define-key ido-common-completion-map (kbd "<down>") 'ido-next-match)
-                (define-key ido-buffer-completion-map (kbd "<down>") 'ido-next-match)
-                (define-key ido-file-completion-map (kbd "<down>") 'ido-next-match)
-                (define-key ido-file-dir-completion-map (kbd "<down>") 'ido-next-match)
-                (define-key ido-common-completion-map (kbd "DEL") 'ido-backspace)
-                ))))
+  (bind-key "t" 'helm-ls-git-ls custom-search-keymap))
 
 (use-package helm-gtags
   :defer t

@@ -16,7 +16,8 @@
     (use-package auto-complete-nxml)
     (use-package auto-complete-yasnippet)
     (use-package go-autocomplete)
-    (use-package ac-slime))
+    (use-package ac-slime)
+    (use-package ac-helm))
   :config
   (progn
     (ac-config-default)
@@ -31,27 +32,29 @@
     (define-key ac-complete-mode-map [next] 'ac-page-next)
     (define-key ac-complete-mode-map [prior] 'ac-page-previous)
     (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+    (global-set-key (kbd "<S-M-tab>") 'ac-complete-with-helm)
     ))
 
 (use-package yasnippet
-  :commands yas-ido-expand
-  :bind ("C-M-<return>" . yas-ido-expand)
+  :init
+  (use-package helm-c-yasnippet)
   :config
   (progn
     ;; unset both to remove ALL translations
     (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
     (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (bind-key "C-M-<return>" 'helm-yas-complete)
     (setq yas/next-field-key '("<backtab>" "<S-tab>"))
     (setq yas/prev-field-key '("<C-tab>"))
     (setq yas-snippet-dirs nil)
+    (setq helm-yas-space-match-any-greedy t)
     (push custom/yasnippet-dir yas-snippet-dirs)
     (push custom/yasnippet-private-dir yas-snippet-dirs)
     (yas--initialize)
-    (setq yas/prompt-functions
-          '(yas/ido-prompt
-            yas/completing-prompt
-            yas/x-prompt
-            yas/no-prompt))
+    (setq yas-prompt-functions
+          '(yas-completing-prompt
+            yas-x-prompt
+            yas-no-prompt))
     ;; Wrap around region
     (setq yas/wrap-around-region t)
     (add-hook 'after-save-hook 'update-yasnippets-on-save)
