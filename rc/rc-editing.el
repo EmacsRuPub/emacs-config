@@ -233,7 +233,7 @@
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
-(global-set-key (kbd "C-c h m") 'woman)
+(global-set-key (kbd "C-c h m") 'helm-man-woman)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-]") 'custom/comment-or-uncomment-region)
 (global-set-key (kbd "C-c C-u C-r") 'rename-uniquely)

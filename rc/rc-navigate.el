@@ -27,6 +27,7 @@
   (use-package helm-recentd)
   (use-package helm-grep)
   (use-package helm-projectile)
+  (use-package helm-descbinds)
   :config
   (progn
     (setq helm-recentd--action
@@ -43,6 +44,11 @@
     (setq helm-ff-search-library-in-sexp t)
     (setq helm-ff-file-name-history-use-recentf t)
     (setq helm-buffers-fuzzy-matching t)
+    (setq helm-recentf-fuzzy-match t)
+    (setq helm-locate-fuzzy-match t)
+    (setq helm-M-x-fuzzy-match t)
+    (setq helm-apropos-fuzzy-match t)
+    (setq helm-apropos-fuzzy-match t)
     (setq helm-move-to-line-cycle-in-source t)
     (pushnew 'python-mode helm-buffers-favorite-modes)
     (bind-key "C-<down>" 'helm-next-source helm-map)
@@ -55,17 +61,24 @@
     (bind-key "q" 'helm-projectile custom-search-keymap)
     (bind-key "r" 'helm-do-grep custom-search-keymap)
     (bind-key "C-h a" 'helm-apropos)
+    (bind-key "C-h r" 'helm-info-emacs)
+    (bind-key "C-h r" 'helm-info-at-point)
     (bind-key "f" 'custom/helm-find-files custom-search-keymap)
     (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)
     (bind-key "p" 'helm-projectile-switch-project custom-search-keymap)
     ;TODO: investigate and bind 'helm-resume
+    ;TODO: investigate and bind 'helm-multi-files
     (helm-mode t)
+    (helm-adaptive-mode 1)
+    (helm-autoresize-mode 1)
+    (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
     ))
 
 (use-package helm-ag
   :config
   (setq helm-ag-insert-at-point 'symbol)
-  (bind-key "g" 'helm-do-ag-project-root custom-search-keymap))
+  (setq helm-ag-fuzzy-match t)
+  (bind-key "g" 'helm-ag-project-root custom-search-keymap))
 
 (use-package helm-ls-git
   :config

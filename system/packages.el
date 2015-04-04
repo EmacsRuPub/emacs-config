@@ -78,6 +78,7 @@
         haskell-mode
         helm-ag
         helm-c-yasnippet
+        helm-descbinds
         helm-gtags
         helm-recentd
         help+

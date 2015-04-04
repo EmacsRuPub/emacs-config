@@ -21,6 +21,7 @@ el-get
 elpa
 eshell
 games
+helm-adaptive-history
 image-dired
 kill-ring-saved.el
 last-scrum-timestamp

@@ -42,18 +42,6 @@
      (concat "/sudo:root@localhost:" (buffer-file-name (current-buffer))))
     (goto-char pos)))
 
-(defadvice ido-find-file (after find-file-sudo activate) ;; TODO find-file-hook
-  "Find file as root if necessary."
-  (unless (and buffer-file-name
-               (file-writable-p buffer-file-name))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
-(defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
-
 ;;{{{ String functions
 (defun iy-string-camel-to-underscore (string)
   "Convert camel string to upcase one which concat words using underscore"

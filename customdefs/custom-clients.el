@@ -42,13 +42,13 @@
 (defun select-erc-buffer ()
   (interactive)
   (switch-to-buffer
-   (ido-completing-read
+   (helm-comp-read
     "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
 
 (defun select-erc-unread-buffer ()
   (interactive)
   (switch-to-buffer
-   (ido-completing-read
+   (helm-comp-read
     "Select unread ERC buffer:"
     (mapcar #'buffer-name
             (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
@@ -60,7 +60,7 @@
    (concatenate 'string
                 (when atsign
                   "@")
-                (ido-completing-read "nick: " (pcomplete-erc-nicks)) ": ")
+                (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")
    ))
 
 (defun open-gmail ()
