@@ -852,3 +852,16 @@ CLOSED: [2015-02-22 Вс 17:55]
 :ARCHIVE_CATEGORY: todo
 :ARCHIVE_TODO: DONE
 :END:
+
+* CANCELLED [#A] check trails of flymake in config [2015-03-16 Пн 12:58] :emacs:ticket:
+  CLOSED: [2015-03-16 Пн 12:59] SCHEDULED: <2015-03-16 Пн>
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-03-16 Пн 12:59] \\
+    there are many extensions using flymake for their own, sometimes internal, purposes
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-05 Вс 22:17
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:

@@ -195,3 +195,7 @@
 * TODO [#B] somwhow fix magit behaviour on deleted files/dirs (cannot add watch) [2015-03-01 Вс 23:38] :emacs:ticket:
 * TODO [#A] customdef for interoperating with autopep, for python pep8 enforcing automation [2015-03-09 Пн 23:13] :emacs:ticket:
 * TODO [#B] try to make sauron notifications using dunst instead of emacs frame popup [2015-03-11 Ср 20:14] :emacs:ticket:
+* TODO [#C] grab "make" ideas from [[http://oremacs.com/2015/03/20/managing-emacs-packages/]] [2015-03-21 Сб 22:21] :emacs:ticket:
+* TODO [#B] search the way to pull in dunst within helm workflow [2015-03-29 Вс 14:25] :emacs:ticket:
+* TODO [#C] can we display absolute path of buffer (with file name) in helm buffers list and/or elsewhere in helm relate buffers? [2015-03-30 Пн 11:10] :emacs:ticket:
+* TODO [#C] check if helm variants of grep/ag work correctly [2015-03-31 Вт 15:01] :emacs:ticket:
