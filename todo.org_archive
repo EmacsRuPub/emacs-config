@@ -865,3 +865,19 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: CANCELLED
   :END:
+
+* DONE [#A] helm source for portage [2015-04-04 Сб 12:35]         :emacs:ticket:
+  CLOSED: [2015-04-05 Вс 22:15] SCHEDULED: <2015-04-04 Сб>
+  :CLOCK:
+  CLOCK: [2015-04-05 Вс 22:05]--[2015-04-05 Вс 22:15] =>  0:10
+  :END:
+  :LOGBOOK:
+  - State "DONE"       from "GOING"      [2015-04-05 Вс 22:15]
+  - State "GOING"      from "TODO"       [2015-04-05 Вс 22:04]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-05 Вс 22:18
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
