@@ -7,6 +7,8 @@
 (require 'inf-lisp)
 (require 'info-look)
 
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+
 (setq inferior-lisp-program "sbcl")
 (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
 

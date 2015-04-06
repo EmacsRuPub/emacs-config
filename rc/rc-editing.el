@@ -37,6 +37,9 @@
 (setq user-full-name (capitalize global-username))
 (setq x-select-enable-clipboard t);; Allow pasting selection outside of Emacs
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+;; don't let the cursor go into minibuffer prompt
+(setq minibuffer-prompt-properties
+      '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
 (set-default 'indent-tabs-mode nil);; Never insert tabs
 (setq-default fill-column 200)
@@ -226,6 +229,7 @@
 (define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
 (define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
 (define-key custom-edit-keymap (kbd "2") 'duplicate-line)
+(define-key custom-edit-keymap (kbd "`") 'redraw-display)
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
