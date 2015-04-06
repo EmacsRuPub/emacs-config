@@ -44,7 +44,9 @@
   (progn
     (setq deft-extension "org")
     (setq deft-directory "~/deft/")
-    (setq deft-text-mode 'org-mode)))
+    (setq deft-text-mode 'org-mode)
+    (bind-key "f" 'deft custom-pim-keymap)
+    ))
 
 (use-package calfw
   :defer t
