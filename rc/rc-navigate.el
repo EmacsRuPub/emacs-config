@@ -120,7 +120,7 @@
   :config
   (progn
     (bind-key (kbd "j") 'bc-list custom-search-keymap)
-    (bind-key (kbd "SPC") 'bc-set custom-search-keymap)))
+    (bind-key (kbd "e") 'bc-set custom-search-keymap)))
 
 (use-package zoom-window
   :bind ("C-x C-z" . zoom-window-zoom)
