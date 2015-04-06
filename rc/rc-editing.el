@@ -75,22 +75,6 @@
     (global-undo-tree-mode t)
     (setq undo-tree-mode-lighter "")))
 
-(use-package multiple-cursors
-  :config
-  (progn
-    (bind-key "<right>" 'mc/mark-next-like-this custom-mc-keymap)
-    (bind-key "<left>" 'mc/mark-previous-like-this custom-mc-keymap)
-    (bind-key "8" 'mc/mark-all-like-this custom-mc-keymap)
-    (bind-key "6" 'mc/edit-beginnings-of-lines custom-mc-keymap)
-    (bind-key "4" 'mc/edit-ends-of-lines custom-mc-keymap)
-    (bind-key "3" 'mc/mark-more-like-this-extended custom-mc-keymap)
-    (bind-key "5" 'mc/mark-all-in-region custom-mc-keymap)
-    (bind-key "9" 'mc/mark-all-like-this-in-defun custom-mc-keymap)
-    (bind-key "0" 'mc/mark-all-like-this-dwim custom-mc-keymap)
-    (bind-key "`" 'mc/sort-regions custom-mc-keymap)
-    (bind-key "1" 'mc/insert-numbers custom-mc-keymap)
-    (bind-key "<up>" 'mc/reverse-regions custom-mc-keymap)))
-
 (use-package recentf
   :defer t
   :init
@@ -105,7 +89,20 @@
 
 (use-package region-bindings-mode
   :config
-  (region-bindings-mode-enable))
+  (region-bindings-mode-enable)
+  (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
+  (bind-key "<right>" 'mc/mark-next-like-this region-bindings-mode-map)
+  (bind-key "<left>" 'mc/mark-previous-like-this region-bindings-mode-map)
+  (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
+  (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
+  (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
+  (bind-key "3" 'mc/mark-more-like-this-extended region-bindings-mode-map)
+  (bind-key "5" 'mc/mark-all-in-region region-bindings-mode-map)
+  (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
+  (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
+  (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
+  (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
+  (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
 (use-package volatile-highlights
   :config
