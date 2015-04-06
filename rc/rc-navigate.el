@@ -116,10 +116,6 @@
     (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
     (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
 
-(use-package neotree
-  :config
-  (bind-key "n" 'neotree-toggle custom-search-keymap))
-
 (use-package breadcrumb
   :config
   (progn
@@ -160,10 +156,6 @@
 (use-package fuzzy
   :config
   (turn-on-fuzzy-isearch))
-
-(use-package ag
-  :config
-  (setq ag-highlight-search t))
 
 (use-package window-number
   :config

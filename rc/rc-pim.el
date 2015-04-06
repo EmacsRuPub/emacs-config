@@ -38,16 +38,6 @@
     (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map)
     ))
 
-(use-package deft
-  :defer t
-  :config
-  (progn
-    (setq deft-extension "org")
-    (setq deft-directory "~/deft/")
-    (setq deft-text-mode 'org-mode)
-    (bind-key "f" 'deft custom-pim-keymap)
-    ))
-
 (use-package calfw
   :defer t
   :bind ("C-c c" . custom/calfw-open-calendar)

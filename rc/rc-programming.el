@@ -39,12 +39,6 @@
     (diminish 'projectile-mode "prj")
     ))
 
-(use-package ecb
-  :defer t
-  :bind (("C-x t q" . ecb-toggle-ecb-windows)
-         ("C-x t d" . ecb-deactivate)
-         ("C-x t a" . ecb-activate)))
-
 (use-package flycheck
   :defer t
   :bind (("C-x <up>" . flycheck-previous-error)

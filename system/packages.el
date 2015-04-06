@@ -39,8 +39,6 @@
         crosshairs
         css-eldoc
         csv-mode
-        cursor-chg
-        deft
         diminish
         discover
         dired+
@@ -49,7 +47,6 @@
         doxymacs
         drag-stuff
         dtrt-indent
-        ecb-custom
         el-spice
         elisp-slime-nav
         emacs-jabber
@@ -107,7 +104,6 @@
         minimap
         multifiles
         multiple-cursors
-        neotree
         nginx-mode
         notify
         nxhtml

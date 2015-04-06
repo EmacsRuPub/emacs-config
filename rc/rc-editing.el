@@ -52,10 +52,6 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
-(use-package cursor-chg
-  :config
-  (change-cursor-mode 1))
-
 (use-package drag-stuff
   :defer t
   :bind
