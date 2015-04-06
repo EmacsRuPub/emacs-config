@@ -55,7 +55,11 @@
   (progn
     (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode))
+    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+    (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+    (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+    (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+    (add-hook 'css-mode-hook 'turn-on-css-eldoc))
   :idle
   (diminish 'eldoc-mode "ED"))
 

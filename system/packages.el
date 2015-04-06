@@ -48,6 +48,7 @@
         drag-stuff
         dtrt-indent
         el-spice
+        eldoc-eval
         elisp-slime-nav
         emacs-jabber
         emacs-swoop
