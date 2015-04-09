@@ -76,6 +76,8 @@
     (bind-key "C-c r" 'helm-jedi-related-names python-mode-map) ;NOTE: just to memory the existence for the first time
     (bind-key "C-M-." 'python-indent-shift-right python-mode-map)
     (bind-key "C-M-," 'python-indent-shift-left python-mode-map)
+    (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
+    (bind-key "_" 'python-indent-shift-left region-bindings-mode-map)
     ))
 
 (setq mumamo-background-colors nil)
