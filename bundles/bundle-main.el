@@ -30,7 +30,6 @@
 (require 'rc-tex)
 (require 'rc-dired)
 (require 'rc-help)
-(require 'rc-hydras)
 
 (require 'staging)
 

@@ -82,7 +82,12 @@
   :commands mingus
   :bind ("C-c s" . mingus)
   :config
-  (bind-key "<Backspace>" 'mingus-del mingus-playlist-map))
+  (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
+  (defhydra hydra-mingus (global-map "C-c m s")
+    ("s" mingus "open mingus")
+    ("<right>" mingus-seek "seek forward")
+    ("<left>" mingus-seek-backward "seek backward")
+    ("q" nil "cancel")))
 
 (use-package restclient
   :defer t

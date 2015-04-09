@@ -113,6 +113,16 @@
     (setq ediff-split-window-function 'split-window-horizontally)
     (setq ediff-diff-options "-w")))
 
+(defhydra hydra-programming (global-map "M-P")
+  "programming"
+  ("s" slime "run slime" :color blue)
+  ("l" slime-selector "slime selector" :color blue)
+  ("q" nil "cancel"))
+
+(defhydra hydra-toggle (global-map "<f11>" :color blue)
+  ("d" toggle-debug-on-error "debug on error")
+  ("w" whitespace-mode "whitespace mode"))
+
 (define-key custom-vcs-keymap (kbd "t") 'git-timemachine)
 
 (provide 'rc-programming)

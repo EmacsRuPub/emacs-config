@@ -198,6 +198,30 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
+;; Transpose stuff with M-t
+(global-unset-key (kbd "M-t")) ;; which used to be transpose-words
+(defhydra hydra-transpose (global-map "M-t")
+  ("M-b" backward-word "prev word")
+  ("M-f" forward-word "next word")
+  ("<up>" previous-line "prev line")
+  ("<down>" next-line "next line")
+  ("<left>" backward-char "prev char")
+  ("<right>" forward-char "next char")
+  ("C-_" undo-tree-undo "undo last")
+  ("w" transpose-words "on words")
+  ("s" transpose-sexps "on sexps")
+  ("p" transpose-params "on params")
+  ("a" anchored-transpose "anchored")
+  ("q" nil "cancel"))
+
+(defhydra hydra-jabber-insert (global-map "<f6>")
+  ("8" custom-jabber/insert-kiss-smile ":-*")
+  ("l" custom-jabber/insert-inlove-smile "*IN LOVE*")
+  ("y" custom-jabber/insert-shy-smile ":-[")
+  ("t" custom-jabber/insert-copyright-sign "(c)*")
+  ;TODO: move other insertions here, for example, current time, etc.
+  ("q" nil "cancel"))
+
 (define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)

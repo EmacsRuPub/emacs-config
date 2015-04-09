@@ -91,6 +91,20 @@
         (at-config-basedir
          "contrib/.pylintrc"))
 
+(defhydra hydra-python-nav (global-map "C-x y")
+  ("["       python-nav-beginning-of-block)
+  ("9"       python-nav-beginning-of-statement)
+  ("<up>"    python-nav-backward-up-list)
+  (","       python-nav-backward-block)
+  ("<left>"  python-nav-backward-statement)
+  ("<right>" python-nav-forward-statement)
+  ("."       python-nav-forward-block)
+  ("<down>"  python-nav-end-of-defun)
+  ("0"       python-nav-end-of-statement)
+  ("]"       python-nav-end-of-block)
+  ("f"       python-nav-forward-sexp)
+  ("q" nil "cancel"))
+
 (provide 'rc-python)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
