@@ -203,6 +203,7 @@
         ("be" "emacs" entry (file+olp (at-org-dir "/browser-tabs.org") "inbox" "emacs") "* TODO [#C] %? %U :browser_tab:emacs:")
         ("bn" "news" entry (file+olp (at-org-dir "/browser-tabs.org") "inbox" "news") "* TODO [#C] %? %U :browser_tab:news:")
         ("bv" "video" entry (file+olp (at-org-dir "/browser-tabs.org") "inbox" "video") "* TODO [#C] %? %U :browser_tab:video:")
+        ("bb" "blogs" entry (file+olp (at-org-dir "/browser-tabs.org") "inbox" "blogposts") "* TODO [#C] %? %U :browser_tab:blogpost:")
         ("t" "tickets")
         ("tx" "xmonad tickets" entry (file+headline (at-homedir "/.xmonad/todo.org")) "* TODO [#C] %? %U :xmonad:ticket:")
         ("ts" "stumpwm tickets" entry (file (at-homedir "/.stumpwm.d/todo.org")) "* TODO [#C] %? %U :stumpwm:ticket:")
