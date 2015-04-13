@@ -27,7 +27,6 @@
   (use-package erc-match)
   (use-package erc-nicklist)
   (use-package erc-highlight-nicknames)
-  (use-package erc-scrolltobottom)
   :config
   (progn
     (erc-pcomplete-mode 1)

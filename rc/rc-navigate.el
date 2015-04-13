@@ -80,10 +80,6 @@
   (setq helm-ag-fuzzy-match t)
   (bind-key "g" 'helm-ag-project-root custom-search-keymap))
 
-(use-package helm-ls-git
-  :config
-  (bind-key "t" 'helm-ls-git-ls custom-search-keymap))
-
 (use-package helm-gtags
   :defer t
   :config

@@ -13,9 +13,7 @@
     (use-package auto-complete-extension)
     (use-package auto-complete-emacs-lisp)
     (use-package auto-complete-latex)
-    (use-package auto-complete-nxml)
     (use-package auto-complete-yasnippet)
-    (use-package go-autocomplete)
     (use-package ac-slime)
     (use-package ac-helm))
   :config

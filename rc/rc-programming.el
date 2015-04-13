@@ -67,8 +67,7 @@
   :init
   (progn
     (use-package diminish)
-    (use-package magit-filenotify)
-    (use-package magit-blame-mode))
+    (use-package magit-filenotify))
   :config
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (diminish 'magit-filenotify-mode "FN")

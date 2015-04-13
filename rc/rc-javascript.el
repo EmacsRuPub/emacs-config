@@ -6,7 +6,6 @@
 
 (use-package js2-mode
   :init
-  (use-package js-console)
   (use-package js2-imenu-extras)
   :config
   (progn
