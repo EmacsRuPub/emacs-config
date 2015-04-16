@@ -55,7 +55,7 @@
     (bind-key "C-<up>" 'helm-previous-source helm-map)
     (bind-key "h" 'helm-mini  custom-search-keymap)
     (bind-key "C-x b" 'helm-buffers-list)
-    (bind-key "C-x j j" 'helm-filtered-bookmarks)
+    (bind-key "C-x j j" 'helm-bookmarks)
     (bind-key "C-x C-f" 'helm-find-files)
     (bind-key "M-x" 'helm-M-x)
     (bind-key "q" 'helm-projectile custom-search-keymap)
