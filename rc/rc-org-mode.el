@@ -245,6 +245,13 @@
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 (add-hook 'org-after-refile-insert-hook 'save-buffer)
 
+(defhydra hydra-org-nav (global-map "C-<f7>")
+  "Org navigation"
+  ("<up>" outline-up-heading "")
+  ("C-<down>" outline-next-heading "")
+  ("C-<up>" outline-previous-heading "")
+  ("q" nil "cancel"))
+
 (global-set-key (kbd "C-c e") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
