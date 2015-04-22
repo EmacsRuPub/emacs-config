@@ -262,3 +262,21 @@
 * TODO [#C] [[https://github.com/abo-abo/ido-occasional][abo-abo/ido-occasional]] [2015-02-17 Вт 19:54] :emacs:try:
 * TODO [#C] [[https://github.com/abo-abo/centimacro][abo-abo/centimacro]] [2015-02-17 Вт 20:03] :emacs:try:
 * TODO [#C] [[https://github.com/abo-abo/org-download][abo-abo/org-download]] [2015-02-17 Вт 20:03] :emacs:try:
+* TODO [#C] play with footnote mode [2015-02-22 Вс 23:59]            :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/tiny]] [2015-02-27 Пт 16:27] :emacs:try:
+* TODO [#C] [[https://github.com/Silex/elmacro]] [2015-03-02 Пн 18:20] :emacs:try:
+* TODO [#C] [[http://www.emacswiki.org/emacs/BookmarkPlus#HighlightingBookmarkLocations]] [2015-03-02 Пн 18:42] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/02/28/hydra-repeat/]] [2015-03-02 Пн 18:46] :emacs:try:
+* TODO [#C] [[http://irreal.org/blog/?p%3D3677][http://irreal.org/blog/?p=3677]]y [2015-03-02 Пн 19:58]    :emacs:try:
+* TODO [#C] [[https://snarfed.org/why_i_run_shells_inside_emacs]] [2015-03-03 Вт 11:38] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/03/02/ace-window-without-ace/]] [2015-03-03 Вт 11:46] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/03/05/testing-init-sanity/]] [2015-03-05 Чт 23:46] :emacs:try:
+* TODO [#C] [[http://www.foldr.org/~michaelw/emacs/redshank/]] [2015-03-07 Сб 23:59] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/new-on-elpa-spinner-el-mode-line-spinners-and-progress-bars.html?source%3Drss][http://endlessparentheses.com/new-on-elpa-spinner-el-mode-line-spinners-and-progress-bars.html?source=rss]] [2015-03-10 Вт 16:07] :emacs:try:
+* TODO [#C] [[https://coldnew.github.io/slides/org-ioslide/#1]] [2015-03-11 Ср 13:08] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/org-download]] [2015-03-13 Пт 18:01] :emacs:try:
+* TODO [#C] [[http://www.russet.org.uk/blog/3059][m-buffer]] [2015-03-21 Сб 23:08] :emacs:try:
+* TODO [#C] [[http://www.russet.org.uk/blog/3062]] [2015-03-23 Пн 15:05] :emacs:try:
+* TODO [#C] [[http://blog.jorgenschaefer.de/2015/03/buttercup-10-released.html]] [2015-03-29 Вс 15:03] :emacs:try:
+* TODO [#C] [[https://github.com/camdez/checkbox.el]] [2015-04-03 Пт 19:52] :emacs:try:
+* TODO [#C] [[https://github.com/uk-ar/key-combo]] [2015-04-05 Вс 23:33] :emacs:try:
