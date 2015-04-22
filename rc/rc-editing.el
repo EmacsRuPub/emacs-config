@@ -91,8 +91,8 @@
   :config
   (region-bindings-mode-enable)
   (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
-  (bind-key "C-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
-  (bind-key "C-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
+  (bind-key "M-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
+  (bind-key "M-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
   (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
   (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
   (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
