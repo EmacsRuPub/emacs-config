@@ -186,15 +186,10 @@ point reaches the beginning or end of the buffer, stop there."
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
+(require 'helm-utils)
 (defvar custom/helm-source-portage-files
-  '((name . "Portage files")
-    (candidates . ("/etc/portage/make.conf"
-                   "/etc/portage/package.mask/main"
-                   "/etc/portage/package.unmask"
-                   "/etc/portage/package.use"
-                   "/etc/portage/package.license"
-                   "/etc/portage/package.keywords"
-                   "/etc/portage/package.accept_keywords"))
+  `((name . "Portage files")
+    (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
     (action . (lambda (candidate)
                 (helm-find-file-as-root candidate)))))
 
