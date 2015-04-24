@@ -270,8 +270,16 @@
 
 (define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
-(defhydra hydra-org-global (global-map "<f7>")
-  "Org"
+(defhydra hydra-org-global (global-map "<f7>" :hint nil)
+  "
+^Agenda^                  ^Clock^             ^Properties^        ^Capture^
+--------------------------------------------------------------------------------------
+_s_chedule                _._ clock in        set _p_roperty      _w_ store link
+dead_l_ine                _,_ clock out       _d_elete property   _y_ insert link
+agenda _c_olumns          cloc_k_ display
+foot_n_ote action         _g_oto last clock
+add t_i_me to timestamp
+"
   ("g" org-clock-goto)
   ("p" org-set-property)
   ("d" org-delete-property)
