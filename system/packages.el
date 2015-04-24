@@ -139,6 +139,7 @@
         scratch
         slime
         smart-forward
+        smart-mode-line
         swank-js
         tail
         tern

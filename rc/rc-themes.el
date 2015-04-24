@@ -11,6 +11,9 @@
 (setq fg-colors '("gainsboro" "navy"))
 (setq mouse-colors '("firebrick" "yellow"))
 
+(setq sml/no-confirm-load-theme t)
+(sml/setup)
+
 (set-cursor-color "chartreuse2")
 (set-xwindows-font "consolas-base")
 
