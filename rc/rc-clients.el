@@ -77,12 +77,9 @@
   (setq twittering-use-master-password t))
 
 (use-package mingus
-  :defer t
-  :commands mingus
-  :bind ("C-c s" . mingus)
   :config
   (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
-  (defhydra hydra-mingus (global-map "C-c m s")
+  (defhydra hydra-mingus (global-map "C-c m")
     ("s" mingus "open mingus")
     ("<right>" mingus-seek "seek forward")
     ("<left>" mingus-seek-backward "seek backward")
