@@ -44,6 +44,7 @@
 ;#   Desktop load setup
 ;############################################################################
 (desktop-save-mode t)
+(setq desktop-restore-eager 10)
 
 (when (fboundp 'desktop-load-default)
   (desktop-load-default)
