@@ -110,6 +110,7 @@
         nxhtml
         oauth2
         openwith
+        org-gcal
         org-mode
         org-magit
         org-occur-goto

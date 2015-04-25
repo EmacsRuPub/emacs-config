@@ -1,0 +1,6 @@
+(:name org-gcal
+       :type github
+       :pkgname "myuhe/org-gcal.el"
+       :description "Org sync with Google Calendar"
+       :depends (alert request)
+       :features org-gcal)

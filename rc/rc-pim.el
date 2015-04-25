@@ -99,6 +99,13 @@
     (keyfreq-mode 1)
     (keyfreq-autosave-mode 1)))
 
+(use-package org-gcal
+  :config
+  (progn
+    (setq org-gcal-client-id private/org-gcal-client-id)
+    (setq org-gcal-client-secret private/org-gcal-client-secret)
+    (setq org-gcal-file-alist private/org-gcal-file-alist)))
+
 (provide 'rc-pim)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

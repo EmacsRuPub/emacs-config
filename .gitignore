@@ -28,6 +28,7 @@ last-scrum-timestamp
 newsticker
 oauth2.plstore
 org*.el
+org-gcal
 private
 projectile-bookmarks.eld
 projectile.cache
