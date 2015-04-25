@@ -91,6 +91,7 @@
 (setq org-use-speed-commands t)
 (setq org-use-sub-superscripts nil)
 (setq org-agenda-restore-windows-after-quit t)
+(setq org-agenda-window-setup 'only-window)
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
@@ -162,6 +163,7 @@
           ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
         ("u" . "unassigned")
+        ("P" . "Prioritized tasks")
         ("Pa" "Prioritized tasks A"
          ((tags-todo "+PRIORITY=\"A\"") ))
         ("Pb" "Prioritized tasks B"
@@ -293,6 +295,7 @@ add t_i_me to timestamp
   ("w" org-store-link)
   ("y" org-insert-link)
   ("i" update-timestamp-with-time)
+  ("o" ace-link-org :color blue)
   ("q" nil "cancel"))
 
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
