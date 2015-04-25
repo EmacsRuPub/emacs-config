@@ -6,7 +6,6 @@
 
 (use-package auto-complete
   :commands auto-complete
-  :bind ("C-<tab>" . auto-complete)
   :init
   (progn
     (use-package auto-complete-config)
@@ -30,7 +29,7 @@
     (define-key ac-complete-mode-map [next] 'ac-page-next)
     (define-key ac-complete-mode-map [prior] 'ac-page-previous)
     (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-    (global-set-key (kbd "<S-M-tab>") 'ac-complete-with-helm)
+    (global-set-key (kbd "C-<tab>") 'ac-complete-with-helm)
     ))
 
 (use-package yasnippet
