@@ -56,6 +56,13 @@ With prefix argument, also display headlines without a TODO keyword."
     (insert " "))
   (insert (format-time-string "%H:%M")))
 
+(require 'helm-utils)
+(defvar custom/helm-source-org-files
+  `((name . "Org files")
+    (candidates . ,(helm-walk-directory (at-org-dir) :path 'full))
+    (action . (lambda (candidate)
+                (find-file candidate)))))
+
 (provide 'custom-orgmode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
