@@ -113,7 +113,11 @@
 * TODO [#C] idea: bundle packages with customizations, including el-get packages [2014-11-02 Вс 17:37] :emacs:ticket:
 * TODO [#B] review navigation activities, where helm may be appropriate [2014-11-02 Вс 21:02] :emacs:ticket:
   http://tuhdo.github.io/helm-intro.html
-* TODO [#A] check all custom major mode hooks if they are too heavy [2014-11-03 Пн 21:02] :emacs:ticket:
+* DONE [#A] check all custom major mode hooks if they are too heavy [2014-11-03 Пн 21:02] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:08]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:08]
+  :END:
 * TODO [#B] find if some navigation activities can be laid upon helm (including unexplored ones) [2014-11-13 Чт 00:41] :@workplace:
 * TODO [#A] try various helm sources [2014-11-15 Сб 01:08]     :emacs:ticket:
   helm-source-fixme (maybe setup my own, using the idea)

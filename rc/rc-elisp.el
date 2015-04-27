@@ -7,12 +7,12 @@
 (require 'erefactor)
 
 (defun custom/elisp-mode-hook ()
+  (auto-fill-mode 1)
+  (paren-face-mode)
   (setq indent-tabs-mode t)
   (setq tab-width 2)
-  (abbrev-mode 1)
-  (auto-fill-mode 1)
   (turn-on-eldoc-mode)
-  (paren-face-mode))
+  )
 
 (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)

@@ -13,22 +13,17 @@
 (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
 
 (defun custom/lisp-mode-hook ()
-  (setq tab-width 4)
-  (setq indent-tabs-mode t)
-  (abbrev-mode 1)
   (auto-fill-mode 1)
-  (turn-on-eldoc-mode)
   (paredit-mode 1)
   (paren-face-mode)
-  (setq tab-width 2)
   (setq indent-tabs-mode t)
-  )
+  (setq tab-width 2)
+  (turn-on-eldoc-mode))
 
 (defun custom/slime-hook ()
   (slime-mode t)
   (set (make-local-variable 'slime-lisp-implementations)
-       (list (assoc 'sbcl slime-lisp-implementations)))
-  )
+       (list (assoc 'sbcl slime-lisp-implementations))))
 
 (use-package slime
   :defer t

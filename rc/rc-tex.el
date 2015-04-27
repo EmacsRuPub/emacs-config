@@ -19,8 +19,7 @@
 (setq TeX-open-quote "``")
 (setq TeX-close-quote "''")
 (setq TeX-PDF-mode t)
-(setq font-latex-title-fontify 'color)      ; this gets rid of
-(setq font-latex-title-fontity 'color)      ; the large fonts
+(setq font-latex-title-fontify 'color)      ; this gets rid of the large fonts
 (setq font-latex-fontify-sectioning 'color) ; in sections etc
 (setq reftex-enable-partial-scans t)
 (setq reftex-save-parse-info t)
@@ -36,6 +35,7 @@
 (add-hook 'texinfo-mode-hook 'custom/texinfo-hook)
 
 (defun custom/tex-mode-hook ()
+  (TeX-fold-mode 1)
   (local-set-key "\\" 'TeX-electric-macro)
   (turn-on-bib-cite)
   (local-set-key (kbd "M-i") '(lambda () (interactive) (insert "\n\\item ")))
@@ -44,7 +44,6 @@
 (add-hook 'TeX-mode-hook 'custom/tex-mode-hook)
 (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 (add-hook 'LaTeX-mode-hook 'custom/tex-mode-hook)
-(add-hook 'TeX-mode-hook '(lambda () (TeX-fold-mode 1)))
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
