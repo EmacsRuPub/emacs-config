@@ -222,10 +222,10 @@
         ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :project:")
         ("l" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
         ("j" "job tasks")
-        ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :current:")
+        ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :current:")
         ("jr" "reference item" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :reference:")
-        ("je" "excalation" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :escalation:")
-        ("jp" "patching" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :patching:")
+        ("je" "excalation" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :escalation:")
+        ("jp" "patching" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :patching:")
         ))
 
 (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
