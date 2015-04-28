@@ -151,7 +151,7 @@
              (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
           (org-tags-match-list-sublevels 'indented)
           (org-agenda-sorting-strategy
-           '((agenda time-up priority-down tag-up) ))
+           '((agenda priority-down todo-state-up tag-up) ))
           (org-agenda-overriding-header "Unscheduled TODO entries: ")))
         ("up" alltodo "Unprioritized TODO entries"
          ((org-agenda-skip-function
@@ -159,7 +159,7 @@
              (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
           (org-tags-match-list-sublevels 'indented)
           (org-agenda-sorting-strategy
-           '((agenda time-up priority-down tag-up) ))
+           '((agenda time-up tag-up) ))
           ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
         ("u" . "unassigned")
