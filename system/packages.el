@@ -154,6 +154,7 @@
         w3m-session
         w3m-type-ahead
         wc-mode
+        whitespace
         whole-line-or-region
         window-number
         wrap-region

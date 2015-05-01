@@ -288,5 +288,14 @@
 
 (provide 'rc-editing)
 
+(setq whitespace-style '(indentation::space
+                         space-after-tab
+                         space-before-tab
+                         trailing
+                         lines-tail
+                         tab-mark
+                         face
+                         tabs))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-editing.el ends here
