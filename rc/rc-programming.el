@@ -17,6 +17,7 @@
   (progn
     (setq-default doxymacs-doxygen-style "JavaDoc")
 
+    ;TODO: generalize
     (defun custom/doxymacs-font-lock-hook ()
       (if (or (eq major-mode 'c-mode)
               (eq major-mode 'c++-mode))

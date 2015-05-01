@@ -50,6 +50,7 @@
 With prefix argument, also display headlines without a TODO keyword."
   (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
 
+;TODO: use prefix arg
 (defun custom/org-update-timestamp-with-time (&optional as-is)
   (interactive)
   (unless as-is
