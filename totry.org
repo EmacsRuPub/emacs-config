@@ -159,7 +159,7 @@
 * TODO [#C] [[https://github.com/syohex/zop-to-char][syohex/zop-to-char]] [2015-01-05 Пн 17:25]              :emacs:try:
 * TODO [#C] [[https://github.com/syohex/psession][syohex/psession]] [2015-01-05 Пн 17:25]                 :emacs:try:
 * TODO [#C] [[http://www.wisdomandwonder.com/link/9401/the-emacs-widget-library][The Emacs Widget Library | Wisdom and Wonder]] [2015-01-05 Пн 17:49] :emacs:try:
-* TODO [#A] [[https://marmalade-repo.org/packages/web][web @ Marmalade]] [2015-01-05 Пн 18:28]                 :emacs:try:
+* TODO [#C] [[https://marmalade-repo.org/packages/web][web @ Marmalade]] [2015-01-05 Пн 18:28] :emacs:try:
 * TODO [#C] [[http://stackoverflow.com/questions/1054903/how-do-you-get-python-documentation-in-texinfo-info-format][emacs - How do you get Python documentation in Texinfo Info format? - Stack Overflow]] [2015-01-05 Пн 18:50] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/01/06/rushing-headlong/][Rushing headlong . (or emacs]] [2015-01-08 Чт 00:10] :emacs:try:
 * TODO [#C] [[https://github.com/tam17aki/ace-isearch][tam17aki/ace-isearch]] [2015-01-08 Чт 00:11]            :emacs:try:
@@ -181,7 +181,7 @@
 * TODO [#C] [[http://www.lunaryorn.com/2014/12/23/bug-reference-mode.html][TIL about Bug Reference Mode . lunarsite]] [2015-01-24 Сб 23:06] :emacs:try:
 * TODO [#C] [[https://github.com/joddie/macrostep][joddie/macrostep]] [2015-01-25 Вс 00:24] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/01/19/lispy.0.21.0-is-out/][lispy 0.21.0 is out . (or emacs]] [2015-01-25 Вс 00:53] :emacs:try:
-* TODO [#A] [[http://oremacs.com/2015/01/20/introducing-hydra/][Behold The Mighty Hydra! . (or emacs]] [2015-01-25 Вс 22:10] :emacs:try:
+* TODO [#B] [[http://oremacs.com/2015/01/20/introducing-hydra/][Behold The Mighty Hydra! . (or emacs]] [2015-01-25 Вс 22:10] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/01/25/exploring-emacs-packages/][Exploring Emacs packages . (or emacs]] [2015-01-26 Пн 01:13] :emacs:try:
 * TODO [#C] [[http://irreal.org/blog/?p%3D3624][Sacha on Emacs Micro-Habits | Irreal]] [2015-01-26 Пн 01:14] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/01/23/eltex/][ElTeX - generate full LaTeX documents from Emacs Lisp . (or emacs]] [2015-01-26 Пн 01:18] :emacs:try:
@@ -280,3 +280,20 @@
 * TODO [#C] [[http://blog.jorgenschaefer.de/2015/03/buttercup-10-released.html]] [2015-03-29 Вс 15:03] :emacs:try:
 * TODO [#C] [[https://github.com/camdez/checkbox.el]] [2015-04-03 Пт 19:52] :emacs:try:
 * TODO [#C] [[https://github.com/uk-ar/key-combo]] [2015-04-05 Вс 23:33] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/cider-debug-a-visual-interactive-debugger-for-clojure.html?source=rss]] [2015-04-22 Ср 23:59] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/sx-el-announcement-and-more-launcher-map.html?source=rss]] [2015-04-23 Чт 13:14] :emacs:try:
+* TODO [#C] [[https://github.com/kelvinh/org-page]] [2015-04-23 Чт 15:54] :emacs:try:
+* TODO [#C] [[https://github.com/Malabarba/elisp-bug-hunter]] [2015-04-23 Чт 15:54] :emacs:try:
+* TODO [#C] [[http://punchagan.muse-amuse.in/posts/playing-music-using-mpsyt-from-emacs.html]] [2015-04-23 Чт 16:44] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/04/24/oremacs-config/]] [2015-04-24 Пт 23:11] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/profile-dotemacs]] [2015-04-25 Сб 18:53] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/swiper-helm]] [2015-04-25 Сб 18:58] :emacs:try:
+* TODO [#C] [[https://bitbucket.org/gvol/emacs-achievements]] [2015-04-25 Сб 20:31] :emacs:try:
+* TODO [#C] [[https://github.com/steckerhalter/grandshell-theme]] [2015-04-25 Сб 22:10] :emacs:try:
+* TODO [#C] [[https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/ukrainian-holidays.el]] [2015-04-25 Сб 22:13] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/make-it-so]] [2015-04-25 Сб 23:53] :emacs:try:
+* TODO [#C] [[https://github.com/yasuyk/helm-flycheck]] [2015-04-25 Сб 23:59] :emacs:try:
+* TODO [#C] [[http://ru-emacs.livejournal.com/84952.html]] [2015-04-27 Пн 16:55] :emacs:try:
+* TODO [#C] [[https://github.com/phillord/lentic]] [2015-04-28 Вт 18:07] :emacs:try:
+* TODO [#C] [[https://github.com/itsjeyd/git-wip-timemachine]] [2015-05-01 Пт 18:31] :emacs:try:
+* TODO [#C] [[https://github.com/itsjeyd/git-wip]] [2015-05-01 Пт 18:32] :emacs:try:

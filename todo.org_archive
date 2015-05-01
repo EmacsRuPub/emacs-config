@@ -881,3 +881,137 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#A] check all custom major mode hooks if they are too heavy [2014-11-03 Пн 21:02] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:08]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:08]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] try various helm sources [2014-11-15 Сб 01:08]        :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:11]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:11]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+  helm-source-fixme (maybe setup my own, using the idea)
+  helm-source-jabber-contacts
+  helm-source-stumpwm-commands
+  helm-source-session
+  helm-source-org-headline
+  helm-source-bookmark-files&dirs
+  helm-source-advice
+  helm-source-org-keywords
+  helm-source-evaluation-result
+  helm-source-bookmarks-ssh
+  helm-source-bmkext-addressbook
+  helm-source-bookmark-man
+  helm-source-imenu
+  helm-source-picklist
+  helm-source-gentoo
+  helm-source-ff-file-name-history
+  helm-source-simple-call-tree-functions-callers
+  helm-source-emacs-lisp-expectations
+  helm-source-tracker-search
+  helm-source-emacs-process
+  helm-source-esh
+  helm-source-use-flags
+  helm-source-pp-bookmarks
+  helm-man-woman
+
+* DONE [#A] compare output of project files with ido and helm (maybe helm's includes subprojects contents) [2014-11-25 Вт 01:09] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 18:34]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 18:34]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED [#A] a simple customdef to place .projectile file in current dir [2014-12-28 Вс 21:44] :emacs:ticket:
+  CLOSED: [2015-04-27 Пн 22:50]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-04-27 Пн 22:50] \\
+    new projectile can treat tree below current dir as a project
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#A] customdef for placing org links for dired entities [2015-01-20 Вт 16:03] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:12]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-04-28 Вт 00:12] \\
+    org-store-link seems to do this out of the box
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE [#A] insert dired path as orgmode file link someway [2015-01-26 Пн 00:44] :orgmode:emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:13]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:13]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] define hydra for flycheck errors navigation [2015-02-17 Вт 19:55] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:14]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:14]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] get rid of org indent mode everywhere [2015-02-19 Чт 23:59] :orgmode:emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:14]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:14]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#A] perform diminishing on behalf of use-package [2015-02-22 Вс 23:48] :emacs:ticket:
+  CLOSED: [2015-04-28 Вт 00:15]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-04-28 Вт 00:15]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-04-28 Вт 18:35
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
