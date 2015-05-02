@@ -8,8 +8,7 @@
 ;; Status: not intended to be distributed yet
 
 (require 'rc-navigate)
-(require 'rc-settings)
-(require 'rc-system)
+(require 'rc-common)
 (require 'rc-themes)
 (require 'rc-editing)
 (require 'rc-completion)
@@ -18,7 +17,6 @@
 (require 'rc-shell)
 (require 'rc-pim)
 (require 'rc-org-mode)
-(require 'rc-common-hooks)
 (require 'rc-markup)
 (require 'rc-elisp)
 (require 'rc-javascript)
