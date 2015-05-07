@@ -159,7 +159,6 @@
         whole-line-or-region
         window-number
         wrap-region
-        yandex-weather
         yaml-mode
         yasnippet
         zen-and-art-theme
