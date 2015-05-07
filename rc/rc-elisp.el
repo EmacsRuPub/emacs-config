@@ -11,6 +11,7 @@
   (paren-face-mode)
   (setq indent-tabs-mode t)
   (setq tab-width 2)
+  (setq comment-start ";; ")
   (turn-on-eldoc-mode)
   )
 
