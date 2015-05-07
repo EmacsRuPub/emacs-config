@@ -48,6 +48,30 @@
         (insert output)
         (search-backward "ERROR!")))))
 
+(defhydra hydra-magit (:color teal :hint nil)
+   "
+PROJECT: %(projectile-project-root)
+
+     Immuting            Mutating
+-----------------------------------------
+  _s_: status          _c_: checkout
+  _l_: log             _B_: branch mgr
+  _f_: file log
+  _r_: reflog
+  _w_: diff worktree
+  _t_: time machine
+
+"
+  ("s" magit-status)
+  ("f" magit-file-log)
+  ("c" magit-checkout)
+  ("w" magit-diff-working-tree)
+  ("r" magit-reflog)
+  ("B" magit-branch-manager)
+  ("l" magit-log)
+  ("t" git-timemachine))
+(global-set-key (kbd "C-'") 'hydra-magit/body)
+
 (defvar custom/transform-whole-words nil)
 
 (defadvice upcase-word (before upcase-word-advice activate)

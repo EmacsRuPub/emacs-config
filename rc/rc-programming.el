@@ -76,12 +76,6 @@
   (setq magit-auto-revert-mode nil)
   (setq magit-last-seen-setup-instructions "1.4.0")
   (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
-  ;FIXME:make these custom key use :bind/whatever-appropriate
-  (define-key custom-vcs-keymap (kbd "s") 'magit-status)
-  (define-key custom-vcs-keymap (kbd "l") 'magit-file-log)
-  (define-key custom-vcs-keymap (kbd "w") 'magit-diff-working-tree)
-  (define-key custom-vcs-keymap (kbd "r") 'magit-reflog)
-  (define-key custom-vcs-keymap (kbd "c") 'magit-checkout)
   )
 
 (use-package git-gutter
@@ -125,7 +119,6 @@
   ("d" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode"))
 
-(define-key custom-vcs-keymap (kbd "t") 'git-timemachine)
 
 (provide 'rc-programming)
 

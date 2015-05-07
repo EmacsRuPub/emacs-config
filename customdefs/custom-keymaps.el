@@ -18,9 +18,6 @@
 (define-prefix-command 'custom-pim-keymap)
 (global-set-key (kbd "<f7>") 'custom-pim-keymap)
 
-(define-prefix-command 'custom-vcs-keymap)
-(global-set-key (kbd "C-'") 'custom-vcs-keymap)
-
 (define-prefix-command 'custom-mc-keymap)
 (global-set-key (kbd "<f5>") 'custom-mc-keymap)
 
