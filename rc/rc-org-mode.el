@@ -176,6 +176,11 @@
          ((tags-todo "+PRIORITY=\"B\"")))
         ("Pc" "Prioritized tasks C"
          ((tags-todo "+PRIORITY=\"C\"")))
+        ("S" "Scheduled tasks" agenda ""
+         ((org-agenda-time-grid nil)
+          (org-deadline-warning-days 32)
+          (org-agenda-entry-types '(:scheduled))
+          ))
         ("p" tags "+purchase")
         ("t" . "tickets")
         ("te" tags "+ticket+emacs")
