@@ -48,6 +48,20 @@
         (insert output)
         (search-backward "ERROR!")))))
 
+(defvar custom/transform-whole-words nil)
+
+(defadvice upcase-word (before upcase-word-advice activate)
+  (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+    (backward-word)))
+
+(defadvice downcase-word (before downcase-word-advice activate)
+  (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+    (backward-word)))
+
+(defadvice capitalize-word (before capitalize-word-advice activate)
+  (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+    (backward-word)))
+
 (provide 'staging)
 
 ;;; staging.el ends here
