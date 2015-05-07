@@ -115,7 +115,7 @@
     (setq ediff-split-window-function 'split-window-horizontally)
     (setq ediff-diff-options "-w")))
 
-(defhydra hydra-programming (global-map "M-P")
+(defhydra hydra-programming (global-map "M-p")
   "programming"
   ("s" slime "run slime" :color blue)
   ("l" slime-selector "slime selector" :color blue)
