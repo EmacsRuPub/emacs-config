@@ -172,6 +172,22 @@
   :config
   (setq framemove-hook-into-windmove t))
 
+(use-package ace-window
+  :init
+  (setq aw-background nil)
+  (setq aw-leading-char-style 'char)
+  (ace-window-display-mode)
+  (set-face-attribute 'aw-mode-line-face nil :foreground "white")
+  (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0))))))
+
+(use-package ace-link
+  :config
+  (progn
+    (ace-link-setup-default)
+    (define-key org-mode-map (kbd "M-o") 'ace-link-org)))
+
 (defhydra hydra-window (global-map "<f2>")
   "window"
   ("<left>" windmove-left "left")

@@ -6,23 +6,6 @@
 ;; Keywords:
 ;; Requirements:
 
-(use-package ace-window
-  :init
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
-  (setq aw-leading-char-style 'char)
-  (ace-window-display-mode)
-  (set-face-attribute 'aw-mode-line-face nil :foreground "white")
-  (custom-set-faces
-     '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0))))))
-
-(use-package ace-link
-  :config
-  (progn
-    (ace-link-setup-default)
-    (define-key org-mode-map (kbd "M-o") 'ace-link-org)))
-
 (use-package sauron
   ;; note, you add (setq sauron-debug t) to get errors which can debug if
   ;; there's something wrong; normally, we catch such errors, since e.g an error
