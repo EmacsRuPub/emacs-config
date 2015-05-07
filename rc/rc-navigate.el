@@ -66,6 +66,7 @@
     (bind-key "f" 'custom/helm-find-files custom-search-keymap)
     (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)
     (bind-key "p" 'helm-projectile-switch-project custom-search-keymap)
+    (bind-key "c" 'helm-flycheck custom-search-keymap)
     ;TODO: investigate and bind 'helm-resume
     ;TODO: investigate and bind 'helm-multi-files
     (helm-mode t)

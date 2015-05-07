@@ -1,0 +1,5 @@
+(:name helm-flycheck
+       :type github
+       :pkgname "yasuyk/helm-flycheck"
+       :depends (helm flycheck dash)
+       :features helm-flycheck)

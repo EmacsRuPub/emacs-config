@@ -77,6 +77,7 @@
         helm-ag
         helm-c-yasnippet
         helm-descbinds
+        helm-flycheck
         helm-gtags
         helm-recentd
         help+
