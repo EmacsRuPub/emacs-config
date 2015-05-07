@@ -80,7 +80,6 @@
 (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
 (setq org-refile-use-outline-path 'file)
 (setq org-return-follows-link t)
-(setq org-reverse-note-order t)
 (setq org-special-ctrl-a/e t)
 (setq org-special-ctrl-k t)
 (setq org-src-fontify-natively t)
