@@ -303,7 +303,7 @@
 
 (define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
-(defhydra hydra-org-global (global-map "<f7>" :hint nil)
+(defhydra hydra-org-global (:hint nil)
   "
 ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
 --------------------------------------------------------------------------------------
@@ -328,6 +328,7 @@ add t_i_me to timestamp
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
   ("q" nil "cancel"))
+(global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)

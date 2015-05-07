@@ -15,9 +15,6 @@
 (define-prefix-command 'custom-clients-keymap)
 (global-set-key (kbd "C-q") 'custom-clients-keymap)
 
-(define-prefix-command 'custom-pim-keymap)
-(global-set-key (kbd "<f7>") 'custom-pim-keymap)
-
 (define-prefix-command 'custom-mc-keymap)
 (global-set-key (kbd "<f5>") 'custom-mc-keymap)
 
