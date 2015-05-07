@@ -1,35 +1,3 @@
-* [#C] http://www.emacswiki.org/emacs/PickBackup
-* TODO [#C] https://code.google.com/p/emacs-freex/wiki/Introduction [2013-04-20 Сб 20:27] :emacs:try:
-* TODO [#C] https://github.com/zk-phi/phi-search.git [2013-05-01 Ср 09:49] :emacs:try:
-* TODO [#C] http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/ [2013-05-22 Ср 00:57] :emacs:try:
-* TODO [#C] http://www.emacswiki.org/emacs/VisibleMark [2013-06-16 Вс 14:16] :emacs:try:
-* [#B] https://github.com/overtone/emacs-live [2013-06-16 Вс 16:06] :emacs:try:
-* TODO [#C] https://github.com/kiwanami/emacs-ctable [2014-02-04 Вт 16:11] :emacs:try:
-* TODO [#C] https://github.com/purcell/evil-matchit [2014-02-12 Ср 16:01] :emacs:try:
-* TODO [#C] https://github.com/purcell/projector.el [2014-02-12 Ср 16:03] :emacs:try:
-* TODO [#C] https://github.com/purcell/helm-c-moccur.el [2014-02-12 Ср 16:16] :emacs:try:
-* TODO [#C] https://github.com/purcell/string-inflection [2014-02-12 Ср 16:17] :emacs:try:
-* TODO [#C] https://github.com/purcell/ac-js2 [2014-02-12 Ср 16:22] :emacs:try:
-* TODO [#C] https://github.com/purcell/ibuffer-vc [2014-02-12 Ср 16:43] :emacs:try:
-* [#B] https://github.com/purcell/ace-jump-buffer [2014-02-12 Ср 16:45] :emacs:try:
-* [#B] https://github.com/purcell/helm-dictionary [2014-02-12 Ср 16:47] :emacs:try:
-* [#A] https://github.com/purcell/mmm-mode [2014-02-12 Ср 16:47] :emacs:try:
-* TODO [#C] http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet [2014-03-11 Вт 19:03] :emacs:try:
-* TODO [#C] https://github.com/chrisbarrett/emacs-refactor [2014-03-13 Чт 14:21] :emacs:try:
-* TODO [#C] http://www.masteringemacs.org/articles/2013/12/21/discoverel-discover-emacs-context-menus/ [2014-03-28 Пт 01:14] :emacs:try:
-* [#B] https://github.com/jwiegley/use-package [2014-04-03 Чт 19:16] :emacs:try:
-* [#B] https://github.com/ShingoFukuyama/matchar [2014-06-04 Ср 13:22] :emacs:try:
-* [#B] http://www.emacswiki.org/emacs/DiredSorting
-* [#B] https://github.com/rejeep/prodigy.el
-* TODO [#C] https://github.com/syohex/emacs-helm-pydoc [2014-06-22 Вс 23:42] :emacs:try:
-* TODO [#C] http://www.emacswiki.org/emacs/python-magic.el [2014-06-22 Вс 23:45] :emacs:try:
-* [#B] http://www.emacswiki.org/cgi-bin/wiki/goto-last-change.el [2014-06-23 Пн 00:21] :emacs:try:
-* TODO [#C] http://www.emacswiki.org/emacs/HowmMode [2014-06-23 Пн 01:17] :emacs:try:
-* [#C] https://github.com/chriskempson/tomorrow-theme
-* [#C] https://github.com/chriskempson/base16
-* TODO [#C] https://github.com/pheaver/breadcrumb [2014-06-30 Пн 18:55] :emacs:try:
-* TODO [#C] http://code.google.com/p/emacs-google/wiki/googlecontacts [2014-07-01 Вт 02:25] :emacs:try:
-* TODO [#C] https://github.com/martialboniou/emacs-revival [2014-07-01 Вт 02:36] :emacs:try:
 * BBDB
 ** http://bbdb.sourceforge.net/
 ** http://bbdb.sourceforge.net/faq.html
@@ -45,258 +13,107 @@
 ** http://rpatterson.net/software/bbdb.gmailfilter
 ** http://sunsite.ualberta.ca/Documentation/Gnu/emacs-21.1/html_node/eudc_4.html
 ** http://julien.danjou.info/blog/2010.html#Emacs_Google_Maps_and_BBDB
+* seems useful
+** [#B] http://doc.norang.ca/org-mode.html#ToDoStateTriggers
+** [#B] http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/
+** [#B] http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/ try to make a hydra
+** [#B] http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html
+** [#B] http://oremacs.com/2015/01/30/auto-yasnippet/
+** [#B] http://punchagan.muse-amuse.in/posts/playing-music-using-mpsyt-from-emacs.html
+** [#B] http://stackoverflow.com/questions/1054903/how-do-you-get-python-documentation-in-texinfo-info-format
+** [#B] http://www.emacswiki.org/emacs/HowmMode
+** [#B] https://github.com/KirillTemnov/emacs-web
+** [#B] https://github.com/Malabarba/rich-minority
+** [#B] https://github.com/Silex/elmacro
+** [#B] https://github.com/abo-abo/auto-yasnippet
+** [#B] https://github.com/bradleywright/magit-find-file.el
+** [#B] https://github.com/camdez/checkbox.el
+** [#B] https://github.com/jwiegley/use-package review update notes
+** [#B] https://github.com/magnars/string-edit.el
+** [#B] https://github.com/mgalgs/indent-hints-mode
+** [#B] https://github.com/nonsequitur/orglink
+** [#B] https://github.com/syohex/coverlay.el
+** [#B] https://github.com/terranpro/magit-gerrit
+** [#B] https://github.com/tonini/gitconfig.el
+** [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]]
+** http://endlessparentheses.com/new-on-elpa-and-in-emacs-25-1-let-alist.html
+** http://kostafey.blogspot.ru/2012/10/mode-line.html
+** http://orgmode.org/worg/org-contrib/org-drill.html
+** http://welinux.ru/post/7588/
+** http://www.emacswiki.org/emacs/Htmlize
+** http://www.emacswiki.org/emacs/VisibleMark
+** http://www.emacswiki.org/emacs/WebKit
+** https://code.google.com/p/emacs-google/wiki/googlecontacts
+** https://github.com/3b/slime-proxy
+** https://github.com/Fuco1/keyadvice.el
+** https://github.com/Malabarba/elisp-bug-hunter
+** https://github.com/abo-abo/function-args
+** https://github.com/abo-abo/latex-wrap
+** https://github.com/abo-abo/make-it-so
+** https://github.com/abo-abo/org-download
+** https://github.com/adamrt/sane-term
+** https://github.com/anler/tagedit
+** https://github.com/benma/visual-regexp-steroids.el/
+** https://github.com/capitaomorte/sly
+** https://github.com/dengste/doc-present
+** https://github.com/ecukes/ecukes
+** https://github.com/glasserc/ethan-wspace
+** https://github.com/itsjeyd/git-wip
+** https://github.com/itsjeyd/git-wip-timemachine
+** https://github.com/jamesyoungman/vimvars
+** https://github.com/jixiuf/dired-filetype-face
+** https://github.com/kai2nenobu/guide-key
+** https://github.com/kelvinh/org-page
+** https://github.com/madsdk/yasnippets-latex
+** https://github.com/magit/git-modes
+** https://github.com/magnars/change-inner.el
+** https://github.com/mickeynp/sona.el
+** https://github.com/mpenet/clojure-snippets
+** https://github.com/novoid/Memacs
+** https://github.com/novoid/lazyblorg
+** https://github.com/overtone/emacs-live
+** https://github.com/polypus74/HSnippets
+** https://github.com/purcell/ac-js2
+** https://github.com/purcell/exec-path-from-shell
+** https://github.com/purcell/helm-dictionary
+** https://github.com/purcell/ibuffer-vc
+** https://github.com/purcell/mmm-mode
+** https://github.com/purcell/string-inflection
+** https://github.com/rafl/espect
+** https://github.com/rejeep/yasnippets
+** https://github.com/rolandwalker/back-button
+** https://github.com/rolandwalker/back-button
+** https://github.com/steckerhalter/emacs-fasd
+** https://github.com/syohex/elmacro
+** https://github.com/syohex/emacs-ac-tmux-complete
+** https://github.com/syohex/emacs-emamux
+** https://github.com/syohex/emacs-helm-pydoc
+** https://github.com/syohex/emacs-quickrun
+** https://github.com/syohex/rectangle-utils
+** https://github.com/zk-phi/phi-search
+** https://gitlab.com/goobook/goobook
+** https://www.masteringemacs.org/article/discoverel-discover-emacs-context-menus
 * TODO [#C] http://www.emacswiki.org/emacs/PostgreSQL [2014-07-11 Пт 15:31] :emacs:try:
 * TODO [#C] Dimitri Fountaine's emacs customizations for postgresql development [2014-07-14 Пн 18:57] :emacs:try:ATTACH:
   :PROPERTIES:
   :Attachments: pgsrc.el dim-pgsql.el
   :ID:       f9c53018-ca47-469a-9610-5ca08434e198
   :END:
-* TODO [#C] https://github.com/mickeynp/sona.el [2014-07-20 Вс 04:10] :emacs:try:
-* TODO [#C] [[https://github.com/purcell/password-vault][purcell/password-vault]] [2014-08-20 Ср 01:50]          :emacs:try:
-* TODO [#C] http://nschum.de/src/emacs/pick-backup/ [2014-08-21 Чт 01:30] :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/emacs/WebKit][EmacsWiki: Web Kit]] [2014-08-31 Вс 21:08]              :emacs:try:
 * TODO [#C] orgmode: todo state triggers [2014-09-23 Вт 14:54]    :emacs:try:
-  http://doc.norang.ca/org-mode.html#ToDoStateTriggers
-* TODO [#C] [[https://github.com/syohex/emacs-anzu][syohex/emacs-anzu]] [2014-10-01 Ср 00:13]               :emacs:try:
-* TODO [#C] [[https://github.com/pidu/git-timemachine][pidu/git-timemachine]] [2014-10-01 Ср 00:20]            :emacs:try:
-* TODO [#C] [[https://github.com/ikame/tagedit][ikame/tagedit]] [2014-10-01 Ср 00:28]                   :emacs:try:
 * TODO [#C] auto-complete-c-headers [2014-10-05 Вс 02:09]         :emacs:try:
 * TODO [#C] flymake-google-cpplint [2014-10-05 Вс 02:13]          :emacs:try:
 * TODO [#C] google-c-style  [2014-10-05 Вс 02:13]                 :emacs:try:
-* TODO [#C] http://barisyuksel.com/cppmode/.emacs [2014-10-05 Вс 02:21] :emacs:try:
-* TODO [#C] https://github.com/Sarcasm/irony-mode [2014-10-05 Вс 20:14] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-10-12 Вс 13:51]           :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/Htmlize][EmacsWiki: Htmlize]] [2014-10-12 Вс 14:02]              :emacs:try:
-* TODO [#C] [[https://github.com/dbrock/volume-el/blob/master/volume.el][volume-el/volume.el at master . dbrock/volume-el]] [2014-10-12 Вс 16:34] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-10-12 Вс 18:00]           :emacs:try:
-* TODO [#C] [[https://github.com/d11wtq/fiplr][d11wtq/fiplr]] [2014-10-12 Вс 18:11]                    :emacs:try:
-* TODO [#C] [[https://github.com/kai2nenobu/guide-key][kai2nenobu/guide-key]] [2014-10-12 Вс 18:12]            :emacs:try:
-* TODO [#C] [[https://github.com/zk-phi/sublimity][zk-phi/sublimity]] [2014-10-15 Ср 14:00]                :emacs:try:
-* TODO [#C] [[https://github.com/unic0rn/powerline][unic0rn/powerline]] [2014-10-15 Ср 14:00]               :emacs:try:
-* TODO [#C] [[https://github.com/raugturi/powerline-evil][raugturi/powerline-evil]] [2014-10-15 Ср 14:01]         :emacs:try:
-* TODO [#C] [[http://kostafey.blogspot.ru/2012/10/mode-line.html][Kostafey's Blog: blah-blah-blah mode-line]] [2014-11-01 Сб 01:05] :emacs:try:
-* TODO [#C] [[https://github.com/dengste/doc-present][dengste/doc-present]] [2014-11-01 Сб 18:30]             :emacs:try:
-* TODO [#C] [[https://github.com/capitaomorte/sly][capitaomorte/sly]] [2014-11-02 Вс 00:36]                :emacs:try:
-* TODO [#C] [[https://github.com/sabof/project-explorer][sabof/project-explorer]] [2014-11-02 Вс 00:42]          :emacs:try:
-* TODO [#C] [[https://github.com/d11wtq/fiplr][d11wtq/fiplr]] [2014-11-02 Вс 01:19]                    :emacs:try:
-* TODO [#C] [[https://github.com/coldnew/linum-relative][coldnew/linum-relative]] [2014-11-02 Вс 16:46]          :emacs:try:
-* TODO [#C] [[https://github.com/senny/emacs-eclim][senny/emacs-eclim]] [2014-11-02 Вс 16:47]               :emacs:try:
-* TODO [#C] [[https://github.com/kai2nenobu/guide-key][kai2nenobu/guide-key]] [2014-11-02 Вс 17:00]            :emacs:try:
-* TODO [#C] [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e: an e-mail client for emacs]] [2014-11-02 Вс 17:10] :emacs:try:
-* TODO [#C] [[http://notmuchmail.org/][notmuch]] [2014-11-02 Вс 17:10]                         :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-helm-ag][syohex/emacs-helm-ag]] [2014-11-02 Вс 18:06]            :emacs:try:
-* TODO [#C] [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]] [2014-11-02 Вс 21:15]     :emacs:try:clojure:
-* TODO [#C] [[https://github.com/clojure-emacs/clojure-mode][clojure-emacs/clojure-mode]] [2014-11-02 Вс 21:16] :emacs:try:clojure:
-* TODO [#C] [[https://github.com/mpenet/clojure-snippets][mpenet/clojure-snippets]] [2014-11-02 Вс 21:16] :emacs:try:clojure:
-* TODO [#C] [[https://github.com/n3mo/cyberpunk-theme.el][n3mo/cyberpunk-theme.el]] [2014-11-02 Вс 21:17]         :emacs:try:
-* TODO [#C] [[http://web-mode.org/][web-mode.el - html template editing for emacs]] (another try, check if anything changed) [2014-11-02 Вс 21:26] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/impatient-mode][skeeto/impatient-mode]] [2014-11-02 Вс 21:27]           :emacs:try:
-* TODO [#C] [[http://mwolson.org/projects/EmacsMuse.html][Projects - Emacs Muse]] [2014-11-02 Вс 21:27]           :emacs:try:
-* TODO [#C] [[https://github.com/dgtized/github-clone.el][dgtized/github-clone.el]] [2014-11-02 Вс 21:56]         :emacs:try:
-* TODO [#C] [[https://github.com/magit/git-modes][magit/git-modes]] [2014-11-02 Вс 22:20]                 :emacs:try:
-* TODO [#C] [[https://github.com/chrisdone/structured-haskell-mode][chrisdone/structured-haskell-mode]] [2014-11-02 Вс 22:32] :emacs:try:
-* TODO [#C] [[https://github.com/alanz/HaRe][alanz/HaRe]] [2014-11-02 Вс 22:32]                      :emacs:try:
-* TODO [#C] [[https://github.com/purcell/exec-path-from-shell][purcell/exec-path-from-shell]] [2014-11-02 Вс 22:41]    :emacs:try:
-* TODO [#C] [[https://github.com/benma/visual-regexp.el][benma/visual-regexp.el]] [2014-11-02 Вс 22:42]          :emacs:try:
-* TODO [#C] [[https://github.com/benma/visual-regexp-steroids.el/][benma/visual-regexp-steroids.el]] [2014-11-02 Вс 22:42] :emacs:try:
-* TODO [#C] [[https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md][emacs-haskell-tutorial/tutorial.md at master . serras/emacs-haskell-tutorial]] [2014-11-02 Вс 22:42] :emacs:try:
-* TODO [#C] [[http://www.mew.org/~kazu/proj/ghc-mod/en/][Happy Haskell Programming]] [2014-11-02 Вс 22:42]       :emacs:try:
 * TODO [#C] tabbar buffer groups [2014-11-10 Пн 00:42]            :emacs:try:
-* TODO [#C] [[http://lukego.livejournal.com/23379.html][Luke's Weblog - lively.el 0.1]] [2014-11-11 Вт 21:12]   :emacs:try:
-* TODO [#C] [[https://github.com/chrisdone/god-mode][chrisdone/god-mode]] [2014-11-12 Ср 00:10]              :emacs:try:
-* TODO [#C] [[https://github.com/baohaojun/ajoke][baohaojun/ajoke]] [2014-11-12 Ср 00:13]                 :emacs:try:
-* TODO [#C] [[http://www.skybert.net/emacs/java/][java]] [2014-11-12 Ср 00:13]                            :emacs:try:
 * TODO [#C] voice coding (search for infosources) [2014-11-12 Ср 00:46] :emacs:try:
-* TODO [#C] [[https://github.com/nonsequitur/git-modes][nonsequitur/git-modes]] [2014-11-12 Ср 23:56]           :emacs:try:
-* TODO [#C] [[https://github.com/nonsequitur/orglink][nonsequitur/orglink]] [2014-11-12 Ср 23:56]             :emacs:try:
 * TODO [#C] org-cycle-include-plain-lists [2014-11-14 Пт 01:26]   :emacs:try:
-* TODO [#C] [[http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/][A peek at Emacs 24.4: superword-mode - Emacs Redux]] [2014-11-19 Ср 19:13] :emacs:try:
-* TODO [#C] [[https://github.com/tonini/gitconfig.el][tonini/gitconfig.el]] [2014-11-19 Ср 19:17]             :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/emacs-en/GoobookMode][EmacsWiki: Goobook Mode]] [2014-11-19 Ср 21:26]         :emacs:try:
-* TODO [#C] [[https://github.com/tonini/karma.el][tonini/karma.el]] [2014-11-19 Ср 21:45]                 :emacs:try:
-* TODO [#C] [[https://github.com/senny/cabbage][senny/cabbage]] [2014-11-19 Ср 21:45]                   :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/emacs-en/HideIfDef][EmacsWiki: Hide If Def]] [2014-11-19 Ср 21:51]          :emacs:try:
-* TODO [#C] [[https://github.com/terranpro/magit-gerrit][terranpro/magit-gerrit]] [2014-11-19 Ср 22:09]          :emacs:try:
-* TODO [#C] [[http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/][A peek at Emacs 24.4: prettify-symbols-mode - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
-* TODO [#C] [[http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/][A peek at Emacs 24.4: Focus Hooks - Emacs Redux]] [2014-11-19 Ср 22:36] :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/emacs/ImenuMode#toc10][EmacsWiki: Imenu Mode]] [2014-11-23 Вс 20:11]           :emacs:try:
-* TODO [#C] [[https://github.com/chrisdone/structured-haskell-mode][chrisdone/structured-haskell-mode]] [2014-11-25 Вт 23:47] :emacs:try:
-* TODO [#C] [[http://sachachua.com/blog/2014/11/using-org-mode-keep-process-journal/][Using Org Mode to keep a process journal - sacha chua :: living an awesome life]] [2014-11-28 Пт 01:24] :emacs:try:
-* TODO [#C] [[https://github.com/magnars/string-edit.el][magnars/string-edit.el]] [2014-11-29 Сб 23:48]          :emacs:try:
-* TODO [#C] [[https://github.com/magnars/change-inner.el][magnars/change-inner.el]] [2014-11-29 Сб 23:48]         :emacs:try:
-* TODO [#C] [[http://welinux.ru/post/7588/][welinux.ru / Emacs dict + dictem]] [2014-12-07 Вс 19:58] :emacs:try:
-* TODO [#C] [[http://orgmode.org/worg/org-contrib/org-drill.html][org-drill.el flashcards and spaced repetition for org-mode]] [2014-12-07 Вс 22:29] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html?source%3Drss][Introducing Names: practical namespaces for Emacs-Lisp . Endless Parentheses]] [2014-12-11 Чт 12:31] :emacs:try:
-* TODO [#C] [[http://definitelyaplug.b0.cx/post/dlist-a-major-mode-tutorial-5/][dlist: A Major Mode Tutorial | Definitely a plug.]] [2014-12-14 Вс 17:57] :emacs:try:
-* TODO [#C] [[https://github.com/novoid/lazyblorg][novoid/lazyblorg]] [2014-12-14 Вс 22:28]                :emacs:try:
-* TODO [#C] [[https://github.com/novoid/Memacs][novoid/Memacs]] [2014-12-14 Вс 22:28]                   :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/new-on-elpa-and-in-emacs-25-1-let-alist.html?source%3Drss][New on Elpa and in Emacs 25.1: let-alist . Endless Parentheses]] [2014-12-16 Вт 13:50] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/keyfreq][abo-abo/keyfreq]] [2014-12-29 Пн 15:26]                 :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/ace-link][abo-abo/ace-link]] [2014-12-29 Пн 15:27]                :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/make-it-so][abo-abo/make-it-so]] [2014-12-29 Пн 15:28]              :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/auto-yasnippet][abo-abo/auto-yasnippet]] [2014-12-29 Пн 15:28]          :emacs:try:
-* TODO [#C] [[http://oremacs.com/2014/12/26/the-little-package-that-could/][tiny.el - the little package that could . (or emacs]] [2014-12-29 Пн 15:41] :emacs:try:
-* TODO [#C] [[https://github.com/Bruce-Connor/erc-gitter][Bruce-Connor/erc-gitter]] [2014-12-30 Вт 16:13]         :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/02/wrap-with-latex/][Wrap a region with a LaTeX environment . (or emacs]] [2015-01-03 Сб 16:37] :emacs:try:
-* TODO [#C] [[http://mbork.pl/2014-12-27_Info_dispatch][Marcin Borkowski: 2014-12-27 Info dispatch]] [2015-01-03 Сб 16:53] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired 路 (or emacs]] [2015-01-04 Вс 19:13] :emacs:try:
-* TODO [#C] [[https://github.com/tarsius/auto-compile][tarsius/auto-compile]] [2015-01-04 Вс 23:26]            :emacs:try:
-* TODO [#C] [[https://github.com/chrisbarrett/emacs-refactor][chrisbarrett/emacs-refactor]] [2015-01-04 Вс 23:27]     :emacs:try:
-* TODO [#C] [[http://www.wisdomandwonder.com/link/9401/the-emacs-widget-library][The Emacs Widget Library | Wisdom and Wonder]] [2015-01-05 Пн 00:11] :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-quickrun][syohex/emacs-quickrun]] [2015-01-05 Пн 16:51]           :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-editutil][syohex/emacs-editutil]] [2015-01-05 Пн 17:16]           :emacs:try:
-* TODO [#C] [[https://github.com/syohex/docean.el][syohex/docean.el]] [2015-01-05 Пн 17:17]                :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-dired-k][syohex/emacs-dired-k]] [2015-01-05 Пн 17:18]            :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-emamux][syohex/emacs-emamux]] [2015-01-05 Пн 17:19]             :emacs:try:
-* TODO [#C] [[https://github.com/syohex/shut-up.el][syohex/shut-up.el]] [2015-01-05 Пн 17:19]               :emacs:try:
-* TODO [#C] [[https://github.com/syohex/elmacro][syohex/elmacro]] [2015-01-05 Пн 17:20]                  :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-utils][syohex/emacs-utils]] [2015-01-05 Пн 17:21]              :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-gitignore][syohex/emacs-gitignore]] [2015-01-05 Пн 17:21]          :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-ac-tmux-complete][syohex/emacs-ac-tmux-complete]] [2015-01-05 Пн 17:22]   :emacs:try:
-* TODO [#C] [[https://github.com/syohex/coverlay.el][syohex/coverlay.el]] [2015-01-05 Пн 17:23]              :emacs:try:
-* TODO [#C] [[https://github.com/syohex/emacs-inertial-scroll][syohex/emacs-inertial-scroll]] [2015-01-05 Пн 17:24]    :emacs:try:
-* TODO [#C] [[https://github.com/syohex/rectangle-utils][syohex/rectangle-utils]] [2015-01-05 Пн 17:24]          :emacs:try:
-* TODO [#C] [[https://github.com/syohex/zop-to-char][syohex/zop-to-char]] [2015-01-05 Пн 17:25]              :emacs:try:
-* TODO [#C] [[https://github.com/syohex/psession][syohex/psession]] [2015-01-05 Пн 17:25]                 :emacs:try:
-* TODO [#C] [[http://www.wisdomandwonder.com/link/9401/the-emacs-widget-library][The Emacs Widget Library | Wisdom and Wonder]] [2015-01-05 Пн 17:49] :emacs:try:
-* TODO [#C] [[https://marmalade-repo.org/packages/web][web @ Marmalade]] [2015-01-05 Пн 18:28] :emacs:try:
-* TODO [#C] [[http://stackoverflow.com/questions/1054903/how-do-you-get-python-documentation-in-texinfo-info-format][emacs - How do you get Python documentation in Texinfo Info format? - Stack Overflow]] [2015-01-05 Пн 18:50] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/06/rushing-headlong/][Rushing headlong . (or emacs]] [2015-01-08 Чт 00:10] :emacs:try:
-* TODO [#C] [[https://github.com/tam17aki/ace-isearch][tam17aki/ace-isearch]] [2015-01-08 Чт 00:11]            :emacs:try:
-* TODO [#C] [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][orgpaper/orgpapers.org at master . vikasrawal/orgpaper]] [2015-01-08 Чт 00:18] :emacs:try:
-* TODO [#C] [[https://github.com/ahungry/ahungry-blog][ahungry/ahungry-blog]] [2015-01-08 Чт 15:14]            :emacs:try:
-* TODO [#C] [[https://github.com/Bruce-Connor/rich-minority][Bruce-Connor/rich-minority]] [2015-01-08 Чт 16:39]      :emacs:try:
-* TODO [#C] [[https://github.com/Bruce-Connor/smart-mode-line/][Bruce-Connor/smart-mode-line]] [2015-01-08 Чт 16:39]    :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1. . (or emacs]] [2015-01-09 Пт 00:52] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/08/org-protocol-2/][My org-protocol setup, part 2. . (or emacs]] [2015-01-09 Пт 00:52] :emacs:try:
-* TODO [#C] [[http://www.russet.org.uk/blog/3035][An Exercise in Irrelevance . Blog Archive . Lenticular Text: Looking at code from different angles]] [2015-01-09 Пт 19:57] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/09/ido-find-file-tilde/][tilde in ido-find-file . (or emacs]] [2015-01-09 Пт 20:45] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/worf][abo-abo/worf]] [2015-01-10 Сб 16:24] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/function-args][abo-abo/function-args]] [2015-01-10 Сб 16:25] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/lispy][abo-abo/lispy]] [2015-01-10 Сб 16:25] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2014/12/23/upcase-word-you-silly/][upcase-word, you so silly . (or emacs]] [2015-01-10 Сб 18:02] :emacs:try:
-* TODO [#C] [[https://github.com/adamrt/sane-term][adamrt/sane-term]] [2015-01-11 Вс 10:46] :emacs:try:
-* TODO [#C] howm [2015-01-15 Чт 23:56]                            :emacs:try:
-* TODO [#C] [[https://github.com/novoid/Memacs][novoid/Memacs]] [2015-01-18 Вс 00:38] :emacs:try:
-* TODO [#C] [[http://www.lunaryorn.com/2014/12/23/bug-reference-mode.html][TIL about Bug Reference Mode . lunarsite]] [2015-01-24 Сб 23:06] :emacs:try:
-* TODO [#C] [[https://github.com/joddie/macrostep][joddie/macrostep]] [2015-01-25 Вс 00:24] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/19/lispy.0.21.0-is-out/][lispy 0.21.0 is out . (or emacs]] [2015-01-25 Вс 00:53] :emacs:try:
-* TODO [#B] [[http://oremacs.com/2015/01/20/introducing-hydra/][Behold The Mighty Hydra! . (or emacs]] [2015-01-25 Вс 22:10] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/25/exploring-emacs-packages/][Exploring Emacs packages . (or emacs]] [2015-01-26 Пн 01:13] :emacs:try:
-* TODO [#C] [[http://irreal.org/blog/?p%3D3624][Sacha on Emacs Micro-Habits | Irreal]] [2015-01-26 Пн 01:14] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/23/eltex/][ElTeX - generate full LaTeX documents from Emacs Lisp . (or emacs]] [2015-01-26 Пн 01:18] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/24/after-select-window/][Do things after selecting window . (or emacs]] [2015-01-26 Пн 01:18] :emacs:try:
 * TODO [#C] org-todo-state-tags-triggers [2015-01-29 Чт 00:23] :orgmode:emacs:try:
 * TODO [#C] org-agenda-filter-preset [2015-01-31 Сб 14:00] :emacs:try:
 * TODO [#C] ibuffer-vc [2015-02-01 Вс 17:42] :emacs:try:
 * TODO [#C] fullframe [2015-02-01 Вс 18:01] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/30/auto-yasnippet/][Re-introducing auto-yasnippet . (or emacs]] [2015-02-01 Вс 19:24] :emacs:try:
 * TODO [#C] set-rectangular-region-anchor [2015-02-01 Вс 21:30] :emacs:try:
 * TODO [#C] org-mobile [2015-02-01 Вс 21:49]                      :emacs:try:
 * TODO [#C] org-crypt [2015-02-01 Вс 21:52]                       :emacs:try:
-* TODO [#C] [[http://orgmode.org/manual/Cooperation.html][Cooperation - The Org Manual]] [2015-02-02 Пн 23:03] :emacs:try:
-* TODO [#C] [[http://table.sourceforge.net/][Table]] [2015-02-03 Вт 23:59] :emacs:try:
-* TODO [#C] [[http://www.flickr.com/photos/sachac/16249059918/][2015-02-03 Better Emacs Testing -- index card #testing #emacs | Flickr - Photo Sharing!]] [2015-02-03 Вт 23:59] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/14/repeatable-commands/][Zoom in / out with style . (or emacs]] [2015-02-04 Ср 19:13] :emacs:try:
-* TODO [#C] [[https://github.com/mad/weather.el][mad/weather.el]] [2015-02-05 Чт 12:34] :emacs:try:
-* TODO [#C] [[https://github.com/lewang/jump-char][lewang/jump-char]] [2015-02-05 Чт 13:23] :emacs:try:
-* TODO [#C] [[https://github.com/jamesyoungman/vimvars][jamesyoungman/vimvars]] [2015-02-05 Чт 17:19] :emacs:try:
-* TODO [#C] [[https://github.com/rafl/espect][rafl/espect]] [2015-02-05 Чт 17:21] :emacs:try:
-* TODO [#C] [[https://github.com/gigamonkey/jumper][gigamonkey/jumper]] [2015-02-05 Чт 17:23] :emacs:try:
-* TODO [#C] http://oremacs.com/2015/02/04/pre-hydra-post/ and friends [2015-02-05 Чт 17:39] :emacs:try:
-* TODO [#C] [[https://github.com/rolandwalker/back-button][rolandwalker/back-button]] [2015-02-05 Чт 18:30] :emacs:try:
-* TODO [#C] [[https://github.com/bradleywright/magit-find-file.el][bradleywright/magit-find-file.el]] [2015-02-05 Чт 18:38] :emacs:try:
-* TODO [#C] [[https://github.com/3b/slime-proxy][3b/slime-proxy]] [2015-02-05 Чт 18:38] :emacs:try:
-* TODO [#C] [[https://github.com/ecukes/ecukes][ecukes/ecukes]] [2015-02-05 Чт 18:40] :emacs:try:
-* TODO [#C] [[https://github.com/haxney/ezbl][haxney/ezbl]] [2015-02-05 Чт 18:41] :emacs:try:
-* TODO [#C] [[https://github.com/technomancy/swank-clojure][technomancy/swank-clojure]] [2015-02-05 Чт 18:41] :emacs:try:
-* TODO [#C] [[https://github.com/mattkeller/mk-project][mattkeller/mk-project]] [2015-02-05 Чт 18:42] :emacs:try:
-* TODO [#C] [[https://github.com/michaelklishin/cucumber.el][michaelklishin/cucumber.el]] [2015-02-05 Чт 18:43] :emacs:try:
-* TODO [#C] [[https://github.com/jrockway/stylish-elisp][jrockway/stylish-elisp]] [2015-02-05 Чт 18:46] :emacs:try:
-* TODO [#C] [[https://github.com/benma/visual-regexp-steroids.el/][benma/visual-regexp-steroids.el]] [2015-02-05 Чт 18:47] :emacs:try:
-* TODO [#C] [[https://github.com/benma/visual-regexp.el][benma/visual-regexp.el]] [2015-02-05 Чт 18:49] :emacs:try:
-* TODO [#C] [[https://github.com/tj64/navi][tj64/navi]] [2015-02-05 Чт 18:49] :emacs:try:
-* TODO [#C] [[https://github.com/zk-phi/phi-search][zk-phi/phi-search]] [2015-02-05 Чт 18:50] :emacs:try:
-* TODO [#C] [[https://github.com/jrockway/stylish][jrockway/stylish]] [2015-02-05 Чт 18:51] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/elxiki][Fuco1/elxiki]] [2015-02-05 Чт 18:57] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/skewer-mode][skeeto/skewer-mode]] [2015-02-05 Чт 18:57] :emacs:try:
-* TODO [#C] [[https://github.com/steckerhalter/emacs-fasd][steckerhalter/emacs-fasd]] [2015-02-05 Чт 18:58] :emacs:try:
-* TODO [#C] [[https://github.com/KMahoney/kpm-list][KMahoney/kpm-list]] [2015-02-05 Чт 18:58] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/keyfreq][Fuco1/keyfreq]] [2015-02-05 Чт 18:59] :emacs:try:
-* TODO [#C] [[https://github.com/grizzl/grizzl][grizzl/grizzl]] [2015-02-05 Чт 19:01] :emacs:try:
-* TODO [#C] [[https://github.com/abingham/prosjekt][abingham/prosjekt]] [2015-02-05 Чт 19:01] :emacs:try:
-* TODO [#C] [[https://github.com/glasserc/ethan-wspace][glasserc/ethan-wspace]] [2015-02-05 Чт 19:02] :emacs:try:
-* TODO [#C] [[https://github.com/madsdk/yasnippets-latex][madsdk/yasnippets-latex]] [2015-02-05 Чт 19:02] :emacs:try:
-* TODO [#C] [[https://github.com/rejeep/yasnippets][rejeep/yasnippets]] [2015-02-05 Чт 19:02] :emacs:try:
-* TODO [#C] [[https://github.com/jwiegley/regex-tool][jwiegley/regex-tool]] [2015-02-05 Чт 19:02] :emacs:try:
-* TODO [#C] [[https://github.com/mgalgs/indent-hints-mode][mgalgs/indent-hints-mode]] [2015-02-05 Чт 19:03] :emacs:try:
-* TODO [#C] [[https://github.com/jixiuf/dired-filetype-face][jixiuf/dired-filetype-face]] [2015-02-05 Чт 19:03] :emacs:try:
-* TODO [#C] [[https://github.com/afroisalreadyinu/abl-mode][afroisalreadyinu/abl-mode]] [2015-02-05 Чт 19:04] :emacs:try:
-* TODO [#C] [[https://github.com/jrockway/eproject][jrockway/eproject]] [2015-02-05 Чт 19:06] :emacs:try:
-* TODO [#C] [[https://github.com/netguy204/imp.el][netguy204/imp.el]] [2015-02-05 Чт 19:15] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/indicators.el][Fuco1/indicators.el]] [2015-02-05 Чт 19:16] :emacs:try:
-* TODO [#C] [[https://github.com/stefanhusmann/emacs-else][stefanhusmann/emacs-else]] [2015-02-05 Чт 19:19] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/skewer-mode][skeeto/skewer-mode]] [2015-02-05 Чт 19:24] :emacs:try:
-* TODO [#C] [[https://github.com/skeeto/boids-js][skeeto/boids-js]] [2015-02-05 Чт 19:24] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/keyadvice.el][Fuco1/keyadvice.el]] [2015-02-05 Чт 19:30] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/clippy.el][Fuco1/clippy.el]] [2015-02-05 Чт 19:31] :emacs:try:
-* TODO [#C] [[https://github.com/Fuco1/typoel][Fuco1/typoel]] [2015-02-05 Чт 19:31] :emacs:try:
-* TODO [#C] [[https://github.com/polypus74/HSnippets][polypus74/HSnippets]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/KirillTemnov/emacs-web][KirillTemnov/emacs-web]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/lewang/le_emacs_libs][lewang/le_emacs_libs]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/benma/visual-regexp.el][benma/visual-regexp.el]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/baohaojun/ajoke][baohaojun/ajoke]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/abingham/prosjekt][abingham/prosjekt]] [2015-02-05 Чт 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode]] [2015-02-06 Пт 13:33] :emacs:try:
-* TODO [#C] [[https://github.com/rolandwalker/back-button][rolandwalker/back-button]] [2015-02-06 Пт 13:34] :emacs:try:
-* TODO [#C] [[https://github.com/magit/git-modes][magit/git-modes]] [2015-02-06 Пт 13:34] :emacs:try:
-* TODO [#C] [[https://github.com/KirillTemnov/emacs-web][KirillTemnov/emacs-web]] [2015-02-06 Пт 13:36] :emacs:try:
-* TODO [#C] [[http://cmacr.ae/blog/2015/01/18/org-page-blogging/][Blogging with org-page - Calum MacRae]] [2015-02-13 Пт 20:48] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/implementing-comment-line.html][Implementing comment-line · Endless Parentheses]] [2015-02-14 Сб 22:42] :emacs:try:
-* TODO [#C] [[https://github.com/Bruce-Connor/paradox/][Bruce-Connor/paradox]] [2015-02-14 Сб 22:49] :emacs:try:
-* TODO [#C] [[http://sachachua.com/blog/2015/02/digital-index-piles-emacs-rapid-categorization-org-mode-items/][Digital index piles with Emacs: Rapid categorization of Org Mode items - sacha chua :: living an awesome life]] [2015-02-16 Пн 12:53] :emacs:try:
-* TODO [#C] [[http://emacswiki.org/emacs/auto-yasnippet.el][EmacsWiki: auto-yasnippet.el]] [2015-02-16 Пн 23:20] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/new-on-elpa-speed-of-thought-lisp.html?source%3Drss][New on (M)Elpa: speed-of-thought-lisp · Endless Parentheses]] [2015-02-16 Пн 23:55] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/lispy][abo-abo/lispy]] [2015-02-16 Пн 23:59] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/01/30/auto-yasnippet/][Re-introducing auto-yasnippet · (or emacs]] [2015-02-16 Пн 23:59] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/ido-occasional][abo-abo/ido-occasional]] [2015-02-17 Вт 19:54] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/centimacro][abo-abo/centimacro]] [2015-02-17 Вт 20:03] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/org-download][abo-abo/org-download]] [2015-02-17 Вт 20:03] :emacs:try:
 * TODO [#C] play with footnote mode [2015-02-22 Вс 23:59]            :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/tiny]] [2015-02-27 Пт 16:27] :emacs:try:
-* TODO [#C] [[https://github.com/Silex/elmacro]] [2015-03-02 Пн 18:20] :emacs:try:
-* TODO [#C] [[http://www.emacswiki.org/emacs/BookmarkPlus#HighlightingBookmarkLocations]] [2015-03-02 Пн 18:42] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/02/28/hydra-repeat/]] [2015-03-02 Пн 18:46] :emacs:try:
-* TODO [#C] [[http://irreal.org/blog/?p%3D3677][http://irreal.org/blog/?p=3677]]y [2015-03-02 Пн 19:58]    :emacs:try:
-* TODO [#C] [[https://snarfed.org/why_i_run_shells_inside_emacs]] [2015-03-03 Вт 11:38] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/03/02/ace-window-without-ace/]] [2015-03-03 Вт 11:46] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/03/05/testing-init-sanity/]] [2015-03-05 Чт 23:46] :emacs:try:
-* TODO [#C] [[http://www.foldr.org/~michaelw/emacs/redshank/]] [2015-03-07 Сб 23:59] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/new-on-elpa-spinner-el-mode-line-spinners-and-progress-bars.html?source%3Drss][http://endlessparentheses.com/new-on-elpa-spinner-el-mode-line-spinners-and-progress-bars.html?source=rss]] [2015-03-10 Вт 16:07] :emacs:try:
-* TODO [#C] [[https://coldnew.github.io/slides/org-ioslide/#1]] [2015-03-11 Ср 13:08] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/org-download]] [2015-03-13 Пт 18:01] :emacs:try:
-* TODO [#C] [[http://www.russet.org.uk/blog/3059][m-buffer]] [2015-03-21 Сб 23:08] :emacs:try:
-* TODO [#C] [[http://www.russet.org.uk/blog/3062]] [2015-03-23 Пн 15:05] :emacs:try:
-* TODO [#C] [[http://blog.jorgenschaefer.de/2015/03/buttercup-10-released.html]] [2015-03-29 Вс 15:03] :emacs:try:
-* TODO [#C] [[https://github.com/camdez/checkbox.el]] [2015-04-03 Пт 19:52] :emacs:try:
-* TODO [#C] [[https://github.com/uk-ar/key-combo]] [2015-04-05 Вс 23:33] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/cider-debug-a-visual-interactive-debugger-for-clojure.html?source=rss]] [2015-04-22 Ср 23:59] :emacs:try:
-* TODO [#C] [[http://endlessparentheses.com/sx-el-announcement-and-more-launcher-map.html?source=rss]] [2015-04-23 Чт 13:14] :emacs:try:
-* TODO [#C] [[https://github.com/kelvinh/org-page]] [2015-04-23 Чт 15:54] :emacs:try:
-* TODO [#C] [[https://github.com/Malabarba/elisp-bug-hunter]] [2015-04-23 Чт 15:54] :emacs:try:
-* TODO [#C] [[http://punchagan.muse-amuse.in/posts/playing-music-using-mpsyt-from-emacs.html]] [2015-04-23 Чт 16:44] :emacs:try:
-* TODO [#C] [[http://oremacs.com/2015/04/24/oremacs-config/]] [2015-04-24 Пт 23:11] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/profile-dotemacs]] [2015-04-25 Сб 18:53] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/swiper-helm]] [2015-04-25 Сб 18:58] :emacs:try:
-* TODO [#C] [[https://bitbucket.org/gvol/emacs-achievements]] [2015-04-25 Сб 20:31] :emacs:try:
-* TODO [#C] [[https://github.com/steckerhalter/grandshell-theme]] [2015-04-25 Сб 22:10] :emacs:try:
-* TODO [#C] [[https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/ukrainian-holidays.el]] [2015-04-25 Сб 22:13] :emacs:try:
-* TODO [#C] [[https://github.com/abo-abo/make-it-so]] [2015-04-25 Сб 23:53] :emacs:try:
-* TODO [#C] [[https://github.com/yasuyk/helm-flycheck]] [2015-04-25 Сб 23:59] :emacs:try:
-* TODO [#C] [[http://ru-emacs.livejournal.com/84952.html]] [2015-04-27 Пн 16:55] :emacs:try:
-* TODO [#C] [[https://github.com/phillord/lentic]] [2015-04-28 Вт 18:07] :emacs:try:
-* TODO [#C] [[https://github.com/itsjeyd/git-wip-timemachine]] [2015-05-01 Пт 18:31] :emacs:try:
-* TODO [#C] [[https://github.com/itsjeyd/git-wip]] [2015-05-01 Пт 18:32] :emacs:try:
 * TODO [#C] google-c-style [2015-05-02 Сб 18:48]                     :emacs:try:
 * TODO [#C] [[https://github.com/sshaw/git-link]] [2015-05-02 Сб 21:42] :emacs:try:
 * TODO [#C] [[https://github.com/purcell/exec-path-from-shell]] [2015-05-03 Вс 19:25] :emacs:try:
