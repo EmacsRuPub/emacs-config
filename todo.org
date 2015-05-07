@@ -106,6 +106,8 @@
 * TODO [#C] develop some dates/anniversaries handling either using org 'holidays' machinery or some file-based solution [2014-09-28 Вс 19:46] :emacs:ticket:
 ** HINT: %%(org-bbdb-anniversaries)
 ** idea: plainly use org scheduling facility
+** example
+   https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/ukrainian-holidays.el
 * TODO [#B] customdef: ask TODO keywords set on .org file creation (put upon #+TODO) [2014-09-30 Вт 01:39]                             :emacs:ticket:
 * TODO [#B] orgmode gcalendar synchronization [2014-09-30 Вт 01:52] :emacs:ticket:
 * TODO [#C] fix "Error in post-command-hook (global-hl-line-highlight): (wrong-type-argument overlayp nil)" [2014-10-28 Вт 17:39]                       :emacs:ticket:
@@ -186,3 +188,13 @@
   SCHEDULED: <2015-05-01 Пт>
 * TODO [#B] hydra for moving text, maybe via drag-stuff (think of) [2015-05-01 Пт 18:27] :emacs:ticket:
 * TODO [#B] make use of org helm source, try to use it to uniquify incoming [captured] headings [2015-05-01 Пт 18:34] :emacs:ticket:
+* TODO [#C] http://therandymon.com/woodnotes/emacs-for-writers/node27.html try to make hydra [2015-05-02 Сб 15:21] :emacs:ticket:
+  SCHEDULED: <2015-05-02 Сб>
+* TODO [#C] review [[http://kostafey.blogspot.ru/2012/10/mode-line.html]] [2015-05-03 Вс 20:37]                         :emacs:ticket:
+* TODO [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:
+  SCHEDULED: <2015-05-06 Ср>
+* TODO [#C] investigate disposable macros [2015-05-06 Ср 23:57]   :emacs:ticket:
+* TODO [#C] review [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]] and choose the way of opening files externally (compare with current solution) [2015-05-06 Ср 23:59] :emacs:ticket:
+* TODO [#C] review the status the "advices" machinery has been upgraded to [2015-05-07 Чт 13:26] :emacs:ticket:
+* TODO [#A] customize org-mode scheduling in a way that scheduled timestamp will be in a near future, rather than the time when 'org-schedule was called [2015-05-07 Чт 13:52] :emacs:ticket:
+  SCHEDULED: <2015-05-07 Чт>
