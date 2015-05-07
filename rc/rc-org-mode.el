@@ -92,6 +92,13 @@
 (setq org-use-sub-superscripts nil)
 (setq org-agenda-restore-windows-after-quit t)
 (setq org-agenda-window-setup 'only-window)
+(setq org-yank-adjusted-subtrees t)
+(setq org-read-date-prefer-future 'time)
+(setq org-export-coding-system 'utf-8)
+(setq org-agenda-skip-additional-timestamps-same-entry t)
+(setq org-agenda-persistent-filter t)
+(setq appt-message-warning-time 10)
+(setq appt-display-interval 5)
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
@@ -229,6 +236,18 @@
         ("je" "excalation" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :escalation:")
         ("jp" "patching" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :patching:")
         ))
+(setq org-list-demote-modify-bullet '(("+" . "-")
+                                      ("*" . "-")
+                                      ("1." . "-")
+                                      ("1)" . "-")
+                                      ("A)" . "-")
+                                      ("B)" . "-")
+                                      ("a)" . "-")
+                                      ("b)" . "-")
+                                      ("A." . "-")
+                                      ("B." . "-")
+                                      ("a." . "-")
+                                      ("b." . "-")))
 
 (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
 (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
@@ -248,6 +267,7 @@
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
 (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
 (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
+(set-charset-priority 'unicode)
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
