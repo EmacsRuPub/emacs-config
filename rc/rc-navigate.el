@@ -202,6 +202,8 @@
   ("<C-right>" win-resize-enlarge-horiz "move splitter right")
   ("g" avi-goto-char "goto char within window" :color blue)
   ("G" avi-goto-word-0 "goto word within window" :color blue)
+  ("=" text-scale-increase)
+  ("-" text-scale-decrease)
   ("q" nil "cancel"))
 
 (defhydra hydra-scope (global-map "C-x s") ; was save-some-buffers
