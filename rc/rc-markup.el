@@ -42,6 +42,8 @@
     (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
     (bind-key "<tab>" 'yas/expand markdown-mode-map)))
 
+(use-package yaml-mode)
+
 (defun custom/nxml-mode-hook ()
   (auto-fill-mode)
   (hs-minor-mode 1)

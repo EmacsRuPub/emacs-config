@@ -160,6 +160,7 @@
         window-number
         wrap-region
         yandex-weather
+        yaml-mode
         yasnippet
         zen-and-art-theme
         zoom-window
