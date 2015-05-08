@@ -103,6 +103,10 @@ PROJECT: %(projectile-project-root)
     ("u" ggtags-update-tags)
     ("M-," 'pop-tag-mark)))
 
+(defun fix-screwed-up-paragraphs(beg end)
+  (interactive "r")
+  (shell-command-on-region beg end "fmt -w2000" nil t))
+
 (provide 'staging)
 
 ;;; staging.el ends here
