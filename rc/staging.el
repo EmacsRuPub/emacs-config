@@ -86,6 +86,23 @@ PROJECT: %(projectile-project-root)
   (when (and (not (looking-back "\\b")) custom/transform-whole-words)
     (backward-word)))
 
+(use-package ggtags
+  :config
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
+                (ggtags-mode 1))))
+  ;; TODO: make hydra with keybindings below
+  (defhydra hydra-ggtags (:color teal)
+    ("s" ggtags-find-other-symbol)
+    ("s" ggtags-find-other-symbol)
+    ("h" ggtags-view-tag-history)
+    ("r" ggtags-find-reference)
+    ("f" ggtags-find-file)
+    ("c" ggtags-create-tags)
+    ("u" ggtags-update-tags)
+    ("M-," 'pop-tag-mark)))
+
 (provide 'staging)
 
 ;;; staging.el ends here
