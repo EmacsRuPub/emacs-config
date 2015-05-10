@@ -30,6 +30,7 @@
     (define-key ac-complete-mode-map [prior] 'ac-page-previous)
     (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
     (global-set-key (kbd "C-<tab>") 'ac-complete-with-helm)
+    ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
     ))
 
 (use-package yasnippet

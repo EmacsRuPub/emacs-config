@@ -3,6 +3,7 @@
 ;; Filename: defun-jabber-tools.el
 ;; Created: Пн ноя 25 16:34:10 2013 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TODO: migrate to helm
 (require 'ido)
 
 (defvar *my-jid-history* '())
