@@ -4,10 +4,6 @@
 ;; Created:  Thu May 29 17:37:11 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq special-display-regexps (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
-(setq special-display-regexps (remove "[ ]?\\*info.*\\*[ ]?" special-display-regexps))
-(setq special-display-regexps (remove "[ ]?\\*Messages\\*[ ]?" special-display-regexps))
-
 (use-package bookmark+
   :init
   (use-package crosshairs))
@@ -273,8 +269,6 @@ Breadcrumb bookmarks:
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
 (provide 'rc-navigate)
-
-;; TODO: See if we can customize Bookmarks[+] further
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-navigate.el ends here
