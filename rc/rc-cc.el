@@ -4,9 +4,9 @@
 ;; Created:  Sun Nov 30 18:41:23 2014 +0300
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cc-mode)
-(require 'info-look)
-(require 'auto-complete-clang)
+(use-package cc-mode)
+(use-package info-look)
+(use-package auto-complete-clang)
 
 (info-lookup-add-help
  :mode 'c-mode

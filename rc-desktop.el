@@ -7,7 +7,7 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(require 'desktop)
+(use-package desktop)
 (eval-when-compile
   (require 'cl))
 

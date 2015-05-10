@@ -4,8 +4,8 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'inf-lisp)
-(require 'info-look)
+(use-package inf-lisp)
+(use-package info-look)
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 

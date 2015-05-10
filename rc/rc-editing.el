@@ -6,10 +6,10 @@
 
 (autoload 'footnote-mode "footnote" nil t) ;; footnote mode
 
-(require 'rst)
-(require 'savekill)
-(require 'saveplace)
-(require 'table) ;; table
+(use-package rst)
+(use-package savekill)
+(use-package saveplace)
+(use-package table) ;; table
 
 (delete-selection-mode t)
 (dtrt-indent-mode)

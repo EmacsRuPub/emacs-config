@@ -4,10 +4,10 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'dired)
-(require 'dired+)
-(require 'dired-x)
-(require 'dired-toggle-sudo)
+(use-package dired)
+(use-package dired+)
+(use-package dired-x)
+(use-package dired-toggle-sudo)
 
 ;; TODO: check if this is not obsolete yet
 (setq diredp-ignored-file-name 'green-face)

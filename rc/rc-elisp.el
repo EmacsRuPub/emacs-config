@@ -4,7 +4,7 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'erefactor)
+(use-package erefactor)
 
 (defun custom/elisp-mode-hook ()
   (auto-fill-mode 1)

@@ -9,8 +9,8 @@
 (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 (autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
 
-(require 'tex-site)
-(require 'preview-latex)
+(use-package tex-site)
+(use-package preview-latex)
 
 (setq-default TeX-master nil)
 (setq TeX-parse-self t)

@@ -4,14 +4,14 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'haskell-mode)
-(require 'hs-lint)
-(require 'haskell-align-imports)
-(require 'haskell-navigate-imports)
-(require 'haskell-sort-imports)
-(require 'inf-haskell)
-(require 'haskell-ghci)
-(require 'haskell-indent)
+(use-package haskell-mode)
+(use-package hs-lint)
+(use-package haskell-align-imports)
+(use-package haskell-navigate-imports)
+(use-package haskell-sort-imports)
+(use-package inf-haskell)
+(use-package haskell-ghci)
+(use-package haskell-indent)
 
 (setq haskell-program-name "ghci")
 (setq hs-lint-replace-with-suggestions t)

@@ -4,8 +4,8 @@
 ;; Created:  Mon Jun 30 19:02:26 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'info)
-(add-to-list  'Info-directory-list "/usr/share/info")
+(use-package info)
+(add-to-list 'Info-directory-list "/usr/share/info")
 
 (push "/usr/share/info" Info-directory-list)
 (setenv "MANPATH" "/usr/share/man:/usr/local/man")

@@ -4,9 +4,9 @@
 ;; Created:  Fri May 30 23:45:51 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'filecache)
-(require 'imenu)
-(require 'compile)
+(use-package filecache)
+(use-package imenu)
+(use-package compile)
 
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 (autoload 'gtags-mode "gtags" "" t)

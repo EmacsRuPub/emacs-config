@@ -8,8 +8,8 @@
 
 (load-library "time")
 
-(require 'popwin)
-(require 'epg)
+(use-package popwin)
+(use-package epg)
 
 ;;; Enable functions that are disabled by default
 (put 'dired-find-alternate-file 'disabled nil)

@@ -15,8 +15,8 @@
         org-id org-info org-inlinetask org-irc org-man org-protocol
         <C>org-pomodoro org-timer org-w3m))
 
-(require 'org)
-(require 'ox-html)
+(use-package org)
+(use-package ox-html)
 
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
