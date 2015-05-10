@@ -198,3 +198,5 @@
 * TODO [#C] review the status the "advices" machinery has been upgraded to [2015-05-07 Чт 13:26] :emacs:ticket:
 * TODO [#A] customize org-mode scheduling in a way that scheduled timestamp will be in a near future, rather than the time when 'org-schedule was called [2015-05-07 Чт 13:52] :emacs:ticket:
   SCHEDULED: <2015-05-07 Чт>
+* TODO [#C] review what can be done using org-speed-commands-user [2015-05-08 Пт 23:59]  :emacs:ticket:
+* TODO [#B] hydra for paredit [2015-05-09 Сб 23:59]               :emacs:ticket:

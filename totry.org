@@ -120,3 +120,11 @@
 * TODO [#C] https://github.com/wasamasa/firestarter [2015-05-04 Пн 14:55] :emacs:try:
 * TODO [#C] [[https://github.com/zk-phi/togetherly][zk-phi/togetherly]] [2015-05-05 Вт 23:35] :emacs:try:
 * TODO [#C] [[http://renard.github.io/o-blog-v2.6/index.html][O-Blog easy web site and bloging system]] [2015-05-05 Вт 23:50] :emacs:try:
+* TODO [#C] [[http://blog.binchen.org/posts/emacs-speed-up-1000.html][Emacs speed up 1000% | Chen's blog]] [2015-05-08 Пт 22:34] :emacs:try:
+* TODO [#C] [[https://github.com/rolandwalker/fixmee][rolandwalker/fixmee]] [2015-05-09 Сб 16:24] :emacs:try:
+* TODO [#C] [[https://github.com/fourier/ztree][fourier/ztree]] [2015-05-09 Сб 17:19] :emacs:try:
+* TODO [#C] [[https://github.com/sabof/org-bullets][sabof/org-bullets]] [2015-05-09 Сб 17:24] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/hydra/wiki/Twittering][Twittering · abo-abo/hydra Wiki]] [2015-05-09 Сб 23:59] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/hydra/wiki/Rectangle-Operations][Rectangle Operations · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:45] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][PDF Tools · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:45] :emacs:try:
+* TODO [#C] [[https://github.com/abo-abo/hydra/wiki/YASnippet][YASnippet · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:47] :emacs:try:
