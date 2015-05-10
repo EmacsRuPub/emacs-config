@@ -32,17 +32,18 @@
   ("c" apropos-command)
   ("l" apropos-library)
   ("u" apropos-user-option)
+  ("i" info-apropos "info")
+  ("t" tags-apropos "tags")
   ("e" apropos-value))
 
-;TODO: bind to key
-(defhydra hydra-info-to (global-map "C-c C-h"
-                         :hint nil :color teal)
+(defhydra hydra-info-to (:hint nil :color teal)
   "
-_o_rg e_l_isp _e_macs _h_yperspec"
+_o_rg _e_lisp e_m_acs _h_yperspec"
   ("o" (custom/open-info "org" "*org info*"))
   ("e" (custom/open-info "elisp" "*elisp info*"))
   ("m" (custom/open-info "emacs" "*emacs info*"))
   ("h" (custom/open-info "gcl" "*hyperspec*")))
+(global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
 
 (provide 'rc-help)
 
