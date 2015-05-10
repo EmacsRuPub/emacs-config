@@ -52,7 +52,7 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
-(global-set-key (kbd "C-c m w") 'whizzytex-mode)
+(global-set-key (kbd "C-c t w") 'whizzytex-mode)
 
 ;TODO: investigate TEXT_INPUTS usage
 
