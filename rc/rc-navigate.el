@@ -221,14 +221,16 @@ Breadcrumb bookmarks:
   ("d" (lambda () (interactive) (ace-window 16)) "delete")
   ("1" delete-other-windows "1" :color blue)
   ("i" ace-maximize-window "a1" :color blue)
-  ("<C-up>" win-resize-minimize-vert "move splitter up")
-  ("<C-down>" win-resize-enlarge-vert "move splitter dow")
-  ("<C-left>" win-resize-minimize-horiz "move splitter left")
-  ("<C-right>" win-resize-enlarge-horiz "move splitter right")
-  ("g" avi-goto-char "goto char within window" :color blue)
-  ("G" avi-goto-word-0 "goto word within window" :color blue)
+  ("<C-up>" win-resize-enlarge-vert "move splitter up")
+  ("<C-down>" win-resize-minimize-vert "move splitter dow")
+  ("<C-left>" win-resize-enlarge-horiz "move splitter left")
+  ("<C-right>" win-resize-minimize-horiz "move splitter right")
+  ("g" avy-goto-char "goto char within window" :color blue)
+  ("G" avy-goto-word-0 "goto word within window" :color blue)
   ("=" text-scale-increase)
   ("-" text-scale-decrease)
+  ("f" make-frame-command)
+  ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
   ("q" nil "cancel"))
 
 (defhydra hydra-scope (global-map "C-x s") ; was save-some-buffers
