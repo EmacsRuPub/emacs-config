@@ -285,18 +285,10 @@
   ("C-<up>" outline-previous-heading "")
   ("q" nil "cancel"))
 
-(global-set-key (kbd "C-c e") 'org-capture)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-iswitchb)
-(global-set-key (kbd "C-c t c") 'org-table-create)
-(global-set-key (kbd "C-c t s") 'org-sparse-tree)
-(global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
-(global-set-key (kbd "C-c t t") 'org-toggle-timestamp-type)
-(global-set-key (kbd "C-c m m") 'org-agenda-bulk-mark-all)
-(global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
-(global-set-key (kbd "<f12>") 'org-pomodoro)
-
+(defhydra hydra-org-sandbox ()
+  ("c" org-table-create)
+  ("s" org-sparse-tree)
+  ("t" org-toggle-timestamp-type))
 
 (define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
@@ -324,6 +316,9 @@ add t_i_me to timestamp
   ("y" org-insert-link)
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
+  ("e" org-capture)
+  ("a" org-agenda)
+  ("m" org-pomodoro)
   ("q" nil "cancel"))
 (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
