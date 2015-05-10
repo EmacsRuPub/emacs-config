@@ -79,7 +79,7 @@
 (use-package mingus
   :config
   (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
-  (defhydra hydra-mingus (global-map "C-c m")
+  (defhydra hydra-mingus ()
     "
 Control               Playlist
 ------------------------------
@@ -94,7 +94,8 @@ _<left>_ seek backward
     ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
     ("<right>" mingus-seek "seek forward")
     ("<left>" mingus-seek-backward "seek backward")
-    ("q" nil "cancel")))
+    ("q" nil "cancel"))
+  (global-set-key (kbd "C-c m") 'hydra-mingus/body))
 
 (use-package restclient
   :defer t
