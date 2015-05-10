@@ -64,6 +64,15 @@ With prefix argument, also display headlines without a TODO keyword."
     (action . (lambda (candidate)
                 (find-file candidate)))))
 
+(defun custom/get-org-timestamp ()
+  (with-temp-buffer
+    (call-interactively 'org-time-stamp-inactive)
+    (buffer-string)))
+
+(defun custom/strip-org-timestamp (ts)
+  (let ((tslen (length ts)))
+    (substring ts 1 (- tslen 4))))
+
 (provide 'custom-orgmode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

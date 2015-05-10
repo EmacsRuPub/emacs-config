@@ -297,9 +297,6 @@
 (global-set-key (kbd "C-c m u") 'org-agenda-bulk-unmark-all)
 (global-set-key (kbd "<f12>") 'org-pomodoro)
 
-(global-set-key (kbd "C-c C-o C-s") 'save-last-scrum-timestamp)
-(global-set-key (kbd "C-c C-o C-m") 'mark-with-finished-timestamp)
-(global-set-key (kbd "C-c C-o C-d") 'refile-job-done)
 
 (define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
