@@ -1015,3 +1015,29 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* CANCELLED [#A] error running timer ... not a git repository [2015-04-21 Вт 13:58] :emacs:ticket:
+  CLOSED: [2015-05-12 Вт 14:20] SCHEDULED: <2015-05-01 Пт>
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-05-12 Вт 14:20] \\
+    Not enough info on this concrete issue. Similar issue was popup/auto-complete-related, so maybe fixes/workarounds are already released
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-05-12 Вт 14:21
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#A] change helm-find-files behaviour with respect to current dir (now off-by-1) [2015-05-01 Пт 14:07] :emacs:ticket:
+  CLOSED: [2015-05-12 Вт 14:24] SCHEDULED: <2015-05-01 Пт>
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-05-12 Вт 14:24] \\
+    false alarm
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-05-12 Вт 18:58
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:

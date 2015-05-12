@@ -169,8 +169,6 @@
 * TODO [#C] can we display absolute path of buffer (with file name) in helm buffers list and/or elsewhere in helm relate buffers? [2015-03-30 Пн 11:10] :emacs:ticket:
 * TODO [#C] check if helm variants of grep/ag work correctly [2015-03-31 Вт 15:01] :emacs:ticket:
 * TODO [#C] review abo-abo's extensions and their dependencies [2015-04-18 Сб 11:55] :emacs:ticket:
-* TODO [#A] error running timer ... not a git repository [2015-04-21 Вт 13:58] :emacs:ticket:
-  SCHEDULED: <2015-05-01 Пт>
 * TODO [#B] file bug aboutace-window: char in modeline and enlarged ones are not always displayed (investigate first) [2015-04-24 Пт 22:59] :emacs:ticket:
 * TODO [#B] magit: find a way to remove a window, previously used for commit and return to *magit-status*  [2015-04-27 Пн 12:03] :emacs:ticket:
   SCHEDULED: <2015-04-28 Вт>
@@ -184,8 +182,6 @@
 ** https://github.com/magit/magit/issues/771
 * TODO [#B] check and fix priority-bounded custom agenda commands [2015-04-27 Пн 23:59] :emacs:ticket:
   Ex: #A command also show unprioritized entries (and so on)
-* TODO [#A] change helm-find-files behaviour with respect to current dir (now off-by-1) [2015-05-01 Пт 14:07] :emacs:ticket:
-  SCHEDULED: <2015-05-01 Пт>
 * TODO [#B] hydra for moving text, maybe via drag-stuff (think of) [2015-05-01 Пт 18:27] :emacs:ticket:
 * TODO [#B] make use of org helm source, try to use it to uniquify incoming [captured] headings [2015-05-01 Пт 18:34] :emacs:ticket:
 * TODO [#C] http://therandymon.com/woodnotes/emacs-for-writers/node27.html try to make hydra [2015-05-02 Сб 15:21] :emacs:ticket:
