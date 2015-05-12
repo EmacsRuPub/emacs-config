@@ -155,13 +155,6 @@ point reaches the beginning or end of the buffer, stop there."
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
 
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
-
 ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
 (defun duplicate-line (arg)
   "comment line at point; if COMMENTFIRST is non-nil, comment the original"

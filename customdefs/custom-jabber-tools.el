@@ -8,16 +8,6 @@
 
 (defvar *my-jid-history* '())
 
-(defun my-jabber-read-jid-completing (prompt)
-  (let* ((hist-items (remove-duplicates *my-jid-history* :test #'equal))
-         (choices
-          (mapcar #'symbol-name (jabber-concat-rosters))))
-    (setf choices (append hist-items
-                          (sort (set-difference choices hist-items :test #'equal)
-                                #'string<)))
-    (ido-completing-read prompt choices
-                         nil nil nil '*my-jid-history*)))
-
 (defun my-jabber-jid-connection (jid)
   (or (find-if
        #'(lambda (jc)
@@ -31,8 +21,8 @@
   "Insert MUC participant nick into chat."
   (interactive)
   (end-of-buffer)
-  (insert (concat (ido-completing-read "Send to: "
-                     (jabber-muc-nicknames)) ": ")))
+  (insert (concat (helm-comp-read "Send to: "
+                                  (jabber-muc-nicknames)) ": ")))
 
 
 (defvar custom/helm-source-jabber-contact-jids
