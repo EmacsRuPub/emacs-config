@@ -193,6 +193,17 @@ point reaches the beginning or end of the buffer, stop there."
     (action . (lambda (candidate)
                 (helm-find-file-as-root candidate)))))
 
+(defun custom/cite-region (arg)
+  (clipboard-kill-ring-save (region-beginning) (region-end))
+  (with-temp-buffer
+    (let ((comment-start "> "))
+      (yank)
+      (comment-region (point-min) (point-max))
+      (when (> arg 1)
+        (beginning-of-buffer)
+        (insert "\n"))
+      (clipboard-kill-region (point-min) (point-max)))))
+
 (provide 'custom-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

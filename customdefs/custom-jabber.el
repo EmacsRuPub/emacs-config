@@ -20,27 +20,6 @@
       (while (re-search-forward org-plain-link-re nil t)
         (org-open-at-point)))))
 
-;; uses s
-;; TODO maybe use s in some other similar utils
-(defun custom-jabber/cite-region ()
-  (interactive)
-  (let* ((content
-          (buffer-substring
-           (region-beginning) (region-end)))
-         (result nil))
-    (when (not (s-blank? content))
-      (setq result
-            (mapcar (lambda (x)
-                      (if (s-starts-with? "[" x)
-                          (nth 2 (s-match "^\\(\\[[0-9-\\ :]+\\] \\)\\(.*\\)" x))
-                        x))
-                    (s-lines (s-trim-right content))))
-      (end-of-buffer)
-      (insert-for-yank-1
-       (s-append "\n"
-                 (s-join "\n"
-                         (mapcar (lambda (x) (s-prepend "> " x)) result)))))))
-
 (provide 'custom-jabber)
 
 ;;; defun-jabber-custom.el ends here

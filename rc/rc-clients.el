@@ -35,6 +35,7 @@
     (bind-key "b" 'select-erc-buffer custom-clients-keymap)
     (bind-key "u" 'select-erc-unread-buffer custom-clients-keymap)
     (bind-key "i" '(lambda () (interactive) (insert-erc-nick t)) custom-clients-keymap)
+    (bind-key "z" 'custom/cite-chat-region custom-clients-keymap)
     (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
     (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
@@ -227,7 +228,7 @@ _<left>_ seek backward
     (setq jabber-roster-buffer "*-jroster-*")
     (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
     (setq jabber-use-global-history nil)
-    (bind-key "C-c C-e" 'custom-jabber/cite-region jabber-chat-mode-map)
+    (bind-key "C-c C-e" 'custom/cite-chat-region jabber-chat-mode-map)
     (bind-key "C-c u r" 'upcase-region jabber-chat-mode-map)
     (bind-key "C-M-r" 'custom-jabber/wrap-replace-regexp jabber-chat-mode-map)
     (bind-key "C-M-m" 'custom-jabber/wrap-misreading jabber-chat-mode-map)
