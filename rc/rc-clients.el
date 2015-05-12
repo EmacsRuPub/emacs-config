@@ -175,7 +175,9 @@ _<left>_ seek backward
   :bind
   (("C-x C-j C-r" . jabber-switch-to-roster-buffer)
    ("C-x C-j C-a" . jabber-activity-switch-to)
-   ("C-c C-o C-r" . custom/open-urls-in-region))
+   ("C-c C-o C-r" . custom/open-urls-in-region)
+   ("C-x C-j C-j" . custom/helm-jabber-chat-with)
+   ("C-x C-j C-s" . custom/jabber-muc-sendto))
   :config
   (progn
     (when use-zenburn-in-jabber

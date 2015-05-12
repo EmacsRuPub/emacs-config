@@ -204,6 +204,8 @@ point and around or after mark are interchanged."
     (switch-to-buffer restbuffer)
     (restclient-mode)))
 
+(defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
+
 (defun custom/find-url-backward ()
   (interactive)
   (re-search-backward url-regexp nil t))
