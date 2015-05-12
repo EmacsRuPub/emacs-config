@@ -155,6 +155,7 @@
         w3m-session
         w3m-type-ahead
         wc-mode
+        web
         whitespace
         whole-line-or-region
         window-number
