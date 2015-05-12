@@ -45,6 +45,11 @@
     (helm-other-buffer '(helm-source-jabber-contacts)
                      "*jabber: chat with*")))
 
+(defun custom/jabber-abbrev ()
+  (interactive)
+  (clipboard-kill-ring-save (region-beginning) (region-end))
+  (end-of-buffer)
+  (helm-yas-complete))
 
 (provide 'custom-jabber)
 

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: misreading
+# key: misread
+# insert a "misreading" harness for some fancy misreading
+# --
++ прочтение: "$1" --> "$2"

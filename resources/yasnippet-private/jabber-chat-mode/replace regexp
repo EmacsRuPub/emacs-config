@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: replace regexp
+# key: rr
+# insert a regexp replacing harness to denote some back-in-time text replacing
+# --
+s/$1/$2
