@@ -4,6 +4,8 @@
 ;; Created: Вс окт 26 19:46:22 2014 (+0300)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 (defvar js2r-path-to-tests "/test/"
   "Path to tests from a root shared with sources")
 
@@ -84,6 +86,8 @@
        (windmove-left)
        (save-excursion
          (insert (format " ;; %s" (js2-node-short-name node)))))))
+
+)
 
 (provide 'custom-javascript)
 

@@ -52,7 +52,7 @@
     (bind-key "h" 'helm-mini  custom-search-keymap)
     (bind-key "C-x b" 'helm-buffers-list)
     (bind-key "C-x j j" 'helm-bookmarks)
-    (bind-key "C-x C-f" 'helm-find-files)
+    (bind-key "C-x C-f" 'custom/helm-find-files)
     (bind-key "M-x" 'helm-M-x)
     (bind-key "q" 'helm-projectile custom-search-keymap)
     (bind-key "r" 'helm-do-grep custom-search-keymap)
@@ -156,7 +156,7 @@ Breadcrumb bookmarks:
               (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
     (add-hook 'ibuffer-mode-hook
               (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
-    (bind-key "/ ." 'ibuffer-filter-by-extname ibuffer-mode-map)
+    (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map)
     ))
 
 (use-package fuzzy
@@ -226,10 +226,10 @@ Breadcrumb bookmarks:
   ("d" (lambda () (interactive) (ace-window 16)) "delete")
   ("1" delete-other-windows "1" :color blue)
   ("i" ace-maximize-window "a1" :color blue)
-  ("<C-up>" win-resize-enlarge-vert "move splitter up")
-  ("<C-down>" win-resize-minimize-vert "move splitter dow")
-  ("<C-left>" win-resize-enlarge-horiz "move splitter left")
-  ("<C-right>" win-resize-minimize-horiz "move splitter right")
+  ("<C-up>" custom/win-resize-enlarge-vert "move splitter up")
+  ("<C-down>" custom/win-resize-minimize-vert "move splitter dow")
+  ("<C-left>" custom/win-resize-enlarge-horiz "move splitter left")
+  ("<C-right>" custom/win-resize-minimize-horiz "move splitter right")
   ("g" avy-goto-char "goto char within window" :color blue)
   ("G" avy-goto-word-0 "goto word within window" :color blue)
   ("=" text-scale-increase)
@@ -256,7 +256,7 @@ Breadcrumb bookmarks:
   ("<right>" next-error "next error")
   ("k" smerge-prev "previous conflict")
   ("j" smerge-next "next conflict")
-  ("<return>" process-thing-at-point "execute ;)" :color blue)
+  ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
 
 (defhydra hydra-smart-moving (global-map "C-c 9")
@@ -273,7 +273,7 @@ Breadcrumb bookmarks:
 (global-unset-key (kbd "C-x C-b"))
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+(define-key isearch-mode-map (kbd "C-o") 'custom/isearch-occur)
 
 (provide 'rc-navigate)
 

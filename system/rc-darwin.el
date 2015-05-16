@@ -37,8 +37,8 @@
   (progn
     ;; Make jabber.el notify through growl when I get a new message
     (setq jabber-message-alert-same-buffer nil)
-    (add-hook 'jabber-alert-message-hooks 'pg-jabber-growl-notify)
-    (add-hook 'jabber-alert-muc-hooks 'pg-jabber-muc-growl-notify)
+    (add-hook 'jabber-alert-message-hooks 'custom/pg-jabber-growl-notify)
+    (add-hook 'jabber-alert-muc-hooks 'custom/pg-jabber-muc-growl-notify)
     (setq jabber-message-alert-same-buffer t)))
 
 (setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")

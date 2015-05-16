@@ -18,8 +18,8 @@
       (setq flycheck-checker 'python-flake8)
       (setq indent-tabs-mode nil)
       (setq tab-width 4)
-      ;FIXME: find-project-flake8-config id somehow broken
-      ;; (setq flycheck-flake8rc (or (find-project-flake8-config) flycheck-flake8rc))
+      ;;FIXME: find-project-flake8-config id somehow broken
+      ;; (setq flycheck-flake8rc (or (custom/find-project-flake8-config) flycheck-flake8rc))
       )
     (add-hook 'python-mode-hook 'custom/python-mode-hook)
     (add-hook 'python-mode-hook 'common-hooks/prog-helpers)

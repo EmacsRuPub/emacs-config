@@ -6,7 +6,9 @@
 ;; Keywords:
 ;; Requirements:
 
-;TODO: parametrize shell for terminal
+(define-namespace custom/
+
+;;TODO: parametrize shell for terminal
 (defun terminal ()
   "Switch to terminal. Launch if nonexistent."
   (interactive)
@@ -52,7 +54,7 @@
     "Select unread ERC buffer:"
     (mapcar #'buffer-name
             (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
-;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
+;;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
 
 (defun insert-erc-nick (&optional atsign)
   (interactive)
@@ -78,7 +80,7 @@
       (bbdb-complete-name)
     (message-tab)))
 
-(defun custom/term-exec-hook ()
+(defun term-exec-hook ()
   (let* ((buff (current-buffer))
          (proc (get-buffer-process buff)))
     (set-process-sentinel
@@ -87,11 +89,13 @@
         (if (string= event "finished\n")
             (kill-buffer ,buff))))))
 
-(defun custom/cite-chat-region (arg)
+(defun cite-chat-region (arg)
   (interactive "P")
   (custom/cite-region (prefix-numeric-value arg))
   (end-of-buffer)
   (yank))
+
+)
 
 (provide 'custom-clients)
 

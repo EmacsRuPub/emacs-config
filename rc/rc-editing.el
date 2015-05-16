@@ -208,7 +208,7 @@
   ("<left>" backward-char "prev char")
   ("<right>" forward-char "next char")
   ("C-_" undo-tree-undo "undo last")
-  ("w" transpose-words "on words")
+  ("w" custom/transpose-words "on words")
   ("s" transpose-sexps "on sexps")
   ("p" transpose-params "on params")
   ("a" anchored-transpose "anchored")
@@ -225,34 +225,34 @@ _p_ersist snippet
   ("p" aya-persist-snippet))
 (global-set-key (kbd "<f5>") 'hydra-auto-yasnippet/body)
 
-(define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
+(define-key custom-edit-keymap (kbd "i") 'custom/insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)
 (define-key custom-edit-keymap (kbd "x") 'query-replace-regexp)
-(define-key custom-edit-keymap (kbd "u") 'uniq)
+(define-key custom-edit-keymap (kbd "u") 'custom/uniq)
 (define-key custom-edit-keymap (kbd "s") 'sort-lines)
 (define-key custom-edit-keymap [tab] 'tabify)
 (define-key custom-edit-keymap (kbd "SPC") 'untabify)
 (define-key custom-edit-keymap (kbd "M-a") 'indent-region)
 (define-key custom-edit-keymap (kbd "C-SPC") 'comment-dwim)
 (define-key custom-edit-keymap (kbd "v") 'view-mode)
-(define-key custom-edit-keymap (kbd "4") 'camelscore-word-at-point)
-(define-key custom-edit-keymap (kbd "9") 'quote-string-with-period-and-nextline)
-(define-key custom-edit-keymap (kbd "S-9") 'double-quote-string-with-period-and-nextline)
+(define-key custom-edit-keymap (kbd "4") 'custom/camelscore-word-at-point)
+(define-key custom-edit-keymap (kbd "9") 'custom/quote-string-with-period-and-nextline)
+(define-key custom-edit-keymap (kbd "S-9") 'custom/double-quote-string-with-period-and-nextline)
 (define-key custom-edit-keymap (kbd "[") 'comment-region)
 (define-key custom-edit-keymap (kbd "]") 'uncomment-region)
 (define-key custom-edit-keymap (kbd "<left>") 'jump-char-backward)
 (define-key custom-edit-keymap (kbd "<right>") 'jump-char-forward)
-(define-key custom-edit-keymap (kbd "C-SPC") 'join-next-line-space-n)
-(define-key custom-edit-keymap (kbd "J") 'join-next-line-n)
-(define-key custom-edit-keymap (kbd "C-;") 'join-next-line-semicolon-n)
-(define-key custom-edit-keymap (kbd "C-r") 'join-region)
+(define-key custom-edit-keymap (kbd "C-SPC") 'custom/join-next-line-space-n)
+(define-key custom-edit-keymap (kbd "J") 'custom/join-next-line-n)
+(define-key custom-edit-keymap (kbd "C-;") 'custom/join-next-line-semicolon-n)
+(define-key custom-edit-keymap (kbd "C-r") 'custom/join-region)
 (define-key custom-edit-keymap (kbd "b") 'subword-mode)
 (define-key custom-edit-keymap (kbd "o") 'just-one-space)
-(define-key custom-edit-keymap (kbd "0") 'compact-spaces-in-region)
-(define-key custom-edit-keymap (kbd "f") 'copy-file-name-to-clipboard)
-(define-key custom-edit-keymap (kbd "r") 'rename-file-and-buffer)
-(define-key custom-edit-keymap (kbd "2") 'duplicate-line)
+(define-key custom-edit-keymap (kbd "0") 'custom/compact-spaces-in-region)
+(define-key custom-edit-keymap (kbd "f") 'custom/copy-file-name-to-clipboard)
+(define-key custom-edit-keymap (kbd "r") 'custom/rename-file-and-buffer)
+(define-key custom-edit-keymap (kbd "2") 'custom/duplicate-line)
 (define-key custom-edit-keymap (kbd "`") 'redraw-display)
 
 (global-set-key (kbd "C-x g") 'insert-register)
@@ -266,7 +266,7 @@ _p_ersist snippet
 
 ;I never use set-fill-column and I hate hitting it by accident.
 (global-set-key "\C-x\ f" 'find-file)
-(global-set-key (kbd "C-x r M-k") 'kill-save-rectangle) ;; Give it a memorable key binding
+(global-set-key (kbd "C-x r M-k") 'custom/kill-save-rectangle) ;; Give it a memorable key binding
 
 (global-set-key (kbd "C-c n") 'scratch)
 (global-set-key (kbd "C-c y") 'revbufs)
@@ -281,9 +281,9 @@ _p_ersist snippet
 ;; key definition example
 ;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
 
-;; remap C-a to `smarter-move-beginning-of-line'
+;; remap C-a to `custom/smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
-                'smarter-move-beginning-of-line)
+                'custom/smarter-move-beginning-of-line)
 
 (global-set-key (kbd "C-c r p") '(lambda ()
                                    (interactive)

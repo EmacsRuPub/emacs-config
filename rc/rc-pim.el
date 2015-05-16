@@ -31,7 +31,7 @@
     (setq news-reply-header-hook nil)
     (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
     (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
-    (bind-key "<tab>" 'my-bbdb-tab-complete message-mode-map)
+    (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
     (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
     (bind-key "C-c C-d" 'bbdb-delete-current-record)
     (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)

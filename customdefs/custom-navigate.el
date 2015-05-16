@@ -4,7 +4,9 @@
 ;; Created: Вс июн  1 21:30:30 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun custom/helm-find-files ()
+(define-namespace custom/
+
+(defun helm-find-files ()
   (interactive)
   (helm-other-buffer '(
                        helm-source-files-in-current-dir
@@ -35,22 +37,22 @@
   (interactive)
   (let ((case-fold-search isearch-case-fold-search))
     (occur-and-switch (if isearch-regexp isearch-string
-             (regexp-quote isearch-string)))))
+                        (regexp-quote isearch-string)))))
 
 (defadvice occur-mode-goto-occurrence (after close-occur activate)
   (delete-other-windows))
 
 (defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
-  (if custom/suppress-projectile-symbol-at-point
-    (setq ad-return-value "")
+  (if suppress-projectile-symbol-at-point
+      (setq ad-return-value "")
     (setq ad-return-value ad-do-it)))
 
-(defun custom/projectile-ag (arg)
+(defun projectile-ag (arg)
   (interactive "p")
   (message "arg: %s" arg)
   (if (equal arg 4)
-      (setq custom/suppress-projectile-symbol-at-point t)
-    (setq custom/suppress-projectile-symbol-at-point nil))
+      (setq suppress-projectile-symbol-at-point t)
+    (setq suppress-projectile-symbol-at-point nil))
   (call-interactively 'projectile-ag))
 
 (defun isearch-forward-noeldoc ()
@@ -67,15 +69,16 @@
   (isearch-backward)
   (eldoc-mode 1))
 
-;TODO: make implemetation less straightforward or find "right way" to do it
+;;TODO: make implemetation less straightforward or find "right way" to do it
 (defun process-thing-at-point ()
   (interactive)
   (cond
    ((equal major-mode 'ag-mode) (compile-goto-error))
    ((or (equal major-mode 'jabber-chat-mode)
         (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
+   (t (browse-url (thing-at-point 'url t)))))
 
-    (t (browse-url (thing-at-point 'url t)))))
+)
 
 (provide 'custom-navigate)
 

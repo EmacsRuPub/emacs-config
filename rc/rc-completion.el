@@ -26,8 +26,8 @@
     (add-hook 'slime-mode-hook 'set-up-slime-ac)
     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
     (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-    (define-key ac-complete-mode-map [next] 'ac-page-next)
-    (define-key ac-complete-mode-map [prior] 'ac-page-previous)
+    (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
+    (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
     (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
     (global-set-key (kbd "C-<tab>") 'ac-complete-with-helm)
     ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
@@ -55,11 +55,11 @@
             yas-no-prompt))
     ;; Wrap around region
     (setq yas/wrap-around-region t)
-    (add-hook 'after-save-hook 'update-yasnippets-on-save)
+    (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
     ;; Jump to end of snippet definition
     (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
-    (define-key yas/keymap (kbd "C-e") 'yas/goto-end-of-active-field)
-    (define-key yas/keymap (kbd "C-a") 'yas/goto-start-of-active-field)
+    (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
+    (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
     (global-set-key (kbd "C-c C-y C-v") 'yas-visit-snippet-file)
     (global-set-key (kbd "C-c C-y C-n") 'yas-insert-snippet)
     ))

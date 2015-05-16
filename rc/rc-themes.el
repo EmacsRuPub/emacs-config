@@ -15,7 +15,7 @@
 (sml/setup)
 
 (set-cursor-color "chartreuse2")
-(set-xwindows-font "consolas-base")
+(custom/set-xwindows-font "consolas-base")
 
 (load-theme 'zenburn t)
 

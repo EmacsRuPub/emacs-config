@@ -10,6 +10,8 @@
 ;#   Darwin-specific notifications code
 ;############################################################################
 
+(define-namespace custom/
+
 (defvar growl-program "/usr/local/bin/growlnotify")
 
 (defun growl (title message &optional id)
@@ -55,6 +57,8 @@
          (ltext (string-to-list utext)))
     (apply #'concat
            (mapcar (lambda (x) (format "%c" x)) ltext))))
+
+)
 
 (provide 'custom-jabber-darwin)
 

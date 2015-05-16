@@ -30,11 +30,11 @@
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (bind-key "s" 'connect-slack-irc custom-clients-keymap)
-    (bind-key "q" 'leave-irc-server custom-clients-keymap)
-    (bind-key "b" 'select-erc-buffer custom-clients-keymap)
-    (bind-key "u" 'select-erc-unread-buffer custom-clients-keymap)
-    (bind-key "i" '(lambda () (interactive) (insert-erc-nick t)) custom-clients-keymap)
+    (bind-key "s" 'custom/connect-slack-irc custom-clients-keymap)
+    (bind-key "q" 'custom/leave-irc-server custom-clients-keymap)
+    (bind-key "b" 'custom/select-erc-buffer custom-clients-keymap)
+    (bind-key "u" 'custom/select-erc-unread-buffer custom-clients-keymap)
+    (bind-key "i" '(lambda () (interactive) (custom/insert-erc-nick t)) custom-clients-keymap)
     (bind-key "z" 'custom/cite-chat-region custom-clients-keymap)
     (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
     (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
@@ -100,7 +100,7 @@ _<left>_ seek backward
 
 (use-package restclient
   :defer t
-  :bind ("C-c C-r C-s" . create-restclient-sandbox))
+  :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
 
 (use-package tramp
   :init
@@ -179,7 +179,7 @@ _<left>_ seek backward
    ("C-x C-j C-s" . custom/jabber-muc-sendto))
   :config
   (progn
-    (when use-zenburn-in-jabber
+    (when custom/use-zenburn-in-jabber
       (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
       (set-face-attribute 'jabber-roster-user-online nil :foreground "#dfaf8f" :weight 'bold)
       (set-face-attribute 'jabber-roster-user-away nil :foreground "#8fb28f")
@@ -244,7 +244,7 @@ _<left>_ seek backward
     (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
     ))
 
-(define-key comint-mode-map "\C-c\M-o" #'comint-clear-buffer)
+(define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
 
 (provide 'rc-clients)
 

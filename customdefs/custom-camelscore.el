@@ -4,6 +4,8 @@
 ;; Created: Чт апр 11 01:28:48 2013 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 (defvar thing-at-point-type 'word)      ;'symbol
 
 (defun camelscore-word-at-point ()
@@ -35,7 +37,7 @@
 
 (defun camelcase  (s) (mapconcat 'identity
                                  (mapcar-head 'downcase 'capitalize
-                                 (split-name s)) ""))
+                                              (split-name s)) ""))
 (defun pascalcase (s) (mapconcat 'capitalize (split-name s) ""))
 (defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
 (defun dasherize  (s) (mapconcat 'downcase   (split-name s) "-"))
@@ -52,6 +54,8 @@
   "Like MAPCAR, but applies a different function to the first element."
   (if list
       (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
+
+)
 
 (provide 'custom-camelscore)
 

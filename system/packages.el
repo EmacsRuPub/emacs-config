@@ -108,6 +108,7 @@
         minimap
         multifiles
         multiple-cursors
+        names
         nginx-mode
         notify
         nxhtml

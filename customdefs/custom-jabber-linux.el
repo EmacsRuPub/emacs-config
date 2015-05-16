@@ -10,6 +10,8 @@
 ;#   Linux-specific notifications code
 ;############################################################################
 
+(define-namespace custom/
+
 (defun jabber-libnotify-message(from msg)
   "Show MSG using libnotify"
   (let ((process-connection-type nil))
@@ -18,7 +20,7 @@
                    "-i" jabber-libnotify-icon
                    from msg)))
 
-(defun jabber-libnotify-message-display(from buffer text propsed-alert)
+(defun jabber-libnotify-message-display (from buffer text propsed-alert)
   (jabber-libnotify-message from text))
 
 (defun x-urgency-hint (frame arg &optional source)
@@ -50,7 +52,7 @@
     (custom/notify "jabber" (format "Presence changed for %s: %s"
                                     who (if (get who 'connected) "online" "offline")))))
 
-(defun custom/notify (title message)
+(defun notify (title message)
   "Notify the user using either the dbus based API or the `growl' one"
   (unless (and (fboundp 'dbus-register-signal)
                ;; avoid a bug in Emacs 24.0 under darwin
@@ -69,6 +71,8 @@
        (t                               (error "Fallback to `message'")))
     ;; when notification function errored out, degrade gracefully to `message'
     (error (message "%s: %s" title message))))
+
+)
 
 (provide 'custom-jabber-linux)
 

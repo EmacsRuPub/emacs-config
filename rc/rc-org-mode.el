@@ -334,7 +334,7 @@ add t_i_me to timestamp
 (define-key org-mode-map (kbd "C-c C-o") nil)
 
 (define-key org-mode-map (kbd "C-x C-a") 'show-all)
-(define-key org-mode-map (kbd "C-c C-o C-l") 'open-or-browse-at-point)
+(define-key org-mode-map (kbd "C-c C-o C-l") 'custom/open-or-browse-at-point)
 
 (global-set-key (kbd "C-c r o") '(lambda ()
                                    (interactive)

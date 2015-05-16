@@ -24,9 +24,9 @@
   (progn
     (setq wdired-allow-to-change-permissions 'advanced)
     (setq wdired-allow-to-change-permissions t)
-    (bind-key "C-a" 'dired-back-to-start-of-files wdired-mode-map)
-    (bind-key (vector 'remap 'beginning-of-buffer) 'dired-back-to-top wdired-mode-map)
-    (bind-key (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom wdired-mode-map)
+    (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
+    (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
+    (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
     (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
     ))
 
@@ -40,15 +40,15 @@
 (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
 (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
 (define-key dired-mode-map (kbd "C-c C-m") 'custom/get-file-md5)
-(define-key dired-mode-map (kbd "!") 'sudo-dired)
+(define-key dired-mode-map (kbd "!") 'custom/sudo-dired)
 ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
-(define-key dired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
-(define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-(define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
-(define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
-(define-key dired-mode-map (vector 'remap 'smart-down) 'dired-jump-to-bottom)
+(define-key dired-mode-map (kbd "C-a") 'custom/dired-back-to-start-of-files)
+(define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
+(define-key dired-mode-map (vector 'remap 'smart-up) 'custom/dired-back-to-top)
+(define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom)
+(define-key dired-mode-map (vector 'remap 'smart-down) 'custom/dired-jump-to-bottom)
 (define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete) ;; Delete with C-x C-k to match file buffers and magit
-(define-key dired-mode-map (kbd "`") 'dired-open-term)
+(define-key dired-mode-map (kbd "`") 'custom/dired-open-term)
 
 (provide 'rc-dired)
 

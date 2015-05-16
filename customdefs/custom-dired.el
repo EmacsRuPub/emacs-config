@@ -4,6 +4,8 @@
 ;; Created: Вс июн  1 21:02:47 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 ;; C-a is nicer in dired if it moves back to start of files
 (defun dired-back-to-start-of-files ()
   (interactive)
@@ -23,7 +25,7 @@
   (next-line -1)
   (dired-back-to-start-of-files))
 
-(defun custom/dired-sort ()
+(defun dired-sort ()
   "Sort dired listings with directories first."
   (save-excursion
     (let (buffer-read-only)
@@ -32,9 +34,9 @@
     (set-buffer-modified-p nil)))
 
 (defadvice dired-readin
-  (after dired-after-updating-hook first () activate)
+    (after dired-after-updating-hook first () activate)
   "Sort dired listings with directories first before adding marks."
-  (custom/dired-sort))
+  (dired-sort))
 
 (defvar *directory-separator* '?/)
 
@@ -60,7 +62,7 @@
   (interactive)
   (let ((current-dir (dired-current-directory)))
     (term-send-string
-     (terminal)
+     (custom/terminal)
      (if (file-remote-p current-dir)
          (let ((v (tramp-dissect-file-name current-dir t)))
            (format "ssh %s@%s\n"
@@ -74,6 +76,8 @@
     (if (string-match "^/sudo:" dir)
         (user-error "Already in sudo")
       (dired (concat "/sudo::" dir)))))
+
+)
 
 (provide 'custom-dired)
 

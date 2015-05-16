@@ -6,19 +6,12 @@
 ;; Keywords:
 ;; Requirements:
 
-(defun my-find-thing-at-point ()
-  "Find variable, function or file at point."
-  (interactive)
-  (cond ((not (eq (variable-at-point) 0))
-         (call-interactively 'describe-variable))
-        ((function-called-at-point)
-         (call-interactively 'describe-function))
-        (t (find-file-at-point))))
+(define-namespace custom/
 
-;Make cursor stay in the same column when scrolling using pgup/dn.
-;Previously pgup/dn clobbers column position, moving it to the
-;beginning of the line.
-;<http://www.dotemacs.de/dotfiles/ElijahDaniel.emacs.html>
+;;Make cursor stay in the same column when scrolling using pgup/dn.
+;;Previously pgup/dn clobbers column position, moving it to the
+;;beginning of the line.
+;;<http://www.dotemacs.de/dotfiles/ElijahDaniel.emacs.html>
 (defadvice scroll-up (around ewd-scroll-up first act)
   "Keep cursor in the same column."
   (let ((col (current-column)))
@@ -96,7 +89,7 @@ point and around or after mark are interchanged."
   (transpose-subr 'backward-word arg)
   (forward-word (+ arg 1)))
 
-(defun custom/remove-elc-on-save ()
+(defun remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook
@@ -106,7 +99,7 @@ point and around or after mark are interchanged."
 
 ;; (Utilities) ;;
 
-;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
+;;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it is visiting to NEW-NAME."
   (interactive "sNew name: ")
@@ -162,7 +155,7 @@ point and around or after mark are interchanged."
         (search-forward "}}" nil t)
         (let ((end (- (point) 3)))
           (setq variables-list (cons (buffer-substring-no-properties beg end) variables-list)))))
-    (spawn-buffer)
+    (custom/spawn-buffer)
     (dolist (variable (nreverse variables-list))
       (insert variable)
       (insert "\n"))))
@@ -182,17 +175,17 @@ point and around or after mark are interchanged."
 (autoload 'vc-svn-root "vc-svn")
 (autoload 'vc-hg-root "vc-hg")
 
-(defun custom/project-root (file-path)
+(defun project-root (file-path)
   "Guess the project root of the given FILE-PATH."
   (or (vc-git-root file-path)
-       (vc-svn-root file-path)
-       (vc-hg-root file-path)
-       file-path))
+      (vc-svn-root file-path)
+      (vc-hg-root file-path)
+      file-path))
 
-(defun custom/copy-project-subpath ()
+(defun copy-project-subpath ()
   (interactive)
   (let* ((current-file (buffer-file-name))
-         (project-root (file-truename (custom/project-root current-file)))
+         (project-root (file-truename (project-root current-file)))
          (selection (substring current-file (length project-root))))
     (with-temp-buffer
       (insert selection)
@@ -206,11 +199,11 @@ point and around or after mark are interchanged."
 
 (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
 
-(defun custom/find-url-backward ()
+(defun find-url-backward ()
   (interactive)
   (re-search-backward url-regexp nil t))
 
-(defun custom/find-url-forward ()
+(defun find-url-forward ()
   (interactive)
   (re-search-forward url-regexp nil t))
 
@@ -233,7 +226,7 @@ point and around or after mark are interchanged."
                     (point-max)
                     file))))
 
-(defun custom/get-file-md5 ()
+(defun get-file-md5 ()
   (interactive)
   (when (derived-mode-p 'dired-mode)
     (let ((abs-file-name (dired-get-filename)))
@@ -243,7 +236,7 @@ point and around or after mark are interchanged."
             (shell-command (format "md5sum %s" abs-file-name))
             (buffer-string)))))))
 
-;TODO: maybe make org-protocol solution instead
+;;TODO: maybe make org-protocol solution instead
 (defun youtube-dl ()
   (interactive)
   (let* ((str (current-kill 0))
@@ -272,6 +265,8 @@ point and around or after mark are interchanged."
                 letter-group
                 "\n"))
         (princ "\n\n")))))
+
+)
 
 (provide 'custom-utils)
 

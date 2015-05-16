@@ -1,0 +1,5 @@
+(:name names
+       :type github
+       :pkgname "Malabarba/names"
+       :description " A Namespace implementation for Emacs-Lisp"
+       :features names)

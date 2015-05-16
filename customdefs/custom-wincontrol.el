@@ -4,6 +4,8 @@
 ;; Created: Вс июн  1 21:57:25 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 (defun win-resize-top-or-bot ()
   "Figure out if the current window is on top, bottom or in the middle"
   (let* ((win-edges (window-edges))
@@ -77,6 +79,8 @@
         (delete-other-frames)))
      (t
       (delete-other-frames)))))
+
+)
 
 (provide 'custom-wincontrol)
 

@@ -15,8 +15,8 @@
 (use-package sgml-mode
   :config
   (progn
-    (bind-key "C-<down>" 'skip-to-next-blank-line html-mode-map)
-    (bind-key "C-<up>" 'skip-to-previous-blank-line html-mode-map)
+    (bind-key "C-<down>" 'custom/skip-to-next-blank-line html-mode-map)
+    (bind-key "C-<up>" 'custom/skip-to-previous-blank-line html-mode-map)
     (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
 (use-package emmet-mode
@@ -76,9 +76,9 @@
             (setq django-indent-width 4)
             (setq sgml-basic-offset 4)))
 (add-hook 'less-css-mode-hook (lambda ()
-                (local-set-key [remap isearch-forward] 'isearch-forward-noeldoc)))
+                (local-set-key [remap isearch-forward] 'custom/isearch-forward-noeldoc)))
 (add-hook 'less-css-mode-hook (lambda ()
-                (local-set-key [remap isearch-backward] 'isearch-backward-noeldoc)))
+                (local-set-key [remap isearch-backward] 'custom/isearch-backward-noeldoc)))
 
 (provide 'rc-markup)
 

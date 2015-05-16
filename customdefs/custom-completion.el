@@ -4,16 +4,18 @@
 ;; Created: Вс июн  1 20:49:09 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 (defun ac-yasnippet-candidate ()
   (let ((table (yas/get-snippet-tables major-mode)))
     (if table
-      (let (candidates (list))
-            (mapcar (lambda (mode)
-              (maphash (lambda (key value)
-                (push key candidates))
-              (yas/snippet-table-hash mode)))
-            table)
-        (all-completions ac-prefix candidates)))))
+        (let (candidates (list))
+          (mapcar (lambda (mode)
+                    (maphash (lambda (key value)
+                               (push key candidates))
+                             (yas/snippet-table-hash mode)))
+                  table)
+          (all-completions ac-prefix candidates)))))
 
 (defun ac-yasnippet-candidate-1 (table)
   (let ((hashtab (yas/snippet-table-hash table))
@@ -38,18 +40,18 @@
   "Face for the yasnippet selected candidate.")
 
 ;; Inter-field navigation
-(defun yas/goto-end-of-active-field ()
+(defun yas-goto-end-of-active-field ()
   (interactive)
-  (let* ((snippet (car (yas/snippets-at-point)))
-         (position (yas/field-end (yas/snippet-active-field snippet))))
+  (let* ((snippet (car (yas--snippets-at-point)))
+         (position (yas--field-end (yas--snippet-active-field snippet))))
     (if (= (point) position)
         (move-end-of-line)
       (goto-char position))))
 
-(defun yas/goto-start-of-active-field ()
+(defun yas-goto-start-of-active-field ()
   (interactive)
-  (let* ((snippet (car (yas/snippets-at-point)))
-         (position (yas/field-start (yas/snippet-active-field snippet))))
+  (let* ((snippet (car (yas--snippets-at-point)))
+         (position (yas--field-start (yas--snippet-active-field snippet))))
     (if (= (point) position)
         (move-beginning-of-line)
       (goto-char position))))
@@ -75,7 +77,7 @@
     (dotimes (counter (1- ac-menu-height))
       (ac-previous))))
 
-(defun custom/ielm-auto-complete ()
+(defun ielm-auto-complete ()
   "Enables `auto-complete' support in \\[ielm]."
   (setq ac-sources '(ac-source-functions
                      ac-source-variables
@@ -83,6 +85,8 @@
                      ac-source-symbols
                      ac-source-words-in-same-mode-buffers))
   (add-to-list 'ac-modes 'inferior-emacs-lisp-mode))
+
+)
 
 (provide 'custom-completion)
 

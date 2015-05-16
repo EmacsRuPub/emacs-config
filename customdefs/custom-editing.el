@@ -4,13 +4,15 @@
 ;; Created: Чт июн 19 23:30:55 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 ;; current date and time.
 (defun insert-current-date-time()
   "Insert the current date and time at point."
   (interactive "*")
   (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
-(defun custom/comment-or-uncomment-region (arg)
+(defun comment-or-uncomment-region (arg)
   (interactive "*P")
   (comment-normalize-vars)
   (if (and (not mark-active)
@@ -140,9 +142,9 @@ point reaches the beginning or end of the buffer, stop there."
       (forward-char 1))))
 
 (defadvice whole-line-or-region-kill-region
-               (before whole-line-or-region-kill-read-only-ok activate)
-      (interactive "p")
-      (unless kill-read-only-ok (barf-if-buffer-read-only)))
+    (before whole-line-or-region-kill-read-only-ok activate)
+  (interactive "p")
+  (unless kill-read-only-ok (barf-if-buffer-read-only)))
 
 ;; When popping the mark, continue popping until the cursor actually moves
 ;; Also, if the last command was a copy - skip past all the expand-region cruft.
@@ -180,13 +182,13 @@ point reaches the beginning or end of the buffer, stop there."
            (insert (current-kill 0)))))
 
 (require 'helm-utils)
-(defvar custom/helm-source-portage-files
+(defvar helm-source-portage-files
   `((name . "Portage files")
     (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
     (action . (lambda (candidate)
                 (helm-find-file-as-root candidate)))))
 
-(defun custom/cite-region (arg)
+(defun cite-region (arg)
   (clipboard-kill-ring-save (region-beginning) (region-end))
   (with-temp-buffer
     (let ((comment-start "> "))
@@ -197,10 +199,12 @@ point reaches the beginning or end of the buffer, stop there."
         (insert "\n"))
       (clipboard-kill-region (point-min) (point-max)))))
 
-(defun custom/strip-prefix (prefix lines)
+(defun strip-prefix (prefix lines)
   (s-join "\n"
           (mapcar (lambda (s) (s-chop-prefix prefix s))
                   (s-lines lines))))
+
+)
 
 (provide 'custom-editing)
 

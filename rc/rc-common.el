@@ -177,8 +177,8 @@
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)
 (add-hook 'after-init-hook 'custom/after-init-hook)
 (add-hook 'server-visit-hook
-          (lambda () (local-set-key (kbd "C-c C-c") 'server-save-edit)))
-;; (add-hook 'kill-emacs-hook 'save-buffer-clients-on-exit)
+          (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
+;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
 
 (global-set-key (kbd "C-x c") 'proced)
 

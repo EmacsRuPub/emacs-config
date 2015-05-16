@@ -7,10 +7,12 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
+(define-namespace custom/
+
 (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
 (defvar *my-jid-history* '())
 
-(defun custom/open-urls-in-region (beg end)
+(defun open-urls-in-region (beg end)
   "Open URLs between BEG and END."
   (interactive "r")
   (save-excursion
@@ -20,7 +22,7 @@
       (while (re-search-forward org-plain-link-re nil t)
         (org-open-at-point)))))
 
-(defun custom/jabber-muc-sendto (&optional other-window)
+(defun jabber-muc-sendto (&optional other-window)
   "Insert MUC participant nick into chat."
   (interactive)
   (end-of-buffer)
@@ -28,7 +30,7 @@
                                   (jabber-muc-nicknames)) ": ")))
 
 
-(defvar custom/helm-source-jabber-contact-jids
+(defvar helm-source-jabber-contact-jids
   '((name . "Jabber Contacts")
     (init . (lambda () (require 'jabber)))
     (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
@@ -37,19 +39,21 @@
                  (jabber-read-account)
                  x)))))
 
-(defun custom/helm-jabber-chat-with (arg)
+(defun helm-jabber-chat-with (arg)
   (interactive "P")
   (if (= (prefix-numeric-value arg) 4)
-      (helm-other-buffer '(custom/helm-source-jabber-contact-jids)
-                     "*jabber: chat with*")
+      (helm-other-buffer '(helm-source-jabber-contact-jids)
+                         "*jabber: chat with*")
     (helm-other-buffer '(helm-source-jabber-contacts)
-                     "*jabber: chat with*")))
+                       "*jabber: chat with*")))
 
-(defun custom/jabber-abbrev ()
+(defun jabber-abbrev ()
   (interactive)
   (clipboard-kill-ring-save (region-beginning) (region-end))
   (end-of-buffer)
   (helm-yas-complete))
+
+)
 
 (provide 'custom-jabber)
 

@@ -4,6 +4,8 @@
 ;; Created: Вс июл 20 12:28:02 2014 (+0400)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define-namespace custom/
+
 (defun server-save-edit ()
   (interactive)
   (save-buffer)
@@ -12,11 +14,11 @@
 (defun save-buffer-clients-on-exit ()
   (interactive)
   (if (and (boundp 'server-buffer-clients) server-buffer-clients)
-        (server-save-edit)
-      (save-buffers-kill-emacs t)))
+      (server-save-edit)
+    (save-buffers-kill-emacs t)))
 
-;TODO: maybe implement as advice
-(defun custom/toggle-input-method ()
+;;TODO: maybe implement as advice
+(defun toggle-input-method ()
   "Toggle input method while keeping system keyboard layout in latin.
    Essential for WMs without this functionality built-in."
   (interactive)
@@ -29,6 +31,8 @@
                    "/ru/gentoo/KbddService"
                    "ru.gentoo.kbdd.set_layout"
                    "uint32:1")))
+
+)
 
 (provide 'custom-system)
 
