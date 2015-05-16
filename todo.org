@@ -187,8 +187,15 @@
 * TODO [#C] http://therandymon.com/woodnotes/emacs-for-writers/node27.html try to make hydra [2015-05-02 Сб 15:21] :emacs:ticket:
   SCHEDULED: <2015-05-02 Сб>
 * TODO [#C] review [[http://kostafey.blogspot.ru/2012/10/mode-line.html]] [2015-05-03 Вс 20:37]                         :emacs:ticket:
-* TODO [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:
+* GOING [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:ATTACH:
   SCHEDULED: <2015-05-06 Ср>
+  :LOGBOOK:
+  - State "GOING"      from "TODO"       [2015-05-12 Вт 17:27]
+  :END:
+  :PROPERTIES:
+  :Attachments: scratch%20code
+  :ID:       6bd845d5-6e2d-4b54-8752-fc3c47eab35a
+  :END:
 * TODO [#C] investigate disposable macros [2015-05-06 Ср 23:57]   :emacs:ticket:
 * TODO [#C] review [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]] and choose the way of opening files externally (compare with current solution) [2015-05-06 Ср 23:59] :emacs:ticket:
 * TODO [#C] review the status the "advices" machinery has been upgraded to [2015-05-07 Чт 13:26] :emacs:ticket:
