@@ -289,7 +289,8 @@ _p_ersist snippet
                                    (interactive)
                                    (helm :sources '(custom/helm-source-portage-files))))
 
-(provide 'rc-editing)
+(global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
+(global-set-key (kbd "C-c b") 'comment-box)
 
 (setq whitespace-style '(indentation::space
                          space-after-tab
@@ -299,6 +300,8 @@ _p_ersist snippet
                          tab-mark
                          face
                          tabs))
+
+(provide 'rc-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rc-editing.el ends here
