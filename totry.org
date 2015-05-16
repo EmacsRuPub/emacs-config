@@ -18,23 +18,14 @@
 ** [#B] http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/
 ** [#B] http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/ try to make a hydra
 ** [#B] http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html
-** [#B] http://oremacs.com/2015/01/30/auto-yasnippet/
 ** [#B] http://punchagan.muse-amuse.in/posts/playing-music-using-mpsyt-from-emacs.html
 ** [#B] http://stackoverflow.com/questions/1054903/how-do-you-get-python-documentation-in-texinfo-info-format
-** [#B] http://www.emacswiki.org/emacs/HowmMode
-** [#B] https://github.com/KirillTemnov/emacs-web
-** [#B] https://github.com/Malabarba/rich-minority
 ** [#B] https://github.com/Silex/elmacro
-** [#B] https://github.com/abo-abo/auto-yasnippet
-** [#B] https://github.com/bradleywright/magit-find-file.el
 ** [#B] https://github.com/camdez/checkbox.el
 ** [#B] https://github.com/jwiegley/use-package review update notes
 ** [#B] https://github.com/magnars/string-edit.el
 ** [#B] https://github.com/mgalgs/indent-hints-mode
-** [#B] https://github.com/nonsequitur/orglink
-** [#B] https://github.com/syohex/coverlay.el
 ** [#B] https://github.com/terranpro/magit-gerrit
-** [#B] https://github.com/tonini/gitconfig.el
 ** [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]]
 ** http://endlessparentheses.com/new-on-elpa-and-in-emacs-25-1-let-alist.html
 ** http://kostafey.blogspot.ru/2012/10/mode-line.html

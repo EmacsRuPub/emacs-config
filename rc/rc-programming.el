@@ -109,6 +109,12 @@
     (setq ediff-split-window-function 'split-window-horizontally)
     (setq ediff-diff-options "-w")))
 
+(use-package coverlay
+  :config
+  ;; TODO: make hydra
+  (bind-key "C-c l" 'coverlay-load-file)
+  (bind-key "C-c s" 'coverlay-parse-buffer))
+
 (defhydra hydra-programming (global-map "M-p")
   "programming"
   ("s" slime "run slime" :color blue)
@@ -118,7 +124,6 @@
 (defhydra hydra-toggle (global-map "<f11>" :color blue)
   ("d" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode"))
-
 
 (provide 'rc-programming)
 

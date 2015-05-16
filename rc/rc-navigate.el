@@ -197,6 +197,11 @@ Breadcrumb bookmarks:
     (ace-link-setup-default)
     (define-key org-mode-map (kbd "M-o") 'ace-link-org)))
 
+(use-package orglink
+  :config
+  ;; TODO: customize orglink-activate-in-modes
+  (global-orglink-mode))
+
 (defhydra hydra-window (global-map "<f2>")
   "window"
   ("<left>" windmove-left "left")

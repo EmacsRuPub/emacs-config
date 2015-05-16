@@ -1,0 +1,5 @@
+(:name orglink
+       :type github
+       :pkgname "tarsius/orglink"
+       :description "Use Org Mode links in other modes "
+       :features orglink)

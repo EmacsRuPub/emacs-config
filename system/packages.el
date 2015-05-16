@@ -25,6 +25,7 @@
         auto-complete-extension
         auto-complete-latex
         auto-complete-yasnippet
+        auto-yasnippet
         base16
         bbdb
         bitlbee
@@ -35,6 +36,7 @@
         col-highlight
         color-theme-zenburn
         column-marker
+        coverlay
         crontab-mode
         crosshairs
         css-eldoc
@@ -117,6 +119,7 @@
         org-occur-goto
         org-pomodoro
         org-toodledo
+        orglink
         paredit
         paredit-everywhere
         pdftools

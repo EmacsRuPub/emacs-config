@@ -214,6 +214,17 @@
   ("a" anchored-transpose "anchored")
   ("q" nil "cancel"))
 
+(defhydra hydra-auto-yasnippet (:color teal)
+  "
+_c_reate snippet
+_e_xpand snippet
+_p_ersist snippet
+"
+  ("c" aya-create)
+  ("e" aya-expand)
+  ("p" aya-persist-snippet))
+(global-set-key (kbd "<f5>") 'hydra-auto-yasnippet/body)
+
 (define-key custom-edit-keymap (kbd "i") 'insert-current-date-time)
 (define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
 (define-key custom-edit-keymap (kbd "q") 'query-replace)
