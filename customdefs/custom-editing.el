@@ -197,6 +197,11 @@ point reaches the beginning or end of the buffer, stop there."
         (insert "\n"))
       (clipboard-kill-region (point-min) (point-max)))))
 
+(defun custom/strip-prefix (prefix lines)
+  (s-join "\n"
+          (mapcar (lambda (s) (s-chop-prefix prefix s))
+                  (s-lines lines))))
+
 (provide 'custom-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
