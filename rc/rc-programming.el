@@ -38,6 +38,42 @@
     (setq projectile-tags-command
           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
     (diminish 'projectile-mode "prj")
+    (defhydra hydra-projectile (:color teal)
+      "
+PROJECT: %(projectile-project-root)
+find                         Project               More
+---------------------------------------------------------------------------------------
+_fd_irectory                 i_pb_uffer            _c_ommander
+_ft_est file                 in_pf_o               _s_witch to buffer
+_ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
+file d_fw_im                 _pc_ompile            _d_ired
+file o_ft_her window         _pi_nvalidate cache   display _b_uffer
+_fo_ther file                _pk_ill buffers       _r_ecentf
+other file _fO_ther window
+"
+      ("fd" projectile-find-dir)
+      ("ft" projectile-find-test-file)
+      ("ff" projectile-find-file)
+      ("fw" projectile-find-file-dwim)
+      ("ft" projectile-find-file-dwim-other-window)
+      ("fo" projectile-find-other-file)
+      ("fO" projectile-find-other-file-other-window)
+      ("pb" projectile-ibuffer)
+      ("pf" projectile-project-info)
+      ("pt" projectile-test-project)
+      ("pc" projectile-compile-project)
+      ("pi" projectile-invalidate-cache)
+      ("pk" projectile-kill-buffers)
+      ("c" projectile-commander)
+      ("s" projectile-switch-to-buffer)
+      ("w" projectile-switch-to-buffer-other-window)
+      ("d" projectile-dired)
+      ("b" projectile-display-buffer)
+      ("r" projectile-recentf)
+      ;;TODO: write legend
+      ("s" projectile-run-command-in-root)
+      ("S" projectile-run-async-shell-command-in-root))
+    (global-set-key (kbd "<f8>") 'hydra-projectile/body)
     ))
 
 (use-package flycheck
