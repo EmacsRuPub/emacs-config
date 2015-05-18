@@ -23,34 +23,6 @@
     ad-do-it
     (move-to-column col)))
 
-(defun custom/insert-uuid ()
-  (interactive)
-  (shell-command-on-region (point) (point) "uuidgen" t)
-  (delete-backward-char 1))
-
-(defun sudo-edit-current-file ()
-  (interactive)
-  (let ((pos (point)))
-    (find-alternate-file
-     (concat "/sudo:root@localhost:" (buffer-file-name (current-buffer))))
-    (goto-char pos)))
-
-;;{{{ String functions
-(defun iy-string-camel-to-underscore (string)
-  "Convert camel string to upcase one which concat words using underscore"
-  (let ((case-fold-search nil))
-    (replace-regexp-in-string
-     "\\([[:upper:]]\\)\\([[:upper:]][[:lower:]]\\)" "\\1_\\2"
-     (replace-regexp-in-string
-      "\\([[:lower:]]\\)\\([[:upper:]]\\)" "\\1_\\2" string))))
-
-(defun camel-to-underscore (start end)
-  (interactive "r")
-  (let ((origin (buffer-substring start end)))
-    (delete-region start end)
-    (insert (iy-string-camel-to-underscore origin))))
-;;}}}
-
 (defun downcase-dwim (arg)
   (interactive "p")
   (if (region-active-p)
@@ -126,40 +98,6 @@ point and around or after mark are interchanged."
   (goto-char start)
   (yank-rectangle))
 
-(defun string-camel-to-underscore (string)
-  "Convert camel string to upcase one which concat words using underscore"
-  (let ((case-fold-search nil))
-    (replace-regexp-in-string
-     "\\([[:upper:]]\\)\\([[:upper:]][[:lower:]]\\)" "\\1_\\2"
-     (replace-regexp-in-string
-      "\\([[:lower:]]\\)\\([[:upper:]]\\)" "\\1_\\2" string))))
-
-(defun camel-to-underscore (start end)
-  (interactive "r")
-  (let ((origin (buffer-substring start end)))
-    (delete-region start end)
-    (insert (iy-string-camel-to-underscore origin))))
-
-(defun back-to-indentation-or-beginning ()
-  (interactive)
-  (if (= (point) (save-excursion (back-to-indentation) (point)))
-      (beginning-of-line)
-    (back-to-indentation)))
-
-(defun get-all-template-variables-django ()
-  (interactive)
-  (beginning-of-buffer)
-  (let ((variables-list '()))
-    (while (search-forward "{{" nil t)
-      (let ((beg (+ (point) 1)))
-        (search-forward "}}" nil t)
-        (let ((end (- (point) 3)))
-          (setq variables-list (cons (buffer-substring-no-properties beg end) variables-list)))))
-    (custom/spawn-buffer)
-    (dolist (variable (nreverse variables-list))
-      (insert variable)
-      (insert "\n"))))
-
 (defun compact-spaces-in-region (beg end)
   "replace all whitespace in the region with single spaces"
   (interactive "r")
@@ -181,15 +119,6 @@ point and around or after mark are interchanged."
       (vc-svn-root file-path)
       (vc-hg-root file-path)
       file-path))
-
-(defun copy-project-subpath ()
-  (interactive)
-  (let* ((current-file (buffer-file-name))
-         (project-root (file-truename (project-root current-file)))
-         (selection (substring current-file (length project-root))))
-    (with-temp-buffer
-      (insert selection)
-      (clipboard-kill-region (point-min) (point-max)))))
 
 (defun create-restclient-sandbox ()
   (interactive)

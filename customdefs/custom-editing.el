@@ -66,26 +66,6 @@ point reaches the beginning or end of the buffer, stop there."
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-(defun move-line-up ()
-  "Move up the current line."
-  (interactive)
-  (transpose-lines 1)
-  (forward-line -2)
-  (indent-according-to-mode))
-
-(defun move-line-down ()
-  "Move down the current line."
-  (interactive)
-  (forward-line 1)
-  (transpose-lines 1)
-  (forward-line -1)
-  (indent-according-to-mode))
-
-;; (defun conditionally-enable-parens-mode ()
-;;   "Enable `paredit-mode' in the minibuffer, during `eval-expression'."
-;;   (if (eq this-command 'eval-expression)
-;;       (turn-on-smartparens-mode 1)))
-
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)

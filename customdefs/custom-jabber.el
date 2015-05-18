@@ -10,7 +10,6 @@
 (define-namespace custom/
 
 (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
-(defvar *my-jid-history* '())
 
 (defun open-urls-in-region (beg end)
   "Open URLs between BEG and END."

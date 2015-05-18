@@ -19,6 +19,7 @@
 
 (defalias 'tt 'terminal)
 
+;;TODO: make some kind of ERC profiles from functions below
 (defun connect-slack-irc ()
   (interactive)
   (erc-tls
@@ -64,10 +65,6 @@
                   "@")
                 (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")
    ))
-
-(defun open-gmail ()
-  (interactive)
-  (browse-url "https://mail.google.com"))
 
 (defun comint-clear-buffer ()
   (interactive)
