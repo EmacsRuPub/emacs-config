@@ -53,25 +53,27 @@
       (let ((browse-url-browser-function 'w3m-browse-url))
         ad-do-it))))
 
-(use-package python-mode
+(use-package python
   :defer t
   :config
   (progn
+    (defhydra hydra-python-nav ()
+      ("["       python-nav-beginning-of-block)
+      ("9"       python-nav-beginning-of-statement)
+      ("<up>"    python-nav-backward-up-list)
+      (","       python-nav-backward-block)
+      ("<left>"  python-nav-backward-statement)
+      ("<right>" python-nav-forward-statement)
+      ("."       python-nav-forward-block)
+      ("<down>"  python-nav-end-of-defun)
+      ("0"       python-nav-end-of-statement)
+      ("]"       python-nav-end-of-block)
+      ("f"       python-nav-forward-sexp)
+      ("q" nil "cancel"))
+    (global-set-key (kbd "C-x y") 'hydra-python-nav/body)
     (bind-key "C-c l" 'pylint python-mode-map)
     (bind-key "C-c p e" 'pep8 python-mode-map)
     (bind-key "C-c h" 'pylookup-lookup-at-point python-mode-map)
-    (bind-key "C-c [" 'python-nav-beginning-of-block python-mode-map)
-    (bind-key "C-c 9" 'python-nav-beginning-of-statement python-mode-map)
-    (bind-key "C-c <up>" 'python-nav-backward-up-list python-mode-map)
-    (bind-key "C-c ," 'python-nav-backward-block python-mode-map)
-    (bind-key "C-c <left>" 'python-nav-backward-statement python-mode-map)
-    (bind-key "C-c <right>" 'python-nav-forward-statement python-mode-map)
-    (bind-key "C-c ." 'python-nav-forward-block python-mode-map)
-    (bind-key "C-c <down>" 'python-nav-end-of-defun python-mode-map)
-    (bind-key "C-c 0" 'python-nav-end-of-statement python-mode-map)
-    (bind-key "C-c ]" 'python-nav-end-of-block python-mode-map)
-    (bind-key "C-M-f" 'python-nav-forward-sexp python-mode-map)
-    (bind-key "C-c 6" 'custom/insert-debugger-statements python-mode-map)
     (bind-key "C-c r" 'helm-jedi-related-names python-mode-map) ;NOTE: just to memory the existence for the first time
     (bind-key "C-M-." 'python-indent-shift-right python-mode-map)
     (bind-key "C-M-," 'python-indent-shift-left python-mode-map)
@@ -89,20 +91,6 @@
 (setenv "PYLINTRC"
         (at-config-basedir
          "contrib/.pylintrc"))
-
-(defhydra hydra-python-nav (global-map "C-x y")
-  ("["       python-nav-beginning-of-block)
-  ("9"       python-nav-beginning-of-statement)
-  ("<up>"    python-nav-backward-up-list)
-  (","       python-nav-backward-block)
-  ("<left>"  python-nav-backward-statement)
-  ("<right>" python-nav-forward-statement)
-  ("."       python-nav-forward-block)
-  ("<down>"  python-nav-end-of-defun)
-  ("0"       python-nav-end-of-statement)
-  ("]"       python-nav-end-of-block)
-  ("f"       python-nav-forward-sexp)
-  ("q" nil "cancel"))
 
 (provide 'rc-python)
 
