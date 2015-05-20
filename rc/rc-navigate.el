@@ -202,6 +202,8 @@ Breadcrumb bookmarks:
   ;; TODO: customize orglink-activate-in-modes
   (global-orglink-mode))
 
+(setq scroll-preserve-screen-position 'always)
+
 (defhydra hydra-window (global-map "<f2>")
   "window"
   ("<left>" windmove-left "left")
