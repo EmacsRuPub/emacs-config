@@ -12,7 +12,7 @@
   (interactive "*")
   (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
-(defun comment-or-uncomment-region (arg)
+(defun comment-uncomment-region (arg)
   (interactive "*P")
   (comment-normalize-vars)
   (if (and (not mark-active)
