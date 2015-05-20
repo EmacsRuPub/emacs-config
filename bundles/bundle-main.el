@@ -26,7 +26,6 @@
 (use-package rc-cc)
 (use-package rc-special-major-modes)
 (use-package rc-tex)
-(use-package rc-dired)
 (use-package rc-help)
 
 (use-package staging)
