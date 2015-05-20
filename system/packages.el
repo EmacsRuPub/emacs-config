@@ -124,6 +124,7 @@
         paredit
         paredit-everywhere
         pdftools
+        phi-search
         po-mode
         popwin
         projectile

@@ -271,8 +271,8 @@ Breadcrumb bookmarks:
 (global-unset-key (kbd "C-M-s"))
 (global-unset-key (kbd "C-M-r"))
 (global-unset-key (kbd "C-x C-b"))
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-s") 'phi-search)
+(global-set-key (kbd "C-r") 'phi-search-backward)
 (define-key isearch-mode-map (kbd "C-o") 'custom/isearch-occur)
 
 (provide 'rc-navigate)
