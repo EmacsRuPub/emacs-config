@@ -95,7 +95,6 @@ PROJECT: %(projectile-project-root)
   ;; TODO: make hydra with keybindings below
   (defhydra hydra-ggtags (:color teal)
     ("s" ggtags-find-other-symbol)
-    ("s" ggtags-find-other-symbol)
     ("h" ggtags-view-tag-history)
     ("r" ggtags-find-reference)
     ("f" ggtags-find-file)
