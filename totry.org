@@ -119,3 +119,6 @@
 * TODO [#C] [[https://github.com/abo-abo/hydra/wiki/Rectangle-Operations][Rectangle Operations · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:45] :emacs:try:
 * TODO [#C] [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][PDF Tools · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:45] :emacs:try:
 * TODO [#C] [[https://github.com/abo-abo/hydra/wiki/YASnippet][YASnippet · abo-abo/hydra Wiki]] [2015-05-10 Вс 14:47] :emacs:try:
+* TODO [#C] [[https://github.com/asok/peep-dired][asok/peep-dired]] [2015-05-16 Сб 17:13] :emacs:try:
+* TODO [#C] [[http://www.fitzsim.org/blog/?p%3D257][EUDC Improvements | fitzsim's development log]] [2015-05-19 Вт 12:35] :emacs:try:
+* TODO [#C] [[http://batsov.com/prelude/][Prelude by bbatsov]] - borrow ideas [2015-05-19 Вт 12:45]  :emacs:try:

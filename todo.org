@@ -203,3 +203,4 @@
   SCHEDULED: <2015-05-07 Чт>
 * TODO [#C] review what can be done using org-speed-commands-user [2015-05-08 Пт 23:59]  :emacs:ticket:
 * TODO [#B] hydra for paredit [2015-05-09 Сб 23:59]               :emacs:ticket:
+* TODO [#A] customdef for opening some search results (ag/rgrep/etc) in other buffer side-by-side with current, vertical or horizontal [2015-05-18 Пн 20:05] :emacs:ticket:
