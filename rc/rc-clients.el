@@ -89,7 +89,7 @@ _<down>_ volume down    _/_ search for tracks
 _<right>_ seek forward
 _<left>_ seek backward
 "
-    ("s" mingus "open mingus")
+    ("s" mingus "open mingus" :color blue)
     ("/" mingus-search "Search")
     ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
     ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
