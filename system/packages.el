@@ -104,7 +104,6 @@
         markdown-mode
         mingus
         minibuf-electric-gnuemacs
-        minimap
         multifiles
         multiple-cursors
         names

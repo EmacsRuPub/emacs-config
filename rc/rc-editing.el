@@ -273,9 +273,6 @@ _p_ersist snippet
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
-(global-set-key (kbd "C-c i c") 'minimap-create)
-(global-set-key (kbd "C-c i k") 'minimap-kill)
-
 (global-set-key (kbd "C-`") 'mf/mirror-region-in-multifile)
 
 ;; key definition example
