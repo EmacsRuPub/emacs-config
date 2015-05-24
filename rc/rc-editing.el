@@ -109,9 +109,7 @@
   (volatile-highlights-mode t)
   (diminish 'volatile-highlights-mode))
 
-(use-package wc-mode
-  :config
-  (bind-key "c" 'wc-mode custom-edit-keymap))
+(use-package wc-mode)
 
 (use-package whole-line-or-region ;; if no region is active, act on current line
   :defer t
@@ -179,11 +177,7 @@
   :mode ".vim\\(rc\\)?$")
 
 (use-package whitespace
-  :defer t
-  :config
-  (progn
-    (bind-key "p" 'whitespace-mode custom-edit-keymap)
-    (bind-key "t" 'delete-trailing-whitespace custom-edit-keymap)))
+  :defer t)
 
 (use-package wrap-region
   :config
@@ -225,35 +219,41 @@ _p_ersist snippet
   ("p" aya-persist-snippet))
 (global-set-key (kbd "<f5>") 'hydra-auto-yasnippet/body)
 
-(define-key custom-edit-keymap (kbd "i") 'custom/insert-current-date-time)
-(define-key custom-edit-keymap (kbd "d") 'diff-buffer-with-file)
-(define-key custom-edit-keymap (kbd "q") 'query-replace)
-(define-key custom-edit-keymap (kbd "x") 'query-replace-regexp)
-(define-key custom-edit-keymap (kbd "u") 'custom/uniq)
-(define-key custom-edit-keymap (kbd "s") 'sort-lines)
-(define-key custom-edit-keymap [tab] 'tabify)
-(define-key custom-edit-keymap (kbd "SPC") 'untabify)
-(define-key custom-edit-keymap (kbd "M-a") 'indent-region)
-(define-key custom-edit-keymap (kbd "C-SPC") 'comment-dwim)
-(define-key custom-edit-keymap (kbd "v") 'view-mode)
-(define-key custom-edit-keymap (kbd "4") 'custom/camelscore-word-at-point)
-(define-key custom-edit-keymap (kbd "9") 'custom/quote-string-with-period-and-nextline)
-(define-key custom-edit-keymap (kbd "S-9") 'custom/double-quote-string-with-period-and-nextline)
-(define-key custom-edit-keymap (kbd "[") 'comment-region)
-(define-key custom-edit-keymap (kbd "]") 'uncomment-region)
-(define-key custom-edit-keymap (kbd "<left>") 'jump-char-backward)
-(define-key custom-edit-keymap (kbd "<right>") 'jump-char-forward)
-(define-key custom-edit-keymap (kbd "C-SPC") 'custom/join-next-line-space-n)
-(define-key custom-edit-keymap (kbd "J") 'custom/join-next-line-n)
-(define-key custom-edit-keymap (kbd "C-;") 'custom/join-next-line-semicolon-n)
-(define-key custom-edit-keymap (kbd "C-r") 'custom/join-region)
-(define-key custom-edit-keymap (kbd "b") 'subword-mode)
-(define-key custom-edit-keymap (kbd "o") 'just-one-space)
-(define-key custom-edit-keymap (kbd "0") 'custom/compact-spaces-in-region)
-(define-key custom-edit-keymap (kbd "f") 'custom/copy-file-name-to-clipboard)
-(define-key custom-edit-keymap (kbd "r") 'custom/rename-file-and-buffer)
-(define-key custom-edit-keymap (kbd "2") 'custom/duplicate-line)
-(define-key custom-edit-keymap (kbd "`") 'redraw-display)
+(defhydra hydra-edit (:color blue)
+  ("0" custom/compact-spaces-in-region)
+  ("2" custom/duplicate-line)
+  ("4" custom/camelscore-word-at-point)
+  ("9" custom/quote-string-with-period-and-nextline)
+  ("<left>" jump-char-backward)
+  ("<right>" jump-char-forward)
+  ("C-;" custom/join-next-line-semicolon-n)
+  ("C-SPC" comment-dwim)
+  ("C-SPC" custom/join-next-line-space-n)
+  ("C-r" custom/join-region)
+  ("J" custom/join-next-line-n)
+  ("M-a" indent-region)
+  ("S-9" custom/double-quote-string-with-period-and-nextline)
+  ("SPC" untabify)
+  ("TAB" tabify)
+  ("[" comment-region)
+  ("]" uncomment-region)
+  ("`" redraw-display)
+  ("b" subword-mode)
+  ("c" wc-mode)
+  ("d" diff-buffer-with-file)
+  ("f" custom/copy-file-name-to-clipboard)
+  ("i" custom/insert-current-date-time)
+  ("o" just-one-space)
+  ("p" whitespace-mode)
+  ("r" query-replace)
+  ("n" custom/rename-file-and-buffer)
+  ("s" sort-lines)
+  ("t" delete-trailing-whitespace)
+  ("u" custom/uniq)
+  ("v" view-mode)
+  ("x" query-replace-regexp)
+  ("q" nil "cancel"))
+(global-set-key (kbd "C-z") 'hydra-edit/body)
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)

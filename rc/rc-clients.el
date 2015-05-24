@@ -30,12 +30,6 @@
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (bind-key "s" 'custom/connect-slack-irc custom-clients-keymap)
-    (bind-key "q" 'custom/leave-irc-server custom-clients-keymap)
-    (bind-key "b" 'custom/select-erc-buffer custom-clients-keymap)
-    (bind-key "u" 'custom/select-erc-unread-buffer custom-clients-keymap)
-    (bind-key "i" '(lambda () (interactive) (custom/insert-erc-nick t)) custom-clients-keymap)
-    (bind-key "z" 'custom/cite-chat-region custom-clients-keymap)
     (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
     (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
@@ -232,6 +226,15 @@ _<left>_ seek backward
     (add-hook 'jabber-chat-mode-hook 'goto-address)
     (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
     ))
+
+(defhydra hydra-clients (:color blue)
+  ("s" custom/connect-slack-irc)
+  ("q" custom/leave-irc-server)
+  ("b" custom/select-erc-buffer)
+  ("u" custom/select-erc-unread-buffer)
+  ("i" (lambda () (interactive) (custom/insert-erc-nick t)))
+  ("z" custom/cite-chat-region))
+(global-set-key (kbd "C-q") 'hydra-clients/body)
 
 (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
 
