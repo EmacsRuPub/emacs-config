@@ -278,13 +278,6 @@
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 (add-hook 'org-after-refile-insert-hook 'save-buffer)
 
-(defhydra hydra-org-nav (global-map "C-<f7>")
-  "Org navigation"
-  ("<up>" outline-up-heading "")
-  ("C-<down>" outline-next-heading "")
-  ("C-<up>" outline-previous-heading "")
-  ("q" nil "cancel"))
-
 (defhydra hydra-org-sandbox ()
   ("c" org-table-create)
   ("s" org-sparse-tree)
@@ -292,16 +285,19 @@
 
 (define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
 
-(defhydra hydra-org-global (:hint nil)
+(defhydra hydra-org-global (:color pink) ;;TODO: provide sane colors for heads
   "
-^Agenda^                  ^Clock^             ^Properties^        ^Capture^
---------------------------------------------------------------------------------------
-_s_chedule                _._ clock in        set _p_roperty      _w_ store link
-dead_l_ine                _,_ clock out       _d_elete property   _y_ insert link
-agenda _c_olumns          cloc_k_ display
-foot_n_ote action         _g_oto last clock
-add t_i_me to timestamp
+^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
+---------------------------------------------------------------------------------------------------------------
+_<up>_:     up heading     _s_chedule                _._ clock in        set _p_roperty      _w_ store link
+_C-<down>_: next heading   dead_l_ine                _,_ clock out       _d_elete property   _y_ insert link
+_C-<up>_:   prev heading   agenda _c_olumns          cloc_k_ display
+                           foot_n_ote action         _g_oto last clock
+                           add t_i_me to timestamp
 "
+  ("<up>" outline-up-heading "")
+  ("C-<down>" outline-next-heading "")
+  ("C-<up>" outline-previous-heading "")
   ("g" org-clock-goto)
   ("p" org-set-property)
   ("d" org-delete-property)
