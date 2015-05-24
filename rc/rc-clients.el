@@ -150,13 +150,6 @@ _<left>_ seek backward
                  '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
     (define-key custom-search-keymap (kbd "w") 'w3m-select-buffer)))
 
-(use-package gmail-notifier
-  :defer t
-  :config
-  (progn
-    (gmail-notifier-start)
-    (gmail-notifier-check)))
-
 (use-package google-translate
   :defer t
   :init

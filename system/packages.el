@@ -72,7 +72,6 @@
         git-emacs
         git-gutter
         git-timemachine
-        gmail-notifier
         google-contacts
         google-translate
         haskell-mode
