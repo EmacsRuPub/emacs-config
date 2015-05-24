@@ -152,7 +152,6 @@ _<left>_ seek backward
 
 (use-package gmail-notifier
   :defer t
-  :bind (("<f9>" . gmail-notifier-check))
   :config
   (progn
     (gmail-notifier-start)

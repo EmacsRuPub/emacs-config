@@ -5,7 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-prefix-command 'custom-search-keymap)
-(global-set-key (kbd "M-s") 'custom-search-keymap)
+(global-set-key (kbd "<f9>") 'custom-search-keymap)
 
 (global-unset-key (kbd "C-z"))
 (define-prefix-command 'custom-edit-keymap)
