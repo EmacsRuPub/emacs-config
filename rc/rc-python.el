@@ -57,20 +57,6 @@
   :defer t
   :config
   (progn
-    (defhydra hydra-python-nav ()
-      ("["       python-nav-beginning-of-block)
-      ("9"       python-nav-beginning-of-statement)
-      ("<up>"    python-nav-backward-up-list)
-      (","       python-nav-backward-block)
-      ("<left>"  python-nav-backward-statement)
-      ("<right>" python-nav-forward-statement)
-      ("."       python-nav-forward-block)
-      ("<down>"  python-nav-end-of-defun)
-      ("0"       python-nav-end-of-statement)
-      ("]"       python-nav-end-of-block)
-      ("f"       python-nav-forward-sexp)
-      ("q" nil "cancel"))
-    (global-set-key (kbd "C-x y") 'hydra-python-nav/body)
     (bind-key "C-c l" 'pylint python-mode-map)
     (bind-key "C-c p e" 'pep8 python-mode-map)
     (bind-key "C-c h" 'pylookup-lookup-at-point python-mode-map)

@@ -183,6 +183,8 @@ PROJECT: %(projectile-project-root)
   ("d" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode"))
 
+(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+
 (provide 'rc-programming)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

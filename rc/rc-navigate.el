@@ -216,9 +216,7 @@ Breadcrumb bookmarks:
   (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
   (bind-key "`" 'custom/dired-open-term dired-mode-map)
   (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
-  (define-key dired-mode-map (vector 'remap 'smart-up) 'custom/dired-back-to-top)
-  (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom)
-  (define-key dired-mode-map (vector 'remap 'smart-down) 'custom/dired-jump-to-bottom))
+  (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
 (use-package dired+
   :config
@@ -307,13 +305,6 @@ Breadcrumb bookmarks:
   ("k" smerge-prev "previous conflict")
   ("j" smerge-next "next conflict")
   ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
-  ("q" nil "cancel"))
-
-(defhydra hydra-smart-moving (global-map "C-c 9")
-  ("<left>" smart-backward "smart seek backward")
-  ("<down>" smart-down "smart seek down")
-  ("<up>" smart-up "smart seek up")
-  ("<right>" smart-forward "smart seek forward")
   ("q" nil "cancel"))
 
 (global-unset-key (kbd "C-s"))
