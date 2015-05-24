@@ -49,20 +49,13 @@
     (pushnew 'python-mode helm-buffers-favorite-modes)
     (bind-key "C-<down>" 'helm-next-source helm-map)
     (bind-key "C-<up>" 'helm-previous-source helm-map)
-    (bind-key "h" 'helm-mini  custom-search-keymap)
     (bind-key "C-x b" 'helm-buffers-list)
     (bind-key "C-x j j" 'helm-bookmarks)
     (bind-key "C-x C-f" 'custom/helm-find-files)
     (bind-key "M-x" 'helm-M-x)
-    (bind-key "q" 'helm-projectile custom-search-keymap)
-    (bind-key "r" 'helm-do-grep custom-search-keymap)
     (bind-key "C-h a" 'helm-apropos)
     (bind-key "C-h r" 'helm-info-emacs)
     (bind-key "C-h r" 'helm-info-at-point)
-    (bind-key "f" 'custom/helm-find-files custom-search-keymap)
-    (bind-key "s" 'helm-semantic-or-imenu custom-search-keymap)
-    (bind-key "p" 'helm-projectile-switch-project custom-search-keymap)
-    (bind-key "c" 'helm-flycheck custom-search-keymap)
     ;TODO: investigate and bind 'helm-resume
     ;TODO: investigate and bind 'helm-multi-files
     (helm-mode t)
@@ -74,8 +67,7 @@
 (use-package helm-ag
   :config
   (setq helm-ag-insert-at-point 'symbol)
-  (setq helm-ag-fuzzy-match t)
-  (bind-key "g" 'helm-ag-project-root custom-search-keymap))
+  (setq helm-ag-fuzzy-match t))
 
 (use-package helm-gtags
   :defer t
@@ -103,9 +95,6 @@
 (use-package swoop
   :config
   (progn
-    (bind-key "m" 'swoop-multi custom-search-keymap)
-    (bind-key "i" 'swoop custom-search-keymap)
-    (bind-key "o" '(lambda () (interactive) (swoop "")) custom-search-keymap)
     (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
     (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
 
@@ -306,6 +295,24 @@ Breadcrumb bookmarks:
   ("j" smerge-next "next conflict")
   ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
+
+(defhydra hydra-navigate (:color blue)
+  ("h" helm-mini)
+  ("q" helm-projectile)
+  ("r" helm-do-grep)
+  ("f" custom/helm-find-files)
+  ("s" helm-semantic-or-imenu)
+  ("p" helm-projectile-switch-project)
+  ("c" helm-flycheck)
+  ("m" swoop-multi)
+  ("i" swoop)
+  ("o" (lambda () (interactive) (swoop "")))
+  ("g" helm-ag-project-root)
+  ("w" w3m-select-buffer)
+  ("t" google-translate-at-point)
+  ("T" google-translate-query-translate)
+  ("l" helm-org-headlines))
+(global-set-key (kbd "<f9>") 'hydra-navigate/body)
 
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))

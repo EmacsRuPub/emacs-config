@@ -283,8 +283,6 @@
   ("s" org-sparse-tree)
   ("t" org-toggle-timestamp-type))
 
-(define-key custom-search-keymap (kbd "l") 'helm-org-headlines)
-
 (defhydra hydra-org-global (:color pink) ;;TODO: provide sane colors for heads
   "
 ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^

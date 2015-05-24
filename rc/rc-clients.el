@@ -147,16 +147,13 @@ _<left>_ seek backward
     (standard-display-ascii ?\224 [?\"])
     (standard-display-ascii ?\227 " -- ")
     (add-to-list 'w3m-search-engine-alist
-                 '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))
-    (define-key custom-search-keymap (kbd "w") 'w3m-select-buffer)))
+                 '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
 
 (use-package google-translate
   :defer t
   :init
   (progn
-    (use-package google-translate-default-ui)
-    (bind-key "t" 'google-translate-at-point custom-search-keymap)
-    (bind-key "T" 'google-translate-query-translate custom-search-keymap)))
+    (use-package google-translate-default-ui)))
 
 (use-package jabber
   :init
