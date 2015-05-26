@@ -154,8 +154,7 @@
     (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)))
 
 (use-package rebox2
-  :bind (("M-q" . rebox-dwim)
-         ("S-M-q" . rebox-cycle)))
+  ;;TODO: bind commands)
 
 (use-package paredit
   :defer t
