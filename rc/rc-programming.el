@@ -179,10 +179,6 @@ PROJECT: %(projectile-project-root)
   ("l" slime-selector "slime selector" :color blue)
   ("q" nil "cancel"))
 
-(defhydra hydra-toggle (global-map "<f11>" :color blue)
-  ("d" toggle-debug-on-error "debug on error")
-  ("w" whitespace-mode "whitespace mode"))
-
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
 (provide 'rc-programming)

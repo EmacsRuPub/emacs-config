@@ -57,11 +57,9 @@
 
 (use-package drag-stuff
   :defer t
-  :bind
-  (("C-c d e" . turn-on-drag-stuff-mode)
-   ("C-c d d" . turn-off-drag-stuff-mode))
   :config
   (progn
+    (setq drag-stuff-modifier '(meta shift))
     (turn-off-drag-stuff-mode)
     ))
 
@@ -254,6 +252,12 @@ _p_ersist snippet
   ("x" query-replace-regexp)
   ("q" nil "cancel"))
 (global-set-key (kbd "C-z") 'hydra-edit/body)
+
+(defhydra hydra-toggle (global-map "<f11>" :color blue)
+  ("b" toggle-debug-on-error "debug on error")
+  ("w" whitespace-mode "whitespace mode")
+  ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
+  ("D" turn-off-drag-stuff-mode "disable drag-stuff mode"))
 
 (global-set-key (kbd "C-x g") 'insert-register)
 (global-set-key (kbd "C-x x") 'copy-to-register)
