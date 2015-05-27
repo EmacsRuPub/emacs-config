@@ -154,7 +154,8 @@
     (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)))
 
 (use-package rebox2
-  ;;TODO: bind commands)
+  ;;TODO: bind commands
+  )
 
 (use-package paredit
   :defer t
