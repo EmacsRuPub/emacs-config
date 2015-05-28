@@ -312,7 +312,7 @@ Breadcrumb bookmarks:
   ("t" google-translate-at-point)
   ("T" google-translate-query-translate)
   ("l" helm-org-headlines))
-(global-set-key (kbd "<f9>") 'hydra-navigate/body)
+(global-set-key (kbd "C-`") 'hydra-navigate/body)
 
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))

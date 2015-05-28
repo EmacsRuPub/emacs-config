@@ -277,7 +277,7 @@ _p_ersist snippet
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
-(global-set-key (kbd "C-`") 'mf/mirror-region-in-multifile)
+(global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)
 
 ;; key definition example
 ;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
