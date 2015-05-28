@@ -109,7 +109,6 @@ other file _fO_ther window
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (diminish 'magit-filenotify-mode "FN")
   (setq watches-count-threshold 50)
-  (setq magit-auto-revert-mode nil)
   (setq magit-last-seen-setup-instructions "1.4.0")
   (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
   (defhydra hydra-magit (:color teal :hint nil)
