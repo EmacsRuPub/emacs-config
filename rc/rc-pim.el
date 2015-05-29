@@ -106,6 +106,14 @@
     (setq org-gcal-client-secret private/org-gcal-client-secret)
     (setq org-gcal-file-alist private/org-gcal-file-alist)))
 
+(use-package deft
+  :config
+  (setq deft-directory (at-homedir "/deft"))
+  (setq deft-extension "org")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-use-filename-as-title t)
+  (bind-key "C-c d" 'deft))
+
 (provide 'rc-pim)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

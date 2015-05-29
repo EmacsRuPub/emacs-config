@@ -41,6 +41,7 @@
         crosshairs
         css-eldoc
         csv-mode
+        deft
         diminish
         discover
         dired+
