@@ -82,6 +82,7 @@
         helm-flycheck
         helm-gtags
         helm-recentd
+        helm-slime
         help+
         hide-comnt
         hl-line+
