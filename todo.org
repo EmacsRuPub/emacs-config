@@ -204,3 +204,7 @@
 * TODO [#C] review what can be done using org-speed-commands-user [2015-05-08 Пт 23:59]  :emacs:ticket:
 * TODO [#B] hydra for paredit [2015-05-09 Сб 23:59]               :emacs:ticket:
 * TODO [#A] customdef for opening some search results (ag/rgrep/etc) in other buffer side-by-side with current, vertical or horizontal [2015-05-18 Пн 20:05] :emacs:ticket:
+* TODO [#A] customdef for collecting TODO/FIXME/whatever keyword over some filetree [2015-05-22 Пт 21:27] :emacs:ticket:
+* TODO [#B] customdef to capture browser links to not-predefined locations (+org-protocol) [2015-05-25 Пн 12:47] :emacs:ticket:
+* TODO [#B] review state-of-the-art of emacs web templates field (mumamo, web-mode, etc) [2015-05-28 Чт 19:11] :emacs:ticket:
+  Warning (mumamo-per-buffer-local-vars): Already 'permanent-local t: buffer-file-name
