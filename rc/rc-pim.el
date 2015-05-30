@@ -112,6 +112,25 @@
   (setq deft-extension "org")
   (setq deft-text-mode 'org-mode)
   (setq deft-use-filename-as-title t)
+  (define-namespace custom/deft/
+  ;;advise deft to save window config
+  (defun save-windows (orig-fun &rest args)
+    (setq custom/pre-deft-window-config (current-window-configuration))
+    (apply orig-fun args))
+  ;;function to quit a deft edit cleanly back to pre deft window
+  (defun quit-deft ()
+    "Save buffer, kill buffer, kill deft buffer, and restore
+window config to the way it was before deft was invoked"
+    (interactive)
+    (save-buffer)
+    (kill-this-buffer)
+    (switch-to-buffer "*Deft*")
+    (kill-this-buffer)
+    (when (window-configuration-p custom/pre-deft-window-config)
+      (set-window-configuration custom/pre-deft-window-config)))
+  )
+  (advice-add 'deft :around #'custom/deft/save-windows)
+  (global-set-key (kbd "C-c q") 'custom/deft/quit-deft)
   (bind-key "C-c d" 'deft))
 
 (provide 'rc-pim)
