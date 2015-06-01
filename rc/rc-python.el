@@ -33,8 +33,6 @@
     ))
 
 (use-package flake8-multi
-  :defer t
-  :bind ("C-c f" . flake8-multi)
   :config
   (setq flake8-multi/exclude-patterns '("env" "site-packages" "old")))
 
@@ -57,17 +55,20 @@
   :defer t
   :config
   (progn
-    (bind-key "C-c l" 'pylint python-mode-map)
-    (bind-key "C-c p e" 'pep8 python-mode-map)
-    (bind-key "C-c h" 'pylookup-lookup-at-point python-mode-map)
-    (bind-key "C-c r" 'helm-jedi-related-names python-mode-map) ;NOTE: just to memory the existence for the first time
-    (bind-key "C-M-." 'python-indent-shift-right python-mode-map)
-    (bind-key "C-M-," 'python-indent-shift-left python-mode-map)
     (bind-key "M-." 'jedi:goto-definition python-mode-map)
     (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
     (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
     (bind-key "_" 'python-indent-shift-left region-bindings-mode-map)
     ))
+
+(defhydra hydra-python ()
+  ("l" pylint)
+  ("8" pep8)
+  ("m" flake8-multi)
+  ("p" pylookup-lookup-at-point)
+  ("r" helm-jedi-related-names)
+  ("q" nil))
+(global-set-key (kbd "C-c C-p") 'hydra-python/body)
 
 (setq mumamo-background-colors nil)
 

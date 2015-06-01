@@ -9,8 +9,6 @@
   :commands bbdb
   :init
   (use-package bbdb)
-  :bind (("C-c C-b s" . bbdb)
-         ("C-c C-b c" . bbdb-create))
   :config
   (progn
     (setq bbdb-change-hook 'bbdb-timestamp-hook)
@@ -33,14 +31,12 @@
     (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
     (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
     (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
-    (bind-key "C-c C-d" 'bbdb-delete-current-record)
     (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
     (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map)
     ))
 
 (use-package calfw
   :defer t
-  :bind ("C-c c" . custom/calfw-open-calendar)
   :init
   (use-package calfw-ical)
   (use-package calfw-org)
@@ -93,7 +89,6 @@
 
 (use-package keyfreq
   :defer t
-  :bind ("C-c k" . keyfreq-show)
   :config
   (progn
     (keyfreq-mode 1)
@@ -129,9 +124,19 @@ window config to the way it was before deft was invoked"
     (when (window-configuration-p custom/pre-deft-window-config)
       (set-window-configuration custom/pre-deft-window-config)))
   )
-  (advice-add 'deft :around #'custom/deft/save-windows)
-  (global-set-key (kbd "C-c q") 'custom/deft/quit-deft)
-  (bind-key "C-c d" 'deft))
+  (advice-add 'deft :around #'custom/deft/save-windows))
+
+;;TODO: clusterize various extensions
+(defhydra hydra-pim ()
+  ("b" bbdb)
+  ("c" bbdb-create)
+  ("u" bbdb-delete-current-record)
+  ("o" custom/calfw-open-calendar)
+  ("k" keyfreq-show)
+  ("d" deft)
+  ("D" custom/deft/quit-deft)
+  ("q" nil))
+(global-set-key (kbd "C-c c") 'hydra-pim/body)
 
 (provide 'rc-pim)
 

@@ -313,24 +313,24 @@ _C-<up>_:   prev heading   agenda _c_olumns          cloc_k_ display
   ("y" org-insert-link)
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
+  ("O" custom/open-or-browse-at-point)
   ("e" org-capture)
   ("a" org-agenda)
+  ("A" show-all)
   ("m" org-pomodoro)
   ("q" nil "cancel"))
 (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
+(define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
 
 (define-key org-mode-map (kbd "C-'") nil)
 (define-key org-mode-map (kbd "C-c [") nil)
 (define-key org-mode-map (kbd "C-c ]") nil)
 (define-key org-mode-map (kbd "C-c C-o") nil)
 
-(define-key org-mode-map (kbd "C-x C-a") 'show-all)
-(define-key org-mode-map (kbd "C-c C-o C-l") 'custom/open-or-browse-at-point)
-
-(global-set-key (kbd "C-c r o") '(lambda ()
+(global-set-key (kbd "C-c r o") '(lambda () ;;TODO: make hydra for such custom helm sources
                                    (interactive)
                                    (helm :sources '(custom/helm-source-org-files))))
 

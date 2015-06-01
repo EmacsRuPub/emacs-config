@@ -82,7 +82,7 @@
     (setq recentf-max-saved-items 250)
     (setq recentf-max-menu-items 15)
     ;; get rid of `find-file-read-only' and replace it with something more useful.
-    (global-set-key (kbd "C-x C-r") 'helm-recentf)))
+    ))
 
 (use-package region-bindings-mode
   :config
@@ -205,17 +205,6 @@
   ("a" anchored-transpose "anchored")
   ("q" nil "cancel"))
 
-(defhydra hydra-auto-yasnippet (:color teal)
-  "
-_c_reate snippet
-_e_xpand snippet
-_p_ersist snippet
-"
-  ("c" aya-create)
-  ("e" aya-expand)
-  ("p" aya-persist-snippet))
-(global-set-key (kbd "<f5>") 'hydra-auto-yasnippet/body)
-
 (defhydra hydra-edit (:color blue)
   ("0" custom/compact-spaces-in-region)
   ("2" custom/duplicate-line)
@@ -250,6 +239,13 @@ _p_ersist snippet
   ("v" view-mode)
   ("x" query-replace-regexp)
   ("a" custom/append-cited-region)
+  ("g" insert-register)
+  ("e" copy-to-register)
+  ("m" rename-uniquely)
+  ("S" scratch)
+  ("y" revbufs)
+  ("k" custom/kill-save-rectangle)
+  ("/" comment-box)
   ("q" nil "cancel"))
 (global-set-key (kbd "C-z") 'hydra-edit/body)
 
@@ -259,39 +255,25 @@ _p_ersist snippet
   ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
   ("D" turn-off-drag-stuff-mode "disable drag-stuff mode"))
 
-(global-set-key (kbd "C-x g") 'insert-register)
-(global-set-key (kbd "C-x x") 'copy-to-register)
-(global-set-key (kbd "C-c h m") 'helm-man-woman)
+;;TODO: provide global binding
+(defhydra hydra-cases ()
+  ("d" downcase-word)
+  ("D" downcase-region)
+  ("u" upcase-word)
+  ("U" upcase-region)
+  ("I" upcase-initials-region))
+
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-]") 'custom/comment-uncomment-region)
-(global-set-key (kbd "C-c C-u C-r") 'rename-uniquely)
-
 (global-set-key (kbd "M-\"") 'eval-region)
-
-;I never use set-fill-column and I hate hitting it by accident.
-(global-set-key "\C-x\ f" 'find-file)
-(global-set-key (kbd "C-x r M-k") 'custom/kill-save-rectangle) ;; Give it a memorable key binding
-
-(global-set-key (kbd "C-c n") 'scratch)
-(global-set-key (kbd "C-c y") 'revbufs)
-
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-
 (global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)
-
-;; key definition example
-;; (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
-
-;; remap C-a to `custom/smarter-move-beginning-of-line'
-(global-set-key [remap move-beginning-of-line]
-                'custom/smarter-move-beginning-of-line)
-
-(global-set-key (kbd "C-c r p") '(lambda ()
+;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
+(global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
+(global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
+(global-set-key (kbd "C-c r p") '(lambda () ;;TODO: make hydra for such custom helm sources
                                    (interactive)
                                    (helm :sources '(custom/helm-source-portage-files))))
-
-(global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
-(global-set-key (kbd "C-c b") 'comment-box)
 
 (setq whitespace-style '(indentation::space
                          space-after-tab

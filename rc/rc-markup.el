@@ -15,8 +15,6 @@
 (use-package sgml-mode
   :config
   (progn
-    (bind-key "C-<down>" 'custom/skip-to-next-blank-line html-mode-map)
-    (bind-key "C-<up>" 'custom/skip-to-previous-blank-line html-mode-map)
     (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
 (use-package emmet-mode
@@ -40,7 +38,7 @@
   :config
   (progn
     (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
-    (bind-key "<tab>" 'yas/expand markdown-mode-map)))
+    (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
 
 (use-package yaml-mode)
 

@@ -51,6 +51,7 @@
     (add-hook 'js2-mode-hook '(lambda ()
                                 (setq flycheck-checker 'javascript-jshint)
                                 (tern-mode t)))
+    ;;TODO: maybe make hydra
     (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
     (define-key js2-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
     (define-key js2-mode-map (kbd "C-c b") 'js-send-buffer)

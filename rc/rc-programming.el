@@ -76,10 +76,6 @@ other file _fO_ther window
     ))
 
 (use-package flycheck
-  :defer t
-  :bind (("C-x <up>" . flycheck-previous-error)
-         ("C-x <down>" . flycheck-next-error)
-         ("C-x !" . flycheck-first-error))
   :config
   (progn
     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
@@ -109,7 +105,6 @@ other file _fO_ther window
   (diminish 'magit-filenotify-mode "FN")
   (setq watches-count-threshold 50)
   (setq magit-last-seen-setup-instructions "1.4.0")
-  (global-set-key (kbd "C-c C-g") 'magit-blame-mode)
   (defhydra hydra-magit (:color teal :hint nil)
     "
 PROJECT: %(projectile-project-root)
@@ -122,21 +117,20 @@ PROJECT: %(projectile-project-root)
   _r_: reflog
   _w_: diff worktree
   _t_: time machine
-
+  _b_: blame
 "
     ("s" magit-status)
     ("f" magit-file-log)
     ("c" magit-checkout)
     ("w" magit-diff-working-tree)
     ("r" magit-reflog)
+    ("b" magit-blame-mode)
     ("B" magit-branch-manager)
     ("l" magit-log)
     ("t" git-timemachine))
   (global-set-key (kbd "C-'") 'hydra-magit/body))
 
 (use-package git-gutter
-  :bind (("C-c <prior>" . git-gutter:next-hunk)
-         ("C-c <next>" . git-gutter:previous-hunk))
   :config
   (progn
     (setq git-gutter:modified-sign "?")
@@ -170,12 +164,6 @@ PROJECT: %(projectile-project-root)
   ;; TODO: make hydra
   (bind-key "C-c l" 'coverlay-load-file)
   (bind-key "C-c s" 'coverlay-parse-buffer))
-
-(defhydra hydra-programming (global-map "M-p")
-  "programming"
-  ("s" slime "run slime" :color blue)
-  ("l" slime-selector "slime selector" :color blue)
-  ("q" nil "cancel"))
 
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 

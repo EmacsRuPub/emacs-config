@@ -30,8 +30,6 @@
   :config
   (progn
     (erc-pcomplete-mode 1)
-    (bind-key "M-<up>" 'custom/find-url-backward erc-mode-map)
-    (bind-key "M-<down>" 'custom/find-url-forward erc-mode-map)
     (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                     "324" "329" "332" "333" "353" "477"))
     (setq erc-kill-queries-on-quit t)
@@ -63,6 +61,14 @@
     (erc-match-mode 1)
     (erc-timestamp-mode t)
     (erc-log-enable)
+
+    (defhydra hydra-erc (:color blue)
+      ("s" custom/connect-slack-irc)
+      ("q" custom/leave-irc-server)
+      ("b" custom/select-erc-buffer)
+      ("u" custom/select-erc-unread-buffer)
+      ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
+    (global-set-key (kbd "C-q") 'hydra-erc/body)
     ))
 
 (use-package twittering-mode
@@ -154,12 +160,6 @@ _<left>_ seek backward
   (use-package jabber-autoloads) ;; For 0.7.90 and above:
   (use-package jabber-bookmarks)
   (use-package jabber-autoaway)
-  :bind
-  (("C-x C-j C-r" . jabber-switch-to-roster-buffer)
-   ("C-x C-j C-a" . jabber-activity-switch-to)
-   ("C-c C-o C-r" . custom/open-urls-in-region)
-   ("C-x C-j C-j" . custom/helm-jabber-chat-with)
-   ("C-x C-j C-s" . custom/jabber-muc-sendto))
   :config
   (progn
     (when custom/use-zenburn-in-jabber
@@ -190,11 +190,16 @@ _<left>_ seek backward
              (server (plist-get state-data :server)))
         (message "%s" server)
         ))
-    (defhydra hydra-jabber-insert (global-map "<f6>")
+    (defhydra hydra-jabber (global-map "<f6>")
       ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
       ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
       ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
       ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
+      ("a" custom/jabber-abbrev)
+      ("r" jabber-switch-to-roster-buffer)
+      ("s" jabber-activity-switch-to)
+      ("j" custom/helm-jabber-chat-with)
+      ("m" custom/jabber-muc-sendto)
       ;;TODO: move other insertions here, for example, current time, etc.
       ("q" nil "cancel"))
     (setq fsm-debug nil)
@@ -218,22 +223,10 @@ _<left>_ seek backward
     (setq jabber-roster-buffer "*-jroster-*")
     (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
     (setq jabber-use-global-history nil)
-    (bind-key "C-c u r" 'upcase-region jabber-chat-mode-map)
-    (bind-key "C-M-r" 'custom/jabber-abbrev jabber-chat-mode-map)
-    (bind-key "C-c C-o C-l" 'browse-url jabber-chat-mode-map)
     (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
     (add-hook 'jabber-chat-mode-hook 'goto-address)
     (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
     ))
-
-(defhydra hydra-clients (:color blue)
-  ("s" custom/connect-slack-irc)
-  ("q" custom/leave-irc-server)
-  ("b" custom/select-erc-buffer)
-  ("u" custom/select-erc-unread-buffer)
-  ("i" (lambda () (interactive) (custom/insert-erc-nick t)))
-  ("z" custom/cite-chat-region))
-(global-set-key (kbd "C-q") 'hydra-clients/body)
 
 (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
 

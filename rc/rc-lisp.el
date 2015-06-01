@@ -62,9 +62,15 @@
     (setq slime-use-autodoc-mode nil)
     (setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
     (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
-    (bind-key "C-c h" 'slime-documentation-lookup slime-repl-mode-map)
-    (bind-key "C-c ;" 'slime-insert-balanced-comments lisp-mode-map)
-    (bind-key "C-c M-;" 'slime-remove-balanced-comments lisp-mode-map)
+    ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
+    (defhydra hydra-slime (global-map "M-p")
+      "programming"
+      ("s" slime "run slime" :color blue)
+      ("l" slime-selector "slime selector" :color blue)
+      (";" slime-insert-balanced-comments)
+      ("M-;" slime-remove-balanced-comments)
+      ("h" slime-documentation-lookup)
+      ("q" nil "cancel"))
     ))
 
 ;; lookup information in hyperspec

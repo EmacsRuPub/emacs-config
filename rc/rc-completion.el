@@ -60,9 +60,21 @@
     (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
     (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
     (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
-    (global-set-key (kbd "C-c C-y C-v") 'yas-visit-snippet-file)
-    (global-set-key (kbd "C-c C-y C-n") 'yas-insert-snippet)
     ))
+
+(defhydra hydra-yasnippet (:color teal)
+  "
+_c_reate auto snippet
+_e_xpand auto snippet
+_p_ersist auto snippet
+"
+  ("c" aya-create)
+  ("e" aya-expand)
+  ("p" aya-persist-snippet)
+  ("v" yas-visit-snippet-file)
+  ("i" yas-insert-snippet)
+  )
+(global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
 
 (global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand)
 

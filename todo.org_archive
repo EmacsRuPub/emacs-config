@@ -1041,3 +1041,15 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: CANCELLED
   :END:
+
+* DONE [#C] http://therandymon.com/woodnotes/emacs-for-writers/node27.html try to make hydra [2015-05-02 Сб 15:21] :emacs:ticket:
+  CLOSED: [2015-06-01 Пн 18:30] SCHEDULED: <2015-05-02 Сб>
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-01 Пн 18:30]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-01 Пн 23:14
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

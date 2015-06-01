@@ -54,11 +54,15 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
-(global-set-key (kbd "C-c t w") 'whizzytex-mode)
-(global-set-key (kbd "M-p") 'custom/ps-print-buffer-with-faces)
-(global-set-key (kbd "C-c M-p") 'custom/ps-print-region-with-faces)
-(global-set-key (kbd "C-c C-p") 'pdf-save-buffer-with-faces)
-(global-set-key (kbd "C-c C-r") 'pdf-save-region-with-faces)
+
+(defhydra hydra-publishing ()
+  ("w" whizzytex-mode)
+  ("p" custom/ps-print-buffer-with-faces)
+  ("P" custom/ps-print-region-with-faces)
+  ("s" pdf-save-buffer-with-faces)
+  ("S" pdf-save-region-with-faces)
+  ("q" nil))
+(global-set-key (kbd "C-c n") 'hydra-publishing/body)
 
 ;; TODO: investigate TEXT_INPUTS usage
 ;; TODO: fix encoding issues (questions marks instead of russian letters)

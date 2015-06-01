@@ -34,7 +34,8 @@
   ("u" apropos-user-option)
   ("i" info-apropos "info")
   ("t" tags-apropos "tags")
-  ("e" apropos-value))
+  ("e" apropos-value)
+  ("m" helm-man-woman))
 
 (defhydra hydra-info-to (:hint nil :color teal)
   "

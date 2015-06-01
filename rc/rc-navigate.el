@@ -13,7 +13,6 @@
 
 (use-package helm
   :defer t
-  :bind ("C-x C-d" . helm-recentd)
   :init
   (use-package helm-config)
   (use-package helm-files)
@@ -56,8 +55,10 @@
     (bind-key "C-h a" 'helm-apropos)
     (bind-key "C-h r" 'helm-info-emacs)
     (bind-key "C-h r" 'helm-info-at-point)
-    ;TODO: investigate and bind 'helm-resume
-    ;TODO: investigate and bind 'helm-multi-files
+    (bind-key "C-x C-r" 'helm-recentf)
+    (bind-key "C-x C-d" ' helm-recentd)
+    ;;TODO: investigate and bind 'helm-resume
+    ;;TODO: investigate and bind 'helm-multi-files
     (helm-mode t)
     (helm-adaptive-mode 1)
     (helm-autoresize-mode 1)
@@ -118,7 +119,6 @@ Breadcrumb bookmarks:
 (global-set-key (kbd "<f12>") 'hydra-breadcrumb/body)
 
 (use-package zoom-window
-  :bind ("C-x C-z" . zoom-window-zoom)
   :config
   (setq zoom-window-mode-line-color "DarkGreen"))
 
@@ -275,11 +275,12 @@ Breadcrumb bookmarks:
   ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
   ("q" nil "cancel"))
 
-(defhydra hydra-scope (global-map "C-x s") ; was save-some-buffers
+(defhydra hydra-scope (global-map "<f9>") ; was save-some-buffers
   ("r" narrow-to-region)
   ("d" narrow-to-defun)
   ("c" narrow-to-defun+comments-above)
   ("w" widen)
+  ("z" zoom-window-zoom)
   ;TODO: maybe add org narrowing
   ("q" nil "cancel"))
 
@@ -293,6 +294,11 @@ Breadcrumb bookmarks:
   ("<right>" next-error "next error")
   ("k" smerge-prev "previous conflict")
   ("j" smerge-next "next conflict")
+  ("r" custom/open-urls-in-region)
+  ("=" custom/skip-to-next-blank-line)
+  ("-" custom/skip-to-previous-blank-line)
+  ("h" git-gutter:previous-hunk)
+  ("l" git-gutter:next-hunk)
   ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
 
@@ -321,7 +327,6 @@ Breadcrumb bookmarks:
 (global-unset-key (kbd "C-x C-b"))
 (global-set-key (kbd "C-s") 'phi-search)
 (global-set-key (kbd "C-r") 'phi-search-backward)
-(define-key isearch-mode-map (kbd "C-o") 'custom/isearch-occur)
 
 (provide 'rc-navigate)
 
