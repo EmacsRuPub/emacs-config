@@ -4,8 +4,8 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(autoload 'smerge-mode "smerge-mode" nil t)
+(use-package ansi-color)
+(use-package smerge-mode)
 
 (defun custom/sh-check-finish-hook (buf msg)
   "Function, that is executed at the end of sh check"

@@ -7,9 +7,8 @@
 (use-package filecache)
 (use-package imenu)
 (use-package compile)
-
-(autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
-(autoload 'gtags-mode "gtags" "" t)
+(use-package po-mode)
+(use-package gtags)
 
 (use-package doxymacs
   :defer t

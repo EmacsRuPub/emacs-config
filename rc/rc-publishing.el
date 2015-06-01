@@ -4,13 +4,11 @@
 ;; Created:  Sun May 4 23:57:55 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'turn-on-bib-cite "bib-cite")
-(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
-(autoload 'whizzytex-mode "whizzytex" "WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
-
 (use-package tex-site)
 (use-package preview-latex)
+(use-package cdlatex)
+(use-package bib-cite)
+(use-package whizzytex)
 
 (setq-default TeX-master nil)
 (setq TeX-parse-self t)

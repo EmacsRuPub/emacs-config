@@ -4,12 +4,11 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'footnote-mode "footnote" nil t) ;; footnote mode
-
 (use-package rst)
 (use-package savekill)
 (use-package saveplace)
 (use-package table) ;; table
+(use-package footnote)
 
 (delete-selection-mode t)
 (dtrt-indent-mode)
