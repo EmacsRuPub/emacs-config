@@ -179,6 +179,12 @@ point reaches the beginning or end of the buffer, stop there."
         (insert "\n"))
       (clipboard-kill-region (point-min) (point-max)))))
 
+(defun append-cited-region (arg)
+  (interactive "P")
+  (custom/cite-region (prefix-numeric-value arg))
+  (end-of-buffer)
+  (yank))
+
 (defun strip-prefix (prefix lines)
   (s-join "\n"
           (mapcar (lambda (s) (s-chop-prefix prefix s))

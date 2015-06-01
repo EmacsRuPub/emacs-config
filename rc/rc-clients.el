@@ -218,7 +218,6 @@ _<left>_ seek backward
     (setq jabber-roster-buffer "*-jroster-*")
     (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
     (setq jabber-use-global-history nil)
-    (bind-key "C-c C-e" 'custom/cite-chat-region jabber-chat-mode-map)
     (bind-key "C-c u r" 'upcase-region jabber-chat-mode-map)
     (bind-key "C-M-r" 'custom/jabber-abbrev jabber-chat-mode-map)
     (bind-key "C-c C-o C-l" 'browse-url jabber-chat-mode-map)

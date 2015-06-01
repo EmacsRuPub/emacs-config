@@ -78,6 +78,16 @@
         (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
    (t (browse-url (thing-at-point 'url t)))))
 
+(defun open-urls-in-region (beg end)
+  "Open URLs between BEG and END."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward org-plain-link-re nil t)
+        (org-open-at-point)))))
+
 )
 
 (provide 'custom-navigate)

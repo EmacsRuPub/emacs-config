@@ -4,37 +4,39 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package haskell-mode)
-(use-package hs-lint)
-(use-package haskell-align-imports)
-(use-package haskell-navigate-imports)
-(use-package haskell-sort-imports)
-(use-package inf-haskell)
+(use-package haskell-mode
+  :init
+  (use-package haskell-indent)
+  (use-package haskell-align-imports)
+  (use-package haskell-navigate-imports)
+  (use-package haskell-sort-imports)
+  (use-package inf-haskell)
+  :config
+  (setq haskell-program-name "ghci")
+  (setq inferior-haskell-wait-and-jump t)
+  (setq haskell-program-name "ghci \"+.\"")
+  (bind-key "C-," 'haskell-move-nested-left haskell-mode-map)
+  (bind-key "C-." 'haskell-move-nested-right haskell-mode-map)
+  (bind-key "<tab>" 'haskell-indent-cycle haskell-mode-map)
+  (bind-key "C-c h" 'haskell-hoogle haskell-mode-map)
+  (bind-key "C-c C-h" 'haskell-hayoo haskell-mode-map)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  (add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
+  (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci))
+
+(use-package hs-lint
+  :config
+  (setq hs-lint-replace-with-suggestions t)
+  (define-key haskell-mode-map (kbd "C-c l") 'hs-lint))
+
 (use-package haskell-ghci)
-(use-package haskell-indent)
 
-(setq haskell-program-name "ghci")
-(setq hs-lint-replace-with-suggestions t)
-(setq inferior-haskell-wait-and-jump t)
-(setq haskell-doc-show-global-types t)
-(setq haskell-program-name "ghci \"+.\"")
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
-(add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
-
-(define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
-(define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
-(define-key haskell-mode-map (kbd "<tab>") 'haskell-indent-cycle)
-(define-key haskell-mode-map (kbd "C-c l") 'hs-lint)
-(define-key haskell-mode-map (kbd "C-c h") 'haskell-hoogle)
-(define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hayoo)
-
-;TODO: setup flycheck
-;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
+;;TODO: setup flycheck
+;;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
+;;TODO: investigate the difference between builtin and el-get versions of haskell-mode
 
 (provide 'rc-haskell)
 

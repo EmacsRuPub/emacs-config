@@ -250,6 +250,7 @@ _p_ersist snippet
   ("u" custom/uniq)
   ("v" view-mode)
   ("x" query-replace-regexp)
+  ("a" custom/append-cited-region)
   ("q" nil "cancel"))
 (global-set-key (kbd "C-z") 'hydra-edit/body)
 

@@ -11,16 +11,6 @@
 
 (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
 
-(defun open-urls-in-region (beg end)
-  "Open URLs between BEG and END."
-  (interactive "r")
-  (save-excursion
-    (save-restriction
-      (narrow-to-region beg end)
-      (goto-char (point-min))
-      (while (re-search-forward org-plain-link-re nil t)
-        (org-open-at-point)))))
-
 (defun jabber-muc-sendto (&optional other-window)
   "Insert MUC participant nick into chat."
   (interactive)

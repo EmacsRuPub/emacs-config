@@ -86,12 +86,6 @@
         (if (string= event "finished\n")
             (kill-buffer ,buff))))))
 
-(defun cite-chat-region (arg)
-  (interactive "P")
-  (custom/cite-region (prefix-numeric-value arg))
-  (end-of-buffer)
-  (yank))
-
 )
 
 (provide 'custom-clients)
