@@ -12,6 +12,7 @@
 (setq mouse-colors '("firebrick" "yellow"))
 
 (setq sml/no-confirm-load-theme t)
+(setq sml/theme 'respectful)
 (sml/setup)
 
 (set-cursor-color "chartreuse2")
@@ -24,6 +25,8 @@
 (when (boundp 'zenburn-colors-alist)
   (set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
+
+(set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
 
 (provide 'rc-themes)
 
