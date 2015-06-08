@@ -31,16 +31,9 @@
 (defvar ps-print-path "~/ps-print"
   "Path for ps-print output")
 
-(defun custom/texinfo-hook ()
-  (local-set-key [delete]  'delete-char)
-  (setq delete-key-deletes-forward t))
-(add-hook 'texinfo-mode-hook 'custom/texinfo-hook)
-
 (defun custom/tex-mode-hook ()
   (TeX-fold-mode 1)
-  (local-set-key "\\" 'TeX-electric-macro)
   (turn-on-bib-cite)
-  (local-set-key (kbd "M-i") '(lambda () (interactive) (insert "\n\\item ")))
   (setq bib-cite-use-reftex-view-crossref t))
 
 (add-hook 'TeX-mode-hook 'custom/tex-mode-hook)

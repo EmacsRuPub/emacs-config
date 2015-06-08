@@ -55,20 +55,6 @@
     (setq suppress-projectile-symbol-at-point nil))
   (call-interactively 'projectile-ag))
 
-(defun isearch-forward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-forward)
-  (eldoc-mode 1))
-
-(defun isearch-backward-noeldoc ()
-  "close eldoc temperaily"
-  (interactive)
-  (eldoc-mode -1)
-  (isearch-backward)
-  (eldoc-mode 1))
-
 ;;TODO: make implemetation less straightforward or find "right way" to do it
 (defun process-thing-at-point ()
   (interactive)

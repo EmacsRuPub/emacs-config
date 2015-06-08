@@ -45,7 +45,6 @@
 (defun custom/nxml-mode-hook ()
   (auto-fill-mode)
   (hs-minor-mode 1)
-  (local-set-key (kbd "C-c /") 'nxml-finish-element)
   (rng-validate-mode)
   (setq ispell-skip-html t)
   (unify-8859-on-decoding-mode)
@@ -73,10 +72,6 @@
           (lambda ()
             (setq django-indent-width 4)
             (setq sgml-basic-offset 4)))
-(add-hook 'less-css-mode-hook (lambda ()
-                (local-set-key [remap isearch-forward] 'custom/isearch-forward-noeldoc)))
-(add-hook 'less-css-mode-hook (lambda ()
-                (local-set-key [remap isearch-backward] 'custom/isearch-backward-noeldoc)))
 
 (provide 'rc-markup)
 

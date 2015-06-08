@@ -109,7 +109,6 @@
 * TODO [#B] some window ruling handles, e.g.: [2014-12-22 Пн 19:14] :emacs:ticket:
   open magit commit info in another frame if exists
   rotate window splits (AFAIK there is an existing extension for it)
-* TODO [#C] search for 'local-set-key' uses and try to eliminate [2015-01-04 Вс 23:47] :emacs:ticket:
 * TODO [#B] bind view-lossage [2015-01-05 Пн 18:51]            :emacs:ticket:
 * TODO [#B] explore http://batsov.com/projectile/ for overlooked features [2015-01-09 Пт 22:24] :emacs:ticket:
 * TODO [#B] maybe macro for binding a couple of functions to a keybinding, using prefix arg for alternate function call [2015-01-13 Вт 13:38] :emacs:ticket:
