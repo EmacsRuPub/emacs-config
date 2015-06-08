@@ -171,7 +171,6 @@
 * TODO [#C] review abo-abo's extensions and their dependencies [2015-04-18 Сб 11:55] :emacs:ticket:
 * TODO [#B] file bug aboutace-window: char in modeline and enlarged ones are not always displayed (investigate first) [2015-04-24 Пт 22:59] :emacs:ticket:
 * TODO [#B] magit: find a way to remove a window, previously used for commit and return to *magit-status*  [2015-04-27 Пн 12:03] :emacs:ticket:
-  SCHEDULED: <2015-04-28 Вт>
 ** 1
 (defadvice git-commit-commit (after delete-window activate)
   (delete-window))
@@ -186,7 +185,6 @@
 * TODO [#B] make use of org helm source, try to use it to uniquify incoming [captured] headings [2015-05-01 Пт 18:34] :emacs:ticket:
 * TODO [#C] review [[http://kostafey.blogspot.ru/2012/10/mode-line.html]] [2015-05-03 Вс 20:37]                         :emacs:ticket:
 * GOING [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:ATTACH:
-  SCHEDULED: <2015-05-06 Ср>
   :LOGBOOK:
   - State "GOING"      from "TODO"       [2015-05-12 Вт 17:27]
   :END:
@@ -198,7 +196,6 @@
 * TODO [#C] review [[http://oremacs.com/2015/01/04/dired-nohup/][Start a process from dired · (or emacs]] and choose the way of opening files externally (compare with current solution) [2015-05-06 Ср 23:59] :emacs:ticket:
 * TODO [#C] review the status the "advices" machinery has been upgraded to [2015-05-07 Чт 13:26] :emacs:ticket:
 * TODO [#A] customize org-mode scheduling in a way that scheduled timestamp will be in a near future, rather than the time when 'org-schedule was called [2015-05-07 Чт 13:52] :emacs:ticket:
-  SCHEDULED: <2015-05-07 Чт>
 * TODO [#C] review what can be done using org-speed-commands-user [2015-05-08 Пт 23:59]  :emacs:ticket:
 * TODO [#B] hydra for paredit [2015-05-09 Сб 23:59]               :emacs:ticket:
 * TODO [#A] customdef for opening some search results (ag/rgrep/etc) in other buffer side-by-side with current, vertical or horizontal [2015-05-18 Пн 20:05] :emacs:ticket:
@@ -206,3 +203,7 @@
 * TODO [#B] customdef to capture browser links to not-predefined locations (+org-protocol) [2015-05-25 Пн 12:47] :emacs:ticket:
 * TODO [#B] review state-of-the-art of emacs web templates field (mumamo, web-mode, etc) [2015-05-28 Чт 19:11] :emacs:ticket:
   Warning (mumamo-per-buffer-local-vars): Already 'permanent-local t: buffer-file-name
+* TODO [#A] investigate the ability of non-global hydras [2015-06-01 Пн 19:07] :emacs:ticket:
+* TODO [#A] customize smart-modeline [2015-06-02 Вт 15:01]        :emacs:ticket:
+* TODO [#C] review contexts, tags and custom agenda commands, check if they are correspond real life [2015-06-03 Ср 22:57] :emacs:ticket:
+* TODO [#B] extend sml/replacer-regexp-list [2015-06-06 Сб 23:56] :emacs:ticket:
