@@ -1195,3 +1195,185 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* CANCELLED [#B] find how to suppress ecb dialog for upgraded settings on activate
+  CLOSED: [2015-06-08 Пн 16:22]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 16:22] \\
+    removed ecb at all
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] ERC: bots [2014-06-23 Пн 00:22]              :emacs:ticket:erc:
+  CLOSED: [2015-06-08 Пн 16:21]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 16:21] \\
+    cannot remember initial task
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 16:23]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 16:23] \\
+    does not make much sense at the moment. moreover, it seems the respective code was abandoned
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
+  CLOSED: [2015-06-08 Пн 16:27]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 16:27] \\
+    does not make much sense while there is only one environment exists as a workplace, maybe return to it later
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:31
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
+  CLOSED: [2015-06-08 Пн 16:29]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 16:29] \\
+    cannot see if it wiil be of any usefulness, especially with custom workflow on a single workspace (some particular laptop)
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:31
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] MAYBE some setup above emacs registers            :investigate:
+  CLOSED: [2015-06-08 Пн 17:11]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:11] \\
+    built-in setup seems to be sufficient
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:11
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] Wanderlust: fix std11 encoding problem in mail headers    :fix:
+  CLOSED: [2015-06-08 Пн 17:12]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:12] \\
+    wanderlust is not used now / context was forwarded
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:14
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE [#C] org-mode tables setup                           :investigate:review:
+  CLOSED: [2015-06-08 Пн 17:14]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 17:14]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:14
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED [#C] some setup for Wanderlust (and probably org-mode integration) :investigate:review:
+  CLOSED: [2015-06-08 Пн 17:15]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:15] \\
+    wanderlust is not used now / in case it will be used, we may resuurect old setup or create new with better understanding
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:16
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] check el-get setup coupling with any particular linux distro, including current (Gentoo) [2014-07-02 Ср 23:46] :emacs:ticket:el:get:
+  CLOSED: [2015-06-08 Пн 17:17]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:17] \\
+    does not make sense for current workplace configuration/layout
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:18
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE [#C] customdef framework for in-emacs strings processing (or find existing) [2014-07-03 Чт 15:29] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 17:18]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 17:18]
+    in fact, "s" framework from magnars works reasonably well
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:19
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED [#C] think of some interface wrappers between setenv/etc calls [2014-07-07 Пн 16:13] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 17:20]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:20] \\
+    task statement is too common
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:21
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED [#C] find out how to open *magit-log-edit* [2014-08-13 Ср 01:08] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 17:22]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:22] \\
+    aim for this has been lost
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:23
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+
+* CANCELLED [#C] review custom keybindings again [2014-08-21 Чт 13:42] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 17:23]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 17:23] \\
+    it is performed continuously anyway
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 17:24
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
