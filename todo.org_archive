@@ -1053,3 +1053,133 @@ CLOSED: [2015-02-22 Вс 17:55]
   :ARCHIVE_CATEGORY: todo
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE [#C] structured parenthesis editing in python mode          :investigate:
+  CLOSED: [2015-06-08 Пн 15:53]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 15:53]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 15:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
+  CLOSED: [2015-06-08 Пн 15:53]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 15:53]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 15:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] setup org refiling                              :investigate:review:
+  CLOSED: [2015-06-08 Пн 15:54]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 15:54]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 15:59
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+** наладить refile из разных org-файлов в "текущие дела" (сюда) [2013-03-31 Вс 18:50] :todo:orgmode:
+** разобраться с org-refile [2013-03-31 Вс 18:50]              :todo:orgmode:
+** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
+** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
+
+* CANCELLED [#C] Erlang setup: review and extend (from inventory or right there) :review:extend:
+  CLOSED: [2015-06-08 Пн 15:55]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 15:55] \\
+    not needed / should be rethought
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE [#B] find out some (maybe, persistent) way to add file to org-agenda-files :investigate:
+  CLOSED: [2015-06-08 Пн 15:55]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 15:55]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 15:56]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 15:56]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED [#C] emacs client for delicious [2014-07-01 Вт 02:40] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 15:57]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 15:57] \\
+    probably better to implement it as standalone app
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+** HINT resclient
+
+* CANCELLED [#B] find out why emacs moves between frames within dual head setup and fails to otherwise [2014-07-01 Вт 03:03] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 15:58]
+  :LOGBOOK:
+  - State "CANCELLED"  from "TODO"       [2015-06-08 Пн 15:58] \\
+    cannot reproduce / context was forwarded too much
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE [#B] make magit-blame-mode stop activating while running org-capture [2015-01-11 Вс 00:00] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 16:00]
+  :LOGBOOK:
+  - State "DONE"       from "WAITING"    [2015-06-08 Пн 16:00]
+  :END:
+  - State "WAITING"    from "TODO"       [2015-01-11 Вс 22:28] \\
+    cannot reproduce right now
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:00
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE [#B] try to incorporate https://github.com/Bruce-Connor/names to automate namespaces (maybe additional benefits can be found) [2014-12-11 Чт 12:38] :emacs:ticket:
+  CLOSED: [2015-06-08 Пн 16:02]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-06-08 Пн 16:02]
+  :END:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2015-06-08 Пн 16:16
+  :ARCHIVE_FILE: ~/.emacs.d/todo.org
+  :ARCHIVE_CATEGORY: todo
+  :ARCHIVE_TODO: DONE
+  :END:

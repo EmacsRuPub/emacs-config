@@ -1,20 +1,11 @@
-* TODO [#C] structured parenthesis editing in python mode       :investigate:
-* TODO [#B] maybe generalize (otherwise reimplement) jabber quoting for ERC :fix:investigate:erc:
 * TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
 * TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
 * TODO [#B] review redmine + emacs connectivity options         :investigate:
-* TODO [#B] setup org refiling                           :investigate:review:
-** наладить refile из разных org-файлов в "текущие дела" (сюда) [2013-03-31 Вс 18:50] :todo:orgmode:
-** разобраться с org-refile [2013-03-31 Вс 18:50]              :todo:orgmode:
-** разобраться как настроить targets для refile, чтобы при выборе не висело множество однотипных 'filename.org' [2013-03-31 Вс 18:49] :todo:orgmode:
-** разработать и настроить структуру refile для хранения истории выполненных задач [2013-03-31 Вс 18:49] :todo:orgmode:
 * TODO [#C] think of some reflection layer such as bool vars for particular emacs version, etc. :investigate:
 * TODO [#C] maybe issue minimal config - barely initial or with extensions already being parts of emacs (e.g. ERC) :investigate:
 * TODO [#C] MAYBE some setup above emacs registers              :investigate:
 * TODO [#C] some setup for Wanderlust (and probably org-mode integration) :investigate:review:
 * TODO [#C] Wanderlust: fix std11 encoding problem in mail headers      :fix:
-* TODO [#C] Erlang setup: review and extend (from inventory or right there) :review:extend:
-* TODO [#B] find out some (maybe, persistent) way to add file to org-agenda-files :investigate:
 * TODO [#C] w3m-emacs batch urls opening                        :investigate:
 * TODO [#C] org-mode tables setup                        :investigate:review:
 * TODO [#C] tex: auctex: "Adding Support for Macros" chapter in documentation :review:investigate:
@@ -36,7 +27,6 @@
 * TODO [#B] sort python imports in elisp [2014-06-28 Сб 13:16] :emacs:ticket:
 ** https://github.com/paetzke/py-isort.el
 * TODO [#B] learn about LOGBOOK/LOG_INTO_DRAWER/org-log-into-drawer [2014-06-28 Сб 18:39] :emacs:ticket:
-* TODO [#B] fix issue with strange initial encoding in org files ("c" instead of "U" in mode line, russian text as hieroglyphs) [2014-06-28 Сб 18:51] :emacs:ticket:
 * TODO [#C] maybe reimplement 'custom/projectile-ag some way without setq hack [2014-06-30 Пн 22:14] :emacs:ticket:
 * TODO [#C] reapply/reimplement portage handling code to up-to-date el-get [2014-07-01 Вт 00:51] :emacs:ticket:
 * TODO [#C] emacs - associative memory [2013-04-01 Пн 18:36] :todo:chaos:idea:
@@ -48,13 +38,9 @@
 * TODO [#C] smart reminders - emacs [2013-04-01 Пн 18:42]   :todo:chaos:idea:
   напоминалка, всплывает при приближении к коду, где она написана,
   например TODO всплывет в отдельном буфере
-* TODO [#C] emacs client for delicious [2014-07-01 Вт 02:40]   :emacs:ticket:
-** HINT resclient
-
 * TODO [#C] emacs - несколько локаций в коде [2013-04-01 Пн 19:08] :todo:chaos:idea:
   отслеживание нескольких локаций в коде и их состояния - продумать
   идею
-* TODO [#B] find out why emacs moves between frames within dual head setup and fails to otherwise [2014-07-01 Вт 03:03] :emacs:ticket:
 * TODO [#B] play with org-sync and its redmine backend particularly [2014-07-01 Вт 03:06] :emacs:ticket:
   http://orgmode.org/worg/org-contrib/gsoc2012/student-projects/org-sync/backends.html#sec-2-3
   https://github.com/emacsmirror/org-sync
@@ -118,7 +104,6 @@
 * TODO [#B] find if some navigation activities can be laid upon helm (including unexplored ones) [2014-11-13 Чт 00:41] :@workplace:
 * TODO [#B] fix renaming within dired buffers [2014-11-17 Пн 23:49] :emacs:ticket:
 * TODO [#A] fix magit filenotify issue with deleted files (e.g. "cannot add watch...") [2014-12-09 Вт 13:58] :emacs:ticket:
-* TODO [#B] try to incorporate https://github.com/Bruce-Connor/names to automate namespaces (maybe additional benefits can be found) [2014-12-11 Чт 12:38] :emacs:ticket:
 * TODO [#A] fix yasnippet expansion (looks like it cannot find snippets (particularly in python mode)) [2014-12-11 Чт 14:34] :emacs:ticket:
 * TODO [#B] display files of different types in dired using different colors [2014-12-22 Пн 15:22] :emacs:ticket:
 * TODO [#B] some window ruling handles, e.g.: [2014-12-22 Пн 19:14] :emacs:ticket:
@@ -127,9 +112,6 @@
 * TODO [#C] search for 'local-set-key' uses and try to eliminate [2015-01-04 Вс 23:47] :emacs:ticket:
 * TODO [#B] bind view-lossage [2015-01-05 Пн 18:51]            :emacs:ticket:
 * TODO [#B] explore http://batsov.com/projectile/ for overlooked features [2015-01-09 Пт 22:24] :emacs:ticket:
-* WAITING [#B] make magit-blame-mode stop activating while running org-capture [2015-01-11 Вс 00:00] :emacs:ticket:
-  - State "WAITING"    from "TODO"       [2015-01-11 Вс 22:28] \\
-    cannot reproduce right now
 * TODO [#B] maybe macro for binding a couple of functions to a keybinding, using prefix arg for alternate function call [2015-01-13 Вт 13:38] :emacs:ticket:
 * TODO [#B] bind 'dired-jump [2015-01-13 Вт 13:41]                :emacs:ticket:
 * TODO [#B] try to implement org workload display - [[tag:+code_snippet][code snippets]] [2015-01-13 Вт 14:04] :emacs:ticket:orgmode:
