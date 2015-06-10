@@ -26,6 +26,7 @@
         auto-complete-latex
         auto-complete-yasnippet
         auto-yasnippet
+        autopair
         base16
         bbdb
         bitlbee
