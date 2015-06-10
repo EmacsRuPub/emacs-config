@@ -122,3 +122,23 @@
 * TODO [#C] [[https://github.com/asok/peep-dired][asok/peep-dired]] [2015-05-16 Сб 17:13] :emacs:try:
 * TODO [#C] [[http://www.fitzsim.org/blog/?p%3D257][EUDC Improvements | fitzsim's development log]] [2015-05-19 Вт 12:35] :emacs:try:
 * TODO [#C] [[http://batsov.com/prelude/][Prelude by bbatsov]] - borrow ideas [2015-05-19 Вт 12:45]  :emacs:try:
+* TODO [#C] [[http://ericjmritz.name/2015/06/01/firestarter-automated-testing-and-more-in-emacs/][Firestarter: Automated Testing and More in Emacs | One More Game-Dev and Programming Blog - http://ericjmritz.name/2015/06/01/firestarter-automated-testing-and-more-in-emacs/]] [2015-06-02 Вт 17:54] :emacs:try:
+* TODO [#C] [[https://github.com/cpbotha/deft-turbo][cpbotha/deft-turbo - https://github.com/cpbotha/deft-turbo]] [2015-06-02 Вт 17:57] :emacs:try:
+* TODO [#C] [[http://howardism.org/Technical/Emacs/literate-devops.html][Literate DevOps - http://howardism.org/Technical/Emacs/literate-devops.html]] [2015-06-03 Ср 16:34] :emacs:try:
+* TODO [#C] [[http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html][How to use yasnippets to produce email templates in Emacs | Chens blog - http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html]] [2015-06-04 Чт 13:31] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1. · (or emacs - http://oremacs.com/2015/01/07/org-protocol-1/]] [2015-06-05 Пт 23:47] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/01/08/org-protocol-2/][My org-protocol setup, part 2. · (or emacs - http://oremacs.com/2015/01/08/org-protocol-2/]] [2015-06-05 Пт 23:48] :emacs:try:
+* TODO [#C] [[https://github.com/portante/pycscope][portante/pycscope - https://github.com/portante/pycscope]] [2015-06-08 Пн 13:58] :emacs:try:
+* TODO [#C] [[https://github.com/sdague/stacktest][sdague/stacktest - https://github.com/sdague/stacktest]] [2015-06-08 Пн 21:36] :emacs:try:
+* TODO [#C] [[https://github.com/sdague/fly-hack][sdague/fly-hack - https://github.com/sdague/fly-hack]] [2015-06-08 Пн 21:37] :emacs:try:
+* TODO [#C] [[http://www.emacswiki.org/emacs/FlySpell#toc2][EmacsWiki: Fly Spell - http://www.emacswiki.org/emacs/FlySpell#toc2]] [2015-06-08 Пн 21:37] :emacs:try:
+* TODO [#C] [[https://github.com/mgrbyte/pungi][mgrbyte/pungi - https://github.com/mgrbyte/pungi]] [2015-06-09 Вт 13:06] :emacs:try:
+* TODO [#C] [[https://github.com/gabrielelanaro/emacs-for-python/][gabrielelanaro/emacs-for-python - https://github.com/gabrielelanaro/emacs-for-python/]] - borrow ideas [2015-06-10 Ср 15:02] :emacs:try:
+* TODO [#C] [[https://github.com/abingham/traad][abingham/traad - https://github.com/abingham/traad]] 2nd try [2015-06-10 Ср 15:05] :emacs:try:
+* TODO [#C] [[https://github.com/sergey-pashaev/helm-cscope][sergey-pashaev/helm-cscope - https://github.com/sergey-pashaev/helm-cscope]] [2015-06-10 Ср 15:06] :emacs:try:
+* TODO [#C] [[https://github.com/zenozeng/yafolding.el][zenozeng/yafolding.el - https://github.com/zenozeng/yafolding.el]] [2015-06-10 Ср 15:28] :emacs:try:
+* TODO [#C] [[https://github.com/magnars/fold-this.el][magnars/fold-this.el - https://github.com/magnars/fold-this.el]] [2015-06-10 Ср 15:28] :emacs:try:
+* TODO [#C] [[http://kitchingroup.cheme.cmu.edu/blog/2014/12/20/A-new-mode-for-Python-documentation/][The Kitchin Research Group - http://kitchingroup.cheme.cmu.edu/blog/2014/12/20/A-new-mode-for-Python-documentation/]] [2015-06-10 Ср 15:43] :emacs:try:
+* TODO [#C] [[https://github.com/proofit404/anaconda-mode][proofit404/anaconda-mode - https://github.com/proofit404/anaconda-mode]] 2nd try [2015-06-10 Ср 15:43] :emacs:try:
+* TODO [#C] [[https://github.com/porterjamesj/virtualenvwrapper.el][porterjamesj/virtualenvwrapper.el - https://github.com/porterjamesj/virtualenvwrapper.el]] [2015-06-10 Ср 15:44] :emacs:try:
+* TODO [#C] [[https://github.com/jorgenschaefer/pyvenv][jorgenschaefer/pyvenv - https://github.com/jorgenschaefer/pyvenv]] [2015-06-10 Ср 15:44] :emacs:try:

@@ -175,3 +175,7 @@
 * TODO [#A] customize smart-modeline [2015-06-02 Вт 15:01]        :emacs:ticket:
 * TODO [#C] review contexts, tags and custom agenda commands, check if they are correspond real life [2015-06-03 Ср 22:57] :emacs:ticket:
 * TODO [#B] extend sml/replacer-regexp-list [2015-06-06 Сб 23:56] :emacs:ticket:
+* TODO [#C] coerce all applicable keybindings to (kbd "...") format [2015-06-08 Пн 16:09] :emacs:ticket:
+* TODO [#B] [[http://www.emacswiki.org/emacs/TrampMode][EmacsWiki: Tramp Mode - http://www.emacswiki.org/emacs/TrampMode]] - more elaborate setup, eliminate hangups, etc [2015-06-08 Пн 21:37] :emacs:ticket:
+* TODO [#A] search for extension to export smth to google calendar [2015-06-08 Пн 21:47] :emacs:ticket:
+* TODO [#C] [[https://github.com/syl20bnr/spacemacs#configuration-layers][syl20bnr/spacemacs - https://github.com/syl20bnr/spacemacs#configuration-layers]] - borrow ideas [2015-06-09 Вт 16:15] :emacs:ticket:
