@@ -4,10 +4,8 @@
 ;; Created:  Fri May 24 22:41:54 2013 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'icalendar-import-buffer "icalendar" "Import iCalendar data from current buffer" t)
-(autoload 'org-footnote-action "org-footnote" nil t)
-(autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
-(autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+(use-package icalendar)
+(use-package org-footnote)
 
 (setq org-modules
       '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
@@ -272,6 +270,7 @@
 (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
 (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
 (set-charset-priority 'unicode)
+(turn-on-orgtbl)
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
