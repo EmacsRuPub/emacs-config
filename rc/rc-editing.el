@@ -195,20 +195,23 @@
 
 ;; Transpose stuff with M-t
 (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-(defhydra hydra-transpose (global-map "M-t")
+;;TODO: plan docstring
+(defhydra hydra-transpose ()
   ("M-b" backward-word "prev word")
   ("M-f" forward-word "next word")
   ("<up>" previous-line "prev line")
   ("<down>" next-line "next line")
   ("<left>" backward-char "prev char")
   ("<right>" forward-char "next char")
-  ("C-_" undo-tree-undo "undo last")
+  ("_" undo-tree-undo "undo last")
   ("w" custom/transpose-words "on words")
   ("s" transpose-sexps "on sexps")
   ("p" transpose-params "on params")
   ("a" anchored-transpose "anchored")
   ("q" nil "cancel"))
+(global-set-key (kbd "M-t") 'hydra-transpose/body)
 
+;;TODO: plan docstring
 (defhydra hydra-edit (:color blue)
   ("0" custom/compact-spaces-in-region)
   ("2" custom/duplicate-line)
@@ -250,22 +253,34 @@
   ("y" revbufs)
   ("k" custom/kill-save-rectangle)
   ("/" comment-box)
+  ("w" wrap-to-fill-column-mode)
   ("q" nil "cancel"))
 (global-set-key (kbd "C-z") 'hydra-edit/body)
 
-(defhydra hydra-toggle (global-map "<f11>" :color blue)
+(defhydra hydra-toggle (:color blue)
+  "
+TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
+        _d_ / _D_ toggle drag-stuff mode on/off (%(format \"%S\" drag-stuff-mode))
+        _w_hitespace mode
+"
   ("b" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode")
   ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
   ("D" turn-off-drag-stuff-mode "disable drag-stuff mode"))
+(global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
-;;TODO: provide global binding
-(defhydra hydra-cases ()
+(defhydra hydra-cases (:color pink)
+  "
+_d_ / _d_ downcase word/region
+_u_ / _u_ upcase word/region
+_I_       capitalize region
+"
   ("d" downcase-word)
-  ("D" downcase-region)
+  ("d" downcase-region :color blue)
   ("u" upcase-word)
-  ("U" upcase-region)
-  ("I" upcase-initials-region))
+  ("u" upcase-region :color blue)
+  ("I" upcase-initials-region :color blue))
+(global-set-key (kbd "<f10>") 'hydra-cases/body)
 
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-]") 'custom/comment-uncomment-region)

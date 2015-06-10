@@ -22,10 +22,21 @@
 (setq Info-additional-directory-list
       (list (concat home-directory "/help/info")))
 
-(defhydra hydra-apropos (global-map "C-c h"
-                         :color blue
-                         :hint nil)
-  "Apropos"
+(defhydra hydra-apropos (:color blue)
+  "
+Apropos
+---------------
+_a_s it is =)
+_d_ocumentation
+_v_ariable
+_c_ommand
+_l_ibrary
+_u_ser option
+_i_nfo
+_t_ags
+valu_e_
+_m_an pages
+"
   ("a" apropos)
   ("d" apropos-documentation)
   ("v" apropos-variable)
@@ -36,6 +47,7 @@
   ("t" tags-apropos "tags")
   ("e" apropos-value)
   ("m" helm-man-woman))
+(global-set-key (kbd "C-c h") 'hydra-apropos/body)
 
 (defhydra hydra-info-to (:hint nil :color teal)
   "

@@ -67,13 +67,15 @@
 _c_reate auto snippet
 _e_xpand auto snippet
 _p_ersist auto snippet
+_v_isit snippets file
+_i_nsert snippet
 "
   ("c" aya-create)
   ("e" aya-expand)
   ("p" aya-persist-snippet)
   ("v" yas-visit-snippet-file)
   ("i" yas-insert-snippet)
-  )
+  ("q" nil))
 (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
 
 (global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand)

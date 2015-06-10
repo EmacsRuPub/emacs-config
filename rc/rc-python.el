@@ -70,6 +70,13 @@
 (add-hook 'python-mode-hook 'annotate-pdb)
 
 (defhydra hydra-python ()
+  "
+^Checks:^       ^Nav^
+------------------------------------
+py_l_int        _p_ylookup at point
+pep_8_          find _r_elated names (helm+jedi)
+_m_ulti flake8
+"
   ("l" pylint)
   ("8" pep8)
   ("m" flake8-multi)

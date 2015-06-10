@@ -48,6 +48,7 @@
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
 
+;;TODO: plan docstring or reorganize hydra
 (defhydra hydra-publishing ()
   ("w" whizzytex-mode)
   ("p" custom/ps-print-buffer-with-faces)

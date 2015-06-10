@@ -63,6 +63,14 @@
     (erc-log-enable)
 
     (defhydra hydra-erc (:color blue)
+      "
+IRC   ^Connection^ ^Tools^
+      ------------------------
+      _s_lack      _q_ leave server
+                   select _b_uffer
+                   select _u_nread buffer
+                   _i_nsert nick
+"
       ("s" custom/connect-slack-irc)
       ("q" custom/leave-irc-server)
       ("b" custom/select-erc-buffer)
@@ -190,18 +198,28 @@ _<left>_ seek backward
              (server (plist-get state-data :server)))
         (message "%s" server)
         ))
-    (defhydra hydra-jabber (global-map "<f6>")
+    (defhydra hydra-jabber ()
+      "
+^insert^         ^navigate^
+-------------------------------------------------
+_8_ :-*          _r_oster
+_l_ *IN LOVE*    _s_witch to recently active
+_y_ :-[          _j_ump to contact
+_t_ (c)          open _m_uc
+_a_bbreviation
+"
       ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
       ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
       ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
       ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
       ("a" custom/jabber-abbrev)
       ("r" jabber-switch-to-roster-buffer)
-      ("s" jabber-activity-switch-to)
+      ("s" jabber-activity-switch-to :color blue)
       ("j" custom/helm-jabber-chat-with)
       ("m" custom/jabber-muc-sendto)
       ;;TODO: move other insertions here, for example, current time, etc.
       ("q" nil "cancel"))
+    (global-set-key (kbd "<f6>") 'hydra-jabber/body)
     (setq fsm-debug nil)
     (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
     (setq jabber-account-list custom/jabber-account-list)

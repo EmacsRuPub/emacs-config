@@ -239,6 +239,7 @@ Breadcrumb bookmarks:
 
 (setq scroll-preserve-screen-position 'always)
 
+;;TODO: plan docstring
 (defhydra hydra-window (global-map "<f2>")
   "window"
   ("<left>" windmove-left "left")
@@ -275,7 +276,14 @@ Breadcrumb bookmarks:
   ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
   ("q" nil "cancel"))
 
-(defhydra hydra-scope (global-map "<f9>") ; was save-some-buffers
+(defhydra hydra-scope ()
+"
+Narrow to            Widen
+------------------------------------
+_r_egion             _w_iden
+_d_efun              _z_oom window
+defun + _c_omments
+"
   ("r" narrow-to-region)
   ("d" narrow-to-defun)
   ("c" narrow-to-defun+comments-above)
@@ -283,8 +291,10 @@ Breadcrumb bookmarks:
   ("z" zoom-window-zoom)
   ;TODO: maybe add org narrowing
   ("q" nil "cancel"))
+(global-set-key (kbd "<f9>") 'hydra-scope/body)
 
-(defhydra hydra-entries (global-map "<f3>")
+;;TODO: plan docstring
+(defhydra hydra-entries ()
   ("!" flycheck-first-error "ace" :color blue)
   ("<up>" flycheck-previous-error "previous error")
   ("<down>" flycheck-next-error "next error")
@@ -294,15 +304,29 @@ Breadcrumb bookmarks:
   ("<right>" next-error "next error")
   ("k" smerge-prev "previous conflict")
   ("j" smerge-next "next conflict")
-  ("r" custom/open-urls-in-region)
+  ("r" custom/open-urls-in-region :color blue)
   ("=" custom/skip-to-next-blank-line)
   ("-" custom/skip-to-previous-blank-line)
   ("h" git-gutter:previous-hunk)
   ("l" git-gutter:next-hunk)
   ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
+(global-set-key (kbd "<f3>") 'hydra-entries/body)
 
 (defhydra hydra-navigate (:color blue)
+  "
+Search                 Various
+------------------------------
+_r_ recursive grep     _h_ helm-mini
+_s_ semantic/imenu     _q_ projectile
+_m_ multi swoop        _f_ find files
+_i_ find occurencies   _p_ switch project
+_o_ find in buffer     _c_ helm-flycheck
+_g_ ag in project      _w_ select w3m buffer
+                     _t_ google-translate at point
+                     _T_ google translate
+                     _l_ org headlines
+"
   ("h" helm-mini)
   ("q" helm-projectile)
   ("r" helm-do-grep)

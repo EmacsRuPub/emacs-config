@@ -63,14 +63,23 @@
     (setq slime-backend (at-config-basedir "el-get/slime/swank-loader.lisp"))
     (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
     ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
-    (defhydra hydra-slime (global-map "M-p")
-      "programming"
+    (defhydra hydra-slime ()
+      "
+Slime
+-----------
+_s_ run
+_l_ selector
+_;_ insert balanced comments
+_M-;_ remove balanced comments
+_h_ documentation lookup
+"
       ("s" slime "run slime" :color blue)
       ("l" slime-selector "slime selector" :color blue)
       (";" slime-insert-balanced-comments)
       ("M-;" slime-remove-balanced-comments)
       ("h" slime-documentation-lookup)
       ("q" nil "cancel"))
+    (global-set-key (kbd "M-p") 'hydra-slime/body)
     ))
 
 ;; lookup information in hyperspec

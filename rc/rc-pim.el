@@ -128,6 +128,14 @@ window config to the way it was before deft was invoked"
 
 ;;TODO: clusterize various extensions
 (defhydra hydra-pim ()
+"
+BBDB                        Various
+--------------------------------------------------------
+_b_ as it is                _o_ calendar
+_c_ create                  _k_ show keys frequencies
+_u_ delete current record   _d_ deft
+                          _D_ quit deft
+"
   ("b" bbdb)
   ("c" bbdb-create)
   ("u" bbdb-delete-current-record)

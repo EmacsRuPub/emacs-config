@@ -287,11 +287,15 @@
   "
 ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
 ---------------------------------------------------------------------------------------------------------------
-_<up>_:     up heading     _s_chedule                _._ clock in        set _p_roperty      _w_ store link
-_C-<down>_: next heading   dead_l_ine                _,_ clock out       _d_elete property   _y_ insert link
-_C-<up>_:   prev heading   agenda _c_olumns          cloc_k_ display
-                           foot_n_ote action         _g_oto last clock
-                           add t_i_me to timestamp
+_<up>_:     up heading     show _a_genda             _._ clock in        set _p_roperty      captur_e_
+_C-<down>_: next heading   _s_chedule                _,_ clock out       _d_elete property   _w_ store link
+_C-<up>_:   prev heading   dead_l_ine                cloc_k_ display                       _y_ insert link
+ace-link for _o_rg         agenda _c_olumns          _g_oto last clock
+_O_pen at point            foot_n_ote action         estimate effor_t_
+show _A_ll                 add t_i_me to timestamp   _c_ancel clock
+                                                 clock _r_eport
+                                                 po_m_odoro
+                                                 _?_ Clocking commands
 "
   ("<up>" outline-up-heading "")
   ("C-<down>" outline-next-heading "")
@@ -314,8 +318,8 @@ _C-<up>_:   prev heading   agenda _c_olumns          cloc_k_ display
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
   ("O" custom/open-or-browse-at-point)
-  ("e" org-capture)
-  ("a" org-agenda)
+  ("e" org-capture :color blue)
+  ("a" org-agenda :color blue)
   ("A" show-all)
   ("m" org-pomodoro)
   ("q" nil "cancel"))
