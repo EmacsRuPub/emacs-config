@@ -34,7 +34,7 @@
                                     "324" "329" "332" "333" "353" "477"))
     (setq erc-kill-queries-on-quit t)
     (setq erc-autojoin-channels-alist
-          '(("irc.freenode.net" "#git" "#stumpwm")
+          '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
             ))
     (setq erc-keywords '((".*Online.*" (:foreground "green"))
                          (".*Busy" (:foreground "red"))
