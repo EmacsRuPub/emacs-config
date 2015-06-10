@@ -174,7 +174,6 @@ Breadcrumb bookmarks:
   :init
   (setq aw-background nil)
   (setq aw-leading-char-style 'char)
-  (ace-window-display-mode)
   (set-face-attribute 'aw-mode-line-face nil :foreground "white")
   (custom-set-faces
      '(aw-leading-char-face
