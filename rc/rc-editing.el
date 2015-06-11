@@ -103,8 +103,7 @@
 
 (use-package volatile-highlights
   :config
-  (volatile-highlights-mode t)
-  (diminish 'volatile-highlights-mode))
+  (volatile-highlights-mode t))
 
 (use-package wc-mode)
 
@@ -113,7 +112,6 @@
   :config
   (progn
     (whole-line-or-region-mode 1)
-    (diminish 'whole-line-or-region-mode)
     (setq whole-line-or-region-extensions-alist
           '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
             (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)

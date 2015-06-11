@@ -24,7 +24,6 @@
     (bind-key "<C-return>" nil emmet-mode-keymap)
     (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
     (setq emmet-move-cursor-between-quotes t)
-    (diminish 'emmet-mode)
     (add-hook 'sgml-mode-hook 'emmet-mode)
     (add-hook 'nxml-mode-hook 'emmet-mode)
     (add-hook 'django-mode 'emmet-mode)

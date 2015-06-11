@@ -141,6 +141,20 @@
   :config
   (setq tail-max-size 20))
 
+(use-package rich-minority
+  :config
+  (setq rm-blacklist
+        '(" GitGutter"
+          " VHl"
+          " WLR"
+          " Emmet"
+          " Wrap"
+          " Fill"
+          " Abbrev"
+          " SliNav"
+          " Helm"
+          )))
+
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (local-set-key (kbd "<return>") 'newline-and-indent))
@@ -163,15 +177,6 @@
 (defun common-hooks/untabify-hook ()
   (when (member major-mode custom/untabify-modes)
     (untabify (point-min) (point-max))))
-
-(defun custom/after-init-hook ()
-  (use-package diminish
-    :config
-    (progn
-      (diminish 'abbrev-mode)
-      (diminish 'auto-fill-function)
-      (diminish 'visual-line-mode)
-      )))
 
 (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)

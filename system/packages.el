@@ -140,6 +140,7 @@
         replace+
         restclient
         revbufs
+        rich-minority
         rst-mode
         rtags
         sauron

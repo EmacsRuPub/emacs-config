@@ -138,8 +138,7 @@ PROJECT: %(projectile-project-root)
     (set-face-attribute 'git-gutter:added nil :inverse-video nil)
     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
     (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-    (global-git-gutter-mode +1)
-    (diminish 'git-gutter-mode)))
+    (global-git-gutter-mode +1)))
 
 (use-package gud
   :init
