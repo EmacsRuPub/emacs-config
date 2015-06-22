@@ -180,7 +180,6 @@
 
 (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
 (add-hook 'before-save-hook 'common-hooks/untabify-hook)
-(add-hook 'after-init-hook 'custom/after-init-hook)
 (add-hook 'server-visit-hook
           (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
 ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
