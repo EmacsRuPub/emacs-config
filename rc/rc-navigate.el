@@ -276,7 +276,7 @@ Breadcrumb bookmarks:
   ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
   ("q" nil "cancel"))
 
-(defhydra hydra-scope ()
+(defhydra hydra-scope (:color blue)
 "
 Narrow to            Widen
 ------------------------------------
