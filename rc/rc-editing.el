@@ -189,10 +189,6 @@
     (wrap-region-add-wrapper "{-" "-}" "#")
     (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
 
-(use-package autopair
-  :config
-  (autopair-global-mode))
-
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
