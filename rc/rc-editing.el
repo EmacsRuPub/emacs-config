@@ -164,14 +164,18 @@
   :defer t
   :config
   (progn
+    (diminish 'paredit-mode "()"))
     (bind-key "M-s" nil paredit-mode-map)
     (bind-key "M-<up>" nil paredit-mode-map)
     (bind-key "M-<down>" nil paredit-mode-map)
     (bind-key "C-<up>" nil paredit-mode-map)
     (bind-key "C-<down>" nil paredit-mode-map)
-    (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map)
-    (paredit-everywhere-mode 1)
-    ))
+    (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map))
+
+(use-package paredit-everywhere
+  (diminish 'paredit-everywhere-mode "(/)")
+  (paredit-everywhere-mode 1)
+  (define-key paredit-everywhere-mode-map (kbd "M-(") 'paredit-open-round))
 
 (use-package vimrc-mode
   :defer t
