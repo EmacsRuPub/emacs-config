@@ -188,7 +188,8 @@ Breadcrumb bookmarks:
 (use-package orglink
   :config
   ;; TODO: customize orglink-activate-in-modes
-  (global-orglink-mode))
+  (global-orglink-mode)
+  (diminish 'orglink-mode "OL"))
 
 (use-package dired
   :config
