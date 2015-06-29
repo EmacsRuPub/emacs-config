@@ -13,6 +13,7 @@
 
 (setq sml/no-confirm-load-theme t)
 (setq sml/theme 'respectful)
+(setq sml/battery-format " %p%% ")
 (sml/setup)
 
 (set-cursor-color "chartreuse2")
@@ -27,6 +28,7 @@
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
 
 (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
+(set-face-attribute 'sml/discharging nil :foreground "tomato")
 
 (provide 'rc-themes)
 
