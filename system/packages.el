@@ -26,19 +26,16 @@
         auto-complete-latex
         auto-complete-yasnippet
         auto-yasnippet
-        base16
         bbdb
         bitlbee
         bookmark+
         breadcrumb-custom
         c-eldoc
         calfw
-        col-highlight
         color-theme-zenburn
         column-marker
         coverlay
         crontab-mode
-        crosshairs
         css-eldoc
         csv-mode
         deft
@@ -85,7 +82,6 @@
         helm-slime
         help+
         hide-comnt
-        hl-line+
         hs-lint
         hungry-delete-el
         hydra
@@ -111,7 +107,6 @@
         names
         nginx-mode
         notify
-        nxhtml
         oauth2
         openwith
         org-gcal
