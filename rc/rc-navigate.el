@@ -50,7 +50,7 @@
     (bind-key "C-<up>" 'helm-previous-source helm-map)
     (bind-key "C-x b" 'helm-buffers-list)
     (bind-key "C-x j j" 'helm-bookmarks)
-    (bind-key "C-x C-f" 'custom/helm-find-files)
+    ;; (bind-key "C-x C-f" 'custom/helm-find-files)
     (bind-key "M-x" 'helm-M-x)
     (bind-key "C-h a" 'helm-apropos)
     (bind-key "C-h r" 'helm-info-emacs)
