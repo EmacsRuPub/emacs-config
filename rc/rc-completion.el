@@ -29,7 +29,7 @@
     (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
     (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
     (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-    (global-set-key (kbd "C-<tab>") 'ac-complete-with-helm)
+    (global-set-key (kbd "C-<tab>") 'auto-complete)
     ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
     ))
 
