@@ -46,7 +46,7 @@
   (progn
     (slime-setup
      '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
-                             slime-hyperdoc slime-motd slime-package-fu slime-references
+                             slime-hyperdoc slime-package-fu slime-references
                              slime-snapshot slime-sprof slime-trace-dialog slime-xref-browser
                              slime-asdf slime-autodoc slime-banner slime-fancy slime-fuzzy
                              slime-repl slime-sbcl-exts helm-slime))
