@@ -33,12 +33,12 @@
   (set (make-local-variable 'compilation-finish-functions)
        (list 'custom/sh-check-finish-hook)))
 
-(add-hook 'sh-mode-hook 'common-hooks/prog-helpers)
+(add-hook 'shell-mode-hook 'common-hooks/prog-helpers)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-hook 'sh-mode-hook 'common-hooks/newline-hook)
+(add-hook 'shell-mode-hook 'common-hooks/newline-hook)
 (add-hook 'find-file-hooks 'sm-try-smerge t)
 
-(define-key sh-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
+(define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
 
 (provide 'rc-special-major-modes)
 

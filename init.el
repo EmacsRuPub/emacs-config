@@ -24,6 +24,8 @@
            "credentials.el.gpg"
            )))
 
+(require 'use-package)
+
 (mapcar 'load
   (all-files-under-dir-recursively
    (at-config-basedir "customdefs")))
@@ -33,8 +35,6 @@
 (mapcar 'load
   (all-files-under-dir-recursively
    (at-config-basedir "private")))
-
-(require 'use-package)
 
 (require 'bundle-main)
 

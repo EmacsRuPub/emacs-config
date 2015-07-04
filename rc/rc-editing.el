@@ -15,7 +15,6 @@
 (electric-indent-mode -1)
 (global-auto-revert-mode 1);; Auto refresh buffers
 (show-paren-mode t)
-(toggle-cursor-type-when-idle 1)
 (transient-mark-mode 1)
 
 (setq auto-revert-verbose nil)
@@ -173,6 +172,7 @@
     (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map))
 
 (use-package paredit-everywhere
+  :config
   (diminish 'paredit-everywhere-mode "(/)")
   (paredit-everywhere-mode 1)
   (define-key paredit-everywhere-mode-map (kbd "M-(") 'paredit-open-round))

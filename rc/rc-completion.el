@@ -48,7 +48,7 @@
     (setq helm-yas-space-match-any-greedy t)
     (push custom/yasnippet-dir yas-snippet-dirs)
     (push custom/yasnippet-private-dir yas-snippet-dirs)
-    (yas--initialize)
+    (yas-global-mode 1)
     (setq yas-prompt-functions
           '(yas-completing-prompt
             yas-x-prompt

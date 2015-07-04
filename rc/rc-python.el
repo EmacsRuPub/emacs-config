@@ -5,7 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package jedi
-  :pre-load
+  :init
   (progn
     (setq jedi:complete-on-dot t)
     (setq jedi:goto-definition-marker-ring-length 32))

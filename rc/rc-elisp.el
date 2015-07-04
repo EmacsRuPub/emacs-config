@@ -5,8 +5,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package erefactor
+  :config
   ;;TODO: investigate package
-  (bind-key "\C-c\C-v" 'erefactor-map emacs-lisp-mode-map))
+  (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
 
 (defun custom/elisp-mode-hook ()
   (auto-fill-mode 1)

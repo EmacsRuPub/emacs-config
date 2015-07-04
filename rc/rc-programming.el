@@ -92,7 +92,7 @@ other file _fO_ther window
     (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
     (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
     (add-hook 'css-mode-hook 'turn-on-css-eldoc))
-  :idle
+  :config
   (diminish 'eldoc-mode "ED"))
 
 (use-package magit

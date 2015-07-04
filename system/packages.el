@@ -7,67 +7,58 @@
 ;; Requirements:
 ;; Status: not intended to be distributed yet
 
-(setq el-get-packages
+(require 'package)
+(add-to-list 'package-archives
+       '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+       '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+       '("elpa" . "http://tromey.com/elpa/"))
+(package-initialize)
+
+(setq package-el-packages
       '(
+        ac-c-headers
+        ac-clang
+        ac-helm
         ac-math
         ac-slime
-        ac-irony
-        ac-helm
         ace-link
         ace-window
         actionscript-mode
         adaptive-wrap
         anchored-transpose
         auctex
-        auto-complete-c-headers
-        auto-complete-clang
-        auto-complete-emacs-lisp
-        auto-complete-extension
-        auto-complete-latex
-        auto-complete-yasnippet
         auto-yasnippet
         bbdb
         bitlbee
         bookmark+
-        breadcrumb-custom
         c-eldoc
         calfw
-        color-theme-zenburn
         column-marker
-        coverlay
         crontab-mode
         css-eldoc
         csv-mode
         deft
         diminish
-        discover
         dired+
         dired-sort-menu
         dired-toggle-sudo
-        doxymacs
+        discover
         drag-stuff
         dtrt-indent
         el-spice
         eldoc-eval
         elisp-slime-nav
-        emacs-jabber
-        emacs-swoop
-        emacs-w3m
-        wgrep
         emmet-mode
         epoch-view
-        erc-extras
-        erc-highlight-nicknames
         erefactor
         expand-region
         fic-mode
-        file-template
         flycheck
         flycheck-color-mode-line
         framemove
         ggtags
-        git-commit-mode
-        git-emacs
         git-gutter
         git-timemachine
         google-contacts
@@ -78,18 +69,12 @@
         helm-descbinds
         helm-flycheck
         helm-gtags
-        helm-recentd
-        helm-slime
+        helm-projectile
         help+
         hide-comnt
-        hs-lint
-        hungry-delete-el
         hydra
-        init-paredit
-        irony-mode
+        irony
         jedi
-        joseph-file-util
-        js2-highlight-vars
         js2-mode
         js2-refactor
         json-mode
@@ -98,10 +83,7 @@
         list-processes+
         lua-mode
         magit
-        magit-filenotify-custom
         markdown-mode
-        mingus
-        minibuf-electric-gnuemacs
         multifiles
         multiple-cursors
         names
@@ -110,21 +92,17 @@
         oauth2
         openwith
         org-gcal
-        org-mode
         org-magit
-        org-occur-goto
         org-pomodoro
         org-toodledo
         orglink
         paredit
         paredit-everywhere
-        pdftools
+        pdf-tools
         phi-search
-        po-mode
         popwin
         projectile
-        python24
-        pylookup
+        python
         python-pep8
         rainbow-mode
         rebox2
@@ -133,17 +111,13 @@
         region-bindings-mode
         replace+
         restclient
-        revbufs
         rich-minority
-        rst-mode
         rtags
         sauron
         savekill
         scratch
-        slime
         smart-mode-line
-        swank-js
-        tail
+        swoop
         tern
         twittering-mode
         undo-tree
@@ -152,19 +126,57 @@
         vimrc-mode
         vline
         volatile-highlights
-        w3m-session
-        w3m-type-ahead
         wc-mode
         web
         web-mode
-        whitespace
+        wgrep
         whole-line-or-region
-        window-number
         wrap-region
         yaml-mode
-        yasnippet
-        zen-and-art-theme
         zoom-window
+        jabber
+        ))
+
+(mapcar
+ (lambda (package)
+   (unless (package-installed-p package)
+     (package-install package))) package-el-packages)
+
+(setq el-get-packages
+      '(
+        ac-irony
+        auto-complete-emacs-lisp
+        auto-complete-extension
+        auto-complete-latex
+        auto-complete-yasnippet
+        breadcrumb-custom
+        color-theme-zenburn
+        coverlay
+        doxymacs
+        emacs-w3m
+        erc-extras
+        erc-highlight-nicknames
+        file-template
+        git-emacs
+        helm-recentd
+        helm-slime
+        hs-lint
+        hungry-delete-el
+        init-paredit
+        joseph-file-util
+        js2-highlight-vars
+        mingus
+        minibuf-electric-gnuemacs
+        org-mode
+        org-occur-goto
+        po-mode
+        pylookup
+        revbufs
+        rst-mode
+        swank-js
+        tail
+        w3m-session
+        w3m-type-ahead
         ))
 
 (provide 'packages)

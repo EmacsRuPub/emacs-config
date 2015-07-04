@@ -165,7 +165,7 @@ _<left>_ seek backward
 
 (use-package jabber
   :init
-  (use-package jabber-autoloads) ;; For 0.7.90 and above:
+  (load "jabber-autoloads") ;; For 0.7.90 and above:
   (use-package jabber-bookmarks)
   (use-package jabber-autoaway)
   :config
