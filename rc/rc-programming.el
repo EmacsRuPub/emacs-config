@@ -99,11 +99,12 @@ other file _fO_ther window
   :init
   (progn
     (use-package diminish)
-    (use-package magit-filenotify))
+    (use-package magit-filenotify
+      :config
+      (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+      (diminish 'magit-filenotify-mode "FN")
+      (setq watches-count-threshold 50)))
   :config
-  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-  (diminish 'magit-filenotify-mode "FN")
-  (setq watches-count-threshold 50)
   (setq magit-last-seen-setup-instructions "1.4.0")
   (defhydra hydra-magit (:color teal :hint nil)
     "
