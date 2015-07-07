@@ -1,5 +1,0 @@
-(:name coverlay
-       :type github
-       :pkgname "twada/coverlay.el"
-       :description "Test coverage overlay for Emacs"
-       :features coverlay)

@@ -7,7 +7,6 @@
 (use-package filecache)
 (use-package imenu)
 (use-package compile)
-(use-package po-mode)
 (use-package gtags)
 
 (use-package doxymacs

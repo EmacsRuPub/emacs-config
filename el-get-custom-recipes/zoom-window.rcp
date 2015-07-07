@@ -1,4 +1,0 @@
-(:name zoom-window
-       :description "Zoom and Unzoom window"
-       :type github
-       :pkgname "syohex/emacs-zoom-window")

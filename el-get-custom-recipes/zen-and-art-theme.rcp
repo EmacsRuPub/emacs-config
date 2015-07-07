@@ -1,7 +1,0 @@
-(:name zen-and-art-theme
-       :description "zen-and-art theme for Emacs 24"
-       :website "https://github.com/developernotes/zen-and-art-theme"
-       :minimum-emacs-version "24"
-       :type github
-       :pkgname "developernotes/zen-and-art-theme"
-       :prepare (add-to-list 'custom-theme-load-path default-directory))

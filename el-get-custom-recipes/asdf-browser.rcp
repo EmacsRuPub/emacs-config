@@ -1,5 +1,0 @@
-(:name asdf-browser
-       :description "asdf browser for emacs+slime"
-       :type github
-       :pkgname "egv/asdf-browser"
-       :load "asdf-browser.el")

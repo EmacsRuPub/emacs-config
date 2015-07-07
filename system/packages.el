@@ -52,6 +52,7 @@
         elisp-slime-nav
         emmet-mode
         epoch-view
+        erc-hl-nicks
         erefactor
         expand-region
         fic-mode
@@ -63,7 +64,6 @@
         git-timemachine
         google-contacts
         google-translate
-        haskell-mode
         helm-ag
         helm-c-yasnippet
         helm-descbinds
@@ -72,8 +72,10 @@
         helm-projectile
         help+
         hide-comnt
+        hungry-delete
         hydra
         irony
+        jabber
         jedi
         js2-mode
         js2-refactor
@@ -126,6 +128,7 @@
         vimrc-mode
         vline
         volatile-highlights
+        w3m
         wc-mode
         web
         web-mode
@@ -133,51 +136,14 @@
         whole-line-or-region
         wrap-region
         yaml-mode
+        zenburn-theme
         zoom-window
-        jabber
         ))
 
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
      (package-install package))) package-el-packages)
-
-(setq el-get-packages
-      '(
-        ac-irony
-        auto-complete-emacs-lisp
-        auto-complete-extension
-        auto-complete-latex
-        auto-complete-yasnippet
-        breadcrumb-custom
-        color-theme-zenburn
-        coverlay
-        doxymacs
-        emacs-w3m
-        erc-extras
-        erc-highlight-nicknames
-        file-template
-        git-emacs
-        helm-recentd
-        helm-slime
-        hs-lint
-        hungry-delete-el
-        init-paredit
-        joseph-file-util
-        js2-highlight-vars
-        mingus
-        minibuf-electric-gnuemacs
-        org-mode
-        org-occur-goto
-        po-mode
-        pylookup
-        revbufs
-        rst-mode
-        swank-js
-        tail
-        w3m-session
-        w3m-type-ahead
-        ))
 
 (provide 'packages)
 

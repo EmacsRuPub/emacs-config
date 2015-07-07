@@ -1,4 +1,0 @@
-(:name flake8-multi
-       :type github
-       :pkgname "wiedzmin/flake8-multi"
-       :load "flake8-multi.el")

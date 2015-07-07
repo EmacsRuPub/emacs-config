@@ -19,21 +19,11 @@
   (use-package helm-info)
   (use-package helm-locate)
   (use-package helm-misc)
-  (use-package helm-recentd)
   (use-package helm-grep)
   (use-package helm-projectile)
   (use-package helm-descbinds)
   :config
   (progn
-    (setq helm-recentd--action
-          (append
-           helm-recentd--action
-           (cond ((executable-find "urxvt")
-                  '(("Open in Urxvt"
-                     . (lambda (ignored)
-                         (shell-command (format "urxvt -e $SHELL -c 'cd %s && $SHELL' &"
-                                                (helm-recentd--get-target-string))))))))))
-    (setq helm-recentd-sort 'frequency)
     (setq helm-quick-update t)
     (setq helm-split-window-in-side-p t)
     (setq helm-ff-search-library-in-sexp t)
@@ -56,7 +46,6 @@
     (bind-key "C-h r" 'helm-info-emacs)
     (bind-key "C-h r" 'helm-info-at-point)
     (bind-key "C-x C-r" 'helm-recentf)
-    (bind-key "C-x C-d" ' helm-recentd)
     ;;TODO: investigate and bind 'helm-resume
     ;;TODO: investigate and bind 'helm-multi-files
     (helm-mode t)

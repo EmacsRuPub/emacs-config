@@ -1,7 +1,0 @@
-(:name ample-theme
-       :description "A Dark and Light theme pair for Emacs."
-       :website "https://github.com/jordonbiondo/ample-theme"
-       :minimum-emacs-version "24"
-       :type github
-       :pkgname "jordonbiondo/ample-theme"
-       :prepare (add-to-list 'custom-theme-load-path default-directory))

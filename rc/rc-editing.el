@@ -140,20 +140,7 @@
     (setq generic-default-modes (delete 'javascript-generic-mode
                                         generic-default-modes))))
 
-(use-package file-template
-  :config
-  (progn
-    (setq file-template-paths `(,(concat config-basedir "resources/auto-insert"))) ;TODO: move to constants
-    (setq file-template-mapping-alist
-          '(("\\.el$" . "template.el")
-            ("\\.py$" . "template.py")
-            ("\\.sh$" . "template.sh")
-            ("\\.org$" . "template.org")
-            ))
-    (setq file-template-insert-automatically t)
-    (push '("F" . (file-name-base (buffer-file-name))) file-template-tag-alist)
-    (push '("D" . (current-time-string)) file-template-tag-alist)
-    (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook)))
+;TODO: find new package for file templates
 
 (use-package rebox2
   ;;TODO: bind commands

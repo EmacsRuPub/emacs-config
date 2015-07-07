@@ -18,7 +18,12 @@
 
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
-(setq org-agenda-files (append (all-files-under-dir-recursively (at-org-dir) "org$")))
+(f-entries (at-org-dir)
+           (lambda (entry) (when (and (f-file? entry)
+                                      (s-suffix? "org" entry))
+                             (push entry org-agenda-files)))
+           t)
+
 ;TODO: maybe do it less straightforward
 (add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
 (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))

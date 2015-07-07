@@ -1,3 +1,0 @@
-(:name latex-preview-pane
-       :type github
-       :pkgname "jsinglet/latex-preview-pane")

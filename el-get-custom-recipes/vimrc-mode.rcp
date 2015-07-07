@@ -1,4 +1,0 @@
-(:name vimrc-mode
-       :description "Enables syntax highlighting for .vimrc/_vimrc files"
-       :type github
-       :pkgname "mcandre/vimrc-mode")

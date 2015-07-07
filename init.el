@@ -19,22 +19,27 @@
 (mapcar 'load
         (mapcar
          (lambda (path) (at-config-basedir path))
-         '("rc-el-get.el"
-           "constants.el"
+         '("constants.el"
            "credentials.el.gpg"
            )))
 
+(load (at-config-basedir "system/packages.el"))
+
 (require 'use-package)
 
-(mapcar 'load
-  (all-files-under-dir-recursively
-   (at-config-basedir "customdefs")))
+(use-package f)
+
+(f-entries (at-config-basedir "customdefs")
+           (lambda (entry) (when (f-file? entry)
+                             (load entry)))
+           t)
 
 (load (at-config-basedir "systemtraits.el"))
 
-(mapcar 'load
-  (all-files-under-dir-recursively
-   (at-config-basedir "private")))
+(f-entries (at-config-basedir "private")
+           (lambda (entry) (when (f-file? entry)
+                             (load entry)))
+           t)
 
 (require 'bundle-main)
 

@@ -135,12 +135,6 @@
     (setq uniquify-ignore-buffers-re "^\\*")
     (setq uniquify-strip-common-suffix nil)))
 
-(use-package tail
-  :bind
-  ("C-c t f" . tail-file)
-  :config
-  (setq tail-max-size 20))
-
 (use-package rich-minority
   :config
   (setq rm-blacklist

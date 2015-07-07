@@ -1,5 +1,0 @@
-(:name emacs-swoop
-       :description "Peculiar buffer navigation for Emacs"
-       :type github
-       :pkgname "ShingoFukuyama/emacs-swoop"
-       :depends (emacs-async pcre2el ht))

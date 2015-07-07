@@ -1,5 +1,0 @@
-(:name ace-window
-       :description "Quickly switch windows using `ace-jump-mode'"
-       :type github
-       :pkgname "wiedzmin/ace-window"
-       :features ace-window)

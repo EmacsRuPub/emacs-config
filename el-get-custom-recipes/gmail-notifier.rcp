@@ -1,4 +1,0 @@
-(:name gmail-notifier
-       :type github
-       :pkgname "wiedzmin/emacs-gmail-notifier"
-       :features gmail-notifier)

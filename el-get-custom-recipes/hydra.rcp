@@ -1,6 +1,0 @@
-(:name hydra
-       :type github
-       :pkgname "abo-abo/hydra"
-       :description "make Emacs bindings that stick around"
-       :depends avy
-       :features hydra)

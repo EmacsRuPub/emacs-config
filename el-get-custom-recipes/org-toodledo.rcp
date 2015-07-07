@@ -1,5 +1,0 @@
-(:name org-toodledo
-       :type github
-       :pkgname "christopherjwhite/org-toodledo"
-       :features org-toodledo
-       :depends (emacs-w3m http-post-simple))
