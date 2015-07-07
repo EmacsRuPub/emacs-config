@@ -22,6 +22,7 @@
     (diminish 'auto-complete-mode " α")
     (setq ac-auto-start nil)
     (setq ac-quick-help-delay 0.5)
+    (setq ac-fuzzy-enable t)
     (add-to-list 'ac-modes 'slime-repl-mode)
     (add-hook 'slime-mode-hook 'set-up-slime-ac)
     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
