@@ -29,17 +29,15 @@
 
 (use-package f)
 
-(f-entries (at-config-basedir "customdefs")
-           (lambda (entry) (when (f-file? entry)
-                             (load entry)))
-           t)
+(f-files (at-config-basedir "customdefs")
+         (lambda (entry) (load entry))
+         t)
 
 (load (at-config-basedir "systemtraits.el"))
 
-(f-entries (at-config-basedir "private")
-           (lambda (entry) (when (f-file? entry)
-                             (load entry)))
-           t)
+(f-files (at-config-basedir "private")
+         (lambda (entry) (load entry))
+         t)
 
 (require 'bundle-main)
 
