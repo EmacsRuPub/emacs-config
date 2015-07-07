@@ -223,6 +223,7 @@ _a_bbreviation
     (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
     (add-hook 'jabber-chat-mode-hook 'goto-address)
     (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
+    (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method)))
     ))
 
 (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
