@@ -16,6 +16,12 @@
 (use-package org)
 (use-package ox-html)
 
+(use-package orglink
+  :config
+  ;; TODO: customize orglink-activate-in-modes
+  (global-orglink-mode)
+  (diminish 'orglink-mode "OL"))
+
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
 (f-entries (at-org-dir)

@@ -175,12 +175,6 @@ Breadcrumb bookmarks:
     (ace-link-setup-default)
     (define-key org-mode-map (kbd "M-o") 'ace-link-org)))
 
-(use-package orglink
-  :config
-  ;; TODO: customize orglink-activate-in-modes
-  (global-orglink-mode)
-  (diminish 'orglink-mode "OL"))
-
 (use-package dired
   :config
   (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
