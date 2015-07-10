@@ -147,7 +147,6 @@
   )
 
 (use-package paredit
-  :defer t
   :config
   (progn
     (diminish 'paredit-mode "()"))

@@ -11,6 +11,7 @@
 
 (defun custom/elisp-mode-hook ()
   (auto-fill-mode 1)
+  (paredit-mode 1)
   (paren-face-mode)
   (setq indent-tabs-mode t)
   (setq tab-width 2)

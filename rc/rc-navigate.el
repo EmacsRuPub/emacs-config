@@ -6,7 +6,14 @@
 
 (use-package bookmark+
   :init
-  (use-package crosshairs))
+  (use-package crosshairs)
+  :config
+  ;;FIXME: workaround
+  (defadvice bookmark-bmenu-save
+      (around allow-save-bookmarks activate)
+    "Allows to save read-only bookmarks list."
+    (let ((inhibit-read-only t))
+      ad-do-it)))
 
 (use-package re-builder
   :defer t)
@@ -87,25 +94,6 @@
   (progn
     (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
     (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
-
-(use-package breadcrumb
-  :config
-  (defhydra hydra-breadcrumb (:exit t)
-    "
-Breadcrumb bookmarks:
-  _<up>_:   prev   _S-<up>_:   local prev
-  _<down>_: next   _S-<down>_: local next
-  _s_: set  _c_: clear  _l_: list  _q_: quit
-"
-    ("<down>" bc-next nil :exit nil)
-    ("<up>" bc-previous nil :exit nil)
-    ("S-<down>" bc-local-next nil :exit nil)
-    ("S-<up>" bc-local-previous nil :exit nil)
-    ("l" bc-list nil)
-    ("s" bc-set nil)
-    ("c" bc-clear nil)
-    ("q" nil nil)))
-(global-set-key (kbd "<f12>") 'hydra-breadcrumb/body)
 
 (use-package zoom-window
   :config

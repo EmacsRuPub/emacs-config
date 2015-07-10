@@ -37,6 +37,7 @@
         calfw
         column-marker
         crontab-mode
+        crosshairs
         css-eldoc
         csv-mode
         deft
@@ -85,6 +86,7 @@
         list-processes+
         lua-mode
         magit
+        magit-filenotify
         markdown-mode
         multifiles
         multiple-cursors
@@ -100,6 +102,7 @@
         orglink
         paredit
         paredit-everywhere
+        paren-face
         pdf-tools
         phi-search
         popwin

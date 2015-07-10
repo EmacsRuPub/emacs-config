@@ -95,16 +95,8 @@ other file _fO_ther window
   (diminish 'eldoc-mode "ED"))
 
 (use-package magit
-  :init
-  (progn
-    (use-package diminish)
-    (use-package magit-filenotify
-      :config
-      (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-      (diminish 'magit-filenotify-mode "FN")
-      (setq watches-count-threshold 50)))
   :config
-  (setq magit-last-seen-setup-instructions "1.4.0")
+  (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
   (defhydra hydra-magit (:color teal :hint nil)
     "
 PROJECT: %(projectile-project-root)
@@ -129,6 +121,12 @@ PROJECT: %(projectile-project-root)
     ("l" magit-log)
     ("t" git-timemachine))
   (global-set-key (kbd "C-'") 'hydra-magit/body))
+
+(use-package magit-filenotify
+  :config
+  (use-package diminish)
+  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+  (diminish 'magit-filenotify-mode "FN"))
 
 (use-package git-gutter
   :config
