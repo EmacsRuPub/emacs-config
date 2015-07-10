@@ -205,7 +205,7 @@
 (defhydra hydra-edit (:color blue)
   ("0" custom/compact-spaces-in-region)
   ("2" custom/duplicate-line)
-  ("4" custom/camelscore-word-at-point)
+  ("4" string-inflection-all-cycle)
   ("9" custom/quote-string-with-period-and-nextline)
   ("<left>" jump-char-backward)
   ("<right>" jump-char-forward)

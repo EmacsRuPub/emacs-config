@@ -122,6 +122,7 @@
         savekill
         scratch
         smart-mode-line
+        string-inflection
         swoop
         tern
         twittering-mode
