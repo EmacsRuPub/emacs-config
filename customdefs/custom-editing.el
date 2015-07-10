@@ -190,6 +190,81 @@ point reaches the beginning or end of the buffer, stop there."
           (mapcar (lambda (s) (s-chop-prefix prefix s))
                   (s-lines lines))))
 
+(defun downcase-dwim (arg)
+  (interactive "p")
+  (if (region-active-p)
+      (downcase-region (region-beginning) (region-end))
+    (downcase-word arg)))
+
+(defun upcase-dwim (arg)
+  (interactive "p")
+  (if (region-active-p)
+      (upcase-region (region-beginning) (region-end))
+    (upcase-word arg)))
+
+(defun capitalize-dwim (arg)
+  (interactive "P")
+  (when (consp arg) (setq arg 1))
+  (if (region-active-p)
+      (capitalize-region (region-beginning) (region-end))
+    (capitalize-word (prefix-numeric-value arg))))
+
+;; This override for transpose-words fixes what I consider to be a flaw with the
+;; default implementation in simple.el. To traspose chars or lines, you always
+;; put the point on the second char or line to transpose with the previous char
+;; or line. The default transpose-words implementation does the opposite by
+;; flipping the current word with the next word instead of the previous word.
+;; The new implementation below instead makes transpose-words more consistent
+;; with how transpose-chars and trasponse-lines behave.
+(defun transpose-words (arg)
+  "[Override for default transpose-words in simple.el]
+Interchange words around point, leaving point at end of
+them. With prefix arg ARG, effect is to take word before or
+around point and drag it backward past ARG other words (forward
+if ARG negative). If ARG is zero, the words around or after
+point and around or after mark are interchanged."
+  (interactive "*p")
+  (if (eolp) (forward-char -1))
+  (transpose-subr 'backward-word arg)
+  (forward-word (+ arg 1)))
+
+;; Compliment to kill-rectangle (just like kill-ring-save compliments
+;; kill-region)
+;; http://www.emacsblog.org/2007/03/17/quick-tip-set-goal-column/#comment-183
+(defun kill-save-rectangle (start end &optional fill)
+  "Save the rectangle as if killed, but don't kill it. See
+`kill-rectangle' for more information."
+  (interactive "r\nP")
+  (kill-rectangle start end fill)
+  (goto-char start)
+  (yank-rectangle))
+
+(defun compact-spaces-in-region (beg end)
+  "replace all whitespace in the region with single spaces"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward "\\s-+" nil t)
+        (replace-match "")))))
+
+;;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it is visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
 )
 
 (provide 'custom-editing)

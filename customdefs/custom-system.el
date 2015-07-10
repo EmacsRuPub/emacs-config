@@ -32,6 +32,34 @@
                    "ru.gentoo.kbdd.set_layout"
                    "uint32:1")))
 
+;;;###autoload
+(defun keys-describe-prefixes ()
+  (interactive)
+  (with-output-to-temp-buffer "*Bindings*"
+    (dolist (letter-group (list
+                           (cl-loop for c from ?a to ?z
+                                    collect (string c))
+                           (cl-loop for c from ?α to ?ω
+                                    collect (string c))))
+      (dolist (prefix '("" "C-" "M-" "C-M-"))
+        (princ (mapconcat
+                (lambda (letter)
+                  (let ((key (concat prefix letter)))
+                    (format ";; (global-set-key (kbd \"%s\") '%S)"
+                            key
+                            (key-binding (kbd key)))))
+                letter-group
+                "\n"))
+        (princ "\n\n")))))
+
+(defun remove-elc-on-save ()
+  "If you're saving an elisp file, likely the .elc is no longer valid."
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))))
+
 )
 
 (provide 'custom-system)

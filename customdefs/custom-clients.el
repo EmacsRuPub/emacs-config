@@ -86,6 +86,16 @@
         (if (string= event "finished\n")
             (kill-buffer ,buff))))))
 
+;;TODO: maybe make org-protocol solution instead
+(defun youtube-dl ()
+  (interactive)
+  (let* ((str (current-kill 0))
+         (default-directory "~/Downloads")
+         (proc (get-buffer-process (ansi-term "/bin/bash"))))
+    (term-send-string
+     proc
+     (concat "cd ~/Downloads && youtube-dl " str "\n"))))
+
 )
 
 (provide 'custom-clients)

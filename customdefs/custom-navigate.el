@@ -17,17 +17,6 @@
                        )
                      "*helm-find-files*"))
 
-(defadvice ack-and-a-half-arguments-from-options (after search-text-files disable)
-  (let ((current-arguments ad-return-value))
-    (push "--text" current-arguments)
-    (setf ad-return-value current-arguments)))
-
-(defadvice ack-and-a-half-list-files (around list-text-files disable)
-  (let ((arguments (ad-get-args 1)))
-    (push "--text" arguments)
-    (ad-set-args 1 arguments)
-    (setq ad-return-value ad-do-it)))
-
 (defun occur-and-switch (search)
   (interactive "sSearch for: ")
   (occur (regexp-quote search))
@@ -73,6 +62,64 @@
       (goto-char (point-min))
       (while (re-search-forward org-plain-link-re nil t)
         (org-open-at-point)))))
+
+(defun spawn-buffer()
+  (interactive)
+  (let ((buffer-name (generate-new-buffer-name "*new-buffer*")))
+    (generate-new-buffer buffer-name)
+    (switch-to-buffer buffer-name)))
+
+(defun ibuffer-filter-by-extname (qualifier)
+  (interactive "sFilter by extname: ")
+  (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
+
+(defun update-frames (heads-count)
+  (let ((frames-count (length (frame-list))))
+    (cond
+     ((= heads-count 2)
+      (when (= frames-count 1)
+        (make-frame-command)))
+     ((= heads-count 1)
+      (when (> frames-count 1)
+        (delete-other-frames)))
+     (t
+      (delete-other-frames)))))
+
+;;Make cursor stay in the same column when scrolling using pgup/dn.
+;;Previously pgup/dn clobbers column position, moving it to the
+;;beginning of the line.
+;;<http://www.dotemacs.de/dotfiles/ElijahDaniel.emacs.html>
+(defadvice scroll-up (around ewd-scroll-up first act)
+  "Keep cursor in the same column."
+  (let ((col (current-column)))
+    ad-do-it
+    (move-to-column col)))
+(defadvice scroll-down (around ewd-scroll-down first act)
+  "Keep cursor in the same column."
+  (let ((col (current-column)))
+    ad-do-it
+    (move-to-column col)))
+
+(defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
+
+(defun find-url-backward ()
+  (interactive)
+  (re-search-backward url-regexp nil t))
+
+(defun find-url-forward ()
+  (interactive)
+  (re-search-forward url-regexp nil t)
+)
+
+(defun get-file-md5 ()
+  (interactive)
+  (when (derived-mode-p 'dired-mode)
+    (let ((abs-file-name (dired-get-filename)))
+      (unless (file-directory-p abs-file-name)
+        (with-temp-buffer
+          (let ((prefix-arg t))
+            (shell-command (format "md5sum %s" abs-file-name))
+            (buffer-string)))))))
 
 )
 
