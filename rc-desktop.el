@@ -73,20 +73,11 @@
 (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
 (add-to-list 'desktop-locals-to-save 'tab-width)
 (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-(add-to-list 'desktop-minor-mode-handlers '(semantic-stickyfunc-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(senator-minor-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(semantic-idle-scheduler-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(semantic-idle-summary-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(semantic-idle-completions-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(semantic-mru-bookmark-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(semantic-decoration-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(srecode-minor-mode . my-desktop-ignore-semantic))
-(add-to-list 'desktop-minor-mode-handlers '(ede-minor-mode . my-desktop-ignore-semantic))
 (add-to-list 'desktop-modes-not-to-save 'dired-mode)
 (add-to-list 'desktop-modes-not-to-save 'Info-mode)
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-(provide 'desktop-autosave)
+(provide 'rc-desktop)
 
 ;;; emacs-rc-desktop.el ends here
