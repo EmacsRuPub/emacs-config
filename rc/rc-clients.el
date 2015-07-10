@@ -142,6 +142,10 @@ IRC   ^Connection^ ^Tools^
   (progn
     (use-package google-translate-default-ui)))
 
+(use-package libmpdee
+  ;;TODO: maybe provide handy keybindings/hydra/whatever
+  )
+
 (use-package jabber
   :init
   (load "jabber-autoloads") ;; For 0.7.90 and above:

@@ -83,6 +83,7 @@
         json-mode
         keyfreq
         latex-preview-pane
+        libmpdee
         list-processes+
         lua-mode
         magit
