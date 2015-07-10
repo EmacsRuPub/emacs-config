@@ -137,6 +137,7 @@
         web-mode
         wgrep
         whole-line-or-region
+        windsize
         wrap-region
         yaml-mode
         zenburn-theme

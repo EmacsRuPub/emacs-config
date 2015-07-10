@@ -142,6 +142,8 @@
    ("C-s-<right>" . windmove-right)
    ))
 
+(use-package windsize)
+
 (use-package framemove
   :config
   (setq framemove-hook-into-windmove t))
@@ -235,10 +237,10 @@
   ("d" (lambda () (interactive) (ace-window 16)) "delete")
   ("1" delete-other-windows "1" :color blue)
   ("i" ace-maximize-window "a1" :color blue)
-  ("<C-up>" custom/win-resize-enlarge-vert "move splitter up")
-  ("<C-down>" custom/win-resize-minimize-vert "move splitter dow")
-  ("<C-left>" custom/win-resize-enlarge-horiz "move splitter left")
-  ("<C-right>" custom/win-resize-minimize-horiz "move splitter right")
+  ("<C-up>" windsize-up "move splitter up")
+  ("<C-down>" windsize-down "move splitter down")
+  ("<C-left>" windsize-left "move splitter left")
+  ("<C-right>" windsize-right "move splitter right")
   ("g" avy-goto-char "goto char within window" :color blue)
   ("G" avy-goto-word-0 "goto word within window" :color blue)
   ("=" text-scale-increase)
