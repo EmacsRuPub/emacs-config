@@ -179,3 +179,9 @@
 * TODO [#B] [[http://www.emacswiki.org/emacs/TrampMode][EmacsWiki: Tramp Mode - http://www.emacswiki.org/emacs/TrampMode]] - more elaborate setup, eliminate hangups, etc [2015-06-08 Пн 21:37] :emacs:ticket:
 * TODO [#A] search for extension to export smth to google calendar [2015-06-08 Пн 21:47] :emacs:ticket:
 * TODO [#C] [[https://github.com/syl20bnr/spacemacs#configuration-layers][syl20bnr/spacemacs - https://github.com/syl20bnr/spacemacs#configuration-layers]] - borrow ideas [2015-06-09 Вт 16:15] :emacs:ticket:
+* TODO [#A] review colors of hydras and their heads [2015-06-10 Ср 22:16] :emacs:ticket:
+* TODO [#A] fix the clash of PareditEverywhere and commenting (namely M-]) in some major modes [2015-06-15 Пн 17:55] :emacs:ticket:
+* TODO [#A] review and change helm colors, especially for files/dirs listings (some are pretty unreadble) [2015-06-16 Вт 10:52] :emacs:ticket:
+* TODO [#B] fallback on isearch for "too short" phi-searches [2015-06-18 Чт 14:37] :emacs:ticket:
+* TODO [#B] maybe function for selecting among open jabber-chat buffers [2015-06-22 Пн 15:09] :emacs:ticket:
+* TODO [#B] is there any way to automatically tag entries with some function during capture process? [2015-07-03 Пт 16:00] :orgmode:emacs:ticket:

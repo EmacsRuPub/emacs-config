@@ -142,3 +142,25 @@
 * TODO [#C] [[https://github.com/proofit404/anaconda-mode][proofit404/anaconda-mode - https://github.com/proofit404/anaconda-mode]] 2nd try [2015-06-10 Ср 15:43] :emacs:try:
 * TODO [#C] [[https://github.com/porterjamesj/virtualenvwrapper.el][porterjamesj/virtualenvwrapper.el - https://github.com/porterjamesj/virtualenvwrapper.el]] [2015-06-10 Ср 15:44] :emacs:try:
 * TODO [#C] [[https://github.com/jorgenschaefer/pyvenv][jorgenschaefer/pyvenv - https://github.com/jorgenschaefer/pyvenv]] [2015-06-10 Ср 15:44] :emacs:try:
+* TODO [#C] [[http://sachachua.com/blog/2015/06/adding-calculations-based-on-time-to-the-org-agenda-clock-report/][Adding calculations based on time to the Org Agenda clock report - sacha chua :: living an awesome life - http://sachachua.com/blog/2015/06/adding-calculations-based-on-time-to-the-org-agenda-clock-report/]] [2015-06-11 Чт 16:46] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/better-compile-command.html?source%3Drss][Better compile command · Endless Parentheses - http://endlessparentheses.com/better-compile-command.html?source=rss]] [2015-06-16 Вт 11:02] :emacs:try:
+* TODO [#C] [[http://sachachua.com/blog/2015/06/providing-values-to-functions-in-org-capture-templates/][Providing values to functions in org-capture-templates - sacha chua :: living an awesome life - http://sachachua.com/blog/2015/06/providing-values-to-functions-in-org-capture-templates/]] [2015-06-18 Чт 15:30] :emacs:try:
+* TODO [#C] [[https://github.com/cemerick/piggieback][cemerick/piggieback - https://github.com/cemerick/piggieback]] [2015-06-19 Пт 15:01] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/cider-debug-a-visual-interactive-debugger-for-clojure.html][Cider-debug, a visual, interactive, debugger for Clojure · Endless Parentheses - http://endlessparentheses.com/cider-debug-a-visual-interactive-debugger-for-clojure.html]] [2015-06-19 Пт 15:02] :emacs:try:
+* TODO [#C] [[http://sachachua.com/blog/2015/06/using-your-own-emacs-lisp-functions-in-org-mode-table-calculations-easier-dosage-totals/][Using your own Emacs Lisp functions in Org Mode table calculations: easier dosage totals - sacha chua :: living an awesome life - http://sachachua.com/blog/2015/06/using-your-own-emacs-lisp-functions-in-org-mode-table-calculations-easier-dosage-totals/]] [2015-06-19 Пт 15:59] :emacs:try:
+* TODO [#C] [[http://ru-emacs.livejournal.com/85243.html][ru_emacs: Двуязычная проверка орфографии в Emacs - http://ru-emacs.livejournal.com/85243.html]] [2015-06-21 Вс 12:54] :emacs:try:
+* TODO [#C] [[http://pragmaticemacs.com/emacs/sort-lines-in-a-region/][Sort lines in a region | Pragmatic Emacs - http://pragmaticemacs.com/emacs/sort-lines-in-a-region/]] [2015-06-21 Вс 13:07] :emacs:try:
+* TODO [#C] visible-mark [2015-06-24 Ср 22:58]                       :emacs:try:
+* TODO [#C] [[https://github.com/doitian/thing-actions.el][doitian/thing-actions.el - https://github.com/doitian/thing-actions.el]] [2015-06-26 Пт 19:22] :emacs:try:
+* TODO [#C] [[https://github.com/pashinin/capture.el][pashinin/capture.el - https://github.com/pashinin/capture.el]] [2015-06-26 Пт 19:36] :emacs:try:
+* TODO [#C] [[https://github.com/rmm5t/maxframe.el][rmm5t/maxframe.el - https://github.com/rmm5t/maxframe.el]] [2015-06-26 Пт 19:44] :emacs:try:
+* TODO [#C] [[https://github.com/etrepum/ghc-mod][etrepum/ghc-mod - https://github.com/etrepum/ghc-mod]] [2015-06-26 Пт 19:49] :emacs:try:
+* TODO [#C] [[https://github.com/vkurup/python-django.el][vkurup/python-django.el - https://github.com/vkurup/python-django.el]] [2015-06-26 Пт 19:59] :emacs:try:
+* TODO [#C] [[https://bitbucket.org/edgimar/michel-orgmode][edgimar / michel-orgmode — Bitbucket - https://bitbucket.org/edgimar/michel-orgmode]] [2015-06-28 Вс 16:36] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html?source%3Drss][How I blog with Emacs: One year of posts in a single org file]] [2015-06-28 Вс 19:18] :emacs:try:
+* TODO [#C] [[https://github.com/vinitkumar/googlecl][vinitkumar/googlecl]] [2015-06-29 Пн 16:46] :emacs:try:
+* TODO [#C] [[http://doc.rix.si/org/fsem.html#sec-3-1-4-1][Hardcore Freestyle Emacs - http://doc.rix.si/org/fsem.html#sec-3-1-4-1]] [2015-06-29 Пн 17:04] :emacs:try:
+* TODO [#C] [[https://github.com/sabof/org-bullets][sabof/org-bullets - https://github.com/sabof/org-bullets]] [2015-06-30 Вт 14:43] :emacs:try:
+* TODO [#C] [[https://github.com/dfeich/org-babel-examples][dfeich/org-babel-examples - https://github.com/dfeich/org-babel-examples]] [2015-06-30 Вт 19:58] :emacs:try:
+* TODO [#C] [[https://github.com/nflath/recursive-narrow][nflath/recursive-narrow - https://github.com/nflath/recursive-narrow]] [2015-07-06 Пн 13:38] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/07/07/hydra-resume/][Pause or resume the current Hydra · (or emacs - http://oremacs.com/2015/07/07/hydra-resume/]] [2015-07-08 Ср 13:13] :emacs:try:
