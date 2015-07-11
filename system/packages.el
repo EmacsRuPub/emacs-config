@@ -144,7 +144,6 @@
         yaml-mode
         zenburn-theme
         zoom-window
-        zencoding-mode
         ))
 
 (setq package-el-packages-staging
