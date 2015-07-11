@@ -13,7 +13,6 @@
     (use-package auto-complete-emacs-lisp)
     (use-package auto-complete-latex)
     (use-package auto-complete-yasnippet)
-    (use-package ac-slime)
     (use-package ac-helm))
   :config
   (progn
