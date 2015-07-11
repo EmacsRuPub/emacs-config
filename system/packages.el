@@ -144,6 +144,7 @@
         yaml-mode
         zenburn-theme
         zoom-window
+        zencoding-mode
         ))
 
 (mapcar
