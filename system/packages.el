@@ -147,10 +147,102 @@
         zencoding-mode
         ))
 
+(setq package-el-packages-staging
+      '(
+        ac-emmet
+        ac-js2
+        ac-python
+        ansible
+        backup-walker
+        broadcast
+        browse-url-dwim
+        butler
+        calfw-gcal
+        comment-dwim-2
+        common-lisp-snippets
+        confluence
+        deep-thought-theme
+        dired-ranger
+        discover-my-major
+        edebug-x
+        emacs-cl
+        emacsd-tile
+        emamux
+        ercn
+        esup
+        eww-lnum
+        git-messenger
+        gitignore-mode
+        grep-a-lot
+        helm-dired-recent-dirs
+        helm-emmet
+        helm-fuzzy-find
+        helm-helm-commands
+        helm-mode-manager
+        helm-package
+        helm-themes
+        highlight-sexp
+        magit-gerrit
+        mark
+        material-theme
+        memory-usage
+        monky
+        navigate
+        navorski
+        nose
+        nose-mode
+        nterm
+        nzenburn-theme
+        org-bullets
+        org-beautify-theme
+        org-context
+        org-dashboard
+        org-doing
+        org-screenshot
+        orgit
+        orglue
+        phi-search-mc
+        pep8
+        py-autopep8
+        py-import-check
+        pyimpsort
+        rainbow-blocks
+        readline-complete
+        recursive-narrow
+        req-package
+        relative-buffers
+        runner
+        rust-mode
+        searchq
+        shift-text
+        slime-annot
+        slime-fuzzy
+        slime-theme
+        snakehump
+        spinner
+        tern-auto-complete
+        thing-cmds
+        thingopt
+        timesheet
+        timestamper
+        tj-mode
+        turnip
+        unbound
+        vagrant
+        vagrant-tramp
+        wand
+        wgrep-helm
+        ))
+
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
      (package-install package))) package-el-packages)
+
+(mapcar
+ (lambda (package)
+   (unless (package-installed-p package)
+     (package-install package))) package-el-packages-staging)
 
 (provide 'packages)
 
