@@ -31,21 +31,17 @@
         auctex
         auto-yasnippet
         bbdb
-        bitlbee
         bookmark+
         c-eldoc
         calfw
-        column-marker
         crontab-mode
         crosshairs
         css-eldoc
         csv-mode
-        deft
         diminish
         dired+
         dired-sort-menu
         dired-toggle-sudo
-        discover
         drag-stuff
         dtrt-indent
         el-spice
@@ -63,7 +59,6 @@
         ggtags
         git-gutter
         git-timemachine
-        google-contacts
         google-translate
         helm-ag
         helm-c-yasnippet
@@ -106,7 +101,6 @@
         paren-face
         pdf-tools
         phi-search
-        popwin
         projectile
         python
         python-pep8
