@@ -209,7 +209,6 @@
         searchq
         shift-text
         slime-annot
-        slime-fuzzy
         slime-theme
         snakehump
         spinner
