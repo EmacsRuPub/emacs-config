@@ -151,9 +151,7 @@
         ac-python
         ansible
         backup-walker
-        broadcast
         browse-url-dwim
-        butler
         calfw-gcal
         comment-dwim-2
         common-lisp-snippets
@@ -162,8 +160,6 @@
         discover-my-major
         edebug-x
         emacs-cl
-        emacsd-tile
-        emamux
         ercn
         esup
         eww-lnum
@@ -177,7 +173,6 @@
         helm-package
         helm-themes
         highlight-sexp
-        magit-gerrit
         mark
         memory-usage
         monky
@@ -187,7 +182,6 @@
         nose-mode
         nterm
         org-bullets
-        org-beautify-theme
         org-context
         org-dashboard
         org-doing
@@ -209,7 +203,6 @@
         searchq
         shift-text
         slime-annot
-        slime-theme
         snakehump
         spinner
         tern-auto-complete
