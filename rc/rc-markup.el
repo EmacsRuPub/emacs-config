@@ -21,6 +21,7 @@
   :config
   (progn
     (use-package ac-emmet)
+    (use-package helm-emmet)
     (push 'html-mode ac-modes)
     (push 'web-mode ac-modes)
     (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
@@ -29,6 +30,7 @@
     (bind-key "C-j" nil emmet-mode-keymap)
     (bind-key "<C-return>" nil emmet-mode-keymap)
     (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
+    (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
     (setq emmet-move-cursor-between-quotes t)
     (add-hook 'sgml-mode-hook 'emmet-mode)
     (add-hook 'nxml-mode-hook 'emmet-mode)

@@ -20,6 +20,7 @@
       '(
         ac-c-headers
         ac-clang
+        ac-emmet
         ac-helm
         ac-math
         ac-slime
@@ -63,6 +64,7 @@
         helm-ag
         helm-c-yasnippet
         helm-descbinds
+        helm-emmet
         helm-flycheck
         helm-gtags
         helm-projectile
@@ -138,7 +140,6 @@
         yaml-mode
         zenburn-theme
         zoom-window
-        ac-emmet
         ))
 
 (setq package-el-packages-staging
@@ -168,7 +169,6 @@
         gitignore-mode
         grep-a-lot
         helm-dired-recent-dirs
-        helm-emmet
         helm-fuzzy-find
         helm-helm-commands
         helm-mode-manager
