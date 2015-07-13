@@ -19,7 +19,7 @@
 (set-cursor-color "chartreuse2")
 (custom/set-xwindows-font "consolas-base")
 
-(load-theme 'zenburn t)
+(load-theme 'material t)
 
 (unicode-fonts-setup)
 

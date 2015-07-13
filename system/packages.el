@@ -39,6 +39,7 @@
         crosshairs
         css-eldoc
         csv-mode
+        deep-thought-theme
         diminish
         dired+
         dired-sort-menu
@@ -86,11 +87,13 @@
         magit
         magit-filenotify
         markdown-mode
+        material-theme
         multifiles
         multiple-cursors
         names
         nginx-mode
         notify
+        nzenburn-theme
         oauth2
         openwith
         org-gcal
@@ -155,7 +158,6 @@
         comment-dwim-2
         common-lisp-snippets
         confluence
-        deep-thought-theme
         dired-ranger
         discover-my-major
         edebug-x
@@ -177,7 +179,6 @@
         highlight-sexp
         magit-gerrit
         mark
-        material-theme
         memory-usage
         monky
         navigate
@@ -185,7 +186,6 @@
         nose
         nose-mode
         nterm
-        nzenburn-theme
         org-bullets
         org-beautify-theme
         org-context
