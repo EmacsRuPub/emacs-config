@@ -99,10 +99,13 @@
         nzenburn-theme
         oauth2
         openwith
+        org-bullets
+        org-dashboard
         org-gcal
         org-magit
         org-pomodoro
         org-toodledo
+        orgit
         orglink
         paredit
         paredit-everywhere
@@ -178,13 +181,6 @@
         nose
         nose-mode
         nterm
-        org-bullets
-        org-context
-        org-dashboard
-        org-doing
-        org-screenshot
-        orgit
-        orglue
         phi-search-mc
         pep8
         py-autopep8

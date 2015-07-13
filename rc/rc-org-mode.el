@@ -15,6 +15,9 @@
 
 (use-package org)
 (use-package ox-html)
+(use-package org-dashboard)
+(use-package orgit)
+(use-package org-bullets)
 
 (use-package orglink
   :config
@@ -290,6 +293,7 @@
 (turn-on-orgtbl)
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
+(add-hook 'org-mode-hook 'org-bullets-mode)
 (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
 (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
 (add-hook 'org-after-refile-insert-hook 'save-buffer)
@@ -319,6 +323,7 @@ show _A_ll                 add t_i_me to timestamp   _c_ancel clock
   ("g" org-clock-goto)
   ("p" org-set-property)
   ("d" org-delete-property)
+  ("D" org-dashboard-display :color blue)
   ("s" org-schedule :color blue)
   ("l" org-deadline :color blue)
   ("." org-clock-in)
