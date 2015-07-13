@@ -65,10 +65,13 @@
         helm-ag
         helm-c-yasnippet
         helm-descbinds
+        helm-dired-recent-dirs
         helm-emmet
         helm-flycheck
         helm-gtags
+        helm-helm-commands
         helm-projectile
+        helm-themes
         help+
         hide-comnt
         hungry-delete
@@ -166,12 +169,6 @@
         git-messenger
         gitignore-mode
         grep-a-lot
-        helm-dired-recent-dirs
-        helm-fuzzy-find
-        helm-helm-commands
-        helm-mode-manager
-        helm-package
-        helm-themes
         highlight-sexp
         mark
         memory-usage

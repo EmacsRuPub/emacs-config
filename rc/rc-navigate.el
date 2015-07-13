@@ -29,6 +29,9 @@
   (use-package helm-grep)
   (use-package helm-projectile)
   (use-package helm-descbinds)
+  (use-package helm-themes)
+  (use-package helm-helm-commands)
+  (use-package helm-dired-recent-dirs)
   :config
   (progn
     (setq helm-quick-update t)
