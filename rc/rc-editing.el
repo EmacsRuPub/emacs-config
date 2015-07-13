@@ -9,6 +9,7 @@
 (use-package saveplace)
 (use-package table) ;; table
 (use-package footnote)
+(use-package snakehump)
 
 (delete-selection-mode t)
 (dtrt-indent-mode)
@@ -203,7 +204,7 @@
 (defhydra hydra-edit (:color blue)
   ("0" custom/compact-spaces-in-region)
   ("2" custom/duplicate-line)
-  ("4" string-inflection-all-cycle)
+  ("4" snakehump-next-at-point)
   ("9" custom/quote-string-with-period-and-nextline)
   ("<left>" jump-char-backward)
   ("<right>" jump-char-forward)

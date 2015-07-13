@@ -128,7 +128,7 @@
         savekill
         scratch
         smart-mode-line
-        string-inflection
+        snakehump
         swoop
         tern
         twittering-mode
@@ -195,7 +195,6 @@
         searchq
         shift-text
         slime-annot
-        snakehump
         spinner
         tern-auto-complete
         thing-cmds
