@@ -157,12 +157,6 @@
     (bind-key "C-<down>" nil paredit-mode-map)
     (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map))
 
-(use-package paredit-everywhere
-  :config
-  (diminish 'paredit-everywhere-mode "(/)")
-  (paredit-everywhere-mode 1)
-  (define-key paredit-everywhere-mode-map (kbd "M-(") 'paredit-open-round))
-
 (use-package vimrc-mode
   :defer t
   :mode ".vim\\(rc\\)?$")

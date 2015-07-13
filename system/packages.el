@@ -108,7 +108,6 @@
         orgit
         orglink
         paredit
-        paredit-everywhere
         paren-face
         pdf-tools
         phi-search
