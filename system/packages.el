@@ -138,11 +138,11 @@
         yaml-mode
         zenburn-theme
         zoom-window
+        ac-emmet
         ))
 
 (setq package-el-packages-staging
       '(
-        ac-emmet
         ac-js2
         ac-python
         ansible

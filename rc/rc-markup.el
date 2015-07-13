@@ -20,6 +20,12 @@
 (use-package emmet-mode
   :config
   (progn
+    (use-package ac-emmet)
+    (push 'html-mode ac-modes)
+    (push 'web-mode ac-modes)
+    (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+    (add-hook 'css-mode-hook 'ac-emmet-css-setup)
+    (add-hook 'web-mode-hook 'ac-emmet-html-setup)
     (bind-key "C-j" nil emmet-mode-keymap)
     (bind-key "<C-return>" nil emmet-mode-keymap)
     (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
