@@ -12,14 +12,6 @@
   (interactive "*")
   (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
-(defun comment-uncomment-region (arg)
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not mark-active)
-           (save-excursion (beginning-of-line) (not (looking-at "\\s-*$"))))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-    (comment-dwim arg)))
-
 (defun uniq ()
   "Trying to leave only unique strings from selection"
   (interactive)

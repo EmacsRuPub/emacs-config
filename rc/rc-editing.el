@@ -125,6 +125,10 @@
             (yank whole-line-or-region-yank nil)
             ))))
 
+(use-package comment-dwim-2
+  :config
+  (global-set-key (kbd "M-]") 'comment-dwim-2))
+
 (use-package generic
   :defer t
   :init
@@ -264,7 +268,6 @@ _I_       capitalize region
 (global-set-key (kbd "<f10>") 'hydra-cases/body)
 
 (global-set-key (kbd "M-g") 'goto-line)
-(global-set-key (kbd "M-]") 'custom/comment-uncomment-region)
 (global-set-key (kbd "M-\"") 'eval-region)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)

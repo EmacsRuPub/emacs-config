@@ -35,6 +35,7 @@
         bookmark+
         c-eldoc
         calfw
+        comment-dwim-2
         crontab-mode
         crosshairs
         css-eldoc
@@ -158,7 +159,6 @@
         backup-walker
         browse-url-dwim
         calfw-gcal
-        comment-dwim-2
         common-lisp-snippets
         confluence
         dired-ranger
