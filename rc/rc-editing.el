@@ -10,6 +10,7 @@
 (use-package table) ;; table
 (use-package footnote)
 (use-package snakehump)
+(use-package highlight-sexp)
 
 (delete-selection-mode t)
 (dtrt-indent-mode)
@@ -252,7 +253,8 @@ TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
   ("b" toggle-debug-on-error "debug on error")
   ("w" whitespace-mode "whitespace mode")
   ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
-  ("D" turn-off-drag-stuff-mode "disable drag-stuff mode"))
+  ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
+  ("h" highlight-sexp-mode "toggle highlight-sexp mode"))
 (global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
 (defhydra hydra-cases (:color pink)

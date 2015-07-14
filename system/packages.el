@@ -75,6 +75,7 @@
         helm-themes
         help+
         hide-comnt
+        highlight-sexp
         hungry-delete
         hydra
         irony
@@ -163,7 +164,6 @@
         eww-lnum
         gitignore-mode
         grep-a-lot
-        highlight-sexp
         mark
         memory-usage
         nose
