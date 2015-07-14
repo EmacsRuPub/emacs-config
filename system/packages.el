@@ -153,43 +153,26 @@
 
 (setq package-el-packages-staging
       '(
-        ac-js2
-        ac-python
-        ansible
         backup-walker
-        browse-url-dwim
         calfw-gcal
         common-lisp-snippets
-        confluence
-        dired-ranger
         discover-my-major
         edebug-x
-        emacs-cl
         ercn
         esup
         eww-lnum
-        git-messenger
         gitignore-mode
         grep-a-lot
         highlight-sexp
         mark
         memory-usage
-        monky
-        navigate
-        navorski
         nose
         nose-mode
-        nterm
         phi-search-mc
         pep8
         py-autopep8
         py-import-check
-        pyimpsort
-        rainbow-blocks
-        readline-complete
         recursive-narrow
-        req-package
-        relative-buffers
         runner
         rust-mode
         searchq
@@ -197,15 +180,7 @@
         slime-annot
         spinner
         tern-auto-complete
-        thing-cmds
-        thingopt
-        timesheet
-        timestamper
-        tj-mode
-        turnip
         unbound
-        vagrant
-        vagrant-tramp
         wand
         wgrep-helm
         ))
