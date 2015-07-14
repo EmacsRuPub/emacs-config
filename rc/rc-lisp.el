@@ -6,6 +6,7 @@
 
 (use-package inf-lisp)
 (use-package info-look)
+(use-package common-lisp-snippets)
 
 (setq inferior-lisp-program "sbcl")
 (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))

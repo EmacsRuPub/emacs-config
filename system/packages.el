@@ -36,6 +36,7 @@
         c-eldoc
         calfw
         comment-dwim-2
+        common-lisp-snippets
         crontab-mode
         crosshairs
         css-eldoc
@@ -157,7 +158,6 @@
       '(
         backup-walker
         calfw-gcal
-        common-lisp-snippets
         discover-my-major
         edebug-x
         esup
