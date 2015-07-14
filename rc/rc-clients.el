@@ -27,6 +27,7 @@
   (use-package erc-match)
   (use-package erc-nicklist)
   (use-package erc-highlight-nicknames)
+  (use-package ercn) ;TODO: add notifications handler function
   :config
   (progn
     (erc-pcomplete-mode 1)

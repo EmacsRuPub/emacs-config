@@ -53,6 +53,7 @@
         emmet-mode
         epoch-view
         erc-hl-nicks
+        ercn
         erefactor
         expand-region
         fic-mode
@@ -159,7 +160,6 @@
         common-lisp-snippets
         discover-my-major
         edebug-x
-        ercn
         esup
         eww-lnum
         gitignore-mode
