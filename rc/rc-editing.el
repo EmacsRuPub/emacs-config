@@ -179,6 +179,14 @@
     (wrap-region-add-wrapper "{-" "-}" "#")
     (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
 
+(use-package mark
+  :config
+  (defhydra hydra-mark ()
+    ("<right>" forward-mark "forward-mark")
+    ("<left>" backward-mark "backward-mark")
+    ("<down>" show-marks "show-marks"))
+  (global-set-key (kbd "<f12>") 'hydra-mark/body))
+
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)

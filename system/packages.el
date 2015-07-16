@@ -96,6 +96,7 @@
         lua-mode
         magit
         magit-filenotify
+        mark
         markdown-mode
         material-theme
         multifiles
@@ -166,7 +167,6 @@
         eww-lnum
         gitignore-mode
         grep-a-lot
-        mark
         memory-usage
         nose
         nose-mode
