@@ -47,6 +47,7 @@
         dired+
         dired-sort-menu
         dired-toggle-sudo
+        discover-my-major
         drag-stuff
         dtrt-indent
         el-spice
@@ -158,7 +159,6 @@
 (setq package-el-packages-staging
       '(
         calfw-gcal
-        discover-my-major
         edebug-x
         esup
         eww-lnum

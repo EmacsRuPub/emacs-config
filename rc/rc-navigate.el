@@ -206,6 +206,9 @@
 (use-package dired-x)
 (use-package dired-toggle-sudo)
 
+(use-package discover-my-major
+  ;TODO: bind to key
+  )
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
