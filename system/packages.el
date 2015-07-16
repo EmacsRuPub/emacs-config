@@ -67,6 +67,7 @@
         ggtags
         git-gutter
         git-timemachine
+        gitignore-mode
         google-translate
         helm-ag
         helm-c-yasnippet
@@ -133,6 +134,7 @@
         restclient
         rich-minority
         rtags
+        rust-mode
         sauron
         savekill
         scratch
@@ -168,7 +170,6 @@
         calfw-gcal
         esup
         eww-lnum
-        gitignore-mode
         grep-a-lot
         memory-usage
         nose
@@ -177,7 +178,6 @@
         py-autopep8
         py-import-check
         runner
-        rust-mode
         searchq
         shift-text
         slime-annot
