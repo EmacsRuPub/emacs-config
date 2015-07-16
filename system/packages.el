@@ -150,6 +150,7 @@
         web
         web-mode
         wgrep
+        wgrep-helm
         whole-line-or-region
         windsize
         wrap-region
@@ -182,7 +183,6 @@
         tern-auto-complete
         unbound
         wand
-        wgrep-helm
         ))
 
 (mapcar

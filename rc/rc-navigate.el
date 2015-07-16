@@ -27,6 +27,7 @@
   (use-package helm-locate)
   (use-package helm-misc)
   (use-package helm-grep)
+  (use-package wgrep-helm) ;TODO: maybe configure
   (use-package helm-projectile)
   (use-package helm-descbinds)
   (use-package helm-themes)
