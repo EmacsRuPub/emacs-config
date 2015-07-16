@@ -165,35 +165,10 @@
         zoom-window
         ))
 
-(setq package-el-packages-staging
-      '(
-        calfw-gcal
-        esup
-        eww-lnum
-        grep-a-lot
-        memory-usage
-        nose
-        nose-mode
-        pep8
-        py-autopep8
-        py-import-check
-        runner
-        searchq
-        shift-text
-        slime-annot
-        spinner
-        wand
-        ))
-
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
      (package-install package))) package-el-packages)
-
-(mapcar
- (lambda (package)
-   (unless (package-installed-p package)
-     (package-install package))) package-el-packages-staging)
 
 (provide 'packages)
 
