@@ -126,6 +126,7 @@
         rainbow-mode
         rebox2
         recentf-ext
+        recursive-narrow
         regex-tool
         region-bindings-mode
         replace+
@@ -173,7 +174,6 @@
         pep8
         py-autopep8
         py-import-check
-        recursive-narrow
         runner
         rust-mode
         searchq

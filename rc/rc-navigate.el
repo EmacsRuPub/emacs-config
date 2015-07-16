@@ -217,6 +217,8 @@
   (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys)
 )
 
+(use-package recursive-narrow)
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
@@ -276,6 +278,8 @@ defun + _c_omments
   ("c" narrow-to-defun+comments-above)
   ("w" widen)
   ("z" zoom-window-zoom)
+  ("N" recursive-narrow-or-widen-dwim)
+  ("W" recursive-widen-dwim)
   ;TODO: maybe add org narrowing
   ("q" nil "cancel"))
 (global-set-key (kbd "<f9>") 'hydra-scope/body)
