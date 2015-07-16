@@ -149,6 +149,10 @@
           " Helm"
           )))
 
+(use-package backup-walker
+  ;TODO: bind to key and other stuff
+  )
+
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (local-set-key (kbd "<return>") 'newline-and-indent))

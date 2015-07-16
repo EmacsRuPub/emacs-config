@@ -31,6 +31,7 @@
         anchored-transpose
         auctex
         auto-yasnippet
+        backup-walker
         bbdb
         bookmark+
         c-eldoc
@@ -156,7 +157,6 @@
 
 (setq package-el-packages-staging
       '(
-        backup-walker
         calfw-gcal
         discover-my-major
         edebug-x
