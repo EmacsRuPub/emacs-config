@@ -164,3 +164,14 @@
 * TODO [#C] [[https://github.com/dfeich/org-babel-examples][dfeich/org-babel-examples - https://github.com/dfeich/org-babel-examples]] [2015-06-30 Вт 19:58] :emacs:try:
 * TODO [#C] [[https://github.com/nflath/recursive-narrow][nflath/recursive-narrow - https://github.com/nflath/recursive-narrow]] [2015-07-06 Пн 13:38] :emacs:try:
 * TODO [#C] [[http://oremacs.com/2015/07/07/hydra-resume/][Pause or resume the current Hydra · (or emacs - http://oremacs.com/2015/07/07/hydra-resume/]] [2015-07-08 Ср 13:13] :emacs:try:
+* TODO [#C] timesheet.el [2015-07-14 Вт 13:35] :emacs:try:
+* TODO [#C] thingopt [2015-07-14 Вт 13:37] :emacs:try:
+* TODO [#C] thing-cmds [2015-07-14 Вт 13:37] :emacs:try:
+* TODO [#C] searchq [2015-07-14 Вт 22:24]                            :emacs:try:
+* TODO [#C] grep-a-lot [2015-07-14 Вт 22:25] :emacs:try:
+* TODO [#C] py-import-check [2015-07-14 Вт 23:14] :emacs:try:
+* TODO [#C] nose-* [2015-07-16 Чт 10:08]                             :emacs:try:
+* TODO [#C] eww-lnum [2015-07-16 Чт 12:54] :emacs:try:
+* TODO [#C] memory-usage [2015-07-16 Чт 13:03] :emacs:try:
+* TODO [#C] calfw-gcal [2015-07-16 Чт 13:04] :emacs:try:
+* TODO [#C] wand [2015-07-16 Чт 13:07]                               :emacs:try:

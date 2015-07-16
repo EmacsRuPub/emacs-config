@@ -185,3 +185,9 @@
 * TODO [#B] fallback on isearch for "too short" phi-searches [2015-06-18 Чт 14:37] :emacs:ticket:
 * TODO [#B] maybe function for selecting among open jabber-chat buffers [2015-06-22 Пн 15:09] :emacs:ticket:
 * TODO [#B] is there any way to automatically tag entries with some function during capture process? [2015-07-03 Пт 16:00] :orgmode:emacs:ticket:
+* TODO [#C] borrow ideas from "smotitah" package [2015-07-11 Сб 17:24] :emacs:ticket:
+* TODO [#C] borrow ideas from http://github.com/kurisuwhyte/emacs-wonderland [2015-07-11 Сб 18:32]              :emacs:ticket:
+* TODO [#C] fork pyimpsort and correct behaviour [2015-07-14 Вт 14:17] :emacs:ticket:
+* TODO [#C] fork py-autopep8 and see if it works correctly [2015-07-14 Вт 23:13] :emacs:ticket:
+* TODO [#C] fork python-pep8 package, check correctness and customizability [2015-07-16 Чт 12:46] :emacs:ticket:
+* TODO [#B] found the root cause of serial errors with filesystem notification [2015-07-16 Чт 12:54] :emacs:ticket:
