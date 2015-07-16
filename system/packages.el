@@ -50,6 +50,7 @@
         discover-my-major
         drag-stuff
         dtrt-indent
+        edebug-x
         el-spice
         eldoc-eval
         elisp-slime-nav
@@ -160,7 +161,6 @@
 (setq package-el-packages-staging
       '(
         calfw-gcal
-        edebug-x
         esup
         eww-lnum
         gitignore-mode

@@ -10,6 +10,7 @@
 
 (use-package popwin)
 (use-package epg)
+(use-package edebug-x)
 
 ;;; Enable functions that are disabled by default
 (put 'dired-find-alternate-file 'disabled nil)
