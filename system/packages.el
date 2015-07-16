@@ -142,6 +142,7 @@
         tern
         tern-auto-complete
         twittering-mode
+        unbound
         undo-tree
         unicode-fonts
         use-package
@@ -181,7 +182,6 @@
         shift-text
         slime-annot
         spinner
-        unbound
         wand
         ))
 
