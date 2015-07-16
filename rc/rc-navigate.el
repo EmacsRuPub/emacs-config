@@ -209,6 +209,13 @@
 (use-package discover-my-major
   ;TODO: bind to key
   )
+
+(use-package phi-search-mc
+  :config
+  (phi-search-mc/setup-keys)
+  (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys)
+)
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory

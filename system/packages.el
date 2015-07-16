@@ -117,6 +117,7 @@
         paren-face
         pdf-tools
         phi-search
+        phi-search-mc
         projectile
         python
         python-pep8
@@ -168,7 +169,6 @@
         memory-usage
         nose
         nose-mode
-        phi-search-mc
         pep8
         py-autopep8
         py-import-check
