@@ -140,6 +140,7 @@
         snakehump
         swoop
         tern
+        tern-auto-complete
         twittering-mode
         undo-tree
         unicode-fonts
@@ -180,7 +181,6 @@
         shift-text
         slime-annot
         spinner
-        tern-auto-complete
         unbound
         wand
         ))
