@@ -146,7 +146,12 @@
     (setq generic-default-modes (delete 'javascript-generic-mode
                                         generic-default-modes))))
 
-;TODO: find new package for file templates
+(use-package yatemplate
+  :init
+  (auto-insert-mode)
+  :config
+  (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
+  (yatemplate-fill-alist))
 
 (use-package rebox2
   ;;TODO: bind commands
