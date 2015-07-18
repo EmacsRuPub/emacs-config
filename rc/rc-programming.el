@@ -162,8 +162,6 @@ PROJECT: %(projectile-project-root)
   (bind-key "C-c l" 'coverlay-load-file)
   (bind-key "C-c s" 'coverlay-parse-buffer))
 
-(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-
 (provide 'rc-programming)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
