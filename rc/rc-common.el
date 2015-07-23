@@ -87,6 +87,7 @@
         js2-mode
         html-mode
         lua-mode
+        yaml-mode
 ))
 ;; untabify some modes
 (setq custom/untabify-modes
