@@ -57,7 +57,7 @@
   (setq slime-net-coding-system 'utf-8-unix)
   (setq slime-lisp-implementations '((clojure ("clj-cmd") :init swank-clojure-init)))
   (setq slime-use-autodoc-mode nil)
-  (setq slime-backend (concat (car (f-glob "slime-*" (at-config-basedir "elpa"))) "/swank-loader.lisp"))
+  (setq slime-backend (concat (package-desc-dir (cadr (assq 'slime package-alist))) "/swank-loader.lisp"))
   (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
   ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
   (defhydra hydra-slime ()
