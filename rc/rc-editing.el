@@ -55,12 +55,6 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
-(defun set-book-readonly ()
-  (when (or (s-contains? "book" (buffer-file-name))
-            (s-contains? "fiction" (buffer-file-name)))
-    (read-only-mode)))
-(add-hook 'find-file-hook 'set-book-readonly)
-
 (use-package drag-stuff
   :defer t
   :config

@@ -6,14 +6,7 @@
 
 (use-package bookmark+
   :init
-  (use-package crosshairs)
-  :config
-  ;;FIXME: workaround
-  (defadvice bookmark-bmenu-save
-      (around allow-save-bookmarks activate)
-    "Allows to save read-only bookmarks list."
-    (let ((inhibit-read-only t))
-      ad-do-it)))
+  (use-package crosshairs))
 
 (use-package re-builder
   :defer t)
