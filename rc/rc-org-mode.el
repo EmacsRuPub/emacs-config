@@ -36,7 +36,7 @@
 ;TODO: maybe do it less straightforward
 (add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
 (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
-(add-to-list 'org-agenda-files (at-homedir ".stumpwm.d/todo.org"))
+(add-to-list 'org-agenda-files (at-homedir "/.stumpwm.d/todo.org"))
 
 (setq calendar-date-style 'european)
 (setq org-agenda-dim-blocked-tasks 'invisible)
