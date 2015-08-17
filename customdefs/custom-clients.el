@@ -19,23 +19,6 @@
 
 (defalias 'tt 'terminal)
 
-;;TODO: make some kind of ERC profiles from functions below
-(defun connect-slack-irc ()
-  (interactive)
-  (erc-tls
-   :server private/mira-slack-host
-   :full-name private/erc-full-name
-   :nick private/mira-slack-nick
-   :password private/mira-slack-password))
-
-(defun connect-gitter-irc ()
-  (interactive)
-  (erc-tls
-   :server private/erc-server-gitter
-   :full-name private/erc-full-name
-   :nick private/erc-nick-gitter
-   :password private/erc-password-gitter))
-
 ;; FIXME should be able to quit server
 ;; being invoked from barely any buffer
 (defun leave-irc-server ()
