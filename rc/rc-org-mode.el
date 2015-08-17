@@ -349,6 +349,7 @@ show _A_ll                 add t_i_me to timestamp   _c_ancel clock
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
 (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
+(define-key org-mode-map (kbd "M-o") 'ace-link-org)
 
 (define-key org-mode-map (kbd "C-'") nil)
 (define-key org-mode-map (kbd "C-c [") nil)

@@ -157,9 +157,7 @@
 
 (use-package ace-link
   :config
-  (progn
-    (ace-link-setup-default)
-    (define-key org-mode-map (kbd "M-o") 'ace-link-org)))
+  (ace-link-setup-default))
 
 (use-package dired
   :config
