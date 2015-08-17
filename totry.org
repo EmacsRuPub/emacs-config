@@ -175,3 +175,14 @@
 * TODO [#C] memory-usage [2015-07-16 Чт 13:03] :emacs:try:
 * TODO [#C] calfw-gcal [2015-07-16 Чт 13:04] :emacs:try:
 * TODO [#C] wand [2015-07-16 Чт 13:07]                               :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/fixing-double-capitals-as-you-type.html?source%3Drss][Fixing DOuble CApitals as you type · Endless Parentheses - http://endlessparentheses.com/fixing-double-capitals-as-you-type.html?source=rss]] [2015-07-20 Пн 21:46] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/07/20/hydra-columns/][Easily arrange hydra into a matrix · (or emacs - http://oremacs.com/2015/07/20/hydra-columns/]] [2015-07-22 Ср 18:40] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/07/23/ivy-multiaction/][New Ivy multi-action exit · (or emacs - http://oremacs.com/2015/07/23/ivy-multiaction/]] [2015-07-23 Чт 23:49] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html?source%3Drss][Embedding Youtube videos with org-mode links · Endless Parentheses - http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html?source=rss]] [2015-07-28 Вт 16:49] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html][Embedding Youtube videos with org-mode links · Endless Parentheses - http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html]] [2015-07-31 Пт 13:17] :emacs:try:
+* TODO [#C] [[http://oremacs.com/2015/07/27/counsel-recoll/][Using Recoll desktop search database with Emacs · (or emacs - http://oremacs.com/2015/07/27/counsel-recoll/]] [2015-08-02 Вс 23:59] :emacs:try:
+* TODO [#C] [[http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html][Use which-func-mode with js2-mode | Chens blog - http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html]] [2015-08-03 Пн 22:55] :emacs:try:
+* TODO [#C] [[http://sachachua.com/blog/2015/08/org-mode-date-arithmetic/][Org Mode date arithmetic - sacha chua :: living an awesome life - http://sachachua.com/blog/2015/08/org-mode-date-arithmetic/]] [2015-08-07 Пт 22:59] :emacs:try:
+* TODO [#C] [[http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html][Evil text object to select nearby file path | Chens blog - http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html]] [2015-08-08 Сб 21:54] :emacs:try:
+* TODO [#C] [[http://endlessparentheses.com/use-org-mode-links-for-absolutely-anything.html][Use Org-Mode Links for Absolutely Anything · Endless Parentheses - http://endlessparentheses.com/use-org-mode-links-for-absolutely-anything.html]] [2015-08-12 Ср 14:34] :emacs:try:
+* TODO [#C] [[http://www.lunaryorn.com/2015/08/16/emojis-in-emacs.html][Emojis in Emacs – lunarsite - http://www.lunaryorn.com/2015/08/16/emojis-in-emacs.html]] [2015-08-17 Пн 09:34] :emacs:try:

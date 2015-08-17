@@ -152,8 +152,10 @@
 * TODO [#B] hydra for moving text, maybe via drag-stuff (think of) [2015-05-01 Пт 18:27] :emacs:ticket:
 * TODO [#B] make use of org helm source, try to use it to uniquify incoming [captured] headings [2015-05-01 Пт 18:34] :emacs:ticket:
 * TODO [#C] review [[http://kostafey.blogspot.ru/2012/10/mode-line.html]] [2015-05-03 Вс 20:37]                         :emacs:ticket:
-* GOING [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:ATTACH:
+* WAITING [#A] customdef for removing common prefix from lines in region (find or implement) [2015-05-05 Вт 23:24] :emacs:ticket:ATTACH:
   :LOGBOOK:
+  - State "WAITING"    from "GOING"      [2015-07-25 Сб 18:24] \\
+    not crucial for now
   - State "GOING"      from "TODO"       [2015-05-12 Вт 17:27]
   :END:
   :PROPERTIES:
@@ -191,3 +193,6 @@
 * TODO [#C] fork py-autopep8 and see if it works correctly [2015-07-14 Вт 23:13] :emacs:ticket:
 * TODO [#C] fork python-pep8 package, check correctness and customizability [2015-07-16 Чт 12:46] :emacs:ticket:
 * TODO [#B] found the root cause of serial errors with filesystem notification [2015-07-16 Чт 12:54] :emacs:ticket:
+* TODO [#C] magit: bind blame mode and blame commit showing [2015-07-25 Сб 17:20] :emacs:ticket:
+* TODO [#B] workaround yatemplate insertion in org-agenda buffer [2015-07-25 Сб 17:23] :emacs:ticket:
+* TODO [#A] find a way to make emacs not to stuck when some dirs display with dired become deleted  [2015-07-31 Пт 19:26] :emacs:ticket:
