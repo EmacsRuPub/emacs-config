@@ -156,12 +156,6 @@ PROJECT: %(projectile-project-root)
     (setq ediff-split-window-function 'split-window-horizontally)
     (setq ediff-diff-options "-w")))
 
-(use-package coverlay
-  :config
-  ;; TODO: make hydra
-  (bind-key "C-c l" 'coverlay-load-file)
-  (bind-key "C-c s" 'coverlay-parse-buffer))
-
 (provide 'rc-programming)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

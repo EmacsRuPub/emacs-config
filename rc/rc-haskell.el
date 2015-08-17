@@ -27,11 +27,6 @@
   (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci))
 
-(use-package hs-lint
-  :config
-  (setq hs-lint-replace-with-suggestions t)
-  (define-key haskell-mode-map (kbd "C-c l") 'hs-lint))
-
 (use-package haskell-ghci)
 
 ;;TODO: setup flycheck

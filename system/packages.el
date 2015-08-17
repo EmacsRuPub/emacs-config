@@ -19,7 +19,6 @@
 (setq package-el-packages
       '(
         ac-c-headers
-        ac-clang
         ac-emmet
         ac-helm
         ac-math
@@ -30,6 +29,7 @@
         adaptive-wrap
         anchored-transpose
         auctex
+        auto-complete-clang
         auto-yasnippet
         backup-walker
         bbdb
@@ -43,6 +43,7 @@
         css-eldoc
         csv-mode
         deep-thought-theme
+        deft
         diminish
         dired+
         dired-sort-menu
@@ -64,6 +65,7 @@
         flycheck
         flycheck-color-mode-line
         framemove
+        fuzzy
         ggtags
         git-gutter
         git-timemachine
@@ -121,6 +123,7 @@
         pdf-tools
         phi-search
         phi-search-mc
+        popwin
         projectile
         python
         python-pep8

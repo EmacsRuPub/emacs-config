@@ -125,10 +125,6 @@
   :config
   (turn-on-fuzzy-isearch))
 
-(use-package window-number
-  :config
-  (window-number-meta-mode))
-
 (use-package windmove
   :init
   (use-package framemove)

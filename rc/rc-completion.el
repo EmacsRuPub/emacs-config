@@ -9,10 +9,6 @@
   :init
   (progn
     (use-package auto-complete-config)
-    (use-package auto-complete-extension)
-    (use-package auto-complete-emacs-lisp)
-    (use-package auto-complete-latex)
-    (use-package auto-complete-yasnippet)
     (use-package ac-helm))
   :config
   (progn

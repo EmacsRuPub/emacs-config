@@ -32,10 +32,6 @@
     (add-hook 'python-mode-hook 'jedi:ac-setup)
     ))
 
-(use-package flake8-multi
-  :config
-  (setq flake8-multi/exclude-patterns '("env" "site-packages" "old")))
-
 (use-package pylookup
   :defer t
   :config

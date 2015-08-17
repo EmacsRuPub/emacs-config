@@ -15,6 +15,7 @@
 (use-package erc
   :defer t
   :init
+  ;;TODO: try using 'erc-modules
   (use-package erc-pcomplete)
   (use-package erc-join)
   (use-package erc-lang)
@@ -25,8 +26,8 @@
   (use-package erc-menu)
   (use-package erc-ring)
   (use-package erc-match)
-  (use-package erc-nicklist)
-  (use-package erc-highlight-nicknames)
+  ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
+  (use-package erc-hl-nicks)
   (use-package ercn) ;TODO: add notifications handler function
   :config
   (progn
