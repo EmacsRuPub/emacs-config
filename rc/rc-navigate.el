@@ -60,7 +60,10 @@
 (use-package helm-ag
   :config
   (setq helm-ag-insert-at-point 'symbol)
-  (setq helm-ag-fuzzy-match t))
+  (setq helm-ag-fuzzy-match t)
+  ;;TODO: add other common escapes
+  (defadvice helm-ag--query (after escape-search-term activate)
+    (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
 
 (use-package helm-gtags
   :defer t
