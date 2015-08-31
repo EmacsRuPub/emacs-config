@@ -119,7 +119,6 @@
         orgit
         orglink
         paredit
-        paren-face
         pdf-tools
         phi-search
         phi-search-mc
