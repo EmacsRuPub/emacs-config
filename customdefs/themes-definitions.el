@@ -58,6 +58,7 @@
 (setf (gethash "urw-nimbus-mono-l-normal" fonts-def) "-urw-Nimbus Mono L-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 (setf (gethash "xos4-terminus-bold-16" fonts-def) "-xos4-Terminus-bold-normal-normal-*-16-*-*-*-c-80-iso10646-1")
 (setf (gethash "bsvera-sans-mono" fonts-def) "Bitstream Vera Sans Mono:size=12")
+(setf (gethash "hack-regular" fonts-def) "Hack:size=12")
 
 )
 
