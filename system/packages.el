@@ -38,6 +38,7 @@
         calfw
         comment-dwim-2
         common-lisp-snippets
+        counsel
         crontab-mode
         crosshairs
         css-eldoc
@@ -142,6 +143,8 @@
         scratch
         smart-mode-line
         snakehump
+        swiper
+        swiper-helm
         swoop
         tern
         tern-auto-complete
