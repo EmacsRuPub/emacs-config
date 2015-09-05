@@ -31,6 +31,9 @@
 (defadvice occur-mode-goto-occurrence (after close-occur activate)
   (delete-other-windows))
 
+(defvar suppress-projectile-symbol-at-point nil
+  "Whether to suppress inserting symbol at point while using projectile searches")
+
 (defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
   (if suppress-projectile-symbol-at-point
       (setq ad-return-value "")
