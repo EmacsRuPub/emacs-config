@@ -108,9 +108,8 @@
     (setq ibuffer-jump-offer-only-visible-buffers t)
     (setq ibuffer-saved-filters
           '(("dired" ((mode . dired-mode)))
-            ("leechcraft" ((filename . "leechcraft")))
-            ("qxmpp" ((filename . "qxmpp")))
-            ("xmonad" ((filename . "xmonad")))
+            ("foss" ((filename . "foss")))
+            ("pets" ((filename . "pets")))
             ("jabberchat" ((mode . jabber-chat-mode)))
             ("orgmode" ((mode . org-mode)))
             ("elisp" ((mode . emacs-lisp-mode)))
