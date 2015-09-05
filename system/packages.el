@@ -36,6 +36,7 @@
         bookmark+
         c-eldoc
         calfw
+        calfw-gcal
         comment-dwim-2
         common-lisp-snippets
         counsel
