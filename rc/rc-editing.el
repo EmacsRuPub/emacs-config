@@ -186,6 +186,10 @@
     ("<down>" show-marks "show-marks"))
   (global-set-key (kbd "<f12>") 'hydra-mark/body))
 
+(use-package page-break-lines
+  :config
+  (turn-on-page-break-lines-mode))
+
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)

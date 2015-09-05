@@ -119,6 +119,7 @@
         org-toodledo
         orgit
         orglink
+        page-break-lines
         paredit
         pdf-tools
         phi-search
