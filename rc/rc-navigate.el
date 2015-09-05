@@ -209,6 +209,19 @@
 
 (use-package recursive-narrow)
 
+(use-package swiper
+  :config
+  (setq ivy-display-style 'fancy)
+  (custom-set-faces
+   '(swiper-minibuffer-match-face-1
+     ((t :background "#dddddd")))
+   '(swiper-minibuffer-match-face-2
+     ((t :background "#bbbbbb" :weight bold)))
+   '(swiper-minibuffer-match-face-3
+     ((t :background "#bbbbff" :weight bold)))
+   '(swiper-minibuffer-match-face-4
+     ((t :background "#ffbbff" :weight bold)))))
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
