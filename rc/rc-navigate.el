@@ -345,12 +345,8 @@ _g_ ag in project      _w_ select w3m buffer
 (global-unset-key (kbd "C-M-s"))
 (global-unset-key (kbd "C-M-r"))
 (global-unset-key (kbd "C-x C-b"))
-(global-unset-key (kbd "C-h f"))
-(global-unset-key (kbd "C-h v"))
 (global-set-key (kbd "C-s") 'phi-search)
 (global-set-key (kbd "C-r") 'phi-search-backward)
-(global-set-key (kbd "C-h f") 'counsel-describe-function)
-(global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
 (provide 'rc-navigate)
 
