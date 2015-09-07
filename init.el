@@ -13,6 +13,20 @@
 
 (setq custom-file (at-config-basedir "customizations.el"))
 
+;; A bunch of directories for various working datasets
+;; As the order of loading corresponding extensions,
+;; is cumbersome to maintain we should customize them ASAP (here)
+;;TODO: think of less straightforward customization way
+(setq auto-save-list-file-prefix (at-data-dir "/auto-save-list/.saves-"))
+(setq bookmark-default-file (at-data-dir "/bookmarks"))
+(setq tramp-persistency-file-name (at-data-dir "/tramp"))
+(setq eshell-directory-name (at-data-dir "/eshell/"))
+(setq shared-game-score-directory (at-data-dir "/games"))
+(setq pcache-directory (at-data-dir "/var/pcache/"))
+(setq url-configuration-directory (at-data-dir "/url/"))
+(setq request-storage-directory (at-data-dir "/request"))
+(setq image-dired-dir (at-data-dir "/image-dired/"))
+
 (add-to-list 'load-path (at-config-basedir "rc"))
 (add-to-list 'load-path (at-config-basedir "bundles"))
 

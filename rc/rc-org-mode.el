@@ -64,6 +64,8 @@
 (setq org-clock-in-switch-to-state "GOING")
 (setq org-clock-into-drawer "CLOCK")
 (setq org-clock-out-remove-zero-time-clocks t)
+(setq org-id-locations-file (at-data-dir "/.org-id-locations"))
+(setq org-clock-persist-file (at-data-dir "/org-clock-save.el"))
 (setq org-clock-persist t)
 (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
 (setq org-confirm-elisp-link-function 'y-or-n-p)
@@ -270,7 +272,6 @@
 
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-(load (at-config-basedir "last-scrum-timestamp"))
 (org-add-link-type "tag" 'custom/follow-tag-link)
 (ignore-errors (org-agenda-to-appt))
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)

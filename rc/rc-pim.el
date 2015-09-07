@@ -97,6 +97,7 @@
 (use-package org-gcal
   :config
   (progn
+    (setq org-gcal-dir (at-data-dir "/org-gcal/"))
     (setq org-gcal-client-id private/org-gcal-client-id)
     (setq org-gcal-client-secret private/org-gcal-client-secret)
     (setq org-gcal-file-alist private/org-gcal-file-alist)))

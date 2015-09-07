@@ -6,7 +6,9 @@
 
 (use-package bookmark+
   :init
-  (use-package crosshairs))
+  (use-package crosshairs)
+  :config
+  (setq bmkp-last-bookmark-file (at-data-dir "/bookmarks")))
 
 (use-package re-builder
   :defer t)
@@ -39,6 +41,7 @@
     (setq helm-apropos-fuzzy-match t)
     (setq helm-apropos-fuzzy-match t)
     (setq helm-move-to-line-cycle-in-source t)
+    (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
     (pushnew 'python-mode helm-buffers-favorite-modes)
     (bind-key "C-<down>" 'helm-next-source helm-map)
     (bind-key "C-<up>" 'helm-previous-source helm-map)

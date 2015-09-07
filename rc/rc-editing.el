@@ -5,7 +5,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package rst)
-(use-package savekill)
 (use-package saveplace)
 (use-package table) ;; table
 (use-package footnote)
@@ -55,6 +54,10 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
+(use-package savekill
+  :config
+  (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
+
 (use-package drag-stuff
   :defer t
   :config
@@ -84,6 +87,10 @@
     (setq recentf-max-menu-items 15)
     ;; get rid of `find-file-read-only' and replace it with something more useful.
     ))
+
+(use-package multiple-cursors
+  :config
+  (setq mc/list-file (at-data-dir "/.mc-lists.el")))
 
 (use-package region-bindings-mode
   :config

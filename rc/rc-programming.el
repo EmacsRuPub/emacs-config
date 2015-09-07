@@ -30,6 +30,8 @@
   (progn
     (projectile-global-mode) ;; to enable in all buffers
     (setq projectile-enable-caching t)
+    (setq projectile-cache-file (at-data-dir "/projectile.cache"))
+    (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
     (setq projectile-require-project-root nil)
     (setq projectile-switch-project-action 'projectile-find-file)
     (setq projectile-completion-system 'ivy)
