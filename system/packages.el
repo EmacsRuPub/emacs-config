@@ -147,7 +147,6 @@
         snakehump
         swiper
         swiper-helm
-        swoop
         tern
         tern-auto-complete
         twittering-mode

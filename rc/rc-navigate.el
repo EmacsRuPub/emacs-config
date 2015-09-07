@@ -91,12 +91,6 @@
     (add-hook 'c-mode-hook 'helm-gtags-mode)
     (add-hook 'c++-mode-hook 'helm-gtags-mode)))
 
-(use-package swoop
-  :config
-  (progn
-    (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
-    (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
-
 (use-package zoom-window
   :config
   (setq zoom-window-mode-line-color "DarkGreen"))
@@ -315,7 +309,7 @@ Search                 Various
 ------------------------------
 _r_ recursive grep     _h_ helm-mini
 _s_ semantic/imenu     _q_ projectile
-_m_ multi swoop        _f_ find files
+_m_ swiper-multi       _f_ find files
 _i_ find occurencies   _p_ switch project
 _o_ find in buffer     _c_ helm-flycheck
 _g_ ag in project      _w_ select w3m buffer
