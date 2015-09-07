@@ -56,24 +56,6 @@ point reaches the beginning or end of the buffer, stop there."
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-(defun quote-string-with-period-and-nextline ()
-  "Wraps current line in quotes, adds period and goes one down"
-  (interactive)
-  (beginning-of-line)
-  (insert "\'")
-  (end-of-line)
-  (insert "\'\,")
-  (next-line))
-
-(defun double-quote-string-with-period-and-nextline ()
-  "Wraps current line in quotes, adds period and goes one down"
-  (interactive)
-  (beginning-of-line)
-  (insert "\"")
-  (end-of-line)
-  (insert "\"\,")
-  (next-line))
-
 (defun skip-to-next-blank-line ()
   (interactive)
   (let ((inhibit-changing-match-data t))
