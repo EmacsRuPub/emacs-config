@@ -63,10 +63,7 @@
 (use-package js2-refactor
   :config
   (progn
-    (js2r-add-keybindings-with-prefix "C-c C-j")
-    (make-variable-buffer-local 'custom/js2r-path-to-tests)
-    (make-variable-buffer-local 'custom/js2r-path-to-sources)
-    (make-variable-buffer-local 'custom/js2r-test-suffix)))
+    (js2r-add-keybindings-with-prefix "C-c C-j")))
 
 (use-package tern
   :commands tern-mode
