@@ -124,6 +124,18 @@
             (shell-command (format "md5sum %s" abs-file-name))
             (buffer-string)))))))
 
+;; some customizations for nested hydras
+(defvar hydra-stack nil)
+
+(defun hydra-push (expr)
+  (push `(lambda () ,expr) hydra-stack))
+
+(defun hydra-pop ()
+  (interactive)
+  (let ((x (pop hydra-stack)))
+    (when x
+      (funcall x))))
+
 )
 
 (provide 'custom-navigate)
