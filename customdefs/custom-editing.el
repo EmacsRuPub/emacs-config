@@ -12,31 +12,6 @@
   (interactive "*")
   (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
-(defun uniq ()
-  "Trying to leave only unique strings from selection"
-  (interactive)
-  (let ((beg (point))
-        (end (mark))
-        (hash (make-hash-table :test 'equal))
-        )
-    (if (not end)
-        (error "Please, mark text to uniquify")
-      (save-excursion
-        (narrow-to-region beg end)
-        (goto-char (point-min))
-        ;; store strings in hash
-        (while (not (eobp))
-          (beginning-of-line)
-          (puthash (buffer-substring (point) (point-at-eol)) 0 hash)
-          (forward-line 1))
-        (delete-region beg end)
-        ;; insert strings from hash
-        (maphash (lambda (key val)
-                   (insert key "\n")
-                   (message "%s" key))
-                 hash)
-        (widen)))))
-
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 

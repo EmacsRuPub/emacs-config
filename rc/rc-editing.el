@@ -240,7 +240,7 @@
   ("n" custom/rename-file-and-buffer)
   ("s" sort-lines)
   ("t" delete-trailing-whitespace)
-  ("u" custom/uniq)
+  ("u" delete-duplicate-lines)
   ("v" view-mode)
   ("x" query-replace-regexp)
   ("a" custom/append-cited-region)
