@@ -87,7 +87,7 @@ point reaches the beginning or end of the buffer, stop there."
       (when (= p (point)) ad-do-it))))
 
 ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
-(defun duplicate-line (arg)
+(defun duplicate-and-comment-line (arg)
   "comment line at point; if COMMENTFIRST is non-nil, comment the original"
   (interactive "P")
   (beginning-of-line)

@@ -222,7 +222,7 @@
 ;;TODO: plan docstring
 (defhydra hydra-edit (:color blue)
   ("0" custom/compact-spaces-in-region)
-  ("2" custom/duplicate-line)
+  ("2" custom/duplicate-and-comment-line)
   ("4" snakehump-next-at-point)
   ("<left>" jump-char-backward)
   ("<right>" jump-char-forward)
