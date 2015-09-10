@@ -149,6 +149,7 @@
         swiper-helm
         tern
         tern-auto-complete
+        transpose-frame
         twittering-mode
         unbound
         undo-tree

@@ -218,6 +218,19 @@
    '(swiper-minibuffer-match-face-4
      ((t :background "#ffbbff" :weight bold)))))
 
+(use-package transpose-frame
+  :config
+  (defhydra hydra-transpose-frame ()
+    "frames geometry management"
+    ("t" transpose-frame "transpose")
+    ("i" flip-frame "flip")
+    ("o" flop-frame "flop")
+    ("r" rotate-frame "rotate")
+    ("<left>" rotate-frame-anticlockwise "rotate <-")
+    ("<right>" rotate-frame-clockwise "rotate ->")
+    ("q" nil "cancel"))
+  (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
