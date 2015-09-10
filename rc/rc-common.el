@@ -72,6 +72,10 @@
         ("\\.swf\\'" "swfdec-player" (file))
         ))
 
+(setq display-time-world-list
+      '(("Europe/Moscow" "Moscow")
+        ("America/New_York" "New York")))
+
 ;; clean trailing whitespaces automatically
 (setq custom/trailing-whitespace-modes
       '(
