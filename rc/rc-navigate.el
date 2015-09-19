@@ -237,6 +237,11 @@
     ("q" nil "cancel"))
   (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
 
+(use-package avy
+  :config
+  (setq avy-timeout-seconds 0.5)
+  (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
@@ -275,8 +280,6 @@
   ("<C-down>" windsize-down "move splitter down")
   ("<C-left>" windsize-left "move splitter left")
   ("<C-right>" windsize-right "move splitter right")
-  ("g" avy-goto-char "goto char within window" :color blue)
-  ("G" avy-goto-word-0 "goto word within window" :color blue)
   ("=" text-scale-increase)
   ("-" text-scale-decrease)
   ("f" make-frame-command)
@@ -350,7 +353,9 @@ _g_ ag in project      _w_ select w3m buffer
   ("w" w3m-select-buffer)
   ("t" google-translate-at-point)
   ("T" google-translate-query-translate)
-  ("l" helm-org-headlines))
+  ("l" helm-org-headlines)
+  ("a" avy-goto-char-timer "goto char within window" :color blue)
+  ("A" avy-goto-word-0 "goto word within window" :color blue))
 (global-set-key (kbd "C-`") 'hydra-navigate/body)
 
 (global-unset-key (kbd "C-s"))
