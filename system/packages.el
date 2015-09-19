@@ -122,6 +122,7 @@
         page-break-lines
         paredit
         pdf-tools
+        pep8
         phi-search
         phi-search-mc
         popwin
