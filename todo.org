@@ -196,3 +196,4 @@
 * TODO [#C] magit: bind blame mode and blame commit showing [2015-07-25 Сб 17:20] :emacs:ticket:
 * TODO [#B] workaround yatemplate insertion in org-agenda buffer [2015-07-25 Сб 17:23] :emacs:ticket:
 * TODO [#A] find a way to make emacs not to stuck when some dirs display with dired become deleted  [2015-07-31 Пт 19:26] :emacs:ticket:
+* TODO [#A] show magit commit buffer in side of magit log window [2015-09-06 Вс 21:48] :emacs:ticket:
