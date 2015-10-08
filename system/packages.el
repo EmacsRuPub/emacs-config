@@ -85,6 +85,7 @@
         help+
         hide-comnt
         highlight-sexp
+        hl-spotlight
         hungry-delete
         hydra
         irony

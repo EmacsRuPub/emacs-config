@@ -202,6 +202,10 @@
 ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
 ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
 
+(use-package hl-spotlight
+  :config
+  (global-hl-spotlight-mode))
+
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
