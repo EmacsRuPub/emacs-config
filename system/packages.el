@@ -100,6 +100,7 @@
         lua-mode
         magit
         magit-filenotify
+        macro-math
         mark
         markdown-mode
         material-theme

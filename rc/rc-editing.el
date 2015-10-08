@@ -197,6 +197,11 @@
   :config
   (turn-on-page-break-lines-mode))
 
+;; (use-package macro-math
+;;   :config
+;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
+;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
