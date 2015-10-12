@@ -158,16 +158,11 @@
   ;;TODO: bind commands
   )
 
-(use-package paredit
+(use-package smartparens
   :config
-  (progn
-    (diminish 'paredit-mode "()"))
-    (bind-key "M-s" nil paredit-mode-map)
-    (bind-key "M-<up>" nil paredit-mode-map)
-    (bind-key "M-<down>" nil paredit-mode-map)
-    (bind-key "C-<up>" nil paredit-mode-map)
-    (bind-key "C-<down>" nil paredit-mode-map)
-    (bind-key "C-M-s" 'paredit-splice-sexp paredit-mode-map))
+  (use-package smartparens-config)
+  (smartparens-global-strict-mode +1)
+  (show-smartparens-global-mode +1))
 
 (use-package vimrc-mode
   :defer t

@@ -122,7 +122,6 @@
         orgit
         orglink
         page-break-lines
-        paredit
         pdf-tools
         pep8
         phi-search
@@ -146,6 +145,7 @@
         savekill
         scratch
         smart-mode-line
+        smartparens
         snakehump
         swoop
         tern
