@@ -97,6 +97,7 @@
         keyfreq
         latex-preview-pane
         libmpdee
+        link-hint
         list-processes+
         lua-mode
         magit

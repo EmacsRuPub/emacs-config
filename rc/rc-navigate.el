@@ -321,6 +321,8 @@ defun + _c_omments
   ("-" custom/skip-to-previous-blank-line)
   ("h" git-gutter:previous-hunk)
   ("l" git-gutter:next-hunk)
+  ("f" link-hint-open-link :color blue)
+  ("y" link-hint-copy-link :color blue)
   ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
   ("q" nil "cancel"))
 (global-set-key (kbd "<f3>") 'hydra-entries/body)
