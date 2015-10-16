@@ -204,3 +204,14 @@
 * TODO [#C] [[http://endlessparentheses.com/better-time-stamps-in-org-export.html?source=rss][Better time-stamps in org-export with Emacs - http://endlessparentheses.com/better-time-stamps-in-org-export.html?source=rss]] [2015-10-06 Вт 09:24] :emacs:try:
 * TODO [#C] [[https://github.com/ReanGD/emacs-multi-compile][ReanGD/emacs-multi-compile - https://github.com/ReanGD/emacs-multi-compile]] [2015-10-07 Ср 13:37] :emacs:try:
 * TODO [#C] [[http://www.lunaryorn.com/2015/08/16/emojis-in-emacs.html][Emojis in Emacs — lunarsite - http://www.lunaryorn.com/2015/08/16/emojis-in-emacs.html]] [2015-10-07 Ср 15:36] :emacs:try:
+* TODO [#C] ps-ccrypt [2015-10-11 Вс 23:24] :emacs:try:
+* TODO [#C] real-auto-save [2015-10-11 Вс 23:25] :emacs:try:
+* TODO [#C] ispell [2015-10-11 Вс 23:59]                             :emacs:try:
+* TODO [#C] graphviz-dot-mode [2015-10-12 Пн 16:06] :emacs:try:
+* TODO [#A] edit-indirect package [2015-10-15 Чт 21:17]              :emacs:try:
+* TODO [#A] narrow-indirect package [2015-10-15 Чт 21:17]            :emacs:try:
+* TODO [#C] [[http://irreal.org/blog/?p=2029][Embedded Notes in Text | Irreal - http://irreal.org/blog/?p=2029]] [2015-10-15 Чт 21:34] :emacs:try:
+* TODO [#C] [[https://github.com/Malabarba/paradox][Malabarba/paradox - https://github.com/Malabarba/paradox]] [2015-10-16 Пт 10:26] :emacs:try:
+* TODO [#C] [[https://github.com/vspinu/polymode][vspinu/polymode - https://github.com/vspinu/polymode]] [2015-10-16 Пт 11:00] :emacs:try:
+* TODO [#B] real-auto-save [2015-10-17 Сб 23:59]                     :emacs:try:
+* TODO [#C] [[http://www.nongnu.org/geiser/][Geiser: Top - http://www.nongnu.org/geiser/]] [2015-10-17 Сб 23:59] :emacs:try:
