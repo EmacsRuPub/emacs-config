@@ -33,6 +33,7 @@
         auto-yasnippet
         backup-walker
         bbdb
+        beacon
         bookmark+
         c-eldoc
         calfw
@@ -85,7 +86,6 @@
         help+
         hide-comnt
         highlight-sexp
-        hl-spotlight
         hungry-delete
         hydra
         irony
