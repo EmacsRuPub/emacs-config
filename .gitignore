@@ -1,5 +1,6 @@
 */#*#
 *log
+*semantic*
 *~
 .emacs.desktop
 credentials.el.gpg
@@ -8,3 +9,4 @@ data
 elpa
 private
 request
+savehist
