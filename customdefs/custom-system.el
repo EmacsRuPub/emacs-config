@@ -60,6 +60,11 @@
               (if (file-exists-p (concat buffer-file-name "c"))
                   (delete-file (concat buffer-file-name "c"))))))
 
+(defmacro with-major-mode (mode &rest body)
+  `(lambda () (interactive)
+     (when (eq major-mode ,mode)
+       (progn ,@body))))
+
 )
 
 (provide 'custom-system)
