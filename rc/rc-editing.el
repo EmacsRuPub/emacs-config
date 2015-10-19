@@ -11,13 +11,6 @@
 (use-package snakehump)
 (use-package highlight-sexp)
 
-(delete-selection-mode t)
-(dtrt-indent-mode)
-(electric-indent-mode -1)
-(global-auto-revert-mode 1);; Auto refresh buffers
-(show-paren-mode t)
-(transient-mark-mode 1)
-
 (setq auto-revert-verbose nil)
 (setq comment-style 'indent)
 (setq default-input-method 'russian-computer)
@@ -47,6 +40,13 @@
 (setq-default tab-width 4)
 (setq-default transient-mark-mode t)
 (setq-default truncate-lines t);; Don't break lines for me, please
+
+(delete-selection-mode t)
+(dtrt-indent-mode)
+(electric-indent-mode -1)
+(global-auto-revert-mode 1);; Auto refresh buffers
+(show-paren-mode t)
+(transient-mark-mode 1)
 
 (make-variable-buffer-local 'transient-mark-mode)
 (put 'transient-mark-mode 'permanent-local t)
