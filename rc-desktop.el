@@ -33,7 +33,8 @@
 (setq-default desktop-save t)
 (setq-default desktop-save-mode t)
 (setq-default save-place t)
-(setq history-length 250)
+(setq history-length t)
+(setq history-delete-duplicates t)
 (setq desktop-buffers-not-to-save
       (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
