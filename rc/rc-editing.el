@@ -162,7 +162,8 @@
   :config
   (use-package smartparens-config)
   (smartparens-global-strict-mode +1)
-  (show-smartparens-global-mode +1))
+  (show-smartparens-global-mode +1)
+  (sp-use-paredit-bindings))
 
 (use-package vimrc-mode
   :defer t
