@@ -14,6 +14,8 @@
        '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives
        '("elpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives
+       '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 
 (setq package-el-packages
