@@ -18,6 +18,21 @@
        '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 
+(package-install 'use-package)
+(package-install 'auto-compile)
+
+(require 'use-package)
+(setq use-package-verbose t)
+(setq load-prefer-newer t)
+
+(use-package auto-compile
+  :ensure t
+  :config
+  (auto-compile-on-load-mode 1)
+  (auto-compile-on-save-mode 1)
+  (setq auto-compile-display-buffer nil)
+  (setq auto-compile-mode-line-counter t))
+
 (setq package-el-packages
       '(
         ac-c-headers
@@ -158,7 +173,6 @@
         unbound
         undo-tree
         unicode-fonts
-        use-package
         vimrc-mode
         vline
         volatile-highlights
