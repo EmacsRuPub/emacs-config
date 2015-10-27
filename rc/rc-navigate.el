@@ -69,6 +69,7 @@
   (defadvice helm-ag--query (after escape-search-term activate)
     (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
 
+;;TODO: sync and maybe slurp something from rc-cc
 (use-package helm-gtags
   :defer t
   :config
@@ -82,12 +83,13 @@
     (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
     (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
     (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-    ;; (bind-key "M-s" 'helm-gtags-select helm-gtags-mode-map)
+    (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
     (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
     (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
     (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
     (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
     (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
+    (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
     (add-hook 'dired-mode-hook 'helm-gtags-mode)
     (add-hook 'c-mode-hook 'helm-gtags-mode)
     (add-hook 'c++-mode-hook 'helm-gtags-mode)))
