@@ -86,6 +86,7 @@
         framemove
         fuzzy
         ggtags
+        function-args
         git-gutter
         git-timemachine
         gitignore-mode
