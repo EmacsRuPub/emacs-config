@@ -229,6 +229,12 @@
 ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
 ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
 
+(use-package miniedit
+  :defer t
+  :ensure t
+  :commands minibuffer-edit
+  :init (miniedit-install))
+
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)

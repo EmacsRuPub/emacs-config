@@ -124,6 +124,7 @@
         mark
         markdown-mode
         material-theme
+        miniedit
         multifiles
         multiple-cursors
         names
