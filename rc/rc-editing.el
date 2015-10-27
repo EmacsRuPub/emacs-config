@@ -71,10 +71,15 @@
   :bind ("C-=" . er/expand-region))
 
 (use-package undo-tree
+  :defer t
+  :ensure t
   :config
   (progn
     (global-undo-tree-mode t)
-    (setq undo-tree-mode-lighter "")))
+    (setq undo-tree-mode-lighter "")
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)
+    ))
 
 (use-package recentf
   :defer t
