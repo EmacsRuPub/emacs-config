@@ -105,6 +105,9 @@
         python-mode
 ))
 
+(setq resize-mini-windows t)
+(setq max-mini-window-height 0.33)
+
 (set-default buffer-file-coding-system 'utf-8-unix)
 (set-default default-buffer-file-coding-system 'utf-8-unix)
 (fset 'yes-or-no-p 'y-or-n-p)
