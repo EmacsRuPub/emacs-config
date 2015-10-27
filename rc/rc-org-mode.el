@@ -76,7 +76,7 @@
 (setq org-default-notes-file custom/org-capture-file)
 (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
 (setq org-enforce-todo-checkbox-dependencies t)
-(setq org-enforce-todo-dependencies t)
+(setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
 (setq org-extend-today-until 2)
 (setq org-fast-tag-selection-single-key 'expert)
 (setq org-fontify-done-headline t)
@@ -112,6 +112,8 @@
 (setq org-agenda-persistent-filter t)
 (setq appt-message-warning-time 10)
 (setq appt-display-interval 5)
+(setq org-use-effective-time t)
+(setq org-goto-max-level 10)
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
