@@ -209,3 +209,8 @@
   :ID:       722b29b5-6b12-43c9-bae9-95b4a0d15c38
   :END:
 * TODO [#B] review org-modules list and check if some of those need additional setup [2015-10-27 Вт 22:04] :emacs:ticket:
+* TODO [#B] check if zap-to-char will be useful [2015-10-27 Вт 23:04] :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: zap-to-char
+  :ID:       aa821abb-c782-4f5c-a042-cd141286bcfc
+  :END:
