@@ -98,6 +98,11 @@ With prefix argument, also display headlines without a TODO keyword."
   ;;    (org-agenda-goto-calendar)))
   )
 
+(defun org-use-speed-commands-for-headings-and-lists ()
+  "Activate speed commands on list items too."
+  (or (and (looking-at org-outline-regexp) (looking-back "^\**"))
+      (save-excursion (and (looking-at (org-item-re)) (looking-back "^[ \t]*")))))
+
 )
 
 (provide 'custom-orgmode)

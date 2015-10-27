@@ -40,6 +40,13 @@
 (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
 (add-to-list 'org-agenda-files (at-homedir "/.stumpwm.d/todo.org"))
 
+(add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
+(add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
+(add-to-list 'org-speed-commands-user '("s" call-interactively 'org-schedule))
+(add-to-list 'org-speed-commands-user '("i" call-interactively 'org-clock-in))
+(add-to-list 'org-speed-commands-user '("o" call-interactively 'org-clock-out))
+(add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
+
 (setq calendar-date-style 'european)
 (setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-agenda-include-all-todo t)
@@ -116,6 +123,7 @@
 (setq appt-display-interval 5)
 (setq org-use-effective-time t)
 (setq org-goto-max-level 10)
+(setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
