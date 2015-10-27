@@ -41,6 +41,12 @@
 (setq-default transient-mark-mode t)
 (setq-default truncate-lines t);; Don't break lines for me, please
 
+(setq x-stretch-cursor t)
+(setq blink-matching-paren nil)
+(setq show-paren-delay 0)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+
 (delete-selection-mode t)
 (dtrt-indent-mode)
 (electric-indent-mode -1)
