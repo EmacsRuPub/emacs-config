@@ -356,6 +356,16 @@ show _A_ll                 add t_i_me to timestamp
   ("q" nil "cancel"))
 (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
+(defhydra hydra-org-movement (:color red :columns 3)
+  "Org Mode Movements"
+  ("n" outline-next-visible-heading "next heading")
+  ("p" outline-previous-visible-heading "prev heading")
+  ("N" org-forward-heading-same-level "next heading at same level")
+  ("P" org-backward-heading-same-level "prev heading at same level")
+  ("u" outline-up-heading "up heading")
+  ("g" org-goto "goto" :exit t))
+;;TODO: bind hydra-org-movement to a key
+
 (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
 (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
 (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
