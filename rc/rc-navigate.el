@@ -343,7 +343,7 @@ _g_ ag in project      _w_ select w3m buffer
 "
   ("h" helm-mini)
   ("q" helm-projectile)
-  ("r" helm-do-grep)
+  ("r" helm-projectile-grep)
   ("f" custom/helm-find-files)
   ("s" helm-semantic-or-imenu)
   ("p" helm-projectile-switch-project)
