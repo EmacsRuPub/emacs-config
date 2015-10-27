@@ -380,6 +380,21 @@ show _A_ll                 add t_i_me to timestamp
                                    (interactive)
                                    (helm :sources '(custom/helm-source-org-files))))
 
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((css . t)
+   (dot . t)
+   (ditaa . t)
+   (emacs-lisp . t)
+   (js . t)
+   (latex . t)
+   (org . t)
+   (plantuml . t)
+   (R . t)
+   (scheme . t)
+   (sh . t)))
+
 (provide 'rc-org-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
