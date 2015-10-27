@@ -183,7 +183,6 @@
            '((agenda time-up tag-up) ))
           ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
-        ("u" . "unassigned")
         ("P" . "Prioritized tasks")
         ("Pa" "Prioritized tasks A"
          ((tags-todo "+PRIORITY=\"A\"") ))
