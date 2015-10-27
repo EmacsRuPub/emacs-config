@@ -225,3 +225,24 @@
 * [[https://github.com/jcpetkovich/shrink-whitespace.el][jcpetkovich/shrink-whitespace.el - https://github.com/jcpetkovich/shrink-whitespace.el]] [2015-10-25 Вс 22:55] :emacs:try:
 * [[https://github.com/rocky/emacs-test-simple][rocky/emacs-test-simple - https://github.com/rocky/emacs-test-simple]] [2015-10-25 Вс 22:59] :emacs:try:
 * [[https://github.com/lujun9972/uimage][lujun9972/uimage - https://github.com/lujun9972/uimage]] [2015-10-25 Вс 22:59] :emacs:try:
+* [[https://github.com/ralesi/ranger.el][ralesi/ranger.el - https://github.com/ralesi/ranger.el]] [2015-10-26 Пн 21:21] :emacs:try:
+* [[https://github.com/emacs-helm/helm-recoll][emacs-helm/helm-recoll - https://github.com/emacs-helm/helm-recoll]] [2015-10-26 Пн 21:36] :emacs:try:
+* [[https://github.com/chmouel/openstack-cgit-browse-file][chmouel/openstack-cgit-browse-file - https://github.com/chmouel/openstack-cgit-browse-file]] [2015-10-26 Пн 21:37] :emacs:try:
+* [[http://emacs-ide.tuxfamily.org/][Emacs-IDE - http://emacs-ide.tuxfamily.org/]] [2015-10-26 Пн 21:41] :emacs:try:
+* [[https://github.com/jyp/boon][jyp/boon - https://github.com/jyp/boon]] [2015-10-26 Пн 21:45] :emacs:try:
+* [[https://github.com/EHartC/memento][EHartC/memento - https://github.com/EHartC/memento]] [2015-10-26 Пн 21:53] :emacs:try:
+* [[https://github.com/bastibe/org-journal][bastibe/org-journal - https://github.com/bastibe/org-journal]] [2015-10-26 Пн 23:24] :emacs:try:
+* [[https://github.com/fgeller/fingers.el][fgeller/fingers.el - https://github.com/fgeller/fingers.el]] [2015-10-26 Пн 23:25] :emacs:try:
+* [[https://github.com/QBobWatson/popup-keys][QBobWatson/popup-keys - https://github.com/QBobWatson/popup-keys]] [2015-10-26 Пн 23:25] :emacs:try:
+* [[https://github.com/steckerhalter/discover-my-major][steckerhalter/discover-my-major - https://github.com/steckerhalter/discover-my-major]] [2015-10-26 Пн 23:26] :emacs:try:
+* [[https://github.com/rudolfochrist/interleave][rudolfochrist/interleave - https://github.com/rudolfochrist/interleave]] [2015-10-26 Пн 23:33] :emacs:try:
+* [[https://github.com/Golevka/emacs-clang-complete-async][Golevka/emacs-clang-complete-async - https://github.com/Golevka/emacs-clang-complete-async]] [2015-10-26 Пн 23:33] :emacs:try:
+* [[https://github.com/knu/elscreen][knu/elscreen - https://github.com/knu/elscreen]] [2015-10-26 Пн 23:34] :emacs:try:
+* [[https://github.com/wamei/elscreen-multi-term][wamei/elscreen-multi-term - https://github.com/wamei/elscreen-multi-term]] [2015-10-26 Пн 23:34] :emacs:try:
+* [[http://melpa.org/#/magit-rockstar][magit-rockstar - MELPA - http://melpa.org/#/magit-rockstar]] [2015-10-27 Вт 18:08] :emacs:try:
+* [[https://github.com/zk-phi/togetherly/][zk-phi/togetherly - https://github.com/zk-phi/togetherly/]] [2015-10-27 Вт 18:19] :emacs:try:
+* [[https://github.com/zk-phi/electric-case][zk-phi/electric-case - https://github.com/zk-phi/electric-case]] [2015-10-27 Вт 18:33] :emacs:try:
+* [[https://github.com/zk-phi/phi-search-dired][zk-phi/phi-search-dired - https://github.com/zk-phi/phi-search-dired]] [2015-10-27 Вт 18:34] :emacs:try:
+* [[https://github.com/Fuco1/nave-mode][Fuco1/nave-mode - https://github.com/Fuco1/nave-mode]] [2015-10-27 Вт 18:51] :emacs:try:
+* [[https://github.com/tj64/outshine][tj64/outshine - https://github.com/tj64/outshine]] [2015-10-27 Вт 18:53] :emacs:try:
+* [[https://github.com/chmouel/tox.el][chmouel/tox.el - https://github.com/chmouel/tox.el]] [2015-10-27 Вт 20:29] :emacs:try:

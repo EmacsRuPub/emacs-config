@@ -197,3 +197,14 @@
 * TODO [#B] workaround yatemplate insertion in org-agenda buffer [2015-07-25 Сб 17:23] :emacs:ticket:
 * TODO [#A] find a way to make emacs not to stuck when some dirs display with dired become deleted  [2015-07-31 Пт 19:26] :emacs:ticket:
 * TODO [#A] show magit commit buffer in side of magit log window [2015-09-06 Вс 21:48] :emacs:ticket:
+* TODO [#A] make smth like #'projectile-mark-as project' which places empty .projectile file into current default-directory [2015-10-17 Сб 19:19] :emacs:ticket:
+* TODO [#A] check if the point at the beginning of the string or not while inserting TODO-like templates with yasnippet (in all modes affected) [2015-10-22 Чт 17:52] :emacs:ticket:
+* TODO [#C] review functions in [[https://github.com/magnars/multiple-cursors.el][magnars/multiple-cursors.el - https://github.com/magnars/multiple-cursors.el]] [2015-10-26 Пн 21:55]            :emacs:ticket:
+* TODO [#B] think if the way to present task/note's complexity, either using tags or in some other way with orgmode [2015-10-26 Пн 23:35] :emacs:ticket:
+* TODO [#A] try using use-package's :ensure to install from package.el archives instead of explicit packages list [2015-10-26 Пн 23:59] :emacs:ticket:
+* TODO [#A] play with Jedi's server args to finally add new paths/envs to be able to travel to appropriate venv for the particular project (+ kenobi.el) [2015-10-27 Вт 20:46] :emacs:ticket:
+* TODO [#C] play with time summarizing (creds to sachac) [2015-10-27 Вт 21:46] :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: summarizing%20functions
+  :ID:       722b29b5-6b12-43c9-bae9-95b4a0d15c38
+  :END:
