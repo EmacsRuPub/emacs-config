@@ -108,6 +108,7 @@
         irony
         jabber
         jedi
+        jenkins
         js2-mode
         js2-refactor
         json-mode

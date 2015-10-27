@@ -234,6 +234,12 @@ _a_bbreviation
 
 (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
 
+(use-package jenkins
+  :config
+  (setq jenkins-api-token private/jenkins-api-token)
+  (setq jenkins-hostname private/jenkins-hostname)
+  (setq jenkins-username private/jenkins-username))
+
 (provide 'rc-clients)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
