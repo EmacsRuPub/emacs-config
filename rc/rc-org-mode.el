@@ -262,6 +262,9 @@
   (append holiday-other-holidays
           holiday-solar-holidays))
 
+(set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
+(set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
+
 (appt-activate t)
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 (org-add-link-type "tag" 'custom/follow-tag-link)
