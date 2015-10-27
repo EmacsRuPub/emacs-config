@@ -92,6 +92,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
+;; (use-package typing :disabled t
+;;   :init
+;;   (autoload 'typing-of-emacs "typing" nil t)
+;;   :config
+;;   (progn
+;;     (setq toe-starting-length 6)
+;;     (setq toe-starting-time-per-word 2)
+;;     (setq toe-max-length 20)))
+
 (provide 'staging)
 
 ;;; staging.el ends here

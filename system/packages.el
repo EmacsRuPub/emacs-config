@@ -172,6 +172,7 @@
         tern-auto-complete
         transpose-frame
         twittering-mode
+        typing
         unbound
         undo-tree
         unicode-fonts
