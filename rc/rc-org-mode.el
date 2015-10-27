@@ -280,7 +280,7 @@
 (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
 (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
 (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
-(run-with-idle-timer 150 t 'custom/jump-to-org-agenda)
+(run-with-idle-timer 300 t 'custom/jump-to-org-agenda)
 (set-charset-priority 'unicode)
 (turn-on-orgtbl)
 
