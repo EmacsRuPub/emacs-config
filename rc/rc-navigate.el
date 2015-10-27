@@ -243,6 +243,12 @@
   (setq avy-timeout-seconds 0.5)
   (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
+(use-package beacon
+  :config
+  (setq beacon-color "#666600")
+  (setq beacon-size 60)
+  (setq beacon-blink-duration 0.5))
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
