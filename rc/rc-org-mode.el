@@ -281,8 +281,7 @@
 
 (defhydra hydra-org-sandbox ()
   ("c" org-table-create)
-  ("s" org-sparse-tree)
-  ("t" org-toggle-timestamp-type))
+  ("s" org-sparse-tree))
 
 (defhydra hydra-org-clock ()
   "
@@ -341,6 +340,7 @@ show _A_ll                 add t_i_me to timestamp
   ("e" org-capture :color blue)
   ("a" org-agenda :color blue)
   ("A" show-all)
+  ("t" org-toggle-timestamp-type)
   ("r" (custom/with-major-mode 'org-mode (org-refile)) "refile")
   ("q" nil "cancel"))
 (global-set-key (kbd "<f7>") 'hydra-org-global/body)
