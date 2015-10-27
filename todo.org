@@ -208,3 +208,4 @@
   :Attachments: summarizing%20functions
   :ID:       722b29b5-6b12-43c9-bae9-95b4a0d15c38
   :END:
+* TODO [#B] review org-modules list and check if some of those need additional setup [2015-10-27 Вт 22:04] :emacs:ticket:

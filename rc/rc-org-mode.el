@@ -8,10 +8,12 @@
 (use-package org-footnote)
 
 (setq org-modules
-      '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
-        org-checklist org-clock org-docview org-expiry org-habit
-        org-id org-info org-inlinetask org-irc org-man org-protocol
-        <C>org-pomodoro org-timer org-w3m))
+      '(<C>org-pomodoro
+        org-agenda org-archive org-attach org-bbdb org-bibtex
+        org-bookmark org-checklist org-clock org-collector org-docview
+        org-drill org-expiry org-habit org-id org-info org-inlinetask
+        org-interactive-query org-irc org-man org-mouse org-protocol
+        org-timer org-w3m))
 
 (use-package org)
 (use-package ox-html)
