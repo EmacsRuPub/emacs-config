@@ -129,6 +129,7 @@
         multifiles
         multiple-cursors
         names
+        narrow-indirect
         nginx-mode
         notify
         nzenburn-theme

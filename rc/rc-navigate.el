@@ -369,6 +369,11 @@ _g_ ag in project      _w_ select w3m buffer
   ("A" avy-goto-word-0 "goto word within window" :color blue))
 (global-set-key (kbd "C-`") 'hydra-navigate/body)
 
+;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
+(define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
+(define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
+(define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
+
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-r"))
 (global-unset-key (kbd "C-M-s"))
