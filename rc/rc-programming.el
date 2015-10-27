@@ -25,6 +25,7 @@
     (add-hook 'c-mode-common-hook 'doxymacs-mode)))
 
 (use-package projectile
+  :ensure helm
   :commands (projectile-find-file custom/projectile-ag)
   :config
   (progn
@@ -33,10 +34,12 @@
     (setq projectile-cache-file (at-data-dir "/projectile.cache"))
     (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
     (setq projectile-require-project-root nil)
-    (setq projectile-switch-project-action 'projectile-find-file)
+    (setq projectile-switch-project-action 'helm-projectile)
     (setq projectile-completion-system 'ivy)
     (setq projectile-tags-command
           "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+    (add-to-list 'projectile-other-file-alist '("html" "js"))
+    (add-to-list 'projectile-other-file-alist '("js" "html"))
     (diminish 'projectile-mode "prj")
     (defhydra hydra-projectile (:color teal)
       "
@@ -51,12 +54,12 @@ file o_ft_her window         _pi_nvalidate cache   display _b_uffer
 _fo_ther file                _pk_ill buffers       _r_ecentf
 other file _fO_ther window
 "
-      ("fd" projectile-find-dir)
+      ("fd" helm-projectile-find-dir)
       ("ft" projectile-find-test-file)
-      ("ff" projectile-find-file)
-      ("fw" projectile-find-file-dwim)
+      ("ff" helm-projectile-find-file)
+      ("fw" helm-projectile-find-file-dwim)
       ("ft" projectile-find-file-dwim-other-window)
-      ("fo" projectile-find-other-file)
+      ("fo" helm-projectile-find-other-file)
       ("fO" projectile-find-other-file-other-window)
       ("pb" projectile-ibuffer)
       ("pf" projectile-project-info)
@@ -64,6 +67,7 @@ other file _fO_ther window
       ("pc" projectile-compile-project)
       ("pi" projectile-invalidate-cache)
       ("pk" projectile-kill-buffers)
+      ("ps" projectile-switch-project)
       ("c" projectile-commander)
       ("s" projectile-switch-to-buffer)
       ("w" projectile-switch-to-buffer-other-window)
