@@ -166,9 +166,13 @@
 (use-package smartparens
   :config
   (use-package smartparens-config)
-  (smartparens-global-strict-mode +1)
-  (show-smartparens-global-mode +1)
-  (sp-use-paredit-bindings))
+  (smartparens-global-strict-mode t)
+  (show-smartparens-global-mode t)
+  (sp-use-smartparens-bindings)
+  (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+  (bind-key "M-F" nil smartparens-mode-map)
+  (bind-key "M-B" nil smartparens-mode-map)
+  (bind-key "M-<backspace>" nil smartparens-mode-map))
 
 (use-package vimrc-mode
   :defer t
