@@ -161,6 +161,16 @@
   ;TODO: bind to key and other stuff
   )
 
+(use-package savehist
+  :config
+  (setq savehist-file (at-data-dir "/savehist"))
+  (savehist-mode +1)
+  (setq savehist-save-minibuffer-history +1)
+  (setq savehist-additional-variables
+        '(kill-ring
+          search-ring
+          regexp-search-ring)))
+
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (local-set-key (kbd "<return>") 'newline-and-indent))
