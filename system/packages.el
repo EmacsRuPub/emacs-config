@@ -71,6 +71,7 @@
         drag-stuff
         dtrt-indent
         edebug-x
+        edit-indirect
         el-spice
         eldoc-eval
         elisp-slime-nav

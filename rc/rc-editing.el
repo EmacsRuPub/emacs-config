@@ -295,6 +295,7 @@
   ("k" custom/kill-save-rectangle)
   ("/" comment-box)
   ("w" wrap-to-fill-column-mode)
+  ("=" edit-indirect-region)
   ("q" nil "cancel"))
 (global-set-key (kbd "C-z") 'hydra-edit/body)
 
