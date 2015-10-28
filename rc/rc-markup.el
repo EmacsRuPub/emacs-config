@@ -9,8 +9,11 @@
 ;; http://www.emacswiki.org/emacs/DocbookXmlMode
 
 (use-package css-eldoc
+  :ensure t
   :config
   (turn-on-css-eldoc))
+
+(use-package rainbow-mode :ensure t)
 
 (use-package sgml-mode
   :config
@@ -18,10 +21,11 @@
     (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
 (use-package emmet-mode
+  :ensure t
   :config
   (progn
-    (use-package ac-emmet)
-    (use-package helm-emmet)
+    (use-package ac-emmet :ensure auto-complete)
+    (use-package helm-emmet :ensure helm)
     (push 'html-mode ac-modes)
     (push 'web-mode ac-modes)
     (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
@@ -42,12 +46,13 @@
     ))
 
 (use-package markdown-mode
+  :ensure t
   :config
   (progn
     (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
     (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
 
-(use-package yaml-mode)
+(use-package yaml-mode :ensure t)
 
 (defun custom/nxml-mode-hook ()
   (auto-fill-mode)

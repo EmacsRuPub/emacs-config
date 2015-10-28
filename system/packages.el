@@ -18,8 +18,12 @@
        '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 
-(package-install 'use-package)
-(package-install 'auto-compile)
+(mapcar
+ (lambda (package)
+   (unless (package-installed-p package)
+     (package-install package)))
+ ;;base system packages for bootstrapping
+ '(bind-key diminish use-package f names))
 
 (require 'use-package)
 (setq use-package-verbose t)
@@ -33,173 +37,7 @@
   (setq auto-compile-display-buffer nil)
   (setq auto-compile-mode-line-counter t))
 
-(setq package-el-packages
-      '(
-        ac-c-headers
-        ac-emmet
-        ac-helm
-        ac-math
-        ac-slime
-        ace-link
-        ace-window
-        actionscript-mode
-        adaptive-wrap
-        anchored-transpose
-        auctex
-        auto-complete-clang
-        auto-yasnippet
-        backup-walker
-        bbdb
-        beacon
-        bookmark+
-        c-eldoc
-        calfw
-        calfw-gcal
-        comment-dwim-2
-        common-lisp-snippets
-        crontab-mode
-        crosshairs
-        css-eldoc
-        csv-mode
-        deep-thought-theme
-        deft
-        diminish
-        dired+
-        dired-sort-menu
-        dired-toggle-sudo
-        discover-my-major
-        drag-stuff
-        dtrt-indent
-        edebug-x
-        edit-indirect
-        el-spice
-        eldoc-eval
-        elisp-slime-nav
-        emmet-mode
-        epoch-view
-        erc-hl-nicks
-        ercn
-        erefactor
-        expand-region
-        fic-mode
-        flycheck
-        flycheck-color-mode-line
-        framemove
-        fuzzy
-        ggtags
-        function-args
-        git-gutter
-        git-timemachine
-        gitignore-mode
-        google-translate
-        helm-ag
-        helm-c-yasnippet
-        helm-descbinds
-        helm-dired-recent-dirs
-        helm-emmet
-        helm-flycheck
-        helm-gtags
-        helm-helm-commands
-        helm-projectile
-        helm-themes
-        help+
-        hide-comnt
-        highlight-sexp
-        hungry-delete
-        hydra
-        irony
-        jabber
-        jedi
-        jenkins
-        js2-mode
-        js2-refactor
-        json-mode
-        keyfreq
-        latex-preview-pane
-        libmpdee
-        link-hint
-        list-processes+
-        lua-mode
-        magit
-        magit-filenotify
-        macro-math
-        mark
-        markdown-mode
-        material-theme
-        miniedit
-        multifiles
-        multiple-cursors
-        names
-        narrow-indirect
-        nginx-mode
-        notify
-        nzenburn-theme
-        oauth2
-        openwith
-        org-bullets
-        org-dashboard
-        org-gcal
-        org-magit
-        org-pomodoro
-        org-toodledo
-        orgit
-        orglink
-        page-break-lines
-        pdf-tools
-        pep8
-        phi-search
-        phi-search-mc
-        popwin
-        projectile
-        python
-        python-pep8
-        rainbow-mode
-        rebox2
-        recentf-ext
-        recursive-narrow
-        regex-tool
-        region-bindings-mode
-        replace+
-        restclient
-        rich-minority
-        rtags
-        rust-mode
-        sauron
-        savekill
-        scratch
-        smart-mode-line
-        smartparens
-        snakehump
-        swoop
-        tern
-        tern-auto-complete
-        transpose-frame
-        twittering-mode
-        typing
-        unbound
-        undo-tree
-        unicode-fonts
-        vimrc-mode
-        vline
-        volatile-highlights
-        w3m
-        wc-mode
-        web
-        web-mode
-        wgrep
-        wgrep-helm
-        whole-line-or-region
-        windsize
-        wrap-region
-        yaml-mode
-        zenburn-theme
-        zoom-window
-        ))
-
-(mapcar
- (lambda (package)
-   (unless (package-installed-p package)
-     (package-install package))) package-el-packages)
+(use-package f :ensure t)
 
 (provide 'packages)
 

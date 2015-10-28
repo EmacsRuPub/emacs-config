@@ -5,13 +5,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package bookmark+
+  :ensure t
   :init
-  (use-package crosshairs)
+  (use-package crosshairs :ensure t)
   :config
   (setq bmkp-last-bookmark-file (at-data-dir "/bookmarks")))
 
 (use-package re-builder
   :defer t)
+
+(use-package hydra :ensure t)
+(use-package wgrep :ensure t)
+(use-package vline :ensure t)
 
 (use-package helm
   :defer t
@@ -22,13 +27,15 @@
   (use-package helm-locate)
   (use-package helm-misc)
   (use-package helm-grep)
-  (use-package wgrep-helm) ;TODO: maybe configure
-  (use-package helm-projectile)
-  (use-package helm-descbinds)
-  (use-package helm-themes)
-  (use-package helm-helm-commands)
-  (use-package helm-dired-recent-dirs)
+  (use-package wgrep-helm :ensure t) ;TODO: maybe configure
+  (use-package helm-projectile :ensure t)
+  (use-package helm-descbinds :ensure t)
+  (use-package helm-themes :ensure t)
+  (use-package helm-helm-commands :ensure t)
+  (use-package helm-dired-recent-dirs :ensure t)
+  (use-package helm-flycheck :ensure t)
   :config
+  (use-package ac-helm :ensure auto-complete)
   (progn
     (setq helm-quick-update t)
     (setq helm-split-window-in-side-p t)
@@ -62,6 +69,7 @@
     ))
 
 (use-package helm-ag
+  :ensure t
   :config
   (setq helm-ag-insert-at-point 'symbol)
   (setq helm-ag-fuzzy-match t)
@@ -71,6 +79,7 @@
 
 ;;TODO: sync and maybe slurp something from rc-cc
 (use-package helm-gtags
+  :ensure t
   :defer t
   :config
   (progn
@@ -95,12 +104,14 @@
     (add-hook 'c++-mode-hook 'helm-gtags-mode)))
 
 (use-package swoop
+  :ensure t
   :config
   (progn
     (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
     (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
 
 (use-package zoom-window
+  :ensure t
   :config
   (setq zoom-window-mode-line-color "DarkGreen"))
 
@@ -130,12 +141,11 @@
     ))
 
 (use-package fuzzy
+  :ensure t
   :config
   (turn-on-fuzzy-isearch))
 
 (use-package windmove
-  :init
-  (use-package framemove)
   :bind
   (("C-s-<up>" . windmove-up)
    ("C-s-<down>" . windmove-down)
@@ -143,13 +153,15 @@
    ("C-s-<right>" . windmove-right)
    ))
 
-(use-package windsize)
+(use-package windsize :ensure t)
 
 (use-package framemove
+  :ensure t
   :config
   (setq framemove-hook-into-windmove t))
 
 (use-package ace-window
+  :ensure t
   :init
   (setq aw-background nil)
   (setq aw-leading-char-style 'char)
@@ -160,10 +172,16 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
 (use-package ace-link
+  :ensure t
   :config
   (ace-link-setup-default))
 
+(use-package link-hint
+  :ensure t)
+
 (use-package dired
+  :init
+  (use-package dired-sort-menu :ensure t)
   :config
   (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
   (setq dired-dwim-target t)
@@ -180,6 +198,7 @@
   (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
 (use-package dired+
+  :ensure t
   :config
   ;; TODO: check if this is not obsolete yet
   (setq diredp-ignored-file-name 'green-face)
@@ -200,19 +219,21 @@
     ))
 
 (use-package dired-x)
-(use-package dired-toggle-sudo)
+(use-package dired-toggle-sudo :ensure t)
 
 (use-package discover-my-major
+  :ensure t
   ;TODO: bind to key
   )
 
 (use-package phi-search-mc
+  :ensure t
   :config
   (phi-search-mc/setup-keys)
   (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys)
 )
 
-(use-package recursive-narrow)
+(use-package recursive-narrow :ensure t)
 
 (use-package swiper
   :config
@@ -228,6 +249,7 @@
      ((t :background "#ffbbff" :weight bold)))))
 
 (use-package transpose-frame
+  :ensure t
   :config
   (defhydra hydra-transpose-frame ()
     "frames geometry management"
@@ -241,15 +263,19 @@
   (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
 
 (use-package avy
+  :ensure t
   :config
   (setq avy-timeout-seconds 0.5)
   (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
 (use-package beacon
+  :ensure t
   :config
   (setq beacon-color "#666600")
   (setq beacon-size 60)
   (setq beacon-blink-duration 0.5))
+
+(use-package phi-search :ensure t)
 
 ;; Reload dired after making changes
 (--each '(dired-do-rename

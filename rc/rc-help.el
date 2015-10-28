@@ -5,6 +5,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package info)
+(use-package help+ :ensure t)
+
 (add-to-list 'Info-directory-list "/usr/share/info")
 
 (push "/usr/share/info" Info-directory-list)

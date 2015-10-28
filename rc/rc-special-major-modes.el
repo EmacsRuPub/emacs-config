@@ -7,6 +7,17 @@
 (use-package ansi-color)
 (use-package smerge-mode)
 
+(use-package  actionscript-mode :ensure t)
+(use-package  crontab-mode :ensure t)
+(use-package  csv-mode :ensure t)
+(use-package  fic-mode :ensure t)
+(use-package  gitignore-mode :ensure t)
+(use-package  json-mode :ensure t)
+(use-package  lua-mode :ensure t)
+(use-package  nginx-mode :ensure t)
+(use-package  rust-mode :ensure t)
+(use-package  web-mode :ensure t)
+
 (defun custom/sh-check-finish-hook (buf msg)
   "Function, that is executed at the end of sh check"
   (when (not (string-match "finished" msg))

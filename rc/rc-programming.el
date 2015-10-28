@@ -8,24 +8,13 @@
 (use-package imenu)
 (use-package compile)
 (use-package gtags)
-
-(use-package doxymacs
-  :defer t
-  :config
-  (progn
-    (setq-default doxymacs-doxygen-style "JavaDoc")
-
-    ;TODO: generalize
-    (defun custom/doxymacs-font-lock-hook ()
-      (if (or (eq major-mode 'c-mode)
-              (eq major-mode 'c++-mode))
-          (doxymacs-font-lock)))
-
-    (add-hook 'font-lock-mode-hook 'custom/doxymacs-font-lock-hook)
-    (add-hook 'c-mode-common-hook 'doxymacs-mode)))
+(use-package c-eldoc :ensure t)
+(use-package eldoc-eval :ensure t)
+(use-package hide-comnt :ensure t)
+(use-package regex-tool :ensure t)
 
 (use-package projectile
-  :ensure helm
+  :ensure t
   :commands (projectile-find-file custom/projectile-ag)
   :config
   (progn
@@ -81,6 +70,9 @@ other file _fO_ther window
     ))
 
 (use-package flycheck
+  :ensure t
+  :init
+  (use-package flycheck-color-mode-line :ensure t)
   :config
   (progn
     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
@@ -101,6 +93,7 @@ other file _fO_ther window
   (diminish 'eldoc-mode "ED"))
 
 (use-package magit
+  :ensure t
   :config
   (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
   (defhydra hydra-magit (:color teal :hint nil)
@@ -129,12 +122,14 @@ PROJECT: %(projectile-project-root)
   (global-set-key (kbd "C-'") 'hydra-magit/body))
 
 (use-package magit-filenotify
+  :ensure t
   :config
-  (use-package diminish)
+  (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (diminish 'magit-filenotify-mode "FN"))
 
 (use-package git-gutter
+  :ensure t
   :config
   (progn
     (setq git-gutter:modified-sign "?")
@@ -143,6 +138,8 @@ PROJECT: %(projectile-project-root)
     (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
     (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
     (global-git-gutter-mode +1)))
+
+(use-package git-timemachine :ensure t)
 
 (use-package gud
   :init

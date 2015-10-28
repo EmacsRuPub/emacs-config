@@ -6,7 +6,30 @@
 
 (use-package cc-mode)
 (use-package info-look)
-(use-package auto-complete-clang)
+(use-package ac-c-headers :ensure auto-complete)
+(use-package ac-clang :ensure auto-complete)
+(use-package auto-complete-clang :ensure auto-complete)
+(use-package irony :ensure t)
+
+(use-package function-args
+  :ensure t
+  :config
+  (define-key c-mode-map (kbd "C-c j") 'moo-jump-local)
+  (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local)
+  (define-key c-mode-map (kbd "C-c C-<tab>") 'moo-complete)
+  (define-key c++-mode-map (kbd "C-c C-<tab>") 'moo-complete))
+
+(use-package rtags
+  :ensure t
+  :config
+  (define-key c-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
+  (define-key c-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
+  (define-key c-mode-map (kbd "C-,") 'rtags-location-stack-back)
+  (define-key c-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
+  (define-key c++-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
+  (define-key c++-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
+  (define-key c++-mode-map (kbd "C-,") 'rtags-location-stack-back)
+  (define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics))
 
 (info-lookup-add-help
  :mode 'c-mode
@@ -40,16 +63,6 @@
 (add-hook 'irony-mode-hook 'custom/irony-mode-hook)
 
 ;;TODO: review and maybe rebind
-;; RTags essential keybindings
-(define-key c-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-(define-key c-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
-(define-key c-mode-map (kbd "C-,") 'rtags-location-stack-back)
-(define-key c-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
-(define-key c++-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-(define-key c++-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
-(define-key c++-mode-map (kbd "C-,") 'rtags-location-stack-back)
-(define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
-
 (define-key c-mode-map (kbd "M-.") 'helm-gtags-select)
 (define-key c++-mode-map (kbd "C-j") 'helm-gtags-select)
 (define-key c-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
@@ -58,11 +71,6 @@
 (define-key c++-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
 (define-key c-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
 (define-key c++-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
-
-(define-key c-mode-map (kbd "C-c j") 'moo-jump-local)
-(define-key c++-mode-map (kbd "C-c j") 'moo-jump-local)
-(define-key c-mode-map (kbd "C-c C-<tab>") 'moo-complete)
-(define-key c++-mode-map (kbd "C-c C-<tab>") 'moo-complete)
 
 ;;TODO: bind helm-gtags-find-{rtags,symbol}
 

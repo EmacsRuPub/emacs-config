@@ -8,7 +8,7 @@
   :defer t
   :commands bbdb
   :init
-  (use-package bbdb)
+  (use-package bbdb :ensure t)
   :config
   (progn
     (setq bbdb-change-hook 'bbdb-timestamp-hook)
@@ -36,6 +36,7 @@
     ))
 
 (use-package calfw
+  :ensure t
   :defer t
   :init
   (use-package calfw-ical)
@@ -87,7 +88,10 @@
         (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
         (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed"))))))
 
+(use-package calfw-gcal :ensure t)
+
 (use-package keyfreq
+  :ensure t
   :defer t
   :config
   (progn
@@ -95,6 +99,7 @@
     (keyfreq-autosave-mode 1)))
 
 (use-package org-gcal
+  :ensure t
   :config
   (progn
     (setq org-gcal-dir (at-data-dir "/org-gcal/"))
@@ -103,6 +108,7 @@
     (setq org-gcal-file-alist private/org-gcal-file-alist)))
 
 (use-package deft
+  :ensure t
   :config
   (setq deft-directory (at-homedir "/deft"))
   (setq deft-extension "org")

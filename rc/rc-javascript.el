@@ -5,6 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package js2-mode
+  :ensure t
   :init
   (use-package js2-imenu-extras)
   :config
@@ -61,14 +62,16 @@
 
 ;TODO: play with js2-refactor
 (use-package js2-refactor
+  :ensure t
   :config
   (progn
     (js2r-add-keybindings-with-prefix "C-c C-j")))
 
 (use-package tern
+  :ensure t
   :commands tern-mode
   :init
-  (use-package tern-auto-complete)
+  (use-package tern-auto-complete :ensure auto-complete)
   :config
   (tern-ac-setup))
 

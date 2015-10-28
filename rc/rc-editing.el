@@ -8,8 +8,17 @@
 (use-package saveplace)
 (use-package table) ;; table
 (use-package footnote)
-(use-package snakehump)
-(use-package highlight-sexp)
+(use-package snakehump :ensure t)
+(use-package highlight-sexp :ensure t)
+(use-package adaptive-wrap :ensure t)
+(use-package anchored-transpose :ensure t)
+(use-package edit-indirect :ensure t)
+(use-package epoch-view :ensure t)
+(use-package hungry-delete :ensure t)
+(use-package multifiles :ensure t)
+(use-package narrow-indirect :ensure t)
+(use-package replace+ :ensure t)
+(use-package scratch :ensure t)
 
 (setq auto-revert-verbose nil)
 (setq comment-style 'indent)
@@ -48,7 +57,6 @@
 (setq mouse-wheel-progressive-speed nil)
 
 (delete-selection-mode t)
-(dtrt-indent-mode)
 (electric-indent-mode -1)
 (global-auto-revert-mode 1);; Auto refresh buffers
 (show-paren-mode t)
@@ -60,11 +68,18 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
+(use-package dtrt-indent
+  :ensure t
+  :config
+  (dtrt-indent-mode))
+
 (use-package savekill
+  :ensure t
   :config
   (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
 
 (use-package drag-stuff
+  :ensure t
   :defer t
   :config
   (progn
@@ -73,6 +88,7 @@
     ))
 
 (use-package expand-region
+  :ensure t
   :defer t
   :bind ("C-=" . er/expand-region))
 
@@ -90,7 +106,7 @@
 (use-package recentf
   :defer t
   :init
-  (use-package recentf-ext)
+  (use-package recentf-ext :ensure t)
   :config
   (progn
     (recentf-mode t) ;enable recent files mode.
@@ -100,10 +116,12 @@
     ))
 
 (use-package multiple-cursors
+  :ensure t
   :config
   (setq mc/list-file (at-data-dir "/.mc-lists.el")))
 
 (use-package region-bindings-mode
+  :ensure t
   :config
   (region-bindings-mode-enable)
   (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
@@ -121,12 +139,14 @@
   (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
 (use-package volatile-highlights
+  :ensure t
   :config
   (volatile-highlights-mode t))
 
-(use-package wc-mode)
+(use-package wc-mode :ensure t)
 
 (use-package whole-line-or-region ;; if no region is active, act on current line
+  :ensure t
   :defer t
   :config
   (progn
@@ -140,6 +160,7 @@
             ))))
 
 (use-package comment-dwim-2
+  :ensure t
   :config
   (global-set-key (kbd "M-]") 'comment-dwim-2))
 
@@ -166,10 +187,12 @@
   (yatemplate-fill-alist))
 
 (use-package rebox2
+  :ensure t
   ;;TODO: bind commands
   )
 
 (use-package smartparens
+  :ensure t
   :config
   (use-package smartparens-config)
   (smartparens-global-strict-mode t)
@@ -197,6 +220,7 @@
   (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
 
 (use-package vimrc-mode
+  :ensure t
   :defer t
   :mode ".vim\\(rc\\)?$")
 
@@ -204,6 +228,7 @@
   :defer t)
 
 (use-package wrap-region
+  :ensure t
   :config
   (progn
     (wrap-region-global-mode 1)
@@ -213,6 +238,7 @@
     (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
 
 (use-package mark
+  :ensure t
   :config
   (defhydra hydra-mark ()
     ("<right>" forward-mark "forward-mark")
@@ -221,6 +247,7 @@
   (global-set-key (kbd "<f12>") 'hydra-mark/body))
 
 (use-package page-break-lines
+  :ensure t
   :config
   (turn-on-page-break-lines-mode))
 

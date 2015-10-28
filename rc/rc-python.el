@@ -4,7 +4,11 @@
 ;; Created:  Thu May 1 16:30:43 2014 +0400
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package pep8 :ensure t)
+(use-package python-pep8 :ensure t)
+
 (use-package jedi
+  :ensure t
   :init
   (progn
     (setq jedi:complete-on-dot t)
@@ -48,14 +52,14 @@
         ad-do-it))))
 
 (use-package python
+  :ensure t
   :defer t
   :config
-  (progn
-    (bind-key "M-." 'jedi:goto-definition python-mode-map)
-    (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
-    (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
-    (bind-key "_" 'python-indent-shift-left region-bindings-mode-map)
-    ))
+  (use-package ac-python :ensure auto-complete)
+  (bind-key "M-." 'jedi:goto-definition python-mode-map)
+  (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
+  (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
+  (bind-key "_" 'python-indent-shift-left region-bindings-mode-map))
 
 ; Highlight the call to ipdb
 ; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/

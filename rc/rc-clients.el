@@ -12,6 +12,10 @@
     (setq explicit-shell-file-name "/bin/zsh")
     ))
 
+(use-package notify :ensure t)
+(use-package oauth2 :ensure t)
+(use-package web :ensure t)
+
 (use-package erc
   :defer t
   :init
@@ -27,8 +31,8 @@
   (use-package erc-ring)
   (use-package erc-match)
   ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
-  (use-package erc-hl-nicks)
-  (use-package ercn) ;TODO: add notifications handler function
+  (use-package erc-hl-nicks :ensure t)
+  (use-package ercn :ensure t) ;TODO: add notifications handler function
   :config
   (progn
     (erc-pcomplete-mode 1)
@@ -82,12 +86,14 @@ IRC   ^Connection^ ^Tools^
     ))
 
 (use-package twittering-mode
+  :ensure t
   :defer t
   :commands twit
   :init
   (setq twittering-use-master-password t))
 
 (use-package restclient
+  :ensure t
   :defer t
   :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
 
@@ -100,6 +106,7 @@ IRC   ^Connection^ ^Tools^
                   '(".*" "\\`.+\\'" "/ssh:%h:")))
 
 (use-package w3m
+  :ensure t
   :defer t
   :commands w3m
   :init
@@ -139,16 +146,20 @@ IRC   ^Connection^ ^Tools^
                  '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
 
 (use-package google-translate
+  :ensure t
   :defer t
   :init
   (progn
     (use-package google-translate-default-ui)))
 
+;;TODO: install mingus back, now there is a package for it
 (use-package libmpdee
+  :ensure t
   ;;TODO: maybe provide handy keybindings/hydra/whatever
   )
 
 (use-package jabber
+  :ensure t
   :init
   (load "jabber-autoloads") ;; For 0.7.90 and above:
   (use-package jabber-bookmarks)
@@ -235,6 +246,7 @@ _a_bbreviation
 (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
 
 (use-package jenkins
+  :ensure t
   :config
   (setq jenkins-api-token private/jenkins-api-token)
   (setq jenkins-hostname private/jenkins-hostname)

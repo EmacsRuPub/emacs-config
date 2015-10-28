@@ -8,9 +8,9 @@
 
 (load-library "time")
 
-(use-package popwin)
+(use-package popwin :ensure t)
 (use-package epg)
-(use-package edebug-x)
+(use-package edebug-x :ensure t)
 
 ;;; Enable functions that are disabled by default
 (put 'dired-find-alternate-file 'disabled nil)
@@ -63,14 +63,6 @@
 (setq version-control t)
 (setq visible-bell t)
 (setq warning-suppress-types nil)
-(setq openwith-associations
-      '(("\\.pdf\\'" "zathura" (file))
-        ("\\.djvu\\'" "zathura" (file))
-        ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
-        ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
-        ("\\.doc\\'" "abiword" (file))
-        ("\\.swf\\'" "swfdec-player" (file))
-        ))
 
 (setq display-time-world-list
       '(("Europe/Moscow" "Moscow")
@@ -144,6 +136,7 @@
     (setq uniquify-strip-common-suffix nil)))
 
 (use-package rich-minority
+  :ensure t
   :config
   (setq rm-blacklist
         '(" GitGutter"
@@ -157,7 +150,12 @@
           " Helm"
           )))
 
+(use-package diminish
+  :ensure t
+  :commands diminish)
+
 (use-package backup-walker
+  :ensure t
   ;TODO: bind to key and other stuff
   )
 
@@ -170,6 +168,22 @@
         '(kill-ring
           search-ring
           regexp-search-ring)))
+
+(use-package list-processes+ :ensure t)
+
+(use-package openwith
+  :ensure t
+  :config
+  (setq openwith-associations
+        '(("\\.pdf\\'" "zathura" (file))
+          ("\\.djvu\\'" "zathura" (file))
+          ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
+          ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
+          ("\\.doc\\'" "abiword" (file))
+          ("\\.swf\\'" "swfdec-player" (file))
+          )))
+
+(use-package unbound :ensure t)
 
 (defun common-hooks/newline-hook ()
   (local-set-key (kbd "C-m") 'newline-and-indent)

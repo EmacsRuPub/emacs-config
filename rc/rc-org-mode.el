@@ -6,6 +6,8 @@
 
 (use-package icalendar)
 (use-package org-footnote)
+(use-package org-magit :ensure t)
+(use-package org-pomodoro :ensure t)
 
 (setq org-modules
       '(<C>org-pomodoro
@@ -17,11 +19,12 @@
 
 (use-package org)
 (use-package ox-html)
-(use-package org-dashboard)
-(use-package orgit)
-(use-package org-bullets)
+(use-package org-dashboard :ensure t)
+(use-package orgit :ensure t)
+(use-package org-bullets :ensure t)
 
 (use-package orglink
+  :ensure t
   :config
   ;; TODO: customize orglink-activate-in-modes
   (global-orglink-mode)

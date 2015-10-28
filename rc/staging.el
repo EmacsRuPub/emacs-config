@@ -7,6 +7,7 @@
 ;; Requirements:
 
 (use-package sauron
+  :ensure t
   ;; note, you add (setq sauron-debug t) to get errors which can debug if
   ;; there's something wrong; normally, we catch such errors, since e.g an error
   ;; in one of the hooks may cause ERC to fail (i.e., the message won't come

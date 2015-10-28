@@ -39,10 +39,6 @@
 
 (load (at-config-basedir "system/packages.el"))
 
-(require 'use-package)
-
-(use-package f)
-
 (f-files (at-config-basedir "customdefs")
          (lambda (entry) (load entry))
          t)

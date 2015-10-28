@@ -9,6 +9,9 @@
 (use-package cdlatex)
 (use-package bib-cite)
 (use-package whizzytex)
+(use-package auctex :ensure t)
+(use-package latex-preview-pane :ensure t)
+(use-package pdf-tools :ensure t)
 
 (setq-default TeX-master nil)
 (setq TeX-parse-self t)

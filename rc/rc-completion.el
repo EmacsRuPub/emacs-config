@@ -5,11 +5,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package auto-complete
+  :ensure t
   :commands auto-complete
   :init
-  (progn
-    (use-package auto-complete-config)
-    (use-package ac-helm))
+  (use-package auto-complete-config)
+  (use-package ac-math)
   :config
   (progn
     (ac-config-default)
@@ -31,8 +31,9 @@
     ))
 
 (use-package yasnippet
+  :ensure t
   :init
-  (use-package helm-c-yasnippet)
+  (use-package helm-c-yasnippet :ensure t)
   :config
   (progn
     ;; unset both to remove ALL translations
@@ -59,6 +60,9 @@
     (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
     ))
 
+(use-package auto-yasnippet :ensure t)
+
+;;TODO: splice into yasnippet package definition
 (defhydra hydra-yasnippet (:color teal)
   "
 _c_reate auto snippet

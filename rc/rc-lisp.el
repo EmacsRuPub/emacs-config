@@ -6,7 +6,7 @@
 
 (use-package inf-lisp)
 (use-package info-look)
-(use-package common-lisp-snippets)
+(use-package common-lisp-snippets :ensure t)
 
 (setq inferior-lisp-program "sbcl")
 (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
@@ -28,7 +28,7 @@
   :init
   (use-package slime-autoloads)
   :config
-  (use-package ac-slime)
+  (use-package ac-slime :ensure auto-complete)
   (eval-after-load "auto-complete"
     '(add-to-list 'ac-modes 'slime-repl-mode))
   (add-hook 'lisp-mode-hook 'custom/slime-hook)
