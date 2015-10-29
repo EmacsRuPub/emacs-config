@@ -152,11 +152,27 @@ IRC   ^Connection^ ^Tools^
   (progn
     (use-package google-translate-default-ui)))
 
-;;TODO: install mingus back, now there is a package for it
-(use-package libmpdee
+(use-package mingus
   :ensure t
-  ;;TODO: maybe provide handy keybindings/hydra/whatever
-  )
+  :config
+  (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
+  (defhydra hydra-mingus ()
+    "
+Control               Playlist
+------------------------------
+_<up>_ volume up        _s_ show playlist
+_<down>_ volume down    _/_ search for tracks
+_<right>_ seek forward
+_<left>_ seek backward
+"
+    ("s" mingus "open mingus")
+    ("/" mingus-search "Search")
+    ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
+    ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
+    ("<right>" mingus-seek "seek forward")
+    ("<left>" mingus-seek-backward "seek backward")
+    ("q" nil "cancel"))
+  (global-set-key (kbd "C-c m") 'hydra-mingus/body))
 
 (use-package jabber
   :ensure t
