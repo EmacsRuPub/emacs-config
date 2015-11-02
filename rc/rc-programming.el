@@ -111,7 +111,7 @@ PROJECT: %(projectile-project-root)
   _b_: blame
 "
     ("s" magit-status)
-    ("f" magit-file-log)
+    ("f" magit-log-buffer-file)
     ("c" magit-checkout)
     ("w" magit-diff-working-tree)
     ("r" magit-reflog)
