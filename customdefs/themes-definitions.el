@@ -60,6 +60,7 @@
 (setf (gethash "bsvera-sans-mono" fonts-def) "Bitstream Vera Sans Mono:size=12")
 (setf (gethash "hack-regular" fonts-def) "Hack:size=12")
 (setf (gethash "fantasque" fonts-def) "Fantasque Sans Mono:size=14")
+(setf (gethash "sourcepro" fonts-def) "Source Code Pro:style=Bold:size=13")
 
 )
 
