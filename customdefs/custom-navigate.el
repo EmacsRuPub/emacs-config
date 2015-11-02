@@ -56,15 +56,20 @@
         (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
    (t (browse-url (thing-at-point 'url t)))))
 
+;;TODO: find a common way for all url-browsing functionality in config
+;;to handle special cases like spaces in urls, etc.
 (defun open-urls-in-region (beg end)
   "Open URLs between BEG and END."
   (interactive "r")
   (save-excursion
     (save-restriction
-      (narrow-to-region beg end)
-      (goto-char (point-min))
-      (while (re-search-forward org-plain-link-re nil t)
-        (org-open-at-point)))))
+      (let ((urls))
+        (narrow-to-region beg end)
+        (goto-char (point-min))
+        (while (re-search-forward org-plain-link-re nil t)
+          (push (thing-at-point 'url) urls))
+        (dolist (url (reverse urls))
+          (browse-url url))))))
 
 (defun spawn-buffer()
   (interactive)
