@@ -29,7 +29,7 @@
 ;#############################################################################
 ;#   Various
 ;############################################################################
-(setq custom/frame-title-format "emacs - %f")
+(setq custom/frame-title-format "emacs - %b %f")
 (setq custom/erc-autoaway-message "I'm gone (autoaway after %i seconds)")
 
 (setq custom/juick-tmp-dir "~/.juick-avatars/")
