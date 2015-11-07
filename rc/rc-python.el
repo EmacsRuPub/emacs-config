@@ -18,7 +18,6 @@
     (defun custom/python-mode-hook ()
       (auto-fill-mode 1)
       (flycheck-mode)
-      ;; (paren-face-mode)
       (setq flycheck-checker 'python-flake8)
       (setq indent-tabs-mode nil)
       (setq tab-width 4)

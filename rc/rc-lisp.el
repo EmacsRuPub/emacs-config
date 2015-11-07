@@ -13,7 +13,6 @@
 
 (defun custom/lisp-mode-hook ()
   (auto-fill-mode 1)
-  ;; (paren-face-mode)
   (setq indent-tabs-mode t)
   (setq tab-width 2)
   (turn-on-eldoc-mode))
