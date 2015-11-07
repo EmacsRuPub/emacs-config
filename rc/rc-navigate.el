@@ -53,7 +53,7 @@
     (bind-key "C-<down>" 'helm-next-source helm-map)
     (bind-key "C-<up>" 'helm-previous-source helm-map)
     (bind-key "C-x b" 'helm-buffers-list)
-    (bind-key "*" 'helm-mark-all helm-map)
+    (bind-key "C-*" 'helm-mark-all helm-map)
     (bind-key "C-x j j" 'helm-bookmarks)
     (bind-key "M-x" 'helm-M-x)
     (bind-key "C-h a" 'helm-apropos)
