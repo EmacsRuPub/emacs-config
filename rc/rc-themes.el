@@ -37,7 +37,7 @@
 (unicode-fonts-setup)
 
 (when (boundp 'zenburn-colors-alist)
-  (set-face-attribute 'default nil :background (cdr (assoc "zenburn-bg-1" zenburn-colors-alist)))
+  (set-face-attribute 'default nil :background "#1A1A1A")
   (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
 
 (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
