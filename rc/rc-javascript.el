@@ -25,6 +25,7 @@
     ;; https://github.com/mooz/js2-mode
     (setq js2-consistent-level-indent-inner-bracket-p t)
     (setq js2-use-ast-for-indentation-p t)
+    (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
     (setq-default js2-global-externs
                   '("module" "require" "jQuery" "$" "_" "buster"
                     "sinon" "assert" "refute" "setTimeout" "clearTimeout"
