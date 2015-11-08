@@ -121,6 +121,18 @@ PROJECT: %(projectile-project-root)
     ("t" git-timemachine))
   (global-set-key (kbd "C-'") 'hydra-magit/body))
 
+(use-package magit-gh-pulls
+  :ensure t
+  :config
+  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+
+(use-package magit-gerrit
+  :ensure t
+  :disabled t
+  :config
+  (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
+  (setq-default magit-gerrit-remote "gerrit"))
+
 (use-package magit-filenotify
   :ensure t
   :config
