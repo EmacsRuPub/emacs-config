@@ -79,7 +79,21 @@ _i_nsert snippet
   ("q" nil))
 (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
 
-(global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand)
+(use-package hippie-expand
+  :config
+  (setq hippie-expand-try-functions-list
+        '(yas-hippie-try-expand
+          try-expand-all-abbrevs
+          try-complete-file-name-partially
+          try-complete-file-name
+          try-expand-dabbrev
+          try-expand-dabbrev-from-kill
+          try-expand-dabbrev-all-buffers
+          try-expand-list
+          try-expand-line
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol))
+  (global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand))
 
 (provide 'rc-completion)
 
