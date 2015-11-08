@@ -32,14 +32,23 @@
 
 (use-package yasnippet
   :ensure t
+  :defer t
+  :diminish yas-minor-mode
+  :commands yas-global-mode
   :init
   (use-package helm-c-yasnippet :ensure t)
-  :config
+  :idle
   (progn
+    (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+    (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
+    (setq yas-expand-only-for-last-commands '(self-insert-command))
+    (yas-global-mode 1)
+    (bind-key "\t" 'hippie-expand yas-minor-mode-map)
     ;; unset both to remove ALL translations
     (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
     (define-key yas-minor-mode-map (kbd "TAB") nil)
     (bind-key "C-M-<return>" 'helm-yas-complete)
+    ;;TODO: bind helm-yas-create-snippet-on-region
     (setq yas/next-field-key '("<backtab>" "<S-tab>"))
     (setq yas/prev-field-key '("<C-tab>"))
     (setq yas-snippet-dirs nil)
@@ -57,8 +66,7 @@
     ;; Jump to end of snippet definition
     (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
     (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
-    (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
-    ))
+    (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)))
 
 (use-package auto-yasnippet :ensure t)
 
