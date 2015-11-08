@@ -96,6 +96,7 @@ other file _fO_ther window
   :ensure t
   :config
   (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
+  (setq magit-blame-heading-format "%H %-20a %C %s")
   (defhydra hydra-magit (:color teal :hint nil)
     "
 PROJECT: %(projectile-project-root)
