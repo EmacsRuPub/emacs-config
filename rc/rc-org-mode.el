@@ -34,7 +34,8 @@
 
 (f-entries (at-org-dir)
            (lambda (entry) (when (and (f-file? entry)
-                                      (s-suffix? "org" entry))
+                                      (s-suffix? "org" entry)
+                                      (file-exists-p entry))
                              (push entry org-agenda-files)))
            t)
 
