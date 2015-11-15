@@ -45,6 +45,7 @@
 (setq font-lock-maximum-decoration t)
 (setq frame-title-format custom/frame-title-format)
 (setq gc-cons-percentage 0.3)
+(setq gc-cons-threshold 20000000)
 (setq inhibit-startup-echo-area-message "octocat")
 (setq inhibit-startup-message t)
 (setq inhibit-startup-screen t)
