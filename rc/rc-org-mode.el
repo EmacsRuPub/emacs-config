@@ -303,54 +303,35 @@
   ("c" org-table-create)
   ("s" org-sparse-tree))
 
-(defhydra hydra-org-clock ()
-  "
-^Clock^
---------------------
-_._ clock in
-_,_ clock out
-cloc_k_ display
-_g_oto last clock
-estimate effor_t_
-_c_ancel clock
-clock _r_eport
-po_m_odoro
-_?_ Clocking commands
-"
-  ("," org-clock-out)
-  ("." org-clock-in)
-  ("?" (org-info "Clocking commands"))
-  ("c" org-clock-cancel)
-  ("g" org-clock-goto)
-  ("k" org-clock-display)
-  ("m" org-pomodoro)
-  ("r" org-clock-report)
-  ("t" org-clock-modify-effort-estimate)
-  ("q" custom/hydra-pop "exit"))
-
 (defhydra hydra-org-global (:color teal)
   "
-^Navigation^               ^Agenda^                  ^Properties^        ^Capture^
------------------------------------------------------------------------------------------------
-_<up>_:     up heading     show _a_genda             set _p_roperty      captur_e_
-_C-<down>_: next heading   _s_chedule                _d_elete property   _w_ store link
-_C-<up>_:   prev heading   dead_l_ine                                       _y_ insert link
-ace-link for _o_rg         agenda _c_olumns
-_O_pen at point            foot_n_ote action
-show _A_ll                 add t_i_me to timestamp
+^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
+---------------------------------------------------------------------------------------------------------------
+_<up>_:     up heading     show _a_genda             _._ clock in        set _p_roperty      captur_e_
+_C-<down>_: next heading   _s_chedule                _,_ clock out       _d_elete property   _w_ store link
+_C-<up>_:   prev heading   dead_l_ine                cloc_k_ display                       _y_ insert link
+ace-link for _o_rg         agenda _c_olumns          _g_oto last clock
+_O_pen at point            foot_n_ote action         estimate effor_t_
+show _A_ll                 add t_i_me to timestamp   _c_ancel clock
+                                                 clock _r_eport
+                                                 po_m_odoro
 "
   ("<up>" outline-up-heading "")
   ("C-<down>" outline-next-heading "")
   ("C-<up>" outline-previous-heading "")
+  ("g" org-clock-goto)
   ("p" org-set-property)
   ("d" org-delete-property)
   ("D" org-dashboard-display :color blue)
   ("s" org-schedule :color blue)
   ("l" org-deadline :color blue)
-  ("c" (progn
-         (hydra-org-clock/body)
-         (custom/hydra-push '(hydra-org-global/body)))
-       "Org clock commands")
+  ("." org-clock-in)
+  ("," org-clock-out)
+  ("t" org-clock-modify-effort-estimate)
+  ("c" org-clock-cancel)
+  ("r" org-clock-report)
+  ("?" (org-info "Clocking commands"))
+  ("k" org-clock-display)
   ("n" org-footnote-action)
   ("w" org-store-link)
   ("y" org-insert-link)
@@ -361,6 +342,7 @@ show _A_ll                 add t_i_me to timestamp
   ("a" org-agenda :color blue)
   ("A" show-all)
   ("t" org-toggle-timestamp-type)
+  ("m" org-pomodoro)
   ("r" (custom/with-major-mode 'org-mode (org-refile)) "refile")
   ("q" nil "cancel"))
 (global-set-key (kbd "<f7>") 'hydra-org-global/body)
