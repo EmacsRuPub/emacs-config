@@ -9,7 +9,10 @@
 (use-package ac-c-headers :ensure auto-complete)
 (use-package ac-clang :ensure auto-complete)
 (use-package auto-complete-clang :ensure auto-complete)
-(use-package irony :ensure t)
+
+(use-package irony :ensure t
+  :config
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package function-args
   :ensure t
@@ -42,8 +45,7 @@
   (add-to-list 'ac-sources 'ac-source-c-headers)
   (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-clang)
-  ;; (hs-minor-mode 1)
-  )
+  (irony-mode))
 
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
