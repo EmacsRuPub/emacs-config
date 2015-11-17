@@ -348,6 +348,7 @@ show _A_ll                 add t_i_me to timestamp   _c_ancel clock
   ("n" org-footnote-action)
   ("w" org-store-link)
   ("y" org-insert-link)
+  ("Y" org-insert-link-global)
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
   ("O" custom/open-or-browse-at-point)
