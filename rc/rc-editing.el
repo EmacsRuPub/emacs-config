@@ -125,6 +125,11 @@
   :config
   (setq mc/list-file (at-data-dir "/.mc-lists.el")))
 
+(use-package mc-extras
+  ;;TODO: explore and bind functions
+  :ensure t
+  :defer t)
+
 (use-package region-bindings-mode
   :ensure t
   :config
