@@ -272,8 +272,7 @@
   :ensure t
   :config
   (setq beacon-color "#666600")
-  (setq beacon-size 60)
-  (setq beacon-blink-duration 0.5))
+  (setq beacon-size 60))
 
 (use-package phi-search :ensure t)
 
