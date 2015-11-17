@@ -195,7 +195,17 @@
         ("ed" tags "+develop")
         ("ei" tags "+investigate")
         ("ee" tags "+entertainment")
-        ("eh" tags "+housekeeping")
+        ("ey" tags "+family")
+        ("eH" tags-todo "+housekeeping")
+        ("eC" tags-todo "+current")
+        ("eF" tags-todo "+reference")
+        ("eM" tags-todo "+master")
+        ("eO" tags-todo "+ordering")
+        ("eR" tags-todo "+repair")
+        ("eD" tags-todo "+develop")
+        ("eI" tags-todo "+investigate")
+        ("eE" tags-todo "+entertainment")
+        ("eE" tags-todo "+entertainment")
         ("u" . "unassigned")
         ("uu" alltodo "Unscheduled TODO entries"
          ((org-agenda-skip-function
@@ -230,6 +240,7 @@
         ("b" . "tickets")
         ("be" tags "+ticket+emacs")
         ("bs" tags "+ticket+stumpwm")
+        ("jc" tags "+@job+current/GOING|HOLD")
         ))
 
 (setq org-capture-templates
