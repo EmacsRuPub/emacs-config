@@ -246,3 +246,30 @@
 * [[https://github.com/Fuco1/nave-mode][Fuco1/nave-mode - https://github.com/Fuco1/nave-mode]] [2015-10-27 Вт 18:51] :emacs:try:
 * [[https://github.com/tj64/outshine][tj64/outshine - https://github.com/tj64/outshine]] [2015-10-27 Вт 18:53] :emacs:try:
 * [[https://github.com/chmouel/tox.el][chmouel/tox.el - https://github.com/chmouel/tox.el]] [2015-10-27 Вт 20:29] :emacs:try:
+* [[https://github.com/rayslava/emacs-point-el][rayslava/emacs-point-el - https://github.com/rayslava/emacs-point-el]] [2015-10-29 Чт 19:38] :emacs:try:
+* real-auto-save [2015-11-01 Вс 23:39]                               :emacs:try:
+* [[https://github.com/takaxp/org-tree-slide][takaxp/org-tree-slide - https://github.com/takaxp/org-tree-slide]] [2015-11-03 Вт 14:39] :emacs:try:
+* [[https://github.com/ilya-babanov/emacs-bpr][ilya-babanov/emacs-bpr - https://github.com/ilya-babanov/emacs-bpr]] [2015-11-03 Вт 15:03] :emacs:try:
+* [[http://melpa.org/#/helm-grepint][helm-grepint - MELPA - http://melpa.org/#/helm-grepint]] [2015-11-03 Вт 17:49] :emacs:try:
+* [[https://github.com/synic/jbeans-emacs][synic/jbeans-emacs - https://github.com/synic/jbeans-emacs]] [2015-11-03 Вт 23:59] :emacs:try:
+* [[http://melpa.org/#/replace-symbol][replace-symbol - MELPA - http://melpa.org/#/replace-symbol]] [2015-11-05 Чт 10:28] :emacs:try:
+* [[https://github.com/bmastenbrook/termbright-theme-el][bmastenbrook/termbright-theme-el - https://github.com/bmastenbrook/termbright-theme-el]] [2015-11-05 Чт 10:30] :emacs:try:
+* [[https://github.com/justbur/emacs-which-key][justbur/emacs-which-key - https://github.com/justbur/emacs-which-key]] [2015-11-05 Чт 20:49] :emacs:try:
+* [[https://github.com/cask/cask][cask/cask - https://github.com/cask/cask]] [2015-11-05 Чт 20:52] :emacs:try:
+* [[https://github.com/rdallasgray/pallet][rdallasgray/pallet - https://github.com/rdallasgray/pallet]] [2015-11-05 Чт 20:52] :emacs:try:
+* [[http://melpa.org/#/typing-game][typing-game - MELPA - http://melpa.org/#/typing-game]] [2015-11-09 Пн 23:52] :emacs:try:
+* [[http://melpa.org/#/noxml-fold][noxml-fold - MELPA - http://melpa.org/#/noxml-fold]] [2015-11-09 Пн 23:52] :emacs:try:
+* [[http://melpa.org/#/github-notifier][MELPA - http://melpa.org/#/github-notifier]] [2015-11-09 Пн 23:53] :emacs:try:
+* [[http://melpa.org/#/emoji-fontset][emoji-fontset - MELPA - http://melpa.org/#/emoji-fontset]] [2015-11-09 Пн 23:54] :emacs:try:
+* [[https://github.com/xuchunyang/eshell-z][xuchunyang/eshell-z - https://github.com/xuchunyang/eshell-z]] [2015-11-10 Вт 14:02] :emacs:try:
+* [[https://github.com/company-mode/company-mode/issues/68][More info about how this compares to auto-complete · Issue #68 · company-mode/company-mode - https://github.com/company-mode/company-mode/issues/68]] [2015-11-10 Вт 19:40] :emacs:try:
+* [[http://i.imgur.com/zlp94Vd.png][zlp94Vd.png (Изображение PNG, 950 × 1076 пикселов) - http://i.imgur.com/zlp94Vd.png]] [2015-11-10 Вт 19:59] :emacs:try:
+* [[https://www.reddit.com/r/emacs/comments/3rzy03/access_the_last_environment_i_have_left/][Access the last environment I have left : emacs - https://www.reddit.com/r/emacs/comments/3rzy03/access_the_last_environment_i_have_left/]] [2015-11-10 Вт 20:02] :emacs:try:
+* [[https://github.com/atilaneves/cmake-ide][atilaneves/cmake-ide - https://github.com/atilaneves/cmake-ide]] [2015-11-10 Вт 20:22] :emacs:try:
+* https://github.com/ReanGD/emacs-multi-compile [2015-11-12 Чт 13:16] :emacs:try:
+* [[https://github.com/iqbalansari/emacs-emojify][iqbalansari/emacs-emojify - https://github.com/iqbalansari/emacs-emojify]] [2015-11-15 Вс 11:29] :emacs:try:
+* [[http://endlessparentheses.com/test-driven-development-in-cider-and-emacs.html?source=rss][Test-Driven-Development in CIDER and Emacs · Endless Parentheses - http://endlessparentheses.com/test-driven-development-in-cider-and-emacs.html?source=rss]] [2015-11-16 Пн 20:12] :emacs:try:
+* [[https://github.com/alphapapa/org-protocol-capture-html#org-protocol-capture-html][alphapapa/org-protocol-capture-html - https://github.com/alphapapa/org-protocol-capture-html#org-protocol-capture-html]] [2015-11-16 Пн 23:06] :emacs:try:
+* [[http://irreal.org/blog/?p=4705][Textified Web Pages in Emacs | Irreal - http://irreal.org/blog/?p=4705]] [2015-11-16 Пн 23:06] :emacs:try:
+* [[https://github.com/politza/pdf-tools][politza/pdf-tools - https://github.com/politza/pdf-tools]] [2015-11-17 Вт 14:32] :emacs:try:
+* [[https://github.com/edvorg/req-package][edvorg/req-package - https://github.com/edvorg/req-package]] [2015-11-17 Вт 17:21] :emacs:try:
