@@ -349,6 +349,9 @@ show _A_ll                 add t_i_me to timestamp   _c_ancel clock
   ("w" org-store-link)
   ("y" org-insert-link)
   ("Y" org-insert-link-global)
+  ;;TODO: add org-open-at-point-global
+  ;;TODO: add org-reveal
+  ;;TODO: add org-show-todo-tree
   ("i" custom/org-update-timestamp-with-time)
   ("o" ace-link-org :color blue)
   ("O" custom/open-or-browse-at-point)
