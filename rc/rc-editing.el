@@ -36,7 +36,6 @@
 (setq transient-mark-mode t)
 (setq undo-limit 1000000)
 (setq user-full-name (capitalize global-username))
-(setq x-select-enable-clipboard t);; Allow pasting selection outside of Emacs
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ;; don't let the cursor go into minibuffer prompt
 (setq minibuffer-prompt-properties
@@ -67,6 +66,11 @@
 
 (define-coding-system-alias 'UTF-8 'utf-8)
 (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
+
+(use-package xclip
+  :ensure t
+  :config
+  (xclip-mode 1))
 
 (use-package dtrt-indent
   :ensure t
