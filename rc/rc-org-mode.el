@@ -114,7 +114,7 @@
 (setq org-special-ctrl-k t)
 (setq org-src-fontify-natively t)
 (setq org-startup-folded nil)
-(setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "CANCELLED") nil ""))
+(setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
 (setq org-tags-column -80)
 (setq org-use-property-inheritance t)
 (setq org-use-speed-commands t)
@@ -137,11 +137,11 @@
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 (setq org-ellipsis "⤵")
 
-(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
+(setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "HOLD" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
 (setq org-todo-keywords
       `(,kw-seq-common))
-(setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "GOING(g)" "NEXT(x)"))
+(setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "HOLD(h)" "GOING(g)" "NEXT(x)"))
 (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
 (setq org-agenda-time-grid
       '((daily today require-timed remove-match)
@@ -150,6 +150,7 @@
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
         ("WAITING" . (:foreground "orange" :weight bold))
+        ("HOLD" . (:foreground "yellow" :weight bold))
         ("CANCELLED" . (:foreground "cyan" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))))
 (setq org-priority-faces
