@@ -52,6 +52,8 @@
   (interactive)
   (cond
    ((equal major-mode 'ag-mode) (compile-goto-error))
+   ((or (equal major-mode 'org-agenda-mode)
+        (equal major-mode 'org-mode)) (org-return))
    ((or (equal major-mode 'jabber-chat-mode)
         (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
    (t (browse-url (thing-at-point 'url t)))))
