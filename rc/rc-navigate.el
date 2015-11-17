@@ -66,6 +66,7 @@
     (helm-adaptive-mode 1)
     (helm-autoresize-mode 1)
     (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
+    ;;TODO: investigate and bind 'helm-descbinds
     ))
 
 (use-package helm-ag

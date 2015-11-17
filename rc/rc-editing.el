@@ -297,7 +297,7 @@
   ("<left>" jump-char-backward)
   ("<right>" jump-char-forward)
   ("C-SPC" comment-dwim)
-  ("C-r" custom/join-region)
+  ("C-r" custom/join-region) ;;FIXME: custom/join-region is inexistent
   ("M-a" indent-region)
   ("SPC" untabify)
   ("TAB" tabify)
