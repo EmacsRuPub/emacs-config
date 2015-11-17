@@ -37,7 +37,7 @@
   :commands yas-global-mode
   :init
   (use-package helm-c-yasnippet :ensure t)
-  :idle
+  :config
   (progn
     (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
     (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
