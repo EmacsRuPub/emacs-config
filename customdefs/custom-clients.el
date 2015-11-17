@@ -19,6 +19,14 @@
 
 (defalias 'tt 'terminal)
 
+(defun connect-slack-irc ()
+  (interactive)
+  (erc-tls
+   :server private/irc-mira-slack-server
+   :full-name private/erc-full-name
+   :nick private/irc-mira-slack-nick
+   :password private/irc-mira-slack-password))
+
 ;; FIXME should be able to quit server
 ;; being invoked from barely any buffer
 (defun leave-irc-server ()
