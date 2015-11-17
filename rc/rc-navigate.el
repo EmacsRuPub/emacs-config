@@ -104,6 +104,16 @@
     (add-hook 'c-mode-hook 'helm-gtags-mode)
     (add-hook 'c++-mode-hook 'helm-gtags-mode)))
 
+;(use-package helm-fuzzier
+;  :ensure t
+;  :config
+;  (helm-fuzzier-mode 1))
+
+(use-package helm-flx
+  :ensure t
+  :config
+  (helm-flx-mode 1))
+
 (use-package swoop
   :ensure t
   :config
