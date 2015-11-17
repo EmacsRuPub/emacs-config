@@ -81,6 +81,7 @@
 (setq org-clock-persist-file (at-data-dir "/org-clock-save.el"))
 (setq org-clock-persist t)
 (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
+;; (setq org-columns-default-format "%50ITEM %12SCHEDULED %TODO %3PRIORITY %Effort{:} %TAGS")
 (setq org-confirm-elisp-link-function 'y-or-n-p)
 (setq org-ctrl-k-protect-subtree t)
 (setq org-cycle-include-plain-lists 'integrate)
@@ -90,11 +91,13 @@
 (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
+(setq org-track-ordered-property-with-tag t)
 (setq org-extend-today-until 2)
 (setq org-fast-tag-selection-single-key 'expert)
 (setq org-fontify-done-headline t)
 (setq org-global-properties '(("STYLE_ALL" . "habit")))
 (setq org-habit-graph-column 50)
+;; (setq org-habit-show-habits-only-for-today nil)
 (setq org-hide-leading-stars t)
 (setq org-indirect-buffer-display 'current-window)
 (setq org-insert-mode-line-in-empty-file t)
@@ -128,6 +131,11 @@
 (setq org-use-effective-time t)
 (setq org-goto-max-level 10)
 (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
+(setq org-agenda-inhibit-startup t)
+(setq org-agenda-use-tag-inheritance t)
+(setq org-agenda-show-log t)
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+(setq org-ellipsis "⤵")
 
 (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "SOMEDAY(s@)"
                   "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
