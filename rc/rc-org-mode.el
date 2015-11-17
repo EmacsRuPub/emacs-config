@@ -73,7 +73,7 @@
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-agenda-todo-list-sublevels nil)
 (setq org-align-all-tags t)
-(setq org-attach-directory (at-org-dir "org-attach-data"))
+(setq org-attach-directory (at-org-dir "/org-attach-data"))
 (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
 (setq org-clock-history-length 35)
 (setq org-clock-idle-time 3)
