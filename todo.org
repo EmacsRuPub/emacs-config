@@ -1,5 +1,5 @@
 * TODO [#C] find the way for more declarative way to describe irc server traits (will be useful in case of multiple servers) :investigate:
-* TODO [#C] MAYBE use history rotation in jabber.el         :investigate:fix:
+* TODO [#C] MAYBE use history rotation in jabber.el         :investigate:repair:
 * TODO [#B] redmine + emacs connectivity                           :investigate:
 ** review various options
 ** TODO [#B] play with org-sync and its redmine backend particularly [2014-07-01 Вт 03:06] :emacs:ticket:
@@ -214,3 +214,47 @@
   :Attachments: zap-to-char
   :ID:       aa821abb-c782-4f5c-a042-cd141286bcfc
   :END:
+* TODO [#C] play with joining lines [2015-10-31 Сб 10:07]  :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: join%20lines%20hydra
+  :ID:       fb9215ed-f6bd-4e0d-8546-d258726aa5be
+  :END:
+  http://pragmaticemacs.com/emacs/join-line-to-following-line/
+* TODO [#C] try to display projects with associated subtasks [2015-10-31 Сб 15:47] :emacs:ticket:ATTACH:
+  :PROPERTIES:
+  :Attachments: projects%20with%20associated%20subtasks
+  :ID:       f817e7ef-41f7-4714-909e-ffe2839e331e
+  :END:
+* TODO [#C] review [[http://stackoverflow.com/questions/13555385/org-mode-how-to-schedule-repeating-tasks-for-the-first-saturday-of-every-month][Org mode: How to schedule repeating tasks for the first Saturday of every month? - Stack Overflow - http://stackoverflow.com/questions/13555385/org-mode-how-to-schedule-repeating-tasks-for-the-first-saturday-of-every-month]] [2015-10-31 Сб 20:20]                         :emacs:ticket:
+* TODO [#B] (sachac) review capture templates internals http://pages.sachachua.com/.emacs.d/Sacha.html#text-unnumbered-80 [2015-10-31 Сб 23:59] :emacs:ticket:
+* TODO [#A] think of displaying either repeatable or consolidated full heading tree in agenda [2015-11-01 Вс 17:19] :emacs:ticket:
+  SCHEDULED: <2015-11-19 Чт>
+  e.g we may have scheduled heading, and therefore we want to see which org tree it belongs to (ex: which project we are working on this way)
+** context (as a grep-related notion) in various "occur"-modes (namely, orgmode)
+* DONE [#A] investigate the hang of emacs while trying to reschedule [[file:~/org/mirantis.org::*https:/review.fuel-infra.org/#/admin/projects/openstack/heat][heat fix ci]] from agenda (it works perfectly in buffer) [2015-11-05 Чт 21:13] :emacs:ticket:
+  CLOSED: [2015-11-05 Чт 23:59] SCHEDULED: <2015-11-06 Пт>
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-11-05 Чт 23:59]
+  :END:
+* GOING [#A] find out why text pasted from mentat seems to be readonly [2015-11-09 Пн 23:56] :emacs:ticket:
+  SCHEDULED: <2015-11-15 Вс>
+  :LOGBOOK:
+  - State "GOING"      from "TODO"       [2015-11-12 Чт 23:27]
+  :END:
+* GOING [#A] review recent orgmode customization to find out what makes org-agenda spuriously freeze emacs while trying to reschedule heading at point [2015-11-09 Пн 23:58] :emacs:ticket:
+  SCHEDULED: <2015-11-15 Вс>
+  :LOGBOOK:
+  - State "GOING"      from "TODO"       [2015-11-13 Пт 23:43]
+  :END:
+* TODO [#A] investigate and maybe fix swoop breakage while there was some dir or file opened (have existent buffer) and then it was deleted [2015-11-10 Вт 18:45] :emacs:ticket:
+  SCHEDULED: <2015-11-17 Вт>
+* TODO [#B] [[http://stackoverflow.com/questions/20979918/reading-email-from-gmail-in-emacs-24][Reading email (from gmail) in emacs 24 - Stack Overflow - http://stackoverflow.com/questions/20979918/reading-email-from-gmail-in-emacs-24]] [2015-11-10 Вт 19:36] :emacs:ticket:
+  SCHEDULED: <2015-11-19 Чт>
+* TODO [#C] review [[http://www.mostlymaths.net/2015/11/synctex-and-pdf-view-mode-for-emacs.html][SyncTeX and pdf-view-mode for emacs - http://www.mostlymaths.net/2015/11/synctex-and-pdf-view-mode-for-emacs.html]] [2015-11-10 Вт 20:29]                         :emacs:ticket:
+  SCHEDULED: <2015-11-17 Вт>
+* TODO [#C] review [[https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/][Where are the org-lookup functions? : emacs - https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/]] [2015-11-12 Чт 14:32]                         :emacs:ticket:
+  SCHEDULED: <2015-11-17 Вт>
+* TODO [#A] local refile [2015-11-15 Вс 18:15]            :orgmode:emacs:ticket:
+  SCHEDULED: <2015-11-15 Вс>
+* TODO [#A] org-refile from outside org mode (namely C-u 'org-refile) [2015-11-16 Пн 23:59] :emacs:ticket:
+  SCHEDULED: <2015-11-17 Вт>
