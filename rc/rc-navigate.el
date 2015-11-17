@@ -344,6 +344,7 @@ defun + _c_omments
   ("r" narrow-to-region)
   ("d" narrow-to-defun)
   ("c" narrow-to-defun+comments-above)
+  ("o" org-narrow-to-subtree)
   ("w" widen)
   ("z" zoom-window-zoom)
   ("N" recursive-narrow-or-widen-dwim)
