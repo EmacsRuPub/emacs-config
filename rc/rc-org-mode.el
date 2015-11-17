@@ -30,6 +30,9 @@
   (global-orglink-mode)
   (diminish 'orglink-mode "OL"))
 
+(use-package org-linkany
+  :ensure t)
+
 (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
 (f-entries (at-org-dir)
