@@ -287,6 +287,9 @@
 
 (use-package phi-search :ensure t)
 
+(use-package occur-context-resize
+  :ensure t)
+
 (use-package sift :ensure t)
 
 ;; Reload dired after making changes
