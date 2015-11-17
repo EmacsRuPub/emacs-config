@@ -54,6 +54,7 @@
 (setq show-paren-delay 0)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 (setq mouse-wheel-progressive-speed nil)
+(setq set-mark-command-repeat-pop t)
 
 (delete-selection-mode t)
 (electric-indent-mode -1)
