@@ -16,7 +16,18 @@
 (use-package  lua-mode :ensure t)
 (use-package  nginx-mode :ensure t)
 (use-package  rust-mode :ensure t)
-(use-package  web-mode :ensure t)
+
+(use-package web-mode
+  :ensure t
+  :defer t
+  :mode "\\.html?\\'"
+  :config
+  (progn
+    (setq web-mode-enable-current-element-highlight t)
+    (setq web-mode-ac-sources-alist
+          '(("css" . (ac-source-css-property))
+            ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
+          )))
 
 (defun custom/sh-check-finish-hook (buf msg)
   "Function, that is executed at the end of sh check"
