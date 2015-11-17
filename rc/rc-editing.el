@@ -325,6 +325,7 @@
   ("S" scratch)
   ("y" revbufs)
   ("k" custom/kill-save-rectangle)
+  ("K" append-next-kill)
   ("/" comment-box)
   ("w" wrap-to-fill-column-mode)
   ("=" edit-indirect-region)
