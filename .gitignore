@@ -3,6 +3,7 @@
 *semantic*
 *~
 .emacs.desktop
+config.el
 credentials.el.gpg
 customizations.el
 data
