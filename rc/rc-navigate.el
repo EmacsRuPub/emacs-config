@@ -287,6 +287,8 @@
 
 (use-package phi-search :ensure t)
 
+(use-package sift :ensure t)
+
 ;; Reload dired after making changes
 (--each '(dired-do-rename
           dired-create-directory
@@ -388,7 +390,7 @@ _g_ ag in project      _w_ select w3m buffer
 "
   ("h" helm-mini)
   ("q" helm-projectile)
-  ("r" helm-projectile-grep)
+  ("r" sift-regexp)
   ("f" custom/helm-find-files)
   ("s" helm-semantic-or-imenu)
   ("p" helm-projectile-switch-project)
