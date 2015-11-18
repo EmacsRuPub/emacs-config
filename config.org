@@ -1847,386 +1847,404 @@
  (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
  #+END_SRC
 ** editing
- #+BEGIN_SRC emacs-lisp
- (use-package rst)
- (use-package saveplace)
- (use-package table) ;; table
- (use-package footnote)
- (use-package snakehump :ensure t)
- (use-package highlight-sexp :ensure t)
- (use-package adaptive-wrap :ensure t)
- (use-package anchored-transpose :ensure t)
- (use-package edit-indirect :ensure t)
- (use-package epoch-view :ensure t)
- (use-package hungry-delete :ensure t)
- (use-package multifiles :ensure t)
- (use-package narrow-indirect :ensure t)
- (use-package replace+ :ensure t)
- (use-package scratch :ensure t)
+*** setup
+  #+BEGIN_SRC emacs-lisp
+  (use-package rst)
+  (use-package saveplace)
+  (use-package table) ;; table
+  (use-package footnote)
+  (use-package snakehump :ensure t)
+  (use-package highlight-sexp :ensure t)
+  (use-package adaptive-wrap :ensure t)
+  (use-package anchored-transpose :ensure t)
+  (use-package edit-indirect :ensure t)
+  (use-package epoch-view :ensure t)
+  (use-package hungry-delete :ensure t)
+  (use-package multifiles :ensure t)
+  (use-package narrow-indirect :ensure t)
+  (use-package replace+ :ensure t)
+  (use-package scratch :ensure t)
 
- (setq auto-revert-verbose nil)
- (setq comment-style 'indent)
- (setq default-input-method 'russian-computer)
- (setq delete-by-moving-to-trash t);; Move files to trash when deleting
- (setq global-auto-revert-non-file-buffers t)
- (setq indent-tabs-mode nil)
- (setq kill-whole-line t)
- (setq kmacro-ring-max 16)
- (setq mark-even-if-inactive t)
- (setq next-line-add-newlines nil)
- (setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
- (setq sentence-end-double-space nil)
- (setq tab-always-indent t)
- (setq transient-mark-mode t)
- (setq undo-limit 1000000)
- (setq user-full-name (capitalize global-username))
- (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
- ;; don't let the cursor go into minibuffer prompt
- (setq minibuffer-prompt-properties
-       '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
+  (setq auto-revert-verbose nil)
+  (setq comment-style 'indent)
+  (setq default-input-method 'russian-computer)
+  (setq delete-by-moving-to-trash t);; Move files to trash when deleting
+  (setq global-auto-revert-non-file-buffers t)
+  (setq indent-tabs-mode nil)
+  (setq kill-whole-line t)
+  (setq kmacro-ring-max 16)
+  (setq mark-even-if-inactive t)
+  (setq next-line-add-newlines nil)
+  (setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
+  (setq sentence-end-double-space nil)
+  (setq tab-always-indent t)
+  (setq transient-mark-mode t)
+  (setq undo-limit 1000000)
+  (setq user-full-name (capitalize global-username))
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+  ;; don't let the cursor go into minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
- (set-default 'indent-tabs-mode nil);; Never insert tabs
- (setq-default fill-column 200)
- (setq-default indicate-empty-lines t)
- (setq-default save-place t)
- (setq-default tab-width 4)
- (setq-default transient-mark-mode t)
- (setq-default truncate-lines t);; Don't break lines for me, please
+  (set-default 'indent-tabs-mode nil);; Never insert tabs
+  (setq-default fill-column 200)
+  (setq-default indicate-empty-lines t)
+  (setq-default save-place t)
+  (setq-default tab-width 4)
+  (setq-default transient-mark-mode t)
+  (setq-default truncate-lines t);; Don't break lines for me, please
 
- (setq x-stretch-cursor t)
- (setq blink-matching-paren nil)
- (setq show-paren-delay 0)
- (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
- (setq mouse-wheel-progressive-speed nil)
- (setq set-mark-command-repeat-pop t)
+  (setq x-stretch-cursor t)
+  (setq blink-matching-paren nil)
+  (setq show-paren-delay 0)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil)
+  (setq set-mark-command-repeat-pop t)
 
- (delete-selection-mode t)
- (electric-indent-mode -1)
- (global-auto-revert-mode 1);; Auto refresh buffers
- (show-paren-mode t)
- (transient-mark-mode 1)
+  (delete-selection-mode t)
+  (electric-indent-mode -1)
+  (global-auto-revert-mode 1);; Auto refresh buffers
+  (show-paren-mode t)
+  (transient-mark-mode 1)
 
- (make-variable-buffer-local 'transient-mark-mode)
- (put 'transient-mark-mode 'permanent-local t)
+  (make-variable-buffer-local 'transient-mark-mode)
+  (put 'transient-mark-mode 'permanent-local t)
 
- (define-coding-system-alias 'UTF-8 'utf-8)
- (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
+  (define-coding-system-alias 'UTF-8 'utf-8)
+  (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
- (use-package xclip
-   :ensure t
-   :config
-   (xclip-mode 1))
+  (use-package xclip
+    :ensure t
+    :config
+    (xclip-mode 1))
 
- (use-package dtrt-indent
-   :ensure t
-   :config
-   (dtrt-indent-mode))
+  (use-package dtrt-indent
+    :ensure t
+    :config
+    (dtrt-indent-mode))
 
- (use-package savekill
-   :ensure t
-   :config
-   (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
+  (use-package savekill
+    :ensure t
+    :config
+    (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
 
- (use-package drag-stuff
-   :ensure t
-   :defer t
-   :config
-   (progn
-     (setq drag-stuff-modifier '(meta shift))
-     (turn-off-drag-stuff-mode)
-     ))
+  (use-package drag-stuff
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq drag-stuff-modifier '(meta shift))
+      (turn-off-drag-stuff-mode)
+      ))
 
- (use-package expand-region
-   :ensure t
-   :defer t
-   :bind ("C-=" . er/expand-region))
+  (use-package expand-region
+    :ensure t
+    :defer t
+    :bind ("C-=" . er/expand-region))
 
- (use-package undo-tree
-   :defer t
-   :ensure t
-   :config
-   (progn
-     (global-undo-tree-mode t)
-     (setq undo-tree-mode-lighter "")
-     (setq undo-tree-visualizer-timestamps t)
-     (setq undo-tree-visualizer-diff t)
-     ))
+  (use-package undo-tree
+    :defer t
+    :ensure t
+    :config
+    (progn
+      (global-undo-tree-mode t)
+      (setq undo-tree-mode-lighter "")
+      (setq undo-tree-visualizer-timestamps t)
+      (setq undo-tree-visualizer-diff t)
+      ))
 
- (use-package recentf
-   :defer t
-   :init
-   (use-package recentf-ext :ensure t)
-   :config
-   (progn
-     (recentf-mode t) ;enable recent files mode.
-     (setq recentf-max-saved-items 250)
-     (setq recentf-max-menu-items 15)
-     ;; get rid of `find-file-read-only' and replace it with something more useful.
-     ))
+  (use-package recentf
+    :defer t
+    :init
+    (use-package recentf-ext :ensure t)
+    :config
+    (progn
+      (recentf-mode t) ;enable recent files mode.
+      (setq recentf-max-saved-items 250)
+      (setq recentf-max-menu-items 15)
+      ;; get rid of `find-file-read-only' and replace it with something more useful.
+      ))
 
- (use-package multiple-cursors
-   :ensure t
-   :config
-   (setq mc/list-file (at-data-dir "/.mc-lists.el")))
+  (use-package multiple-cursors
+    :ensure t
+    :config
+    (setq mc/list-file (at-data-dir "/.mc-lists.el")))
 
- (use-package mc-extras
-   ;;TODO: explore and bind functions
-   :ensure t
-   :defer t)
+  (use-package mc-extras
+    ;;TODO: explore and bind functions
+    :ensure t
+    :defer t)
 
- (use-package region-bindings-mode
-   :ensure t
-   :config
-   (region-bindings-mode-enable)
-   (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
-   (bind-key "M-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
-   (bind-key "M-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
-   (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
-   (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
-   (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
-   (bind-key "3" 'mc/mark-more-like-this-extended region-bindings-mode-map)
-   (bind-key "5" 'mc/mark-all-in-region region-bindings-mode-map)
-   (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
-   (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
-   (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
-   (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
-   (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
+  (use-package region-bindings-mode
+    :ensure t
+    :config
+    (region-bindings-mode-enable)
+    (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
+    (bind-key "M-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
+    (bind-key "M-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
+    (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
+    (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
+    (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
+    (bind-key "3" 'mc/mark-more-like-this-extended region-bindings-mode-map)
+    (bind-key "5" 'mc/mark-all-in-region region-bindings-mode-map)
+    (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
+    (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
+    (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
+    (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
+    (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
- (use-package volatile-highlights
-   :ensure t
-   :config
-   (volatile-highlights-mode t))
+  (use-package volatile-highlights
+    :ensure t
+    :config
+    (volatile-highlights-mode t))
 
- (use-package wc-mode :ensure t)
+  (use-package wc-mode :ensure t)
 
- (use-package whole-line-or-region ;; if no region is active, act on current line
-   :ensure t
-   :defer t
-   :config
-   (progn
-     (whole-line-or-region-mode 1)
-     (setq whole-line-or-region-extensions-alist
-           '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
-             (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
-             (kill-region whole-line-or-region-kill-region nil)
-             (kill-ring-save whole-line-or-region-kill-ring-save nil)
-             (yank whole-line-or-region-yank nil)
-             ))))
+  (use-package whole-line-or-region ;; if no region is active, act on current line
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (whole-line-or-region-mode 1)
+      (setq whole-line-or-region-extensions-alist
+            '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
+              (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
+              (kill-region whole-line-or-region-kill-region nil)
+              (kill-ring-save whole-line-or-region-kill-ring-save nil)
+              (yank whole-line-or-region-yank nil)
+              ))))
 
- (use-package comment-dwim-2
-   :ensure t
-   :config
-   (global-set-key (kbd "M-]") 'comment-dwim-2))
+  (use-package comment-dwim-2
+    :ensure t
+    :config
+    (global-set-key (kbd "M-]") 'comment-dwim-2))
 
- (use-package generic
-   :defer t
-   :init
-   (use-package generic-x)
-   :config
-   (progn
-     (define-generic-mode 'keymap-mode
-       '("#")
-       '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-       nil
-       '(".keymap\\'" ".map\\'")
-       nil)
-     (setq generic-default-modes (delete 'javascript-generic-mode
-                                         generic-default-modes))))
+  (use-package generic
+    :defer t
+    :init
+    (use-package generic-x)
+    :config
+    (progn
+      (define-generic-mode 'keymap-mode
+        '("#")
+        '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+        nil
+        '(".keymap\\'" ".map\\'")
+        nil)
+      (setq generic-default-modes (delete 'javascript-generic-mode
+                                          generic-default-modes))))
 
- (use-package yatemplate
-   :init
-   (auto-insert-mode)
-   :config
-   (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
-   (yatemplate-fill-alist))
+  (use-package yatemplate
+    :init
+    (auto-insert-mode)
+    :config
+    (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
+    (yatemplate-fill-alist))
 
- (use-package rebox2
-   :ensure t
-   ;;TODO: bind commands
-   )
+  (use-package rebox2
+    :ensure t
+    ;;TODO: bind commands
+    )
 
- (use-package smartparens
-   :ensure t
-   :config
-   (use-package smartparens-config)
-   (smartparens-global-strict-mode t)
-   (show-smartparens-global-mode t)
-   (sp-use-smartparens-bindings)
-   (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
-   (bind-key "M-F" nil smartparens-mode-map)
-   (bind-key "M-B" nil smartparens-mode-map)
-   (bind-key "M-<backspace>" nil smartparens-mode-map)
-   (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-   (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-   (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
-   (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-   (define-key sp-keymap (kbd "C-c s r n") 'sp-narrow-to-sexp)
-   (define-key sp-keymap (kbd "C-c s t") 'sp-prefix-tag-object)
-   (define-key sp-keymap (kbd "C-c s p") 'sp-prefix-pair-object)
-   (define-key sp-keymap (kbd "C-c s y") 'sp-prefix-symbol-object)
-   (define-key sp-keymap (kbd "C-c s c") 'sp-convolute-sexp)
-   (define-key sp-keymap (kbd "C-c s a") 'sp-absorb-sexp)
-   (define-key sp-keymap (kbd "C-c s w") 'sp-rewrap-sexp)
-   (define-key sp-keymap (kbd "C-c s e") 'sp-emit-sexp)
-   (define-key sp-keymap (kbd "C-c s p") 'sp-add-to-previous-sexp)
-   (define-key sp-keymap (kbd "C-c s n") 'sp-add-to-next-sexp)
-   (define-key sp-keymap (kbd "C-c s j") 'sp-join-sexp)
-   (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
+  (use-package smartparens
+    :ensure t
+    :config
+    (use-package smartparens-config)
+    (smartparens-global-strict-mode t)
+    (show-smartparens-global-mode t)
+    (sp-use-smartparens-bindings)
+    (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+    (bind-key "M-F" nil smartparens-mode-map)
+    (bind-key "M-B" nil smartparens-mode-map)
+    (bind-key "M-<backspace>" nil smartparens-mode-map)
+    (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+    (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+    (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+    (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+    (define-key sp-keymap (kbd "C-c s r n") 'sp-narrow-to-sexp)
+    (define-key sp-keymap (kbd "C-c s t") 'sp-prefix-tag-object)
+    (define-key sp-keymap (kbd "C-c s p") 'sp-prefix-pair-object)
+    (define-key sp-keymap (kbd "C-c s y") 'sp-prefix-symbol-object)
+    (define-key sp-keymap (kbd "C-c s c") 'sp-convolute-sexp)
+    (define-key sp-keymap (kbd "C-c s a") 'sp-absorb-sexp)
+    (define-key sp-keymap (kbd "C-c s w") 'sp-rewrap-sexp)
+    (define-key sp-keymap (kbd "C-c s e") 'sp-emit-sexp)
+    (define-key sp-keymap (kbd "C-c s p") 'sp-add-to-previous-sexp)
+    (define-key sp-keymap (kbd "C-c s n") 'sp-add-to-next-sexp)
+    (define-key sp-keymap (kbd "C-c s j") 'sp-join-sexp)
+    (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
 
- (use-package vimrc-mode
-   :ensure t
-   :defer t
-   :mode ".vim\\(rc\\)?$")
+  (use-package vimrc-mode
+    :ensure t
+    :defer t
+    :mode ".vim\\(rc\\)?$")
 
- (use-package whitespace
-   :defer t)
+  (use-package whitespace
+    :defer t)
 
- (use-package wrap-region
-   :ensure t
-   :config
-   (progn
-     (wrap-region-global-mode 1)
-     (wrap-region-add-wrapper "*" "*")
-     (wrap-region-add-wrapper "(" ")")
-     (wrap-region-add-wrapper "{-" "-}" "#")
-     (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
+  (use-package wrap-region
+    :ensure t
+    :config
+    (progn
+      (wrap-region-global-mode 1)
+      (wrap-region-add-wrapper "*" "*")
+      (wrap-region-add-wrapper "(" ")")
+      (wrap-region-add-wrapper "{-" "-}" "#")
+      (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
 
- (use-package mark
-   :ensure t
-   :config
-   (defhydra hydra-mark ()
-     ("<right>" forward-mark "forward-mark")
-     ("<left>" backward-mark "backward-mark")
-     ("<down>" show-marks "show-marks"))
-   (global-set-key (kbd "<f12>") 'hydra-mark/body))
+  (use-package mark
+    :ensure t
+    :config
+    (defhydra hydra-mark ()
+      ("<right>" forward-mark "forward-mark")
+      ("<left>" backward-mark "backward-mark")
+      ("<down>" show-marks "show-marks"))
+    (global-set-key (kbd "<f12>") 'hydra-mark/body))
 
- (use-package page-break-lines
-   :ensure t
-   :config
-   (turn-on-page-break-lines-mode))
+  (use-package page-break-lines
+    :ensure t
+    :config
+    (turn-on-page-break-lines-mode))
 
- ;; (use-package macro-math
- ;;   :config
- ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
- ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+  ;; (use-package macro-math
+  ;;   :config
+  ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
+  ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
 
- (use-package miniedit
-   :defer t
-   :ensure t
-   :commands minibuffer-edit
-   :init (miniedit-install))
+  (use-package miniedit
+    :defer t
+    :ensure t
+    :commands minibuffer-edit
+    :init (miniedit-install))
 
- (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
- (add-hook 'text-mode-hook 'turn-on-auto-fill)
- (add-hook 'text-mode-hook 'text-mode-hook-identify)
+  (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+  (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
- ;; Transpose stuff with M-t
- (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
- ;;TODO: plan docstring
- (defhydra hydra-transpose ()
-   ("M-b" backward-word "prev word")
-   ("M-f" forward-word "next word")
-   ("<up>" previous-line "prev line")
-   ("<down>" next-line "next line")
-   ("<left>" backward-char "prev char")
-   ("<right>" forward-char "next char")
-   ("_" undo-tree-undo "undo last")
-   ("w" custom/transpose-words "on words")
-   ("s" transpose-sexps "on sexps")
-   ("p" transpose-params "on params")
-   ("a" anchored-transpose "anchored")
-   ("q" nil "cancel"))
- (global-set-key (kbd "M-t") 'hydra-transpose/body)
+  ;; Transpose stuff with M-t
+  (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
+  ;;TODO: plan docstring
+  (defhydra hydra-transpose ()
+    ("M-b" backward-word "prev word")
+    ("M-f" forward-word "next word")
+    ("<up>" previous-line "prev line")
+    ("<down>" next-line "next line")
+    ("<left>" backward-char "prev char")
+    ("<right>" forward-char "next char")
+    ("_" undo-tree-undo "undo last")
+    ("w" custom/transpose-words "on words")
+    ("s" transpose-sexps "on sexps")
+    ("p" transpose-params "on params")
+    ("a" anchored-transpose "anchored")
+    ("q" nil "cancel"))
+  (global-set-key (kbd "M-t") 'hydra-transpose/body)
 
- ;;TODO: plan docstring
- (defhydra hydra-edit (:color blue)
-   ("0" custom/compact-spaces-in-region)
-   ("2" custom/duplicate-and-comment-line)
-   ("4" snakehump-next-at-point)
-   ("<left>" jump-char-backward)
-   ("<right>" jump-char-forward)
-   ("C-SPC" comment-dwim)
-   ("C-r" custom/join-region) ;;FIXME: custom/join-region is inexistent
-   ("M-a" indent-region)
-   ("SPC" untabify)
-   ("TAB" tabify)
-   ("[" comment-region)
-   ("]" uncomment-region)
-   ("`" redraw-display)
-   ("b" subword-mode)
-   ("c" wc-mode)
-   ("d" diff-buffer-with-file)
-   ("f" custom/copy-file-name-to-clipboard)
-   ("i" custom/insert-current-date-time)
-   ("o" just-one-space)
-   ("p" whitespace-mode)
-   ("r" query-replace)
-   ("n" custom/rename-file-and-buffer)
-   ("s" sort-lines)
-   ("t" delete-trailing-whitespace)
-   ("u" delete-duplicate-lines)
-   ("v" view-mode)
-   ("x" query-replace-regexp)
-   ("a" custom/append-cited-region)
-   ("g" insert-register)
-   ("e" copy-to-register)
-   ("m" rename-uniquely)
-   ("S" scratch)
-   ("y" revbufs)
-   ("k" custom/kill-save-rectangle)
-   ("K" append-next-kill)
-   ("/" comment-box)
-   ("w" wrap-to-fill-column-mode)
-   ("=" edit-indirect-region)
-   ("q" nil "cancel"))
- (global-set-key (kbd "C-z") 'hydra-edit/body)
+  ;;TODO: plan docstring
+  (defhydra hydra-edit (:color blue)
+    ("0" custom/compact-spaces-in-region)
+    ("2" custom/duplicate-and-comment-line)
+    ("4" snakehump-next-at-point)
+    ("<left>" jump-char-backward)
+    ("<right>" jump-char-forward)
+    ("C-SPC" comment-dwim)
+    ("C-r" custom/join-region) ;;FIXME: custom/join-region is inexistent
+    ("M-a" indent-region)
+    ("SPC" untabify)
+    ("TAB" tabify)
+    ("[" comment-region)
+    ("]" uncomment-region)
+    ("`" redraw-display)
+    ("b" subword-mode)
+    ("c" wc-mode)
+    ("d" diff-buffer-with-file)
+    ("f" custom/copy-file-name-to-clipboard)
+    ("i" custom/insert-current-date-time)
+    ("o" just-one-space)
+    ("p" whitespace-mode)
+    ("r" query-replace)
+    ("n" custom/rename-file-and-buffer)
+    ("s" sort-lines)
+    ("t" delete-trailing-whitespace)
+    ("u" delete-duplicate-lines)
+    ("v" view-mode)
+    ("x" query-replace-regexp)
+    ("a" custom/append-cited-region)
+    ("g" insert-register)
+    ("e" copy-to-register)
+    ("m" rename-uniquely)
+    ("S" scratch)
+    ("y" revbufs)
+    ("k" custom/kill-save-rectangle)
+    ("K" append-next-kill)
+    ("/" comment-box)
+    ("w" wrap-to-fill-column-mode)
+    ("=" edit-indirect-region)
+    ("q" nil "cancel"))
+  (global-set-key (kbd "C-z") 'hydra-edit/body)
 
- (defhydra hydra-toggle (:color blue)
-   "
-   TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
-   _d_ / _D_ toggle drag-stuff mode on/off (%(format \"%S\" drag-stuff-mode))
-   _w_hitespace mode
-   "
-   ("b" toggle-debug-on-error "debug on error")
-   ("w" whitespace-mode "whitespace mode")
-   ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
-   ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
-   ("h" highlight-sexp-mode "toggle highlight-sexp mode"))
- (global-set-key (kbd "<f11>") 'hydra-toggle/body)
+  (defhydra hydra-toggle (:color blue)
+    "
+    TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
+    _d_ / _D_ toggle drag-stuff mode on/off (%(format \"%S\" drag-stuff-mode))
+    _w_hitespace mode
+    "
+    ("b" toggle-debug-on-error "debug on error")
+    ("w" whitespace-mode "whitespace mode")
+    ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
+    ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
+    ("h" highlight-sexp-mode "toggle highlight-sexp mode"))
+  (global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
- (defhydra hydra-cases (:color pink)
-   "
-   _d_ / _d_ downcase word/region
-   _u_ / _u_ upcase word/region
-   _I_       capitalize region
-   "
-   ("d" downcase-word)
-   ("d" downcase-region :color blue)
-   ("u" upcase-word)
-   ("u" upcase-region :color blue)
-   ("I" upcase-initials-region :color blue))
- (global-set-key (kbd "<f10>") 'hydra-cases/body)
+  (defhydra hydra-cases (:color pink)
+    "
+    _d_ / _d_ downcase word/region
+    _u_ / _u_ upcase word/region
+    _I_       capitalize region
+    "
+    ("d" downcase-word)
+    ("d" downcase-region :color blue)
+    ("u" upcase-word)
+    ("u" upcase-region :color blue)
+    ("I" upcase-initials-region :color blue))
+  (global-set-key (kbd "<f10>") 'hydra-cases/body)
 
- (global-set-key (kbd "M-g") 'goto-line)
- (global-set-key (kbd "M-\"") 'eval-region)
- (global-set-key (kbd "M-y") 'helm-show-kill-ring)
- (global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)
- ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
- (global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
- (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
- (global-set-key (kbd "C-c r p") '(lambda () ;;TODO: make hydra for such custom helm sources
-                                    (interactive)
-                                    (helm :sources '(custom/helm-source-portage-files))))
+  (global-set-key (kbd "M-g") 'goto-line)
+  (global-set-key (kbd "M-\"") 'eval-region)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)
+  ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
+  (global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
+  (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
+  (global-set-key (kbd "C-c r p") '(lambda () ;;TODO: make hydra for such custom helm sources
+                                     (interactive)
+                                     (helm :sources '(custom/helm-source-portage-files))))
 
- (setq whitespace-style '(indentation::space
-                          space-after-tab
-                          space-before-tab
-                          trailing
-                          lines-tail
-                          tab-mark
-                          face
-                          tabs))
- #+END_SRC
+  (setq whitespace-style '(indentation::space
+                           space-after-tab
+                           space-before-tab
+                           trailing
+                           lines-tail
+                           tab-mark
+                           face
+                           tabs))
+  #+END_SRC
+*** try
+    #+BEGIN_SRC emacs-lisp :tangle no
+(defmacro my/insert-unicode (unicode-name)
+  `(lambda () (interactive)
+     (insert-char (cdr (assoc-string ,unicode-name (ucs-names))))))
+(bind-key "C-x 8 s" (my/insert-unicode "ZERO WIDTH SPACE"))
+(bind-key "C-x 8 S" (my/insert-unicode "SNOWMAN"))
+
+(defun sanityinc/kill-back-to-indentation ()
+  "Kill from point back to the first non-whitespace character on the line."
+  (interactive)
+  (let ((prev-pos (point)))
+    (back-to-indentation)
+    (kill-region (point) prev-pos)))
+
+(bind-key "C-M-<backspace>" 'sanityinc/kill-back-to-indentation)
+    #+END_SRC
 ** completion
  #+BEGIN_SRC emacs-lisp
  (use-package auto-complete
@@ -2936,530 +2954,778 @@
  (global-set-key (kbd "C-c c") 'hydra-pim/body)
  #+END_SRC
 ** orgmode
- #+BEGIN_SRC emacs-lisp
- (use-package icalendar)
- (use-package org-footnote)
- (use-package org-magit :ensure t)
- (use-package org-pomodoro :ensure t)
+*** setup
+  #+BEGIN_SRC emacs-lisp
+  (use-package icalendar)
+  (use-package org-footnote)
+  (use-package org-magit :ensure t)
+  (use-package org-pomodoro :ensure t)
 
- (setq org-modules
-       '(<C>org-pomodoro
-         org-agenda org-archive org-attach org-bbdb org-bibtex
-         org-bookmark org-checklist org-clock org-collector org-docview
-         org-drill org-expiry org-habit org-id org-info org-inlinetask
-         org-interactive-query org-irc org-man org-mouse org-protocol
-         org-timer org-w3m))
+  (setq org-modules
+        '(<C>org-pomodoro
+          org-agenda org-archive org-attach org-bbdb org-bibtex
+          org-bookmark org-checklist org-clock org-collector org-docview
+          org-drill org-expiry org-habit org-id org-info org-inlinetask
+          org-interactive-query org-irc org-man org-mouse org-protocol
+          org-timer org-w3m))
 
- (use-package org)
- (use-package ox-html)
- (use-package org-dashboard :ensure t)
- (use-package orgit :ensure t)
- (use-package org-bullets :ensure t)
+  (use-package org)
+  (use-package ox-html)
+  (use-package org-dashboard :ensure t)
+  (use-package orgit :ensure t)
+  (use-package org-bullets :ensure t)
 
- (use-package orglink
-   :ensure t
-   :config
-   ;; TODO: customize orglink-activate-in-modes
-   (global-orglink-mode)
-   (diminish 'orglink-mode "OL"))
+  (use-package orglink
+    :ensure t
+    :config
+    ;; TODO: customize orglink-activate-in-modes
+    (global-orglink-mode)
+    (diminish 'orglink-mode "OL"))
 
- (use-package org-linkany
-   :ensure t)
+  (use-package org-linkany
+    :ensure t)
 
- (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
+  (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
- (f-entries (at-org-dir)
-            (lambda (entry) (when (and (f-file? entry)
-                                       (s-suffix? "org" entry)
-                                       (file-exists-p entry))
-                              (push entry org-agenda-files)))
-            t)
+  (f-entries (at-org-dir)
+             (lambda (entry) (when (and (f-file? entry)
+                                        (s-suffix? "org" entry)
+                                        (file-exists-p entry))
+                               (push entry org-agenda-files)))
+             t)
 
-                                         ;TODO: maybe do it less straightforward
- (add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
- (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
- (add-to-list 'org-agenda-files (at-homedir "/.stumpwm.d/todo.org"))
+                                          ;TODO: maybe do it less straightforward
+  (add-to-list 'org-agenda-files (at-config-basedir "todo.org"))
+  (add-to-list 'org-agenda-files (at-config-basedir "totry.org"))
+  (add-to-list 'org-agenda-files (at-homedir "/.stumpwm.d/todo.org"))
 
- (add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
- (add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
- (add-to-list 'org-speed-commands-user '("s" call-interactively 'org-schedule))
- (add-to-list 'org-speed-commands-user '("i" call-interactively 'org-clock-in))
- (add-to-list 'org-speed-commands-user '("o" call-interactively 'org-clock-out))
- (add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
+  (add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
+  (add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
+  (add-to-list 'org-speed-commands-user '("s" call-interactively 'org-schedule))
+  (add-to-list 'org-speed-commands-user '("i" call-interactively 'org-clock-in))
+  (add-to-list 'org-speed-commands-user '("o" call-interactively 'org-clock-out))
+  (add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
 
- (setq calendar-date-style 'european)
- (setq org-agenda-dim-blocked-tasks 'invisible)
- (setq org-agenda-include-all-todo t)
- (setq org-agenda-repeating-timestamp-show-all nil)
- (setq org-agenda-show-all-dates t)
- (setq org-agenda-show-inherited-tags nil)
- (setq org-agenda-skip-deadline-if-done t)
- (setq org-agenda-skip-scheduled-if-done t)
- (setq org-agenda-skip-timestamp-if-done t)
- (setq org-agenda-span 'month)
- (setq org-agenda-start-on-weekday nil)
- (setq org-agenda-sticky nil)            ;otherwise agenda behaves strangely on non-stuck projects
- (setq org-agenda-tags-todo-honor-ignore-options t)
- (setq org-agenda-todo-ignore-deadlines 'all)
- (setq org-agenda-todo-ignore-scheduled 'all)
- (setq org-agenda-todo-ignore-timestamp 'past)
- (setq org-agenda-todo-ignore-with-date t)
- (setq org-agenda-todo-list-sublevels nil)
- (setq org-align-all-tags t)
- (setq org-attach-directory (at-org-dir "/org-attach-data"))
- (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
- (setq org-clock-history-length 35)
- (setq org-clock-idle-time 3)
- (setq org-clock-in-switch-to-state "GOING")
- (setq org-clock-into-drawer "CLOCK")
- (setq org-clock-out-remove-zero-time-clocks t)
- (setq org-id-locations-file (at-data-dir "/.org-id-locations"))
- (setq org-clock-persist-file (at-data-dir "/org-clock-save.el"))
- (setq org-clock-persist t)
- (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
- ;; (setq org-columns-default-format "%50ITEM %12SCHEDULED %TODO %3PRIORITY %Effort{:} %TAGS")
- (setq org-confirm-elisp-link-function 'y-or-n-p)
- (setq org-ctrl-k-protect-subtree t)
- (setq org-cycle-include-plain-lists 'integrate)
- (setq org-cycle-separator-lines 0)
- (setq org-deadline-warning-days 14)
- (setq org-default-notes-file custom/org-capture-file)
- (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
- (setq org-enforce-todo-checkbox-dependencies t)
- (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
- (setq org-track-ordered-property-with-tag t)
- (setq org-extend-today-until 2)
- (setq org-fast-tag-selection-single-key 'expert)
- (setq org-fontify-done-headline t)
- (setq org-global-properties '(("STYLE_ALL" . "habit")))
- (setq org-habit-graph-column 50)
- ;; (setq org-habit-show-habits-only-for-today nil)
- (setq org-hide-leading-stars t)
- (setq org-indirect-buffer-display 'current-window)
- (setq org-insert-mode-line-in-empty-file t)
- (setq org-log-done t)
- (setq org-log-into-drawer t)
- (setq org-loop-over-headlines-in-active-region t)
- (setq org-outline-path-complete-in-steps nil)
- (setq org-refile-allow-creating-parent-nodes 'confirm)
- (setq org-refile-target-verify-function 'custom/verify-refile-target)
- (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
- (setq org-refile-use-outline-path 'file)
- (setq org-return-follows-link t)
- (setq org-special-ctrl-a/e t)
- (setq org-special-ctrl-k t)
- (setq org-src-fontify-natively t)
- (setq org-startup-folded nil)
- (setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
- (setq org-tags-column -80)
- (setq org-use-property-inheritance t)
- (setq org-use-speed-commands t)
- (setq org-use-sub-superscripts nil)
- (setq org-agenda-restore-windows-after-quit t)
- (setq org-agenda-window-setup 'only-window)
- (setq org-yank-adjusted-subtrees t)
- (setq org-read-date-prefer-future 'time)
- (setq org-export-coding-system 'utf-8)
- (setq org-agenda-skip-additional-timestamps-same-entry t)
- (setq org-agenda-persistent-filter t)
- (setq appt-message-warning-time 10)
- (setq appt-display-interval 5)
- (setq org-use-effective-time t)
- (setq org-goto-max-level 10)
- (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
- (setq org-agenda-inhibit-startup t)
- (setq org-agenda-use-tag-inheritance t)
- (setq org-agenda-show-log t)
- (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
- (setq org-ellipsis "⤵")
+  (setq calendar-date-style 'european)
+  (setq org-agenda-dim-blocked-tasks 'invisible)
+  (setq org-agenda-include-all-todo t)
+  (setq org-agenda-repeating-timestamp-show-all nil)
+  (setq org-agenda-show-all-dates t)
+  (setq org-agenda-show-inherited-tags nil)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-agenda-skip-timestamp-if-done t)
+  (setq org-agenda-span 'month)
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-sticky nil)            ;otherwise agenda behaves strangely on non-stuck projects
+  (setq org-agenda-tags-todo-honor-ignore-options t)
+  (setq org-agenda-todo-ignore-deadlines 'all)
+  (setq org-agenda-todo-ignore-scheduled 'all)
+  (setq org-agenda-todo-ignore-timestamp 'past)
+  (setq org-agenda-todo-ignore-with-date t)
+  (setq org-agenda-todo-list-sublevels nil)
+  (setq org-align-all-tags t)
+  (setq org-attach-directory (at-org-dir "/org-attach-data"))
+  (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
+  (setq org-clock-history-length 35)
+  (setq org-clock-idle-time 3)
+  (setq org-clock-in-switch-to-state "GOING")
+  (setq org-clock-into-drawer "CLOCK")
+  (setq org-clock-out-remove-zero-time-clocks t)
+  (setq org-id-locations-file (at-data-dir "/.org-id-locations"))
+  (setq org-clock-persist-file (at-data-dir "/org-clock-save.el"))
+  (setq org-clock-persist t)
+  (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
+  ;; (setq org-columns-default-format "%50ITEM %12SCHEDULED %TODO %3PRIORITY %Effort{:} %TAGS")
+  (setq org-confirm-elisp-link-function 'y-or-n-p)
+  (setq org-ctrl-k-protect-subtree t)
+  (setq org-cycle-include-plain-lists 'integrate)
+  (setq org-cycle-separator-lines 0)
+  (setq org-deadline-warning-days 14)
+  (setq org-default-notes-file custom/org-capture-file)
+  (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
+  (setq org-enforce-todo-checkbox-dependencies t)
+  (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
+  (setq org-track-ordered-property-with-tag t)
+  (setq org-extend-today-until 2)
+  (setq org-fast-tag-selection-single-key 'expert)
+  (setq org-fontify-done-headline t)
+  (setq org-global-properties '(("STYLE_ALL" . "habit")))
+  (setq org-habit-graph-column 50)
+  ;; (setq org-habit-show-habits-only-for-today nil)
+  (setq org-hide-leading-stars t)
+  (setq org-indirect-buffer-display 'current-window)
+  (setq org-insert-mode-line-in-empty-file t)
+  (setq org-log-done t)
+  (setq org-log-into-drawer t)
+  (setq org-loop-over-headlines-in-active-region t)
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+  (setq org-refile-target-verify-function 'custom/verify-refile-target)
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-return-follows-link t)
+  (setq org-special-ctrl-a/e t)
+  (setq org-special-ctrl-k t)
+  (setq org-src-fontify-natively t)
+  (setq org-startup-folded nil)
+  (setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
+  (setq org-tags-column -80)
+  (setq org-use-property-inheritance t)
+  (setq org-use-speed-commands t)
+  (setq org-use-sub-superscripts nil)
+  (setq org-agenda-restore-windows-after-quit t)
+  (setq org-agenda-window-setup 'only-window)
+  (setq org-yank-adjusted-subtrees t)
+  (setq org-read-date-prefer-future 'time)
+  (setq org-export-coding-system 'utf-8)
+  (setq org-agenda-skip-additional-timestamps-same-entry t)
+  (setq org-agenda-persistent-filter t)
+  (setq appt-message-warning-time 10)
+  (setq appt-display-interval 5)
+  (setq org-use-effective-time t)
+  (setq org-goto-max-level 10)
+  (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
+  (setq org-agenda-inhibit-startup t)
+  (setq org-agenda-use-tag-inheritance t)
+  (setq org-agenda-show-log t)
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+  (setq org-ellipsis "⤵")
 
- (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "HOLD" "SOMEDAY(s@)"
-                                "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
- (setq org-todo-keywords
-       `(,kw-seq-common))
- (setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "HOLD(h)" "GOING(g)" "NEXT(x)"))
- (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
- (setq org-agenda-time-grid
-       '((daily today require-timed remove-match)
-         "----------------"
-         (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
- (setq org-todo-keyword-faces
-       '(("TODO" . (:foreground "red" :weight bold))
-         ("WAITING" . (:foreground "orange" :weight bold))
-         ("HOLD" . (:foreground "yellow" :weight bold))
-         ("CANCELLED" . (:foreground "cyan" :weight bold))
-         ("DONE" . (:foreground "green" :weight bold))))
- (setq org-priority-faces
-       '((?A :foreground "red" :weight bold)
-         (?B :foreground "#94bff3" :weight bold)
-         (?C :foreground "#6f6f6f")))
- (setq org-tag-alist '(("current" . ?c)
-                       ("reference" . ?f)
-                       ("orgmode" . ?g)
-                       ("purchase" . ?p)
-                       ("master" . ?m)
-                       ("ordering" . ?o)
-                       ("housekeeping" . ?h)
-                       ("entertainment" . ?e)
-                       ("interesting" . ?i)
-                       ("repair" . ?r)
-                       ))
- (setq org-tags-exclude-from-inheritance '("project"))
- (setq org-agenda-custom-commands
-       '(("d" . "some non-straightforward TODO statuses")
-         ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
-         ("dw" todo "WAITING|LATER" nil)
-         ("dg" todo "GOING" nil)
-         ("c" . "by context")
-         ("cp" tags "+@personal/GOING|WAITING|TODO")
-         ("cr" tags "+@project/GOING|WAITING|TODO")
-         ("cj" tags "+@job/GOING|WAITING|TODO")
-         ("cw" tags "+@workplace/GOING|WAITING|TODO")
-         ("ct" tags "+@phonecall/WAITING|TODO")
-         ("cs" tags "+@someday")
-         ("cq" tags "+@quicknote")
-         ("e" . "by essence")
-         ;;TODO: find more handy shortcuts
-         ("ec" tags "+current")
-         ("ef" tags "+reference")
-         ("em" tags "+master")
-         ("eo" tags "+ordering")
-         ("er" tags "+repair")
-         ("ed" tags "+develop")
-         ("ei" tags "+investigate")
-         ("ee" tags "+entertainment")
-         ("ey" tags "+family")
-         ("eH" tags-todo "+housekeeping")
-         ("eC" tags-todo "+current")
-         ("eF" tags-todo "+reference")
-         ("eM" tags-todo "+master")
-         ("eO" tags-todo "+ordering")
-         ("eR" tags-todo "+repair")
-         ("eD" tags-todo "+develop")
-         ("eI" tags-todo "+investigate")
-         ("eE" tags-todo "+entertainment")
-         ("eE" tags-todo "+entertainment")
-         ("u" . "unassigned")
-         ("uu" alltodo "Unscheduled TODO entries"
-          ((org-agenda-skip-function
-            (lambda nil
-              (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
-           (org-tags-match-list-sublevels 'indented)
-           (org-agenda-sorting-strategy
-            '((agenda priority-down todo-state-up tag-up) ))
-           (org-agenda-overriding-header "Unscheduled TODO entries: ")))
-         ("up" alltodo "Unprioritized TODO entries"
-          ((org-agenda-skip-function
-            (lambda nil
-              (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
-           (org-tags-match-list-sublevels 'indented)
-           (org-agenda-sorting-strategy
-            '((agenda time-up tag-up) ))
-           ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
-           (org-agenda-overriding-header "Unprioritized TODO entries: ")))
-         ("P" . "Prioritized tasks")
-         ("Pa" "Prioritized tasks A"
-          ((tags-todo "+PRIORITY=\"A\"") ))
-         ("Pb" "Prioritized tasks B"
-          ((tags-todo "+PRIORITY=\"B\"")))
-         ("Pc" "Prioritized tasks C"
-          ((tags-todo "+PRIORITY=\"C\"")))
-         ("S" "Scheduled tasks" agenda ""
-          ((org-agenda-time-grid nil)
-           (org-deadline-warning-days 32)
-           (org-agenda-entry-types '(:scheduled))
-           ))
-         ("p" tags "+purchase")
-         ("b" . "tickets")
-         ("be" tags "+ticket+emacs")
-         ("bs" tags "+ticket+stumpwm")
-         ("jc" tags "+@job+current/GOING|HOLD")
-         ))
+  (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "HOLD" "SOMEDAY(s@)"
+                                 "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
+  (setq org-todo-keywords
+        `(,kw-seq-common))
+  (setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "HOLD(h)" "GOING(g)" "NEXT(x)"))
+  (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
+  (setq org-agenda-time-grid
+        '((daily today require-timed remove-match)
+          "----------------"
+          (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
+  (setq org-todo-keyword-faces
+        '(("TODO" . (:foreground "red" :weight bold))
+          ("WAITING" . (:foreground "orange" :weight bold))
+          ("HOLD" . (:foreground "yellow" :weight bold))
+          ("CANCELLED" . (:foreground "cyan" :weight bold))
+          ("DONE" . (:foreground "green" :weight bold))))
+  (setq org-priority-faces
+        '((?A :foreground "red" :weight bold)
+          (?B :foreground "#94bff3" :weight bold)
+          (?C :foreground "#6f6f6f")))
+  (setq org-tag-alist '(("current" . ?c)
+                        ("reference" . ?f)
+                        ("orgmode" . ?g)
+                        ("purchase" . ?p)
+                        ("master" . ?m)
+                        ("ordering" . ?o)
+                        ("housekeeping" . ?h)
+                        ("entertainment" . ?e)
+                        ("interesting" . ?i)
+                        ("repair" . ?r)
+                        ))
+  (setq org-tags-exclude-from-inheritance '("project"))
+  (setq org-agenda-custom-commands
+        '(("d" . "some non-straightforward TODO statuses")
+          ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
+          ("dw" todo "WAITING|LATER" nil)
+          ("dg" todo "GOING" nil)
+          ("c" . "by context")
+          ("cp" tags "+@personal/GOING|WAITING|TODO")
+          ("cr" tags "+@project/GOING|WAITING|TODO")
+          ("cj" tags "+@job/GOING|WAITING|TODO")
+          ("cw" tags "+@workplace/GOING|WAITING|TODO")
+          ("ct" tags "+@phonecall/WAITING|TODO")
+          ("cs" tags "+@someday")
+          ("cq" tags "+@quicknote")
+          ("e" . "by essence")
+          ;;TODO: find more handy shortcuts
+          ("ec" tags "+current")
+          ("ef" tags "+reference")
+          ("em" tags "+master")
+          ("eo" tags "+ordering")
+          ("er" tags "+repair")
+          ("ed" tags "+develop")
+          ("ei" tags "+investigate")
+          ("ee" tags "+entertainment")
+          ("ey" tags "+family")
+          ("eH" tags-todo "+housekeeping")
+          ("eC" tags-todo "+current")
+          ("eF" tags-todo "+reference")
+          ("eM" tags-todo "+master")
+          ("eO" tags-todo "+ordering")
+          ("eR" tags-todo "+repair")
+          ("eD" tags-todo "+develop")
+          ("eI" tags-todo "+investigate")
+          ("eE" tags-todo "+entertainment")
+          ("eE" tags-todo "+entertainment")
+          ("u" . "unassigned")
+          ("uu" alltodo "Unscheduled TODO entries"
+           ((org-agenda-skip-function
+             (lambda nil
+               (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
+            (org-tags-match-list-sublevels 'indented)
+            (org-agenda-sorting-strategy
+             '((agenda priority-down todo-state-up tag-up) ))
+            (org-agenda-overriding-header "Unscheduled TODO entries: ")))
+          ("up" alltodo "Unprioritized TODO entries"
+           ((org-agenda-skip-function
+             (lambda nil
+               (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
+            (org-tags-match-list-sublevels 'indented)
+            (org-agenda-sorting-strategy
+             '((agenda time-up tag-up) ))
+            ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
+            (org-agenda-overriding-header "Unprioritized TODO entries: ")))
+          ("P" . "Prioritized tasks")
+          ("Pa" "Prioritized tasks A"
+           ((tags-todo "+PRIORITY=\"A\"") ))
+          ("Pb" "Prioritized tasks B"
+           ((tags-todo "+PRIORITY=\"B\"")))
+          ("Pc" "Prioritized tasks C"
+           ((tags-todo "+PRIORITY=\"C\"")))
+          ("S" "Scheduled tasks" agenda ""
+           ((org-agenda-time-grid nil)
+            (org-deadline-warning-days 32)
+            (org-agenda-entry-types '(:scheduled))
+            ))
+          ("p" tags "+purchase")
+          ("b" . "tickets")
+          ("be" tags "+ticket+emacs")
+          ("bs" tags "+ticket+stumpwm")
+          ("jc" tags "+@job+current/GOING|HOLD")
+          ))
 
- (setq org-capture-templates
-       '(("d" "todo")
-         ("dp" "personal tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@personal:")
-         ("dw" "workplace tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@workplace:")
-         ("dc" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@phonecall:")
-         ("dy" "someday" entry (file (at-org-dir "/tasks.org")) "* %? %U :@someday:")
-         ("dq" "quick notes (uncategorized)" entry (file (at-org-dir "/refile.org")) "* %? %U :@quicknote:")
-         ("de" "emacs todo" entry (file (at-config-basedir "todo.org")) "* TODO [#C] %? %U :emacs:ticket:")
-         ("ds" "stumpwm todo" entry (file (at-homedir "/.stumpwm.d/todo.org")) "* TODO [#C] %? %U :stumpwm:ticket:")
-         ("t" "try")
-         ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
-         ("te" "emacs try" entry (file (at-config-basedir "totry.org")) "* %? %U :emacs:try:")
-         ("i" "sink")
-         ("ip" "project ideas" entry (file (at-org-dir "/sink.org")) "* %? %U :project/idea:")
-         ("ia" "newspaper articles" entry (file (at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
-         ("ic" "code snippet" entry (file (at-org-dir "/sink.org"))
-          "* %^{title} %^g :code_snippet:\n :PROPERTIES:\n :CREATED: %U\n :END:\n\n#+BEGIN_SRC %^{lang}\n %i%?\n#+END_SRC\n")
-         ("is" "search" entry (file (at-org-dir "/sink.org")) "* %? %U :search:")
-         ("l" "links" entry (file (at-org-dir "/links.org")) "* %? %U :links:send:")
-         ("g" "github")
-         ("gc" "common" entry (file (at-org-dir "/github.org")) "* %? %U :github:")
-         ("gd" "dotfiles" entry (file (at-org-dir "/github.org")) "* %? %U :github:dotfiles:")
-         ("ge" "emacs config" entry (file (at-org-dir "/github.org")) "* %? %U :github:emacs-config:")
-         ("ga" "awesome config" entry (file (at-org-dir "/github.org")) "* %? %U :github:awesome-config:")
-         ("gs" "stumpwm config" entry (file (at-org-dir "/github.org")) "* %? %U :github:stumpwm-config:")
-         ("gl" "CL repo to review" entry (file+olp (at-org-dir "/mastering.org") "languages" "Common Lisp" "repos") "* %? %U :github:common_lisp:")
-         ("g5" "Starred repos" entry (file (at-org-dir "/github.org")) "* %? %U :github:starred:")
-         ("m" "mastering" entry (file+headline (at-org-dir "/mastering.org") "inbox") "* %? %U")
-         ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :@project:")
-         ("j" "job tasks")
-         ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:current:")
-         ("jb" "bug" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:bug:")
-         ("jr" "reference item" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
-         ("je" "excalation" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:escalation:")
-         ("jp" "patching" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:patching:")
-         ("l" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
-         ))
- (setq org-list-demote-modify-bullet '(("+" . "-")
-                                       ("*" . "-")
-                                       ("1." . "-")
-                                       ("1)" . "-")
-                                       ("A)" . "-")
-                                       ("B)" . "-")
-                                       ("a)" . "-")
-                                       ("b)" . "-")
-                                       ("A." . "-")
-                                       ("B." . "-")
-                                       ("a." . "-")
-                                       ("b." . "-")))
+  (setq org-capture-templates
+        '(("d" "todo")
+          ("dp" "personal tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@personal:")
+          ("dw" "workplace tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@workplace:")
+          ("dc" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@phonecall:")
+          ("dy" "someday" entry (file (at-org-dir "/tasks.org")) "* %? %U :@someday:")
+          ("dq" "quick notes (uncategorized)" entry (file (at-org-dir "/refile.org")) "* %? %U :@quicknote:")
+          ("de" "emacs todo" entry (file (at-config-basedir "todo.org")) "* TODO [#C] %? %U :emacs:ticket:")
+          ("ds" "stumpwm todo" entry (file (at-homedir "/.stumpwm.d/todo.org")) "* TODO [#C] %? %U :stumpwm:ticket:")
+          ("t" "try")
+          ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
+          ("te" "emacs try" entry (file (at-config-basedir "totry.org")) "* %? %U :emacs:try:")
+          ("i" "sink")
+          ("ip" "project ideas" entry (file (at-org-dir "/sink.org")) "* %? %U :project/idea:")
+          ("ia" "newspaper articles" entry (file (at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
+          ("ic" "code snippet" entry (file (at-org-dir "/sink.org"))
+           "* %^{title} %^g :code_snippet:\n :PROPERTIES:\n :CREATED: %U\n :END:\n\n#+BEGIN_SRC %^{lang}\n %i%?\n#+END_SRC\n")
+          ("is" "search" entry (file (at-org-dir "/sink.org")) "* %? %U :search:")
+          ("l" "links" entry (file (at-org-dir "/links.org")) "* %? %U :links:send:")
+          ("g" "github")
+          ("gc" "common" entry (file (at-org-dir "/github.org")) "* %? %U :github:")
+          ("gd" "dotfiles" entry (file (at-org-dir "/github.org")) "* %? %U :github:dotfiles:")
+          ("ge" "emacs config" entry (file (at-org-dir "/github.org")) "* %? %U :github:emacs-config:")
+          ("ga" "awesome config" entry (file (at-org-dir "/github.org")) "* %? %U :github:awesome-config:")
+          ("gs" "stumpwm config" entry (file (at-org-dir "/github.org")) "* %? %U :github:stumpwm-config:")
+          ("gl" "CL repo to review" entry (file+olp (at-org-dir "/mastering.org") "languages" "Common Lisp" "repos") "* %? %U :github:common_lisp:")
+          ("g5" "Starred repos" entry (file (at-org-dir "/github.org")) "* %? %U :github:starred:")
+          ("m" "mastering" entry (file+headline (at-org-dir "/mastering.org") "inbox") "* %? %U")
+          ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :@project:")
+          ("j" "job tasks")
+          ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:current:")
+          ("jb" "bug" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:bug:")
+          ("jr" "reference item" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
+          ("je" "excalation" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:escalation:")
+          ("jp" "patching" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:patching:")
+          ("l" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
+          ))
+  (setq org-list-demote-modify-bullet '(("+" . "-")
+                                        ("*" . "-")
+                                        ("1." . "-")
+                                        ("1)" . "-")
+                                        ("A)" . "-")
+                                        ("B)" . "-")
+                                        ("a)" . "-")
+                                        ("b)" . "-")
+                                        ("A." . "-")
+                                        ("B." . "-")
+                                        ("a." . "-")
+                                        ("b." . "-")))
 
- (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
- (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
+  (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
+  (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
 
- (setq holiday-other-holidays
-       (append holiday-orthodox-holidays holiday-personal-holidays))
+  (setq holiday-other-holidays
+        (append holiday-orthodox-holidays holiday-personal-holidays))
 
- (setq calendar-holidays
-       (append holiday-other-holidays
-               holiday-solar-holidays))
+  (setq calendar-holidays
+        (append holiday-other-holidays
+                holiday-solar-holidays))
 
- (set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
- (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
+  (set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
+  (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
 
- (appt-activate t)
- (run-at-time "00:59" 3600 'org-save-all-org-buffers)
- (org-add-link-type "tag" 'custom/follow-tag-link)
- (ignore-errors (org-agenda-to-appt))
- (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
- (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
- (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
- (run-with-idle-timer 300 t 'custom/jump-to-org-agenda)
- (set-charset-priority 'unicode)
- (turn-on-orgtbl)
+  (appt-activate t)
+  (run-at-time "00:59" 3600 'org-save-all-org-buffers)
+  (org-add-link-type "tag" 'custom/follow-tag-link)
+  (ignore-errors (org-agenda-to-appt))
+  (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+  (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
+  (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
+  (run-with-idle-timer 300 t 'custom/jump-to-org-agenda)
+  (set-charset-priority 'unicode)
+  (turn-on-orgtbl)
 
- (add-hook 'org-mode-hook 'turn-on-font-lock)
- (add-hook 'org-mode-hook 'org-bullets-mode)
- (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
- (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
- (add-hook 'org-after-refile-insert-hook 'save-buffer)
+  (add-hook 'org-mode-hook 'turn-on-font-lock)
+  (add-hook 'org-mode-hook 'org-bullets-mode)
+  (add-hook 'org-after-todo-state-change-hook 'custom/org-todo-changed-hook)
+  (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
+  (add-hook 'org-after-refile-insert-hook 'save-buffer)
 
- (defhydra hydra-org-sandbox ()
-   ("c" org-table-create)
-   ("s" org-sparse-tree))
+  (defhydra hydra-org-sandbox ()
+    ("c" org-table-create)
+    ("s" org-sparse-tree))
 
- (defhydra hydra-org-global (:color teal)
-   "
-   ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
-   ---------------------------------------------------------------------------------------------------------------
-   _<up>_:     up heading     show _a_genda             _._ clock in        set _p_roperty      captur_e_
-   _C-<down>_: next heading   _s_chedule                _,_ clock out       _d_elete property   _w_ store link
-   _C-<up>_:   prev heading   dead_l_ine                cloc_k_ display                       _y_ insert link
-   ace-link for _o_rg         agenda _c_olumns          _g_oto last clock
-   _O_pen at point            foot_n_ote action         estimate effor_t_
-   show _A_ll                 add t_i_me to timestamp   _c_ancel clock
-   clock _r_eport
-   po_m_odoro
-   "
-   ("<up>" outline-up-heading "")
-   ("C-<down>" outline-next-heading "")
-   ("C-<up>" outline-previous-heading "")
-   ("g" org-clock-goto)
-   ("p" org-set-property)
-   ("d" org-delete-property)
-   ("D" org-dashboard-display :color blue)
-   ("s" org-schedule :color blue)
-   ("l" org-deadline :color blue)
-   ("." org-clock-in)
-   ("," org-clock-out)
-   ("t" org-clock-modify-effort-estimate)
-   ("c" org-clock-cancel)
-   ("r" org-clock-report)
-   ("?" (org-info "Clocking commands"))
-   ("k" org-clock-display)
-   ("n" org-footnote-action)
-   ("w" org-store-link)
-   ("y" org-insert-link)
-   ("Y" org-insert-link-global)
-   ;;TODO: add org-open-at-point-global
-   ;;TODO: add org-reveal
-   ;;TODO: add org-show-todo-tree
-   ("i" custom/org-update-timestamp-with-time)
-   ("o" ace-link-org :color blue)
-   ("O" custom/open-or-browse-at-point)
-   ("e" org-capture :color blue)
-   ("a" org-agenda :color blue)
-   ("A" show-all)
-   ("t" org-toggle-timestamp-type)
-   ("m" org-pomodoro)
-   ("r" (custom/with-major-mode 'org-mode (org-refile)) "refile")
-   ("q" nil "cancel"))
- (global-set-key (kbd "<f7>") 'hydra-org-global/body)
+  (defhydra hydra-org-global (:color teal)
+    "
+    ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
+    ---------------------------------------------------------------------------------------------------------------
+    _<up>_:     up heading     show _a_genda             _._ clock in        set _p_roperty      captur_e_
+    _C-<down>_: next heading   _s_chedule                _,_ clock out       _d_elete property   _w_ store link
+    _C-<up>_:   prev heading   dead_l_ine                cloc_k_ display                       _y_ insert link
+    ace-link for _o_rg         agenda _c_olumns          _g_oto last clock
+    _O_pen at point            foot_n_ote action         estimate effor_t_
+    show _A_ll                 add t_i_me to timestamp   _c_ancel clock
+    clock _r_eport
+    po_m_odoro
+    "
+    ("<up>" outline-up-heading "")
+    ("C-<down>" outline-next-heading "")
+    ("C-<up>" outline-previous-heading "")
+    ("g" org-clock-goto)
+    ("p" org-set-property)
+    ("d" org-delete-property)
+    ("D" org-dashboard-display :color blue)
+    ("s" org-schedule :color blue)
+    ("l" org-deadline :color blue)
+    ("." org-clock-in)
+    ("," org-clock-out)
+    ("t" org-clock-modify-effort-estimate)
+    ("c" org-clock-cancel)
+    ("r" org-clock-report)
+    ("?" (org-info "Clocking commands"))
+    ("k" org-clock-display)
+    ("n" org-footnote-action)
+    ("w" org-store-link)
+    ("y" org-insert-link)
+    ("Y" org-insert-link-global)
+    ;;TODO: add org-open-at-point-global
+    ;;TODO: add org-reveal
+    ;;TODO: add org-show-todo-tree
+    ("i" custom/org-update-timestamp-with-time)
+    ("o" ace-link-org :color blue)
+    ("O" custom/open-or-browse-at-point)
+    ("e" org-capture :color blue)
+    ("a" org-agenda :color blue)
+    ("A" show-all)
+    ("t" org-toggle-timestamp-type)
+    ("m" org-pomodoro)
+    ("r" (custom/with-major-mode 'org-mode (org-refile)) "refile")
+    ("q" nil "cancel"))
+  (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
- (defhydra hydra-org-movement (:color red :columns 3)
-   "Org Mode Movements"
-   ("n" outline-next-visible-heading "next heading")
-   ("p" outline-previous-visible-heading "prev heading")
-   ("N" org-forward-heading-same-level "next heading at same level")
-   ("P" org-backward-heading-same-level "prev heading at same level")
-   ("u" outline-up-heading "up heading")
-   ("g" org-goto "goto" :exit t))
- ;;TODO: bind hydra-org-movement to a key
+  (defhydra hydra-org-movement (:color red :columns 3)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("g" org-goto "goto" :exit t))
+  ;;TODO: bind hydra-org-movement to a key
 
- (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
- (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
- (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
- (define-key org-mode-map (kbd "M-o") 'ace-link-org)
+  (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
+  (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
+  (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
+  (define-key org-mode-map (kbd "M-o") 'ace-link-org)
 
- (define-key org-mode-map (kbd "C-'") nil)
- (define-key org-mode-map (kbd "C-c [") nil)
- (define-key org-mode-map (kbd "C-c ]") nil)
- (define-key org-mode-map (kbd "C-c C-o") nil)
+  (define-key org-mode-map (kbd "C-'") nil)
+  (define-key org-mode-map (kbd "C-c [") nil)
+  (define-key org-mode-map (kbd "C-c ]") nil)
+  (define-key org-mode-map (kbd "C-c C-o") nil)
 
- (global-set-key (kbd "C-c r o") '(lambda () ;;TODO: make hydra for such custom helm sources
-                                    (interactive)
-                                    (helm :sources '(custom/helm-source-org-files))))
+  (global-set-key (kbd "C-c r o") '(lambda () ;;TODO: make hydra for such custom helm sources
+                                     (interactive)
+                                     (helm :sources '(custom/helm-source-org-files))))
 
 
- (org-babel-do-load-languages
-  'org-babel-load-languages
-  '((css . t)
-    (dot . t)
-    (ditaa . t)
-    (emacs-lisp . t)
-    (js . t)
-    (latex . t)
-    (org . t)
-    (plantuml . t)
-    (R . t)
-    (scheme . t)
-    (sh . t)))
- #+END_SRC
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((css . t)
+     (dot . t)
+     (ditaa . t)
+     (emacs-lisp . t)
+     (js . t)
+     (latex . t)
+     (org . t)
+     (plantuml . t)
+     (R . t)
+     (scheme . t)
+     (sh . t)))
+  #+END_SRC
+*** try
+**** 1
+     #+BEGIN_SRC emacs-lisp :tangle no
+(defun my/org-capture-refile-and-jump ()
+  (interactive)
+  (org-capture-refile)
+  (org-refile-goto-last-stored))
+(require 'org-capture)
+(bind-key "C-c C-r" 'my/org-capture-refile-and-jump org-capture-mode-map)
+
+(add-to-list 'org-global-properties
+      '("Effort_ALL". "0:05 0:15 0:30 1:00 2:00 3:00 4:00"))
+
+;; review
+(use-package org
+ :init
+ (progn
+  (setq org-clock-idle-time nil)
+  (setq org-log-done 'time)
+  (setq org-clock-continuously nil)
+  (setq org-clock-persist t)
+  (setq org-clock-in-switch-to-state "STARTED")
+  (setq org-clock-in-resume nil)
+  (setq org-show-notification-handler 'message)
+  (setq org-clock-report-include-clocking-task t))
+ :config
+  (org-clock-persistence-insinuate))
+
+(add-hook 'org-clock-in-prepare-hook
+          'my/org-mode-ask-effort)
+
+(defun my/org-mode-ask-effort ()
+  "Ask for an effort estimate when clocking in."
+  (unless (org-entry-get (point) "Effort")
+    (let ((effort
+           (completing-read
+            "Effort: "
+            (org-entry-get-multivalued-property (point) "Effort"))))
+      (unless (equal effort "")
+        (org-set-property "Effort" effort)))))
+
+(defun my/org-agenda-new ()
+  "Create a new note or task at the current agenda item.
+Creates it at the same level as the previous task, so it's better to use
+this with to-do items than with projects or headings."
+  (interactive)
+  (org-agenda-switch-to)
+  (org-capture 0))
+;; New key assignment
+(define-key org-agenda-mode-map "N" 'my/org-agenda-new)
+
+(setq org-agenda-sorting-strategy
+      '((agenda time-up priority-down tag-up effort-up category-keep)
+        (todo user-defined-up todo-state-up priority-down effort-up)
+        (tags user-defined-up)
+        (search category-keep)))
+
+(defun my/org-gcal-notify (title mes)
+  (message "%s - %s" title mes))
+(use-package org-gcal
+  :load-path "~/elisp/org-gcal.el"
+  :init (fset 'org-gcal-notify 'my/org-gcal-notify))
+
+(setq org-export-with-section-numbers nil)
+(setq org-html-include-timestamps nil)
+(setq org-export-with-sub-superscripts nil)
+(setq org-export-with-toc nil)
+(setq org-html-toplevel-hlevel 2)
+(setq org-export-htmlize-output-type 'css)
+
+    (if (string= system-name "webdev")
+       (setq my/emacs-notes-directory "~/code/dev/emacs-notes")
+     (setq my/emacs-notes-directory "c:/sacha/code/dev/emacs-notes"))
+    (setq org-publish-project-alist
+          '(("public"
+             :base-directory "c:/sacha/Dropbox/public"
+             :publishing-directory "c:/sacha/Dropbox/public"
+             :publishing-function my/org-html-publish-to-html-trustingly
+             )
+            ("sharing"
+             :base-directory "c:/sacha/Dropbox/public/sharing"
+             :publishing-directory "c:/sacha/Dropbox/public/sharing"
+             :publishing-function my/org-html-publish-to-html-trustingly
+             )
+            ("emacs-config"
+             :base-directory "~/.emacs.d"
+             :publishing-directory "~/.emacs.d"
+             :publishing-function my/org-html-publish-to-html-trustingly
+             )
+            ("book-notes"
+             :base-directory "c:/sacha/Dropbox/books"
+             :publishing-directory "c:/sacha/Dropbox/books/html"
+             :publishing-function my/org-html-publish-to-html-trustingly
+             :makeindex t)))
+(load "~/code/dev/emacs-chats/build-site.el" t)
+(load "~/code/dev/emacs-notes/build-site.el" t)
+
+(defun my/org-publish-maybe ()
+  (interactive)
+  (save-excursion
+    (if (org-publish-get-project-from-filename
+           (buffer-file-name (buffer-base-buffer)) 'up)
+           (org-publish-current-file t)
+           (my/org-html-export-trustingly))))
+(bind-key "C-c C-p C-p" 'my/org-publish-maybe org-mode-map)
+
+(defun my/org-publish-and-browse ()
+  (interactive)
+  (save-buffer)
+  (my/org-publish-maybe)
+  (browse-url (org-export-output-file-name ".html" nil default-directory)))
+(bind-key "<apps> b" 'my/org-publish-and-browse)
+
+(setq org-html-checkbox-type 'unicode)
+(setq org-html-checkbox-types
+ '((unicode (on . "<span class=\"task-done\">&#x2611;</span>")
+            (off . "<span class=\"task-todo\">&#x2610;</span>")
+            (trans . "<span class=\"task-in-progress\">[-]</span>"))))
+
+(setq org-attach-store-link-p 'attached)
+
+(setq org-startup-with-inline-images t)
+
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+
+(defun my/org-summarize-task-status ()
+  "Count number of tasks by status.
+Probably should make this a dblock someday."
+  (interactive)
+  (let (result)
+    (org-map-entries
+     (lambda ()
+       (let ((todo (elt (org-heading-components) 2)))
+         (if todo
+             (if (assoc todo result)
+                 (setcdr (assoc todo result)
+                         (1+ (cdr (assoc todo result))))
+               (setq result (cons (cons todo 1) result)))))))
+    (message "%s" (mapconcat (lambda (x) (format "%s: %d" (car x) (cdr x)))
+                             result "\n"))))
+
+(setq org-src-window-setup 'current-window)
+
+(defun my/copy-code-as-org-block-and-gist (beg end)
+  (interactive "r")
+  (let ((filename (file-name-base))
+        (mode (symbol-name major-mode))
+        (contents
+         (if (use-region-p) (buffer-substring beg end) (buffer-string)))
+        (gist (if (use-region-p) (gist-region beg end) (gist-buffer))))
+    (kill-new
+     (format "\n[[%s][Gist: %s]]\n#+begin_src %s\n%s\n#+end_src\n"
+             (oref (oref gist :data) :html-url) filename
+             (replace-regexp-in-string "-mode$" "" mode)
+             contents))))
+
+(defun my/org-archive-done-tasks ()
+  "Archive finished or cancelled tasks."
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (outline-previous-heading)))
+   "TODO=\"DONE\"|TODO=\"CANCELLED\"" (if (org-before-first-heading-p) 'file 'tree)))
+
+;;TODO: think of autosaving org files after refiling/status changes/etc
+
+(use-package org-fstree
+  :ensure t
+  :defer t
+  :commands (org-fstree-apply-maybe org-fstree-show-entry-maybe)
+  :idle
+  (progn (add-hook 'org-ctrl-c-ctrl-c-hook 'org-fstree-apply-maybe)
+         (add-hook 'org-pre-cycle-hook 'org-fstree-show-entry-maybe)))
+
+(use-package ox-reveal :disabled t)
+
+;;TODO: bind org-store-link and org-insert-link-global
+     #+END_SRC
 ** markup
- #+BEGIN_SRC emacs-lisp
- ;; TODO: integrate docbook-menu into el-get, probable relevant links below
- ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
- ;; http://www.emacswiki.org/emacs/DocbookXmlMode
+*** setup
+  #+BEGIN_SRC emacs-lisp
+  ;; TODO: integrate docbook-menu into el-get, probable relevant links below
+  ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
+  ;; http://www.emacswiki.org/emacs/DocbookXmlMode
 
- (use-package css-eldoc
-   :ensure t
-   :config
-   (turn-on-css-eldoc))
+  (use-package css-eldoc
+    :ensure t
+    :config
+    (turn-on-css-eldoc))
 
- (use-package rainbow-mode :ensure t)
+  (use-package rainbow-mode :ensure t)
 
- (use-package sgml-mode
-   :config
-   (progn
-     (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
+  (use-package sgml-mode
+    :config
+    (progn
+      (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
- (use-package emmet-mode
-   :ensure t
-   :config
-   (progn
-     (use-package ac-emmet :ensure auto-complete)
-     (use-package helm-emmet :ensure helm)
-     (push 'html-mode ac-modes)
-     (push 'web-mode ac-modes)
-     (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
-     (add-hook 'css-mode-hook 'ac-emmet-css-setup)
-     (add-hook 'web-mode-hook 'ac-emmet-html-setup)
-     (bind-key "C-j" nil emmet-mode-keymap)
-     (bind-key "<C-return>" nil emmet-mode-keymap)
-     (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
-     (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
-     (setq emmet-move-cursor-between-quotes t)
-     (add-hook 'sgml-mode-hook 'emmet-mode)
-     (add-hook 'nxml-mode-hook 'emmet-mode)
-     (add-hook 'django-mode 'emmet-mode)
-     (add-hook 'sgml-mode-hook 'emmet-mode)
-     (add-hook 'css-mode-hook 'emmet-mode)
-     (add-hook 'emmet-mode-hook
-               (lambda () (setq emmet-indentation 2)))
-     ))
+  (use-package emmet-mode
+    :ensure t
+    :config
+    (progn
+      (use-package ac-emmet :ensure auto-complete)
+      (use-package helm-emmet :ensure helm)
+      (push 'html-mode ac-modes)
+      (push 'web-mode ac-modes)
+      (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+      (add-hook 'css-mode-hook 'ac-emmet-css-setup)
+      (add-hook 'web-mode-hook 'ac-emmet-html-setup)
+      (bind-key "C-j" nil emmet-mode-keymap)
+      (bind-key "<C-return>" nil emmet-mode-keymap)
+      (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
+      (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
+      (setq emmet-move-cursor-between-quotes t)
+      (add-hook 'sgml-mode-hook 'emmet-mode)
+      (add-hook 'nxml-mode-hook 'emmet-mode)
+      (add-hook 'django-mode 'emmet-mode)
+      (add-hook 'sgml-mode-hook 'emmet-mode)
+      (add-hook 'css-mode-hook 'emmet-mode)
+      (add-hook 'emmet-mode-hook
+                (lambda () (setq emmet-indentation 2)))
+      ))
 
- (use-package markdown-mode
-   :ensure t
-   :config
-   (progn
-     (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
-     (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
+  (use-package markdown-mode
+    :ensure t
+    :config
+    (progn
+      (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
+      (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
 
- (use-package yaml-mode :ensure t)
+  (use-package yaml-mode :ensure t)
 
- (defun custom/nxml-mode-hook ()
-   (auto-fill-mode)
-   (hs-minor-mode 1)
-   (rng-validate-mode)
-   (setq ispell-skip-html t)
-   (unify-8859-on-decoding-mode)
-   )
+  (defun custom/nxml-mode-hook ()
+    (auto-fill-mode)
+    (hs-minor-mode 1)
+    (rng-validate-mode)
+    (setq ispell-skip-html t)
+    (unify-8859-on-decoding-mode)
+    )
 
- (setq nxml-auto-insert-xml-declaration-flag t)
- (setq nxml-bind-meta-tab-to-complete-flag t)
- (setq nxml-slash-auto-complete-flag t)
- (setq mumamo-background-colors nil)
+  (setq nxml-auto-insert-xml-declaration-flag t)
+  (setq nxml-bind-meta-tab-to-complete-flag t)
+  (setq nxml-slash-auto-complete-flag t)
+  (setq mumamo-background-colors nil)
 
- (push '("<\\?xml" . nxml-mode) magic-mode-alist)
+  (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
- (add-to-list 'hs-special-modes-alist
-              '(nxml-mode
-                "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
-                ""
-                nil))
+  (add-to-list 'hs-special-modes-alist
+               '(nxml-mode
+                 "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
+                 ""
+                 nil))
 
- (setq mumamo-submode-indent-offset 4)
+  (setq mumamo-submode-indent-offset 4)
 
- (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
- (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
- (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
- (add-hook 'django-html-mumamo-mode-hook
-           (lambda ()
-             (setq django-indent-width 4)
-             (setq sgml-basic-offset 4)))
- #+END_SRC
+  (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
+  (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
+  (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
+  (add-hook 'django-html-mumamo-mode-hook
+            (lambda ()
+              (setq django-indent-width 4)
+              (setq sgml-basic-offset 4)))
+  #+END_SRC
+*** try
+    #+BEGIN_SRC emacs-lisp :tangle no
+;; from FAQ at http://web-mode.org/ for smartparens
+(defun my/web-mode-hook ()
+  (setq web-mode-enable-auto-pairing nil))
+
+(defun my/sp-web-mode-is-code-context (id action context)
+  (when (and (eq action 'insert)
+             (not (or (get-text-property (point) 'part-side)
+                      (get-text-property (point) 'block-side))))
+    t))
+
+
+(use-package "eldoc"
+  :diminish eldoc-mode
+  :commands turn-on-eldoc-mode
+  :defer t
+  :init
+  (progn
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
+    #+END_SRC
 ** elisp
- #+BEGIN_SRC emacs-lisp
- (use-package el-spice :ensure t)
+*** setup
+  #+BEGIN_SRC emacs-lisp
+  (use-package el-spice :ensure t)
 
- (use-package elisp-slime-nav
-   :ensure t
-   :config
-   (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-     (add-hook hook 'elisp-slime-nav-mode)))
+  (use-package elisp-slime-nav
+    :ensure t
+    :config
+    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+      (add-hook hook 'elisp-slime-nav-mode)))
 
- (use-package erefactor
-   :ensure t
-   :config
-   ;;TODO: investigate package
-   (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
+  (use-package erefactor
+    :ensure t
+    :config
+    ;;TODO: investigate package
+    (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
 
- (defun custom/elisp-mode-hook ()
-   (auto-fill-mode 1)
-   (setq indent-tabs-mode t)
-   (setq tab-width 2)
-   (setq comment-start ";;")
-   (turn-on-eldoc-mode))
+  (defun custom/elisp-mode-hook ()
+    (auto-fill-mode 1)
+    (setq indent-tabs-mode t)
+    (setq tab-width 2)
+    (setq comment-start ";;")
+    (turn-on-eldoc-mode))
 
- (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
- (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
- (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
- (add-hook 'emacs-lisp-mode-hook 'custom/remove-elc-on-save)
- (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
- (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
- #+END_SRC
+  (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
+  (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
+  (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
+  (add-hook 'emacs-lisp-mode-hook 'custom/remove-elc-on-save)
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
+  #+END_SRC
+*** try
+**** 1
+     #+BEGIN_SRC emacs-lisp :tangle no
+     ;; C-c C-v l : elint current buffer in clean environment.
+     ;; C-c C-v L : elint current buffer by multiple emacs binaries.
+     ;;             See `erefactor-lint-emacsen'
+     ;; C-c C-v r : Rename symbol in current buffer.
+     ;;             Resolve `let' binding as long as i can.
+     ;; C-c C-v R : Rename symbol in requiring modules and current buffer.
+     ;; C-c C-v h : Highlight current symbol in this buffer
+     ;;             and suppress `erefacthr-highlight-mode'.
+     ;; C-c C-v d : Dehighlight all by above command.
+     ;; C-c C-v c : Switch prefix bunch of symbols.
+     ;;             ex: '(hoge-var hoge-func) -> '(foo-var foo-func)
+     ;; C-c C-v ? : Display flymake elint warnings/errors
+     #+END_SRC
+**** 2
+     #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package erefactor
+      :ensure t
+      :defer t
+      :config
+      (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map))
+
+    (use-package redshank
+      :ensure t
+      :defer t
+      :init (add-hook 'emacs-lisp-mode-hook 'redshank-mode))
+
+  (define-key emacs-lisp-mode-map (kbd "C-c .") 'find-function-at-point)
+  (bind-key "C-c f" 'find-function)
+
+  (bind-key "M-:" 'pp-eval-expression)
+
+  (defun sanityinc/eval-last-sexp-or-region (prefix)
+    "Eval region from BEG to END if active, otherwise the last sexp."
+    (interactive "P")
+    (if (and (mark) (use-region-p))
+        (eval-region (min (point) (mark)) (max (point) (mark)))
+      (pp-eval-last-sexp prefix)))
+
+  (bind-key "C-x C-e" 'sanityinc/eval-last-sexp-or-region emacs-lisp-mode-map)
+  #+END_SRC
 ** javascript
  #+BEGIN_SRC emacs-lisp
  (use-package js2-mode
@@ -4008,6 +4274,7 @@
  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
  ;; (use-package typing :disabled t
  ;;   :init
  ;;   (autoload 'typing-of-emacs "typing" nil t)
