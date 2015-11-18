@@ -210,7 +210,7 @@
 
      )
    #+END_SRC
-** editing
+** jabber
 *** common
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
