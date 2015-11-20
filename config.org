@@ -1,3 +1,104 @@
+* bootstrapping
+** definitions
+   #+BEGIN_SRC emacs-lisp
+     (defun reverse-input-method (input-method)
+       "Build the reverse mapping of single letters from INPUT-METHOD."
+       (interactive
+        (list (read-input-method-name "Use input method (default current): ")))
+       (if (and input-method (symbolp input-method))
+           (setq input-method (symbol-name input-method)))
+       (let ((current current-input-method)
+             (modifiers '(nil (control) (meta) (control meta))))
+         (when input-method
+           (activate-input-method input-method))
+         (when (and current-input-method quail-keyboard-layout)
+           (dolist (map (cdr (quail-map)))
+             (let* ((to (car map))
+                    (from (quail-get-translation
+                           (cadr map) (char-to-string to) 1)))
+               (when (and (characterp from) (characterp to))
+                 (dolist (mod modifiers)
+                   (define-key local-function-key-map
+                     (vector (append mod (list from)))
+                     (vector (append mod (list to)))))))))
+         (when input-method
+           (activate-input-method current))))
+
+     ;;TODO: unify slashes usage
+     (defun at-homedir (&optional suffix)
+       (concat home-directory suffix))
+
+     (defun at-org-dir (&optional suffix)
+       (concat (at-homedir "/org") suffix))
+
+     (defun at-data-dir (&optional suffix)
+       (concat (at-config-basedir "data") suffix))
+   #+END_SRC
+** variables setting
+   #+BEGIN_SRC emacs-lisp
+     (setq home-directory (getenv "HOME"))
+     (setq global-username user-login-name)
+
+     (reverse-input-method 'russian-computer)
+     (setq shell-file-name "/bin/bash")
+     (setq message-log-max t)
+     (setq custom-file (at-config-basedir "customizations.el"))
+   #+END_SRC
+** working directories
+   A bunch of directories for various working datasets
+   As the order of loading corresponding extensions,
+   is cumbersome to maintain we should customize them ASAP (here)
+   #+BEGIN_SRC emacs-lisp
+     ;;TODO: think of less straightforward customization way
+     (setq auto-save-list-file-prefix (at-data-dir "/auto-save-list/.saves-"))
+     (setq bookmark-default-file (at-data-dir "/bookmarks"))
+     (setq tramp-persistency-file-name (at-data-dir "/tramp"))
+     (setq eshell-directory-name (at-data-dir "/eshell/"))
+     (setq shared-game-score-directory (at-data-dir "/games"))
+     (setq pcache-directory (at-data-dir "/var/pcache/"))
+     (setq url-configuration-directory (at-data-dir "/url/"))
+     (setq request-storage-directory (at-data-dir "/request"))
+     (setq image-dired-dir (at-data-dir "/image-dired/"))
+   #+END_SRC
+** constants and credentials
+   #+BEGIN_SRC emacs-lisp
+     (load (at-config-basedir "constants.el"))
+     (load (at-config-basedir "credentials.el.gpg"))
+   #+END_SRC
+** packages
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (add-to-list 'package-archives
+                  '("marmalade" . "http://marmalade-repo.org/packages/"))
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/"))
+     (add-to-list 'package-archives
+                  '("elpa" . "http://tromey.com/elpa/"))
+     (add-to-list 'package-archives
+                  '("org" . "http://orgmode.org/elpa/"))
+     (package-initialize)
+
+     (mapcar
+      (lambda (package)
+        (unless (package-installed-p package)
+          (package-install package)))
+      ;;base system packages for bootstrapping
+      '(bind-key diminish use-package f names))
+
+     (require 'use-package)
+     (setq use-package-verbose t)
+     (setq load-prefer-newer t)
+
+     (use-package auto-compile
+       :ensure t
+       :config
+       (auto-compile-on-load-mode 1)
+       (auto-compile-on-save-mode 1)
+       (setq auto-compile-display-buffer nil)
+       (setq auto-compile-mode-line-counter t))
+
+     (use-package f :ensure t)
+   #+END_SRC
 * appearance
 ** definitions
    #+BEGIN_SRC emacs-lisp
@@ -919,6 +1020,7 @@
        :ensure t
        :config
        ;; TODO: check if this is not obsolete yet
+       (setq diredp-hide-details-initially-flag nil)
        (setq diredp-ignored-file-name 'green-face)
        (setq diredp-other-priv 'white-face)
        (setq diredp-rare-priv 'white-red-face)
@@ -3950,7 +4052,6 @@
          (latex . t)
          (org . t)
          (plantuml . t)
-         (R . t)
          (scheme . t)
          (sh . t)))
     #+END_SRC
