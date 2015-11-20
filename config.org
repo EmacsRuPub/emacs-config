@@ -1,3 +1,6 @@
+#+TITLE: Wiedzmin's literate Emacs configuration
+#+OPTIONS: toc:4 h:4
+
 * bootstrapping
 ** definitions
    #+BEGIN_SRC emacs-lisp
