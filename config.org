@@ -42,6 +42,8 @@
      (setq home-directory (getenv "HOME"))
      (setq global-username user-login-name)
 
+     (setq diredp-hide-details-initially-flag nil)
+
      (reverse-input-method 'russian-computer)
      (setq shell-file-name "/bin/bash")
      (setq message-log-max t)
@@ -989,7 +991,6 @@
        :ensure t
        :config
        ;; TODO: check if this is not obsolete yet
-       (setq diredp-hide-details-initially-flag nil)
        (setq diredp-ignored-file-name 'green-face)
        (setq diredp-other-priv 'white-face)
        (setq diredp-rare-priv 'white-red-face)
