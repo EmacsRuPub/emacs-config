@@ -2,32 +2,8 @@
 #+OPTIONS: toc:4 h:4
 
 * bootstrapping
-** definitions
+** path utils
    #+BEGIN_SRC emacs-lisp
-     (defun reverse-input-method (input-method)
-       "Build the reverse mapping of single letters from INPUT-METHOD."
-       (interactive
-        (list (read-input-method-name "Use input method (default current): ")))
-       (if (and input-method (symbolp input-method))
-           (setq input-method (symbol-name input-method)))
-       (let ((current current-input-method)
-             (modifiers '(nil (control) (meta) (control meta))))
-         (when input-method
-           (activate-input-method input-method))
-         (when (and current-input-method quail-keyboard-layout)
-           (dolist (map (cdr (quail-map)))
-             (let* ((to (car map))
-                    (from (quail-get-translation
-                           (cadr map) (char-to-string to) 1)))
-               (when (and (characterp from) (characterp to))
-                 (dolist (mod modifiers)
-                   (define-key local-function-key-map
-                     (vector (append mod (list from)))
-                     (vector (append mod (list to)))))))))
-         (when input-method
-           (activate-input-method current))))
-
-     ;;TODO: unify slashes usage
      (defun at-homedir (&optional suffix)
        (concat home-directory suffix))
 
@@ -37,17 +13,52 @@
      (defun at-data-dir (&optional suffix)
        (concat (at-config-basedir "data") suffix))
    #+END_SRC
-** variables setting
+**** TODO unify slashes usage
+** reverse input method
+   it makes Emacs with non-English system keyboard layout
+   to behave correctly with keybindings
+   It definitley makes sense while using Emacs in such X WMs
+   when there is no chance to hook into keyboard layouts switching
+   (those are probably all, except StumpWM/XMonad, AFAIK)
    #+BEGIN_SRC emacs-lisp
+     (defun reverse-input-method (input-method)
+         "Build the reverse mapping of single letters from INPUT-METHOD."
+         (interactive
+          (list (read-input-method-name "Use input method (default current): ")))
+         (if (and input-method (symbolp input-method))
+                 (setq input-method (symbol-name input-method)))
+         (let ((current current-input-method)
+                     (modifiers '(nil (control) (meta) (control meta))))
+             (when input-method
+                 (activate-input-method input-method))
+             (when (and current-input-method quail-keyboard-layout)
+                 (dolist (map (cdr (quail-map)))
+                     (let* ((to (car map))
+                                  (from (quail-get-translation
+                                                 (cadr map) (char-to-string to) 1)))
+                         (when (and (characterp from) (characterp to))
+                             (dolist (mod modifiers)
+                                 (define-key local-function-key-map
+                                     (vector (append mod (list from)))
+                                     (vector (append mod (list to)))))))))
+             (when input-method
+                 (activate-input-method current))))
+
+     (defadvice read-passwd (around my-read-passwd act)
+       (let ((local-function-key-map nil))
+         ad-do-it))
+   #+END_SRC
+** set the very basic variable values
+   #+BEGIN_SRC emacs-lisp
+     (setq message-log-max t) ;; we don't want to lose any startup log info
      (setq home-directory (getenv "HOME"))
      (setq global-username user-login-name)
+     (setq shell-file-name "/bin/bash")
+     (setq custom-file (at-config-basedir "customizations.el"))
 
-     (setq diredp-hide-details-initially-flag nil)
+     (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
 
      (reverse-input-method 'russian-computer)
-     (setq shell-file-name "/bin/bash")
-     (setq message-log-max t)
-     (setq custom-file (at-config-basedir "customizations.el"))
    #+END_SRC
 ** working directories
    A bunch of directories for various working datasets
@@ -65,9 +76,39 @@
      (setq request-storage-directory (at-data-dir "/request"))
      (setq image-dired-dir (at-data-dir "/image-dired/"))
    #+END_SRC
-** constants and credentials
+** set some constants
    #+BEGIN_SRC emacs-lisp
-     (load (at-config-basedir "constants.el"))
+     (setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
+     (setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
+
+
+     (setq custom/org-capture-file (at-org-dir "/refile.org"))
+
+     (setq custom/jabber-history-dir (at-homedir "/.emacs-jabber"))
+
+     (setq custom/frame-title-format "emacs - %b %f")
+     (setq custom/erc-autoaway-message "I'm gone (autoaway after %i seconds)")
+
+     (setq custom/juick-tmp-dir "~/.juick-avatars/")
+     (setq custom/psto-tmp-dir "~/.psto-avatars/")
+
+     (setq custom/jabber-resource "laptoptop")
+     (setq custom/hyperspec-root "~/help/HyperSpec/")
+
+     (setq custom/wl-domain "ronin.homelinux.net")
+
+     (setq custom/maildir-folder "~/Mail")
+
+     ;; pylookup
+     (defun at-pylookup-dir (&optional suffix)
+       (concat (at-config-basedir "el-get/pylookup") suffix))
+
+     (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
+
+     (setq custom/php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
+   #+END_SRC
+** load various private credentials from GPG-encrypted file
+   #+BEGIN_SRC emacs-lisp
      (load (at-config-basedir "credentials.el.gpg"))
    #+END_SRC
 * appearance
