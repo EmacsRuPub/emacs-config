@@ -14,40 +14,59 @@
        (concat (at-config-basedir "data") suffix))
    #+END_SRC
 **** TODO unify slashes usage
-** reverse input method
-   it makes Emacs with non-English system keyboard layout
-   to behave correctly with keybindings
-   It definitley makes sense while using Emacs in such X WMs
-   when there is no chance to hook into keyboard layouts switching
-   (those are probably all, except StumpWM/XMonad, AFAIK)
-   #+BEGIN_SRC emacs-lisp
-     (defun reverse-input-method (input-method)
-         "Build the reverse mapping of single letters from INPUT-METHOD."
-         (interactive
-          (list (read-input-method-name "Use input method (default current): ")))
-         (if (and input-method (symbolp input-method))
-                 (setq input-method (symbol-name input-method)))
-         (let ((current current-input-method)
-                     (modifiers '(nil (control) (meta) (control meta))))
-             (when input-method
-                 (activate-input-method input-method))
-             (when (and current-input-method quail-keyboard-layout)
-                 (dolist (map (cdr (quail-map)))
-                     (let* ((to (car map))
-                                  (from (quail-get-translation
-                                                 (cadr map) (char-to-string to) 1)))
-                         (when (and (characterp from) (characterp to))
-                             (dolist (mod modifiers)
-                                 (define-key local-function-key-map
-                                     (vector (append mod (list from)))
-                                     (vector (append mod (list to)))))))))
-             (when input-method
-                 (activate-input-method current))))
+** input method utils (internal emacs keyboard layouts switching)
+*** reverse input method
+    it makes Emacs with non-English system keyboard layout
+    to behave correctly with keybindings
+    It definitley makes sense while using Emacs in such X WMs
+    when there is no chance to hook into keyboard layouts switching
+    (those are probably all, except StumpWM/XMonad, AFAIK)
+    #+BEGIN_SRC emacs-lisp
+      (defun reverse-input-method (input-method)
+          "Build the reverse mapping of single letters from INPUT-METHOD."
+          (interactive
+           (list (read-input-method-name "Use input method (default current): ")))
+          (if (and input-method (symbolp input-method))
+                  (setq input-method (symbol-name input-method)))
+          (let ((current current-input-method)
+                      (modifiers '(nil (control) (meta) (control meta))))
+              (when input-method
+                  (activate-input-method input-method))
+              (when (and current-input-method quail-keyboard-layout)
+                  (dolist (map (cdr (quail-map)))
+                      (let* ((to (car map))
+                                   (from (quail-get-translation
+                                                  (cadr map) (char-to-string to) 1)))
+                          (when (and (characterp from) (characterp to))
+                              (dolist (mod modifiers)
+                                  (define-key local-function-key-map
+                                      (vector (append mod (list from)))
+                                      (vector (append mod (list to)))))))))
+              (when input-method
+                  (activate-input-method current))))
 
-     (defadvice read-passwd (around my-read-passwd act)
-       (let ((local-function-key-map nil))
-         ad-do-it))
-   #+END_SRC
+      (defadvice read-passwd (around my-read-passwd act)
+        (let ((local-function-key-map nil))
+          ad-do-it))
+    #+END_SRC
+*** toggling input method
+    this method uses external kbdd utility
+    #+BEGIN_SRC emacs-lisp
+      ;;TODO: maybe implement as advice
+      (defun toggle-input-method ()
+        "Toggle input method while keeping system keyboard layout in latin.
+        Essential for WMs without this functionality built-in."
+        (interactive)
+        (toggle-input-method)
+        (when (executable-find "kbdd")
+          (start-process "dbus-send"
+                         nil
+                         "dbus-send"
+                         "--dest=ru.gentoo.KbddService"
+                         "/ru/gentoo/KbddService"
+                         "ru.gentoo.kbdd.set_layout"
+                         "uint32:1")))
+    #+END_SRC
 ** set the very basic variable values
    #+BEGIN_SRC emacs-lisp
      (setq message-log-max t) ;; we don't want to lose any startup log info
@@ -59,6 +78,8 @@
      (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
 
      (reverse-input-method 'russian-computer)
+
+     (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
 ** working directories
    A bunch of directories for various working datasets
@@ -86,7 +107,6 @@
 
      (setq custom/jabber-history-dir (at-homedir "/.emacs-jabber"))
 
-     (setq custom/frame-title-format "emacs - %b %f")
      (setq custom/erc-autoaway-message "I'm gone (autoaway after %i seconds)")
 
      (setq custom/juick-tmp-dir "~/.juick-avatars/")
@@ -194,6 +214,7 @@
      (use-package zenburn-theme :ensure t)
 
      (load-theme 'zenburn t)
+     (setq color-theme-is-global t)
    #+END_SRC
 ** set common colors
    #+BEGIN_SRC emacs-lisp
@@ -208,6 +229,9 @@
    #+END_SRC
 ** setup fonts
    #+BEGIN_SRC emacs-lisp
+     (setq font-lock-maximum-decoration t)
+     (setq scalable-fonts-allowed t)
+
      (custom/set-xwindows-font "consolas-base")
 
      (use-package unicode-fonts :ensure t)
@@ -220,36 +244,38 @@
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
 * common
-** definitions
+** emacs server
+*** defininitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun server-save-edit ()
+          (interactive)
+          (save-buffer)
+          (server-edit))
+
+      (defun save-buffer-clients-on-exit ()
+          (interactive)
+          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
+                  (server-save-edit)
+              (save-buffers-kill-emacs t)))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'server-visit-hook
+                (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
+      ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
+
+      (unless (and (string-equal "root" (getenv "USER"))
+                   (server-running-p))
+        ;; Only start server mode if I'm not root and it is not running
+        (require 'server)
+        (server-start))
+    #+END_SRC
+** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defun server-save-edit ()
-       (interactive)
-       (save-buffer)
-       (server-edit))
-
-     (defun save-buffer-clients-on-exit ()
-       (interactive)
-       (if (and (boundp 'server-buffer-clients) server-buffer-clients)
-           (server-save-edit)
-         (save-buffers-kill-emacs t)))
-
-     ;;TODO: maybe implement as advice
-     (defun toggle-input-method ()
-       "Toggle input method while keeping system keyboard layout in latin.
-       Essential for WMs without this functionality built-in."
-       (interactive)
-       (toggle-input-method)
-       (when (executable-find "kbdd")
-         (start-process "dbus-send"
-                        nil
-                        "dbus-send"
-                        "--dest=ru.gentoo.KbddService"
-                        "/ru/gentoo/KbddService"
-                        "ru.gentoo.kbdd.set_layout"
-                        "uint32:1")))
-
        ;;;###autoload
      (defun keys-describe-prefixes ()
        (interactive)
@@ -270,13 +296,28 @@
                      "\n"))
              (princ "\n\n")))))
 
-     (defun remove-elc-on-save ()
-       "If you're saving an elisp file, likely the .elc is no longer valid."
-       (make-local-variable 'after-save-hook)
-       (add-hook 'after-save-hook
-                 (lambda ()
-                   (if (file-exists-p (concat buffer-file-name "c"))
-                       (delete-file (concat buffer-file-name "c"))))))
+     (use-package keyfreq
+       :ensure t
+       :defer t
+       :config
+       (progn
+         (keyfreq-mode 1)
+         (keyfreq-autosave-mode 1)))
+
+     (use-package unbound :ensure t)
+   #+END_SRC
+** remove elc after save
+   If you're saving an elisp file, likely the .elc is no longer valid.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'after-save-hook
+               (lambda ()
+               (if (and (equal major-mode 'emacs-lisp-mode)
+                        (file-exists-p (concat buffer-file-name "c")))
+                     (delete-file (concat buffer-file-name "c")))))
+   #+END_SRC
+** a handy macro to execute code only in major mode it makes sense in
+   #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
 
      (defmacro with-major-mode (mode &rest body)
        `(lambda () (interactive)
@@ -285,15 +326,8 @@
 
      )
    #+END_SRC
-** setup
+** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp
-     (load-library "time")
-
-     (use-package popwin :ensure t)
-     (use-package epg)
-     (use-package edebug-x :ensure t)
-
-       ;;; Enable functions that are disabled by default
      (put 'dired-find-alternate-file 'disabled nil)
      (put 'downcase-region 'disabled nil)
      (put 'downcase-region 'disabled nil)
@@ -305,51 +339,91 @@
      (put 'upcase-region 'disabled nil)
      (put 'upcase-region 'disabled nil)
 
+     (setq disabled-command-function nil)
+   #+END_SRC
+** backups
+   #+BEGIN_SRC emacs-lisp
      (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+     (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
      (setq backup-by-copying t)
      (setq backup-by-copying-when-linked t)
-     (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
-     (setq color-theme-is-global t)
-     (setq column-number-mode t)
-     (setq custom-buffer-done-kill t)
      (setq delete-old-versions -1)
-     (setq disabled-command-function nil)
-     (setq display-time-day-and-date t)
-     (setq display-time-form-list (list 'time 'load))
-     (setq display-time-mail-file t)
-     (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
-     (setq echo-keystrokes 0.1)
+     (setq version-control t)
+
+     (use-package backup-walker
+       :ensure t
+       ;;TODO: bind to key and other stuff
+       )
+   #+END_SRC
+** world time
+   #+BEGIN_SRC emacs-lisp
+     (setq display-time-world-list
+           '(("Europe/Moscow" "Moscow")
+             ("America/New_York" "New York")))
+   #+END_SRC
+** security
+   #+BEGIN_SRC emacs-lisp
+     (use-package epg)
+
+     (setq password-cache-expiry 7200)
+   #+END_SRC
+** local variables processing
+   #+BEGIN_SRC emacs-lisp
      (setq enable-local-variables nil)
-     (setq enable-recursive-minibuffers t)
-     (setq eval-expression-print-length nil)
-     (setq eval-expression-print-level nil)
-     (setq font-lock-maximum-decoration t)
-     (setq frame-title-format custom/frame-title-format)
-     (setq gc-cons-percentage 0.3)
-     (setq gc-cons-threshold 20000000)
+   #+END_SRC
+** warnings processing
+   #+BEGIN_SRC emacs-lisp
+     (setq warning-suppress-types nil)
+   #+END_SRC
+** frames appearance
+   #+BEGIN_SRC emacs-lisp
+     (setq frame-title-format "emacs - %b %f")
+
      (setq inhibit-startup-echo-area-message "octocat")
      (setq inhibit-startup-message t)
      (setq inhibit-startup-screen t)
      (setq initial-scratch-message nil)
+
      (setq line-number-mode t)
-     (setq locale-coding-system 'utf-8)
-     (setq password-cache-expiry 7200)
-     (setq print-circle t)
-     (setq print-gensym t)
-     (setq redisplay-dont-pause t)
-     (setq scalable-fonts-allowed t)
+
+     (setq resize-mini-windows t)
+     (setq max-mini-window-height 0.33)
+
+     (setq column-number-mode t)
+
+     (load-library "time")
+     (setq display-time-day-and-date t)
+     (setq display-time-form-list (list 'time 'load))
+     (setq display-time-mail-file t)
+     (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
+
+     (setq use-dialog-box nil)
+     (setq visible-bell t)
      (setq size-indication-mode t)
      (setq split-width-threshold nil)
+     (setq enable-recursive-minibuffers t)
+     (setq echo-keystrokes 0.1)
      (setq truncate-partial-width-windows nil)
-     (setq use-dialog-box nil)
-     (setq version-control t)
-     (setq visible-bell t)
-     (setq warning-suppress-types nil)
 
-     (setq display-time-world-list
-           '(("Europe/Moscow" "Moscow")
-             ("America/New_York" "New York")))
+     (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+     (menu-bar-mode -1)
+     (scroll-bar-mode 0)
+     (blink-cursor-mode 0)
+     (tool-bar-mode 0)
+     (tooltip-mode nil)
+     (global-font-lock-mode t)
+     (display-battery-mode 1)
+     (display-time)
 
+     (use-package popwin :ensure t)
+   #+END_SRC
+** GC tweaks
+   #+BEGIN_SRC emacs-lisp
+     (setq gc-cons-percentage 0.3)
+     (setq gc-cons-threshold 20000000)
+   #+END_SRC
+** hooks for tabs and spaces ;)
+   #+BEGIN_SRC emacs-lisp
      ;; clean trailing whitespaces automatically
      (setq custom/trailing-whitespace-modes
            '(
@@ -379,36 +453,31 @@
              python-mode
              ))
 
-     (setq resize-mini-windows t)
-     (setq max-mini-window-height 0.33)
+     (defun common-hooks/trailing-whitespace-hook ()
+       (when (member major-mode custom/trailing-whitespace-modes)
+         (delete-trailing-whitespace)))
 
+     (defun common-hooks/untabify-hook ()
+       (when (member major-mode custom/untabify-modes)
+         (untabify (point-min) (point-max))))
+
+     (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
+     (add-hook 'before-save-hook 'common-hooks/untabify-hook)
+   #+END_SRC
+** encodings
+   #+BEGIN_SRC emacs-lisp
+     (setq locale-coding-system 'utf-8)
      (set-default buffer-file-coding-system 'utf-8-unix)
      (set-default default-buffer-file-coding-system 'utf-8-unix)
-     (fset 'yes-or-no-p 'y-or-n-p)
-
-     (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
      (prefer-coding-system 'utf-8)
      (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
      (set-default-coding-systems 'utf-8)
      (set-keyboard-coding-system 'utf-8)
      (set-selection-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
-     (menu-bar-mode -1)
-     (scroll-bar-mode 0)
-     (blink-cursor-mode 0)
-     (tool-bar-mode 0)
-     (tooltip-mode nil)
-     (global-font-lock-mode t)
-     (display-battery-mode 1)
-     (display-time)
-
-     (auto-compression-mode t)
-     (unless (and (string-equal "root" (getenv "USER"))
-                  (server-running-p))
-       ;; Only start server mode if I'm not root and it is not running
-       (require 'server)
-       (server-start))
-
+   #+END_SRC
+** uniquify buffer names
+   #+BEGIN_SRC emacs-lisp
      (use-package uniquify
        :config
        (progn
@@ -416,7 +485,9 @@
          (setq uniquify-separator ":")
          (setq uniquify-ignore-buffers-re "^\\*")
          (setq uniquify-strip-common-suffix nil)))
-
+   #+END_SRC
+** diminish modeline contents
+   #+BEGIN_SRC emacs-lisp
      (use-package rich-minority
        :ensure t
        :config
@@ -435,12 +506,15 @@
      (use-package diminish
        :ensure t
        :commands diminish)
+   #+END_SRC
+** view system processes info
+   #+BEGIN_SRC emacs-lisp
+     (use-package list-processes+ :ensure t)
 
-     (use-package backup-walker
-       :ensure t
-                                             ;TODO: bind to key and other stuff
-       )
-
+     (global-set-key (kbd "C-x c") 'proced)
+   #+END_SRC
+** information persistence
+   #+BEGIN_SRC emacs-lisp
      (use-package savehist
        :config
        (setq savehist-file (at-data-dir "/savehist"))
@@ -450,89 +524,47 @@
              '(kill-ring
                search-ring
                regexp-search-ring)))
-
-     (use-package list-processes+ :ensure t)
-
-     (use-package openwith
-       :ensure t
-       :config
-       (setq openwith-associations
-             '(("\\.pdf\\'" "zathura" (file))
-               ("\\.djvu\\'" "zathura" (file))
-               ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
-               ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
-               ("\\.doc\\'" "abiword" (file))
-               ("\\.swf\\'" "swfdec-player" (file))
-               )))
-
-     (use-package unbound :ensure t)
-
-     (defun common-hooks/newline-hook ()
-       (local-set-key (kbd "C-m") 'newline-and-indent)
-       (local-set-key (kbd "<return>") 'newline-and-indent))
-
-     ;; show FIXME/TODO/BUG keywords
-     (defun common-hooks/prog-helpers ()
-       ;; highlight additional keywords
-       (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
-       (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
-       (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
-       (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
-       ;; highlight too long lines
-       (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t)))
-       )
-
-     (defun common-hooks/trailing-whitespace-hook ()
-       (when (member major-mode custom/trailing-whitespace-modes)
-         (delete-trailing-whitespace)))
-
-     (defun common-hooks/untabify-hook ()
-       (when (member major-mode custom/untabify-modes)
-         (untabify (point-min) (point-max))))
-
-     (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
-     (add-hook 'before-save-hook 'common-hooks/untabify-hook)
-     (add-hook 'server-visit-hook
-               (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
-     ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
-
-     (global-set-key (kbd "C-x c") 'proced)
    #+END_SRC
-** linux traits
-   #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
-     (setq x-alt-keysym 'meta)
+*** TODO merge with desktop and maybe other similars, move to toplevel
+** OS-specific stuff
+   Besides the common part of the common setup (sic!) there is also 
+   a little part of customizations begin specific to OS Emacs is 
+   running on. So here they are (conditionally loaded):
+*** linux specific
+    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
+      (setq x-alt-keysym 'meta)
 
-     (setq browse-url-browser-function 'browse-url-generic)
-     (setq browse-url-generic-program "/usr/bin/firefox")
-   #+END_SRC
-** darwin traits
-   #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
-     ;; key bindings
-     (cua-mode t)
-     (setq mac-option-key-is-meta t)
-     (setq mac-command-key-is-meta nil)
-     (setq process-connection-type nil)
-     (setq mac-command-modifier 'hyper)    ;meta|super
-     (setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
-     (global-set-key [(hyper x)] 'cua-cut-region)
-     (global-set-key [(hyper c)] 'cua-copy-region)
-     (global-set-key [(hyper v)] 'cua-paste)
-     (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
-     (setq mac-control-modifier 'control)
+      (setq browse-url-browser-function 'browse-url-generic)
+      (setq browse-url-generic-program "/usr/bin/firefox")
+    #+END_SRC
+*** darwin specific
+    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
+      ;; key bindings
+      (cua-mode t)
+      (setq mac-option-key-is-meta t)
+      (setq mac-command-key-is-meta nil)
+      (setq process-connection-type nil)
+      (setq mac-command-modifier 'hyper)    ;meta|super
+      (setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
+      (global-set-key [(hyper x)] 'cua-cut-region)
+      (global-set-key [(hyper c)] 'cua-copy-region)
+      (global-set-key [(hyper v)] 'cua-paste)
+      (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+      (setq mac-control-modifier 'control)
 
-     ;; Ignore .DS_Store files with ido mode
-     (add-to-list 'ido-ignore-files "\\.DS_Store")
+      ;; Ignore .DS_Store files with ido mode
+      (add-to-list 'ido-ignore-files "\\.DS_Store")
 
-     (setq locate-command "mdfind")
-     (setq helm-locate-command "mdfind")
+      (setq locate-command "mdfind")
+      (setq helm-locate-command "mdfind")
 
-     (prefer-coding-system 'utf-8-unix)
-     (set-default-coding-systems 'utf-8-unix)
-     (if (< emacs-major-version 23)
-         (set-keyboard-coding-system 'utf-8))
-     (set-clipboard-coding-system 'utf-8)
-     (set-terminal-coding-system 'utf-8)
-   #+END_SRC
+      (prefer-coding-system 'utf-8-unix)
+      (set-default-coding-systems 'utf-8-unix)
+      (if (< emacs-major-version 23)
+          (set-keyboard-coding-system 'utf-8))
+      (set-clipboard-coding-system 'utf-8)
+      (set-terminal-coding-system 'utf-8)
+    #+END_SRC
 * desktop
   #+BEGIN_SRC emacs-lisp
     (use-package desktop)
@@ -685,7 +717,6 @@
 
      )
    #+END_SRC
-
 ** common definitions
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
@@ -1467,7 +1498,6 @@
 
      )
    #+END_SRC
-
 ** setup
    #+BEGIN_SRC emacs-lisp
      (use-package rst)
@@ -1521,6 +1551,7 @@
      (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
      (setq mouse-wheel-progressive-speed nil)
      (setq set-mark-command-repeat-pop t)
+     (auto-compression-mode t)
 
      (delete-selection-mode t)
      (electric-indent-mode -1)
@@ -2110,215 +2141,234 @@
       (use-package regex-tool :ensure t)
 
       (use-package projectile
-        :ensure t
-        :commands (projectile-find-file custom/projectile-ag)
-        :config
-        (progn
-          (projectile-global-mode) ;; to enable in all buffers
-          (setq projectile-enable-caching t)
-          (setq projectile-cache-file (at-data-dir "/projectile.cache"))
-          (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
-          (setq projectile-require-project-root nil)
-          (setq projectile-switch-project-action 'helm-projectile)
-          (setq projectile-completion-system 'ivy)
-          (setq projectile-tags-command
-                "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-          (add-to-list 'projectile-other-file-alist '("html" "js"))
-          (add-to-list 'projectile-other-file-alist '("js" "html"))
-          (diminish 'projectile-mode "prj")
-          (defhydra hydra-projectile (:color teal)
-            "
-        PROJECT: %(projectile-project-root)
-        find                         Project               More
-        ---------------------------------------------------------------------------------------
-        _fd_irectory                 i_pb_uffer            _c_ommander
-        _ft_est file                 in_pf_o               _s_witch to buffer
-        _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
-        file d_fw_im                 _pc_ompile            _d_ired
-        file o_ft_her window         _pi_nvalidate cache   display _b_uffer
-        _fo_ther file                _pk_ill buffers       _r_ecentf
-        other file _fO_ther window
-        "
-            ("fd" helm-projectile-find-dir)
-            ("ft" projectile-find-test-file)
-            ("ff" helm-projectile-find-file)
-            ("fw" helm-projectile-find-file-dwim)
-            ("ft" projectile-find-file-dwim-other-window)
-            ("fo" helm-projectile-find-other-file)
-            ("fO" projectile-find-other-file-other-window)
-            ("pb" projectile-ibuffer)
-            ("pf" projectile-project-info)
-            ("pt" projectile-test-project)
-            ("pc" projectile-compile-project)
-            ("pi" projectile-invalidate-cache)
-            ("pk" projectile-kill-buffers)
-            ("ps" projectile-switch-project)
-            ("c" projectile-commander)
-            ("s" projectile-switch-to-buffer)
-            ("w" projectile-switch-to-buffer-other-window)
-            ("d" projectile-dired)
-            ("b" projectile-display-buffer)
-            ("r" projectile-recentf)
-            ;;TODO: write legend
-            ("s" projectile-run-command-in-root)
-            ("S" projectile-run-async-shell-command-in-root))
-          (global-set-key (kbd "<f8>") 'hydra-projectile/body)
-          ))
+          :ensure t
+          :commands (projectile-find-file custom/projectile-ag)
+          :config
+          (progn
+              (projectile-global-mode) ;; to enable in all buffers
+              (setq projectile-enable-caching t)
+              (setq projectile-cache-file (at-data-dir "/projectile.cache"))
+              (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
+              (setq projectile-require-project-root nil)
+              (setq projectile-switch-project-action 'helm-projectile)
+              (setq projectile-completion-system 'ivy)
+              (setq projectile-tags-command
+                          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+              (add-to-list 'projectile-other-file-alist '("html" "js"))
+              (add-to-list 'projectile-other-file-alist '("js" "html"))
+              (diminish 'projectile-mode "prj")
+              (defhydra hydra-projectile (:color teal)
+                  "
+          PROJECT: %(projectile-project-root)
+          find                         Project               More
+          ---------------------------------------------------------------------------------------
+          _fd_irectory                 i_pb_uffer            _c_ommander
+          _ft_est file                 in_pf_o               _s_witch to buffer
+          _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
+          file d_fw_im                 _pc_ompile            _d_ired
+          file o_ft_her window         _pi_nvalidate cache   display _b_uffer
+          _fo_ther file                _pk_ill buffers       _r_ecentf
+          other file _fO_ther window
+          "
+                  ("fd" helm-projectile-find-dir)
+                  ("ft" projectile-find-test-file)
+                  ("ff" helm-projectile-find-file)
+                  ("fw" helm-projectile-find-file-dwim)
+                  ("ft" projectile-find-file-dwim-other-window)
+                  ("fo" helm-projectile-find-other-file)
+                  ("fO" projectile-find-other-file-other-window)
+                  ("pb" projectile-ibuffer)
+                  ("pf" projectile-project-info)
+                  ("pt" projectile-test-project)
+                  ("pc" projectile-compile-project)
+                  ("pi" projectile-invalidate-cache)
+                  ("pk" projectile-kill-buffers)
+                  ("ps" projectile-switch-project)
+                  ("c" projectile-commander)
+                  ("s" projectile-switch-to-buffer)
+                  ("w" projectile-switch-to-buffer-other-window)
+                  ("d" projectile-dired)
+                  ("b" projectile-display-buffer)
+                  ("r" projectile-recentf)
+                  ;;TODO: write legend
+                  ("s" projectile-run-command-in-root)
+                  ("S" projectile-run-async-shell-command-in-root))
+              (global-set-key (kbd "<f8>") 'hydra-projectile/body)
+              ))
 
       (use-package flycheck
-        :ensure t
-        :init
-        (use-package flycheck-color-mode-line :ensure t)
-        :config
-        (progn
-          (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-          (setq flycheck-check-syntax-automatically '(idle-change))))
+          :ensure t
+          :init
+          (use-package flycheck-color-mode-line :ensure t)
+          :config
+          (progn
+              (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
+              (setq flycheck-check-syntax-automatically '(idle-change))))
 
       (use-package eldoc
-        :defer t
-        :init
-        (progn
-          (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
-          (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-          (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-          (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-          (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-          (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
-          (add-hook 'css-mode-hook 'turn-on-css-eldoc))
-        :config
-        (diminish 'eldoc-mode "ED"))
+          :defer t
+          :init
+          (progn
+              (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
+              (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+              (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+              (add-hook 'css-mode-hook 'turn-on-css-eldoc))
+          :config
+          (diminish 'eldoc-mode "ED"))
 
       (use-package magit
-        :ensure t
-        :config
-        (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
-        (setq magit-blame-heading-format "%H %-20a %C %s")
-        (defhydra hydra-magit (:color teal :hint nil)
-          "
-        PROJECT: %(projectile-project-root)
+          :ensure t
+          :config
+          (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
+          (setq magit-blame-heading-format "%H %-20a %C %s")
+          (defhydra hydra-magit (:color teal :hint nil)
+              "
+          PROJECT: %(projectile-project-root)
 
-        Immuting            Mutating
-        -----------------------------------------
-        _s_: status          _c_: checkout
-        _l_: log             _B_: branch mgr
-        _f_: file log
-        _r_: reflog
-        _w_: diff worktree
-        _t_: time machine
-        _b_: blame
-        "
-          ("s" magit-status)
-          ("f" magit-log-buffer-file)
-          ("c" magit-checkout)
-          ("w" magit-diff-working-tree)
-          ("r" magit-reflog)
-          ("b" magit-blame)
-          ("B" magit-branch-manager)
-          ("l" magit-log)
-          ("t" git-timemachine))
-        (global-set-key (kbd "C-'") 'hydra-magit/body))
+          Immuting            Mutating
+          -----------------------------------------
+          _s_: status          _c_: checkout
+          _l_: log             _B_: branch mgr
+          _f_: file log
+          _r_: reflog
+          _w_: diff worktree
+          _t_: time machine
+          _b_: blame
+          "
+              ("s" magit-status)
+              ("f" magit-log-buffer-file)
+              ("c" magit-checkout)
+              ("w" magit-diff-working-tree)
+              ("r" magit-reflog)
+              ("b" magit-blame)
+              ("B" magit-branch-manager)
+              ("l" magit-log)
+              ("t" git-timemachine))
+          (global-set-key (kbd "C-'") 'hydra-magit/body))
 
       (use-package magit-gh-pulls
-        :ensure t
-        :config
-        (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+          :ensure t
+          :config
+          (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
       (use-package magit-gerrit
-        :ensure t
-        :disabled t
-        :config
-        (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
-        (setq-default magit-gerrit-remote "gerrit"))
+          :ensure t
+          :disabled t
+          :config
+          (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
+          (setq-default magit-gerrit-remote "gerrit"))
 
       (use-package magit-filenotify
-        :ensure t
-        :config
-        (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
-        (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-        (diminish 'magit-filenotify-mode "FN"))
+          :ensure t
+          :config
+          (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
+          (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+          (diminish 'magit-filenotify-mode "FN"))
 
       (use-package git-gutter
-        :ensure t
-        :config
-        (progn
-          (setq git-gutter:modified-sign "?")
-          (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
-          (set-face-attribute 'git-gutter:added nil :inverse-video nil)
-          (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-          (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-          (global-git-gutter-mode +1)))
+          :ensure t
+          :config
+          (progn
+              (setq git-gutter:modified-sign "?")
+              (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
+              (set-face-attribute 'git-gutter:added nil :inverse-video nil)
+              (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
+              (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
+              (global-git-gutter-mode +1)))
 
       (use-package git-timemachine :ensure t)
 
       (use-package gud
-        :init
-        (use-package gdb-mi)
-        :config
-        (progn
-          (setq gdb-many-windows t)
-          (setq gdb-show-main t)
-          (setq gdb-use-separate-io-buffer t)
-          (setq gud-chdir-before-run nil)
-          (setq gud-tooltip-mode t)))
+          :init
+          (use-package gdb-mi)
+          :config
+          (progn
+              (setq gdb-many-windows t)
+              (setq gdb-show-main t)
+              (setq gdb-use-separate-io-buffer t)
+              (setq gud-chdir-before-run nil)
+              (setq gud-tooltip-mode t)))
 
       (use-package ediff
-        :config
-        (progn
-          (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-          (setq ediff-split-window-function 'split-window-horizontally)
-          (setq ediff-diff-options "-w")))
+          :config
+          (progn
+              (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+              (setq ediff-split-window-function 'split-window-horizontally)
+              (setq ediff-diff-options "-w")))
 
       (defun pgsql-c-mode ()
-        ;; sets up formatting for PostgreSQL C code
-        (interactive)
-        (c-mode)
-        (setq-default tab-width 4)
-        (c-set-style "bsd")             ; set c-basic-offset to 4, plus other stuff
-        (c-set-offset 'case-label '+)   ; tweak case indent to match PG custom
-        (setq fill-column 79)           ; matches what pgindent does
-        (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
+          ;; sets up formatting for PostgreSQL C code
+          (interactive)
+          (c-mode)
+          (setq-default tab-width 4)
+          (c-set-style "bsd")             ; set c-basic-offset to 4, plus other stuff
+          (c-set-offset 'case-label '+)   ; tweak case indent to match PG custom
+          (setq fill-column 79)           ; matches what pgindent does
+          (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
 
       (use-package term
-        :config
-        (progn
-          (add-hook 'term-exec-hook 'custom/term-exec-hook)
-          (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
-          (setq explicit-shell-file-name "/bin/zsh")
-          ))
+          :config
+          (progn
+              (add-hook 'term-exec-hook 'custom/term-exec-hook)
+              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+              (setq explicit-shell-file-name "/bin/zsh")
+              ))
 
       (use-package notify :ensure t)
       (use-package oauth2 :ensure t)
       (use-package web :ensure t)
+
+      (defun common-hooks/newline-hook ()
+        (local-set-key (kbd "C-m") 'newline-and-indent)
+        (local-set-key (kbd "<return>") 'newline-and-indent))
+
+      ;; show FIXME/TODO/BUG keywords
+      (defun common-hooks/prog-helpers ()
+          ;; highlight additional keywords
+          (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
+          ;; highlight too long lines
+          (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
     #+END_SRC
 ** languages
 *** elisp
 **** setup
      #+BEGIN_SRC emacs-lisp
        (use-package el-spice :ensure t)
+       (use-package edebug-x :ensure t)
 
        (use-package elisp-slime-nav
-         :ensure t
-         :config
-         (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-           (add-hook hook 'elisp-slime-nav-mode)))
+           :ensure t
+           :config
+           (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+               (add-hook hook 'elisp-slime-nav-mode)))
 
        (use-package erefactor
-         :ensure t
-         :config
-         ;;TODO: investigate package
-         (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
+           :ensure t
+           :config
+           ;;TODO: investigate package
+           (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
+
+       (setq print-circle t)
+       (setq print-gensym t)
+       (setq eval-expression-print-length nil)
+       (setq eval-expression-print-level nil)
 
        (defun custom/elisp-mode-hook ()
-         (auto-fill-mode 1)
-         (setq indent-tabs-mode t)
-         (setq tab-width 2)
-         (setq comment-start ";;")
-         (turn-on-eldoc-mode))
+           (auto-fill-mode 1)
+           (setq indent-tabs-mode t)
+           (setq tab-width 2)
+           (setq comment-start ";;")
+           (turn-on-eldoc-mode))
 
        (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
        (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
        (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'emacs-lisp-mode-hook 'custom/remove-elc-on-save)
        (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
        (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
      #+END_SRC
@@ -3385,7 +3435,19 @@
             (ansi-color-apply-on-region eshell-last-output-start
                                         eshell-last-output-end))
           (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
-    #+END_SRC
+
+      (use-package openwith
+        :ensure t
+        :config
+        (setq openwith-associations
+              '(("\\.pdf\\'" "zathura" (file))
+                ("\\.djvu\\'" "zathura" (file))
+                ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
+                ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
+                ("\\.doc\\'" "abiword" (file))
+                ("\\.swf\\'" "swfdec-player" (file))
+                )))
+     #+END_SRC
 *** linux traits
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
       ;; Jabber urgency hints
@@ -3495,14 +3557,6 @@
              (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed"))))))
 
      (use-package calfw-gcal :ensure t)
-
-     (use-package keyfreq
-       :ensure t
-       :defer t
-       :config
-       (progn
-         (keyfreq-mode 1)
-         (keyfreq-autosave-mode 1)))
 
      (use-package org-gcal
        :ensure t
