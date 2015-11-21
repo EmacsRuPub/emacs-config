@@ -112,7 +112,7 @@
      (load (at-config-basedir "credentials.el.gpg"))
    #+END_SRC
 * appearance
-** definitions
+** populate fonts inventory
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
 
@@ -174,22 +174,8 @@
 
      )
    #+END_SRC
-** setup
+** setup smart modeline
    #+BEGIN_SRC emacs-lisp
-     (use-package unicode-fonts :ensure t)
-
-     (use-package deep-thought-theme :ensure t :disabled t)
-     (use-package material-theme :ensure t :disabled t)
-     (use-package nzenburn-theme :ensure t :disabled t)
-     (use-package zenburn-theme :ensure t)
-
-     (defvar bg-colors "emacs background colors list")
-     (defvar fg-colors "emacs foreground colors list")
-
-     (setq bg-colors '("cornsilk" "gray0" "gray18" "gray40"))
-     (setq fg-colors '("gainsboro" "navy"))
-     (setq mouse-colors '("firebrick" "yellow"))
-
      (use-package smart-mode-line
        :ensure t
        :ensure rich-minority
@@ -199,14 +185,36 @@
        (setq sml/battery-format " %p%% ")
        (sml/setup)
        (set-face-attribute 'sml/discharging nil :foreground "tomato"))
-
-     (set-cursor-color "chartreuse2")
-     (custom/set-xwindows-font "consolas-base")
+   #+END_SRC
+** load themes and choose one
+   #+BEGIN_SRC emacs-lisp
+     (use-package deep-thought-theme :ensure t :disabled t)
+     (use-package material-theme :ensure t :disabled t)
+     (use-package nzenburn-theme :ensure t :disabled t)
+     (use-package zenburn-theme :ensure t)
 
      (load-theme 'zenburn t)
+   #+END_SRC
+** set common colors
+   #+BEGIN_SRC emacs-lisp
+     (defvar bg-colors "emacs background colors list")
+     (defvar fg-colors "emacs foreground colors list")
 
+     (setq bg-colors '("cornsilk" "gray0" "gray18" "gray40"))
+     (setq fg-colors '("gainsboro" "navy"))
+     (setq mouse-colors '("firebrick" "yellow"))
+
+     (set-cursor-color "chartreuse2")
+   #+END_SRC
+** setup fonts
+   #+BEGIN_SRC emacs-lisp
+     (custom/set-xwindows-font "consolas-base")
+
+     (use-package unicode-fonts :ensure t)
      (unicode-fonts-setup)
-
+   #+END_SRC
+** update some faces values
+   #+BEGIN_SRC emacs-lisp
      (when (boundp 'zenburn-colors-alist)
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
