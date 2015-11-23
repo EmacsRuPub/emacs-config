@@ -273,3 +273,31 @@
 * [[http://irreal.org/blog/?p=4705][Textified Web Pages in Emacs | Irreal - http://irreal.org/blog/?p=4705]] [2015-11-16 Пн 23:06] :emacs:try:
 * [[https://github.com/politza/pdf-tools][politza/pdf-tools - https://github.com/politza/pdf-tools]] [2015-11-17 Вт 14:32] :emacs:try:
 * [[https://github.com/edvorg/req-package][edvorg/req-package - https://github.com/edvorg/req-package]] [2015-11-17 Вт 17:21] :emacs:try:
+* [[https://github.com/svend/ibuffer-tramp][svend/ibuffer-tramp - https://github.com/svend/ibuffer-tramp]] [2015-11-21 Сб 15:47] :emacs:try:
+* [[https://github.com/shosti/wacspace.el][shosti/wacspace.el - https://github.com/shosti/wacspace.el]] [2015-11-21 Сб 19:42] :emacs:try:
+* [[http://www.emacswiki.org/emacs/GotoChg][EmacsWiki: Goto Chg - http://www.emacswiki.org/emacs/GotoChg]] [2015-11-21 Сб 20:00] :emacs:try:
+* helm + org [2015-11-21 Сб 23:36]                                   :emacs:try:
+* [[https://github.com/skeeto/elisp-finalize][skeeto/elisp-finalize - https://github.com/skeeto/elisp-finalize]] [2015-11-22 Вс 14:01] :emacs:try:
+* [[https://github.com/dpsutton/resize-mode][dpsutton/resize-mode - https://github.com/dpsutton/resize-mode]] [2015-11-22 Вс 14:09] :emacs:try:
+* [[http://melpa.org/#/region-state][MELPA - http://melpa.org/#/region-state]] [2015-11-22 Вс 14:23] :emacs:try:
+* [[http://melpa.org/#/therapy][MELPA - http://melpa.org/#/therapy]] [2015-11-22 Вс 14:24] :emacs:try:
+* [[http://melpa.org/#/wilt][MELPA - http://melpa.org/#/wilt]] [2015-11-22 Вс 14:25] :emacs:try:
+* [[http://melpa.org/#/elog][MELPA - http://melpa.org/#/elog]] [2015-11-22 Вс 14:25] :emacs:try:
+* [[https://github.com/aki2o/emacs-bts][aki2o/emacs-bts - https://github.com/aki2o/emacs-bts]] [2015-11-22 Вс 14:59] :emacs:try:
+* [#B] [[https://www.reddit.com/r/emacs/comments/3skh5v/how_to_pass_the_useragent_ssh_key_passphrase/][How to pass the user-agent ssh key passphrase through to Emacs {i.e. for magit}? : emacs - https://www.reddit.com/r/emacs/comments/3skh5v/how_to_pass_the_useragent_ssh_key_passphrase/]] [2015-11-22 Вс 15:01] :emacs:try:
+* [[https://github.com/rolandwalker/back-button][rolandwalker/back-button - https://github.com/rolandwalker/back-button]] [2015-11-22 Вс 15:44] :emacs:try:
+* [[https://github.com/ganmacs/jumplist][ganmacs/jumplist - https://github.com/ganmacs/jumplist]] [2015-11-22 Вс 15:47] :emacs:try:
+* [[https://github.com/tty-tourist/org-tracktable][tty-tourist/org-tracktable - https://github.com/tty-tourist/org-tracktable]] [2015-11-22 Вс 16:05] :emacs:try:
+* [[https://github.com/noctuid/chronicler.el][noctuid/chronicler.el - https://github.com/noctuid/chronicler.el]] [2015-11-22 Вс 16:06] :emacs:try:
+* [[http://melpa.org/#/bind-map][bind-map - MELPA - http://melpa.org/#/bind-map]] [2015-11-22 Вс 16:15] :emacs:try:
+  :PROPERTIES:
+  :ID:       94446aab-5236-4a25-99f2-1db2d10c5edf
+  :END:
+* [#B] [[http://melpa.org/#/org-time-budgets][MELPA - http://melpa.org/#/org-time-budgets]] [2015-11-22 Вс 16:15] :emacs:try:
+  :PROPERTIES:
+  :ID:       20615f8d-8bfd-4cd3-a421-4662993f86e5
+  :END:
+* [[https://www.google.ru/search?num=100&q=org-clocktable&gws_rd=cr,ssl&ei=66pRVq_BGoaVsAGm0YToAg][org-clocktable - Поиск в Google - https://www.google.ru/search?num=100&q=org-clocktable&gws_rd=cr,ssl&ei=66pRVq_BGoaVsAGm0YToAg]] [2015-11-22 Вс 16:15] :emacs:try:
+  :PROPERTIES:
+  :ID:       7531383e-bcbd-4907-9a27-67b7a36ec44c
+  :END:
