@@ -50,8 +50,8 @@
           ad-do-it))
     #+END_SRC
 *** toggling input method
-    this method uses external kbdd utility
-    #+BEGIN_SRC emacs-lisp
+    This method uses external kbdd utility
+    #+BEGIN_SRC emacs-lisp :tangle no
       ;;TODO: maybe implement as advice
       (defun toggle-input-method ()
         "Toggle input method while keeping system keyboard layout in latin.
