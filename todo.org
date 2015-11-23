@@ -254,7 +254,13 @@
   SCHEDULED: <2015-11-17 Вт>
 * TODO [#C] review [[https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/][Where are the org-lookup functions? : emacs - https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/]] [2015-11-12 Чт 14:32]                         :emacs:ticket:
   SCHEDULED: <2015-11-17 Вт>
-* TODO [#A] local refile [2015-11-15 Вс 18:15]            :orgmode:emacs:ticket:
-  SCHEDULED: <2015-11-15 Вс>
-* TODO [#A] org-refile from outside org mode (namely C-u 'org-refile) [2015-11-16 Пн 23:59] :emacs:ticket:
-  SCHEDULED: <2015-11-17 Вт>
+* DONE [#A] local refile [2015-11-15 Вс 18:15]            :orgmode:emacs:ticket:
+  CLOSED: [2015-11-21 Сб 23:58] SCHEDULED: <2015-11-15 Вс>
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-11-21 Сб 23:58]
+  :END:
+* DONE [#A] org-refile from outside org mode (namely C-u 'org-refile) [2015-11-16 Пн 23:59] :emacs:ticket:
+  CLOSED: [2015-11-21 Сб 23:58] SCHEDULED: <2015-11-17 Вт>
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2015-11-21 Сб 23:58]
+  :END:
