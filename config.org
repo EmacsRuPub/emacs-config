@@ -243,6 +243,85 @@
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
+* persistence
+** definitions
+   #+BEGIN_SRC emacs-lisp
+     (defun desktop-autosave-save ()
+       (desktop-save-in-desktop-dir))
+     (add-hook 'auto-save-hook (lambda () (desktop-autosave-save)))
+
+     (defun my-desktop-ignore-semantic (desktop-buffer-file-name)
+       "Function to ignore cedet minor modes during restore of buffers"
+       nil)
+   #+END_SRC
+** save history
+   #+BEGIN_SRC emacs-lisp
+     (use-package savehist
+       :config
+       (setq savehist-file (at-data-dir "/savehist"))
+       (savehist-mode +1)
+       (setq savehist-save-minibuffer-history +1)
+       (setq savehist-additional-variables
+             '(kill-ring
+               search-ring
+               regexp-search-ring)))
+   #+END_SRC
+** backups
+   #+BEGIN_SRC emacs-lisp
+     (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+     (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
+     (setq backup-by-copying t)
+     (setq backup-by-copying-when-linked t)
+     (setq delete-old-versions -1)
+     (setq version-control t)
+
+     (use-package backup-walker
+       :ensure t
+       ;;TODO: bind to key and other stuff
+       )
+   #+END_SRC
+** desktop
+   #+BEGIN_SRC emacs-lisp
+     (use-package desktop
+         :config
+         (setq-default desktop-missing-file-warning nil)
+         (setq-default desktop-path '("~"))
+         (setq-default desktop-save t)
+         (setq-default desktop-save-mode t)
+         (setq-default save-place t)
+         (setq history-length t)
+         (setq history-delete-duplicates t)
+         (setq desktop-buffers-not-to-save
+                     (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+                                     "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+                                     "\\)$"))
+         (desktop-save-mode t)
+         (setq desktop-restore-eager 10)
+         (desktop-load-default)
+
+         (add-to-list 'desktop-globals-to-save '(buffer-name-history      . 100))
+         (add-to-list 'desktop-globals-to-save '(dired-regexp-history     . 20))
+         (add-to-list 'desktop-globals-to-save '(extended-command-history . 100))
+         (add-to-list 'desktop-globals-to-save '(file-name-history        . 500))
+         (add-to-list 'desktop-globals-to-save '(grep-history             . 50))
+         (add-to-list 'desktop-globals-to-save '(minibuffer-history       . 100))
+         (add-to-list 'desktop-globals-to-save '(query-replace-history    . 60))
+         (add-to-list 'desktop-globals-to-save '(read-expression-history  . 60))
+         (add-to-list 'desktop-globals-to-save '(regexp-history           . 60))
+         (add-to-list 'desktop-globals-to-save '(regexp-search-ring       . 20))
+         (add-to-list 'desktop-globals-to-save '(search-ring              . 20))
+         (add-to-list 'desktop-globals-to-save '(shell-command-history    . 50))
+         (add-to-list 'desktop-globals-to-save 'file-name-history)
+
+         (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
+         (add-to-list 'desktop-locals-to-save 'tab-width)
+         (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
+
+         (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+         (add-to-list 'desktop-modes-not-to-save 'Info-mode)
+         (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+         (add-to-list 'desktop-modes-not-to-save 'fundamental-mode))
+   #+END_SRC
 * common
 ** emacs server
 *** defininitions
@@ -340,20 +419,6 @@
      (put 'upcase-region 'disabled nil)
 
      (setq disabled-command-function nil)
-   #+END_SRC
-** backups
-   #+BEGIN_SRC emacs-lisp
-     (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
-     (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
-     (setq backup-by-copying t)
-     (setq backup-by-copying-when-linked t)
-     (setq delete-old-versions -1)
-     (setq version-control t)
-
-     (use-package backup-walker
-       :ensure t
-       ;;TODO: bind to key and other stuff
-       )
    #+END_SRC
 ** world time
    #+BEGIN_SRC emacs-lisp
@@ -513,19 +578,6 @@
 
      (global-set-key (kbd "C-x c") 'proced)
    #+END_SRC
-** information persistence
-   #+BEGIN_SRC emacs-lisp
-     (use-package savehist
-       :config
-       (setq savehist-file (at-data-dir "/savehist"))
-       (savehist-mode +1)
-       (setq savehist-save-minibuffer-history +1)
-       (setq savehist-additional-variables
-             '(kill-ring
-               search-ring
-               regexp-search-ring)))
-   #+END_SRC
-*** TODO merge with desktop and maybe other similars, move to toplevel
 ** OS-specific stuff
    Besides the common part of the common setup (sic!) there is also 
    a little part of customizations begin specific to OS Emacs is 
@@ -565,80 +617,6 @@
       (set-clipboard-coding-system 'utf-8)
       (set-terminal-coding-system 'utf-8)
     #+END_SRC
-* desktop
-  #+BEGIN_SRC emacs-lisp
-    (use-package desktop)
-    (eval-when-compile
-      (require 'cl))
-
-
-    ;;#############################################################################
-    ;;#   Custom defuns
-    ;;############################################################################
-
-    (defun desktop-autosave-save ()
-      (desktop-save-in-desktop-dir))
-    (add-hook 'auto-save-hook (lambda () (desktop-autosave-save)))
-
-    (defun my-desktop-ignore-semantic (desktop-buffer-file-name)
-      "Function to ignore cedet minor modes during restore of buffers"
-      nil)
-
-
-    ;;#############################################################################
-    ;;#   Desktop-related variables
-    ;;############################################################################
-    (setq-default desktop-missing-file-warning nil)
-    (setq-default desktop-path '("~"))
-    (setq-default desktop-save t)
-    (setq-default desktop-save-mode t)
-    (setq-default save-place t)
-    (setq history-length t)
-    (setq history-delete-duplicates t)
-    (setq desktop-buffers-not-to-save
-          (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-                  "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-                  "\\)$"))
-
-
-    ;;#############################################################################
-    ;;#   Desktop load setup
-    ;;############################################################################
-    (desktop-save-mode t)
-    (setq desktop-restore-eager 10)
-
-    (when (fboundp 'desktop-load-default)
-      (desktop-load-default)
-      (mapcar
-       (lambda (symbol)
-         (add-to-list 'desktop-globals-to-save symbol))
-       '((buffer-name-history      . 100)
-         (dired-regexp-history     . 20)
-         (extended-command-history . 100)
-         (file-name-history        . 500)
-         (grep-history             . 50)
-         (minibuffer-history       . 100)
-         (query-replace-history    . 60)
-         (read-expression-history  . 60)
-         (regexp-history           . 60)
-         (regexp-search-ring       . 20)
-         (search-ring              . 20)
-         (shell-command-history    . 50)))
-      )
-
-
-    ;;#############################################################################
-    ;;#   Desktop list customizations
-    ;;############################################################################
-    (add-to-list 'desktop-globals-to-save 'file-name-history)
-    (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-    (add-to-list 'desktop-locals-to-save 'tab-width)
-    (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-    (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-    (add-to-list 'desktop-modes-not-to-save 'Info-mode)
-    (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-    (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-  #+END_SRC
 * navigate
 ** dired definitions
    #+BEGIN_SRC emacs-lisp
