@@ -4285,6 +4285,47 @@
 
        ;;TODO: bind org-store-link and org-insert-link-global
      #+END_SRC
+**** 2
+     #+BEGIN_SRC emacs-lisp
+       (setq org-agenda-custom-commands
+             ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
+             '((" " "Agenda"
+                ((agenda "" nil)
+                 ;; All items with the "REFILE" tag, everything in refile.org
+                 ;; automatically gets that applied
+                 (tags "REFILE"
+                       ((org-agenda-overriding-header "Tasks to Refile")
+                        (org-tags-match-list-sublevels nil)))
+                 ;; All "INPROGRESS" todo items
+                 (todo "INPROGRESS"
+                       ((org-agenda-overriding-header "Current work")))
+                 ;; All headings with the "support" tag
+                 (tags "support/!"
+                       ((org-agenda-overriding-header "Support cases")))
+                 ;; All "NEESREVIEW" todo items
+                 (todo "NEEDSREVIEW"
+                       ((org-agenda-overriding-header "Waiting on reviews")))
+                 ;; All "WAITING" items without a "support" tag
+                 (tags "WAITING-support"
+                       ((org-agenda-overriding-header "Waiting for something")))
+                 ;; All TODO items
+                 (todo "TODO"
+                       ((org-agenda-overriding-header "Task list")
+                        ;; sort by time, priority, and category
+                        (org-agenda-sorting-strategy
+                         '(time-up priority-down category-keep))))
+                 ;; Everything on hold
+                 (todo "HOLD"
+                       ((org-agenda-overriding-header "On-hold")))
+                 ;; All headings with the "recurring" tag
+                 (tags "recurring/!"
+                       ((org-agenda-overriding-header "Recurring"))))
+                nil)))
+     #+END_SRC
+**** 3
+     #+BEGIN_SRC emacs-lisp
+       (require 'org-inlinetask)
+     #+END_SRC
 * major modes
   #+BEGIN_SRC emacs-lisp
     (use-package ansi-color)
