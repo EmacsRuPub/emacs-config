@@ -264,3 +264,10 @@
   :LOGBOOK:
   - State "DONE"       from "TODO"       [2015-11-21 Сб 23:58]
   :END:
+* TODO [#B] org clocking with helm interface [2015-11-22 Вс 14:47] :emacs:ticket:
+* TODO [#B] find out why refiling in the end of org-capture does not always work [2015-11-22 Вс 16:04] :emacs:ticket:
+* TODO [#B] find a way to [conditionally] turn off the popups about things under cursor (ex: Python function headers) [2015-11-24 Вт 20:29] :emacs:ticket:
+  SCHEDULED: <2015-11-27 Пт>
+* TODO [#B] make DONE (and synonymous statuses) tasks go (maybe refile) to org journal [2015-11-26 Чт 15:56] :emacs:ticket:
+  SCHEDULED: <2015-11-27 Пт>
+* collect and make project from all stored links about emacs + email/gmail/whatever

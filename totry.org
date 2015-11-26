@@ -301,3 +301,7 @@
   :PROPERTIES:
   :ID:       7531383e-bcbd-4907-9a27-67b7a36ec44c
   :END:
+* [[http://melpa.org/#/yaml-tomato][yaml-tomato - MELPA - http://melpa.org/#/yaml-tomato]] [2015-11-25 Ср 23:12] :emacs:try:
+* [[http://melpa.org/#/flycheck-css-colorguard][flycheck-css-colorguard - MELPA - http://melpa.org/#/flycheck-css-colorguard]] [2015-11-25 Ср 23:17] :emacs:try:
+* [[http://melpa.org/#/badwolf-theme][badwolf-theme - MELPA - http://melpa.org/#/badwolf-theme]] [2015-11-25 Ср 23:19] :emacs:try:
+* [#B] [[https://gist.github.com/tmalsburg/9747104][A simple script for converting vCard files to org-contacts. - https://gist.github.com/tmalsburg/9747104]] [2015-11-26 Чт 18:15] :emacs:try:
