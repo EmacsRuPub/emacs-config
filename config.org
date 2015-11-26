@@ -440,54 +440,74 @@
    #+BEGIN_SRC emacs-lisp
      (setq warning-suppress-types nil)
    #+END_SRC
-** frames appearance
-   #+BEGIN_SRC emacs-lisp
-     (setq frame-title-format "emacs - %b %f")
+** frames
+*** call this on WM side to sync frames and heads count
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
 
-     (setq inhibit-startup-echo-area-message "octocat")
-     (setq inhibit-startup-message t)
-     (setq inhibit-startup-screen t)
-     (setq initial-scratch-message nil)
+      (defun update-frames (heads-count)
+        (let ((frames-count (length (frame-list))))
+          (cond
+           ((= heads-count 2)
+            (when (= frames-count 1)
+              (make-frame-command)))
+           ((= heads-count 1)
+            (when (> frames-count 1)
+              (delete-other-frames)))
+           (t
+            (delete-other-frames)))))
 
-     (setq line-number-mode t)
+      )
+    #+END_SRC
+*** appearance
+    #+BEGIN_SRC emacs-lisp
+      (setq frame-title-format "emacs - %b %f")
 
-     (setq resize-mini-windows t)
-     (setq max-mini-window-height 0.33)
+      (setq inhibit-startup-echo-area-message "octocat")
+      (setq inhibit-startup-message t)
+      (setq inhibit-startup-screen t)
+      (setq initial-scratch-message nil)
 
-     (setq column-number-mode t)
+      (setq line-number-mode t)
 
-     (load-library "time")
-     (setq display-time-day-and-date t)
-     (setq display-time-form-list (list 'time 'load))
-     (setq display-time-mail-file t)
-     (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
+      (setq resize-mini-windows t)
+      (setq max-mini-window-height 0.33)
 
-     (setq use-dialog-box nil)
-     (setq visible-bell t)
-     (setq size-indication-mode t)
-     (setq split-width-threshold nil)
-     (setq enable-recursive-minibuffers t)
-     (setq echo-keystrokes 0.1)
-     (setq truncate-partial-width-windows nil)
+      (setq column-number-mode t)
 
-     (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
-     (menu-bar-mode -1)
-     (scroll-bar-mode 0)
-     (blink-cursor-mode 0)
-     (tool-bar-mode 0)
-     (tooltip-mode nil)
-     (global-font-lock-mode t)
-     (display-battery-mode 1)
-     (display-time)
+      (load-library "time")
+      (setq display-time-day-and-date t)
+      (setq display-time-form-list (list 'time 'load))
+      (setq display-time-mail-file t)
+      (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
 
-     (use-package popwin :ensure t)
-   #+END_SRC
+      (setq use-dialog-box nil)
+      (setq visible-bell t)
+      (setq size-indication-mode t)
+      (setq split-width-threshold nil)
+      (setq enable-recursive-minibuffers t)
+      (setq echo-keystrokes 0.1)
+      (setq truncate-partial-width-windows nil)
+
+      (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+      (menu-bar-mode -1)
+      (scroll-bar-mode 0)
+      (blink-cursor-mode 0)
+      (tool-bar-mode 0)
+      (tooltip-mode nil)
+      (global-font-lock-mode t)
+      (display-battery-mode 1)
+      (display-time)
+
+      (use-package popwin :ensure t)
+      (use-package vline :ensure t)
+    #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp
      (setq gc-cons-percentage 0.3)
      (setq gc-cons-threshold 20000000)
    #+END_SRC
-** hooks for tabs and spaces ;)
+** hooks for tabs and spaces ;]
    #+BEGIN_SRC emacs-lisp
      ;; clean trailing whitespaces automatically
      (setq custom/trailing-whitespace-modes
@@ -617,176 +637,87 @@
       (set-clipboard-coding-system 'utf-8)
       (set-terminal-coding-system 'utf-8)
     #+END_SRC
+** ubiquitous hydra
+*** some definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; some customizations for nested hydras
+      (defvar hydra-stack nil)
+
+      (defun hydra-push (expr)
+        (push `(lambda () ,expr) hydra-stack))
+
+      (defun hydra-pop ()
+        (interactive)
+        (let ((x (pop hydra-stack)))
+          (when x
+            (funcall x))))
+
+      )
+    #+END_SRC
+*** use it
+    #+BEGIN_SRC emacs-lisp
+      (use-package hydra :ensure t)
+    #+END_SRC
 * navigate
-** dired definitions
+** URLs, links and TAPs
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;;TODO: make implemetation less straightforward or find "right way" to do it
+      (defun process-thing-at-point ()
+        (interactive)
+        (cond
+         ((equal major-mode 'ag-mode) (compile-goto-error))
+         ((or (equal major-mode 'org-agenda-mode)
+              (equal major-mode 'org-mode)) (org-return))
+         ((or (equal major-mode 'jabber-chat-mode)
+              (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
+         (t (browse-url (thing-at-point 'url t)))))
+
+      ;;TODO: find a common way for all url-browsing functionality in config
+      ;;to handle special cases like spaces in urls, etc.
+      (defun open-urls-in-region (beg end)
+        "Open URLs between BEG and END."
+        (interactive "r")
+        (save-excursion
+          (save-restriction
+            (let ((urls))
+              (narrow-to-region beg end)
+              (goto-char (point-min))
+              (while (re-search-forward org-plain-link-re nil t)
+                (push (thing-at-point 'url) urls))
+              (dolist (url (reverse urls))
+                (browse-url url))))))
+
+      (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
+
+      (defun find-url-backward ()
+        (interactive)
+        (re-search-backward url-regexp nil t))
+
+      (defun find-url-forward ()
+        (interactive)
+        (re-search-forward url-regexp nil t)
+        )
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package ace-link
+        :ensure t
+        :config
+        (ace-link-setup-default))
+
+      (use-package link-hint
+        :ensure t)
+    #+END_SRC
+** keep the same position while scrolling
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
-
-     ;; C-a is nicer in dired if it moves back to start of files
-     (defun dired-back-to-start-of-files ()
-       (interactive)
-       (backward-char (- (current-column) 2)))
-
-     ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
-     (defun dired-back-to-top ()
-       (interactive)
-       (beginning-of-buffer)
-       (next-line 2)
-       (dired-back-to-start-of-files))
-
-     ;; M-down is nicer in dired if it moves to the last file
-     (defun dired-jump-to-bottom ()
-       (interactive)
-       (end-of-buffer)
-       (next-line -1)
-       (dired-back-to-start-of-files))
-
-     (defun dired-sort ()
-       "Sort dired listings with directories first."
-       (save-excursion
-         (let (buffer-read-only)
-           (forward-line 2) ;; beyond dir. header
-           (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-         (set-buffer-modified-p nil)))
-
-     (defadvice dired-readin
-         (after dired-after-updating-hook first () activate)
-       "Sort dired listings with directories first before adding marks."
-       (dired-sort))
-
-     (defvar *directory-separator* '?/)
-
-     (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
-     (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
-
-     ;; Updated file system on all buffer switches if in dired mode
-     (defadvice switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
-       (if (equal major-mode 'dired-mode)
-           (revert-buffer)))
-     (defadvice switch-to-buffer (after auto-refresh-dired (buffer &optional norecord) activate)
-       (if (equal major-mode 'dired-mode)
-           (revert-buffer)))
-     (defadvice display-buffer (after auto-refresh-dired (buffer &optional not-this-window frame) activate)
-       (if (equal major-mode 'dired-mode)
-           (revert-buffer)))
-     (defadvice other-window (after auto-refresh-dired (arg &optional all-frame) activate)
-       (if (equal major-mode 'dired-mode)
-           (revert-buffer)))
-
-     (defun dired-open-term ()
-       "Open an `ansi-term' that corresponds to current directory."
-       (interactive)
-       (let ((current-dir (dired-current-directory)))
-         (term-send-string
-          (custom/terminal)
-          (if (file-remote-p current-dir)
-              (let ((v (tramp-dissect-file-name current-dir t)))
-                (format "ssh %s@%s\n"
-                        (aref v 1) (aref v 2)))
-            (format "cd '%s'\n" current-dir)))))
-
-     (defun sudo-dired ()
-       (interactive)
-       (require 'tramp)
-       (let ((dir (expand-file-name default-directory)))
-         (if (string-match "^/sudo:" dir)
-             (user-error "Already in sudo")
-           (dired (concat "/sudo::" dir)))))
-
-     )
-   #+END_SRC
-** common definitions
-   #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defun helm-find-files ()
-       (interactive)
-       (helm-other-buffer '(
-                            helm-source-files-in-current-dir
-                            helm-source-recentf
-                            helm-source-file-name-history
-                            helm-source-findutils
-                            helm-source-locate
-                            )
-                          "*helm-find-files*"))
-
-     (defun occur-and-switch (search)
-       (interactive "sSearch for: ")
-       (occur (regexp-quote search))
-       (switch-to-buffer-other-window "*Occur*"))
-
-     (defun isearch-occur ()
-       (interactive)
-       (let ((case-fold-search isearch-case-fold-search))
-         (occur-and-switch (if isearch-regexp isearch-string
-                             (regexp-quote isearch-string)))))
-
-     (defadvice occur-mode-goto-occurrence (after close-occur activate)
-       (delete-other-windows))
-
-     (defvar suppress-projectile-symbol-at-point nil
-       "Whether to suppress inserting symbol at point while using projectile searches")
-
-     (defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
-       (if suppress-projectile-symbol-at-point
-           (setq ad-return-value "")
-         (setq ad-return-value ad-do-it)))
-
-     (defun projectile-ag (arg)
-       (interactive "p")
-       (message "arg: %s" arg)
-       (if (equal arg 4)
-           (setq suppress-projectile-symbol-at-point t)
-         (setq suppress-projectile-symbol-at-point nil))
-       (call-interactively 'projectile-ag))
-
-     ;;TODO: make implemetation less straightforward or find "right way" to do it
-     (defun process-thing-at-point ()
-       (interactive)
-       (cond
-        ((equal major-mode 'ag-mode) (compile-goto-error))
-        ((or (equal major-mode 'org-agenda-mode)
-             (equal major-mode 'org-mode)) (org-return))
-        ((or (equal major-mode 'jabber-chat-mode)
-             (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
-        (t (browse-url (thing-at-point 'url t)))))
-
-     ;;TODO: find a common way for all url-browsing functionality in config
-     ;;to handle special cases like spaces in urls, etc.
-     (defun open-urls-in-region (beg end)
-       "Open URLs between BEG and END."
-       (interactive "r")
-       (save-excursion
-         (save-restriction
-           (let ((urls))
-             (narrow-to-region beg end)
-             (goto-char (point-min))
-             (while (re-search-forward org-plain-link-re nil t)
-               (push (thing-at-point 'url) urls))
-             (dolist (url (reverse urls))
-               (browse-url url))))))
-
-     (defun spawn-buffer()
-       (interactive)
-       (let ((buffer-name (generate-new-buffer-name "*new-buffer*")))
-         (generate-new-buffer buffer-name)
-         (switch-to-buffer buffer-name)))
-
-     (defun ibuffer-filter-by-extname (qualifier)
-       (interactive "sFilter by extname: ")
-       (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
-
-     (defun update-frames (heads-count)
-       (let ((frames-count (length (frame-list))))
-         (cond
-          ((= heads-count 2)
-           (when (= frames-count 1)
-             (make-frame-command)))
-          ((= heads-count 1)
-           (when (> frames-count 1)
-             (delete-other-frames)))
-          (t
-           (delete-other-frames)))))
 
      ;;Make cursor stay in the same column when scrolling using pgup/dn.
      ;;Previously pgup/dn clobbers column position, moving it to the
@@ -803,42 +734,355 @@
          ad-do-it
          (move-to-column col)))
 
-     (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
-
-     (defun find-url-backward ()
-       (interactive)
-       (re-search-backward url-regexp nil t))
-
-     (defun find-url-forward ()
-       (interactive)
-       (re-search-forward url-regexp nil t)
-       )
-
-     (defun get-file-md5 ()
-       (interactive)
-       (when (derived-mode-p 'dired-mode)
-         (let ((abs-file-name (dired-get-filename)))
-           (unless (file-directory-p abs-file-name)
-             (with-temp-buffer
-               (let ((prefix-arg t))
-                 (shell-command (format "md5sum %s" abs-file-name))
-                 (buffer-string)))))))
-
-     ;; some customizations for nested hydras
-     (defvar hydra-stack nil)
-
-     (defun hydra-push (expr)
-       (push `(lambda () ,expr) hydra-stack))
-
-     (defun hydra-pop ()
-       (interactive)
-       (let ((x (pop hydra-stack)))
-         (when x
-           (funcall x))))
-
      )
+
+     (setq scroll-preserve-screen-position 'always)
    #+END_SRC
-** setup
+** helm
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun helm-find-files ()
+        (interactive)
+        (helm-other-buffer '(
+                             helm-source-files-in-current-dir
+                             helm-source-recentf
+                             helm-source-file-name-history
+                             helm-source-findutils
+                             helm-source-locate
+                             )
+                           "*helm-find-files*"))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package helm
+        :defer t
+        :init
+        (use-package helm-config)
+        (use-package helm-files)
+        (use-package helm-info)
+        (use-package helm-locate)
+        (use-package helm-misc)
+        (use-package helm-grep)
+        (use-package wgrep-helm :ensure t) ;TODO: maybe configure
+        (use-package helm-projectile :ensure t)
+        (use-package helm-descbinds :ensure t)
+        (use-package helm-themes :ensure t)
+        (use-package helm-helm-commands :ensure t)
+        (use-package helm-dired-recent-dirs :ensure t)
+        (use-package helm-flycheck :ensure t)
+        :config
+        (use-package ac-helm :ensure auto-complete)
+        (progn
+          (setq helm-quick-update t)
+          (setq helm-split-window-in-side-p t)
+          (setq helm-ff-search-library-in-sexp t)
+          (setq helm-ff-file-name-history-use-recentf t)
+          (setq helm-buffers-fuzzy-matching t)
+          (setq helm-recentf-fuzzy-match t)
+          (setq helm-locate-fuzzy-match t)
+          (setq helm-M-x-fuzzy-match t)
+          (setq helm-apropos-fuzzy-match t)
+          (setq helm-apropos-fuzzy-match t)
+          (setq helm-move-to-line-cycle-in-source t)
+          (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
+          (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
+          (pushnew 'python-mode helm-buffers-favorite-modes)
+          (bind-key "C-<down>" 'helm-next-source helm-map)
+          (bind-key "C-<up>" 'helm-previous-source helm-map)
+          (bind-key "C-x b" 'helm-buffers-list)
+          (bind-key "C-*" 'helm-mark-all helm-map)
+          (bind-key "C-x j j" 'helm-bookmarks)
+          (bind-key "M-x" 'helm-M-x)
+          (bind-key "C-h a" 'helm-apropos)
+          (bind-key "C-h r" 'helm-info-emacs)
+          (bind-key "C-h r" 'helm-info-at-point)
+          (bind-key "C-x C-r" 'helm-recentf)
+          ;;TODO: investigate and bind 'helm-resume
+          ;;TODO: investigate and bind 'helm-multi-files
+          (helm-mode t)
+          (helm-adaptive-mode 1)
+          (helm-autoresize-mode 1)
+          (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
+          ;;TODO: investigate and bind 'helm-descbinds
+          ))
+
+      (use-package helm-ag
+        :ensure t
+        :config
+        (setq helm-ag-insert-at-point 'symbol)
+        (setq helm-ag-fuzzy-match t)
+        ;;TODO: add other common escapes
+        (defadvice helm-ag--query (after escape-search-term activate)
+          (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
+
+      ;;TODO: sync and maybe slurp something from rc-cc
+      (use-package helm-gtags
+        :ensure t
+        :defer t
+        :config
+        (progn
+          (setq helm-gtags-path-style 'relative)
+          (setq helm-gtags-ignore-case t)
+          (setq helm-gtags-auto-update t)
+          (setq helm-gtags-use-input-at-cursor t)
+          (setq helm-gtags-pulse-at-cursor t)
+          (setq helm-gtags-suggested-key-mapping t)
+          (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
+          (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
+          (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
+          (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
+          (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
+          (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
+          (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
+          (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
+          (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
+          (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
+          (add-hook 'dired-mode-hook 'helm-gtags-mode)
+          (add-hook 'c-mode-hook 'helm-gtags-mode)
+          (add-hook 'c++-mode-hook 'helm-gtags-mode)))
+
+      ;;(use-package helm-fuzzier
+      ;;  :ensure t
+      ;;  :config
+      ;;  (helm-fuzzier-mode 1))
+
+      (use-package helm-flx
+        :ensure t
+        :config
+        (helm-flx-mode 1))
+    #+END_SRC
+** projectile
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defvar suppress-projectile-symbol-at-point nil
+        "Whether to suppress inserting symbol at point while using projectile searches")
+
+      (defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
+        (if suppress-projectile-symbol-at-point
+            (setq ad-return-value "")
+          (setq ad-return-value ad-do-it)))
+
+      (defun projectile-ag (arg)
+        (interactive "p")
+        (message "arg: %s" arg)
+        (if (equal arg 4)
+            (setq suppress-projectile-symbol-at-point t)
+          (setq suppress-projectile-symbol-at-point nil))
+        (call-interactively 'projectile-ag))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package projectile
+          :ensure t
+          :commands (projectile-find-file custom/projectile-ag)
+          :config
+          (progn
+              (projectile-global-mode) ;; to enable in all buffers
+              (setq projectile-enable-caching t)
+              (setq projectile-cache-file (at-data-dir "/projectile.cache"))
+              (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
+              (setq projectile-require-project-root nil)
+              (setq projectile-switch-project-action 'helm-projectile)
+              (setq projectile-completion-system 'ivy)
+              (setq projectile-tags-command
+                          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+              (add-to-list 'projectile-other-file-alist '("html" "js"))
+              (add-to-list 'projectile-other-file-alist '("js" "html"))
+              (diminish 'projectile-mode "prj")
+              (defhydra hydra-projectile (:color teal)
+                  "
+          PROJECT: %(projectile-project-root)
+          find                         Project               More
+          ---------------------------------------------------------------------------------------
+          _fd_irectory                 i_pb_uffer            _c_ommander
+          _ft_est file                 in_pf_o               _s_witch to buffer
+          _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
+          file d_fw_im                 _pc_ompile            _d_ired
+          file o_ft_her window         _pi_nvalidate cache   display _b_uffer
+          _fo_ther file                _pk_ill buffers       _r_ecentf
+          other file _fO_ther window
+          "
+                  ("fd" helm-projectile-find-dir)
+                  ("ft" projectile-find-test-file)
+                  ("ff" helm-projectile-find-file)
+                  ("fw" helm-projectile-find-file-dwim)
+                  ("ft" projectile-find-file-dwim-other-window)
+                  ("fo" helm-projectile-find-other-file)
+                  ("fO" projectile-find-other-file-other-window)
+                  ("pb" projectile-ibuffer)
+                  ("pf" projectile-project-info)
+                  ("pt" projectile-test-project)
+                  ("pc" projectile-compile-project)
+                  ("pi" projectile-invalidate-cache)
+                  ("pk" projectile-kill-buffers)
+                  ("ps" projectile-switch-project)
+                  ("c" projectile-commander)
+                  ("s" projectile-switch-to-buffer)
+                  ("w" projectile-switch-to-buffer-other-window)
+                  ("d" projectile-dired)
+                  ("b" projectile-display-buffer)
+                  ("r" projectile-recentf)
+                  ;;TODO: write legend
+                  ("s" projectile-run-command-in-root)
+                  ("S" projectile-run-async-shell-command-in-root))
+              (global-set-key (kbd "<f8>") 'hydra-projectile/body)
+              ))
+    #+END_SRC
+** dired
+*** always refresh contents
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; Updated file system on all buffer switches if in dired mode
+      (defadvice switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
+        (if (equal major-mode 'dired-mode)
+            (revert-buffer)))
+      (defadvice switch-to-buffer (after auto-refresh-dired (buffer &optional norecord) activate)
+        (if (equal major-mode 'dired-mode)
+            (revert-buffer)))
+      (defadvice display-buffer (after auto-refresh-dired (buffer &optional not-this-window frame) activate)
+        (if (equal major-mode 'dired-mode)
+            (revert-buffer)))
+      (defadvice other-window (after auto-refresh-dired (arg &optional all-frame) activate)
+        (if (equal major-mode 'dired-mode)
+            (revert-buffer)))
+
+      )
+    #+END_SRC
+*** navigate to margins
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; C-a is nicer in dired if it moves back to start of files
+      (defun dired-back-to-start-of-files ()
+        (interactive)
+        (backward-char (- (current-column) 2)))
+
+      ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
+      (defun dired-back-to-top ()
+        (interactive)
+        (beginning-of-buffer)
+        (next-line 2)
+        (dired-back-to-start-of-files))
+
+      ;; M-down is nicer in dired if it moves to the last file
+      (defun dired-jump-to-bottom ()
+        (interactive)
+        (end-of-buffer)
+        (next-line -1)
+        (dired-back-to-start-of-files))
+
+      )
+    #+END_SRC
+*** sort contents
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun dired-sort ()
+        "Sort dired listings with directories first."
+        (save-excursion
+          (let (buffer-read-only)
+            (forward-line 2) ;; beyond dir. header
+            (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+          (set-buffer-modified-p nil)))
+
+      (defadvice dired-readin
+          (after dired-after-updating-hook first () activate)
+        "Sort dired listings with directories first before adding marks."
+        (dired-sort))
+
+      )
+    #+END_SRC
+*** utils
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun dired-open-term ()
+        "Open an `ansi-term' that corresponds to current directory."
+        (interactive)
+        (let ((current-dir (dired-current-directory)))
+          (term-send-string
+           (custom/terminal)
+           (if (file-remote-p current-dir)
+               (let ((v (tramp-dissect-file-name current-dir t)))
+                 (format "ssh %s@%s\n"
+                         (aref v 1) (aref v 2)))
+             (format "cd '%s'\n" current-dir)))))
+
+      (defun sudo-dired ()
+        (interactive)
+        (require 'tramp)
+        (let ((dir (expand-file-name default-directory)))
+          (if (string-match "^/sudo:" dir)
+              (user-error "Already in sudo")
+            (dired (concat "/sudo::" dir)))))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (defvar *directory-separator* '?/)
+      (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
+      (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
+
+      (use-package dired
+        :init
+        (use-package dired-sort-menu :ensure t)
+        :config
+        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
+        (setq dired-dwim-target t)
+        (setq dired-listing-switches "-lah1v --group-directories-first")
+        (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
+        ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
+        (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
+        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
+        (bind-key "!" 'custom/sudo-dired dired-mode-map)
+        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
+        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
+        (bind-key "`" 'custom/dired-open-term dired-mode-map)
+        (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
+        (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
+
+      (use-package dired+
+        :ensure t
+        :config
+        ;; TODO: check if this is not obsolete yet
+        (setq diredp-ignored-file-name 'green-face)
+        (setq diredp-other-priv 'white-face)
+        (setq diredp-rare-priv 'white-red-face)
+        (setq diredp-compressed-file-suffix 'darkyellow-face))
+
+      (use-package wdired
+        :defer t
+        :config
+        (progn
+          (setq wdired-allow-to-change-permissions 'advanced)
+          (setq wdired-allow-to-change-permissions t)
+          (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
+          (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
+          (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
+          (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
+          ))
+
+      (use-package dired-x)
+      (use-package dired-toggle-sudo :ensure t)
+
+      ;; Reload dired after making changes
+      (--each '(dired-do-rename
+                dired-create-directory
+                wdired-abort-changes)
+        (eval `(defadvice ,it (after revert-buffer activate)
+                 (revert-buffer))))
+    #+END_SRC
+** bookmark+
    #+BEGIN_SRC emacs-lisp
      (use-package bookmark+
        :ensure t
@@ -846,152 +1090,56 @@
        (use-package crosshairs :ensure t)
        :config
        (setq bmkp-last-bookmark-file (at-data-dir "/bookmarks")))
+   #+END_SRC
+** search
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
 
-     (use-package re-builder
-       :defer t)
+      (defun occur-and-switch (search)
+        (interactive "sSearch for: ")
+        (occur (regexp-quote search))
+        (switch-to-buffer-other-window "*Occur*"))
 
-     (use-package hydra :ensure t)
-     (use-package wgrep :ensure t)
-     (use-package vline :ensure t)
+      (defadvice occur-mode-goto-occurrence (after close-occur activate)
+        (delete-other-windows))
 
-     (use-package helm
-       :defer t
-       :init
-       (use-package helm-config)
-       (use-package helm-files)
-       (use-package helm-info)
-       (use-package helm-locate)
-       (use-package helm-misc)
-       (use-package helm-grep)
-       (use-package wgrep-helm :ensure t) ;TODO: maybe configure
-       (use-package helm-projectile :ensure t)
-       (use-package helm-descbinds :ensure t)
-       (use-package helm-themes :ensure t)
-       (use-package helm-helm-commands :ensure t)
-       (use-package helm-dired-recent-dirs :ensure t)
-       (use-package helm-flycheck :ensure t)
-       :config
-       (use-package ac-helm :ensure auto-complete)
-       (progn
-         (setq helm-quick-update t)
-         (setq helm-split-window-in-side-p t)
-         (setq helm-ff-search-library-in-sexp t)
-         (setq helm-ff-file-name-history-use-recentf t)
-         (setq helm-buffers-fuzzy-matching t)
-         (setq helm-recentf-fuzzy-match t)
-         (setq helm-locate-fuzzy-match t)
-         (setq helm-M-x-fuzzy-match t)
-         (setq helm-apropos-fuzzy-match t)
-         (setq helm-apropos-fuzzy-match t)
-         (setq helm-move-to-line-cycle-in-source t)
-         (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
-         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
-         (pushnew 'python-mode helm-buffers-favorite-modes)
-         (bind-key "C-<down>" 'helm-next-source helm-map)
-         (bind-key "C-<up>" 'helm-previous-source helm-map)
-         (bind-key "C-x b" 'helm-buffers-list)
-         (bind-key "C-*" 'helm-mark-all helm-map)
-         (bind-key "C-x j j" 'helm-bookmarks)
-         (bind-key "M-x" 'helm-M-x)
-         (bind-key "C-h a" 'helm-apropos)
-         (bind-key "C-h r" 'helm-info-emacs)
-         (bind-key "C-h r" 'helm-info-at-point)
-         (bind-key "C-x C-r" 'helm-recentf)
-         ;;TODO: investigate and bind 'helm-resume
-         ;;TODO: investigate and bind 'helm-multi-files
-         (helm-mode t)
-         (helm-adaptive-mode 1)
-         (helm-autoresize-mode 1)
-         (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
-         ;;TODO: investigate and bind 'helm-descbinds
-         ))
+      (defun isearch-occur ()
+        (interactive)
+        (let ((case-fold-search isearch-case-fold-search))
+          (occur-and-switch (if isearch-regexp isearch-string
+                              (regexp-quote isearch-string)))))
 
-     (use-package helm-ag
-       :ensure t
-       :config
-       (setq helm-ag-insert-at-point 'symbol)
-       (setq helm-ag-fuzzy-match t)
-       ;;TODO: add other common escapes
-       (defadvice helm-ag--query (after escape-search-term activate)
-         (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package wgrep :ensure t)
 
-     ;;TODO: sync and maybe slurp something from rc-cc
-     (use-package helm-gtags
-       :ensure t
-       :defer t
-       :config
-       (progn
-         (setq helm-gtags-path-style 'relative)
-         (setq helm-gtags-ignore-case t)
-         (setq helm-gtags-auto-update t)
-         (setq helm-gtags-use-input-at-cursor t)
-         (setq helm-gtags-pulse-at-cursor t)
-         (setq helm-gtags-suggested-key-mapping t)
-         (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
-         (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
-         (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-         (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
-         (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
-         (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
-         (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
-         (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
-         (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
-         (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
-         (add-hook 'dired-mode-hook 'helm-gtags-mode)
-         (add-hook 'c-mode-hook 'helm-gtags-mode)
-         (add-hook 'c++-mode-hook 'helm-gtags-mode)))
+      (use-package occur-context-resize
+          :ensure t)
 
-                                             ;(use-package helm-fuzzier
-                                             ;  :ensure t
-                                             ;  :config
-                                             ;  (helm-fuzzier-mode 1))
+      (use-package phi-search :ensure t)
 
-     (use-package helm-flx
-       :ensure t
-       :config
-       (helm-flx-mode 1))
+      (use-package sift :ensure t)
 
-     (use-package swoop
-       :ensure t
-       :config
-       (progn
-         (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
-         (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
+      (use-package phi-search-mc
+          :ensure t
+          :config
+          (phi-search-mc/setup-keys)
+          (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
 
+      (use-package fuzzy
+        :ensure t
+        :config
+        (turn-on-fuzzy-isearch))
+    #+END_SRC
+** operations with windows
+   #+BEGIN_SRC emacs-lisp
      (use-package zoom-window
        :ensure t
        :config
        (setq zoom-window-mode-line-color "DarkGreen"))
-
-     (use-package ibuffer
-       :defer t
-       :config
-       (progn
-         (setq ibuffer-default-sorting-mode 'major-mode) ;recency
-         (setq ibuffer-always-show-last-buffer :nomini)
-         (setq ibuffer-default-shrink-to-minimum-size t)
-         (setq ibuffer-jump-offer-only-visible-buffers t)
-         (setq ibuffer-saved-filters
-               '(("dired" ((mode . dired-mode)))
-                 ("foss" ((filename . "foss")))
-                 ("pets" ((filename . "pets")))
-                 ("jabberchat" ((mode . jabber-chat-mode)))
-                 ("orgmode" ((mode . org-mode)))
-                 ("elisp" ((mode . emacs-lisp-mode)))
-                 ("fundamental" ((mode . fundamental-mode)))
-                 ("haskell" ((mode . haskell-mode)))))
-         (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
-         (add-hook 'ibuffer-mode-hook
-                   (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
-         (add-hook 'ibuffer-mode-hook
-                   (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
-         (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map)
-         ))
-
-     (use-package fuzzy
-       :ensure t
-       :config
-       (turn-on-fuzzy-isearch))
 
      (use-package windmove
        :bind
@@ -1019,83 +1167,6 @@
         '(aw-leading-char-face
           ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
-     (use-package ace-link
-       :ensure t
-       :config
-       (ace-link-setup-default))
-
-     (use-package link-hint
-       :ensure t)
-
-     (use-package dired
-       :init
-       (use-package dired-sort-menu :ensure t)
-       :config
-       (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
-       (setq dired-dwim-target t)
-       (setq dired-listing-switches "-lah1v --group-directories-first")
-       (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
-       ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
-       (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
-       (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
-       (bind-key "!" 'custom/sudo-dired dired-mode-map)
-       (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
-       (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-       (bind-key "`" 'custom/dired-open-term dired-mode-map)
-       (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
-       (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
-
-     (use-package dired+
-       :ensure t
-       :config
-       ;; TODO: check if this is not obsolete yet
-       (setq diredp-ignored-file-name 'green-face)
-       (setq diredp-other-priv 'white-face)
-       (setq diredp-rare-priv 'white-red-face)
-       (setq diredp-compressed-file-suffix 'darkyellow-face))
-
-     (use-package wdired
-       :defer t
-       :config
-       (progn
-         (setq wdired-allow-to-change-permissions 'advanced)
-         (setq wdired-allow-to-change-permissions t)
-         (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
-         (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
-         (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
-         (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
-         ))
-
-     (use-package dired-x)
-     (use-package dired-toggle-sudo :ensure t)
-
-     (use-package discover-my-major
-       :ensure t
-                                             ;TODO: bind to key
-       )
-
-     (use-package phi-search-mc
-       :ensure t
-       :config
-       (phi-search-mc/setup-keys)
-       (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys)
-       )
-
-     (use-package recursive-narrow :ensure t)
-
-     (use-package swiper
-       :config
-       (setq ivy-display-style 'fancy)
-       (custom-set-faces
-        '(swiper-minibuffer-match-face-1
-          ((t :background "#dddddd")))
-        '(swiper-minibuffer-match-face-2
-          ((t :background "#bbbbbb" :weight bold)))
-        '(swiper-minibuffer-match-face-3
-          ((t :background "#bbbbff" :weight bold)))
-        '(swiper-minibuffer-match-face-4
-          ((t :background "#ffbbff" :weight bold)))))
-
      (use-package transpose-frame
        :ensure t
        :config
@@ -1109,34 +1180,6 @@
          ("<right>" rotate-frame-clockwise "rotate ->")
          ("q" nil "cancel"))
        (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
-
-     (use-package avy
-       :ensure t
-       :config
-       (setq avy-timeout-seconds 0.5)
-       (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
-
-     (use-package beacon
-       :ensure t
-       :config
-       (setq beacon-color "#666600")
-       (setq beacon-size 60))
-
-     (use-package phi-search :ensure t)
-
-     (use-package occur-context-resize
-       :ensure t)
-
-     (use-package sift :ensure t)
-
-     ;; Reload dired after making changes
-     (--each '(dired-do-rename
-               dired-create-directory
-               wdired-abort-changes)
-       (eval `(defadvice ,it (after revert-buffer activate)
-                (revert-buffer))))
-
-     (setq scroll-preserve-screen-position 'always)
 
      ;;TODO: plan docstring
      (defhydra hydra-window (global-map "<f2>")
@@ -1172,27 +1215,108 @@
        ("f" make-frame-command)
        ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
        ("q" nil "cancel"))
+   #+END_SRC
+** scope
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
 
-     (defhydra hydra-scope (:color blue)
-       "
-       Narrow to            Widen
-       ------------------------------------
-       _r_egion             _w_iden
-       _d_efun              _z_oom window
-       defun + _c_omments
-       "
-       ("r" narrow-to-region)
-       ("d" narrow-to-defun)
-       ("c" narrow-to-defun+comments-above)
-       ("o" org-narrow-to-subtree)
-       ("w" widen)
-       ("z" zoom-window-zoom)
-       ("N" recursive-narrow-or-widen-dwim)
-       ("W" recursive-widen-dwim)
-                                             ;TODO: maybe add org narrowing
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f9>") 'hydra-scope/body)
+     (defun ibuffer-filter-by-extname (qualifier)
+       (interactive "sFilter by extname: ")
+       (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
 
+     )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (defhydra hydra-scope (:color blue)
+        "
+        Narrow to            Widen
+        ------------------------------------
+        _r_egion             _w_iden
+        _d_efun              _z_oom window
+        defun + _c_omments
+        "
+        ("r" narrow-to-region)
+        ("d" narrow-to-defun)
+        ("c" narrow-to-defun+comments-above)
+        ("o" org-narrow-to-subtree)
+        ("w" widen)
+        ("z" zoom-window-zoom)
+        ("N" recursive-narrow-or-widen-dwim)
+        ("W" recursive-widen-dwim)
+        ;;TODO: maybe add org narrowing
+        ("q" nil "cancel"))
+      (global-set-key (kbd "<f9>") 'hydra-scope/body)
+
+      (use-package ibuffer
+        :defer t
+        :config
+        (progn
+          (setq ibuffer-default-sorting-mode 'major-mode) ;recency
+          (setq ibuffer-always-show-last-buffer :nomini)
+          (setq ibuffer-default-shrink-to-minimum-size t)
+          (setq ibuffer-jump-offer-only-visible-buffers t)
+          (setq ibuffer-saved-filters
+                '(("dired" ((mode . dired-mode)))
+                  ("foss" ((filename . "foss")))
+                  ("pets" ((filename . "pets")))
+                  ("jabberchat" ((mode . jabber-chat-mode)))
+                  ("orgmode" ((mode . org-mode)))
+                  ("elisp" ((mode . emacs-lisp-mode)))
+                  ("fundamental" ((mode . fundamental-mode)))
+                  ("haskell" ((mode . haskell-mode)))))
+          (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
+          (add-hook 'ibuffer-mode-hook
+                    (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
+          (add-hook 'ibuffer-mode-hook
+                    (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+          (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map)
+          ))
+
+      ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
+      (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
+      (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
+      (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
+
+      (use-package recursive-narrow :ensure t)
+    #+END_SRC
+** warping
+   #+BEGIN_SRC emacs-lisp
+     (use-package swoop
+       :ensure t
+       :config
+       (progn
+         (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
+         (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
+
+     (use-package swiper
+       :config
+       (setq ivy-display-style 'fancy)
+       (custom-set-faces
+        '(swiper-minibuffer-match-face-1
+          ((t :background "#dddddd")))
+        '(swiper-minibuffer-match-face-2
+          ((t :background "#bbbbbb" :weight bold)))
+        '(swiper-minibuffer-match-face-3
+          ((t :background "#bbbbff" :weight bold)))
+        '(swiper-minibuffer-match-face-4
+          ((t :background "#ffbbff" :weight bold)))))
+
+     (use-package avy
+       :ensure t
+       :config
+       (setq avy-timeout-seconds 0.5)
+       (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
+
+     (use-package beacon
+       :ensure t
+       :config
+       (setq beacon-color "#666600")
+       (setq beacon-size 60))
+   #+END_SRC
+** hydras and keybindings
+   #+BEGIN_SRC emacs-lisp
      ;;TODO: plan docstring
      (defhydra hydra-entries ()
        ("!" flycheck-first-error "ace" :color blue)
@@ -1248,11 +1372,6 @@
        ("a" avy-goto-char-timer "goto char within window" :color blue)
        ("A" avy-goto-word-0 "goto word within window" :color blue))
      (global-set-key (kbd "C-`") 'hydra-navigate/body)
-
-     ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
-     (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
-     (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
-     (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
 
      (global-unset-key (kbd "C-s"))
      (global-unset-key (kbd "C-r"))
@@ -1475,6 +1594,22 @@
                (set-visited-file-name new-name)
                (set-buffer-modified-p nil))))))
 
+     (defun spawn-buffer()
+       (interactive)
+       (let ((buffer-name (generate-new-buffer-name "*new-buffer*")))
+         (generate-new-buffer buffer-name)
+         (switch-to-buffer buffer-name)))
+
+     (defun get-file-md5 ()
+       (interactive)
+       (when (derived-mode-p 'dired-mode)
+         (let ((abs-file-name (dired-get-filename)))
+           (unless (file-directory-p abs-file-name)
+             (with-temp-buffer
+               (let ((prefix-arg t))
+                 (shell-command (format "md5sum %s" abs-file-name))
+                 (buffer-string)))))))
+
      )
    #+END_SRC
 ** setup
@@ -1494,6 +1629,7 @@
      (use-package narrow-indirect :ensure t)
      (use-package replace+ :ensure t)
      (use-package scratch :ensure t)
+     (use-package re-builder :defer t)
 
      (setq auto-revert-verbose nil)
      (setq comment-style 'indent)
@@ -2118,62 +2254,6 @@
       (use-package eldoc-eval :ensure t)
       (use-package hide-comnt :ensure t)
       (use-package regex-tool :ensure t)
-
-      (use-package projectile
-          :ensure t
-          :commands (projectile-find-file custom/projectile-ag)
-          :config
-          (progn
-              (projectile-global-mode) ;; to enable in all buffers
-              (setq projectile-enable-caching t)
-              (setq projectile-cache-file (at-data-dir "/projectile.cache"))
-              (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
-              (setq projectile-require-project-root nil)
-              (setq projectile-switch-project-action 'helm-projectile)
-              (setq projectile-completion-system 'ivy)
-              (setq projectile-tags-command
-                          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-              (add-to-list 'projectile-other-file-alist '("html" "js"))
-              (add-to-list 'projectile-other-file-alist '("js" "html"))
-              (diminish 'projectile-mode "prj")
-              (defhydra hydra-projectile (:color teal)
-                  "
-          PROJECT: %(projectile-project-root)
-          find                         Project               More
-          ---------------------------------------------------------------------------------------
-          _fd_irectory                 i_pb_uffer            _c_ommander
-          _ft_est file                 in_pf_o               _s_witch to buffer
-          _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
-          file d_fw_im                 _pc_ompile            _d_ired
-          file o_ft_her window         _pi_nvalidate cache   display _b_uffer
-          _fo_ther file                _pk_ill buffers       _r_ecentf
-          other file _fO_ther window
-          "
-                  ("fd" helm-projectile-find-dir)
-                  ("ft" projectile-find-test-file)
-                  ("ff" helm-projectile-find-file)
-                  ("fw" helm-projectile-find-file-dwim)
-                  ("ft" projectile-find-file-dwim-other-window)
-                  ("fo" helm-projectile-find-other-file)
-                  ("fO" projectile-find-other-file-other-window)
-                  ("pb" projectile-ibuffer)
-                  ("pf" projectile-project-info)
-                  ("pt" projectile-test-project)
-                  ("pc" projectile-compile-project)
-                  ("pi" projectile-invalidate-cache)
-                  ("pk" projectile-kill-buffers)
-                  ("ps" projectile-switch-project)
-                  ("c" projectile-commander)
-                  ("s" projectile-switch-to-buffer)
-                  ("w" projectile-switch-to-buffer-other-window)
-                  ("d" projectile-dired)
-                  ("b" projectile-display-buffer)
-                  ("r" projectile-recentf)
-                  ;;TODO: write legend
-                  ("s" projectile-run-command-in-root)
-                  ("S" projectile-run-async-shell-command-in-root))
-              (global-set-key (kbd "<f8>") 'hydra-projectile/body)
-              ))
 
       (use-package flycheck
           :ensure t
@@ -4464,6 +4544,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package info)
     (use-package help+ :ensure t)
+    (use-package discover-my-major :ensure t)
 
     (add-to-list 'Info-directory-list "/usr/share/info")
 
@@ -6631,4 +6712,3 @@
 ** [[http://melpa.org/#/flycheck-css-colorguard][flycheck-css-colorguard - MELPA - http://melpa.org/#/flycheck-css-colorguard]] [2015-11-25 Ср 23:17] :emacs:try:
 ** [[http://melpa.org/#/badwolf-theme][badwolf-theme - MELPA - http://melpa.org/#/badwolf-theme]] [2015-11-25 Ср 23:19] :emacs:try:
 ** [#B] [[https://gist.github.com/tmalsburg/9747104][A simple script for converting vCard files to org-contacts. - https://gist.github.com/tmalsburg/9747104]] [2015-11-26 Чт 18:15] :emacs:try:
-
