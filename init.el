@@ -20,7 +20,7 @@
    (unless (package-installed-p package)
      (package-install package)))
  ;;base system packages for bootstrapping
- '(bind-key diminish use-package f names org))
+ '(bind-key use-package))
 
 (require 'use-package)
 (setq use-package-verbose t)
@@ -35,6 +35,9 @@
   (setq auto-compile-mode-line-counter t))
 
 (use-package f :ensure t)
+(use-package diminish :ensure t)
+(use-package names :ensure t)
+(use-package org)
 (use-package org-protocol)
 
 (org-babel-load-file (at-config-basedir "config.org"))
