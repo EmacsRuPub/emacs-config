@@ -1243,7 +1243,7 @@
        ("w" w3m-select-buffer)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
-       ("l" helm-org-in-buffer-headings)
+       ("l" (custom/with-major-mode 'org-mode (helm-org-in-buffer-headings)))
        ("L" helm-org-agenda-files-headings)
        ("a" avy-goto-char-timer "goto char within window" :color blue)
        ("A" avy-goto-word-0 "goto word within window" :color blue))
