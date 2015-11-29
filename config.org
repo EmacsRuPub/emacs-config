@@ -266,6 +266,20 @@
                search-ring
                regexp-search-ring)))
    #+END_SRC
+** maintain recent files
+   #+BEGIN_SRC emacs-lisp
+     (use-package recentf
+       :defer t
+       :init
+       (use-package recentf-ext :ensure t)
+       :config
+       (progn
+         (recentf-mode t) ;enable recent files mode.
+         (setq recentf-max-saved-items 250)
+         (setq recentf-max-menu-items 15)
+         ;; get rid of `find-file-read-only' and replace it with something more useful.
+         ))
+   #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp
      (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
@@ -501,6 +515,11 @@
 
       (use-package popwin :ensure t)
       (use-package vline :ensure t)
+
+      (use-package volatile-highlights
+        :ensure t
+        :config
+        (volatile-highlights-mode t))
     #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp
@@ -560,6 +579,7 @@
      (set-keyboard-coding-system 'utf-8)
      (set-selection-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
+     (define-coding-system-alias 'UTF-8 'utf-8)
    #+END_SRC
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp
@@ -715,7 +735,7 @@
       (use-package link-hint
         :ensure t)
     #+END_SRC
-** keep the same position while scrolling
+** cursor positioning
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
 
@@ -734,9 +754,59 @@
          ad-do-it
          (move-to-column col)))
 
+     (defun smarter-move-beginning-of-line (arg)
+       "Move point back to indentation of beginning of line.
+
+       Move point to the first non-whitespace character on this line.
+       If point is already there, move to the beginning of the line.
+       Effectively toggle between the first non-whitespace character and
+       the beginning of the line.
+
+       If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+       point reaches the beginning or end of the buffer, stop there."
+       (interactive "^p")
+       (setq arg (or arg 1))
+       ;; Move lines first
+       (when (/= arg 1)
+         (let ((line-move-visual nil))
+           (forward-line (1- arg))))
+       (let ((orig-point (point)))
+         (back-to-indentation)
+         (when (= orig-point (point))
+           (move-beginning-of-line 1))))
+
+     (defun skip-to-next-blank-line ()
+       (interactive)
+       (let ((inhibit-changing-match-data t))
+         (forward-char 1)
+         (unless (search-forward-regexp "^\\s *$" nil t)
+           (forward-char -1))))
+
+     (defun skip-to-previous-blank-line ()
+       (interactive)
+       (let ((inhibit-changing-match-data t))
+         (forward-char -1)
+         (unless (search-backward-regexp "^\\s *$" nil t)
+           (forward-char 1))))
+
+     ;; When popping the mark, continue popping until the cursor actually moves
+     ;; Also, if the last command was a copy - skip past all the expand-region cruft.
+     (defadvice pop-to-mark-command (around ensure-new-position activate)
+       (let ((p (point)))
+         (when (eq last-command 'save-region-or-current-line)
+           ad-do-it
+           ad-do-it
+           ad-do-it)
+         (dotimes (i 10)
+           (when (= p (point)) ad-do-it))))
+
      )
 
      (setq scroll-preserve-screen-position 'always)
+
+     (use-package saveplace)
+
+     (setq-default save-place t)
    #+END_SRC
 ** helm
 *** definitions
@@ -753,6 +823,13 @@
                              helm-source-locate
                              )
                            "*helm-find-files*"))
+
+      (require 'helm-utils)
+      (defvar helm-source-portage-files
+        `((name . "Portage files")
+          (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
+          (action . (lambda (candidate)
+                      (helm-find-file-as-root candidate)))))
 
       )
     #+END_SRC
@@ -1382,36 +1459,9 @@
      (global-set-key (kbd "C-r") 'phi-search-backward)
    #+END_SRC
 * editing
-** definitions
+** utils for files and buffers
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
-
-     ;; current date and time.
-     (defun insert-current-date-time()
-       "Insert the current date and time at point."
-       (interactive "*")
-       (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
-
-     (defun smarter-move-beginning-of-line (arg)
-       "Move point back to indentation of beginning of line.
-
-       Move point to the first non-whitespace character on this line.
-       If point is already there, move to the beginning of the line.
-       Effectively toggle between the first non-whitespace character and
-       the beginning of the line.
-
-       If ARG is not nil or 1, move forward ARG - 1 lines first.  If
-       point reaches the beginning or end of the buffer, stop there."
-       (interactive "^p")
-       (setq arg (or arg 1))
-       ;; Move lines first
-       (when (/= arg 1)
-         (let ((line-move-visual nil))
-           (forward-line (1- arg))))
-       (let ((orig-point (point)))
-         (back-to-indentation)
-         (when (= orig-point (point))
-           (move-beginning-of-line 1))))
 
      (defun copy-file-name-to-clipboard ()
        "Copy the current buffer file name to the clipboard."
@@ -1435,148 +1485,6 @@
               (t
                (rename-file filename new-name t)
                (set-visited-file-name new-name t t)))))))
-
-     (defun skip-to-next-blank-line ()
-       (interactive)
-       (let ((inhibit-changing-match-data t))
-         (forward-char 1)
-         (unless (search-forward-regexp "^\\s *$" nil t)
-           (forward-char -1))))
-
-     (defun skip-to-previous-blank-line ()
-       (interactive)
-       (let ((inhibit-changing-match-data t))
-         (forward-char -1)
-         (unless (search-backward-regexp "^\\s *$" nil t)
-           (forward-char 1))))
-
-     (defadvice whole-line-or-region-kill-region
-         (before whole-line-or-region-kill-read-only-ok activate)
-       (interactive "p")
-       (unless kill-read-only-ok (barf-if-buffer-read-only)))
-
-     ;; When popping the mark, continue popping until the cursor actually moves
-     ;; Also, if the last command was a copy - skip past all the expand-region cruft.
-     (defadvice pop-to-mark-command (around ensure-new-position activate)
-       (let ((p (point)))
-         (when (eq last-command 'save-region-or-current-line)
-           ad-do-it
-           ad-do-it
-           ad-do-it)
-         (dotimes (i 10)
-           (when (= p (point)) ad-do-it))))
-
-     ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
-     (defun duplicate-and-comment-line (arg)
-       "comment line at point; if COMMENTFIRST is non-nil, comment the original"
-       (interactive "P")
-       (beginning-of-line)
-       (push-mark)
-       (end-of-line)
-       (let ((str (buffer-substring (region-beginning) (region-end))))
-         (when arg
-           (comment-region (region-beginning) (region-end)))
-         (insert-string
-          (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
-         (forward-line -1)))
-
-     (defun eval-and-replace ()
-       "Replace the preceding sexp with its value."
-       (interactive)
-       (backward-kill-sexp)
-       (condition-case nil
-           (prin1 (eval (read (current-kill 0)))
-                  (current-buffer))
-         (error (message "Invalid expression")
-                (insert (current-kill 0)))))
-
-     (require 'helm-utils)
-     (defvar helm-source-portage-files
-       `((name . "Portage files")
-         (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
-         (action . (lambda (candidate)
-                     (helm-find-file-as-root candidate)))))
-
-     (defun cite-region (arg)
-       (clipboard-kill-ring-save (region-beginning) (region-end))
-       (with-temp-buffer
-         (let ((comment-start "> "))
-           (yank)
-           (comment-region (point-min) (point-max))
-           (when (> arg 1)
-             (beginning-of-buffer)
-             (insert "\n"))
-           (clipboard-kill-region (point-min) (point-max)))))
-
-     (defun append-cited-region (arg)
-       (interactive "P")
-       (custom/cite-region (prefix-numeric-value arg))
-       (end-of-buffer)
-       (yank))
-
-     (defun strip-prefix (prefix lines)
-       (s-join "\n"
-               (mapcar (lambda (s) (s-chop-prefix prefix s))
-                       (s-lines lines))))
-
-     (defun downcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (downcase-region (region-beginning) (region-end))
-         (downcase-word arg)))
-
-     (defun upcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (upcase-region (region-beginning) (region-end))
-         (upcase-word arg)))
-
-     (defun capitalize-dwim (arg)
-       (interactive "P")
-       (when (consp arg) (setq arg 1))
-       (if (region-active-p)
-           (capitalize-region (region-beginning) (region-end))
-         (capitalize-word (prefix-numeric-value arg))))
-
-     ;; This override for transpose-words fixes what I consider to be a flaw with the
-     ;; default implementation in simple.el. To traspose chars or lines, you always
-     ;; put the point on the second char or line to transpose with the previous char
-     ;; or line. The default transpose-words implementation does the opposite by
-     ;; flipping the current word with the next word instead of the previous word.
-     ;; The new implementation below instead makes transpose-words more consistent
-     ;; with how transpose-chars and trasponse-lines behave.
-     (defun transpose-words (arg)
-       "[Override for default transpose-words in simple.el]
-       Interchange words around point, leaving point at end of
-       them. With prefix arg ARG, effect is to take word before or
-       around point and drag it backward past ARG other words (forward
-       if ARG negative). If ARG is zero, the words around or after
-       point and around or after mark are interchanged."
-       (interactive "*p")
-       (if (eolp) (forward-char -1))
-       (transpose-subr 'backward-word arg)
-       (forward-word (+ arg 1)))
-
-     ;; Compliment to kill-rectangle (just like kill-ring-save compliments
-     ;; kill-region)
-     ;; http://www.emacsblog.org/2007/03/17/quick-tip-set-goal-column/#comment-183
-     (defun kill-save-rectangle (start end &optional fill)
-       "Save the rectangle as if killed, but don't kill it. See
-       `kill-rectangle' for more information."
-       (interactive "r\nP")
-       (kill-rectangle start end fill)
-       (goto-char start)
-       (yank-rectangle))
-
-     (defun compact-spaces-in-region (beg end)
-       "replace all whitespace in the region with single spaces"
-       (interactive "r")
-       (save-excursion
-         (save-restriction
-           (narrow-to-region beg end)
-           (goto-char (point-min))
-           (while (re-search-forward "\\s-+" nil t)
-             (replace-match "")))))
 
      ;;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
      (defun rename-file-and-buffer (new-name)
@@ -1611,136 +1519,65 @@
                  (buffer-string)))))))
 
      )
-   #+END_SRC
-** setup
-   #+BEGIN_SRC emacs-lisp
-     (use-package rst)
-     (use-package saveplace)
-     (use-package table) ;; table
-     (use-package footnote)
-     (use-package snakehump :ensure t)
-     (use-package highlight-sexp :ensure t)
-     (use-package adaptive-wrap :ensure t)
-     (use-package anchored-transpose :ensure t)
-     (use-package edit-indirect :ensure t)
-     (use-package epoch-view :ensure t)
-     (use-package hungry-delete :ensure t)
-     (use-package multifiles :ensure t)
-     (use-package narrow-indirect :ensure t)
-     (use-package replace+ :ensure t)
+
      (use-package scratch :ensure t)
-     (use-package re-builder :defer t)
+   #+END_SRC
+** regions and rectangles
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
 
-     (setq auto-revert-verbose nil)
-     (setq comment-style 'indent)
-     (setq default-input-method 'russian-computer)
-     (setq delete-by-moving-to-trash t);; Move files to trash when deleting
-     (setq global-auto-revert-non-file-buffers t)
-     (setq indent-tabs-mode nil)
-     (setq kill-whole-line t)
-     (setq kmacro-ring-max 16)
-     (setq mark-even-if-inactive t)
-     (setq next-line-add-newlines nil)
-     (setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
-     (setq sentence-end-double-space nil)
-     (setq tab-always-indent t)
-     (setq transient-mark-mode t)
-     (setq undo-limit 1000000)
-     (setq user-full-name (capitalize global-username))
-     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-     ;; don't let the cursor go into minibuffer prompt
-     (setq minibuffer-prompt-properties
-           '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
+      (defadvice whole-line-or-region-kill-region
+          (before whole-line-or-region-kill-read-only-ok activate)
+        (interactive "p")
+        (unless kill-read-only-ok (barf-if-buffer-read-only)))
 
-     (set-default 'indent-tabs-mode nil);; Never insert tabs
-     (setq-default fill-column 200)
-     (setq-default indicate-empty-lines t)
-     (setq-default save-place t)
-     (setq-default tab-width 4)
-     (setq-default transient-mark-mode t)
-     (setq-default truncate-lines t);; Don't break lines for me, please
+      (defun cite-region (arg)
+        (clipboard-kill-ring-save (region-beginning) (region-end))
+        (with-temp-buffer
+          (let ((comment-start "> "))
+            (yank)
+            (comment-region (point-min) (point-max))
+            (when (> arg 1)
+              (beginning-of-buffer)
+              (insert "\n"))
+            (clipboard-kill-region (point-min) (point-max)))))
 
-     (setq x-stretch-cursor t)
-     (setq blink-matching-paren nil)
-     (setq show-paren-delay 0)
-     (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-     (setq mouse-wheel-progressive-speed nil)
-     (setq set-mark-command-repeat-pop t)
-     (auto-compression-mode t)
+      (defun append-cited-region (arg)
+        (interactive "P")
+        (custom/cite-region (prefix-numeric-value arg))
+        (end-of-buffer)
+        (yank))
 
-     (delete-selection-mode t)
-     (electric-indent-mode -1)
-     (global-auto-revert-mode 1);; Auto refresh buffers
-     (show-paren-mode t)
-     (transient-mark-mode 1)
+      ;; Compliment to kill-rectangle (just like kill-ring-save compliments
+      ;; kill-region)
+      ;; http://www.emacsblog.org/2007/03/17/quick-tip-set-goal-column/#comment-183
+      (defun kill-save-rectangle (start end &optional fill)
+        "Save the rectangle as if killed, but don't kill it. See
+        `kill-rectangle' for more information."
+        (interactive "r\nP")
+        (kill-rectangle start end fill)
+        (goto-char start)
+        (yank-rectangle))
 
-     (make-variable-buffer-local 'transient-mark-mode)
-     (put 'transient-mark-mode 'permanent-local t)
+      (defun compact-spaces-in-region (beg end)
+        "replace all whitespace in the region with single spaces"
+        (interactive "r")
+        (save-excursion
+          (save-restriction
+            (narrow-to-region beg end)
+            (goto-char (point-min))
+            (while (re-search-forward "\\s-+" nil t)
+              (replace-match "")))))
 
-     (define-coding-system-alias 'UTF-8 'utf-8)
-     (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
-
-     (use-package xclip
-       :ensure t
-       :config
-       (xclip-mode 1))
-
-     (use-package dtrt-indent
-       :ensure t
-       :config
-       (dtrt-indent-mode))
-
-     (use-package savekill
-       :ensure t
-       :config
-       (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
-
-     (use-package drag-stuff
-       :ensure t
-       :defer t
-       :config
-       (progn
-         (setq drag-stuff-modifier '(meta shift))
-         (turn-off-drag-stuff-mode)
-         ))
-
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
        :ensure t
        :defer t
        :bind ("C-=" . er/expand-region))
-
-     (use-package undo-tree
-       :defer t
-       :ensure t
-       :config
-       (progn
-         (global-undo-tree-mode t)
-         (setq undo-tree-mode-lighter "")
-         (setq undo-tree-visualizer-timestamps t)
-         (setq undo-tree-visualizer-diff t)
-         ))
-
-     (use-package recentf
-       :defer t
-       :init
-       (use-package recentf-ext :ensure t)
-       :config
-       (progn
-         (recentf-mode t) ;enable recent files mode.
-         (setq recentf-max-saved-items 250)
-         (setq recentf-max-menu-items 15)
-         ;; get rid of `find-file-read-only' and replace it with something more useful.
-         ))
-
-     (use-package multiple-cursors
-       :ensure t
-       :config
-       (setq mc/list-file (at-data-dir "/.mc-lists.el")))
-
-     (use-package mc-extras
-       ;;TODO: explore and bind functions
-       :ensure t
-       :defer t)
 
      (use-package region-bindings-mode
        :ensure t
@@ -1760,13 +1597,6 @@
        (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
        (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
-     (use-package volatile-highlights
-       :ensure t
-       :config
-       (volatile-highlights-mode t))
-
-     (use-package wc-mode :ensure t)
-
      (use-package whole-line-or-region ;; if no region is active, act on current line
        :ensure t
        :defer t
@@ -1781,10 +1611,231 @@
                  (yank whole-line-or-region-yank nil)
                  ))))
 
+     (use-package wrap-region
+       :ensure t
+       :config
+       (progn
+         (wrap-region-global-mode 1)
+         (wrap-region-add-wrapper "*" "*")
+         (wrap-region-add-wrapper "(" ")")
+         (wrap-region-add-wrapper "{-" "-}" "#")
+         (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
+    #+END_SRC
+** switch case
+   #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
+
+     (defun downcase-dwim (arg)
+       (interactive "p")
+       (if (region-active-p)
+           (downcase-region (region-beginning) (region-end))
+         (downcase-word arg)))
+
+     (defun upcase-dwim (arg)
+       (interactive "p")
+       (if (region-active-p)
+           (upcase-region (region-beginning) (region-end))
+         (upcase-word arg)))
+
+     (defun capitalize-dwim (arg)
+       (interactive "P")
+       (when (consp arg) (setq arg 1))
+       (if (region-active-p)
+           (capitalize-region (region-beginning) (region-end))
+         (capitalize-word (prefix-numeric-value arg))))
+
+     )
+   #+END_SRC
+** move and bind text around
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; This override for transpose-words fixes what I consider to be a flaw with the
+      ;; default implementation in simple.el. To traspose chars or lines, you always
+      ;; put the point on the second char or line to transpose with the previous char
+      ;; or line. The default transpose-words implementation does the opposite by
+      ;; flipping the current word with the next word instead of the previous word.
+      ;; The new implementation below instead makes transpose-words more consistent
+      ;; with how transpose-chars and trasponse-lines behave.
+      (defun transpose-words (arg)
+        "[Override for default transpose-words in simple.el]
+        Interchange words around point, leaving point at end of
+        them. With prefix arg ARG, effect is to take word before or
+        around point and drag it backward past ARG other words (forward
+        if ARG negative). If ARG is zero, the words around or after
+        point and around or after mark are interchanged."
+        (interactive "*p")
+        (if (eolp) (forward-char -1))
+        (transpose-subr 'backward-word arg)
+        (forward-word (+ arg 1)))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package anchored-transpose :ensure t)
+
+      (use-package drag-stuff
+        :ensure t
+        :defer t
+        :config
+        (progn
+          (setq drag-stuff-modifier '(meta shift))
+          (turn-off-drag-stuff-mode)
+          ))
+
+      (use-package snakehump :ensure t)
+      (use-package adaptive-wrap :ensure t)
+      (use-package hungry-delete :ensure t)
+      (use-package replace+ :ensure t)
+
+      (use-package multiple-cursors
+        :ensure t
+        :config
+        (setq mc/list-file (at-data-dir "/.mc-lists.el")))
+
+      (use-package mc-extras
+        ;;TODO: explore and bind functions
+        :ensure t
+        :defer t)
+
+      ;; Transpose stuff with M-t
+      (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
+      ;;TODO: plan docstring
+      (defhydra hydra-transpose ()
+        ("M-b" backward-word "prev word")
+        ("M-f" forward-word "next word")
+        ("<up>" previous-line "prev line")
+        ("<down>" next-line "next line")
+        ("<left>" backward-char "prev char")
+        ("<right>" forward-char "next char")
+        ("_" undo-tree-undo "undo last")
+        ("w" custom/transpose-words "on words")
+        ("s" transpose-sexps "on sexps")
+        ("p" transpose-params "on params")
+        ("a" anchored-transpose "anchored")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "M-t") 'hydra-transpose/body)
+    #+END_SRC
+** commenting
+   #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
+
+     ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
+     (defun duplicate-and-comment-line (arg)
+       "comment line at point; if COMMENTFIRST is non-nil, comment the original"
+       (interactive "P")
+       (beginning-of-line)
+       (push-mark)
+       (end-of-line)
+       (let ((str (buffer-substring (region-beginning) (region-end))))
+         (when arg
+           (comment-region (region-beginning) (region-end)))
+         (insert-string
+          (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+         (forward-line -1)))
+
+     )
+
      (use-package comment-dwim-2
        :ensure t
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
+
+     (use-package rebox2
+       :ensure t
+       ;;TODO: bind commands
+       )
+
+     (setq comment-style 'indent)
+   #+END_SRC
+** clipboard and killring
+   #+BEGIN_SRC emacs-lisp
+     (use-package xclip
+       :ensure t
+       :config
+       (xclip-mode 1))
+
+     (use-package savekill
+       :ensure t
+       :config
+       (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
+   #+END_SRC
+** undo/redo
+   #+BEGIN_SRC emacs-lisp
+     (setq undo-limit 1000000)
+
+     (use-package undo-tree
+       :defer t
+       :ensure t
+       :config
+       (progn
+         (global-undo-tree-mode t)
+         (setq undo-tree-mode-lighter "")
+         (setq undo-tree-visualizer-timestamps t)
+         (setq undo-tree-visualizer-diff t)
+         ))
+   #+END_SRC
+** utils
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; current date and time.
+      (defun insert-current-date-time()
+        "Insert the current date and time at point."
+        (interactive "*")
+        (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
+
+      (defun strip-prefix (prefix lines)
+        (s-join "\n"
+                (mapcar (lambda (s) (s-chop-prefix prefix s))
+                        (s-lines lines))))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package table) ;; table
+      (use-package footnote)
+      (use-package epoch-view :ensure t)
+      (use-package re-builder :defer t)
+
+      (use-package wc-mode :ensure t)
+
+      (use-package yatemplate
+        :init
+        (auto-insert-mode)
+        :config
+        (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
+        (yatemplate-fill-alist))
+
+      (use-package whitespace
+        :defer t)
+
+      (use-package mark
+        :ensure t
+        :config
+        (defhydra hydra-mark ()
+          ("<right>" forward-mark "forward-mark")
+          ("<left>" backward-mark "backward-mark")
+          ("<down>" show-marks "show-marks"))
+        (global-set-key (kbd "<f12>") 'hydra-mark/body))
+
+      (use-package page-break-lines
+        :ensure t
+        :config
+        (turn-on-page-break-lines-mode))
+
+      ;; (use-package macro-math
+      ;;   :config
+      ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
+      ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+    #+END_SRC
+** major modes
+   #+BEGIN_SRC emacs-lisp
+     (use-package rst)
 
      (use-package generic
        :defer t
@@ -1800,18 +1851,14 @@
            nil)
          (setq generic-default-modes (delete 'javascript-generic-mode
                                              generic-default-modes))))
-
-     (use-package yatemplate
-       :init
-       (auto-insert-mode)
-       :config
-       (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
-       (yatemplate-fill-alist))
-
-     (use-package rebox2
+     (use-package vimrc-mode
        :ensure t
-       ;;TODO: bind commands
-       )
+       :defer t
+       :mode ".vim\\(rc\\)?$")
+   #+END_SRC
+** sexps
+   #+BEGIN_SRC emacs-lisp
+     (use-package highlight-sexp :ensure t)
 
      (use-package smartparens
        :ensure t
@@ -1840,72 +1887,92 @@
        (define-key sp-keymap (kbd "C-c s n") 'sp-add-to-next-sexp)
        (define-key sp-keymap (kbd "C-c s j") 'sp-join-sexp)
        (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
-
-     (use-package vimrc-mode
-       :ensure t
-       :defer t
-       :mode ".vim\\(rc\\)?$")
-
-     (use-package whitespace
-       :defer t)
-
-     (use-package wrap-region
-       :ensure t
-       :config
-       (progn
-         (wrap-region-global-mode 1)
-         (wrap-region-add-wrapper "*" "*")
-         (wrap-region-add-wrapper "(" ")")
-         (wrap-region-add-wrapper "{-" "-}" "#")
-         (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
-
-     (use-package mark
-       :ensure t
-       :config
-       (defhydra hydra-mark ()
-         ("<right>" forward-mark "forward-mark")
-         ("<left>" backward-mark "backward-mark")
-         ("<down>" show-marks "show-marks"))
-       (global-set-key (kbd "<f12>") 'hydra-mark/body))
-
-     (use-package page-break-lines
-       :ensure t
-       :config
-       (turn-on-page-break-lines-mode))
-
-     ;; (use-package macro-math
-     ;;   :config
-     ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
-     ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+   #+END_SRC
+** some fancy editing methods
+   #+BEGIN_SRC emacs-lisp
+     (use-package edit-indirect :ensure t)
+     (use-package narrow-indirect :ensure t)
+     (use-package multifiles :ensure t)
 
      (use-package miniedit
        :defer t
        :ensure t
        :commands minibuffer-edit
        :init (miniedit-install))
+   #+END_SRC
+** indentation
+   #+BEGIN_SRC emacs-lisp
+     (setq indent-tabs-mode nil)
 
+     (use-package dtrt-indent
+       :ensure t
+       :config
+       (dtrt-indent-mode))
+
+     (setq-default tab-width 4)
+   #+END_SRC
+** setup basic minor modes
+   #+BEGIN_SRC emacs-lisp
+     (auto-compression-mode t)
+     (delete-selection-mode t)
+     (electric-indent-mode -1)
+     (global-auto-revert-mode 1);; Auto refresh buffers
+     (show-paren-mode t)
+     (transient-mark-mode 1)
+   #+END_SRC
+** set variables
+   #+BEGIN_SRC emacs-lisp
+     (setq auto-revert-verbose nil)
+     (setq global-auto-revert-non-file-buffers t)
+     (setq default-input-method 'russian-computer)
+     (setq delete-by-moving-to-trash t);; Move files to trash when deleting
+     (setq kill-whole-line t)
+     (setq kmacro-ring-max 16)
+     (setq mark-even-if-inactive t)
+     (setq next-line-add-newlines nil)
+     (setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
+     (setq sentence-end-double-space nil)
+     (setq tab-always-indent t)
+     (setq transient-mark-mode t)
+     (setq user-full-name (capitalize global-username))
+     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+     ;; don't let the cursor go into minibuffer prompt
+     (setq minibuffer-prompt-properties
+           '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
+
+     (set-default 'indent-tabs-mode nil);; Never insert tabs
+     (setq-default fill-column 200)
+     (setq-default indicate-empty-lines t)
+     (setq-default transient-mark-mode t)
+     (setq-default truncate-lines t);; Don't break lines for me, please
+
+     (setq x-stretch-cursor t)
+     (setq blink-matching-paren nil)
+     (setq show-paren-delay 0)
+     (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+     (setq mouse-wheel-progressive-speed nil)
+     (setq set-mark-command-repeat-pop t)
+
+     (make-variable-buffer-local 'transient-mark-mode)
+     (put 'transient-mark-mode 'permanent-local t)
+
+     (setq whitespace-style '(indentation::space
+                              space-after-tab
+                              space-before-tab
+                              trailing
+                              lines-tail
+                              tab-mark
+                              face
+                              tabs))
+   #+END_SRC
+** add hooks
+   #+BEGIN_SRC emacs-lisp
      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
      (add-hook 'text-mode-hook 'turn-on-auto-fill)
      (add-hook 'text-mode-hook 'text-mode-hook-identify)
-
-     ;; Transpose stuff with M-t
-     (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-     ;;TODO: plan docstring
-     (defhydra hydra-transpose ()
-       ("M-b" backward-word "prev word")
-       ("M-f" forward-word "next word")
-       ("<up>" previous-line "prev line")
-       ("<down>" next-line "next line")
-       ("<left>" backward-char "prev char")
-       ("<right>" forward-char "next char")
-       ("_" undo-tree-undo "undo last")
-       ("w" custom/transpose-words "on words")
-       ("s" transpose-sexps "on sexps")
-       ("p" transpose-params "on params")
-       ("a" anchored-transpose "anchored")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "M-t") 'hydra-transpose/body)
-
+   #+END_SRC
+** hydras and keys
+   #+BEGIN_SRC emacs-lisp :tangle no
      ;;TODO: plan docstring
      (defhydra hydra-edit (:color blue)
        ("0" custom/compact-spaces-in-region)
@@ -1985,15 +2052,6 @@
      (global-set-key (kbd "C-c r p") '(lambda () ;;TODO: make hydra for such custom helm sources
                                         (interactive)
                                         (helm :sources '(custom/helm-source-portage-files))))
-
-     (setq whitespace-style '(indentation::space
-                              space-after-tab
-                              space-before-tab
-                              trailing
-                              lines-tail
-                              tab-mark
-                              face
-                              tabs))
    #+END_SRC
 ** try
    #+BEGIN_SRC emacs-lisp :tangle no
@@ -4562,6 +4620,8 @@
 
     (setq Info-additional-directory-list
           (list (concat home-directory "/help/info")))
+
+    (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
 
     (defhydra hydra-apropos (:color blue)
       "
