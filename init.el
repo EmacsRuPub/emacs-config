@@ -39,5 +39,6 @@
 (use-package names :ensure t)
 (use-package org)
 (use-package org-protocol)
+(use-package anaphora :ensure t)
 
 (org-babel-load-file (at-config-basedir "config.org"))
