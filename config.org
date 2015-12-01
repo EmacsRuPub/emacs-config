@@ -6775,3 +6775,5 @@
 ** [[http://melpa.org/#/badwolf-theme][badwolf-theme - MELPA - http://melpa.org/#/badwolf-theme]] [2015-11-25 Ср 23:19] :emacs:try:
 ** [#B] [[https://gist.github.com/tmalsburg/9747104][A simple script for converting vCard files to org-contacts. - https://gist.github.com/tmalsburg/9747104]] [2015-11-26 Чт 18:15] :emacs:try:
 ** [[https://github.com/istib/helm-mode-manager][istib/helm-mode-manager - https://github.com/istib/helm-mode-manager]] [2015-11-29 Вс 13:54]                                          :emacs:try:
+** [[https://github.com/yuya373/emacs-slack][yuya373/emacs-slack - https://github.com/yuya373/emacs-slack]] [2015-11-30 Пн 19:27]                                          :emacs:try:
+** [[http://endlessparentheses.com/using-paradox-for-github-notifications.html?source=rss][Using Paradox for Github notifications · Endless Parentheses - http://endlessparentheses.com/using-paradox-for-github-notifications.html?source=rss]] [2015-11-30 Пн 19:39]                                          :emacs:try:
