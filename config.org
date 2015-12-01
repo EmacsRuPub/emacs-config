@@ -211,9 +211,10 @@
      (use-package deep-thought-theme :ensure t :disabled t)
      (use-package material-theme :ensure t :disabled t)
      (use-package nzenburn-theme :ensure t :disabled t)
-     (use-package zenburn-theme :ensure t)
+     (use-package zenburn-theme :ensure t :disabled t)
+     (use-package darkburn-theme :ensure t)
 
-     (load-theme 'zenburn t)
+     (load-theme 'darkburn t)
      (setq color-theme-is-global t)
    #+END_SRC
 ** set common colors
