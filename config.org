@@ -2072,151 +2072,156 @@
      (bind-key "C-M-<backspace>" 'sanityinc/kill-back-to-indentation)
    #+END_SRC
 * completion
-** definitions
+** yasnippet
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;; Inter-field navigation
+      (defun yas-goto-end-of-active-field ()
+        (interactive)
+        (let* ((snippet (car (yas--snippets-at-point)))
+               (position (yas--field-end (yas--snippet-active-field snippet))))
+          (if (= (point) position)
+              (move-end-of-line)
+            (goto-char position))))
+
+      (defun yas-goto-start-of-active-field ()
+        (interactive)
+        (let* ((snippet (car (yas--snippets-at-point)))
+               (position (yas--field-start (yas--snippet-active-field snippet))))
+          (if (= (point) position)
+              (move-beginning-of-line)
+            (goto-char position))))
+
+      ;; hook for automatic reloading of changed snippets
+      (defun update-yasnippets-on-save ()
+        (when (string-match "/resources/yasnippet" buffer-file-name)
+          (yas/load-directory custom/yasnippet-dir)))
+
+      (defun ac-page-next ()
+        "Select next completion candidate per `ac-menu-height' range.
+         Pages down through completion menu."
+        (interactive)
+        (let ((counter 0))
+          (dotimes (counter (1- ac-menu-height))
+            (ac-next))))
+
+      (defun ac-page-previous ()
+        "Select previous completion candidate per `ac-menu-height' range.
+         Pages up through completion menu."
+        (interactive)
+        (let ((counter 0))
+          (dotimes (counter (1- ac-menu-height))
+            (ac-previous))))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet
+        :ensure t
+        :defer t
+        :diminish yas-minor-mode
+        :commands yas-global-mode
+        :init
+        (use-package helm-c-yasnippet :ensure t)
+        :config
+        (progn
+          (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+          (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
+          (setq yas-expand-only-for-last-commands '(self-insert-command))
+          (yas-global-mode 1)
+          (bind-key "\t" 'hippie-expand yas-minor-mode-map)
+          ;; unset both to remove ALL translations
+          (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
+          (define-key yas-minor-mode-map (kbd "TAB") nil)
+          (bind-key "C-M-<return>" 'helm-yas-complete)
+          ;;TODO: bind helm-yas-create-snippet-on-region
+          (setq yas/next-field-key '("<backtab>" "<S-tab>"))
+          (setq yas/prev-field-key '("<C-tab>"))
+          (setq yas-snippet-dirs nil)
+          (setq helm-yas-space-match-any-greedy t)
+          (push custom/yasnippet-dir yas-snippet-dirs)
+          (push custom/yasnippet-private-dir yas-snippet-dirs)
+          (yas-global-mode 1)
+          (setq yas-prompt-functions
+                '(yas-completing-prompt
+                  yas-x-prompt
+                  yas-no-prompt))
+          ;; Wrap around region
+          (setq yas/wrap-around-region t)
+          (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
+          ;; Jump to end of snippet definition
+          (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
+          (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
+          (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)))
+
+      (use-package auto-yasnippet :ensure t)
+
+      ;;TODO: splice into yasnippet package definition
+      (defhydra hydra-yasnippet (:color teal)
+        "
+        _c_reate auto snippet
+        _e_xpand auto snippet
+        _p_ersist auto snippet
+        _v_isit snippets file
+        _i_nsert snippet
+        "
+        ("c" aya-create)
+        ("e" aya-expand)
+        ("p" aya-persist-snippet)
+        ("v" yas-visit-snippet-file)
+        ("i" yas-insert-snippet)
+        ("q" nil))
+      (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
+    #+END_SRC
+** auto-complete
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun ielm-auto-complete ()
+        "Enables `auto-complete' support in \\[ielm]."
+        (setq ac-sources '(ac-source-functions
+                           ac-source-variables
+                           ac-source-features
+                           ac-source-symbols
+                           ac-source-words-in-same-mode-buffers))
+        (add-to-list 'ac-modes 'inferior-emacs-lisp-mode))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package auto-complete
+        :ensure t
+        :commands auto-complete
+        :init
+        (use-package auto-complete-config)
+        (use-package ac-math)
+        :config
+        (progn
+          (ac-config-default)
+          (global-auto-complete-mode t)
+          (diminish 'auto-complete-mode " α")
+          (setq ac-auto-start nil)
+          (setq ac-quick-help-delay 0.5)
+          (setq ac-fuzzy-enable t)
+          (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
+          (add-to-list 'ac-modes 'slime-repl-mode)
+          (add-hook 'slime-mode-hook 'set-up-slime-ac)
+          (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+          (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+          (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
+          (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
+          (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+          (global-set-key (kbd "C-<tab>") 'auto-complete)
+          ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
+          ))
+    #+END_SRC
+** hippie-expand
    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defun my-bbdb-tab-complete ()
-       (interactive)
-       (if (mail-abbrev-in-expansion-header-p)
-           (bbdb-complete-name)
-         (message-tab)))
-
-     ;; Inter-field navigation
-     (defun yas-goto-end-of-active-field ()
-       (interactive)
-       (let* ((snippet (car (yas--snippets-at-point)))
-              (position (yas--field-end (yas--snippet-active-field snippet))))
-         (if (= (point) position)
-             (move-end-of-line)
-           (goto-char position))))
-
-     (defun yas-goto-start-of-active-field ()
-       (interactive)
-       (let* ((snippet (car (yas--snippets-at-point)))
-              (position (yas--field-start (yas--snippet-active-field snippet))))
-         (if (= (point) position)
-             (move-beginning-of-line)
-           (goto-char position))))
-
-     ;; hook for automatic reloading of changed snippets
-     (defun update-yasnippets-on-save ()
-       (when (string-match "/resources/yasnippet" buffer-file-name)
-         (yas/load-directory custom/yasnippet-dir)))
-
-     (defun ac-page-next ()
-       "Select next completion candidate per `ac-menu-height' range.
-        Pages down through completion menu."
-       (interactive)
-       (let ((counter 0))
-         (dotimes (counter (1- ac-menu-height))
-           (ac-next))))
-
-     (defun ac-page-previous ()
-       "Select previous completion candidate per `ac-menu-height' range.
-        Pages up through completion menu."
-       (interactive)
-       (let ((counter 0))
-         (dotimes (counter (1- ac-menu-height))
-           (ac-previous))))
-
-     (defun ielm-auto-complete ()
-       "Enables `auto-complete' support in \\[ielm]."
-       (setq ac-sources '(ac-source-functions
-                          ac-source-variables
-                          ac-source-features
-                          ac-source-symbols
-                          ac-source-words-in-same-mode-buffers))
-       (add-to-list 'ac-modes 'inferior-emacs-lisp-mode))
-
-     )
-   #+END_SRC
-
-** setup
-   #+BEGIN_SRC emacs-lisp
-     (use-package auto-complete
-       :ensure t
-       :commands auto-complete
-       :init
-       (use-package auto-complete-config)
-       (use-package ac-math)
-       :config
-       (progn
-         (ac-config-default)
-         (global-auto-complete-mode t)
-         (diminish 'auto-complete-mode " α")
-         (setq ac-auto-start nil)
-         (setq ac-quick-help-delay 0.5)
-         (setq ac-fuzzy-enable t)
-         (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
-         (add-to-list 'ac-modes 'slime-repl-mode)
-         (add-hook 'slime-mode-hook 'set-up-slime-ac)
-         (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-         (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-         (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
-         (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
-         (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-         (global-set-key (kbd "C-<tab>") 'auto-complete)
-         ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
-         ))
-
-     (use-package yasnippet
-       :ensure t
-       :defer t
-       :diminish yas-minor-mode
-       :commands yas-global-mode
-       :init
-       (use-package helm-c-yasnippet :ensure t)
-       :config
-       (progn
-         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-         (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
-         (setq yas-expand-only-for-last-commands '(self-insert-command))
-         (yas-global-mode 1)
-         (bind-key "\t" 'hippie-expand yas-minor-mode-map)
-         ;; unset both to remove ALL translations
-         (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
-         (define-key yas-minor-mode-map (kbd "TAB") nil)
-         (bind-key "C-M-<return>" 'helm-yas-complete)
-         ;;TODO: bind helm-yas-create-snippet-on-region
-         (setq yas/next-field-key '("<backtab>" "<S-tab>"))
-         (setq yas/prev-field-key '("<C-tab>"))
-         (setq yas-snippet-dirs nil)
-         (setq helm-yas-space-match-any-greedy t)
-         (push custom/yasnippet-dir yas-snippet-dirs)
-         (push custom/yasnippet-private-dir yas-snippet-dirs)
-         (yas-global-mode 1)
-         (setq yas-prompt-functions
-               '(yas-completing-prompt
-                 yas-x-prompt
-                 yas-no-prompt))
-         ;; Wrap around region
-         (setq yas/wrap-around-region t)
-         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
-         ;; Jump to end of snippet definition
-         (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
-         (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
-         (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)))
-
-     (use-package auto-yasnippet :ensure t)
-
-     ;;TODO: splice into yasnippet package definition
-     (defhydra hydra-yasnippet (:color teal)
-       "
-       _c_reate auto snippet
-       _e_xpand auto snippet
-       _p_ersist auto snippet
-       _v_isit snippets file
-       _i_nsert snippet
-       "
-       ("c" aya-create)
-       ("e" aya-expand)
-       ("p" aya-persist-snippet)
-       ("v" yas-visit-snippet-file)
-       ("i" yas-insert-snippet)
-       ("q" nil))
-     (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
-
      (use-package hippie-expand
        :config
        (setq hippie-expand-try-functions-list
