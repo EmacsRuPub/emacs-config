@@ -1973,7 +1973,7 @@
      (add-hook 'text-mode-hook 'text-mode-hook-identify)
    #+END_SRC
 ** hydras and keys
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp
      ;;TODO: plan docstring
      (defhydra hydra-edit (:color blue)
        ("0" custom/compact-spaces-in-region)
