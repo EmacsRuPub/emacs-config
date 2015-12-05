@@ -5219,8 +5219,12 @@
     :LOGBOOK:
     - State "GOING"      from "TODO"       [2015-11-13 Пт 23:43]
     :END:
-*** TODO [#A] investigate and maybe fix swoop breakage while there was some dir or file opened (have existent buffer) and then it was deleted [2015-11-10 Вт 18:45] :emacs:ticket:
-    SCHEDULED: <2015-11-17 Вт>
+*** CANCELLED [#A] investigate and maybe fix swoop breakage while there was some dir or file opened (have existent buffer) and then it was deleted [2015-11-10 Вт 18:45] :emacs:ticket:
+    CLOSED: [2015-12-04 Пт 23:51] SCHEDULED: <2015-11-17 Вт>
+    :LOGBOOK:
+    - State "CANCELLED"  from "TODO"       [2015-12-04 Пт 23:51] \\
+      cannot reproduce
+    :END:
 *** TODO [#B] [[http://stackoverflow.com/questions/20979918/reading-email-from-gmail-in-emacs-24][Reading email (from gmail) in emacs 24 - Stack Overflow - http://stackoverflow.com/questions/20979918/reading-email-from-gmail-in-emacs-24]] [2015-11-10 Вт 19:36] :emacs:ticket:
     SCHEDULED: <2015-11-19 Чт>
 *** TODO [#C] review [[http://www.mostlymaths.net/2015/11/synctex-and-pdf-view-mode-for-emacs.html][SyncTeX and pdf-view-mode for emacs - http://www.mostlymaths.net/2015/11/synctex-and-pdf-view-mode-for-emacs.html]] [2015-11-10 Вт 20:29] :emacs:ticket:
@@ -6502,6 +6506,8 @@
     :ARCHIVE_CATEGORY: todo
     :ARCHIVE_TODO: CANCELLED
     :END:
+** TODO [#A] provide way for sift to choose whether it should use regexp parsing or not (search as is, like with "*all*" search string) [2015-12-02 Ср 17:20] :emacs:ticket:
+   SCHEDULED: <2015-12-03 Чт>
 * to try
 ** BBDB
 *** http://bbdb.sourceforge.net/
@@ -6813,3 +6819,9 @@
 ** [[https://github.com/istib/helm-mode-manager][istib/helm-mode-manager - https://github.com/istib/helm-mode-manager]] [2015-11-29 Вс 13:54]                                          :emacs:try:
 ** [[https://github.com/yuya373/emacs-slack][yuya373/emacs-slack - https://github.com/yuya373/emacs-slack]] [2015-11-30 Пн 19:27]                                          :emacs:try:
 ** [[http://endlessparentheses.com/using-paradox-for-github-notifications.html?source=rss][Using Paradox for Github notifications · Endless Parentheses - http://endlessparentheses.com/using-paradox-for-github-notifications.html?source=rss]] [2015-11-30 Пн 19:39]                                          :emacs:try:
+** [[https://github.com/buzztaiki/lice-el][buzztaiki/lice-el - https://github.com/buzztaiki/lice-el]] [2015-12-02 Ср 10:35]                                          :emacs:try:
+** [[http://melpa.org/#/resize-window][resize-window - MELPA - http://melpa.org/#/resize-window]] [2015-12-02 Ср 23:59]                                          :emacs:try:
+** [[http://melpa.org/#/easy-lentic][easy-lentic - MELPA - http://melpa.org/#/easy-lentic]] [2015-12-02 Ср 23:59]                                          :emacs:try:
+** [[http://melpa.org/#/encourage-mode][encourage-mode - MELPA - http://melpa.org/#/encourage-mode]] [2015-12-02 Ср 23:59]                                          :emacs:try:
+** [[https://github.com/Lindydancer/multicolumn][Lindydancer/multicolumn - https://github.com/Lindydancer/multicolumn]] [2015-12-03 Чт 20:29]                                          :emacs:try:
+** [[https://www.reddit.com/r/emacs/comments/3ui312/multiline_configurable_polylingual_automatic/][multi-line - configurable, polylingual, automatic splitting of statements into multiple-lines : emacs - https://www.reddit.com/r/emacs/comments/3ui312/multiline_configurable_polylingual_automatic/]] [2015-12-03 Чт 20:55]                                          :emacs:try:
