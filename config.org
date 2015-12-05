@@ -3869,6 +3869,41 @@
         (or (and (looking-at org-outline-regexp) (looking-back "^\**"))
             (save-excursion (and (looking-at (org-item-re)) (looking-back "^[ \t]*")))))
 
+      (defvar org-journal-file "/home/octocat/org/journal.org")
+
+      ;;TODO: develop some kind of harness to automate, for example
+      ;; - run-at-time, then traverse agenda and copy appropriate headings to journal
+      ;; - try to make solution with #'org-todo-changed-hook work
+      (defun org-save-to-journal ()
+          (interactive)
+          (org-refile-to-datetree org-journal-file))
+
+      (defun org-refile-to-datetree (&optional file cut)
+        "Refile a subtree to a datetree corresponding to it's timestamp.
+
+      The current time is used if the entry has no timestamp. If FILE
+      is nil, refile in the current file."
+        (interactive "f")
+        (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
+                                  (org-read-date t nil "now")))
+               (date (org-date-to-gregorian datetree-date))
+               )
+          (save-excursion
+            (with-current-buffer (current-buffer))
+              (if cut
+                  (org-cut-subtree)
+                (org-copy-subtree))
+              (if file (find-file file))
+              (org-datetree-find-date-create date)
+              (org-narrow-to-subtree)
+              (show-subtree)
+              (org-end-of-subtree t)
+              (newline)
+              (goto-char (point-max))
+              (org-paste-subtree 4)
+              (widen)
+              )))
+
       )
     #+END_SRC
 *** setup
@@ -5245,8 +5280,11 @@
 *** TODO [#B] find out why refiling in the end of org-capture does not always work [2015-11-22 Вс 16:04] :emacs:ticket:
 *** TODO [#B] find a way to [conditionally] turn off the popups about things under cursor (ex: Python function headers) [2015-11-24 Вт 20:29] :emacs:ticket:
     SCHEDULED: <2015-11-27 Пт>
-*** TODO [#B] make DONE (and synonymous statuses) tasks go (maybe refile) to org journal [2015-11-26 Чт 15:56] :emacs:ticket:
-    SCHEDULED: <2015-11-27 Пт>
+*** DONE [#B] make DONE (and synonymous statuses) tasks go (maybe refile) to org journal [2015-11-26 Чт 15:56] :emacs:ticket:
+    CLOSED: [2015-12-05 Сб 23:50] SCHEDULED: <2015-11-27 Пт>
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2015-12-05 Сб 23:50]
+    :END:
 *** collect and make project from all stored links about emacs + email/gmail/whatever
 *** TODO [#A] find out if there is some king of timeout for non-answering repos for package.el [2015-11-28 Сб 23:03] :emacs:ticket:
 ** archive
