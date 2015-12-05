@@ -1392,6 +1392,8 @@
        :config
        (setq beacon-color "#666600")
        (setq beacon-size 60))
+
+     (use-package filecache)
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp
@@ -2240,7 +2242,7 @@
    #+END_SRC
 * programming
 ** common
-*** definitions
+*** flake8 utils
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
@@ -2256,11 +2258,6 @@
                 config-path)
             (concat project-root config-path))))
 
-      ;; FIXME code duplication, think of finding the widely used util or something similar
-      (autoload 'vc-git-root "vc-git")
-      (autoload 'vc-svn-root "vc-svn")
-      (autoload 'vc-hg-root "vc-hg")
-
       (defun project-root (file-path)
         "Guess the project root of the given FILE-PATH."
         (or (vc-git-root file-path)
@@ -2268,11 +2265,72 @@
             (vc-hg-root file-path)
             file-path))
 
-      (defun create-restclient-sandbox ()
-        (interactive)
-        (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
-          (switch-to-buffer restbuffer)
-          (restclient-mode)))
+      )
+    #+END_SRC
+**** TODO review flake8 known problems and OBV search for solutions
+*** flycheck
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+          :ensure t
+          :init
+          (use-package flycheck-color-mode-line :ensure t)
+          :config
+          (progn
+              (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
+              (setq flycheck-check-syntax-automatically '(idle-change))))
+    #+END_SRC
+*** gdb
+    #+BEGIN_SRC emacs-lisp
+      (use-package gud
+          :init
+          (use-package gdb-mi)
+          :config
+          (progn
+              (setq gdb-many-windows t)
+              (setq gdb-show-main t)
+              (setq gdb-use-separate-io-buffer t)
+              (setq gud-chdir-before-run nil)
+              (setq gud-tooltip-mode t)))
+    #+END_SRC
+*** eldoc
+    #+BEGIN_SRC emacs-lisp
+      (use-package c-eldoc :ensure t)
+      (use-package eldoc-eval :ensure t)
+
+      (use-package eldoc
+          :defer t
+          :init
+          (progn
+              (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
+              (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+              (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+              (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+              (add-hook 'css-mode-hook 'turn-on-css-eldoc))
+          :config
+          (diminish 'eldoc-mode "ED"))
+
+      (use-package css-eldoc
+        :ensure t
+        :config
+        (turn-on-css-eldoc))
+    #+END_SRC
+**** try
+     #+BEGIN_SRC emacs-lisp
+       (use-package "eldoc"
+         :diminish eldoc-mode
+         :commands turn-on-eldoc-mode
+         :defer t
+         :init
+         (progn
+               (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+               (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+               (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
+     #+END_SRC
+*** print path within json
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
 
       (defun js2-print-json-path ()
         "Print the path to the JSON value under point, and save it in the kill ring."
@@ -2308,40 +2366,44 @@
 
       )
     #+END_SRC
-*** setup
+*** c-mode specialization for PostgreSQL development
     #+BEGIN_SRC emacs-lisp
-      (use-package filecache)
-      (use-package imenu)
+      (defun pgsql-c-mode ()
+          ;; sets up formatting for PostgreSQL C code
+          (interactive)
+          (c-mode)
+          (setq-default tab-width 4)
+          (c-set-style "bsd")             ; set c-basic-offset to 4, plus other stuff
+          (c-set-offset 'case-label '+)   ; tweak case indent to match PG custom
+          (setq fill-column 79)           ; matches what pgindent does
+          (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
+    #+END_SRC
+*** common hooks
+    #+BEGIN_SRC emacs-lisp
+      (defun common-hooks/newline-hook ()
+        (local-set-key (kbd "C-m") 'newline-and-indent)
+        (local-set-key (kbd "<return>") 'newline-and-indent))
+
+      ;; show FIXME/TODO/BUG keywords
+      (defun common-hooks/prog-helpers ()
+          ;; highlight additional keywords
+          (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
+          (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
+          ;; highlight too long lines
+          (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
+    #+END_SRC
+*** handy packages
+    #+BEGIN_SRC emacs-lisp
       (use-package compile)
       (use-package gtags)
-      (use-package c-eldoc :ensure t)
-      (use-package eldoc-eval :ensure t)
       (use-package hide-comnt :ensure t)
       (use-package regex-tool :ensure t)
-
-      (use-package flycheck
-          :ensure t
-          :init
-          (use-package flycheck-color-mode-line :ensure t)
-          :config
-          (progn
-              (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-              (setq flycheck-check-syntax-automatically '(idle-change))))
-
-      (use-package eldoc
-          :defer t
-          :init
-          (progn
-              (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
-              (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-              (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
-              (add-hook 'css-mode-hook 'turn-on-css-eldoc))
-          :config
-          (diminish 'eldoc-mode "ED"))
-
+    #+END_SRC
+** vcs
+*** git
+    #+BEGIN_SRC emacs-lisp
       (use-package magit
           :ensure t
           :config
@@ -2403,17 +2465,13 @@
               (global-git-gutter-mode +1)))
 
       (use-package git-timemachine :ensure t)
-
-      (use-package gud
-          :init
-          (use-package gdb-mi)
-          :config
-          (progn
-              (setq gdb-many-windows t)
-              (setq gdb-show-main t)
-              (setq gdb-use-separate-io-buffer t)
-              (setq gud-chdir-before-run nil)
-              (setq gud-tooltip-mode t)))
+    #+END_SRC
+*** common
+    #+BEGIN_SRC emacs-lisp
+      ;; FIXME code duplication, think of finding the widely used util or something similar
+      (autoload 'vc-git-root "vc-git")
+      (autoload 'vc-svn-root "vc-svn")
+      (autoload 'vc-hg-root "vc-hg")
 
       (use-package ediff
           :config
@@ -2421,42 +2479,6 @@
               (setq ediff-window-setup-function 'ediff-setup-windows-plain)
               (setq ediff-split-window-function 'split-window-horizontally)
               (setq ediff-diff-options "-w")))
-
-      (defun pgsql-c-mode ()
-          ;; sets up formatting for PostgreSQL C code
-          (interactive)
-          (c-mode)
-          (setq-default tab-width 4)
-          (c-set-style "bsd")             ; set c-basic-offset to 4, plus other stuff
-          (c-set-offset 'case-label '+)   ; tweak case indent to match PG custom
-          (setq fill-column 79)           ; matches what pgindent does
-          (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
-
-      (use-package term
-          :config
-          (progn
-              (add-hook 'term-exec-hook 'custom/term-exec-hook)
-              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
-              (setq explicit-shell-file-name "/bin/zsh")
-              ))
-
-      (use-package notify :ensure t)
-      (use-package oauth2 :ensure t)
-      (use-package web :ensure t)
-
-      (defun common-hooks/newline-hook ()
-        (local-set-key (kbd "C-m") 'newline-and-indent)
-        (local-set-key (kbd "<return>") 'newline-and-indent))
-
-      ;; show FIXME/TODO/BUG keywords
-      (defun common-hooks/prog-helpers ()
-          ;; highlight additional keywords
-          (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
-          ;; highlight too long lines
-          (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
     #+END_SRC
 ** languages
 *** elisp
@@ -2738,7 +2760,6 @@
      #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
        (setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
      #+END_SRC
-
 **** setup
      #+BEGIN_SRC emacs-lisp
        (use-package pep8 :ensure t)
@@ -2951,113 +2972,107 @@
           (add-hook 'php-mode-hook 'common-hooks/prog-helpers)))
     #+END_SRC
 ** webdev
-*** markup
-**** setup
-     #+BEGIN_SRC emacs-lisp
-       ;; TODO: integrate docbook-menu into el-get, probable relevant links below
-       ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
-       ;; http://www.emacswiki.org/emacs/DocbookXmlMode
+*** major modes
+    #+BEGIN_SRC emacs-lisp
+      (use-package sgml-mode
+        :config
+        (progn
+          (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
 
-       (use-package css-eldoc
-         :ensure t
-         :config
-         (turn-on-css-eldoc))
+      (use-package markdown-mode
+        :ensure t
+        :config
+        (progn
+          (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
+          (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
 
-       (use-package rainbow-mode :ensure t)
+      (use-package yaml-mode :ensure t)
+    #+END_SRC
+*** xml
+    #+BEGIN_SRC emacs-lisp
+      (defun custom/nxml-mode-hook ()
+        (auto-fill-mode)
+        (hs-minor-mode 1)
+        (rng-validate-mode)
+        (setq ispell-skip-html t)
+        (unify-8859-on-decoding-mode)
+        )
 
-       (use-package sgml-mode
-         :config
-         (progn
-           (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
+      (setq nxml-auto-insert-xml-declaration-flag t)
+      (setq nxml-bind-meta-tab-to-complete-flag t)
+      (setq nxml-slash-auto-complete-flag t)
 
-       (use-package emmet-mode
-         :ensure t
-         :config
-         (progn
-           (use-package ac-emmet :ensure auto-complete)
-           (use-package helm-emmet :ensure helm)
-           (push 'html-mode ac-modes)
-           (push 'web-mode ac-modes)
-           (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
-           (add-hook 'css-mode-hook 'ac-emmet-css-setup)
-           (add-hook 'web-mode-hook 'ac-emmet-html-setup)
-           (bind-key "C-j" nil emmet-mode-keymap)
-           (bind-key "<C-return>" nil emmet-mode-keymap)
-           (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
-           (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
-           (setq emmet-move-cursor-between-quotes t)
-           (add-hook 'sgml-mode-hook 'emmet-mode)
-           (add-hook 'nxml-mode-hook 'emmet-mode)
-           (add-hook 'django-mode 'emmet-mode)
-           (add-hook 'sgml-mode-hook 'emmet-mode)
-           (add-hook 'css-mode-hook 'emmet-mode)
-           (add-hook 'emmet-mode-hook
-                     (lambda () (setq emmet-indentation 2)))
-           ))
+      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
-       (use-package markdown-mode
-         :ensure t
-         :config
-         (progn
-           (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
-           (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
+      (add-to-list 'hs-special-modes-alist
+                   '(nxml-mode
+                     "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
+                     ""
+                     nil))
 
-       (use-package yaml-mode :ensure t)
+      (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
+      (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 
-       (defun custom/nxml-mode-hook ()
-         (auto-fill-mode)
-         (hs-minor-mode 1)
-         (rng-validate-mode)
-         (setq ispell-skip-html t)
-         (unify-8859-on-decoding-mode)
-         )
+      ;; TODO: integrate docbook-menu into el-get, probable relevant links below
+      ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
+      ;; http://www.emacswiki.org/emacs/DocbookXmlMode
+    #+END_SRC
+*** multiple major modes
+    #+BEGIN_SRC emacs-lisp
+      (use-package web :ensure t)
 
-       (setq nxml-auto-insert-xml-declaration-flag t)
-       (setq nxml-bind-meta-tab-to-complete-flag t)
-       (setq nxml-slash-auto-complete-flag t)
-       (setq mumamo-background-colors nil)
+      (setq mumamo-background-colors nil)
+      (setq mumamo-submode-indent-offset 4)
 
-       (push '("<\\?xml" . nxml-mode) magic-mode-alist)
+      (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
+      (add-hook 'django-html-mumamo-mode-hook
+                (lambda ()
+                  (setq django-indent-width 4)
+                  (setq sgml-basic-offset 4)))
+    #+END_SRC
+*** color helper
+    #+BEGIN_SRC emacs-lisp
+      (use-package rainbow-mode :ensure t)
+    #+END_SRC
+*** emmet mode setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package emmet-mode
+        :ensure t
+        :config
+        (progn
+          (use-package ac-emmet :ensure auto-complete)
+          (use-package helm-emmet :ensure helm)
+          (push 'html-mode ac-modes)
+          (push 'web-mode ac-modes)
+          (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+          (add-hook 'css-mode-hook 'ac-emmet-css-setup)
+          (add-hook 'web-mode-hook 'ac-emmet-html-setup)
+          (bind-key "C-j" nil emmet-mode-keymap)
+          (bind-key "<C-return>" nil emmet-mode-keymap)
+          (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
+          (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
+          (setq emmet-move-cursor-between-quotes t)
+          (add-hook 'sgml-mode-hook 'emmet-mode)
+          (add-hook 'nxml-mode-hook 'emmet-mode)
+          (add-hook 'django-mode 'emmet-mode)
+          (add-hook 'sgml-mode-hook 'emmet-mode)
+          (add-hook 'css-mode-hook 'emmet-mode)
+          (add-hook 'emmet-mode-hook
+                    (lambda () (setq emmet-indentation 2)))
+          ))
+    #+END_SRC
+*** try
+    #+BEGIN_SRC emacs-lisp :tangle no
+      ;; from FAQ at http://web-mode.org/ for smartparens
+      (defun my/web-mode-hook ()
+        (setq web-mode-enable-auto-pairing nil))
 
-       (add-to-list 'hs-special-modes-alist
-                    '(nxml-mode
-                      "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
-                      ""
-                      nil))
-
-       (setq mumamo-submode-indent-offset 4)
-
-       (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
-       (add-hook 'css-mode-hook (lambda () (rainbow-mode)))
-       (add-hook 'django-html-mumamo-mode-hook
-                 (lambda ()
-                   (setq django-indent-width 4)
-                   (setq sgml-basic-offset 4)))
-     #+END_SRC
-**** try
-     #+BEGIN_SRC emacs-lisp :tangle no
-       ;; from FAQ at http://web-mode.org/ for smartparens
-       (defun my/web-mode-hook ()
-         (setq web-mode-enable-auto-pairing nil))
-
-       (defun my/sp-web-mode-is-code-context (id action context)
-         (when (and (eq action 'insert)
-                    (not (or (get-text-property (point) 'part-side)
-                             (get-text-property (point) 'block-side))))
-           t))
-
-
-       (use-package "eldoc"
-         :diminish eldoc-mode
-         :commands turn-on-eldoc-mode
-         :defer t
-         :init
-         (progn
-               (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-               (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-               (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
-     #+END_SRC
+      (defun my/sp-web-mode-is-code-context (id action context)
+        (when (and (eq action 'insert)
+                   (not (or (get-text-property (point) 'part-side)
+                            (get-text-property (point) 'block-side))))
+          t))
+    #+END_SRC
 * clients
 ** definitions
 *** ERC
@@ -3101,6 +3116,12 @@
                         "@")
                       (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")
          ))
+
+      (defun create-restclient-sandbox ()
+        (interactive)
+        (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
+          (switch-to-buffer restbuffer)
+          (restclient-mode)))
 
       )
     #+END_SRC
@@ -3570,7 +3591,17 @@
                 ("\\.doc\\'" "abiword" (file))
                 ("\\.swf\\'" "swfdec-player" (file))
                 )))
-     #+END_SRC
+
+      (use-package term
+          :config
+          (progn
+              (add-hook 'term-exec-hook 'custom/term-exec-hook)
+              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+              (setq explicit-shell-file-name "/bin/zsh")
+              ))
+
+      (use-package notify :ensure t)
+    #+END_SRC
 *** linux traits
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
       ;; Jabber urgency hints
