@@ -450,6 +450,7 @@
      (use-package epg)
 
      (setq password-cache-expiry 7200)
+     (setq password-cache t)
    #+END_SRC
 ** local variables processing
    #+BEGIN_SRC emacs-lisp
