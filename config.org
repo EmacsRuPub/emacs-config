@@ -809,7 +809,10 @@
 
      (setq scroll-preserve-screen-position 'always)
 
-     (use-package saveplace)
+     (use-package saveplace
+         :config
+         (setq save-place-file (at-data-dir "/.emacs-places"))
+         (setq save-place t))
 
      (setq-default save-place t)
    #+END_SRC
