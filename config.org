@@ -854,7 +854,9 @@
         (use-package helm-misc)
         (use-package helm-grep)
         (use-package wgrep-helm :ensure t) ;TODO: maybe configure
-        (use-package helm-projectile :ensure t)
+        (use-package helm-projectile :ensure t
+              :config
+              (helm-projectile-on))
         (use-package helm-descbinds :ensure t)
         (use-package helm-themes :ensure t)
         (use-package helm-helm-commands :ensure t)
