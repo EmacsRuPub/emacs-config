@@ -6940,3 +6940,25 @@
 ** [[http://melpa.org/#/encourage-mode][encourage-mode - MELPA - http://melpa.org/#/encourage-mode]] [2015-12-02 Ср 23:59]                                          :emacs:try:
 ** [[https://github.com/Lindydancer/multicolumn][Lindydancer/multicolumn - https://github.com/Lindydancer/multicolumn]] [2015-12-03 Чт 20:29]                                          :emacs:try:
 ** [[https://www.reddit.com/r/emacs/comments/3ui312/multiline_configurable_polylingual_automatic/][multi-line - configurable, polylingual, automatic splitting of statements into multiple-lines : emacs - https://www.reddit.com/r/emacs/comments/3ui312/multiline_configurable_polylingual_automatic/]] [2015-12-03 Чт 20:55]                                          :emacs:try:
+** [[https://github.com/wasamasa/jammer][wasamasa/jammer - https://github.com/wasamasa/jammer]] [2015-12-07 Пн 19:16]                                          :emacs:try:
+** [[http://www.djcbsoftware.nl/code/mu/mu4e.html][djcbsoftware - http://www.djcbsoftware.nl/code/mu/mu4e.html]] [2015-12-07 Пн 20:01]                                          :emacs:try:
+** [[http://www.djcbsoftware.nl/code/mu/mu4e.html][djcbsoftware - http://www.djcbsoftware.nl/code/mu/mu4e.html]] [2015-12-07 Пн 20:03]                                          :emacs:try:
+** [[https://github.com/boyw165/history][boyw165/history - https://github.com/boyw165/history]] [2015-12-09 Ср 13:01]                                          :emacs:try:
+** [[https://github.com/wasamasa/shackle][wasamasa/shackle - https://github.com/wasamasa/shackle]] [2015-12-09 Ср 13:42]                                          :emacs:try:
+** [#B] [[https://github.com/promethial/paxedit][promethial/paxedit - https://github.com/promethial/paxedit]] [2015-12-09 Ср 16:02] :emacs:try:
+** [[https://github.com/gregsexton/origami.el][gregsexton/origami.el - https://github.com/gregsexton/origami.el]] [2015-12-09 Ср 16:08]                                          :emacs:try:
+** [[http://www.emacswiki.org/emacs/nameses][EmacsWiki: nameses - http://www.emacswiki.org/emacs/nameses]] [2015-12-09 Ср 16:08]                                          :emacs:try:
+** [[https://github.com/zk-phi/phi-grep][zk-phi/phi-grep - https://github.com/zk-phi/phi-grep]] [2015-12-09 Ср 16:10]                                          :emacs:try:
+** [[https://github.com/josteink/wsd-mode][josteink/wsd-mode - https://github.com/josteink/wsd-mode]] [2015-12-09 Ср 16:14]                                          :emacs:try:
+** [[https://www.reddit.com/r/programming/comments/3sed38/parinfer_simpler_lisp_editing/][Parinfer - simpler Lisp editing : programming - https://www.reddit.com/r/programming/comments/3sed38/parinfer_simpler_lisp_editing/]] [2015-12-09 Ср 19:13]                                          :emacs:try:
+** [[https://github.com/thierryvolpiatto/zop-to-char/][thierryvolpiatto/zop-to-char - https://github.com/thierryvolpiatto/zop-to-char/]] [2015-12-09 Ср 19:14]                                          :emacs:try:
+** [[https://github.com/joddie/pcre2el][joddie/pcre2el - https://github.com/joddie/pcre2el]] [2015-12-09 Ср 19:15]                                          :emacs:try:
+** org-expiry [2015-12-09 Ср 19:19]                                  :emacs:try:
+** bbdb or org-contacts [2015-12-09 Ср 19:20]                                          :emacs:try:
+** [[https://github.com/Malabarba/aggressive-indent-mode][Malabarba/aggressive-indent-mode - https://github.com/Malabarba/aggressive-indent-mode]] [2015-12-09 Ср 20:24]                                          :emacs:try:
+** [[https://github.com/nschum/highlight-symbol.el][nschum/highlight-symbol.el - https://github.com/nschum/highlight-symbol.el]] [2015-12-09 Ср 20:24]                                          :emacs:try:
+** [[http://workgroups2.readthedocs.org/en/latest/][Workgroups2 - Emacs session manager — Workgroups2 1.2 documentation - http://workgroups2.readthedocs.org/en/latest/]] [2015-12-09 Ср 21:11]                                          :emacs:try:
+** [[http://quantifiedawesome.com/][quantified awesome - http://quantifiedawesome.com/]] [2015-12-09 Ср 21:59]                                          :emacs:try:
+** [[https://github.com/Fuco1/free-keys][Fuco1/free-keys - https://github.com/Fuco1/free-keys]] [2015-12-09 Ср 22:02]                                          :emacs:try:
+** [[https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/][Where are the org-lookup functions? : emacs - https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/]] [2015-12-09 Ср 22:03]                                          :emacs:try:
+** [[https://github.com/jschaf/esup][jschaf/esup - https://github.com/jschaf/esup]] [2015-12-09 Ср 22:05]                                          :emacs:try:
