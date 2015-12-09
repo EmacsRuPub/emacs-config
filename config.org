@@ -1846,6 +1846,11 @@
       ;;   :config
       ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
       ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+
+      ;;TODO: consolidate all whitespaces utils
+      (use-package ws-butler
+        :commands ws-buttler-mode
+        :ensure t)
     #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp
