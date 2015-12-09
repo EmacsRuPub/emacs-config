@@ -2805,6 +2805,9 @@
       ;;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
       ;;TODO: investigate the difference between builtin and el-get versions of haskell-mode
     #+END_SRC
+**** try
+***** hindent
+***** shm
 *** python
 **** linux traits
      #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
