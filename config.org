@@ -2986,6 +2986,8 @@
     #+END_SRC
 *** perl
     #+BEGIN_SRC emacs-lisp :tangle no
+      (fset 'perl-mode 'cperl-mode)
+
       (use-package cperl
         :defer t
         :command perl-mode
@@ -2995,18 +2997,35 @@
           (setq cperl-auto-newline-after-colon t)
           (setq cperl-autoindent-on-semi t)
           (setq cperl-extra-newline-before-brace nil)
-          (setq cperl-indent-parens-as-block t)))
+          (setq cperl-indent-parens-as-block t)
+              (setq cperl-auto-newline t)
+              (setq cperl-brace-offset 0)
+              (setq cperl-close-paren-offset -4)
+              (setq cperl-continued-brace-offset 0)
+              (setq cperl-continued-statement-offset 4)
+              (setq cperl-extra-newline-before-brace-multiline nil)
+              (setq cperl-indent-level 4)
+              (setq cperl-label-offset -4)
+              (setq cperl-merge-trailing-else nil)
+              (setq cperl-tab-always-indent t)))
 
       (defun custom/perl-mode-hook ()
         (cperl-mode 1)
         (setq compile-command (concat "perl -cw " buffer-file-name))
         (setq indent-tabs-mode nil)
-        (setq tab-width 2)
-        (turn-on-eldoc-mode))
+        (setq tab-width 4)
+        (turn-on-eldoc-mode)
+          (yas-minor-mode t)
+          (setf prettify-symbols-alist '(("->" . ?→)
+                                                                       (">=" . ?≥)
+                                                                       ("<=" . ?≤)))
+          ;; ("<>" . ?≠)  ("=>" . ?⇒)
+          (prettify-symbols-mode t))
 
-      (add-hook 'perl-mode-hook 'custom/perl-mode-hook)
-      (add-hook 'perl-mode-hook 'common-hooks/prog-helpers)
-      (add-hook 'perl-mode-hook 'common-hooks/newline-hook)
+      (add-hook 'cperl-mode-hook 'custom/perl-mode-hook)
+      (add-hook 'cperl-mode-hook 'common-hooks/prog-helpers)
+      (add-hook 'cperl-mode-hook 'common-hooks/newline-hook)
+      (add-hook 'cperl-mode-hook 'ws-butler-mode)
     #+END_SRC
 *** php
     #+BEGIN_SRC emacs-lisp :tangle no
