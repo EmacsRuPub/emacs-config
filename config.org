@@ -2462,6 +2462,7 @@
           :config
           (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
           (setq magit-blame-heading-format "%H %-20a %C %s")
+          (setq magit-diff-refine-hunk t)
           (defhydra hydra-magit (:color teal :hint nil)
               "
           PROJECT: %(projectile-project-root)
