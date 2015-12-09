@@ -1306,15 +1306,16 @@
    #+END_SRC
 ** scope
 *** definitions
-    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
+**** ibuffer
+     #+BEGIN_SRC emacs-lisp
+       (define-namespace custom/
 
-     (defun ibuffer-filter-by-extname (qualifier)
-       (interactive "sFilter by extname: ")
-       (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
+       (defun ibuffer-filter-by-extname (qualifier)
+         (interactive "sFilter by extname: ")
+         (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
 
-     )
-    #+END_SRC
+       )
+     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
       (defhydra hydra-scope (:color blue)
