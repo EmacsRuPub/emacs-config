@@ -6,13 +6,13 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
+(setf (cdr (assoc "gnu" package-archives))
+      "https://elpa.gnu.org/packages/")
 (package-initialize)
 
 (mapcar
