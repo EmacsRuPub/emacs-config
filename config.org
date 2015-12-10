@@ -4013,6 +4013,11 @@
       (use-package org-linkany
         :ensure t)
 
+      (defadvice org-yank (after make-yank-writeable activate)
+          (let ((inhibit-read-only t))
+              (remove-text-properties (region-beginning) (region-end)
+                                                              '(read-only t))))
+
       (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
       (f-entries (at-org-dir)
@@ -5321,9 +5326,10 @@
     :LOGBOOK:
     - State "DONE"       from "TODO"       [2015-11-05 Чт 23:59]
     :END:
-*** GOING [#A] find out why text pasted from mentat seems to be readonly [2015-11-09 Пн 23:56] :emacs:ticket:
-    SCHEDULED: <2015-11-15 Вс>
+*** DONE [#A] find out why text pasted from mentat seems to be readonly [2015-11-09 Пн 23:56] :emacs:ticket:
+    CLOSED: [2015-12-10 Чт 17:19] SCHEDULED: <2015-12-10 Чт>
     :LOGBOOK:
+    - State "DONE"       from "GOING"      [2015-12-10 Чт 17:19]
     - State "GOING"      from "TODO"       [2015-11-12 Чт 23:27]
     :END:
 *** CANCELLED [#A] review recent orgmode customization to find out what makes org-agenda spuriously freeze emacs while trying to reschedule heading at point [2015-11-09 Пн 23:58] :emacs:ticket:
