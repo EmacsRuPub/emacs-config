@@ -5326,9 +5326,13 @@
     :LOGBOOK:
     - State "GOING"      from "TODO"       [2015-11-12 Чт 23:27]
     :END:
-*** GOING [#A] review recent orgmode customization to find out what makes org-agenda spuriously freeze emacs while trying to reschedule heading at point [2015-11-09 Пн 23:58] :emacs:ticket:
-    SCHEDULED: <2015-11-15 Вс>
+*** CANCELLED [#A] review recent orgmode customization to find out what makes org-agenda spuriously freeze emacs while trying to reschedule heading at point [2015-11-09 Пн 23:58] :emacs:ticket:
+    CLOSED: [2015-12-08 Вт 20:23] SCHEDULED: <2015-12-08 Вт>
     :LOGBOOK:
+    - State "CANCELLED"  from "GOING"      [2015-12-08 Вт 20:23] \\
+      actually there were no customization found, affecting the bug in question
+      seems there was too much outdated schedules surrounding the problem heading, but actual reason was not found
+      if the bug returns, will reraise
     - State "GOING"      from "TODO"       [2015-11-13 Пт 23:43]
     :END:
 *** CANCELLED [#A] investigate and maybe fix swoop breakage while there was some dir or file opened (have existent buffer) and then it was deleted [2015-11-10 Вт 18:45] :emacs:ticket:
@@ -6623,6 +6627,7 @@
     :END:
 ** TODO [#A] provide way for sift to choose whether it should use regexp parsing or not (search as is, like with "*all*" search string) [2015-12-02 Ср 17:20] :emacs:ticket:
    SCHEDULED: <2015-12-03 Чт>
+** TODO [#B] get rid of explicit auto-modes declaration and move to :mode clauses in {use,req}-package [2015-12-07 Пн 19:17] :emacs:ticket:
 * to try
 ** BBDB
 *** http://bbdb.sourceforge.net/
