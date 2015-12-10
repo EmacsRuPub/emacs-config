@@ -1209,7 +1209,12 @@
 
       (use-package phi-search :ensure t)
 
-      (use-package sift :ensure t)
+      (use-package sift
+        :ensure t
+        :config
+        (defadvice sift-regexp (around escape-search-term activate)
+          (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
+          ad-do-it))
 
       (use-package phi-search-mc
           :ensure t
@@ -6631,8 +6636,11 @@
     :ARCHIVE_CATEGORY: todo
     :ARCHIVE_TODO: CANCELLED
     :END:
-** TODO [#A] provide way for sift to choose whether it should use regexp parsing or not (search as is, like with "*all*" search string) [2015-12-02 Ср 17:20] :emacs:ticket:
-   SCHEDULED: <2015-12-03 Чт>
+** DONE [#A] provide way for sift to choose whether it should use regexp parsing or not (search as is, like with "*all*" search string) [2015-12-02 Ср 17:20] :emacs:ticket:
+   CLOSED: [2015-12-10 Чт 20:18] SCHEDULED: <2015-12-11 Пт>
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2015-12-10 Чт 20:18]
+   :END:
 ** TODO [#B] get rid of explicit auto-modes declaration and move to :mode clauses in {use,req}-package [2015-12-07 Пн 19:17] :emacs:ticket:
 * to try
 ** BBDB
