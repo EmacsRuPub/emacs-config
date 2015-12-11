@@ -1205,7 +1205,7 @@
       (use-package wgrep :ensure t)
 
       (use-package occur-context-resize
-          :ensure t)
+        :ensure t)
 
       (use-package phi-search :ensure t)
 
@@ -1217,10 +1217,10 @@
           ad-do-it))
 
       (use-package phi-search-mc
-          :ensure t
-          :config
-          (phi-search-mc/setup-keys)
-          (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
+        :ensure t
+        :config
+        (phi-search-mc/setup-keys)
+        (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
 
       (use-package fuzzy
         :ensure t
