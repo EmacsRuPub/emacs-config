@@ -3673,6 +3673,8 @@
                 ("\\.swf\\'" "swfdec-player" (file))
                 )))
 
+      (imagemagick-register-types)
+
       (use-package term
           :config
           (progn
