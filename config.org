@@ -3685,6 +3685,99 @@
 
       (use-package notify :ensure t)
     #+END_SRC
+*** email
+**** definitions
+     #+BEGIN_SRC emacs-lisp
+       (define-namespace custom/
+
+       (defun mu4e-view-mode-hook ()
+         (toggle-truncate-lines nil))
+
+       (defun set-from-address ()
+         "Set the From address based on the To address of the original."
+         (setq user-mail-address "aaermolov@gmail.com")
+         (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
+           (when msg
+             (setq user-mail-address
+                   (cond
+                    ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
+                     "aaermolov@gmail.com")
+                    (t "aaermolov@gmail.com"))))))
+
+       )
+     #+END_SRC
+**** setup
+     #+BEGIN_SRC emacs-lisp
+       (use-package mu4e
+         :init
+         (use-package mu4e-contrib)
+         :config
+         (setq mu4e-maildir "~/Maildir")
+         (setq mu4e-drafts-folder "/aaermolov@gmail.com/Drafts")
+         (setq mu4e-sent-folder   "/aaermolov@gmail.com/Sent")
+         (setq mu4e-trash-folder  "/archive-aaermolov@gmail.com/Trash")
+         (setq mu4e-refile-folder "/archive-aaermolov@gmail.com/Archive")
+
+         ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+         (setq mu4e-sent-messages-behavior 'delete)
+
+         (setq mu4e-html2text-command 'mu4e-shr2text)
+         (setq mu4e-view-show-images t)
+         (setq mu4e-hide-index-messages t)
+         (setq mu4e-update-interval 60)
+         (setq mu4e-confirm-quit nil)
+         (setq mu4e-headers-leave-behavior 'apply)
+         (setq mu4e-headers-auto-update t)
+         (setq mu4e-change-filenames-when-moving t)
+
+         (setq mu4e-compose-signature-auto-include nil)
+         (setq mu4e-use-fancy-chars t)
+         (setq mu4e-attachment-dir "~/Downloads")
+
+         (setq mu4e-maildir-shortcuts
+               '(("/aaermolov@gmail.com/INBOX"               . ?i)
+                 ("/aaermolov@gmail.com/Sent"                . ?s)
+                 ("/archive-aaermolov@gmail.com/Trash"       . ?t)))
+
+         ;; allow for updating mail using 'U' in the main view:
+         (setq mu4e-get-mail-command "true")
+
+         (setq mu4e-completing-read-function 'completing-read)
+
+         (setq user-mail-address "aaermolov@gmail.com")
+         (setq mu4e-compose-signature
+               (concat "regards,\n"
+                       "Alex\n"))
+
+         ;; mirrors the defaults
+         (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
+                                ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
+                                ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
+                                ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)))
+
+         (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
+         (add-hook 'mu4e-compose-pre-hook #'custom/set-from-address))
+
+       (use-package smtpmail
+         :config
+         (setq message-send-mail-function 'smtpmail-send-it)
+         (setq starttls-use-gnutls t)
+         (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
+         (setq smtpmail-auth-credentials '(("smtp.gmail.com" 587 "aaermolov@gmail.com" nil)))
+         (setq smtpmail-default-smtp-server "smtp.gmail.com")
+         (setq smtpmail-smtp-server "smtp.gmail.com")
+         (setq smtpmail-smtp-service 587)
+         (setq smtpmail-debug-info t)
+
+         ;; don't keep message buffers around
+         (setq message-kill-buffer-on-exit t))
+
+       ;;TODO: provide keybinding
+       ;;TODO: catch handy queries
+       (defhydra mu4e-hydra (:exit t :color red)
+         "Some useful mu4e bookmarks"
+         ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
+     #+END_SRC
 *** linux traits
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
       ;; Jabber urgency hints
