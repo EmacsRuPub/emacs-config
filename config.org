@@ -3155,18 +3155,27 @@
           t))
     #+END_SRC
 * clients
-** definitions
-*** ERC
+** restclient
+   #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
+
+     (defun create-restclient-sandbox ()
+       (interactive)
+       (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
+         (switch-to-buffer restbuffer)
+         (restclient-mode)))
+
+     )
+
+     (use-package restclient
+       :ensure t
+       :defer t
+       :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
+   #+END_SRC
+** ERC
+*** some handy navigation functions
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
-
-      (defun connect-slack-irc ()
-        (interactive)
-        (erc-tls
-         :server private/irc-mira-slack-server
-         :full-name private/erc-full-name
-         :nick private/irc-mira-slack-nick
-         :password private/irc-mira-slack-password))
 
       ;; FIXME should be able to quit server
       ;; being invoked from barely any buffer
@@ -3198,206 +3207,23 @@
                       (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")
          ))
 
-      (defun create-restclient-sandbox ()
-        (interactive)
-        (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
-          (switch-to-buffer restbuffer)
-          (restclient-mode)))
-
       )
     #+END_SRC
-*** jabber
-**** common
-     #+BEGIN_SRC emacs-lisp
-       (define-namespace custom/
-
-       (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
-
-       (defun jabber-muc-sendto (&optional other-window)
-         "Insert MUC participant nick into chat."
-         (interactive)
-         (end-of-buffer)
-         (insert (concat (helm-comp-read "Send to: "
-                                         (jabber-muc-nicknames)) ": ")))
-
-
-       (defvar helm-source-jabber-contact-jids
-         '((name . "Jabber Contacts")
-           (init . (lambda () (require 'jabber)))
-           (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
-           (action . (lambda (x)
-                       (jabber-chat-with
-                        (jabber-read-account)
-                        x)))))
-
-       (defun helm-jabber-chat-with (arg)
-         (interactive "P")
-         (if (= (prefix-numeric-value arg) 4)
-             (helm-other-buffer '(helm-source-jabber-contact-jids)
-                                "*jabber: chat with*")
-           (helm-other-buffer '(helm-source-jabber-contacts)
-                              "*jabber: chat with*")))
-
-       (defun jabber-abbrev ()
-         (interactive)
-         (clipboard-kill-ring-save (region-beginning) (region-end))
-         (end-of-buffer)
-         (helm-yas-complete))
-
-       )
-     #+END_SRC
-**** darwin
+*** connect to Slack IRC gate (work chats)
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
-      (defvar growl-program "/usr/local/bin/growlnotify")
-
-      (defun growl (title message &optional id)
-        (if (eq id nil)
-            (start-process "growl" " growl"
-                           growl-program title "-w")
-          (start-process "growl" " growl"
-                         growl-program title "-w" "-d" id))
-        (process-send-string " growl" message)
-        (process-send-string " growl" "\n")
-        (process-send-eof " growl"))
-
-      (defun pg-jabber-growl-notify (from buf text proposed-alert)
-        "(jabber.el hook) Notify of new Jabber chat messages via Growl"
-        (when (or jabber-message-alert-same-buffer
-                  (not (memq (selected-window) (get-buffer-window-list buf))))
-          (if (jabber-muc-sender-p from)
-              (growl (format "(PM) %s"
-                             (jabber-jid-displayname (jabber-jid-user from)))
-                     (format "%s: %s" (jabber-jid-resource from)
-                             (osd-text-to-utf-16-hex text))
-                     (format "jabber-from-%s" (jabber-jid-resource from)))
-            (growl (format "%s" (jabber-jid-displayname from))
-                   (osd-text-to-utf-16-hex text) "jabber-from-unknown"))))
-
-      ;; Same as above, for groupchats
-      (defun pg-jabber-muc-growl-notify (nick group buf text proposed-alert)
-        "(jabber.el hook) Notify of new Jabber MUC messages via Growl"
-        (when (or jabber-message-alert-same-buffer
-                  (not (memq (selected-window) (get-buffer-window-list buf))))
-          (if nick
-              (when (or jabber-muc-alert-self
-                        (not (string=
-                              nick (cdr (assoc group *jabber-active-groupchats*)))))
-                (growl (format "%s" (jabber-jid-displayname group))
-                       (format "%s: %s" nick (osd-text-to-utf-16-hex text))
-                       (format "jabber-chat-%s" (jabber-jid-displayname group))))
-            (growl (format "%s" (jabber-jid-displayname group))
-                   (osd-text-to-utf-16-hex text) "jabber-chat-unknown"))))
-
-      (defun osd-text-to-utf-16-hex (text)
-        (let* ((utext (encode-coding-string text 'utf-8))
-               (ltext (string-to-list utext)))
-          (apply #'concat
-                 (mapcar (lambda (x) (format "%c" x)) ltext))))
-
-      )
-    #+END_SRC
-**** linux
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun jabber-libnotify-message(from msg)
-        "Show MSG using libnotify"
-        (let ((process-connection-type nil))
-          (start-process "notification" nil "notify-send"
-                         "-t" jabber-libnotify-timeout
-                         "-i" jabber-libnotify-icon
-                         from msg)))
-
-      (defun jabber-libnotify-message-display (from buffer text propsed-alert)
-        (jabber-libnotify-message from text))
-
-      (defun x-urgency-hint (frame arg &optional source)
-        (let* ((wm-hints (append (x-window-property
-                                  "WM_HINTS" frame "WM_HINTS"
-                                  (if source
-                                      source
-                                    (string-to-number
-                                     (frame-parameter frame 'outer-window-id)))
-                                  nil t) nil))
-               (flags (car wm-hints)))
-          (setcar wm-hints
-                  (if arg
-                      (logior flags #x00000100)
-                    (logand flags #xFFFFFEFF)))
-          (x-change-window-property "WM_HINTS" wm-hints frame "WM_HINTS" 32 t)))
-
-      (defun jabber-urgency-hint ()
-        (let ((count (length jabber-activity-jids)))
-          (unless (= jabber-activity-jids-count count)
-            (if (zerop count)
-                (x-urgency-hint (selected-frame) nil)
-              (x-urgency-hint (selected-frame) t))
-            (setq jabber-activity-jids-count count))))
-
-      ;; depends on s
-      (defun jabber-presence-urgency-hint (who oldstatus newstatus statustext proposed-alert)
-        (when (remove-if (lambda (jid) (not (s-starts-with? (symbol-name who) jid))) *urgency-presence-jids*)
-          (custom/notify "jabber" (format "Presence changed for %s: %s"
-                                          who (if (get who 'connected) "online" "offline")))))
-
-      (defun notify (title message)
-        "Notify the user using either the dbus based API or the `growl' one"
-        (unless (and (fboundp 'dbus-register-signal)
-                     ;; avoid a bug in Emacs 24.0 under darwin
-                     (ignore-errors (require 'notifications nil t)))
-          ;; else try notify.el
-          (unless (fboundp 'notify)
-            (ignore-errors (require 'notify nil 'noerror))))
-        (condition-case nil
-            (cond
-             ;; Graphical notification
-             ((fboundp 'notifications-notify) (notifications-notify :title title
-                                                                    :app-name "emacs"
-                                                                    :body message))
-             ((fboundp 'notify)               (notify title message))
-             ;; Fallback
-             (t                               (error "Fallback to `message'")))
-          ;; when notification function errored out, degrade gracefully to `message'
-          (error (message "%s: %s" title message))))
-
-      )
-    #+END_SRC
-*** terminal
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      ;;TODO: parametrize shell for terminal
-      (defun terminal ()
-        "Switch to terminal. Launch if nonexistent."
+      (defun connect-slack-irc ()
         (interactive)
-        (if (get-buffer "*ansi-term*")
-            (switch-to-buffer "*ansi-term*")
-          (ansi-term "/bin/zsh"))
-        (get-buffer-process "*ansi-term*"))
-
-      (defalias 'tt 'terminal)
-
-      (defun comint-clear-buffer ()
-        (interactive)
-        (let ((comint-buffer-maximum-size 0))
-          (comint-truncate-buffer)))
-
-      (defun term-exec-hook ()
-        (let* ((buff (current-buffer))
-               (proc (get-buffer-process buff)))
-          (set-process-sentinel
-           proc
-           `(lambda (process event)
-              (if (string= event "finished\n")
-                  (kill-buffer ,buff))))))
+        (erc-tls
+         :server private/irc-mira-slack-server
+         :full-name private/erc-full-name
+         :nick private/irc-mira-slack-nick
+         :password private/irc-mira-slack-password))
 
       )
     #+END_SRC
-
-** setup
-*** common
+*** setup
     #+BEGIN_SRC emacs-lisp
       (use-package erc
         :defer t
@@ -3467,192 +3293,311 @@
             ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
           (global-set-key (kbd "C-q") 'hydra-erc/body)
           ))
+    #+END_SRC
+** jabber
+*** definitions
+**** common utils
+     #+BEGIN_SRC emacs-lisp
+       (define-namespace custom/
 
-      (use-package twittering-mode
-        :ensure t
-        :defer t
-        :commands twit
-        :init
-        (setq twittering-use-master-password t))
+       (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
 
-      (use-package restclient
-        :ensure t
-        :defer t
-        :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
+       (defun jabber-muc-sendto (&optional other-window)
+         "Insert MUC participant nick into chat."
+         (interactive)
+         (end-of-buffer)
+         (insert (concat (helm-comp-read "Send to: "
+                                         (jabber-muc-nicknames)) ": ")))
 
-      (use-package tramp
-        :init
-        (setq tramp-default-method "ssh")
-        :config
-        ;; Allow to use: /sudo:user@host:/path/to/file
-        (add-to-list 'tramp-default-proxies-alist
-                     '(".*" "\\`.+\\'" "/ssh:%h:")))
 
-      (use-package w3m
-        :ensure t
-        :defer t
-        :commands w3m
-        :init
-        (progn
-          (use-package w3m-search)
-          (add-hook 'w3m-display-hook
-                    (lambda (url)
-                      (rename-buffer
-                       (format "*w3m: %s*" (or w3m-current-title
-                                               w3m-current-url)) t))))
-        :config
-        (progn
-          (setq w3m-coding-system 'utf-8)
-          (setq w3m-file-coding-system 'utf-8)
-          (setq w3m-file-name-coding-system 'utf-8)
-          (setq w3m-input-coding-system 'utf-8)
-          (setq w3m-output-coding-system 'utf-8)
-          (setq w3m-terminal-coding-system 'utf-8)
-          (setq w3m-use-cookies t)
-          ;; special chars
-          (standard-display-ascii ?\200 [15])
-          (standard-display-ascii ?\201 [21])
-          (standard-display-ascii ?\202 [24])
-          (standard-display-ascii ?\203 [13])
-          (standard-display-ascii ?\204 [22])
-          (standard-display-ascii ?\205 [25])
-          (standard-display-ascii ?\206 [12])
-          (standard-display-ascii ?\210 [23])
-          (standard-display-ascii ?\211 [14])
-          (standard-display-ascii ?\212 [18])
-          (standard-display-ascii ?\214 [11])
-          (standard-display-ascii ?\222 [?\'])
-          (standard-display-ascii ?\223 [?\"])
-          (standard-display-ascii ?\224 [?\"])
-          (standard-display-ascii ?\227 " -- ")
-          (add-to-list 'w3m-search-engine-alist
-                       '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
+       (defvar helm-source-jabber-contact-jids
+         '((name . "Jabber Contacts")
+           (init . (lambda () (require 'jabber)))
+           (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
+           (action . (lambda (x)
+                       (jabber-chat-with
+                        (jabber-read-account)
+                        x)))))
 
-      (use-package google-translate
-        :ensure t
-        :defer t
-        :init
-        (progn
-          (use-package google-translate-default-ui)))
+       (defun helm-jabber-chat-with (arg)
+         (interactive "P")
+         (if (= (prefix-numeric-value arg) 4)
+             (helm-other-buffer '(helm-source-jabber-contact-jids)
+                                "*jabber: chat with*")
+           (helm-other-buffer '(helm-source-jabber-contacts)
+                              "*jabber: chat with*")))
 
-      (use-package mingus
-        :ensure t
-        :config
-        (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
-        (defhydra hydra-mingus ()
-          "
-        Control               Playlist
-        ------------------------------
-        _<up>_ volume up        _s_ show playlist
-        _<down>_ volume down    _/_ search for tracks
-        _<right>_ seek forward
-        _<left>_ seek backward
-        "
-          ("s" mingus "open mingus")
-          ("/" mingus-search "Search")
-          ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
-          ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
-          ("<right>" mingus-seek "seek forward")
-          ("<left>" mingus-seek-backward "seek backward")
-          ("q" nil "cancel"))
-        (global-set-key (kbd "C-c m") 'hydra-mingus/body))
+       (defun jabber-abbrev ()
+         (interactive)
+         (clipboard-kill-ring-save (region-beginning) (region-end))
+         (end-of-buffer)
+         (helm-yas-complete))
 
-      (use-package jabber
-        :ensure t
-        :init
-        (load "jabber-autoloads") ;; For 0.7.90 and above:
-        (use-package jabber-bookmarks)
-        (use-package jabber-autoaway)
-        :config
-        (progn
-          (when custom/use-zenburn-in-jabber
-            (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
-            (set-face-attribute 'jabber-roster-user-online nil :foreground "#dfaf8f" :weight 'bold)
-            (set-face-attribute 'jabber-roster-user-away nil :foreground "#8fb28f")
-            (set-face-attribute 'jabber-roster-user-xa nil :foreground "#7f9f7f")
-            (set-face-attribute 'jabber-roster-user-offline nil :foreground "#606060")
-            (set-face-attribute 'jabber-roster-user-dnd nil :foreground "#94bff3" :weight 'bold)
-            (set-face-attribute 'jabber-roster-user-error nil :foreground "#e37170" :background "#332323")
-            (set-face-attribute 'jabber-title-small nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-            (set-face-attribute 'jabber-title-medium nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-            (set-face-attribute 'jabber-title-large nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-            (set-face-attribute 'jabber-chat-prompt-local nil :foreground "#f0dfaf" :weight 'bold)
-            (set-face-attribute 'jabber-chat-prompt-foreign nil :foreground "#dfaf8f" :weight 'bold)
-            (set-face-attribute 'jabber-rare-time-face nil :foreground "#8fb28f"))
-          (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
+       )
+     #+END_SRC
+**** darwin
+    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
+      (define-namespace custom/
 
-          ;; Message alert hooks
-          (define-jabber-alert echo "Show a message in the echo area"
-            (lambda (msg)
-              (unless (minibuffer-prompt)
-                (message "%s" msg))))
+      (defvar growl-program "/usr/local/bin/growlnotify")
 
-          (defun my-jabber-connect-hook (jc)
-            (jabber-send-presence "" "I'm online" 10)
-            (let* ((state-data (fsm-get-state-data jc))
-                   (server (plist-get state-data :server)))
-              (message "%s" server)
-              ))
-          (defhydra hydra-jabber ()
-            "
-        ^insert^         ^navigate^
-        -------------------------------------------------
-        _8_ :-*          _r_oster
-        _l_ *IN LOVE*    _s_witch to recently active
-        _y_ :-[          _j_ump to contact
-        _t_ (c)          open _m_uc
-        _a_bbreviation
-        "
-            ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
-            ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
-            ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
-            ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
-            ("a" custom/jabber-abbrev)
-            ("r" jabber-switch-to-roster-buffer)
-            ("s" jabber-activity-switch-to :color blue)
-            ("j" custom/helm-jabber-chat-with)
-            ("m" custom/jabber-muc-sendto)
-            ;;TODO: move other insertions here, for example, current time, etc.
-            ("q" nil "cancel"))
-          (global-set-key (kbd "<f6>") 'hydra-jabber/body)
-          (setq fsm-debug nil)
-          (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
-          (setq jabber-account-list custom/jabber-account-list)
-          (setq jabber-alert-info-message-hooks 'jabber-info-echo)
-          (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
-          (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
-          (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
-          (setq jabber-auto-reconnect t)
-          (setq jabber-backlog-number 100)
-          (setq jabber-chat-buffer-format "*-jc-%n-*")
-          (setq jabber-groupchat-buffer-format "*-jg-%n-*")
-          (setq jabber-history-dir custom/jabber-history-dir)
-          (setq jabber-history-enabled t)
-          (setq jabber-mode-line-mode t)
-          (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
-          (setq jabber-nickname (capitalize global-username))
-          (setq jabber-rare-time-format "%e %b %Y %H:00")
-          (setq jabber-resource custom/jabber-resource)
-          (setq jabber-roster-buffer "*-jroster-*")
-          (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
-          (setq jabber-use-global-history nil)
-          (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
-          (add-hook 'jabber-chat-mode-hook 'goto-address)
-          (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
-          (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method)))
-          ))
+      (defun growl (title message &optional id)
+        (if (eq id nil)
+            (start-process "growl" " growl"
+                           growl-program title "-w")
+          (start-process "growl" " growl"
+                         growl-program title "-w" "-d" id))
+        (process-send-string " growl" message)
+        (process-send-string " growl" "\n")
+        (process-send-eof " growl"))
 
-      (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
+      (defun pg-jabber-growl-notify (from buf text proposed-alert)
+        "(jabber.el hook) Notify of new Jabber chat messages via Growl"
+        (when (or jabber-message-alert-same-buffer
+                  (not (memq (selected-window) (get-buffer-window-list buf))))
+          (if (jabber-muc-sender-p from)
+              (growl (format "(PM) %s"
+                             (jabber-jid-displayname (jabber-jid-user from)))
+                     (format "%s: %s" (jabber-jid-resource from)
+                             (osd-text-to-utf-16-hex text))
+                     (format "jabber-from-%s" (jabber-jid-resource from)))
+            (growl (format "%s" (jabber-jid-displayname from))
+                   (osd-text-to-utf-16-hex text) "jabber-from-unknown"))))
 
-      (use-package jenkins
-        :ensure t
-        :config
-        (setq jenkins-api-token private/jenkins-api-token)
-        (setq jenkins-hostname private/jenkins-hostname)
-        (setq jenkins-username private/jenkins-username))
+      ;; Same as above, for groupchats
+      (defun pg-jabber-muc-growl-notify (nick group buf text proposed-alert)
+        "(jabber.el hook) Notify of new Jabber MUC messages via Growl"
+        (when (or jabber-message-alert-same-buffer
+                  (not (memq (selected-window) (get-buffer-window-list buf))))
+          (if nick
+              (when (or jabber-muc-alert-self
+                        (not (string=
+                              nick (cdr (assoc group *jabber-active-groupchats*)))))
+                (growl (format "%s" (jabber-jid-displayname group))
+                       (format "%s: %s" nick (osd-text-to-utf-16-hex text))
+                       (format "jabber-chat-%s" (jabber-jid-displayname group))))
+            (growl (format "%s" (jabber-jid-displayname group))
+                   (osd-text-to-utf-16-hex text) "jabber-chat-unknown"))))
 
-      (use-package ansi-color)
+      (defun osd-text-to-utf-16-hex (text)
+        (let* ((utext (encode-coding-string text 'utf-8))
+               (ltext (string-to-list utext)))
+          (apply #'concat
+                 (mapcar (lambda (x) (format "%c" x)) ltext))))
 
+      )
+    #+END_SRC
+**** linux
+    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
+      (define-namespace custom/
+
+      (defun jabber-libnotify-message(from msg)
+        "Show MSG using libnotify"
+        (let ((process-connection-type nil))
+          (start-process "notification" nil "notify-send"
+                         "-t" jabber-libnotify-timeout
+                         "-i" jabber-libnotify-icon
+                         from msg)))
+
+      (defun jabber-libnotify-message-display (from buffer text propsed-alert)
+        (jabber-libnotify-message from text))
+
+      (defun x-urgency-hint (frame arg &optional source)
+        (let* ((wm-hints (append (x-window-property
+                                  "WM_HINTS" frame "WM_HINTS"
+                                  (if source
+                                      source
+                                    (string-to-number
+                                     (frame-parameter frame 'outer-window-id)))
+                                  nil t) nil))
+               (flags (car wm-hints)))
+          (setcar wm-hints
+                  (if arg
+                      (logior flags #x00000100)
+                    (logand flags #xFFFFFEFF)))
+          (x-change-window-property "WM_HINTS" wm-hints frame "WM_HINTS" 32 t)))
+
+      (defun jabber-urgency-hint ()
+        (let ((count (length jabber-activity-jids)))
+          (unless (= jabber-activity-jids-count count)
+            (if (zerop count)
+                (x-urgency-hint (selected-frame) nil)
+              (x-urgency-hint (selected-frame) t))
+            (setq jabber-activity-jids-count count))))
+
+      ;; depends on s
+      (defun jabber-presence-urgency-hint (who oldstatus newstatus statustext proposed-alert)
+        (when (remove-if (lambda (jid) (not (s-starts-with? (symbol-name who) jid))) *urgency-presence-jids*)
+          (custom/notify "jabber" (format "Presence changed for %s: %s"
+                                          who (if (get who 'connected) "online" "offline")))))
+
+      (defun notify (title message)
+        "Notify the user using either the dbus based API or the `growl' one"
+        (unless (and (fboundp 'dbus-register-signal)
+                     ;; avoid a bug in Emacs 24.0 under darwin
+                     (ignore-errors (require 'notifications nil t)))
+          ;; else try notify.el
+          (unless (fboundp 'notify)
+            (ignore-errors (require 'notify nil 'noerror))))
+        (condition-case nil
+            (cond
+             ;; Graphical notification
+             ((fboundp 'notifications-notify) (notifications-notify :title title
+                                                                    :app-name "emacs"
+                                                                    :body message))
+             ((fboundp 'notify)               (notify title message))
+             ;; Fallback
+             (t                               (error "Fallback to `message'")))
+          ;; when notification function errored out, degrade gracefully to `message'
+          (error (message "%s: %s" title message))))
+
+      )
+
+      ;; Jabber urgency hints
+      (defvar jabber-activity-jids-count 0)
+      (defvar jabber-libnotify-icon ""
+        "*Icon to be used on the notification pop-up. Default is empty")
+      (defvar jabber-libnotify-timeout "7000"
+        "*Specifies the timeout of the pop up window in millisecond")
+    #+END_SRC
+*** setup
+**** common
+     #+BEGIN_SRC emacs-lisp
+       (use-package jabber
+         :ensure t
+         :init
+         (load "jabber-autoloads") ;; For 0.7.90 and above:
+         (use-package jabber-bookmarks)
+         (use-package jabber-autoaway)
+         :config
+         (progn
+           (when custom/use-zenburn-in-jabber
+             (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
+             (set-face-attribute 'jabber-roster-user-online nil :foreground "#dfaf8f" :weight 'bold)
+             (set-face-attribute 'jabber-roster-user-away nil :foreground "#8fb28f")
+             (set-face-attribute 'jabber-roster-user-xa nil :foreground "#7f9f7f")
+             (set-face-attribute 'jabber-roster-user-offline nil :foreground "#606060")
+             (set-face-attribute 'jabber-roster-user-dnd nil :foreground "#94bff3" :weight 'bold)
+             (set-face-attribute 'jabber-roster-user-error nil :foreground "#e37170" :background "#332323")
+             (set-face-attribute 'jabber-title-small nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+             (set-face-attribute 'jabber-title-medium nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+             (set-face-attribute 'jabber-title-large nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+             (set-face-attribute 'jabber-chat-prompt-local nil :foreground "#f0dfaf" :weight 'bold)
+             (set-face-attribute 'jabber-chat-prompt-foreign nil :foreground "#dfaf8f" :weight 'bold)
+             (set-face-attribute 'jabber-rare-time-face nil :foreground "#8fb28f"))
+           (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
+
+           ;; Message alert hooks
+           (define-jabber-alert echo "Show a message in the echo area"
+             (lambda (msg)
+               (unless (minibuffer-prompt)
+                 (message "%s" msg))))
+
+           (defun my-jabber-connect-hook (jc)
+             (jabber-send-presence "" "I'm online" 10)
+             (let* ((state-data (fsm-get-state-data jc))
+                    (server (plist-get state-data :server)))
+               (message "%s" server)
+               ))
+           (defhydra hydra-jabber ()
+             "
+         ^insert^         ^navigate^
+         -------------------------------------------------
+         _8_ :-*          _r_oster
+         _l_ *IN LOVE*    _s_witch to recently active
+         _y_ :-[          _j_ump to contact
+         _t_ (c)          open _m_uc
+         _a_bbreviation
+         "
+             ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
+             ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
+             ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
+             ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
+             ("a" custom/jabber-abbrev)
+             ("r" jabber-switch-to-roster-buffer)
+             ("s" jabber-activity-switch-to :color blue)
+             ("j" custom/helm-jabber-chat-with)
+             ("m" custom/jabber-muc-sendto)
+             ;;TODO: move other insertions here, for example, current time, etc.
+             ("q" nil "cancel"))
+           (global-set-key (kbd "<f6>") 'hydra-jabber/body)
+           (setq fsm-debug nil)
+           (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
+           (setq jabber-account-list custom/jabber-account-list)
+           (setq jabber-alert-info-message-hooks 'jabber-info-echo)
+           (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
+           (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
+           (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
+           (setq jabber-auto-reconnect t)
+           (setq jabber-backlog-number 100)
+           (setq jabber-chat-buffer-format "*-jc-%n-*")
+           (setq jabber-groupchat-buffer-format "*-jg-%n-*")
+           (setq jabber-history-dir custom/jabber-history-dir)
+           (setq jabber-history-enabled t)
+           (setq jabber-mode-line-mode t)
+           (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
+           (setq jabber-nickname (capitalize global-username))
+           (setq jabber-rare-time-format "%e %b %Y %H:00")
+           (setq jabber-resource custom/jabber-resource)
+           (setq jabber-roster-buffer "*-jroster-*")
+           (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
+           (setq jabber-use-global-history nil)
+           (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
+           (add-hook 'jabber-chat-mode-hook 'goto-address)
+           (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
+           (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method)))
+           ))
+     #+END_SRC
+**** darwin
+     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
+       ;; Make jabber.el notify through growl when I get a new message
+       (setq jabber-message-alert-same-buffer nil)
+       (setq jabber-message-alert-same-buffer t)
+       (add-hook 'jabber-alert-message-hooks 'custom/pg-jabber-growl-notify)
+       (add-hook 'jabber-alert-muc-hooks 'custom/pg-jabber-muc-growl-notify)
+     #+END_SRC
+**** linux
+     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
+       ;; Jabber urgency hints
+       (add-hook 'jabber-activity-update-hook 'custom/jabber-urgency-hint)
+       (add-hook 'jabber-alert-presence-hooks 'custom/jabber-presence-urgency-hint)
+       (add-to-list 'jabber-alert-message-hooks
+                    'custom/jabber-libnotify-message-display)
+     #+END_SRC
+** terminal
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      ;;TODO: parametrize shell for terminal
+      (defun terminal ()
+        "Switch to terminal. Launch if nonexistent."
+        (interactive)
+        (if (get-buffer "*ansi-term*")
+            (switch-to-buffer "*ansi-term*")
+          (ansi-term "/bin/zsh"))
+        (get-buffer-process "*ansi-term*"))
+
+      (defalias 'tt 'terminal)
+
+      (defun comint-clear-buffer ()
+        (interactive)
+        (let ((comint-buffer-maximum-size 0))
+          (comint-truncate-buffer)))
+
+      (defun term-exec-hook ()
+        (let* ((buff (current-buffer))
+               (proc (get-buffer-process buff)))
+          (set-process-sentinel
+           proc
+           `(lambda (process event)
+              (if (string= event "finished\n")
+                  (kill-buffer ,buff))))))
+
+      )
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
       (use-package eshell
         :config
         (progn
@@ -3661,144 +3606,228 @@
                                         eshell-last-output-end))
           (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
 
-      (use-package openwith
-        :ensure t
-        :config
-        (setq openwith-associations
-              '(("\\.pdf\\'" "zathura" (file))
-                ("\\.djvu\\'" "zathura" (file))
-                ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
-                ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
-                ("\\.doc\\'" "abiword" (file))
-                ("\\.swf\\'" "swfdec-player" (file))
-                )))
-
-      (imagemagick-register-types)
-
       (use-package term
-          :config
-          (progn
-              (add-hook 'term-exec-hook 'custom/term-exec-hook)
-              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
-              (setq explicit-shell-file-name "/bin/zsh")
-              ))
+        :config
+        (progn
+          (add-hook 'term-exec-hook 'custom/term-exec-hook)
+          (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+          (setq explicit-shell-file-name "/bin/zsh")
+          ))
 
-      (use-package notify :ensure t)
+      (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
     #+END_SRC
-*** email
-**** definitions
-     #+BEGIN_SRC emacs-lisp
-       (define-namespace custom/
+** Twitter
+   #+BEGIN_SRC emacs-lisp
+     (use-package twittering-mode
+       :ensure t
+       :defer t
+       :commands twit
+       :init
+       (setq twittering-use-master-password t))
+   #+END_SRC
+** internal browser (w3m/eww)
+   #+BEGIN_SRC emacs-lisp
+     (use-package w3m
+       :ensure t
+       :defer t
+       :commands w3m
+       :init
+       (progn
+         (use-package w3m-search)
+         (add-hook 'w3m-display-hook
+                   (lambda (url)
+                     (rename-buffer
+                      (format "*w3m: %s*" (or w3m-current-title
+                                              w3m-current-url)) t))))
+       :config
+       (progn
+         (setq w3m-coding-system 'utf-8)
+         (setq w3m-file-coding-system 'utf-8)
+         (setq w3m-file-name-coding-system 'utf-8)
+         (setq w3m-input-coding-system 'utf-8)
+         (setq w3m-output-coding-system 'utf-8)
+         (setq w3m-terminal-coding-system 'utf-8)
+         (setq w3m-use-cookies t)
+         ;; special chars
+         (standard-display-ascii ?\200 [15])
+         (standard-display-ascii ?\201 [21])
+         (standard-display-ascii ?\202 [24])
+         (standard-display-ascii ?\203 [13])
+         (standard-display-ascii ?\204 [22])
+         (standard-display-ascii ?\205 [25])
+         (standard-display-ascii ?\206 [12])
+         (standard-display-ascii ?\210 [23])
+         (standard-display-ascii ?\211 [14])
+         (standard-display-ascii ?\212 [18])
+         (standard-display-ascii ?\214 [11])
+         (standard-display-ascii ?\222 [?\'])
+         (standard-display-ascii ?\223 [?\"])
+         (standard-display-ascii ?\224 [?\"])
+         (standard-display-ascii ?\227 " -- ")
+         (add-to-list 'w3m-search-engine-alist
+                      '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
+   #+END_SRC
+** MPD
+   #+BEGIN_SRC emacs-lisp
+     (use-package mingus
+       :ensure t
+       :config
+       (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
+       (defhydra hydra-mingus ()
+         "
+       Control               Playlist
+       ------------------------------
+       _<up>_ volume up        _s_ show playlist
+       _<down>_ volume down    _/_ search for tracks
+       _<right>_ seek forward
+       _<left>_ seek backward
+       "
+         ("s" mingus "open mingus")
+         ("/" mingus-search "Search")
+         ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
+         ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
+         ("<right>" mingus-seek "seek forward")
+         ("<left>" mingus-seek-backward "seek backward")
+         ("q" nil "cancel"))
+       (global-set-key (kbd "C-c m") 'hydra-mingus/body))
+   #+END_SRC
+** open files in external apps
+   #+BEGIN_SRC emacs-lisp
+     (use-package openwith
+       :ensure t
+       :config
+       (setq openwith-associations
+             '(("\\.pdf\\'" "zathura" (file))
+               ("\\.djvu\\'" "zathura" (file))
+               ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
+               ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
+               ("\\.doc\\'" "abiword" (file))
+               ("\\.swf\\'" "swfdec-player" (file))
+               )))
+   #+END_SRC
+** email
+*** definitions
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
 
-       (defun mu4e-view-mode-hook ()
-         (toggle-truncate-lines nil))
+      (defun mu4e-view-mode-hook ()
+        (toggle-truncate-lines nil))
 
-       (defun set-from-address ()
-         "Set the From address based on the To address of the original."
-         (setq user-mail-address "aaermolov@gmail.com")
-         (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
-           (when msg
-             (setq user-mail-address
-                   (cond
-                    ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
-                     "aaermolov@gmail.com")
-                    (t "aaermolov@gmail.com"))))))
+      (defun set-from-address ()
+        "Set the From address based on the To address of the original."
+        (setq user-mail-address "aaermolov@gmail.com")
+        (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
+          (when msg
+            (setq user-mail-address
+                  (cond
+                   ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
+                    "aaermolov@gmail.com")
+                   (t "aaermolov@gmail.com"))))))
 
-       )
-     #+END_SRC
-**** setup
-     #+BEGIN_SRC emacs-lisp
-       (use-package mu4e
-         :init
-         (use-package mu4e-contrib)
-         :config
-         (setq mu4e-maildir "~/Maildir")
-         (setq mu4e-drafts-folder "/aaermolov@gmail.com/Drafts")
-         (setq mu4e-sent-folder   "/aaermolov@gmail.com/Sent")
-         (setq mu4e-trash-folder  "/archive-aaermolov@gmail.com/Trash")
-         (setq mu4e-refile-folder "/archive-aaermolov@gmail.com/Archive")
-
-         ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-         (setq mu4e-sent-messages-behavior 'delete)
-
-         (setq mu4e-html2text-command 'mu4e-shr2text)
-         (setq mu4e-view-show-images t)
-         (setq mu4e-hide-index-messages t)
-         (setq mu4e-update-interval 60)
-         (setq mu4e-confirm-quit nil)
-         (setq mu4e-headers-leave-behavior 'apply)
-         (setq mu4e-headers-auto-update t)
-         (setq mu4e-change-filenames-when-moving t)
-
-         (setq mu4e-compose-signature-auto-include nil)
-         (setq mu4e-use-fancy-chars t)
-         (setq mu4e-attachment-dir "~/Downloads")
-
-         (setq mu4e-maildir-shortcuts
-               '(("/aaermolov@gmail.com/INBOX"               . ?i)
-                 ("/aaermolov@gmail.com/Sent"                . ?s)
-                 ("/archive-aaermolov@gmail.com/Trash"       . ?t)))
-
-         ;; allow for updating mail using 'U' in the main view:
-         (setq mu4e-get-mail-command "true")
-
-         (setq mu4e-completing-read-function 'completing-read)
-
-         (setq user-mail-address "aaermolov@gmail.com")
-         (setq mu4e-compose-signature
-               (concat "regards,\n"
-                       "Alex\n"))
-
-         ;; mirrors the defaults
-         (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
-                                ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
-                                ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
-                                ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)))
-
-         (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
-         (add-hook 'mu4e-compose-pre-hook #'custom/set-from-address))
-
-       (use-package smtpmail
-         :config
-         (setq message-send-mail-function 'smtpmail-send-it)
-         (setq starttls-use-gnutls t)
-         (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
-         (setq smtpmail-auth-credentials '(("smtp.gmail.com" 587 "aaermolov@gmail.com" nil)))
-         (setq smtpmail-default-smtp-server "smtp.gmail.com")
-         (setq smtpmail-smtp-server "smtp.gmail.com")
-         (setq smtpmail-smtp-service 587)
-         (setq smtpmail-debug-info t)
-
-         ;; don't keep message buffers around
-         (setq message-kill-buffer-on-exit t))
-
-       ;;TODO: provide keybinding
-       ;;TODO: catch handy queries
-       (defhydra mu4e-hydra (:exit t :color red)
-         "Some useful mu4e bookmarks"
-         ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
-     #+END_SRC
-*** linux traits
-    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
-      ;; Jabber urgency hints
-      (defvar jabber-activity-jids-count 0)
-      (add-hook 'jabber-activity-update-hook 'custom/jabber-urgency-hint)
-      (add-hook 'jabber-alert-presence-hooks 'custom/jabber-presence-urgency-hint)
-      (defvar jabber-libnotify-icon ""
-        "*Icon to be used on the notification pop-up. Default is empty")
-      (defvar jabber-libnotify-timeout "7000"
-        "*Specifies the timeout of the pop up window in millisecond")
-      (add-to-list 'jabber-alert-message-hooks
-                   'custom/jabber-libnotify-message-display)
+      )
     #+END_SRC
-*** darwin traits
-    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
-      ;; Make jabber.el notify through growl when I get a new message
-      (setq jabber-message-alert-same-buffer nil)
-      (add-hook 'jabber-alert-message-hooks 'custom/pg-jabber-growl-notify)
-      (add-hook 'jabber-alert-muc-hooks 'custom/pg-jabber-muc-growl-notify)
-      (setq jabber-message-alert-same-buffer t)
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (use-package mu4e
+        :init
+        (use-package mu4e-contrib)
+        :config
+        (setq mu4e-maildir "~/Maildir")
+        (setq mu4e-drafts-folder "/aaermolov@gmail.com/Drafts")
+        (setq mu4e-sent-folder   "/aaermolov@gmail.com/Sent")
+        (setq mu4e-trash-folder  "/archive-aaermolov@gmail.com/Trash")
+        (setq mu4e-refile-folder "/archive-aaermolov@gmail.com/Archive")
+
+        ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+        (setq mu4e-sent-messages-behavior 'delete)
+
+        (setq mu4e-html2text-command 'mu4e-shr2text)
+        (setq mu4e-view-show-images t)
+        (setq mu4e-hide-index-messages t)
+        (setq mu4e-update-interval 60)
+        (setq mu4e-confirm-quit nil)
+        (setq mu4e-headers-leave-behavior 'apply)
+        (setq mu4e-headers-auto-update t)
+        (setq mu4e-change-filenames-when-moving t)
+
+        (setq mu4e-compose-signature-auto-include nil)
+        (setq mu4e-use-fancy-chars t)
+        (setq mu4e-attachment-dir "~/Downloads")
+
+        (setq mu4e-maildir-shortcuts
+              '(("/aaermolov@gmail.com/INBOX"               . ?i)
+                ("/aaermolov@gmail.com/Sent"                . ?s)
+                ("/archive-aaermolov@gmail.com/Trash"       . ?t)))
+
+        ;; allow for updating mail using 'U' in the main view:
+        (setq mu4e-get-mail-command "true")
+
+        (setq mu4e-completing-read-function 'completing-read)
+
+        (setq user-mail-address "aaermolov@gmail.com")
+        (setq mu4e-compose-signature
+              (concat "regards,\n"
+                      "Alex\n"))
+
+        ;; mirrors the defaults
+        (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
+                               ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
+                               ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
+                               ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)))
+
+        (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
+        (add-hook 'mu4e-compose-pre-hook #'custom/set-from-address))
+
+      (use-package smtpmail
+        :config
+        (setq message-send-mail-function 'smtpmail-send-it)
+        (setq starttls-use-gnutls t)
+        (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
+        (setq smtpmail-auth-credentials '(("smtp.gmail.com" 587 "aaermolov@gmail.com" nil)))
+        (setq smtpmail-default-smtp-server "smtp.gmail.com")
+        (setq smtpmail-smtp-server "smtp.gmail.com")
+        (setq smtpmail-smtp-service 587)
+        (setq smtpmail-debug-info t)
+
+        ;; don't keep message buffers around
+        (setq message-kill-buffer-on-exit t))
+
+      ;;TODO: provide keybinding
+      ;;TODO: catch handy queries
+      (defhydra mu4e-hydra (:exit t :color red)
+        "Some useful mu4e bookmarks"
+        ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
     #+END_SRC
+** various useful packages
+   #+BEGIN_SRC emacs-lisp
+     (use-package tramp
+       :init
+       (setq tramp-default-method "ssh")
+       :config
+       ;; Allow to use: /sudo:user@host:/path/to/file
+       (add-to-list 'tramp-default-proxies-alist
+                    '(".*" "\\`.+\\'" "/ssh:%h:")))
+
+     (use-package google-translate
+       :ensure t
+       :defer t
+       :init
+       (progn
+         (use-package google-translate-default-ui)))
+
+     (use-package jenkins
+       :ensure t
+       :config
+       (setq jenkins-api-token private/jenkins-api-token)
+       (setq jenkins-hostname private/jenkins-hostname)
+       (setq jenkins-username private/jenkins-username))
+
+     (use-package ansi-color)
+
+     (imagemagick-register-types)
+
+     (use-package notify :ensure t)
+   #+END_SRC
 * pim
 ** common
    #+BEGIN_SRC emacs-lisp
