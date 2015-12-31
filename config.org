@@ -3707,97 +3707,177 @@
    #+END_SRC
 ** email
 *** definitions
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+**** utils
+     #+BEGIN_SRC emacs-lisp
+       (define-namespace custom/
 
-      (defun mu4e-view-mode-hook ()
-        (toggle-truncate-lines nil))
+       (defun mu4e-view-mode-hook ()
+         (toggle-truncate-lines nil))
 
-      (defun set-from-address ()
-        "Set the From address based on the To address of the original."
-        (setq user-mail-address "aaermolov@gmail.com")
-        (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
-          (when msg
-            (setq user-mail-address
-                  (cond
-                   ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
-                    "aaermolov@gmail.com")
-                   (t "aaermolov@gmail.com"))))))
+       (defun set-from-address ()
+         "Set the From address based on the To address of the original."
+         (setq user-mail-address "aaermolov@gmail.com")
+         (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
+           (when msg
+             (setq user-mail-address
+                   (cond
+                    ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
+                     "aaermolov@gmail.com")
+                    (t "aaermolov@gmail.com"))))))
 
-      )
-    #+END_SRC
+       )
+     #+END_SRC
+**** multiple accounts
+     #+BEGIN_SRC emacs-lisp
+       (define-namespace custom/
+
+       (defvar gmail-accounts '("aaermolov@gmail.com" "aermolov@mirantis.com"))
+
+       (defun gmail-maildir (email folder &optional from-archive)
+         (let ((prefix "/"))
+           (when from-archive
+             (setf prefix "/archive-"))
+           (concat prefix email "/" folder)))
+
+       (defun mu4e-sibling-folder (maildir folder &optional from-archive)
+         (gmail-maildir (mu4e-maildir-to-account maildir) folder
+                        from-archive))
+
+       (defun mu4e-maildir-to-account (maildir)
+         (caddr (s-match "^/\\(archive-\\)?\\([^/]+?\\)/" maildir)))
+
+       (defun mu4e-find-account-from-parent ()
+         (awhen mu4e-compose-parent-message
+           (message "%s" it)
+           (-first (lambda (account) (mu4e-message-contact-field-matches it :to account)) custom/gmail-accounts)))
+
+       (defun make-maildir-mu4e-context (account)
+         (make-mu4e-context
+          :name account
+          :match-func `(lambda (msg)
+                        (when msg
+                          (s-equals? ,account (custom/mu4e-maildir-to-account
+                                              (mu4e-message-field msg :maildir)))))
+          :vars `((mail-reply-to . ,account)
+                  (user-mail-address . ,account)
+                  (smtpmail-smtp-user . ,account))))
+
+       (defun make-mu4e-contexts ()
+         (-map 'custom/make-maildir-mu4e-context custom/gmail-accounts))
+
+       (defun mu4e-choose-account ()
+         (helm-comp-read "Select an account: " custom/gmail-accounts :must-match t))
+
+       (defun mu4e-read-option (prompt options)
+         (helm-comp-read prompt
+                         (-map (lambda (option)
+                                 (cons (replace-regexp-in-string "^\\(.\\)" "[\\1]" (car option))
+                                       (cdr option)))
+                               options)))
+
+       )
+     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
-      (use-package mu4e
-        :init
-        (use-package mu4e-contrib)
-        :config
-        (setq mu4e-maildir "~/Maildir")
-        (setq mu4e-drafts-folder "/aaermolov@gmail.com/Drafts")
-        (setq mu4e-sent-folder   "/aaermolov@gmail.com/Sent")
-        (setq mu4e-trash-folder  "/archive-aaermolov@gmail.com/Trash")
-        (setq mu4e-refile-folder "/archive-aaermolov@gmail.com/Archive")
+**** mu4e
+     #+BEGIN_SRC emacs-lisp
+       (use-package mu4e
+         :init
+         (use-package mu4e-contrib)
+         (use-package mu4e-context)
+         :config
+         ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+         (setq mu4e-sent-messages-behavior 'delete)
 
-        ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-        (setq mu4e-sent-messages-behavior 'delete)
+         (setq mu4e-html2text-command 'mu4e-shr2text)
+         (setq mu4e-view-show-images t)
+         (setq mu4e-hide-index-messages t)
+         (setq mu4e-update-interval 60)
+         (setq mu4e-confirm-quit nil)
+         (setq mu4e-headers-leave-behavior 'apply)
+         (setq mu4e-headers-auto-update t)
+         (setq mu4e-change-filenames-when-moving t)
+         (setq mu4e-user-mail-address-list custom/gmail-accounts)
 
-        (setq mu4e-html2text-command 'mu4e-shr2text)
-        (setq mu4e-view-show-images t)
-        (setq mu4e-hide-index-messages t)
-        (setq mu4e-update-interval 60)
-        (setq mu4e-confirm-quit nil)
-        (setq mu4e-headers-leave-behavior 'apply)
-        (setq mu4e-headers-auto-update t)
-        (setq mu4e-change-filenames-when-moving t)
+         (setq mu4e-compose-signature-auto-include nil)
+         (setq mu4e-use-fancy-chars t)
+         (setq mu4e-attachment-dir "~/Downloads")
 
-        (setq mu4e-compose-signature-auto-include nil)
-        (setq mu4e-use-fancy-chars t)
-        (setq mu4e-attachment-dir "~/Downloads")
+         (setq mu4e-maildir-shortcuts
+               '(("/aaermolov@gmail.com/INBOX"               . ?i)
+                 ("/aaermolov@gmail.com/Sent"                . ?s)
+                 ("/archive-aaermolov@gmail.com/Trash"       . ?t)))
 
-        (setq mu4e-maildir-shortcuts
-              '(("/aaermolov@gmail.com/INBOX"               . ?i)
-                ("/aaermolov@gmail.com/Sent"                . ?s)
-                ("/archive-aaermolov@gmail.com/Trash"       . ?t)))
+         ;; allow for updating mail using 'U' in the main view:
+         (setq mu4e-get-mail-command "true")
 
-        ;; allow for updating mail using 'U' in the main view:
-        (setq mu4e-get-mail-command "true")
+         (setq mu4e-completing-read-function 'completing-read)
 
-        (setq mu4e-completing-read-function 'completing-read)
+         (setq user-mail-address "aaermolov@gmail.com")
+         (setq mu4e-compose-signature
+               (concat "regards,\n"
+                       "Alex\n"))
 
-        (setq user-mail-address "aaermolov@gmail.com")
-        (setq mu4e-compose-signature
-              (concat "regards,\n"
-                      "Alex\n"))
+         ;; mirrors the defaults
+         (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
+                                ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
+                                ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
+                                ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)))
 
-        ;; mirrors the defaults
-        (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
-                               ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
-                               ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
-                               ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)))
+         (eval-after-load "mu4e"
+           '(progn
+              (setf mu4e-contexts (custom/make-mu4e-contexts))
+              (fset 'mu4e-read-option 'custom/mu4e-read-option)))
 
-        (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
-        (add-hook 'mu4e-compose-pre-hook #'custom/set-from-address))
+         (setf mu4e-maildir       "~/Maildir"
+               mu4e-refile-folder (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Archive" t))
+               mu4e-sent-folder   (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Sent"))
+               mu4e-drafts-folder (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Drafts"))
+               mu4e-trash-folder  (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Trash" t)))
 
-      (use-package smtpmail
-        :config
-        (setq message-send-mail-function 'smtpmail-send-it)
-        (setq starttls-use-gnutls t)
-        (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
-        (setq smtpmail-auth-credentials '(("smtp.gmail.com" 587 "aaermolov@gmail.com" nil)))
-        (setq smtpmail-default-smtp-server "smtp.gmail.com")
-        (setq smtpmail-smtp-server "smtp.gmail.com")
-        (setq smtpmail-smtp-service 587)
-        (setq smtpmail-debug-info t)
+         (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
+         (add-hook 'mu4e-compose-pre-hook #'custom/set-from-address))
+     #+END_SRC
+**** send mail
+     #+BEGIN_SRC emacs-lisp
+       (use-package smtpmail
+         :config
+         (setq message-send-mail-function 'smtpmail-send-it)
+         (setq starttls-use-gnutls t)
+         (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
+         (setq smtpmail-auth-credentials '(("smtp.gmail.com" 587 "aaermolov@gmail.com" nil)))
+         (setq smtpmail-default-smtp-server "smtp.gmail.com")
+         (setq smtpmail-smtp-server "smtp.gmail.com")
+         (setq smtpmail-smtp-service 587)
+         (setq smtpmail-debug-info t)
 
-        ;; don't keep message buffers around
-        (setq message-kill-buffer-on-exit t))
+         ;; don't keep message buffers around
+         (setq message-kill-buffer-on-exit t))
 
-      ;;TODO: provide keybinding
-      ;;TODO: catch handy queries
-      (defhydra mu4e-hydra (:exit t :color red)
-        "Some useful mu4e bookmarks"
-        ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
-    #+END_SRC
+       ;;TODO: provide keybinding
+       ;;TODO: catch handy queries
+       (defhydra mu4e-hydra (:exit t :color red)
+         "Some useful mu4e bookmarks"
+         ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
+     #+END_SRC
+**** unread count extension
+     #+BEGIN_SRC emacs-lisp
+       (use-package mu4e-maildirs-extension
+         :ensure t
+         :commands mu4e-maildirs-extension
+
+         :init
+         (eval-after-load "mu4e" '(mu4e-maildirs-extension))
+         :config
+         (setf mu4e-maildirs-extension-count-command-format
+
+               (replace-regexp-in-string "^mu" mu4e-mu-binary mu4e-maildirs-extension-count-command-format))
+
+
+         (setf mu4e-maildirs-extension-custom-list (-remove #'(lambda (x) (or (s-contains? "[Gmail]" x)
+                                                                              (s-contains? "archive-" x)
+                                                                              (s-contains? "Trash" x))) (mu4e-get-maildirs)))
+         (setf mu4e-maildirs-extension-insert-before-str "\n  Basics"))
+     #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp
      (use-package tramp
