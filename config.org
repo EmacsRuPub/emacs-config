@@ -4198,15 +4198,6 @@
       (use-package org-magit :ensure t)
       (use-package org-pomodoro :ensure t)
 
-      (setq org-modules
-            '(<C>org-pomodoro
-              org-agenda org-archive org-attach org-bbdb org-bibtex
-              org-bookmark org-checklist org-clock org-collector org-docview
-              org-drill org-expiry org-habit org-id org-info org-inlinetask
-              org-interactive-query org-irc org-man org-mouse org-protocol
-              org-timer org-w3m))
-
-      (use-package org)
       (use-package ox-html)
       (use-package org-dashboard :ensure t)
       (use-package orgit :ensure t)

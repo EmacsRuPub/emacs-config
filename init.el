@@ -37,8 +37,12 @@
 (use-package f :ensure t)
 (use-package diminish :ensure t)
 (use-package names :ensure t)
-(use-package org)
-(use-package org-protocol)
+(use-package org-plus-contrib :ensure t)
+(setq org-modules
+      '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
+        org-checklist org-clock org-collector org-docview org-drill org-expiry
+        org-habit org-id org-info org-inlinetask org-interactive-query org-irc
+        org-man org-mouse org-protocol org-timer org-w3m))
 (use-package anaphora :ensure t)
 
 (org-babel-load-file (at-config-basedir "config.org"))
