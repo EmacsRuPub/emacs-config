@@ -7176,3 +7176,40 @@
 ** [[https://github.com/Fuco1/free-keys][Fuco1/free-keys - https://github.com/Fuco1/free-keys]] [2015-12-09 Ср 22:02]                                          :emacs:try:
 ** [[https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/][Where are the org-lookup functions? : emacs - https://www.reddit.com/r/emacs/comments/3r98w0/where_are_the_orglookup_functions/]] [2015-12-09 Ср 22:03]                                          :emacs:try:
 ** [[https://github.com/jschaf/esup][jschaf/esup - https://github.com/jschaf/esup]] [2015-12-09 Ср 22:05]                                          :emacs:try:
+** [[http://cestdiego.github.io/blog/2015/12/04/using-rsync-when-tramp-is-too-much/][Using Rsync when Tramp is too much - Diego Berrocal - http://cestdiego.github.io/blog/2015/12/04/using-rsync-when-tramp-is-too-much/]] [2015-12-09 Ср 23:18]                                          :emacs:try:
+** [[https://github.com/cute-jumper/emacs-firefox-controller][cute-jumper/emacs-firefox-controller - https://github.com/cute-jumper/emacs-firefox-controller]] [2015-12-11 Пт 23:59]                                          :emacs:try:
+** [[http://whatthefuck.computer/blog/2015/08/16/taskflow/][Automatic Workflows in Org-Mode - Computer :( - http://whatthefuck.computer/blog/2015/08/16/taskflow/]] [2015-12-12 Сб 02:11]                                          :emacs:try:
+** [[https://www.gnu.org/software/emacs/manual/html_node/eudc/][Emacs Unified Directory Client (EUDC) Manual: Top - https://www.gnu.org/software/emacs/manual/html_node/eudc/]] [2015-12-13 Вс 23:55]                                          :emacs:try:
+** [[https://github.com/magnars/string-edit.el][magnars/string-edit.el - https://github.com/magnars/string-edit.el]] [2015-12-16 Ср 23:59]                                          :emacs:try:
+** [[https://github.com/johanvts/emacs-fireplace/][johanvts/emacs-fireplace - https://github.com/johanvts/emacs-fireplace/]] [2015-12-19 Сб 12:48]                                          :emacs:try:
+** [[https://github.com/fourier/idea-darkula-theme][fourier/idea-darkula-theme - https://github.com/fourier/idea-darkula-theme]] [2015-12-22 Вт 19:44]                                          :emacs:try:
+** [[https://github.com/lujun9972/verify-url/blob/master/verify-url.el][verify-url/verify-url.el at master · lujun9972/verify-url - https://github.com/lujun9972/verify-url/blob/master/verify-url.el]] [2015-12-24 Чт 14:11]                                          :emacs:try:
+** [[https://github.com/bbatsov/super-save][bbatsov/super-save - https://github.com/bbatsov/super-save]] [2015-12-27 Вс 22:52]                                          :emacs:try:
+** [[https://github.com/nflath/man-commands][nflath/man-commands - https://github.com/nflath/man-commands]] [2015-12-27 Вс 23:04]                                          :emacs:try:
+** [#B] [[https://github.com/agpchil/mu4e-maildirs-extension][agpchil/mu4e-maildirs-extension - https://github.com/agpchil/mu4e-maildirs-extension]] [2015-12-28 Пн 23:59] :emacs:try:
+** [[https://github.com/enoson/eno.el][enoson/eno.el - https://github.com/enoson/eno.el]] [2015-12-30 Ср 13:54]                                          :emacs:try:
+** [[https://github.com/magnars/.emacs.d/tree/master/defuns][.emacs.d/defuns at master · magnars/.emacs.d - https://github.com/magnars/.emacs.d/tree/master/defuns]] [2015-12-30 Ср 15:39]                                          :emacs:try:
+** [[https://github.com/ocodo/.emacs.d/blob/master/custom/handy-functions.el][.emacs.d/handy-functions.el at master · ocodo/.emacs.d - https://github.com/ocodo/.emacs.d/blob/master/custom/handy-functions.el]] [2015-12-30 Ср 15:40]                                          :emacs:try:
+** [[https://github.com/rejeep/emacs/blob/master/defuns.el][emacs/defuns.el at master · rejeep/emacs - https://github.com/rejeep/emacs/blob/master/defuns.el]] [2015-12-30 Ср 15:40]                                          :emacs:try:
+** [[http://melpa.org/#/org-iv][org-iv - MELPA - http://melpa.org/#/org-iv]] [2015-12-31 Чт 15:27]                                          :emacs:try:
+** [[https://github.com/7696122/path-headerline-mode][7696122/path-headerline-mode - https://github.com/7696122/path-headerline-mode]] [2015-12-31 Чт 19:29]                                          :emacs:try:
+** [[http://melpa.org/#/firefox-controller][firefox-controller - MELPA - http://melpa.org/#/firefox-controller]] [2016-01-01 Пт 15:54]                                          :emacs:try:
+** [[http://melpa.org/#/slack][slack - MELPA - http://melpa.org/#/slack]] [2016-01-01 Пт 19:13]                                          :emacs:try:
+** [[http://melpa.org/#/private-diary][MELPA - http://melpa.org/#/private-diary]] [2016-01-01 Пт 19:32]                                          :emacs:try:
+** [[http://melpa.org/#/elisp-lint][MELPA - http://melpa.org/#/elisp-lint]] [2016-01-01 Пт 20:23]                                          :emacs:try:
+** [[http://melpa.org/#/verify-url][verify-url - MELPA - http://melpa.org/#/verify-url]] [2016-01-01 Пт 21:00]                                          :emacs:try:
+** [[http://melpa.org/#/import-js][import-js - MELPA - http://melpa.org/#/import-js]] [2016-01-01 Пт 21:08]                                          :emacs:try:
+** [[http://melpa.org/#/latex-math-preview][latex-math-preview - MELPA - http://melpa.org/#/latex-math-preview]] [2016-01-01 Пт 21:08]                                          :emacs:try:
+** [#B] [[http://melpa.org/#/dim][MELPA - http://melpa.org/#/dim]] [2016-01-01 Пт 21:09]         :emacs:try:
+** [[http://melpa.org/#/clean-buffers][MELPA - http://melpa.org/#/clean-buffers]] [2016-01-01 Пт 21:11]                                          :emacs:try:
+** [[http://melpa.org/#/cff][MELPA - http://melpa.org/#/cff]] [2016-01-01 Пт 21:11]                                          :emacs:try:
+** [[https://gist.github.com/sshbio/8da8c12e9a667b0445f0][An init progress bar in the mode line with sections titles in the echo area. - https://gist.github.com/sshbio/8da8c12e9a667b0445f0]] [2016-01-01 Пт 21:35]                                          :emacs:try:
+** [[http://melpa.org/#/smartwin][MELPA - http://melpa.org/#/smartwin]] [2016-01-01 Пт 21:48]                                          :emacs:try:
+** [[https://github.com/gaudecker/draft-mode][gaudecker/draft-mode - https://github.com/gaudecker/draft-mode]] [2016-01-01 Пт 22:39]                                          :emacs:try:
+** [[http://melpa.org/#/python-mode][python-mode - MELPAMELPA - http://melpa.org/#/ - http://melpa.org/#/python-mode]] [2016-01-02 Сб 12:02]                                          :emacs:try:
+** [#B] [[https://github.com/abingham/emacs-ycmd][abingham/emacs-ycmd - https://github.com/abingham/emacs-ycmd]] [2016-01-02 Сб 12:27] :emacs:try:
+** [#B] [[https://github.com/LefterisJP/malinka][LefterisJP/malinka - https://github.com/LefterisJP/malinka]] [2016-01-02 Сб 14:32] :emacs:try:
+** [[https://github.com/kootenpv/emp][kootenpv/emp - https://github.com/kootenpv/emp]] [2016-01-02 Сб 17:24]                                          :emacs:try:
+** [[http://orgmode.org/worg/org-contrib/org-drill.html][org-drill.el – flashcards and spaced repetition for org-mode - http://orgmode.org/worg/org-contrib/org-drill.html]] [2016-01-03 Вс 21:59]                                          :emacs:try:
+** [#B] [[https://github.com/rexim/org-cliplink][rexim/org-cliplink - https://github.com/rexim/org-cliplink]] [2016-01-03 Вс 21:59] :emacs:try:
+** [[http://orgmode.org/worg/org-contrib/org-velocity.html][org-velocity.el — something like Notational Velocity for Org - http://orgmode.org/worg/org-contrib/org-velocity.html]] [2016-01-03 Вс 22:00]                                          :emacs:try:
