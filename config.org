@@ -1176,6 +1176,8 @@
                 wdired-abort-changes)
         (eval `(defadvice ,it (after revert-buffer activate)
                  (revert-buffer))))
+
+      (use-package dired-filetype-face :ensure t)
     #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp
