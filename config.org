@@ -4335,6 +4335,11 @@
       (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
       (setq org-ellipsis "⤵")
 
+      (setq org-habit-graph-column 50)
+      (setq org-habit-preceding-days 10)
+      (setq org-habit-following-days 4)
+      (setq org-habit-show-habits-only-for-today nil)
+
       (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "HOLD" "SOMEDAY(s@)"
                                      "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
       (setq org-todo-keywords
