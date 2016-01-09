@@ -127,6 +127,13 @@
 
      (setq custom/php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
    #+END_SRC
+** Encryption
+   #+BEGIN_SRC emacs-lisp
+     (use-package epa
+       :config
+       (epa-file-enable)
+       (setq epg-gpg-home-directory "~/.gnupg"))
+   #+END_SRC
 ** load various private credentials from GPG-encrypted file
    #+BEGIN_SRC emacs-lisp
      (load (at-config-basedir "credentials.el.gpg"))
