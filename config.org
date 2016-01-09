@@ -2852,6 +2852,7 @@
              (setq tab-width 4)
              ;;FIXME: find-project-flake8-config id somehow broken
              ;; (setq flycheck-flake8rc (or (custom/find-project-flake8-config) flycheck-flake8rc))
+             (tooltip-mode -1)
              )
            (add-hook 'python-mode-hook 'custom/python-mode-hook)
            (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
