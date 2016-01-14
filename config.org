@@ -1030,6 +1030,10 @@
                   ("S" projectile-run-async-shell-command-in-root))
               (global-set-key (kbd "<f8>") 'hydra-projectile/body)
               ))
+
+      (use-package projectile-sift
+        ;;TODO: customize
+        :ensure t)
     #+END_SRC
 ** dired
 *** always refresh contents
