@@ -3890,6 +3890,13 @@
          (setf mu4e-maildirs-extension-insert-before-str "\n  Basics")
          (setf mu4e-maildirs-extension-default-collapse-level 1))
      #+END_SRC
+** mu4e extension for Orgmode
+   #+BEGIN_SRC emacs-lisp
+     ;;TODO: try to use use-package
+     (eval-after-load "org" '(when (fboundp 'mu4e) (require 'org-mu4e)))
+     ;;store link to message if in header view, not to header query
+     (setq org-mu4e-link-query-in-headers-mode nil)
+   #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp
      (use-package tramp
