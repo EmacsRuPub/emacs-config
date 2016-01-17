@@ -4498,6 +4498,11 @@
                                             ("B." . "-")
                                             ("a." . "-")
                                             ("b." . "-")))
+      (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s %b")
+                                       (timeline . "  % s")
+                                       (todo . " %i %-12:c")
+                                       (tags . " %i %-12:c")
+                                       (search . " %i %-12:c")))
 
       (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
       (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
