@@ -3846,7 +3846,7 @@
          (setf mu4e-maildir       "~/Maildir"
                mu4e-refile-folder (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Archive" t))
                mu4e-sent-folder   (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Sent"))
-               mu4e-drafts-folder (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Drafts"))
+               mu4e-drafts-folder (lambda (msg) (custom/gmail-maildir (mu4e-context-name mu4e~context-current) "Drafts"))
                mu4e-trash-folder  (lambda (msg) (custom/mu4e-sibling-folder (mu4e-message-field msg :maildir) "Trash" t)))
 
          (add-hook 'mu4e-view-mode-hook #'custom/mu4e-view-mode-hook)
