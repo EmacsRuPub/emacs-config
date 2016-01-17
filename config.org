@@ -8,7 +8,7 @@
        (concat home-directory suffix))
 
      (defun at-org-dir (&optional suffix)
-       (concat (at-homedir "/org") suffix))
+       (concat (at-homedir "/docs/org") suffix))
 
      (defun at-data-dir (&optional suffix)
        (concat (at-config-basedir "data") suffix))
