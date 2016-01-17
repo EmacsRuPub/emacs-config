@@ -3832,11 +3832,11 @@
                        "Alex\n"))
 
          ;; mirrors the defaults
-         (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" 117)
-                                ("date:today..now AND NOT maildir:/Trash" "Today's messages" 116)
-                                ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" 119)
-                                ("mime:image/* AND NOT maildir:/Trash" "Messages with images" 112)
-                                                        ("flag:unread AND maildir:/aaermolov@gmail.com/postgresql" "PostgreSQL maillist unread messages" ?P)))
+         (setf mu4e-bookmarks '(("flag:unread AND NOT maildir:/Trash" "Unread messages" ?u)
+                                ("date:today..now AND NOT maildir:/Trash" "Today's messages" ?t)
+                                ("date:7d..now AND NOT maildir:/Trash" "Last 7 days" ?w)
+                                ("mime:image/* AND NOT maildir:/Trash" "Messages with images" ?p)
+                                ("flag:unread AND maildir:/aaermolov@gmail.com/postgresql" "PostgreSQL maillist unread messages" ?P)))
 
          (eval-after-load "mu4e"
            '(progn
