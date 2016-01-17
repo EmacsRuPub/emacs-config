@@ -4383,6 +4383,7 @@
               ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
               ("dw" todo "WAITING|LATER" nil)
               ("dg" todo "GOING" nil)
+              ("da" tags "+actual_p")
               ("c" . "by context")
               ("cp" tags "+@personal/GOING|WAITING|TODO")
               ("cr" tags "+@project/GOING|WAITING|TODO")
