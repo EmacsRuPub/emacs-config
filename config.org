@@ -4215,6 +4215,11 @@
       (use-package orgit :ensure t)
       (use-package org-bullets :ensure t)
 
+      (use-package org-context :ensure t
+        :config
+        ;;TODO: leverage real contexts
+        (org-context-activate))
+
       (use-package orglink
         :ensure t
         :config
