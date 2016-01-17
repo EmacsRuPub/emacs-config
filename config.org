@@ -3875,23 +3875,20 @@
          ("i" (progn (mu4e-update-mail-and-index nil) (mu4e-headers-search "maildir:/INBOX")) "INBOX"))
      #+END_SRC
 **** unread count extension
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle no
        (use-package mu4e-maildirs-extension
          :ensure t
          :commands mu4e-maildirs-extension
-
          :init
          (eval-after-load "mu4e" '(mu4e-maildirs-extension))
          :config
          (setf mu4e-maildirs-extension-count-command-format
-
                (replace-regexp-in-string "^mu" mu4e-mu-binary mu4e-maildirs-extension-count-command-format))
-
-
          (setf mu4e-maildirs-extension-custom-list (-remove #'(lambda (x) (or (s-contains? "[Gmail]" x)
                                                                               (s-contains? "archive-" x)
                                                                               (s-contains? "Trash" x))) (mu4e-get-maildirs)))
-         (setf mu4e-maildirs-extension-insert-before-str "\n  Basics"))
+         (setf mu4e-maildirs-extension-insert-before-str "\n  Basics")
+         (setf mu4e-maildirs-extension-default-collapse-level 1))
      #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp
