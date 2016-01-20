@@ -3646,7 +3646,8 @@
        :defer t
        :commands twit
        :init
-       (setq twittering-use-master-password t))
+       (setq twittering-use-master-password t)
+       (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
    #+END_SRC
 ** internal browser (w3m/eww)
    #+BEGIN_SRC emacs-lisp
