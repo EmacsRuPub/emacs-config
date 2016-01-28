@@ -317,6 +317,7 @@
 ** backups
    #+BEGIN_SRC emacs-lisp
      (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+     (setq auto-save-visited-file-name t)
      (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
      (setq backup-by-copying t)
      (setq backup-by-copying-when-linked t)
