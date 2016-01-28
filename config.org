@@ -3761,15 +3761,14 @@
          (toggle-truncate-lines nil))
 
        (defun set-from-address ()
-         "Set the From address based on the To address of the original."
-         (setq user-mail-address "aaermolov@gmail.com")
+         "Set the From address based on current context
+       or \"To\" address of the original."
          (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
-           (when msg
-             (setq user-mail-address
-                   (cond
-                    ((mu4e-message-contact-field-matches msg :to "aaermolov@gmail.com")
-                     "aaermolov@gmail.com")
-                    (t "aaermolov@gmail.com"))))))
+           (if msg
+               (setq user-mail-address
+                     (mu4e-message-field msg :to)
+                     )
+             (setq user-mail-address (mu4e-context-name mu4e~context-current)))))
 
        )
      #+END_SRC
