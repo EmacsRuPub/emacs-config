@@ -4,11 +4,19 @@
 * bootstrapping
 ** path utils
    #+BEGIN_SRC emacs-lisp
+     (setq home-directory (getenv "HOME"))
+     (setq config-basedir
+           (file-name-directory
+            (or (buffer-file-name) load-file-name)))
+
      (defun at-homedir (&optional suffix)
        (concat home-directory suffix))
 
      (defun at-org-dir (&optional suffix)
        (concat (at-homedir "/docs/org") suffix))
+
+     (defun at-config-basedir (&optional suffix)
+       (concat config-basedir suffix))
 
      (defun at-data-dir (&optional suffix)
        (concat (at-config-basedir "data") suffix))
@@ -67,10 +75,20 @@
                          "ru.gentoo.kbdd.set_layout"
                          "uint32:1")))
     #+END_SRC
+** Encryption
+   #+BEGIN_SRC emacs-lisp
+     (use-package epa
+       :config
+       (epa-file-enable)
+       (setq epg-gpg-home-directory "~/.gnupg"))
+   #+END_SRC
+** load various private credentials from GPG-encrypted file
+   #+BEGIN_SRC emacs-lisp
+     (load (at-config-basedir "credentials.el.gpg"))
+   #+END_SRC
 ** set the very basic variable values
    #+BEGIN_SRC emacs-lisp
      (setq message-log-max t) ;; we don't want to lose any startup log info
-     (setq home-directory (getenv "HOME"))
      (setq global-username user-login-name)
      (setq shell-file-name "/bin/bash")
      (setq custom-file (at-config-basedir "customizations.el"))
@@ -80,6 +98,21 @@
      (reverse-input-method 'russian-computer)
 
      (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+** init essential packages
+   #+BEGIN_SRC emacs-lisp
+     (use-package auto-compile
+       :ensure t
+       :config
+       (auto-compile-on-load-mode 1)
+       (auto-compile-on-save-mode 1)
+       (setq auto-compile-display-buffer nil)
+       (setq auto-compile-mode-line-counter t))
+
+     (use-package f :ensure t)
+     (use-package diminish :ensure t)
+     (use-package names :ensure t)
+     (use-package anaphora :ensure t)
    #+END_SRC
 ** working directories
    A bunch of directories for various working datasets
@@ -126,17 +159,6 @@
      (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
 
      (setq custom/php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
-   #+END_SRC
-** Encryption
-   #+BEGIN_SRC emacs-lisp
-     (use-package epa
-       :config
-       (epa-file-enable)
-       (setq epg-gpg-home-directory "~/.gnupg"))
-   #+END_SRC
-** load various private credentials from GPG-encrypted file
-   #+BEGIN_SRC emacs-lisp
-     (load (at-config-basedir "credentials.el.gpg"))
    #+END_SRC
 * appearance
 ** populate fonts inventory
