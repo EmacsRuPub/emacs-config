@@ -3843,6 +3843,7 @@
          (setq mu4e-change-filenames-when-moving t)
          (setq mu4e-user-mail-address-list custom/gmail-accounts)
 
+         (setq mu4e-context-policy 'pick-first)
          (setq mu4e-compose-signature-auto-include nil)
          (setq mu4e-use-fancy-chars t)
          (setq mu4e-attachment-dir "~/Downloads")
