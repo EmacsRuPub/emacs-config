@@ -1989,6 +1989,13 @@
      (show-paren-mode t)
      (transient-mark-mode 1)
    #+END_SRC
+** some handy major modes
+   #+BEGIN_SRC emacs-lisp
+     (use-package crontab-mode :ensure t)
+     (use-package csv-mode :ensure t)
+     (use-package fic-mode :ensure t)
+     (use-package nginx-mode :ensure t)
+   #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp
      (setq auto-revert-verbose nil)
@@ -2569,6 +2576,19 @@
               (global-git-gutter-mode +1)))
 
       (use-package git-timemachine :ensure t)
+      (use-package gitignore-mode :ensure t)
+    #+END_SRC
+*** smerge mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package smerge-mode)
+
+      (defun sm-try-smerge ()
+        (save-excursion
+          (goto-char (point-min))
+          (when (re-search-forward "^<<<<<<< " nil t)
+            (smerge-mode 1))))
+
+      (add-hook 'find-file-hooks 'sm-try-smerge t)
     #+END_SRC
 *** common
     #+BEGIN_SRC emacs-lisp
@@ -3098,6 +3118,15 @@
           (add-hook 'php-mode-hook 'set-up-php-ac)
           (add-hook 'php-mode-hook 'common-hooks/prog-helpers)))
     #+END_SRC
+*** other
+    Languages without much extra customization are going precisely here
+    #+BEGIN_SRC emacs-lisp
+      (use-package actionscript-mode :ensure t)
+      (use-package go-mode :ensure t)
+      (use-package json-mode :ensure t)
+      (use-package lua-mode :ensure t)
+      (use-package rust-mode :ensure t)
+    #+END_SRC
 ** webdev
 *** major modes
     #+BEGIN_SRC emacs-lisp
@@ -3112,6 +3141,18 @@
         (progn
           (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
           (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
+
+      (use-package web-mode
+        :ensure t
+        :defer t
+        :mode "\\.html?\\'"
+        :config
+        (progn
+          (setq web-mode-enable-current-element-highlight t)
+          (setq web-mode-ac-sources-alist
+                '(("css" . (ac-source-css-property))
+                  ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
+                )))
 
       (use-package yaml-mode :ensure t)
     #+END_SRC
@@ -3611,7 +3652,11 @@
                     'custom/jabber-libnotify-message-display)
      #+END_SRC
 ** terminal
-*** definitions
+*** common
+    #+BEGIN_SRC emacs-lisp
+      (use-package ansi-color)
+    #+END_SRC
+*** comint
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
@@ -3641,16 +3686,6 @@
                   (kill-buffer ,buff))))))
 
       )
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (use-package eshell
-        :config
-        (progn
-          (defun eshell-handle-ansi-color ()
-            (ansi-color-apply-on-region eshell-last-output-start
-                                        eshell-last-output-end))
-          (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
 
       (use-package term
         :config
@@ -3661,6 +3696,50 @@
           ))
 
       (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
+    #+END_SRC
+*** shell/check syntax
+    #+BEGIN_SRC emacs-lisp
+      (define-namespace custom/
+
+      (defun sh-check-finish-hook (buf msg)
+        "Function, that is executed at the end of sh check"
+        (when (not (string-match "finished" msg))
+          (next-error 1 t)))
+
+      (defun sh-check-syntax ()
+        "Check syntax of current file"
+        (interactive)
+        (when (string-match "^\\(ba\\|z\\)sh" (symbol-name sh-shell))
+          (save-some-buffers t)
+          (compilation-start (concat (symbol-name sh-shell) " -n " (buffer-file-name))
+                             'sh-check-mode)))
+
+      )
+
+      (define-compilation-mode sh-check-mode "SH"
+        "Mode for check sh source code."
+        (set (make-local-variable 'compilation-disable-input) t)
+        (set (make-local-variable 'compilation-scroll-output) nil)
+        (set (make-local-variable 'compilation-finish-functions)
+             (list 'custom/sh-check-finish-hook)))
+
+      (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
+    #+END_SRC
+*** eshell
+    #+BEGIN_SRC emacs-lisp
+      (use-package eshell
+        :config
+        (progn
+          (defun eshell-handle-ansi-color ()
+            (ansi-color-apply-on-region eshell-last-output-start
+                                        eshell-last-output-end))
+          (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
+    #+END_SRC
+*** hooks
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+      (add-hook 'shell-mode-hook 'common-hooks/newline-hook)
+      (add-hook 'shell-mode-hook 'common-hooks/prog-helpers)
     #+END_SRC
 ** Twitter
    #+BEGIN_SRC emacs-lisp
@@ -5073,66 +5152,6 @@
        ("g" org-goto "goto" :exit t))
      ;;TODO: bind hydra-org-movement to a key
    #+END_SRC
-* major modes
-  #+BEGIN_SRC emacs-lisp
-    (use-package ansi-color)
-    (use-package smerge-mode)
-
-    (use-package  actionscript-mode :ensure t)
-    (use-package  crontab-mode :ensure t)
-    (use-package  csv-mode :ensure t)
-    (use-package  fic-mode :ensure t)
-    (use-package  gitignore-mode :ensure t)
-    (use-package  json-mode :ensure t)
-    (use-package  lua-mode :ensure t)
-    (use-package  nginx-mode :ensure t)
-    (use-package  rust-mode :ensure t)
-
-    (use-package web-mode
-      :ensure t
-      :defer t
-      :mode "\\.html?\\'"
-      :config
-      (progn
-        (setq web-mode-enable-current-element-highlight t)
-        (setq web-mode-ac-sources-alist
-              '(("css" . (ac-source-css-property))
-                ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
-              )))
-
-    (defun custom/sh-check-finish-hook (buf msg)
-      "Function, that is executed at the end of sh check"
-      (when (not (string-match "finished" msg))
-        (next-error 1 t)))
-
-    (defun custom/sh-check-syntax ()
-      "Check syntax of current file"
-      (interactive)
-      (when (string-match "^\\(ba\\|z\\)sh" (symbol-name sh-shell))
-        (save-some-buffers t)
-        (compilation-start (concat (symbol-name sh-shell) " -n " (buffer-file-name))
-                           'sh-check-mode)))
-
-    (defun sm-try-smerge ()
-      (save-excursion
-        (goto-char (point-min))
-        (when (re-search-forward "^<<<<<<< " nil t)
-          (smerge-mode 1))))
-
-    (define-compilation-mode sh-check-mode "SH"
-      "Mode for check sh source code."
-      (set (make-local-variable 'compilation-disable-input) t)
-      (set (make-local-variable 'compilation-scroll-output) nil)
-      (set (make-local-variable 'compilation-finish-functions)
-           (list 'custom/sh-check-finish-hook)))
-
-    (add-hook 'shell-mode-hook 'common-hooks/prog-helpers)
-    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-    (add-hook 'shell-mode-hook 'common-hooks/newline-hook)
-    (add-hook 'find-file-hooks 'sm-try-smerge t)
-
-    (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
-  #+END_SRC
 * publishing
 ** setup
    #+BEGIN_SRC emacs-lisp :tangle no
