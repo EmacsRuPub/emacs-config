@@ -914,6 +914,7 @@
           (setq helm-apropos-fuzzy-match t)
           (setq helm-apropos-fuzzy-match t)
           (setq helm-move-to-line-cycle-in-source t)
+          (setq helm-buffer-max-length nil)
           (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
           (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
           (pushnew 'python-mode helm-buffers-favorite-modes)
