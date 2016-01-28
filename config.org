@@ -2515,65 +2515,65 @@
 *** git
     #+BEGIN_SRC emacs-lisp
       (use-package magit
-          :ensure t
-          :config
-          (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
-          (setq magit-blame-heading-format "%H %-20a %C %s")
-          (setq magit-diff-refine-hunk t)
-          (defhydra hydra-magit (:color teal :hint nil)
-              "
-          PROJECT: %(projectile-project-root)
-
-          Immuting            Mutating
-          -----------------------------------------
-          _s_: status          _c_: checkout
-          _l_: log             _B_: branch mgr
-          _f_: file log
-          _r_: reflog
-          _w_: diff worktree
-          _t_: time machine
-          _b_: blame
+        :ensure t
+        :config
+        (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
+        (setq magit-blame-heading-format "%H %-20a %C %s")
+        (setq magit-diff-refine-hunk t)
+        (defhydra hydra-magit (:color teal :hint nil)
           "
-              ("s" magit-status)
-              ("f" magit-log-buffer-file)
-              ("c" magit-checkout)
-              ("w" magit-diff-working-tree)
-              ("r" magit-reflog)
-              ("b" magit-blame)
-              ("B" magit-branch-manager)
-              ("l" magit-log)
-              ("t" git-timemachine))
-          (global-set-key (kbd "C-'") 'hydra-magit/body))
+           PROJECT: %(projectile-project-root)
+
+           Immuting            Mutating
+           -----------------------------------------
+           _s_: status          _c_: checkout
+           _l_: log             _B_: branch mgr
+           _f_: file log
+           _r_: reflog
+           _w_: diff worktree
+           _t_: time machine
+           _b_: blame
+           "
+          ("s" magit-status)
+          ("f" magit-log-buffer-file)
+          ("c" magit-checkout)
+          ("w" magit-diff-working-tree)
+          ("r" magit-reflog)
+          ("b" magit-blame)
+          ("B" magit-branch-manager)
+          ("l" magit-log)
+          ("t" git-timemachine))
+        (global-set-key (kbd "C-'") 'hydra-magit/body))
 
       (use-package magit-gh-pulls
-          :ensure t
-          :config
-          (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+        :ensure t
+        :config
+        (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
       (use-package magit-gerrit
-          :ensure t
-          :disabled t
-          :config
-          (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
-          (setq-default magit-gerrit-remote "gerrit"))
+        :ensure t
+        :disabled t
+        :config
+        (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
+        (setq-default magit-gerrit-remote "gerrit"))
 
       (use-package magit-filenotify
-          :ensure t
-          :config
-          (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
-          (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-          (diminish 'magit-filenotify-mode "FN"))
+        :ensure t
+        :config
+        (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
+        (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+        (diminish 'magit-filenotify-mode "FN"))
 
       (use-package git-gutter
-          :ensure t
-          :config
-          (progn
-              (setq git-gutter:modified-sign "?")
-              (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
-              (set-face-attribute 'git-gutter:added nil :inverse-video nil)
-              (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-              (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-              (global-git-gutter-mode +1)))
+        :ensure t
+        :config
+        (progn
+          (setq git-gutter:modified-sign "?")
+          (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
+          (set-face-attribute 'git-gutter:added nil :inverse-video nil)
+          (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
+          (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
+          (global-git-gutter-mode +1)))
 
       (use-package git-timemachine :ensure t)
       (use-package gitignore-mode :ensure t)
@@ -2598,11 +2598,11 @@
       (autoload 'vc-hg-root "vc-hg")
 
       (use-package ediff
-          :config
-          (progn
-              (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-              (setq ediff-split-window-function 'split-window-horizontally)
-              (setq ediff-diff-options "-w")))
+        :config
+        (progn
+          (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+          (setq ediff-split-window-function 'split-window-horizontally)
+          (setq ediff-diff-options "-w")))
     #+END_SRC
 ** languages
 *** elisp
