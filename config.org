@@ -3625,6 +3625,7 @@
              ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
              ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
              ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
+             ("6" (lambda () (interactive) (insert "^^^")) "^^^")
              ("a" custom/jabber-abbrev)
              ("r" jabber-switch-to-roster-buffer)
              ("s" jabber-activity-switch-to :color blue)
