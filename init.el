@@ -22,10 +22,13 @@
 (require 'use-package)
 
 (use-package org-plus-contrib :ensure t)
-(setq org-modules
-      '(org-agenda org-archive org-attach org-bbdb org-bibtex org-bookmark
-        org-checklist org-clock org-collector org-docview org-drill org-expiry
-        org-habit org-id org-info org-inlinetask org-interactive-query org-irc
-        org-man org-mouse org-protocol org-timer org-w3m))
+(setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
+                         org-bibtex org-clock org-docview org-habit
+                         org-id org-info org-inlinetask org-irc
+                         org-mouse org-protocol org-timer org-w3m))
+(setq org-contrib-extra '(org-bookmark org-checklist org-collector
+                          org-drill org-expiry org-index org-interactive-query
+                          org-man org-velocity))
+(setq org-modules `(,@org-contrib-base ,@org-contrib-extra))
 
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
