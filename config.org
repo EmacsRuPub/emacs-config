@@ -306,13 +306,12 @@
        :init
        (use-package recentf-ext :ensure t)
        :config
-       (progn
-         (setq recentf-save-file (at-data-dir "/.recentf"))
-         (setq recentf-max-saved-items 250)
-         (setq recentf-max-menu-items 15)
-         ;; get rid of `find-file-read-only' and replace it with something more useful.
-         (recentf-mode t) ;enable recent files mode.
-         ))
+       (setq recentf-save-file (at-data-dir "/.recentf"))
+       (setq recentf-max-saved-items 250)
+       (setq recentf-max-menu-items 15)
+       ;; get rid of `find-file-read-only' and replace it with something more useful.
+       (recentf-mode t) ;enable recent files mode.
+       )
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp
@@ -332,44 +331,44 @@
 ** desktop
    #+BEGIN_SRC emacs-lisp
      (use-package desktop
-         :config
-         (setq-default desktop-missing-file-warning nil)
-         (setq-default desktop-path '("~"))
-         (setq-default desktop-save t)
-         (setq-default desktop-save-mode t)
-         (setq-default save-place t)
-         (setq history-length t)
-         (setq history-delete-duplicates t)
-         (setq desktop-buffers-not-to-save
-                     (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-                                     "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-                                     "\\)$"))
-         (desktop-save-mode t)
-         (setq desktop-restore-eager 10)
-         (desktop-load-default)
+       :config
+       (setq-default desktop-missing-file-warning nil)
+       (setq-default desktop-path '("~"))
+       (setq-default desktop-save t)
+       (setq-default desktop-save-mode t)
+       (setq-default save-place t)
+       (setq history-length t)
+       (setq history-delete-duplicates t)
+       (setq desktop-buffers-not-to-save
+             (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+                     "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+                     "\\)$"))
+       (desktop-save-mode t)
+       (setq desktop-restore-eager 10)
+       (desktop-load-default)
 
-         (add-to-list 'desktop-globals-to-save '(buffer-name-history      . 100))
-         (add-to-list 'desktop-globals-to-save '(dired-regexp-history     . 20))
-         (add-to-list 'desktop-globals-to-save '(extended-command-history . 100))
-         (add-to-list 'desktop-globals-to-save '(file-name-history        . 500))
-         (add-to-list 'desktop-globals-to-save '(grep-history             . 50))
-         (add-to-list 'desktop-globals-to-save '(minibuffer-history       . 100))
-         (add-to-list 'desktop-globals-to-save '(query-replace-history    . 60))
-         (add-to-list 'desktop-globals-to-save '(read-expression-history  . 60))
-         (add-to-list 'desktop-globals-to-save '(regexp-history           . 60))
-         (add-to-list 'desktop-globals-to-save '(regexp-search-ring       . 20))
-         (add-to-list 'desktop-globals-to-save '(search-ring              . 20))
-         (add-to-list 'desktop-globals-to-save '(shell-command-history    . 50))
-         (add-to-list 'desktop-globals-to-save 'file-name-history)
+       (add-to-list 'desktop-globals-to-save '(buffer-name-history      . 100))
+       (add-to-list 'desktop-globals-to-save '(dired-regexp-history     . 20))
+       (add-to-list 'desktop-globals-to-save '(extended-command-history . 100))
+       (add-to-list 'desktop-globals-to-save '(file-name-history        . 500))
+       (add-to-list 'desktop-globals-to-save '(grep-history             . 50))
+       (add-to-list 'desktop-globals-to-save '(minibuffer-history       . 100))
+       (add-to-list 'desktop-globals-to-save '(query-replace-history    . 60))
+       (add-to-list 'desktop-globals-to-save '(read-expression-history  . 60))
+       (add-to-list 'desktop-globals-to-save '(regexp-history           . 60))
+       (add-to-list 'desktop-globals-to-save '(regexp-search-ring       . 20))
+       (add-to-list 'desktop-globals-to-save '(search-ring              . 20))
+       (add-to-list 'desktop-globals-to-save '(shell-command-history    . 50))
+       (add-to-list 'desktop-globals-to-save 'file-name-history)
 
-         (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-         (add-to-list 'desktop-locals-to-save 'tab-width)
-         (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
+       (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
+       (add-to-list 'desktop-locals-to-save 'tab-width)
+       (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
 
-         (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-         (add-to-list 'desktop-modes-not-to-save 'Info-mode)
-         (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-         (add-to-list 'desktop-modes-not-to-save 'fundamental-mode))
+       (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+       (add-to-list 'desktop-modes-not-to-save 'Info-mode)
+       (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+       (add-to-list 'desktop-modes-not-to-save 'fundamental-mode))
    #+END_SRC
 * common
 ** emacs server
@@ -428,9 +427,8 @@
        :ensure t
        :defer t
        :config
-       (progn
-         (keyfreq-mode 1)
-         (keyfreq-autosave-mode 1)))
+       (keyfreq-mode 1)
+       (keyfreq-autosave-mode 1))
 
      (use-package unbound :ensure t)
    #+END_SRC
@@ -630,11 +628,10 @@
    #+BEGIN_SRC emacs-lisp
      (use-package uniquify
        :config
-       (progn
-         (setq uniquify-buffer-name-style 'post-forward)
-         (setq uniquify-separator ":")
-         (setq uniquify-ignore-buffers-re "^\\*")
-         (setq uniquify-strip-common-suffix nil)))
+       (setq uniquify-buffer-name-style 'post-forward)
+       (setq uniquify-separator ":")
+       (setq uniquify-ignore-buffers-re "^\\*")
+       (setq uniquify-strip-common-suffix nil))
    #+END_SRC
 ** diminish modeline contents
    #+BEGIN_SRC emacs-lisp
@@ -850,9 +847,9 @@
      (setq scroll-preserve-screen-position 'always)
 
      (use-package saveplace
-         :config
-         (setq save-place-file (at-data-dir "/.emacs-places"))
-         (setq save-place t))
+       :config
+       (setq save-place-file (at-data-dir "/.emacs-places"))
+       (setq save-place t))
 
      (setq-default save-place t)
    #+END_SRC
@@ -894,8 +891,8 @@
         (use-package helm-grep)
         (use-package wgrep-helm :ensure t) ;TODO: maybe configure
         (use-package helm-projectile :ensure t
-              :config
-              (helm-projectile-on))
+          :config
+          (helm-projectile-on))
         (use-package helm-descbinds :ensure t)
         (use-package helm-themes :ensure t)
         (use-package helm-helm-commands :ensure t)
@@ -903,40 +900,39 @@
         (use-package helm-flycheck :ensure t)
         :config
         (use-package ac-helm :ensure auto-complete)
-        (progn
-          (setq helm-quick-update t)
-          (setq helm-split-window-in-side-p t)
-          (setq helm-ff-search-library-in-sexp t)
-          (setq helm-ff-file-name-history-use-recentf t)
-          (setq helm-buffers-fuzzy-matching t)
-          (setq helm-recentf-fuzzy-match t)
-          (setq helm-locate-fuzzy-match t)
-          (setq helm-M-x-fuzzy-match t)
-          (setq helm-apropos-fuzzy-match t)
-          (setq helm-apropos-fuzzy-match t)
-          (setq helm-move-to-line-cycle-in-source t)
-          (setq helm-buffer-max-length nil)
-          (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
-          (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
-          (pushnew 'python-mode helm-buffers-favorite-modes)
-          (bind-key "C-<down>" 'helm-next-source helm-map)
-          (bind-key "C-<up>" 'helm-previous-source helm-map)
-          (bind-key "C-x b" 'helm-buffers-list)
-          (bind-key "C-*" 'helm-mark-all helm-map)
-          (bind-key "C-x j j" 'helm-bookmarks)
-          (bind-key "M-x" 'helm-M-x)
-          (bind-key "C-h a" 'helm-apropos)
-          (bind-key "C-h r" 'helm-info-emacs)
-          (bind-key "C-h r" 'helm-info-at-point)
-          (bind-key "C-x C-r" 'helm-recentf)
-          ;;TODO: investigate and bind 'helm-resume
-          ;;TODO: investigate and bind 'helm-multi-files
-          (helm-mode t)
-          (helm-adaptive-mode 1)
-          (helm-autoresize-mode 1)
-          (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
-          ;;TODO: investigate and bind 'helm-descbinds
-          ))
+        (setq helm-quick-update t)
+        (setq helm-split-window-in-side-p t)
+        (setq helm-ff-search-library-in-sexp t)
+        (setq helm-ff-file-name-history-use-recentf t)
+        (setq helm-buffers-fuzzy-matching t)
+        (setq helm-recentf-fuzzy-match t)
+        (setq helm-locate-fuzzy-match t)
+        (setq helm-M-x-fuzzy-match t)
+        (setq helm-apropos-fuzzy-match t)
+        (setq helm-apropos-fuzzy-match t)
+        (setq helm-move-to-line-cycle-in-source t)
+        (setq helm-buffer-max-length nil)
+        (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
+        (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
+        (pushnew 'python-mode helm-buffers-favorite-modes)
+        (bind-key "C-<down>" 'helm-next-source helm-map)
+        (bind-key "C-<up>" 'helm-previous-source helm-map)
+        (bind-key "C-x b" 'helm-buffers-list)
+        (bind-key "C-*" 'helm-mark-all helm-map)
+        (bind-key "C-x j j" 'helm-bookmarks)
+        (bind-key "M-x" 'helm-M-x)
+        (bind-key "C-h a" 'helm-apropos)
+        (bind-key "C-h r" 'helm-info-emacs)
+        (bind-key "C-h r" 'helm-info-at-point)
+        (bind-key "C-x C-r" 'helm-recentf)
+        ;;TODO: investigate and bind 'helm-resume
+        ;;TODO: investigate and bind 'helm-multi-files
+        (helm-mode t)
+        (helm-adaptive-mode 1)
+        (helm-autoresize-mode 1)
+        (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
+        ;;TODO: investigate and bind 'helm-descbinds
+        )
 
       (use-package helm-ag
         :ensure t
@@ -952,26 +948,25 @@
         :ensure t
         :defer t
         :config
-        (progn
-          (setq helm-gtags-path-style 'relative)
-          (setq helm-gtags-ignore-case t)
-          (setq helm-gtags-auto-update t)
-          (setq helm-gtags-use-input-at-cursor t)
-          (setq helm-gtags-pulse-at-cursor t)
-          (setq helm-gtags-suggested-key-mapping t)
-          (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
-          (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
-          (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-          (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
-          (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
-          (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
-          (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
-          (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
-          (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
-          (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
-          (add-hook 'dired-mode-hook 'helm-gtags-mode)
-          (add-hook 'c-mode-hook 'helm-gtags-mode)
-          (add-hook 'c++-mode-hook 'helm-gtags-mode)))
+        (setq helm-gtags-path-style 'relative)
+        (setq helm-gtags-ignore-case t)
+        (setq helm-gtags-auto-update t)
+        (setq helm-gtags-use-input-at-cursor t)
+        (setq helm-gtags-pulse-at-cursor t)
+        (setq helm-gtags-suggested-key-mapping t)
+        (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
+        (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
+        (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
+        (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
+        (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
+        (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
+        (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
+        (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
+        (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
+        (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
+        (add-hook 'dired-mode-hook 'helm-gtags-mode)
+        (add-hook 'c-mode-hook 'helm-gtags-mode)
+        (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
       ;;(use-package helm-fuzzier
       ;;  :ensure t
@@ -1009,24 +1004,23 @@
 *** setup
     #+BEGIN_SRC emacs-lisp
       (use-package projectile
-          :ensure t
-          :commands (projectile-find-file custom/projectile-ag)
-          :config
-          (progn
-              (projectile-global-mode) ;; to enable in all buffers
-              (setq projectile-enable-caching t)
-              (setq projectile-cache-file (at-data-dir "/projectile.cache"))
-              (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
-              (setq projectile-require-project-root nil)
-              (setq projectile-switch-project-action 'helm-projectile)
-              (setq projectile-completion-system 'ivy)
-              (setq projectile-tags-command
-                          "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-              (add-to-list 'projectile-other-file-alist '("html" "js"))
-              (add-to-list 'projectile-other-file-alist '("js" "html"))
-              (diminish 'projectile-mode "prj")
-              (defhydra hydra-projectile (:color teal)
-                  "
+        :ensure t
+        :commands (projectile-find-file custom/projectile-ag)
+        :config
+        (projectile-global-mode) ;; to enable in all buffers
+        (setq projectile-enable-caching t)
+        (setq projectile-cache-file (at-data-dir "/projectile.cache"))
+        (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
+        (setq projectile-require-project-root nil)
+        (setq projectile-switch-project-action 'helm-projectile)
+        (setq projectile-completion-system 'ivy)
+        (setq projectile-tags-command
+              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+        (add-to-list 'projectile-other-file-alist '("html" "js"))
+        (add-to-list 'projectile-other-file-alist '("js" "html"))
+        (diminish 'projectile-mode "prj")
+        (defhydra hydra-projectile (:color teal)
+          "
           PROJECT: %(projectile-project-root)
           find                         Project               More
           ---------------------------------------------------------------------------------------
@@ -1038,31 +1032,30 @@
           _fo_ther file                _pk_ill buffers       _r_ecentf
           other file _fO_ther window
           "
-                  ("fd" helm-projectile-find-dir)
-                  ("ft" projectile-find-test-file)
-                  ("ff" helm-projectile-find-file)
-                  ("fw" helm-projectile-find-file-dwim)
-                  ("ft" projectile-find-file-dwim-other-window)
-                  ("fo" helm-projectile-find-other-file)
-                  ("fO" projectile-find-other-file-other-window)
-                  ("pb" projectile-ibuffer)
-                  ("pf" projectile-project-info)
-                  ("pt" projectile-test-project)
-                  ("pc" projectile-compile-project)
-                  ("pi" projectile-invalidate-cache)
-                  ("pk" projectile-kill-buffers)
-                  ("ps" projectile-switch-project)
-                  ("c" projectile-commander)
-                  ("s" projectile-switch-to-buffer)
-                  ("w" projectile-switch-to-buffer-other-window)
-                  ("d" projectile-dired)
-                  ("b" projectile-display-buffer)
-                  ("r" projectile-recentf)
-                  ;;TODO: write legend
-                  ("s" projectile-run-command-in-root)
-                  ("S" projectile-run-async-shell-command-in-root))
-              (global-set-key (kbd "<f8>") 'hydra-projectile/body)
-              ))
+          ("fd" helm-projectile-find-dir)
+          ("ft" projectile-find-test-file)
+          ("ff" helm-projectile-find-file)
+          ("fw" helm-projectile-find-file-dwim)
+          ("ft" projectile-find-file-dwim-other-window)
+          ("fo" helm-projectile-find-other-file)
+          ("fO" projectile-find-other-file-other-window)
+          ("pb" projectile-ibuffer)
+          ("pf" projectile-project-info)
+          ("pt" projectile-test-project)
+          ("pc" projectile-compile-project)
+          ("pi" projectile-invalidate-cache)
+          ("pk" projectile-kill-buffers)
+          ("ps" projectile-switch-project)
+          ("c" projectile-commander)
+          ("s" projectile-switch-to-buffer)
+          ("w" projectile-switch-to-buffer-other-window)
+          ("d" projectile-dired)
+          ("b" projectile-display-buffer)
+          ("r" projectile-recentf)
+          ;;TODO: write legend
+          ("s" projectile-run-command-in-root)
+          ("S" projectile-run-async-shell-command-in-root))
+        (global-set-key (kbd "<f8>") 'hydra-projectile/body))
 
       (use-package projectile-sift
         ;;TODO: customize
@@ -1195,14 +1188,12 @@
       (use-package wdired
         :defer t
         :config
-        (progn
-          (setq wdired-allow-to-change-permissions 'advanced)
-          (setq wdired-allow-to-change-permissions t)
-          (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
-          (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
-          (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
-          (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map)
-          ))
+        (setq wdired-allow-to-change-permissions 'advanced)
+        (setq wdired-allow-to-change-permissions t)
+        (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
+        (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
+        (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
+        (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
       (use-package dired-x)
       (use-package dired-toggle-sudo :ensure t)
@@ -1392,27 +1383,25 @@
       (use-package ibuffer
         :defer t
         :config
-        (progn
-          (setq ibuffer-default-sorting-mode 'major-mode) ;recency
-          (setq ibuffer-always-show-last-buffer :nomini)
-          (setq ibuffer-default-shrink-to-minimum-size t)
-          (setq ibuffer-jump-offer-only-visible-buffers t)
-          (setq ibuffer-saved-filters
-                '(("dired" ((mode . dired-mode)))
-                  ("foss" ((filename . "foss")))
-                  ("pets" ((filename . "pets")))
-                  ("jabberchat" ((mode . jabber-chat-mode)))
-                  ("orgmode" ((mode . org-mode)))
-                  ("elisp" ((mode . emacs-lisp-mode)))
-                  ("fundamental" ((mode . fundamental-mode)))
-                  ("haskell" ((mode . haskell-mode)))))
-          (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
-          (add-hook 'ibuffer-mode-hook
-                    (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
-          (add-hook 'ibuffer-mode-hook
-                    (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
-          (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map)
-          ))
+        (setq ibuffer-default-sorting-mode 'major-mode) ;recency
+        (setq ibuffer-always-show-last-buffer :nomini)
+        (setq ibuffer-default-shrink-to-minimum-size t)
+        (setq ibuffer-jump-offer-only-visible-buffers t)
+        (setq ibuffer-saved-filters
+              '(("dired" ((mode . dired-mode)))
+                ("foss" ((filename . "foss")))
+                ("pets" ((filename . "pets")))
+                ("jabberchat" ((mode . jabber-chat-mode)))
+                ("orgmode" ((mode . org-mode)))
+                ("elisp" ((mode . emacs-lisp-mode)))
+                ("fundamental" ((mode . fundamental-mode)))
+                ("haskell" ((mode . haskell-mode)))))
+        (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
+        (add-hook 'ibuffer-mode-hook
+                  (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
+        (add-hook 'ibuffer-mode-hook
+                  (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+        (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map))
 
       ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
       (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
@@ -1426,9 +1415,8 @@
      (use-package swoop
        :ensure t
        :config
-       (progn
-         (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
-         (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map)))
+       (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
+       (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map))
 
      (use-package swiper
        :config
@@ -1639,52 +1627,49 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :ensure t
-       :defer t
-       :bind ("C-=" . er/expand-region))
+      (use-package expand-region
+        :ensure t
+        :defer t
+        :bind ("C-=" . er/expand-region))
 
-     (use-package region-bindings-mode
-       :ensure t
-       :config
-       (region-bindings-mode-enable)
-       (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
-       (bind-key "M-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
-       (bind-key "M-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
-       (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
-       (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
-       (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
-       (bind-key "3" 'mc/mark-more-like-this-extended region-bindings-mode-map)
-       (bind-key "5" 'mc/mark-all-in-region region-bindings-mode-map)
-       (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
-       (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
-       (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
-       (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
-       (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
+      (use-package region-bindings-mode
+        :ensure t
+        :config
+        (region-bindings-mode-enable)
+        (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
+        (bind-key "M-<down>" 'mc/mark-next-like-this region-bindings-mode-map)
+        (bind-key "M-<up>" 'mc/mark-previous-like-this region-bindings-mode-map)
+        (bind-key "8" 'mc/mark-all-like-this region-bindings-mode-map)
+        (bind-key "6" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
+        (bind-key "4" 'mc/edit-ends-of-lines region-bindings-mode-map)
+        (bind-key "3" 'mc/mark-more-like-this-extended region-bindings-mode-map)
+        (bind-key "5" 'mc/mark-all-in-region region-bindings-mode-map)
+        (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
+        (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
+        (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
+        (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
+        (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
-     (use-package whole-line-or-region ;; if no region is active, act on current line
-       :ensure t
-       :defer t
-       :config
-       (progn
-         (whole-line-or-region-mode 1)
-         (setq whole-line-or-region-extensions-alist
-               '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
-                 (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
-                 (kill-region whole-line-or-region-kill-region nil)
-                 (kill-ring-save whole-line-or-region-kill-ring-save nil)
-                 (yank whole-line-or-region-yank nil)
-                 ))))
+      (use-package whole-line-or-region ;; if no region is active, act on current line
+        :ensure t
+        :defer t
+        :config
+        (whole-line-or-region-mode 1)
+        (setq whole-line-or-region-extensions-alist
+              '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
+                (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
+                (kill-region whole-line-or-region-kill-region nil)
+                (kill-ring-save whole-line-or-region-kill-ring-save nil)
+                (yank whole-line-or-region-yank nil))))
 
-     (use-package wrap-region
-       :ensure t
-       :config
-       (progn
-         (wrap-region-global-mode 1)
-         (wrap-region-add-wrapper "*" "*")
-         (wrap-region-add-wrapper "(" ")")
-         (wrap-region-add-wrapper "{-" "-}" "#")
-         (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode))))
+      (use-package wrap-region
+        :ensure t
+        :config
+        (wrap-region-global-mode 1)
+        (wrap-region-add-wrapper "*" "*")
+        (wrap-region-add-wrapper "(" ")")
+        (wrap-region-add-wrapper "{-" "-}" "#")
+        (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode)))
     #+END_SRC
 ** switch case
    #+BEGIN_SRC emacs-lisp
@@ -1745,10 +1730,8 @@
         :ensure t
         :defer t
         :config
-        (progn
-          (setq drag-stuff-modifier '(meta shift))
-          (turn-off-drag-stuff-mode)
-          ))
+        (setq drag-stuff-modifier '(meta shift))
+        (turn-off-drag-stuff-mode))
 
       (use-package snakehump :ensure t)
       (use-package adaptive-wrap :ensure t)
@@ -1835,12 +1818,10 @@
        :defer t
        :ensure t
        :config
-       (progn
-         (global-undo-tree-mode t)
-         (setq undo-tree-mode-lighter "")
-         (setq undo-tree-visualizer-timestamps t)
-         (setq undo-tree-visualizer-diff t)
-         ))
+       (global-undo-tree-mode t)
+       (setq undo-tree-mode-lighter "")
+       (setq undo-tree-visualizer-timestamps t)
+       (setq undo-tree-visualizer-diff t))
    #+END_SRC
 ** utils
 *** definitions
@@ -1912,15 +1893,15 @@
        :init
        (use-package generic-x)
        :config
-       (progn
-         (define-generic-mode 'keymap-mode
-           '("#")
-           '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-           nil
-           '(".keymap\\'" ".map\\'")
-           nil)
-         (setq generic-default-modes (delete 'javascript-generic-mode
-                                             generic-default-modes))))
+       (define-generic-mode 'keymap-mode
+         '("#")
+         '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+         nil
+         '(".keymap\\'" ".map\\'")
+         nil)
+       (setq generic-default-modes (delete 'javascript-generic-mode
+                                           generic-default-modes)))
+
      (use-package vimrc-mode
        :ensure t
        :defer t
@@ -2240,35 +2221,34 @@
         :init
         (use-package helm-c-yasnippet :ensure t)
         :config
-        (progn
-          (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-          (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
-          (setq yas-expand-only-for-last-commands '(self-insert-command))
-          (yas-global-mode 1)
-          (bind-key "\t" 'hippie-expand yas-minor-mode-map)
-          ;; unset both to remove ALL translations
-          (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
-          (define-key yas-minor-mode-map (kbd "TAB") nil)
-          (bind-key "C-M-<return>" 'helm-yas-complete)
-          ;;TODO: bind helm-yas-create-snippet-on-region
-          (setq yas/next-field-key '("<backtab>" "<S-tab>"))
-          (setq yas/prev-field-key '("<C-tab>"))
-          (setq yas-snippet-dirs nil)
-          (setq helm-yas-space-match-any-greedy t)
-          (push custom/yasnippet-dir yas-snippet-dirs)
-          (push custom/yasnippet-private-dir yas-snippet-dirs)
-          (yas-global-mode 1)
-          (setq yas-prompt-functions
-                '(yas-completing-prompt
-                  yas-x-prompt
-                  yas-no-prompt))
-          ;; Wrap around region
-          (setq yas/wrap-around-region t)
-          (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
-          ;; Jump to end of snippet definition
-          (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
-          (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
-          (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)))
+        (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+        (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
+        (setq yas-expand-only-for-last-commands '(self-insert-command))
+        (yas-global-mode 1)
+        (bind-key "\t" 'hippie-expand yas-minor-mode-map)
+        ;; unset both to remove ALL translations
+        (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
+        (define-key yas-minor-mode-map (kbd "TAB") nil)
+        (bind-key "C-M-<return>" 'helm-yas-complete)
+        ;;TODO: bind helm-yas-create-snippet-on-region
+        (setq yas/next-field-key '("<backtab>" "<S-tab>"))
+        (setq yas/prev-field-key '("<C-tab>"))
+        (setq yas-snippet-dirs nil)
+        (setq helm-yas-space-match-any-greedy t)
+        (push custom/yasnippet-dir yas-snippet-dirs)
+        (push custom/yasnippet-private-dir yas-snippet-dirs)
+        (yas-global-mode 1)
+        (setq yas-prompt-functions
+              '(yas-completing-prompt
+                yas-x-prompt
+                yas-no-prompt))
+        ;; Wrap around region
+        (setq yas/wrap-around-region t)
+        (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
+        ;; Jump to end of snippet definition
+        (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
+        (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
+        (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field))
 
       (use-package auto-yasnippet :ensure t)
 
@@ -2314,24 +2294,23 @@
         (use-package auto-complete-config)
         (use-package ac-math)
         :config
-        (progn
-          (ac-config-default)
-          (global-auto-complete-mode t)
-          (diminish 'auto-complete-mode " α")
-          (setq ac-auto-start nil)
-          (setq ac-quick-help-delay 0.5)
-          (setq ac-fuzzy-enable t)
-          (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
-          (add-to-list 'ac-modes 'slime-repl-mode)
-          (add-hook 'slime-mode-hook 'set-up-slime-ac)
-          (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-          (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-          (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
-          (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
-          (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-          (global-set-key (kbd "C-<tab>") 'auto-complete)
-          ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
-          ))
+        (ac-config-default)
+        (global-auto-complete-mode t)
+        (diminish 'auto-complete-mode " α")
+        (setq ac-auto-start nil)
+        (setq ac-quick-help-delay 0.5)
+        (setq ac-fuzzy-enable t)
+        (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
+        (add-to-list 'ac-modes 'slime-repl-mode)
+        (add-hook 'slime-mode-hook 'set-up-slime-ac)
+        (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+        (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+        (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
+        (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
+        (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+        (global-set-key (kbd "C-<tab>") 'auto-complete)
+        ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
+        )
     #+END_SRC
 ** hippie-expand
    #+BEGIN_SRC emacs-lisp
@@ -2382,26 +2361,24 @@
 *** flycheck
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck
-          :ensure t
-          :init
-          (use-package flycheck-color-mode-line :ensure t)
-          :config
-          (progn
-              (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-              (setq flycheck-check-syntax-automatically '(idle-change))))
+        :ensure t
+        :init
+        (use-package flycheck-color-mode-line :ensure t)
+        :config
+        (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
+        (setq flycheck-check-syntax-automatically '(idle-change)))
     #+END_SRC
 *** gdb
     #+BEGIN_SRC emacs-lisp
       (use-package gud
-          :init
-          (use-package gdb-mi)
-          :config
-          (progn
-              (setq gdb-many-windows t)
-              (setq gdb-show-main t)
-              (setq gdb-use-separate-io-buffer t)
-              (setq gud-chdir-before-run nil)
-              (setq gud-tooltip-mode t)))
+        :init
+        (use-package gdb-mi)
+        :config
+        (setq gdb-many-windows t)
+        (setq gdb-show-main t)
+        (setq gdb-use-separate-io-buffer t)
+        (setq gud-chdir-before-run nil)
+        (setq gud-tooltip-mode t))
     #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp
@@ -2409,18 +2386,17 @@
       (use-package eldoc-eval :ensure t)
 
       (use-package eldoc
-          :defer t
-          :init
-          (progn
-              (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
-              (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-              (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-              (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
-              (add-hook 'css-mode-hook 'turn-on-css-eldoc))
-          :config
-          (diminish 'eldoc-mode "ED"))
+        :defer t
+        :init
+        (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
+        (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+        (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+        (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+        (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+        (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+        (add-hook 'css-mode-hook 'turn-on-css-eldoc)
+        :config
+        (diminish 'eldoc-mode "ED"))
 
       (use-package css-eldoc
         :ensure t
@@ -2434,10 +2410,9 @@
          :commands turn-on-eldoc-mode
          :defer t
          :init
-         (progn
-               (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-               (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-               (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
+         (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+         (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+         (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
      #+END_SRC
 *** print path within json
     #+BEGIN_SRC emacs-lisp
@@ -2556,13 +2531,12 @@
       (use-package git-gutter
         :ensure t
         :config
-        (progn
-          (setq git-gutter:modified-sign "?")
-          (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
-          (set-face-attribute 'git-gutter:added nil :inverse-video nil)
-          (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-          (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-          (global-git-gutter-mode +1)))
+        (setq git-gutter:modified-sign "?")
+        (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
+        (set-face-attribute 'git-gutter:added nil :inverse-video nil)
+        (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
+        (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
+        (global-git-gutter-mode +1))
 
       (use-package git-timemachine :ensure t)
       (use-package gitignore-mode :ensure t)
@@ -2588,10 +2562,9 @@
 
       (use-package ediff
         :config
-        (progn
-          (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-          (setq ediff-split-window-function 'split-window-horizontally)
-          (setq ediff-diff-options "-w")))
+        (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+        (setq ediff-split-window-function 'split-window-horizontally)
+        (setq ediff-diff-options "-w"))
     #+END_SRC
 ** languages
 *** elisp
@@ -2601,16 +2574,16 @@
        (use-package edebug-x :ensure t)
 
        (use-package elisp-slime-nav
-           :ensure t
-           :config
-           (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-               (add-hook hook 'elisp-slime-nav-mode)))
+         :ensure t
+         :config
+         (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+           (add-hook hook 'elisp-slime-nav-mode)))
 
        (use-package erefactor
-           :ensure t
-           :config
-           ;;TODO: investigate package
-           (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
+         :ensure t
+         :config
+         ;;TODO: investigate package
+         (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
 
        (setq print-circle t)
        (setq print-gensym t)
@@ -2618,11 +2591,11 @@
        (setq eval-expression-print-level nil)
 
        (defun custom/elisp-mode-hook ()
-           (auto-fill-mode 1)
-           (setq indent-tabs-mode t)
-           (setq tab-width 2)
-           (setq comment-start ";;")
-           (turn-on-eldoc-mode))
+         (auto-fill-mode 1)
+         (setq indent-tabs-mode t)
+         (setq tab-width 2)
+         (setq comment-start ";;")
+         (turn-on-eldoc-mode))
 
        (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
        (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
@@ -2649,15 +2622,15 @@
 ***** 2
       #+BEGIN_SRC emacs-lisp :tangle no
         (use-package erefactor
-            :ensure t
-            :defer t
-            :config
-            (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map))
+          :ensure t
+          :defer t
+          :config
+          (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map))
 
         (use-package redshank
-            :ensure t
-            :defer t
-            :init (add-hook 'emacs-lisp-mode-hook 'redshank-mode))
+          :ensure t
+          :defer t
+          :init (add-hook 'emacs-lisp-mode-hook 'redshank-mode))
 
         (define-key emacs-lisp-mode-map (kbd "C-c .") 'find-function-at-point)
         (bind-key "C-c f" 'find-function)
@@ -2680,64 +2653,61 @@
         :init
         (use-package js2-imenu-extras)
         :config
-        (progn
-          (js2-imenu-extras-setup)
-          (setq js2-use-font-lock-faces t)
-          (setq js2-allow-keywords-as-property-names nil)
-          (setq js2-bounce-indent-flag nil)
-          (setq js2-cleanup-whitespace t)
-          (setq js2-enter-indents-newline nil)
-          (setq js2-highlight-level 3)
-          (setq js2-indent-on-enter-key nil)
-          (setq js2-skip-preprocessor-directives t)
-          (setq js2-basic-offset 4)
-          (setq js2-bounce-indent-p t)
-          ;; Special improvements using the mooz fork
-          ;; https://github.com/mooz/js2-mode
-          (setq js2-consistent-level-indent-inner-bracket-p t)
-          (setq js2-use-ast-for-indentation-p t)
-          (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
-          (setq-default js2-global-externs
-                        '("module" "require" "jQuery" "$" "_" "buster"
-                          "sinon" "assert" "refute" "setTimeout" "clearTimeout"
-                          "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
-          (setq-default js2-idle-timer-delay 0.1)
-          (setq-default js2-mirror-mode t)
-          (setq-default js2-auto-indent-p t)
-          (setq-default js2-concat-multiline-strings 'eol)
-          ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
-          ;; add any symbols to a buffer-local var of acceptable global vars
-          ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
-          ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
-          ;; you can;t have a symbol called "someName:false"
-          (add-hook 'js2-post-parse-callbacks
-                    (lambda ()
-                      (when (> (buffer-size) 0)
-                        (let ((btext (replace-regexp-in-string
-                                      ": *true" " "
-                                      (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
-                          (mapc (apply-partially 'add-to-list 'js2-additional-externs)
-                                (split-string
-                                 (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
-                                 " *, *" t))
-                          ))))
-          (add-hook 'js2-mode-hook '(lambda ()
-                                      (setq flycheck-checker 'javascript-jshint)
-                                      (tern-mode t)))
-          ;;TODO: maybe make hydra
-          (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
-          (define-key js2-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
-          (define-key js2-mode-map (kbd "C-c b") 'js-send-buffer)
-          (define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
-          (define-key js2-mode-map (kbd "C-c l") 'js-load-file-and-go)
-          ))
+        (js2-imenu-extras-setup)
+        (setq js2-use-font-lock-faces t)
+        (setq js2-allow-keywords-as-property-names nil)
+        (setq js2-bounce-indent-flag nil)
+        (setq js2-cleanup-whitespace t)
+        (setq js2-enter-indents-newline nil)
+        (setq js2-highlight-level 3)
+        (setq js2-indent-on-enter-key nil)
+        (setq js2-skip-preprocessor-directives t)
+        (setq js2-basic-offset 4)
+        (setq js2-bounce-indent-p t)
+        ;; Special improvements using the mooz fork
+        ;; https://github.com/mooz/js2-mode
+        (setq js2-consistent-level-indent-inner-bracket-p t)
+        (setq js2-use-ast-for-indentation-p t)
+        (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
+        (setq-default js2-global-externs
+                      '("module" "require" "jQuery" "$" "_" "buster"
+                        "sinon" "assert" "refute" "setTimeout" "clearTimeout"
+                        "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
+        (setq-default js2-idle-timer-delay 0.1)
+        (setq-default js2-mirror-mode t)
+        (setq-default js2-auto-indent-p t)
+        (setq-default js2-concat-multiline-strings 'eol)
+        ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
+        ;; add any symbols to a buffer-local var of acceptable global vars
+        ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
+        ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
+        ;; you can;t have a symbol called "someName:false"
+        (add-hook 'js2-post-parse-callbacks
+                  (lambda ()
+                    (when (> (buffer-size) 0)
+                      (let ((btext (replace-regexp-in-string
+                                    ": *true" " "
+                                    (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
+                        (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+                              (split-string
+                               (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+                               " *, *" t))
+                        ))))
+        (add-hook 'js2-mode-hook '(lambda ()
+                                    (setq flycheck-checker 'javascript-jshint)
+                                    (tern-mode t)))
+        ;;TODO: maybe make hydra
+        (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+        (define-key js2-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
+        (define-key js2-mode-map (kbd "C-c b") 'js-send-buffer)
+        (define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
+        (define-key js2-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
-                                              ;TODO: play with js2-refactor
+      ;; TODO: play with js2-refactor
       (use-package js2-refactor
         :ensure t
         :config
-        (progn
-          (js2r-add-keybindings-with-prefix "C-c C-j")))
+        (js2r-add-keybindings-with-prefix "C-c C-j"))
 
       (use-package tern
         :ensure t
@@ -2884,46 +2854,41 @@
        (use-package jedi
          :ensure t
          :init
-         (progn
-           (setq jedi:complete-on-dot t)
-           (setq jedi:goto-definition-marker-ring-length 32))
+         (setq jedi:complete-on-dot t)
+         (setq jedi:goto-definition-marker-ring-length 32)
          :config
-         (progn
-           (defun custom/python-mode-hook ()
-             (auto-fill-mode 1)
-             (flycheck-mode)
-             (setq flycheck-checker 'python-flake8)
-             (setq indent-tabs-mode nil)
-             (setq tab-width 4)
-             ;;FIXME: find-project-flake8-config id somehow broken
-             ;; (setq flycheck-flake8rc (or (custom/find-project-flake8-config) flycheck-flake8rc))
-             (tooltip-mode -1)
-             )
-           (add-hook 'python-mode-hook 'custom/python-mode-hook)
-           (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
-           (add-hook 'python-mode-hook 'common-hooks/newline-hook)
-           (add-hook 'python-mode-hook
-                     (lambda ()
-                       (setq imenu-create-index-function 'imenu-default-create-index-function)))
-           (add-hook 'python-mode-hook 'yas/minor-mode-on)
-           (add-hook 'python-mode-hook 'jedi:setup)
-           (add-hook 'python-mode-hook 'jedi:ac-setup)
-           ))
+         (defun custom/python-mode-hook ()
+           (auto-fill-mode 1)
+           (flycheck-mode)
+           (setq flycheck-checker 'python-flake8)
+           (setq indent-tabs-mode nil)
+           (setq tab-width 4)
+           ;;FIXME: find-project-flake8-config id somehow broken
+           ;; (setq flycheck-flake8rc (or (custom/find-project-flake8-config) flycheck-flake8rc))
+           (tooltip-mode -1))
+         (add-hook 'python-mode-hook 'custom/python-mode-hook)
+         (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
+         (add-hook 'python-mode-hook 'common-hooks/newline-hook)
+         (add-hook 'python-mode-hook
+                   (lambda ()
+                     (setq imenu-create-index-function 'imenu-default-create-index-function)))
+         (add-hook 'python-mode-hook 'yas/minor-mode-on)
+         (add-hook 'python-mode-hook 'jedi:setup)
+         (add-hook 'python-mode-hook 'jedi:ac-setup))
 
        (use-package pylookup
          :defer t
          :config
-         (progn
-           ;; set executable file and db file
-           (setq pylookup-program (at-pylookup-dir "/pylookup.py"))
-           (setq pylookup-db-file (at-pylookup-dir "/pylookup.db"))
-           ;; set search option if you want
-           (setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
-           (defadvice pylookup-lookup
-               (around change-browse-url-browser-function activate)
-             "Use w3m for slime documentation lookup."
-             (let ((browse-url-browser-function 'w3m-browse-url))
-               ad-do-it))))
+         ;; set executable file and db file
+         (setq pylookup-program (at-pylookup-dir "/pylookup.py"))
+         (setq pylookup-db-file (at-pylookup-dir "/pylookup.db"))
+         ;; set search option if you want
+         (setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
+         (defadvice pylookup-lookup
+             (around change-browse-url-browser-function activate)
+           "Use w3m for slime documentation lookup."
+           (let ((browse-url-browser-function 'w3m-browse-url))
+             ad-do-it)))
 
        (use-package python
          :ensure t
@@ -3088,22 +3053,21 @@
         :defer t
         :command perl-mode
         :config
-        (progn
-          (setq cperl-hairy t)
-          (setq cperl-auto-newline-after-colon t)
-          (setq cperl-autoindent-on-semi t)
-          (setq cperl-extra-newline-before-brace nil)
-          (setq cperl-indent-parens-as-block t)
-              (setq cperl-auto-newline t)
-              (setq cperl-brace-offset 0)
-              (setq cperl-close-paren-offset -4)
-              (setq cperl-continued-brace-offset 0)
-              (setq cperl-continued-statement-offset 4)
-              (setq cperl-extra-newline-before-brace-multiline nil)
-              (setq cperl-indent-level 4)
-              (setq cperl-label-offset -4)
-              (setq cperl-merge-trailing-else nil)
-              (setq cperl-tab-always-indent t)))
+        (setq cperl-hairy t)
+        (setq cperl-auto-newline-after-colon t)
+        (setq cperl-autoindent-on-semi t)
+        (setq cperl-extra-newline-before-brace nil)
+        (setq cperl-indent-parens-as-block t)
+        (setq cperl-auto-newline t)
+        (setq cperl-brace-offset 0)
+        (setq cperl-close-paren-offset -4)
+        (setq cperl-continued-brace-offset 0)
+        (setq cperl-continued-statement-offset 4)
+        (setq cperl-extra-newline-before-brace-multiline nil)
+        (setq cperl-indent-level 4)
+        (setq cperl-label-offset -4)
+        (setq cperl-merge-trailing-else nil)
+        (setq cperl-tab-always-indent t))
 
       (defun custom/perl-mode-hook ()
         (cperl-mode 1)
@@ -3111,12 +3075,12 @@
         (setq indent-tabs-mode nil)
         (setq tab-width 4)
         (turn-on-eldoc-mode)
-          (yas-minor-mode t)
-          (setf prettify-symbols-alist '(("->" . ?→)
-                                                                       (">=" . ?≥)
-                                                                       ("<=" . ?≤)))
-          ;; ("<>" . ?≠)  ("=>" . ?⇒)
-          (prettify-symbols-mode t))
+        (yas-minor-mode t)
+        (setf prettify-symbols-alist '(("->" . ?→)
+                                       (">=" . ?≥)
+                                       ("<=" . ?≤)))
+        ;; ("<>" . ?≠)  ("=>" . ?⇒)
+        (prettify-symbols-mode t))
 
       (add-hook 'cperl-mode-hook 'custom/perl-mode-hook)
       (add-hook 'cperl-mode-hook 'common-hooks/prog-helpers)
@@ -3130,18 +3094,17 @@
         (use-package php-electric) ;; autocompletion
         (use-package ac-php-doc)
         :config
-        (progn
-          (setq php-manual-path custom/php-manual-path)
-          (defun custom/php-mode-hook ()
-            ;; style customization
-            (setq tab-width 4) ;; was 4
-            (setq indent-tabs-mode nil)
-            (setq c-basic-offset 4)
-            (setq show-trailing-whitespace t) ;; show trailing whitespace
-            )
-          (add-hook 'php-mode-hook 'custom/php-mode-hook)
-          (add-hook 'php-mode-hook 'set-up-php-ac)
-          (add-hook 'php-mode-hook 'common-hooks/prog-helpers)))
+        (setq php-manual-path custom/php-manual-path)
+        (defun custom/php-mode-hook ()
+          ;; style customization
+          (setq tab-width 4) ;; was 4
+          (setq indent-tabs-mode nil)
+          (setq c-basic-offset 4)
+          (setq show-trailing-whitespace t) ;; show trailing whitespace
+          )
+        (add-hook 'php-mode-hook 'custom/php-mode-hook)
+        (add-hook 'php-mode-hook 'set-up-php-ac)
+        (add-hook 'php-mode-hook 'common-hooks/prog-helpers))
     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
@@ -3157,27 +3120,23 @@
     #+BEGIN_SRC emacs-lisp
       (use-package sgml-mode
         :config
-        (progn
-          (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map)))
+        (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map))
 
       (use-package markdown-mode
         :ensure t
         :config
-        (progn
-          (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
-          (bind-key "C-<tab>" 'yas/expand markdown-mode-map)))
+        (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
+        (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
 
       (use-package web-mode
         :ensure t
         :defer t
         :mode "\\.html?\\'"
         :config
-        (progn
-          (setq web-mode-enable-current-element-highlight t)
-          (setq web-mode-ac-sources-alist
-                '(("css" . (ac-source-css-property))
-                  ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
-                )))
+        (setq web-mode-enable-current-element-highlight t)
+        (setq web-mode-ac-sources-alist
+              '(("css" . (ac-source-css-property))
+                ("html" . (ac-source-words-in-buffer ac-source-abbrev)))))
 
       (use-package yaml-mode :ensure t)
     #+END_SRC
@@ -3232,27 +3191,25 @@
       (use-package emmet-mode
         :ensure t
         :config
-        (progn
-          (use-package ac-emmet :ensure auto-complete)
-          (use-package helm-emmet :ensure helm)
-          (push 'html-mode ac-modes)
-          (push 'web-mode ac-modes)
-          (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
-          (add-hook 'css-mode-hook 'ac-emmet-css-setup)
-          (add-hook 'web-mode-hook 'ac-emmet-html-setup)
-          (bind-key "C-j" nil emmet-mode-keymap)
-          (bind-key "<C-return>" nil emmet-mode-keymap)
-          (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
-          (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
-          (setq emmet-move-cursor-between-quotes t)
-          (add-hook 'sgml-mode-hook 'emmet-mode)
-          (add-hook 'nxml-mode-hook 'emmet-mode)
-          (add-hook 'django-mode 'emmet-mode)
-          (add-hook 'sgml-mode-hook 'emmet-mode)
-          (add-hook 'css-mode-hook 'emmet-mode)
-          (add-hook 'emmet-mode-hook
-                    (lambda () (setq emmet-indentation 2)))
-          ))
+        (use-package ac-emmet :ensure auto-complete)
+        (use-package helm-emmet :ensure helm)
+        (push 'html-mode ac-modes)
+        (push 'web-mode ac-modes)
+        (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+        (add-hook 'css-mode-hook 'ac-emmet-css-setup)
+        (add-hook 'web-mode-hook 'ac-emmet-html-setup)
+        (bind-key "C-j" nil emmet-mode-keymap)
+        (bind-key "<C-return>" nil emmet-mode-keymap)
+        (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
+        (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
+        (setq emmet-move-cursor-between-quotes t)
+        (add-hook 'sgml-mode-hook 'emmet-mode)
+        (add-hook 'nxml-mode-hook 'emmet-mode)
+        (add-hook 'django-mode 'emmet-mode)
+        (add-hook 'sgml-mode-hook 'emmet-mode)
+        (add-hook 'css-mode-hook 'emmet-mode)
+        (add-hook 'emmet-mode-hook
+                  (lambda () (setq emmet-indentation 2))))
     #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -3355,42 +3312,41 @@
         (use-package erc-hl-nicks :ensure t)
         (use-package ercn :ensure t) ;TODO: add notifications handler function
         :config
-        (progn
-          (erc-pcomplete-mode 1)
-          (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                          "324" "329" "332" "333" "353" "477"))
-          (setq erc-kill-queries-on-quit t)
-          (setq erc-autojoin-channels-alist
-                '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
-                  ))
-          (setq erc-keywords '((".*Online.*" (:foreground "green"))
-                               (".*Busy" (:foreground "red"))
-                               (".*Away" (:foreground "red"))
-                               (".*Idle" (:foreground "orange"))
-                               ))
-          (setq erc-nickserv-passwords
-                '((freenode ((private/erc-nick-main . private/erc-password-main)
-                             (private/erc-nick-work . private/erc-password-work)))))
-          (setq erc-prompt-for-nickserv-password nil)
-          (setq erc-nick private/erc-nick-main)
-          (setq erc-track-priority-faces-only 'all)
-          (setq erc-log-channels-directory custom/erc-logs-directory)
-          (setq erc-autoaway-message custom/erc-autoaway-message)
-          (setq erc-auto-query 'buffer)
-          (setq erc-log-channels t)
-          (setq erc-max-buffer-size 20000)
+        (erc-pcomplete-mode 1)
+        (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                        "324" "329" "332" "333" "353" "477"))
+        (setq erc-kill-queries-on-quit t)
+        (setq erc-autojoin-channels-alist
+              '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
+                ))
+        (setq erc-keywords '((".*Online.*" (:foreground "green"))
+                             (".*Busy" (:foreground "red"))
+                             (".*Away" (:foreground "red"))
+                             (".*Idle" (:foreground "orange"))
+                             ))
+        (setq erc-nickserv-passwords
+              '((freenode ((private/erc-nick-main . private/erc-password-main)
+                           (private/erc-nick-work . private/erc-password-work)))))
+        (setq erc-prompt-for-nickserv-password nil)
+        (setq erc-nick private/erc-nick-main)
+        (setq erc-track-priority-faces-only 'all)
+        (setq erc-log-channels-directory custom/erc-logs-directory)
+        (setq erc-autoaway-message custom/erc-autoaway-message)
+        (setq erc-auto-query 'buffer)
+        (setq erc-log-channels t)
+        (setq erc-max-buffer-size 20000)
 
-          (erc-autojoin-mode t)
-          (erc-fill-mode t)
-          (erc-nickserv-mode 1)
-          (erc-ring-mode t)
-          (erc-match-enable)
-          (erc-match-mode 1)
-          (erc-timestamp-mode t)
-          (erc-log-enable)
+        (erc-autojoin-mode t)
+        (erc-fill-mode t)
+        (erc-nickserv-mode 1)
+        (erc-ring-mode t)
+        (erc-match-enable)
+        (erc-match-mode 1)
+        (erc-timestamp-mode t)
+        (erc-log-enable)
 
-          (defhydra hydra-erc (:color blue)
-            "
+        (defhydra hydra-erc (:color blue)
+          "
         IRC   ^Connection^ ^Tools^
         ------------------------
         _s_lack      _q_ leave server
@@ -3398,13 +3354,12 @@
         select _u_nread buffer
         _i_nsert nick
         "
-            ("s" custom/connect-slack-irc)
-            ("q" custom/leave-irc-server)
-            ("b" custom/select-erc-buffer)
-            ("u" custom/select-erc-unread-buffer)
-            ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
-          (global-set-key (kbd "C-q") 'hydra-erc/body)
-          ))
+          ("s" custom/connect-slack-irc)
+          ("q" custom/leave-irc-server)
+          ("b" custom/select-erc-buffer)
+          ("u" custom/select-erc-unread-buffer)
+          ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
+        (global-set-key (kbd "C-q") 'hydra-erc/body))
     #+END_SRC
 ** jabber
 *** definitions
@@ -3582,37 +3537,36 @@
          (use-package jabber-bookmarks)
          (use-package jabber-autoaway)
          :config
-         (progn
-           (when custom/use-zenburn-in-jabber
-             (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
-             (set-face-attribute 'jabber-roster-user-online nil :foreground "#dfaf8f" :weight 'bold)
-             (set-face-attribute 'jabber-roster-user-away nil :foreground "#8fb28f")
-             (set-face-attribute 'jabber-roster-user-xa nil :foreground "#7f9f7f")
-             (set-face-attribute 'jabber-roster-user-offline nil :foreground "#606060")
-             (set-face-attribute 'jabber-roster-user-dnd nil :foreground "#94bff3" :weight 'bold)
-             (set-face-attribute 'jabber-roster-user-error nil :foreground "#e37170" :background "#332323")
-             (set-face-attribute 'jabber-title-small nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-             (set-face-attribute 'jabber-title-medium nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-             (set-face-attribute 'jabber-title-large nil :inherit 'variable-pitch :weight 'bold :height 1.2)
-             (set-face-attribute 'jabber-chat-prompt-local nil :foreground "#f0dfaf" :weight 'bold)
-             (set-face-attribute 'jabber-chat-prompt-foreign nil :foreground "#dfaf8f" :weight 'bold)
-             (set-face-attribute 'jabber-rare-time-face nil :foreground "#8fb28f"))
-           (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
+         (when custom/use-zenburn-in-jabber
+           (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
+           (set-face-attribute 'jabber-roster-user-online nil :foreground "#dfaf8f" :weight 'bold)
+           (set-face-attribute 'jabber-roster-user-away nil :foreground "#8fb28f")
+           (set-face-attribute 'jabber-roster-user-xa nil :foreground "#7f9f7f")
+           (set-face-attribute 'jabber-roster-user-offline nil :foreground "#606060")
+           (set-face-attribute 'jabber-roster-user-dnd nil :foreground "#94bff3" :weight 'bold)
+           (set-face-attribute 'jabber-roster-user-error nil :foreground "#e37170" :background "#332323")
+           (set-face-attribute 'jabber-title-small nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+           (set-face-attribute 'jabber-title-medium nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+           (set-face-attribute 'jabber-title-large nil :inherit 'variable-pitch :weight 'bold :height 1.2)
+           (set-face-attribute 'jabber-chat-prompt-local nil :foreground "#f0dfaf" :weight 'bold)
+           (set-face-attribute 'jabber-chat-prompt-foreign nil :foreground "#dfaf8f" :weight 'bold)
+           (set-face-attribute 'jabber-rare-time-face nil :foreground "#8fb28f"))
+         (custom-set-faces '(jabber-chat-prompt-system ((t (:foreground "darkgreen" :weight bold)))))
 
-           ;; Message alert hooks
-           (define-jabber-alert echo "Show a message in the echo area"
-             (lambda (msg)
-               (unless (minibuffer-prompt)
-                 (message "%s" msg))))
+         ;; Message alert hooks
+         (define-jabber-alert echo "Show a message in the echo area"
+           (lambda (msg)
+             (unless (minibuffer-prompt)
+               (message "%s" msg))))
 
-           (defun my-jabber-connect-hook (jc)
-             (jabber-send-presence "" "I'm online" 10)
-             (let* ((state-data (fsm-get-state-data jc))
-                    (server (plist-get state-data :server)))
-               (message "%s" server)
-               ))
-           (defhydra hydra-jabber ()
-             "
+         (defun my-jabber-connect-hook (jc)
+           (jabber-send-presence "" "I'm online" 10)
+           (let* ((state-data (fsm-get-state-data jc))
+                  (server (plist-get state-data :server)))
+             (message "%s" server)
+             ))
+         (defhydra hydra-jabber ()
+           "
          ^insert^         ^navigate^
          -------------------------------------------------
          _8_ :-*          _r_oster
@@ -3621,45 +3575,44 @@
          _t_ (c)          open _m_uc
          _a_bbreviation
          "
-             ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
-             ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
-             ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
-             ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
-             ("6" (lambda () (interactive) (insert "^^^")) "^^^")
-             ("a" custom/jabber-abbrev)
-             ("r" jabber-switch-to-roster-buffer)
-             ("s" jabber-activity-switch-to :color blue)
-             ("j" custom/helm-jabber-chat-with)
-             ("m" custom/jabber-muc-sendto)
-             ;;TODO: move other insertions here, for example, current time, etc.
-             ("q" nil "cancel"))
-           (global-set-key (kbd "<f6>") 'hydra-jabber/body)
-           (setq fsm-debug nil)
-           (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
-           (setq jabber-account-list custom/jabber-account-list)
-           (setq jabber-alert-info-message-hooks 'jabber-info-echo)
-           (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
-           (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
-           (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
-           (setq jabber-auto-reconnect t)
-           (setq jabber-backlog-number 100)
-           (setq jabber-chat-buffer-format "*-jc-%n-*")
-           (setq jabber-groupchat-buffer-format "*-jg-%n-*")
-           (setq jabber-history-dir custom/jabber-history-dir)
-           (setq jabber-history-enabled t)
-           (setq jabber-mode-line-mode t)
-           (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
-           (setq jabber-nickname (capitalize global-username))
-           (setq jabber-rare-time-format "%e %b %Y %H:00")
-           (setq jabber-resource custom/jabber-resource)
-           (setq jabber-roster-buffer "*-jroster-*")
-           (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
-           (setq jabber-use-global-history nil)
-           (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
-           (add-hook 'jabber-chat-mode-hook 'goto-address)
-           (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
-           (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method)))
-           ))
+           ("8" (lambda () (interactive) (insert ":-* ")) ":-*")
+           ("l" (lambda () (interactive) (insert "*IN LOVE* ")) "*IN LOVE*")
+           ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
+           ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
+           ("6" (lambda () (interactive) (insert "^^^")) "^^^")
+           ("a" custom/jabber-abbrev)
+           ("r" jabber-switch-to-roster-buffer)
+           ("s" jabber-activity-switch-to :color blue)
+           ("j" custom/helm-jabber-chat-with)
+           ("m" custom/jabber-muc-sendto)
+           ;;TODO: move other insertions here, for example, current time, etc.
+           ("q" nil "cancel"))
+         (global-set-key (kbd "<f6>") 'hydra-jabber/body)
+         (setq fsm-debug nil)
+         (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
+         (setq jabber-account-list custom/jabber-account-list)
+         (setq jabber-alert-info-message-hooks 'jabber-info-echo)
+         (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
+         (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
+         (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
+         (setq jabber-auto-reconnect t)
+         (setq jabber-backlog-number 100)
+         (setq jabber-chat-buffer-format "*-jc-%n-*")
+         (setq jabber-groupchat-buffer-format "*-jg-%n-*")
+         (setq jabber-history-dir custom/jabber-history-dir)
+         (setq jabber-history-enabled t)
+         (setq jabber-mode-line-mode t)
+         (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
+         (setq jabber-nickname (capitalize global-username))
+         (setq jabber-rare-time-format "%e %b %Y %H:00")
+         (setq jabber-resource custom/jabber-resource)
+         (setq jabber-roster-buffer "*-jroster-*")
+         (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
+         (setq jabber-use-global-history nil)
+         (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
+         (add-hook 'jabber-chat-mode-hook 'goto-address)
+         (add-hook 'jabber-post-connect-hooks 'my-jabber-connect-hook)
+         (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method))))
      #+END_SRC
 **** darwin
      #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
@@ -3715,11 +3668,9 @@
 
       (use-package term
         :config
-        (progn
-          (add-hook 'term-exec-hook 'custom/term-exec-hook)
-          (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
-          (setq explicit-shell-file-name "/bin/zsh")
-          ))
+        (add-hook 'term-exec-hook 'custom/term-exec-hook)
+        (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+        (setq explicit-shell-file-name "/bin/zsh"))
 
       (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
     #+END_SRC
@@ -3755,11 +3706,10 @@
     #+BEGIN_SRC emacs-lisp
       (use-package eshell
         :config
-        (progn
-          (defun eshell-handle-ansi-color ()
-            (ansi-color-apply-on-region eshell-last-output-start
-                                        eshell-last-output-end))
-          (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
+        (defun eshell-handle-ansi-color ()
+          (ansi-color-apply-on-region eshell-last-output-start
+                                      eshell-last-output-end))
+        (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color))
     #+END_SRC
 *** hooks
     #+BEGIN_SRC emacs-lisp
@@ -3784,40 +3734,38 @@
        :defer t
        :commands w3m
        :init
-       (progn
-         (use-package w3m-search)
-         (add-hook 'w3m-display-hook
-                   (lambda (url)
-                     (rename-buffer
-                      (format "*w3m: %s*" (or w3m-current-title
-                                              w3m-current-url)) t))))
+       (use-package w3m-search)
+       (add-hook 'w3m-display-hook
+                 (lambda (url)
+                   (rename-buffer
+                    (format "*w3m: %s*" (or w3m-current-title
+                                            w3m-current-url)) t)))
        :config
-       (progn
-         (setq w3m-coding-system 'utf-8)
-         (setq w3m-file-coding-system 'utf-8)
-         (setq w3m-file-name-coding-system 'utf-8)
-         (setq w3m-input-coding-system 'utf-8)
-         (setq w3m-output-coding-system 'utf-8)
-         (setq w3m-terminal-coding-system 'utf-8)
-         (setq w3m-use-cookies t)
-         ;; special chars
-         (standard-display-ascii ?\200 [15])
-         (standard-display-ascii ?\201 [21])
-         (standard-display-ascii ?\202 [24])
-         (standard-display-ascii ?\203 [13])
-         (standard-display-ascii ?\204 [22])
-         (standard-display-ascii ?\205 [25])
-         (standard-display-ascii ?\206 [12])
-         (standard-display-ascii ?\210 [23])
-         (standard-display-ascii ?\211 [14])
-         (standard-display-ascii ?\212 [18])
-         (standard-display-ascii ?\214 [11])
-         (standard-display-ascii ?\222 [?\'])
-         (standard-display-ascii ?\223 [?\"])
-         (standard-display-ascii ?\224 [?\"])
-         (standard-display-ascii ?\227 " -- ")
-         (add-to-list 'w3m-search-engine-alist
-                      '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s"))))
+       (setq w3m-coding-system 'utf-8)
+       (setq w3m-file-coding-system 'utf-8)
+       (setq w3m-file-name-coding-system 'utf-8)
+       (setq w3m-input-coding-system 'utf-8)
+       (setq w3m-output-coding-system 'utf-8)
+       (setq w3m-terminal-coding-system 'utf-8)
+       (setq w3m-use-cookies t)
+       ;; special chars
+       (standard-display-ascii ?\200 [15])
+       (standard-display-ascii ?\201 [21])
+       (standard-display-ascii ?\202 [24])
+       (standard-display-ascii ?\203 [13])
+       (standard-display-ascii ?\204 [22])
+       (standard-display-ascii ?\205 [25])
+       (standard-display-ascii ?\206 [12])
+       (standard-display-ascii ?\210 [23])
+       (standard-display-ascii ?\211 [14])
+       (standard-display-ascii ?\212 [18])
+       (standard-display-ascii ?\214 [11])
+       (standard-display-ascii ?\222 [?\'])
+       (standard-display-ascii ?\223 [?\"])
+       (standard-display-ascii ?\224 [?\"])
+       (standard-display-ascii ?\227 " -- ")
+       (add-to-list 'w3m-search-engine-alist
+                    '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s")))
    #+END_SRC
 ** MPD
    #+BEGIN_SRC emacs-lisp
@@ -4048,8 +3996,7 @@
        :ensure t
        :defer t
        :init
-       (progn
-         (use-package google-translate-default-ui)))
+       (use-package google-translate-default-ui))
 
      (use-package jenkins
        :ensure t
@@ -4073,30 +4020,28 @@
        :init
        (use-package bbdb :ensure t)
        :config
-       (progn
-         (setq bbdb-change-hook 'bbdb-timestamp-hook)
-         (setq bbdb-complete-name-allow-cycling t)
-         (setq bbdb-completion-display-record nil)
-         (setq bbdb-dwim-net-address-allow-redundancy t)
-         (setq bbdb-file '"~/.database.bbdb")
-         (setq bbdb-north-american-phone-numbers-p nil)
-         (setq bbdb-notice-hook 'bbdb-auto-notes-hook)
-         (setq bbdb-offer-save 'savenoprompt) ;'automatic
-         (setq bbdb-phone-style 'nil)
-         (setq bbdb-quiet-about-name-mismatches t)
-         (setq bbdb-readonly-p nil)
-         (setq bbdb-sounds-directory nil)
-         (setq bbdb-use-alternate-names nil)
-         (setq bbdb-use-pop-up nil)
-         (setq bbdb/mail-auto-create-p 'bbdb-ignore-most-messages-hook)
-         (setq news-reply-header-hook nil)
-         (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
-         (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
-         (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
-         (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
-         (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
-         (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map)
-         ))
+       (setq bbdb-change-hook 'bbdb-timestamp-hook)
+       (setq bbdb-complete-name-allow-cycling t)
+       (setq bbdb-completion-display-record nil)
+       (setq bbdb-dwim-net-address-allow-redundancy t)
+       (setq bbdb-file '"~/.database.bbdb")
+       (setq bbdb-north-american-phone-numbers-p nil)
+       (setq bbdb-notice-hook 'bbdb-auto-notes-hook)
+       (setq bbdb-offer-save 'savenoprompt) ;'automatic
+       (setq bbdb-phone-style 'nil)
+       (setq bbdb-quiet-about-name-mismatches t)
+       (setq bbdb-readonly-p nil)
+       (setq bbdb-sounds-directory nil)
+       (setq bbdb-use-alternate-names nil)
+       (setq bbdb-use-pop-up nil)
+       (setq bbdb/mail-auto-create-p 'bbdb-ignore-most-messages-hook)
+       (setq news-reply-header-hook nil)
+       (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
+       (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
+       (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
+       (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
+       (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
+       (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map))
    #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp
@@ -4107,62 +4052,60 @@
        (use-package calfw-ical)
        (use-package calfw-org)
        :config
-       (progn
-         (setq calendar-week-start-day 1) ; 0:Sunday, 1:Monday
-         ;; Unicode characters
-         (setq cfw:fchar-junction ?╬
-               cfw:fchar-vertical-line ?║
-               cfw:fchar-horizontal-line ?═
-               cfw:fchar-left-junction ?╠
-               cfw:fchar-right-junction ?╣
-               cfw:fchar-top-junction ?╦
-               cfw:fchar-top-left-corner ?╔
-               cfw:fchar-top-right-corner ?╗)
-         ;; Week days
-         (setq calendar-day-name-array
-               ["Воскресенье" "Понедельник" "Вторник" "Среда" "Четверг" "Пятница" "Суббота"])
-         ;; Month
-         (setq calendar-month-name-array
-               ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь"
-                "Октябрь" "Ноябрь" "Декабрь"])
-         (custom-set-faces
-          '(cfw:face-title ((t (:foreground "#f0dfaf" :weight bold :height 2.0 :inherit variable-pitch))))
-          '(cfw:face-header ((t (:foreground "#d0bf8f" :weight bold))))
-          '(cfw:face-sunday ((t :foreground "#cc9393" :background "grey10" :weight bold)))
-          '(cfw:face-saturday ((t :foreground "#8cd0d3" :background "grey10" :weight bold)))
-          '(cfw:face-holiday ((t :background "grey10" :foreground "#8c5353" :weight bold)))
-          '(cfw:face-grid ((t :foreground "DarkGrey")))
-          '(cfw:face-default-content ((t :foreground "#bfebbf")))
-          '(cfw:face-periods ((t :foreground "cyan")))
-          '(cfw:face-day-title ((t :background "grey10")))
-          '(cfw:face-default-day ((t :weight bold :inherit cfw:face-day-title)))
-          '(cfw:face-annotation ((t :foreground "RosyBrown" :inherit cfw:face-day-title)))
-          '(cfw:face-disable ((t :foreground "DarkGray" :inherit cfw:face-day-title)))
-          '(cfw:face-today-title ((t :background "#7f9f7f" :weight bold)))
-          '(cfw:face-today ((t :background: "grey10" :weight bold)))
-          '(cfw:face-select ((t :background "#2f2f2f")))
-          '(cfw:face-toolbar ((t :foreground "Steelblue4" :background "Steelblue4")))
-          '(cfw:face-toolbar-button-off ((t :foreground "Gray10" :weight bold)))
-          '(cfw:face-toolbar-button-on ((t :foreground "Gray50" :weight bold))))
-         (defun custom/calfw-open-calendar ()
-           (interactive)
-           (cfw:open-calendar-buffer
-            :contents-sources
-            (list
-             (cfw:org-create-source "Green")  ; orgmode source
-             (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
-             (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed"))))))
+       (setq calendar-week-start-day 1) ; 0:Sunday, 1:Monday
+       ;; Unicode characters
+       (setq cfw:fchar-junction ?╬
+             cfw:fchar-vertical-line ?║
+             cfw:fchar-horizontal-line ?═
+             cfw:fchar-left-junction ?╠
+             cfw:fchar-right-junction ?╣
+             cfw:fchar-top-junction ?╦
+             cfw:fchar-top-left-corner ?╔
+             cfw:fchar-top-right-corner ?╗)
+       ;; Week days
+       (setq calendar-day-name-array
+             ["Воскресенье" "Понедельник" "Вторник" "Среда" "Четверг" "Пятница" "Суббота"])
+       ;; Month
+       (setq calendar-month-name-array
+             ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь"
+              "Октябрь" "Ноябрь" "Декабрь"])
+       (custom-set-faces
+        '(cfw:face-title ((t (:foreground "#f0dfaf" :weight bold :height 2.0 :inherit variable-pitch))))
+        '(cfw:face-header ((t (:foreground "#d0bf8f" :weight bold))))
+        '(cfw:face-sunday ((t :foreground "#cc9393" :background "grey10" :weight bold)))
+        '(cfw:face-saturday ((t :foreground "#8cd0d3" :background "grey10" :weight bold)))
+        '(cfw:face-holiday ((t :background "grey10" :foreground "#8c5353" :weight bold)))
+        '(cfw:face-grid ((t :foreground "DarkGrey")))
+        '(cfw:face-default-content ((t :foreground "#bfebbf")))
+        '(cfw:face-periods ((t :foreground "cyan")))
+        '(cfw:face-day-title ((t :background "grey10")))
+        '(cfw:face-default-day ((t :weight bold :inherit cfw:face-day-title)))
+        '(cfw:face-annotation ((t :foreground "RosyBrown" :inherit cfw:face-day-title)))
+        '(cfw:face-disable ((t :foreground "DarkGray" :inherit cfw:face-day-title)))
+        '(cfw:face-today-title ((t :background "#7f9f7f" :weight bold)))
+        '(cfw:face-today ((t :background: "grey10" :weight bold)))
+        '(cfw:face-select ((t :background "#2f2f2f")))
+        '(cfw:face-toolbar ((t :foreground "Steelblue4" :background "Steelblue4")))
+        '(cfw:face-toolbar-button-off ((t :foreground "Gray10" :weight bold)))
+        '(cfw:face-toolbar-button-on ((t :foreground "Gray50" :weight bold))))
+       (defun custom/calfw-open-calendar ()
+         (interactive)
+         (cfw:open-calendar-buffer
+          :contents-sources
+          (list
+           (cfw:org-create-source "Green")  ; orgmode source
+           (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
+           (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")))))
 
      (use-package calfw-gcal :ensure t)
 
      (use-package org-gcal
        :ensure t
        :config
-       (progn
-         (setq org-gcal-dir (at-data-dir "/org-gcal/"))
-         (setq org-gcal-client-id private/org-gcal-client-id)
-         (setq org-gcal-client-secret private/org-gcal-client-secret)
-         (setq org-gcal-file-alist private/org-gcal-file-alist)))
+       (setq org-gcal-dir (at-data-dir "/org-gcal/"))
+       (setq org-gcal-client-id private/org-gcal-client-id)
+       (setq org-gcal-client-secret private/org-gcal-client-secret)
+       (setq org-gcal-file-alist private/org-gcal-file-alist))
    #+END_SRC
 ** deft
 *** definitions
@@ -4929,17 +4872,16 @@
      #+BEGIN_SRC emacs-lisp :tangle no
        ;; review
        (use-package org
-           :init
-           (progn
-               (setq org-clock-idle-time nil)
-               (setq org-log-done 'time)
-               (setq org-clock-continuously nil)
-               (setq org-clock-persist t)
-               (setq org-clock-in-switch-to-state "STARTED")
-               (setq org-clock-in-resume nil)
-               (setq org-show-notification-handler 'message)
-               (setq org-clock-report-include-clocking-task t))
-           :config
+         :init
+         (setq org-clock-idle-time nil)
+         (setq org-log-done 'time)
+         (setq org-clock-continuously nil)
+         (setq org-clock-persist t)
+         (setq org-clock-in-switch-to-state "STARTED")
+         (setq org-clock-in-resume nil)
+         (setq org-show-notification-handler 'message)
+         (setq org-clock-report-include-clocking-task t)
+         :config
          (org-clock-persistence-insinuate))
 
        (add-hook 'org-clock-in-prepare-hook
@@ -5322,17 +5264,15 @@
       ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
       ;; trough).
       :config
-      (progn
-        (setq sauron-separate-frame nil)
-        (setq sauron-hide-mode-line t)
-        (setq sauron-max-line-length 200)
-        (setq sauron-modules
-              '(sauron-erc sauron-dbus sauron-org sauron-notifications))
-        (add-hook 'sauron-event-added-functions 'sauron-fx-notify)
-        (bind-key "C-c r t" 'sauron-toggle-hide-show)
-        (bind-key "C-c r c" 'sauron-clear)
-        (sauron-start)
-        ))
+      (setq sauron-separate-frame nil)
+      (setq sauron-hide-mode-line t)
+      (setq sauron-max-line-length 200)
+      (setq sauron-modules
+            '(sauron-erc sauron-dbus sauron-org sauron-notifications))
+      (add-hook 'sauron-event-added-functions 'sauron-fx-notify)
+      (bind-key "C-c r t" 'sauron-toggle-hide-show)
+      (bind-key "C-c r c" 'sauron-clear)
+      (sauron-start))
 
     ;; TODO: extract emacs init file name
     ;; TODO: deal with emacs server someway
@@ -5390,10 +5330,9 @@
     ;;   :init
     ;;   (autoload 'typing-of-emacs "typing" nil t)
     ;;   :config
-    ;;   (progn
-    ;;     (setq toe-starting-length 6)
-    ;;     (setq toe-starting-time-per-word 2)
-    ;;     (setq toe-max-length 20)))
+    ;;   (setq toe-starting-length 6)
+    ;;   (setq toe-starting-time-per-word 2)
+    ;;   (setq toe-max-length 20))
   #+END_SRC
 * auto-modes
   #+BEGIN_SRC emacs-lisp
