@@ -21,7 +21,7 @@
 
 (require 'use-package)
 
-(use-package org-plus-contrib :ensure t)
+(use-package org-plus-contrib :disabled t) ;; 8.3.3 is broken
 (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
                          org-bibtex org-clock org-docview org-habit
                          org-id org-info org-inlinetask org-irc
@@ -29,6 +29,6 @@
 (setq org-contrib-extra '(org-bookmark org-checklist org-collector
                           org-drill org-expiry org-index org-interactive-query
                           org-man org-velocity))
-(setq org-modules `(,@org-contrib-base ,@org-contrib-extra))
+(setq org-modules `(,@org-contrib-base))
 
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
