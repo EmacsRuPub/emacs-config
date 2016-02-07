@@ -17,9 +17,9 @@
    (unless (package-installed-p package)
      (package-install package)))
  ;;base system packages for bootstrapping
- '(bind-key use-package))
+ '(req-package el-get))
 
-(require 'use-package)
+(require 'req-package)
 
 (use-package org-plus-contrib :disabled t) ;; 8.3.3 is broken
 (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
@@ -32,3 +32,5 @@
 (setq org-modules `(,@org-contrib-base))
 
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
+
+(req-package-finish)

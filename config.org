@@ -77,7 +77,7 @@
     #+END_SRC
 ** Encryption
    #+BEGIN_SRC emacs-lisp
-     (use-package epa
+     (req-package epa
        :config
        (epa-file-enable)
        (setq epg-gpg-home-directory "~/.gnupg"))
@@ -101,18 +101,17 @@
    #+END_SRC
 ** init essential packages
    #+BEGIN_SRC emacs-lisp
-     (use-package auto-compile
-       :ensure t
+     (req-package auto-compile
        :config
        (auto-compile-on-load-mode 1)
        (auto-compile-on-save-mode 1)
        (setq auto-compile-display-buffer nil)
        (setq auto-compile-mode-line-counter t))
 
-     (use-package f :ensure t)
-     (use-package diminish :ensure t)
-     (use-package names :ensure t)
-     (use-package anaphora :ensure t)
+     (req-package-force f :require s dash)
+     (req-package diminish)
+     (req-package names)
+     (req-package anaphora)
    #+END_SRC
 ** working directories
    A bunch of directories for various working datasets
@@ -225,9 +224,8 @@
    #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp
-     (use-package smart-mode-line
-       :ensure t
-       :ensure rich-minority
+     (req-package smart-mode-line
+       :require rich-minority
        :config
        (setq sml/no-confirm-load-theme t)
        (setq sml/theme 'respectful)
@@ -237,11 +235,11 @@
    #+END_SRC
 ** load themes and choose one
    #+BEGIN_SRC emacs-lisp
-     (use-package deep-thought-theme :ensure t :disabled t)
-     (use-package material-theme :ensure t :disabled t)
-     (use-package nzenburn-theme :ensure t :disabled t)
-     (use-package zenburn-theme :ensure t :disabled t)
-     (use-package darkburn-theme :ensure t)
+     (req-package deep-thought-theme :disabled t)
+     (req-package material-theme :disabled t)
+     (req-package nzenburn-theme :disabled t)
+     (req-package zenburn-theme :disabled t)
+     (req-package darkburn-theme)
 
      (load-theme 'darkburn t)
      (setq color-theme-is-global t)
@@ -264,7 +262,7 @@
 
      (custom/set-xwindows-font "consolas-base")
 
-     (use-package unicode-fonts :ensure t)
+     (req-package unicode-fonts)
      (unicode-fonts-setup)
    #+END_SRC
 ** update some faces values
@@ -286,7 +284,7 @@
    #+END_SRC
 ** save history
    #+BEGIN_SRC emacs-lisp
-     (use-package savehist
+     (req-package savehist
        :config
        (setq savehist-file (at-data-dir "/savehist"))
        (setq savehist-save-minibuffer-history t)
@@ -301,10 +299,9 @@
    #+END_SRC
 ** maintain recent files
    #+BEGIN_SRC emacs-lisp
-     (use-package recentf
+     (req-package recentf
+       :require recentf-ext
        :defer t
-       :init
-       (use-package recentf-ext :ensure t)
        :config
        (setq recentf-save-file (at-data-dir "/.recentf"))
        (setq recentf-max-saved-items 250)
@@ -323,14 +320,11 @@
      (setq delete-old-versions -1)
      (setq version-control t)
 
-     (use-package backup-walker
-       :ensure t
-       ;;TODO: bind to key and other stuff
-       )
+     (req-package backup-walker) ;TODO: bind to key and other stuff
    #+END_SRC
 ** desktop
    #+BEGIN_SRC emacs-lisp
-     (use-package desktop
+     (req-package desktop
        :config
        (setq-default desktop-missing-file-warning nil)
        (setq-default desktop-path '("~"))
@@ -423,14 +417,13 @@
                      "\n"))
              (princ "\n\n")))))
 
-     (use-package keyfreq
-       :ensure t
+     (req-package keyfreq
        :defer t
        :config
        (keyfreq-mode 1)
        (keyfreq-autosave-mode 1))
 
-     (use-package unbound :ensure t)
+     (req-package unbound)
    #+END_SRC
 ** remove elc after save
    If you're saving an elisp file, likely the .elc is no longer valid.
@@ -475,7 +468,7 @@
    #+END_SRC
 ** security
    #+BEGIN_SRC emacs-lisp
-     (use-package epg)
+     (req-package epg)
 
      (setq password-cache-expiry 7200)
      (setq password-cache t)
@@ -547,11 +540,10 @@
       (display-battery-mode 1)
       (display-time)
 
-      (use-package popwin :ensure t)
-      (use-package vline :ensure t)
+      (req-package popwin)
+      (req-package vline)
 
-      (use-package volatile-highlights
-        :ensure t
+      (req-package volatile-highlights
         :config
         (volatile-highlights-mode t))
     #+END_SRC
@@ -626,7 +618,7 @@
    #+END_SRC
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp
-     (use-package uniquify
+     (req-package uniquify
        :config
        (setq uniquify-buffer-name-style 'post-forward)
        (setq uniquify-separator ":")
@@ -635,8 +627,7 @@
    #+END_SRC
 ** diminish modeline contents
    #+BEGIN_SRC emacs-lisp
-     (use-package rich-minority
-       :ensure t
+     (req-package rich-minority
        :config
        (setq rm-blacklist
              '(" GitGutter"
@@ -650,13 +641,11 @@
                " Helm"
                )))
 
-     (use-package diminish
-       :ensure t
-       :commands diminish)
+     (req-package diminish :commands diminish)
    #+END_SRC
 ** view system processes info
    #+BEGIN_SRC emacs-lisp
-     (use-package list-processes+ :ensure t)
+     (req-package list-processes+)
 
      (global-set-key (kbd "C-x c") 'proced)
    #+END_SRC
@@ -720,7 +709,9 @@
     #+END_SRC
 *** use it
     #+BEGIN_SRC emacs-lisp
-      (use-package hydra :ensure t)
+      (req-package hydra
+        :config
+        (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
 * navigate
 ** URLs, links and TAPs
@@ -769,13 +760,11 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package ace-link
-        :ensure t
+      (req-package ace-link
         :config
         (ace-link-setup-default))
 
-      (use-package link-hint
-        :ensure t)
+      (req-package link-hint)
     #+END_SRC
 ** cursor positioning
    #+BEGIN_SRC emacs-lisp
@@ -846,7 +835,7 @@
 
      (setq scroll-preserve-screen-position 'always)
 
-     (use-package saveplace
+     (req-package saveplace
        :config
        (setq save-place-file (at-data-dir "/.emacs-places"))
        (setq save-place t))
@@ -880,26 +869,18 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package helm
-        :defer t
+      (req-package-force helm
         :init
-        (use-package helm-config)
-        (use-package helm-files)
-        (use-package helm-info)
-        (use-package helm-locate)
-        (use-package helm-misc)
-        (use-package helm-grep)
-        (use-package wgrep-helm :ensure t) ;TODO: maybe configure
-        (use-package helm-projectile :ensure t
+        (req-package helm-config)
+        (req-package helm-files)
+        (req-package helm-info)
+        (req-package helm-locate)
+        (req-package helm-misc)
+        (req-package helm-grep)
+        (req-package helm-buffers
           :config
-          (helm-projectile-on))
-        (use-package helm-descbinds :ensure t)
-        (use-package helm-themes :ensure t)
-        (use-package helm-helm-commands :ensure t)
-        (use-package helm-dired-recent-dirs :ensure t)
-        (use-package helm-flycheck :ensure t)
+          (pushnew 'python-mode helm-buffers-favorite-modes))
         :config
-        (use-package ac-helm :ensure auto-complete)
         (setq helm-quick-update t)
         (setq helm-split-window-in-side-p t)
         (setq helm-ff-search-library-in-sexp t)
@@ -913,8 +894,6 @@
         (setq helm-move-to-line-cycle-in-source t)
         (setq helm-buffer-max-length nil)
         (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
-        (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff")
-        (pushnew 'python-mode helm-buffers-favorite-modes)
         (bind-key "C-<down>" 'helm-next-source helm-map)
         (bind-key "C-<up>" 'helm-previous-source helm-map)
         (bind-key "C-x b" 'helm-buffers-list)
@@ -934,8 +913,23 @@
         ;;TODO: investigate and bind 'helm-descbinds
         )
 
-      (use-package helm-ag
-        :ensure t
+      (req-package wgrep-helm
+        :require helm wgrep) ;TODO: maybe configure
+
+      (req-package helm-projectile
+        :require helm projectile dash cl-lib
+        :config
+        (helm-projectile-on))
+
+      (req-package helm-descbinds :require helm)
+      (req-package helm-themes :require helm)
+      (req-package helm-helm-commands :require helm)
+      (req-package helm-dired-recent-dirs :require helm)
+      (req-package helm-flycheck :require helm)
+      (req-package ac-helm :require helm auto-complete popup cl-lib)
+
+      (req-package helm-ag
+        :require helm
         :config
         (setq helm-ag-insert-at-point 'symbol)
         (setq helm-ag-fuzzy-match t)
@@ -944,8 +938,8 @@
           (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
 
       ;;TODO: sync and maybe slurp something from rc-cc
-      (use-package helm-gtags
-        :ensure t
+      (req-package helm-gtags
+        :require helm
         :defer t
         :config
         (setq helm-gtags-path-style 'relative)
@@ -968,13 +962,13 @@
         (add-hook 'c-mode-hook 'helm-gtags-mode)
         (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
-      ;;(use-package helm-fuzzier
-      ;;  :ensure t
-      ;;  :config
-      ;;  (helm-fuzzier-mode 1))
+      ;; (req-package helm-fuzzier
+      ;;   :require helm
+      ;;   :config
+      ;;   (helm-fuzzier-mode 1))
 
-      (use-package helm-flx
-        :ensure t
+      (req-package helm-flx
+        :require helm flx
         :config
         (helm-flx-mode 1))
     #+END_SRC
@@ -1003,8 +997,8 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package projectile
-        :ensure t
+      (req-package projectile
+        :require dash pkg-info
         :commands (projectile-find-file custom/projectile-ag)
         :config
         (projectile-global-mode) ;; to enable in all buffers
@@ -1057,9 +1051,7 @@
           ("S" projectile-run-async-shell-command-in-root))
         (global-set-key (kbd "<f8>") 'hydra-projectile/body))
 
-      (use-package projectile-sift
-        ;;TODO: customize
-        :ensure t)
+      (req-package projectile-sift :require sift projectile) ;;TODO: customize
     #+END_SRC
 ** dired
 *** always refresh contents
@@ -1158,9 +1150,8 @@
       (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
       (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
 
-      (use-package dired
+      (req-package dired
         :init
-        (use-package dired-sort-menu :ensure t)
         :config
         (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
         (setq dired-dwim-target t)
@@ -1176,8 +1167,9 @@
         (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
         (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
-      (use-package dired+
-        :ensure t
+      (req-package dired-sort-menu)
+
+      (req-package dired+
         :config
         ;; TODO: check if this is not obsolete yet
         (setq diredp-ignored-file-name 'green-face)
@@ -1185,7 +1177,7 @@
         (setq diredp-rare-priv 'white-red-face)
         (setq diredp-compressed-file-suffix 'darkyellow-face))
 
-      (use-package wdired
+      (req-package wdired
         :defer t
         :config
         (setq wdired-allow-to-change-permissions 'advanced)
@@ -1195,8 +1187,8 @@
         (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
         (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
-      (use-package dired-x)
-      (use-package dired-toggle-sudo :ensure t)
+      (req-package dired-x)
+      (req-package dired-toggle-sudo)
 
       ;; Reload dired after making changes
       (--each '(dired-do-rename
@@ -1205,16 +1197,16 @@
         (eval `(defadvice ,it (after revert-buffer activate)
                  (revert-buffer))))
 
-      (use-package dired-filetype-face :ensure t)
+      (req-package dired-filetype-face)
     #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp
-     (use-package bookmark+
-       :ensure t
+     (req-package bookmark+
        :init
-       (use-package crosshairs :ensure t)
        :config
        (setq bmkp-last-bookmark-file (at-data-dir "/bookmarks")))
+
+     (req-package crosshairs :require hl-line+ col-highlight vline)
    #+END_SRC
 ** search
 *** definitions
@@ -1239,39 +1231,35 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package wgrep :ensure t)
+      (req-package wgrep)
 
-      (use-package occur-context-resize
-        :ensure t)
+      (req-package occur-context-resize)
 
-      (use-package phi-search :ensure t)
+      (req-package phi-search)
 
-      (use-package sift
-        :ensure t
+      (req-package sift
         :config
         (defadvice sift-regexp (around escape-search-term activate)
           (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
           ad-do-it))
 
-      (use-package phi-search-mc
-        :ensure t
+      (req-package phi-search-mc
+        :require phi-search multiple-cursors
         :config
         (phi-search-mc/setup-keys)
         (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
 
-      (use-package fuzzy
-        :ensure t
+      (req-package fuzzy
         :config
         (turn-on-fuzzy-isearch))
     #+END_SRC
 ** operations with windows
    #+BEGIN_SRC emacs-lisp
-     (use-package zoom-window
-       :ensure t
+     (req-package zoom-window
        :config
        (setq zoom-window-mode-line-color "DarkGreen"))
 
-     (use-package windmove
+     (req-package windmove
        :bind
        (("C-s-<up>" . windmove-up)
         ("C-s-<down>" . windmove-down)
@@ -1279,15 +1267,14 @@
         ("C-s-<right>" . windmove-right)
         ))
 
-     (use-package windsize :ensure t)
+     (req-package windsize)
 
-     (use-package framemove
-       :ensure t
+     (req-package framemove
        :config
        (setq framemove-hook-into-windmove t))
 
-     (use-package ace-window
-       :ensure t
+     (req-package ace-window
+       :require avy
        :init
        (setq aw-background nil)
        (setq aw-leading-char-style 'char)
@@ -1297,8 +1284,7 @@
         '(aw-leading-char-face
           ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
-     (use-package transpose-frame
-       :ensure t
+     (req-package transpose-frame
        :config
        (defhydra hydra-transpose-frame ()
          "frames geometry management"
@@ -1380,7 +1366,7 @@
         ("q" nil "cancel"))
       (global-set-key (kbd "<f9>") 'hydra-scope/body)
 
-      (use-package ibuffer
+      (req-package ibuffer
         :defer t
         :config
         (setq ibuffer-default-sorting-mode 'major-mode) ;recency
@@ -1408,17 +1394,17 @@
       (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
       (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
 
-      (use-package recursive-narrow :ensure t)
+      (req-package recursive-narrow)
     #+END_SRC
 ** warping
    #+BEGIN_SRC emacs-lisp
-     (use-package swoop
-       :ensure t
+     (req-package swoop
+       :require ht pcre2el async
        :config
        (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
        (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map))
 
-     (use-package swiper
+     (req-package swiper
        :config
        (setq ivy-display-style 'fancy)
        (custom-set-faces
@@ -1431,19 +1417,19 @@
         '(swiper-minibuffer-match-face-4
           ((t :background "#ffbbff" :weight bold)))))
 
-     (use-package avy
-       :ensure t
+     (req-package avy
+       :require cl-lib
        :config
        (setq avy-timeout-seconds 0.5)
        (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
-     (use-package beacon
-       :ensure t
+     (req-package beacon
+       :require seq
        :config
        (setq beacon-color "#666600")
        (setq beacon-size 60))
 
-     (use-package filecache)
+     (req-package filecache)
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp
@@ -1573,7 +1559,7 @@
 
      )
 
-     (use-package scratch :ensure t)
+     (req-package scratch)
    #+END_SRC
 ** regions and rectangles
 *** definitions
@@ -1627,13 +1613,11 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package expand-region
-        :ensure t
+      (req-package expand-region
         :defer t
         :bind ("C-=" . er/expand-region))
 
-      (use-package region-bindings-mode
-        :ensure t
+      (req-package region-bindings-mode
         :config
         (region-bindings-mode-enable)
         (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
@@ -1650,8 +1634,7 @@
         (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
         (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
-      (use-package whole-line-or-region ;; if no region is active, act on current line
-        :ensure t
+      (req-package whole-line-or-region ;; if no region is active, act on current line
         :defer t
         :config
         (whole-line-or-region-mode 1)
@@ -1662,8 +1645,8 @@
                 (kill-ring-save whole-line-or-region-kill-ring-save nil)
                 (yank whole-line-or-region-yank nil))))
 
-      (use-package wrap-region
-        :ensure t
+      (req-package wrap-region
+        :require dash
         :config
         (wrap-region-global-mode 1)
         (wrap-region-add-wrapper "*" "*")
@@ -1724,28 +1707,26 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package anchored-transpose :ensure t)
+      (req-package anchored-transpose)
 
-      (use-package drag-stuff
-        :ensure t
+      (req-package drag-stuff
         :defer t
         :config
         (setq drag-stuff-modifier '(meta shift))
         (turn-off-drag-stuff-mode))
 
-      (use-package snakehump :ensure t)
-      (use-package adaptive-wrap :ensure t)
-      (use-package hungry-delete :ensure t)
-      (use-package replace+ :ensure t)
+      (req-package snakehump)
+      (req-package adaptive-wrap)
+      (req-package hungry-delete)
+      (req-package replace+)
 
-      (use-package multiple-cursors
-        :ensure t
+      (req-package multiple-cursors
         :config
         (setq mc/list-file (at-data-dir "/.mc-lists.el")))
 
-      (use-package mc-extras
+      (req-package mc-extras
         ;;TODO: explore and bind functions
-        :ensure t
+        :require multiple-cursors
         :defer t)
 
       ;; Transpose stuff with M-t
@@ -1786,27 +1767,21 @@
 
      )
 
-     (use-package comment-dwim-2
-       :ensure t
+     (req-package comment-dwim-2
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
 
-     (use-package rebox2
-       :ensure t
-       ;;TODO: bind commands
-       )
+     (req-package rebox2) ;;TODO: bind commands
 
      (setq comment-style 'indent)
    #+END_SRC
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp
-     (use-package xclip
-       :ensure t
+     (req-package xclip
        :config
        (xclip-mode 1))
 
-     (use-package savekill
-       :ensure t
+     (req-package savekill
        :config
        (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
    #+END_SRC
@@ -1814,9 +1789,8 @@
    #+BEGIN_SRC emacs-lisp
      (setq undo-limit 1000000)
 
-     (use-package undo-tree
+     (req-package undo-tree
        :defer t
-       :ensure t
        :config
        (global-undo-tree-mode t)
        (setq undo-tree-mode-lighter "")
@@ -1843,25 +1817,25 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package table) ;; table
-      (use-package footnote)
-      (use-package epoch-view :ensure t)
-      (use-package re-builder :defer t)
+      (req-package table) ;; table
+      (req-package footnote)
+      (req-package epoch-view)
+      (req-package re-builder :defer t)
 
-      (use-package wc-mode :ensure t)
+      (req-package wc-mode)
 
-      (use-package yatemplate
+      (req-package yatemplate
+        :require yasnippet
         :init
         (auto-insert-mode)
         :config
         (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
         (yatemplate-fill-alist))
 
-      (use-package whitespace
-        :defer t)
+      (req-package whitespace :defer t)
 
-      (use-package mark
-        :ensure t
+      (req-package mark
+        :require fm
         :config
         (defhydra hydra-mark ()
           ("<right>" forward-mark "forward-mark")
@@ -1869,52 +1843,48 @@
           ("<down>" show-marks "show-marks"))
         (global-set-key (kbd "<f12>") 'hydra-mark/body))
 
-      (use-package page-break-lines
-        :ensure t
+      (req-package page-break-lines
         :config
         (turn-on-page-break-lines-mode))
 
-      ;; (use-package macro-math
+      ;; (req-package macro-math
       ;;   :config
       ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
       ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
 
       ;;TODO: consolidate all whitespaces utils
-      (use-package ws-butler
-        :commands ws-buttler-mode
-        :ensure t)
+      (req-package ws-butler :commands ws-buttler-mode)
     #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp
-     (use-package rst)
+     (req-package rst)
 
-     (use-package generic
-       :defer t
-       :init
-       (use-package generic-x)
-       :config
-       (define-generic-mode 'keymap-mode
-         '("#")
-         '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-         nil
-         '(".keymap\\'" ".map\\'")
-         nil)
-       (setq generic-default-modes (delete 'javascript-generic-mode
-                                           generic-default-modes)))
+     ;; (req-package generic
+     ;;   :defer t
+     ;;   :init
+     ;;   (req-package generic-x)
+     ;;   :config
+     ;;   (define-generic-mode 'keymap-mode
+     ;;     '("#")
+     ;;     '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+     ;;     nil
+     ;;     '(".keymap\\'" ".map\\'")
+     ;;     nil)
+     ;;   (setq generic-default-modes (delete 'javascript-generic-mode
+     ;;                                       generic-default-modes)))
 
-     (use-package vimrc-mode
-       :ensure t
+     (req-package vimrc-mode
        :defer t
        :mode ".vim\\(rc\\)?$")
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp
-     (use-package highlight-sexp :ensure t)
+     (req-package highlight-sexp)
 
-     (use-package smartparens
-       :ensure t
+     (req-package smartparens
+       :require cl-lib dash
        :config
-       (use-package smartparens-config)
+       (req-package smartparens-config)
        (smartparens-global-strict-mode t)
        (show-smartparens-global-mode t)
        (sp-use-smartparens-bindings)
@@ -1941,13 +1911,12 @@
    #+END_SRC
 ** some fancy editing methods
    #+BEGIN_SRC emacs-lisp
-     (use-package edit-indirect :ensure t)
-     (use-package narrow-indirect :ensure t)
-     (use-package multifiles :ensure t)
+     (req-package edit-indirect)
+     (req-package narrow-indirect)
+     (req-package multifiles)
 
-     (use-package miniedit
+     (req-package miniedit
        :defer t
-       :ensure t
        :commands minibuffer-edit
        :init (miniedit-install))
    #+END_SRC
@@ -1955,8 +1924,7 @@
    #+BEGIN_SRC emacs-lisp
      (setq indent-tabs-mode nil)
 
-     (use-package dtrt-indent
-       :ensure t
+     (req-package dtrt-indent
        :config
        (dtrt-indent-mode))
 
@@ -1973,10 +1941,10 @@
    #+END_SRC
 ** some handy major modes
    #+BEGIN_SRC emacs-lisp
-     (use-package crontab-mode :ensure t)
-     (use-package csv-mode :ensure t)
-     (use-package fic-mode :ensure t)
-     (use-package nginx-mode :ensure t)
+     (req-package crontab-mode)
+     (req-package csv-mode)
+     (req-package fic-mode)
+     (req-package nginx-mode)
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp
@@ -2213,13 +2181,11 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package yasnippet
-        :ensure t
+      (req-package yasnippet
+        :require diminish
         :defer t
         :diminish yas-minor-mode
         :commands yas-global-mode
-        :init
-        (use-package helm-c-yasnippet :ensure t)
         :config
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
@@ -2250,7 +2216,8 @@
         (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
         (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field))
 
-      (use-package auto-yasnippet :ensure t)
+      (req-package helm-c-yasnippet :require helm yasnippet cl-lib)
+      (req-package auto-yasnippet :require yasnippet)
 
       ;;TODO: splice into yasnippet package definition
       (defhydra hydra-yasnippet (:color teal)
@@ -2287,12 +2254,11 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package auto-complete
-        :ensure t
+      (req-package auto-complete
+        :require popup cl-lib
         :commands auto-complete
         :init
-        (use-package auto-complete-config)
-        (use-package ac-math)
+        (req-package auto-complete-config)
         :config
         (ac-config-default)
         (global-auto-complete-mode t)
@@ -2311,10 +2277,12 @@
         (global-set-key (kbd "C-<tab>") 'auto-complete)
         ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
         )
+
+      (req-package ac-math :require auto-complete math-symbol-lists)
     #+END_SRC
 ** hippie-expand
    #+BEGIN_SRC emacs-lisp
-     (use-package hippie-expand
+     (req-package hippie-expand
        :config
        (setq hippie-expand-try-functions-list
              '(yas-hippie-try-expand
@@ -2360,19 +2328,19 @@
 **** TODO review flake8 known problems and OBV search for solutions
 *** flycheck
     #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-        :ensure t
-        :init
-        (use-package flycheck-color-mode-line :ensure t)
+      (req-package flycheck
+        :require dash pkg-info let-alist seq
         :config
         (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
         (setq flycheck-check-syntax-automatically '(idle-change)))
+
+      (req-package flycheck-color-mode-line :require flycheck dash)
     #+END_SRC
 *** gdb
     #+BEGIN_SRC emacs-lisp
-      (use-package gud
+      (req-package gud
         :init
-        (use-package gdb-mi)
+        (req-package gdb-mi)
         :config
         (setq gdb-many-windows t)
         (setq gdb-show-main t)
@@ -2382,10 +2350,10 @@
     #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp
-      (use-package c-eldoc :ensure t)
-      (use-package eldoc-eval :ensure t)
+      (req-package c-eldoc)
+      (req-package eldoc-eval)
 
-      (use-package eldoc
+      (req-package eldoc
         :defer t
         :init
         (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
@@ -2398,14 +2366,15 @@
         :config
         (diminish 'eldoc-mode "ED"))
 
-      (use-package css-eldoc
+      (req-package css-eldoc
         :ensure t
         :config
         (turn-on-css-eldoc))
     #+END_SRC
 **** try
-     #+BEGIN_SRC emacs-lisp
-       (use-package "eldoc"
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (req-package "eldoc"
+         :require diminish
          :diminish eldoc-mode
          :commands turn-on-eldoc-mode
          :defer t
@@ -2470,16 +2439,16 @@
     #+END_SRC
 *** handy packages
     #+BEGIN_SRC emacs-lisp
-      (use-package compile)
-      (use-package gtags)
-      (use-package hide-comnt :ensure t)
-      (use-package regex-tool :ensure t)
+      (req-package compile)
+      (req-package gtags)
+      (req-package hide-comnt)
+      (req-package regex-tool)
     #+END_SRC
 ** vcs
 *** git
     #+BEGIN_SRC emacs-lisp
-      (use-package magit
-        :ensure t
+      (req-package magit
+        :require async dash with-editor git-commit magit-popup
         :config
         (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
         (setq magit-blame-heading-format "%H %-20a %C %s")
@@ -2509,27 +2478,26 @@
           ("t" git-timemachine))
         (global-set-key (kbd "C-'") 'hydra-magit/body))
 
-      (use-package magit-gh-pulls
-        :ensure t
+      (req-package magit-gh-pulls
+        :require gh magit pcache s
         :config
         (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
-      (use-package magit-gerrit
-        :ensure t
+      (req-package magit-gerrit
+        :require magit
         :disabled t
         :config
         (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
         (setq-default magit-gerrit-remote "gerrit"))
 
-      (use-package magit-filenotify
-        :ensure t
+      (req-package magit-filenotify
+        :require magit diminish
         :config
-        (use-package diminish :ensure t) ;;TODO: relocate to toplevel and try using :command so it may be autoloaded
         (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
         (diminish 'magit-filenotify-mode "FN"))
 
-      (use-package git-gutter
-        :ensure t
+      (req-package git-gutter
+        :require cl-lib
         :config
         (setq git-gutter:modified-sign "?")
         (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
@@ -2538,12 +2506,12 @@
         (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
         (global-git-gutter-mode +1))
 
-      (use-package git-timemachine :ensure t)
-      (use-package gitignore-mode :ensure t)
+      (req-package git-timemachine)
+      (req-package gitignore-mode)
     #+END_SRC
 *** smerge mode
     #+BEGIN_SRC emacs-lisp
-      (use-package smerge-mode)
+      (req-package smerge-mode)
 
       (defun sm-try-smerge ()
         (save-excursion
@@ -2560,27 +2528,31 @@
       (autoload 'vc-svn-root "vc-svn")
       (autoload 'vc-hg-root "vc-hg")
 
-      (use-package ediff
+      (req-package ediff
         :config
         (setq ediff-window-setup-function 'ediff-setup-windows-plain)
         (setq ediff-split-window-function 'split-window-horizontally)
         (setq ediff-diff-options "-w"))
     #+END_SRC
 ** languages
+*** common
+    #+BEGIN_SRC emacs-lisp
+      (req-package-force info-look)
+    #+END_SRC
 *** elisp
 **** setup
      #+BEGIN_SRC emacs-lisp
-       (use-package el-spice :ensure t)
-       (use-package edebug-x :ensure t)
+       (req-package el-spice :require thingatpt+)
+       (req-package edebug-x)
 
-       (use-package elisp-slime-nav
-         :ensure t
+       (req-package elisp-slime-nav
+         :require cl-lib
          :config
          (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
            (add-hook hook 'elisp-slime-nav-mode)))
 
-       (use-package erefactor
-         :ensure t
+       (req-package erefactor
+         :require cl-lib
          :config
          ;;TODO: investigate package
          (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
@@ -2621,13 +2593,13 @@
       #+END_SRC
 ***** 2
       #+BEGIN_SRC emacs-lisp :tangle no
-        (use-package erefactor
-          :ensure t
+        (req-package erefactor
+          :require cl-lib
           :defer t
           :config
           (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map))
 
-        (use-package redshank
+        (req-package redshank
           :ensure t
           :defer t
           :init (add-hook 'emacs-lisp-mode-hook 'redshank-mode))
@@ -2648,10 +2620,10 @@
       #+END_SRC
 *** javascript
     #+BEGIN_SRC emacs-lisp
-      (use-package js2-mode
-        :ensure t
+      (req-package js2-mode
+        :require cl-lib
         :init
-        (use-package js2-imenu-extras)
+        (req-package js2-imenu-extras)
         :config
         (js2-imenu-extras-setup)
         (setq js2-use-font-lock-faces t)
@@ -2704,18 +2676,19 @@
         (define-key js2-mode-map (kbd "C-c l") 'js-load-file-and-go))
 
       ;; TODO: play with js2-refactor
-      (use-package js2-refactor
-        :ensure t
+      (req-package js2-refactor
+        :require js2-mode s multiple-cursors dash s yasnippet
         :config
         (js2r-add-keybindings-with-prefix "C-c C-j"))
 
-      (use-package tern
-        :ensure t
+      (req-package tern
+        :require json cl-lib
         :commands tern-mode
         :init
-        (use-package tern-auto-complete :ensure auto-complete)
         :config
         (tern-ac-setup))
+
+      (req-package tern-auto-complete :require tern auto-complete cl-lib)
 
       (setenv "CLASSPATH"
               (concat
@@ -2724,12 +2697,10 @@
     #+END_SRC
 *** lisp
     #+BEGIN_SRC emacs-lisp
-      (use-package inf-lisp)
-      (use-package info-look)
-      (use-package common-lisp-snippets :ensure t)
-
-      (setq inferior-lisp-program "sbcl")
-      (setq common-lisp-hyperspec-root (file-truename custom/hyperspec-root))
+      (req-package inf-lisp
+        :config
+        (setq inferior-lisp-program "sbcl"))
+      (req-package common-lisp-snippets :require yasnippet)
 
       (defun custom/lisp-mode-hook ()
         (auto-fill-mode 1)
@@ -2742,12 +2713,12 @@
         (set (make-local-variable 'slime-lisp-implementations)
              (list (assoc 'sbcl slime-lisp-implementations))))
 
-      (use-package slime
+      (req-package slime
+          :require cl-lib
         :defer t
         :init
-        (use-package slime-autoloads)
+        (req-package slime-autoloads)
         :config
-        (use-package ac-slime :ensure auto-complete)
         (eval-after-load "auto-complete"
           '(add-to-list 'ac-modes 'slime-repl-mode))
         (add-hook 'lisp-mode-hook 'custom/slime-hook)
@@ -2796,6 +2767,8 @@
           ("q" nil "cancel"))
         (global-set-key (kbd "M-p") 'hydra-slime/body))
 
+      (req-package ac-slime :require auto-complete slime cl-lib)
+
       ;; lookup information in hyperspec
       (info-lookup-add-help
        :mode 'lisp-mode
@@ -2805,13 +2778,15 @@
     #+END_SRC
 *** haskell
     #+BEGIN_SRC emacs-lisp
-      (use-package haskell-mode
+      (req-package haskell-mode
+        :require cl-lib
         :init
-        (use-package haskell-indent)
-        (use-package haskell-align-imports)
-        (use-package haskell-navigate-imports)
-        (use-package haskell-sort-imports)
-        (use-package inf-haskell)
+        (req-package haskell-indent)
+        (req-package haskell-align-imports)
+        (req-package haskell-navigate-imports)
+        (req-package haskell-sort-imports)
+        (req-package inf-haskell)
+        (req-package haskell-ghci)
         :config
         (setq haskell-program-name "ghci")
         (setq inferior-haskell-wait-and-jump t)
@@ -2827,8 +2802,6 @@
         (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
         (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
         (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci))
-
-      (use-package haskell-ghci)
 
       ;;TODO: setup flycheck
       ;;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
@@ -2848,11 +2821,11 @@
      #+END_SRC
 **** setup
      #+BEGIN_SRC emacs-lisp
-       (use-package pep8 :ensure t)
-       (use-package python-pep8 :ensure t)
+       (req-package pep8)
+       (req-package python-pep8)
 
-       (use-package jedi
-         :ensure t
+       (req-package jedi
+         :require jedi-core auto-complete
          :init
          (setq jedi:complete-on-dot t)
          (setq jedi:goto-definition-marker-ring-length 32)
@@ -2876,8 +2849,8 @@
          (add-hook 'python-mode-hook 'jedi:setup)
          (add-hook 'python-mode-hook 'jedi:ac-setup))
 
-       (use-package pylookup
-         :defer t
+       (req-package pylookup
+         :disabled t ;;package archives do not seem to have it, so maybe use el-get version later
          :config
          ;; set executable file and db file
          (setq pylookup-program (at-pylookup-dir "/pylookup.py"))
@@ -2890,15 +2863,16 @@
            (let ((browse-url-browser-function 'w3m-browse-url))
              ad-do-it)))
 
-       (use-package python
-         :ensure t
+       (req-package python
+         :require region-bindings-mode
          :defer t
          :config
-         (use-package ac-python :ensure auto-complete)
          (bind-key "M-." 'jedi:goto-definition python-mode-map)
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
          (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
          (bind-key "_" 'python-indent-shift-left region-bindings-mode-map))
+
+       (req-package ac-python :require auto-complete)
 
        ;; Highlight the call to ipdb
        ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
@@ -2950,35 +2924,46 @@
      #+END_SRC
 **** packages
      #+BEGIN_SRC emacs-lisp
-       (use-package cc-mode)
-       (use-package info-look)
-       (use-package ac-c-headers :ensure auto-complete)
-       (use-package ac-clang :ensure auto-complete)
-       (use-package auto-complete-clang :ensure auto-complete)
+       (req-package cc-mode
+         :require helm-gtags
+         :config
+         (define-key c-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
+         (define-key c-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
+         (define-key c-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
+         (define-key c-mode-map (kbd "M-.") 'helm-gtags-select)
+         (define-key c++-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
+         (define-key c++-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
+         (define-key c++-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
+         (define-key c++-mode-map (kbd "C-j") 'helm-gtags-select))
 
-       (use-package irony :ensure t
+       (req-package ac-c-headers :require auto-complete)
+       (req-package ac-clang :require cl-lib auto-complete pos-tip yasnippet)
+       (req-package auto-complete-clang :require auto-complete)
+
+       (req-package irony
+         :require cl-lib json
          :config
          (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
-       (use-package function-args
-         :ensure t
+       (req-package function-args
+         :require swiper cc-mode
          :config
-         (define-key c-mode-map (kbd "C-c j") 'moo-jump-local)
-         (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local)
          (define-key c-mode-map (kbd "C-c C-<tab>") 'moo-complete)
-         (define-key c++-mode-map (kbd "C-c C-<tab>") 'moo-complete))
+         (define-key c-mode-map (kbd "C-c j") 'moo-jump-local)
+         (define-key c++-mode-map (kbd "C-c C-<tab>") 'moo-complete)
+         (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local))
 
-       (use-package rtags
-         :ensure t
+       (req-package rtags
+         :require cc-mode
          :config
-         (define-key c-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-         (define-key c-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
          (define-key c-mode-map (kbd "C-,") 'rtags-location-stack-back)
+         (define-key c-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
          (define-key c-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
-         (define-key c++-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-         (define-key c++-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
+         (define-key c-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
          (define-key c++-mode-map (kbd "C-,") 'rtags-location-stack-back)
-         (define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics))
+         (define-key c++-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
+         (define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
+         (define-key c++-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point))
 
        (info-lookup-add-help
         :mode 'c-mode
@@ -3012,17 +2997,6 @@
        (add-hook 'c-mode-hook 'irony-mode)
        (add-hook 'irony-mode-hook 'custom/irony-mode-hook)
      #+END_SRC
-**** keys
-     #+BEGIN_SRC emacs-lisp
-       (define-key c-mode-map (kbd "M-.") 'helm-gtags-select)
-       (define-key c++-mode-map (kbd "C-j") 'helm-gtags-select)
-       (define-key c-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
-       (define-key c++-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
-       (define-key c-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
-       (define-key c++-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
-       (define-key c-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
-       (define-key c++-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
-     #+END_SRC
 **** auto-mode setup
 ***** common
       #+BEGIN_SRC emacs-lisp
@@ -3049,7 +3023,7 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       (fset 'perl-mode 'cperl-mode)
 
-      (use-package cperl
+      (req-package cperl
         :defer t
         :command perl-mode
         :config
@@ -3089,10 +3063,8 @@
     #+END_SRC
 *** php
     #+BEGIN_SRC emacs-lisp :tangle no
-      (use-package php-mode
+      (req-package php-mode
         :init
-        (use-package php-electric) ;; autocompletion
-        (use-package ac-php-doc)
         :config
         (setq php-manual-path custom/php-manual-path)
         (defun custom/php-mode-hook ()
@@ -3105,31 +3077,36 @@
         (add-hook 'php-mode-hook 'custom/php-mode-hook)
         (add-hook 'php-mode-hook 'set-up-php-ac)
         (add-hook 'php-mode-hook 'common-hooks/prog-helpers))
+
+      (req-package php-electric
+        :require php-mode
+        :disabled t) ;; autocompletion, not present in xLPA
+
+      (req-package ac-php :require php-mode)
     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp
-      (use-package actionscript-mode :ensure t)
-      (use-package go-mode :ensure t)
-      (use-package json-mode :ensure t)
-      (use-package lua-mode :ensure t)
-      (use-package rust-mode :ensure t)
+      (req-package actionscript-mode)
+      (req-package go-mode)
+      (req-package json-mode :require json-reformat json-snatcher)
+      (req-package lua-mode)
+      (req-package rust-mode)
     #+END_SRC
 ** webdev
 *** major modes
     #+BEGIN_SRC emacs-lisp
-      (use-package sgml-mode
+      (req-package sgml-mode
         :config
         (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map))
 
-      (use-package markdown-mode
-        :ensure t
+      (req-package markdown-mode
+        :require cl-lib
         :config
         (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
         (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
 
-      (use-package web-mode
-        :ensure t
+      (req-package web-mode
         :defer t
         :mode "\\.html?\\'"
         :config
@@ -3138,7 +3115,7 @@
               '(("css" . (ac-source-css-property))
                 ("html" . (ac-source-words-in-buffer ac-source-abbrev)))))
 
-      (use-package yaml-mode :ensure t)
+      (req-package yaml-mode)
     #+END_SRC
 *** xml
     #+BEGIN_SRC emacs-lisp
@@ -3171,7 +3148,7 @@
     #+END_SRC
 *** multiple major modes
     #+BEGIN_SRC emacs-lisp
-      (use-package web :ensure t)
+      (req-package web :require dash s)
 
       (setq mumamo-background-colors nil)
       (setq mumamo-submode-indent-offset 4)
@@ -3184,17 +3161,12 @@
     #+END_SRC
 *** color helper
     #+BEGIN_SRC emacs-lisp
-      (use-package rainbow-mode :ensure t)
+      (req-package rainbow-mode)
     #+END_SRC
 *** emmet mode setup
     #+BEGIN_SRC emacs-lisp
-      (use-package emmet-mode
-        :ensure t
+      (req-package emmet-mode
         :config
-        (use-package ac-emmet :ensure auto-complete)
-        (use-package helm-emmet :ensure helm)
-        (push 'html-mode ac-modes)
-        (push 'web-mode ac-modes)
         (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
         (add-hook 'css-mode-hook 'ac-emmet-css-setup)
         (add-hook 'web-mode-hook 'ac-emmet-html-setup)
@@ -3210,6 +3182,14 @@
         (add-hook 'css-mode-hook 'emmet-mode)
         (add-hook 'emmet-mode-hook
                   (lambda () (setq emmet-indentation 2))))
+
+      (req-package ac-emmet
+        :require emmet-mode auto-complete
+        :config
+        (push 'html-mode ac-modes)
+        (push 'web-mode ac-modes))
+
+      (req-package helm-emmet :require helm emmet-mode)
     #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -3236,8 +3216,7 @@
 
      )
 
-     (use-package restclient
-       :ensure t
+     (req-package restclient
        :defer t
        :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
    #+END_SRC
@@ -3294,23 +3273,31 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package erc
-        :defer t
+      (req-package-force erc
         :init
         ;;TODO: try using 'erc-modules
-        (use-package erc-pcomplete)
-        (use-package erc-join)
-        (use-package erc-lang)
-        (use-package erc-fill)
-        (use-package erc-log)
-        (use-package erc-autoaway)
-        (use-package erc-services)
-        (use-package erc-menu)
-        (use-package erc-ring)
-        (use-package erc-match)
+        (req-package erc-pcomplete)
+        (req-package erc-join)
+        (req-package erc-lang)
+        (req-package erc-fill)
+        (req-package erc-log)
+        (req-package erc-autoaway)
+        (req-package erc-services)
+        (req-package erc-ring)
+        (req-package erc-match)
+        (req-package erc-services
+          :config
+          (setq erc-nickserv-passwords
+                '((freenode ((private/erc-nick-main . private/erc-password-main)
+                             (private/erc-nick-work . private/erc-password-work)))))
+          (setq erc-prompt-for-nickserv-password nil)
+          (erc-nickserv-mode 1))
+        (req-package erc-log
+          :config
+          (setq erc-log-channels-directory custom/erc-logs-directory)
+          (setq erc-log-channels t)
+          (erc-log-enable))
         ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
-        (use-package erc-hl-nicks :ensure t)
-        (use-package ercn :ensure t) ;TODO: add notifications handler function
         :config
         (erc-pcomplete-mode 1)
         (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
@@ -3324,26 +3311,18 @@
                              (".*Away" (:foreground "red"))
                              (".*Idle" (:foreground "orange"))
                              ))
-        (setq erc-nickserv-passwords
-              '((freenode ((private/erc-nick-main . private/erc-password-main)
-                           (private/erc-nick-work . private/erc-password-work)))))
-        (setq erc-prompt-for-nickserv-password nil)
         (setq erc-nick private/erc-nick-main)
         (setq erc-track-priority-faces-only 'all)
-        (setq erc-log-channels-directory custom/erc-logs-directory)
         (setq erc-autoaway-message custom/erc-autoaway-message)
         (setq erc-auto-query 'buffer)
-        (setq erc-log-channels t)
         (setq erc-max-buffer-size 20000)
 
         (erc-autojoin-mode t)
         (erc-fill-mode t)
-        (erc-nickserv-mode 1)
         (erc-ring-mode t)
         (erc-match-enable)
         (erc-match-mode 1)
         (erc-timestamp-mode t)
-        (erc-log-enable)
 
         (defhydra hydra-erc (:color blue)
           "
@@ -3360,6 +3339,11 @@
           ("u" custom/select-erc-unread-buffer)
           ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
         (global-set-key (kbd "C-q") 'hydra-erc/body))
+
+      (req-package erc-hl-nicks)
+      (req-package ercn
+        :config
+        (req-package erc-menu)) ;TODO: add notifications handler function
     #+END_SRC
 ** jabber
 *** definitions
@@ -3530,12 +3514,12 @@
 *** setup
 **** common
      #+BEGIN_SRC emacs-lisp
-       (use-package jabber
-         :ensure t
+       (req-package-force jabber
+         :require fsm
          :init
          (load "jabber-autoloads") ;; For 0.7.90 and above:
-         (use-package jabber-bookmarks)
-         (use-package jabber-autoaway)
+         (req-package jabber-bookmarks)
+         (req-package jabber-autoaway)
          :config
          (when custom/use-zenburn-in-jabber
            (set-face-attribute 'jabber-roster-user-chatty nil :foreground "#f0dfaf" :weight 'bold)
@@ -3633,7 +3617,7 @@
 ** terminal
 *** common
     #+BEGIN_SRC emacs-lisp
-      (use-package ansi-color)
+      (req-package ansi-color)
     #+END_SRC
 *** comint
     #+BEGIN_SRC emacs-lisp
@@ -3666,7 +3650,7 @@
 
       )
 
-      (use-package term
+      (req-package term
         :config
         (add-hook 'term-exec-hook 'custom/term-exec-hook)
         (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
@@ -3704,7 +3688,7 @@
     #+END_SRC
 *** eshell
     #+BEGIN_SRC emacs-lisp
-      (use-package eshell
+      (req-package eshell
         :config
         (defun eshell-handle-ansi-color ()
           (ansi-color-apply-on-region eshell-last-output-start
@@ -3719,8 +3703,7 @@
     #+END_SRC
 ** Twitter
    #+BEGIN_SRC emacs-lisp
-     (use-package twittering-mode
-       :ensure t
+     (req-package twittering-mode
        :defer t
        :commands twit
        :init
@@ -3729,12 +3712,14 @@
    #+END_SRC
 ** internal browser (w3m/eww)
    #+BEGIN_SRC emacs-lisp
-     (use-package w3m
-       :ensure t
+     (req-package w3m
        :defer t
        :commands w3m
        :init
-       (use-package w3m-search)
+       (req-package w3m-search
+         :config
+         (add-to-list 'w3m-search-engine-alist
+                      '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s")))
        (add-hook 'w3m-display-hook
                  (lambda (url)
                    (rename-buffer
@@ -3763,14 +3748,12 @@
        (standard-display-ascii ?\222 [?\'])
        (standard-display-ascii ?\223 [?\"])
        (standard-display-ascii ?\224 [?\"])
-       (standard-display-ascii ?\227 " -- ")
-       (add-to-list 'w3m-search-engine-alist
-                    '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s")))
+       (standard-display-ascii ?\227 " -- "))
    #+END_SRC
 ** MPD
    #+BEGIN_SRC emacs-lisp
-     (use-package mingus
-       :ensure t
+     (req-package mingus
+       :require libmpdee
        :config
        (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
        (defhydra hydra-mingus ()
@@ -3793,8 +3776,7 @@
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
-     (use-package openwith
-       :ensure t
+     (req-package openwith
        :config
        (setq openwith-associations
              '(("\\.pdf\\'" "zathura" (file))
@@ -3879,10 +3861,10 @@
 *** setup
 **** mu4e
      #+BEGIN_SRC emacs-lisp
-       (use-package mu4e
+       (req-package mu4e
          :init
-         (use-package mu4e-contrib)
-         (use-package mu4e-context)
+         (req-package mu4e-contrib)
+         (req-package mu4e-context)
          :config
          ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
          (setq mu4e-sent-messages-behavior 'delete)
@@ -3940,7 +3922,7 @@
      #+END_SRC
 **** send mail
      #+BEGIN_SRC emacs-lisp
-       (use-package smtpmail
+       (req-package smtpmail
          :config
          (setq message-send-mail-function 'smtpmail-send-it)
          (setq starttls-use-gnutls t)
@@ -3959,8 +3941,8 @@
      #+END_SRC
 **** unread count extension
      #+BEGIN_SRC emacs-lisp :tangle no
-       (use-package mu4e-maildirs-extension
-         :ensure t
+       (req-package mu4e-maildirs-extension
+         :require dash
          :commands mu4e-maildirs-extension
          :init
          (eval-after-load "mu4e" '(mu4e-maildirs-extension))
@@ -3984,7 +3966,7 @@
    #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp
-     (use-package tramp
+     (req-package tramp
        :init
        (setq tramp-default-method "ssh")
        :config
@@ -3992,33 +3974,32 @@
        (add-to-list 'tramp-default-proxies-alist
                     '(".*" "\\`.+\\'" "/ssh:%h:")))
 
-     (use-package google-translate
-       :ensure t
+     (req-package google-translate
        :defer t
        :init
-       (use-package google-translate-default-ui))
+       (req-package google-translate-default-ui))
 
-     (use-package jenkins
-       :ensure t
+     (req-package jenkins
+       :require dash json
        :config
        (setq jenkins-api-token private/jenkins-api-token)
        (setq jenkins-hostname private/jenkins-hostname)
        (setq jenkins-username private/jenkins-username))
 
-     (use-package ansi-color)
-
      (imagemagick-register-types)
 
-     (use-package notify :ensure t)
+     (req-package notify)
    #+END_SRC
 * pim
 ** bbdb
-   #+BEGIN_SRC emacs-lisp
-     (use-package bbdb-loaddefs
+   the code below need to be reorganized, it seems to not work
+   req-package is not usable before it
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (req-package bbdb-loaddefs
        :defer t
        :commands bbdb
        :init
-       (use-package bbdb :ensure t)
+       (req-package bbdb)
        :config
        (setq bbdb-change-hook 'bbdb-timestamp-hook)
        (setq bbdb-complete-name-allow-cycling t)
@@ -4045,12 +4026,12 @@
    #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp
-     (use-package calfw
-       :ensure t
+     (req-package calfw
+       :require google-maps
        :defer t
        :init
-       (use-package calfw-ical)
-       (use-package calfw-org)
+       (req-package calfw-ical)
+       (req-package calfw-org)
        :config
        (setq calendar-week-start-day 1) ; 0:Sunday, 1:Monday
        ;; Unicode characters
@@ -4097,10 +4078,10 @@
            (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
            (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")))))
 
-     (use-package calfw-gcal :ensure t)
+     (req-package calfw-gcal :require calfw)
 
-     (use-package org-gcal
-       :ensure t
+     (req-package org-gcal
+       :require request-deferred alert cl-lib org
        :config
        (setq org-gcal-dir (at-data-dir "/org-gcal/"))
        (setq org-gcal-client-id private/org-gcal-client-id)
@@ -4132,8 +4113,7 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (use-package deft
-        :ensure t
+      (req-package deft
         :config
         (setq deft-directory (at-homedir "/deft"))
         (setq deft-extension "org")
@@ -4292,7 +4272,7 @@
          With prefix argument, also display headlines without a TODO keyword."
          (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
 
-       (use-package helm-utils)
+       (req-package-force helm-utils)
        (defvar helm-source-org-files
          `((name . "Org files")
            (candidates . ,(helm-walk-directory (at-org-dir) :path 'full))
@@ -4441,30 +4421,30 @@
      #+END_SRC
 **** additional packages
      #+BEGIN_SRC emacs-lisp
-       (use-package icalendar)
-       (use-package org-footnote)
-       (use-package org-magit :ensure t)
-       (use-package org-pomodoro :ensure t)
+       (req-package icalendar)
+       (req-package org-footnote)
+       (req-package org-magit :require magit org)
+       (req-package org-pomodoro :require alert cl-lib)
 
-       (use-package ox-html)
-       (use-package org-dashboard :ensure t)
-       (use-package orgit :ensure t)
-       (use-package org-bullets :ensure t)
+       (req-package ox-html)
+       (req-package org-dashboard :require cl-lib)
+       (req-package orgit :requires dash magit org)
+       (req-package org-bullets)
 
-       (use-package org-context :ensure t
+       (req-package org-context
          :config
          ;;TODO: leverage real contexts
          (org-context-activate))
 
-       (use-package orglink
-         :ensure t
+       (req-package orglink
+         :require dash org
          :config
          ;; TODO: customize orglink-activate-in-modes
          (global-orglink-mode)
          (diminish 'orglink-mode "OL"))
 
-       (use-package org-linkany
-         :ensure t)
+       (req-package org-linkany
+         :require log4e yaxception)
      #+END_SRC
 **** common 
      #+BEGIN_SRC emacs-lisp
@@ -5122,14 +5102,14 @@
 * publishing
 ** setup
    #+BEGIN_SRC emacs-lisp :tangle no
-     (use-package tex-site)
-     (use-package preview-latex)
-     (use-package cdlatex)
-     (use-package bib-cite)
-     (use-package whizzytex)
-     (use-package auctex :ensure t)
-     (use-package latex-preview-pane :ensure t)
-     (use-package pdf-tools :ensure t)
+     (req-package tex-site)
+     (req-package preview-latex)
+     (req-package cdlatex)
+     (req-package bib-cite)
+     (req-package whizzytex)
+     (req-package auctex)
+     (req-package latex-preview-pane)
+     (req-package pdf-tools :require tablist let-alist)
 
      (setq-default TeX-master nil)
      (setq TeX-parse-self t)
@@ -5196,9 +5176,9 @@
    #+END_SRC
 * help
   #+BEGIN_SRC emacs-lisp
-    (use-package info)
-    (use-package help+ :ensure t)
-    (use-package discover-my-major :ensure t)
+    (req-package info)
+    (req-package help+)
+    (req-package discover-my-major :require makey)
 
     (add-to-list 'Info-directory-list "/usr/share/info")
 
@@ -5257,8 +5237,7 @@
   #+END_SRC
 * staging
   #+BEGIN_SRC emacs-lisp
-    (use-package sauron
-      :ensure t
+    (req-package sauron
       ;; note, you add (setq sauron-debug t) to get errors which can debug if
       ;; there's something wrong; normally, we catch such errors, since e.g an error
       ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
@@ -5326,7 +5305,7 @@
 
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-    ;; (use-package typing :disabled t
+    ;; (req-package typing :disabled t
     ;;   :init
     ;;   (autoload 'typing-of-emacs "typing" nil t)
     ;;   :config
