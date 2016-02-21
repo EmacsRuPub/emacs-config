@@ -3621,7 +3621,7 @@
          (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
          (setq jabber-account-list custom/jabber-account-list)
          (setq jabber-alert-info-message-hooks 'jabber-info-echo)
-         (setq jabber-alert-message-hooks 'jabber-message-beep jabber-message-scroll)
+         (setq jabber-alert-message-hooks '(jabber-message-beep jabber-message-scroll))
          (setq jabber-alert-presence-hooks 'jabber-presence-update-roster)
          (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
          (setq jabber-auto-reconnect t)
