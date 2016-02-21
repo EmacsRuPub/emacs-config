@@ -524,6 +524,7 @@
 
       (setq use-dialog-box nil)
       (setq visible-bell t)
+      (setq ring-bell-function 'ignore)
       (setq size-indication-mode t)
       (setq split-width-threshold nil)
       (setq enable-recursive-minibuffers t)
