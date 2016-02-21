@@ -3957,6 +3957,11 @@
          (setf mu4e-maildirs-extension-insert-before-str "\n  Basics")
          (setf mu4e-maildirs-extension-default-collapse-level 1))
      #+END_SRC
+**** mu extensions
+     #+BEGIN_SRC emacs-lisp
+       (req-package helm-mu
+         :require helm mu4e)
+     #+END_SRC
 ** mu4e extension for Orgmode
    #+BEGIN_SRC emacs-lisp
      ;;TODO: try to use use-package
