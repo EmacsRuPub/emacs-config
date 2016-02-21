@@ -659,7 +659,8 @@
       (setq x-alt-keysym 'meta)
 
       (setq browse-url-browser-function 'browse-url-generic)
-      (setq browse-url-generic-program "/usr/bin/firefox")
+      ;;TODO: find a way to set default browser system-wide, maybe like frames machinery
+      (setq browse-url-generic-program "/usr/bin/google-chrome-stable")
     #+END_SRC
 *** darwin specific
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
