@@ -3608,6 +3608,7 @@
            ("y" (lambda () (interactive) (insert ":-[ ")) ":-[")
            ("t" (lambda () (interactive) (insert "(c) ")) "(c)")
            ("6" (lambda () (interactive) (insert "^^^")) "^^^")
+           ("5" (lambda () (interactive) (insert "🎓")) "🎓") ;;TODO: select over this ad hoc solution and something using code points
            ("a" custom/jabber-abbrev)
            ("r" jabber-switch-to-roster-buffer)
            ("s" jabber-activity-switch-to :color blue)
