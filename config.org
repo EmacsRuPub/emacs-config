@@ -1001,9 +1001,8 @@
     #+BEGIN_SRC emacs-lisp
       (req-package projectile
         :require dash pkg-info
-        :commands (projectile-find-file custom/projectile-ag)
         :config
-        (projectile-global-mode) ;; to enable in all buffers
+        (projectile-global-mode -1) ;; to explicitly disable in all buffers
         (setq projectile-enable-caching t)
         (setq projectile-cache-file (at-data-dir "/projectile.cache"))
         (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
