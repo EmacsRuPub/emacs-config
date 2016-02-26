@@ -15,6 +15,9 @@
      (defun at-org-dir (&optional suffix)
        (concat (at-homedir "/docs/org") suffix))
 
+     (defun at-org-kb-dir (&optional suffix)
+         (concat (at-homedir "/docs/org-kb") suffix))
+
      (defun at-config-basedir (&optional suffix)
        (concat config-basedir suffix))
 
@@ -4824,7 +4827,7 @@
                ("ge" "emacs config" entry (file (at-org-dir "/github.org")) "* %? %U :github:emacs-config:")
                ("ga" "awesome config" entry (file (at-org-dir "/github.org")) "* %? %U :github:awesome-config:")
                ("gs" "stumpwm config" entry (file (at-org-dir "/github.org")) "* %? %U :github:stumpwm-config:")
-               ("gl" "CL repo to review" entry (file+olp (at-org-dir "/mastering.org") "languages" "Common Lisp" "repos") "* %? %U :github:common_lisp:")
+               ("gl" "CL repo to review" entry (file (at-org-kb-dir "/cl-repos.org")) "* %? %U :github:common_lisp:")
                ("g5" "Starred repos" entry (file (at-org-dir "/github.org")) "* %? %U :github:starred:")
                ("m" "mastering" entry (file+headline (at-org-dir "/mastering.org") "inbox") "* %? %U")
                ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :@project:")
