@@ -663,7 +663,7 @@
 
       (setq browse-url-browser-function 'browse-url-generic)
       ;;TODO: find a way to set default browser system-wide, maybe like frames machinery
-      (setq browse-url-generic-program "/usr/bin/google-chrome-stable")
+      (setq browse-url-generic-program "/usr/bin/firefox")
     #+END_SRC
 *** darwin specific
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
