@@ -4056,6 +4056,11 @@
      (imagemagick-register-types)
 
      (req-package notify)
+
+     (req-package wttrin
+       :require xterm-color
+       :config
+       (setq wttrin-default-cities '("Moscow")))
    #+END_SRC
 * pim
 ** bbdb
