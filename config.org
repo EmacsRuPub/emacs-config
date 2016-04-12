@@ -2538,11 +2538,6 @@
           ("t" git-timemachine))
         (global-set-key (kbd "C-'") 'hydra-magit/body))
 
-      (req-package magit-gh-pulls
-        :require gh magit pcache s
-        :config
-        (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-
       (req-package magit-gerrit
         :require magit
         :disabled t
