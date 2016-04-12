@@ -1270,6 +1270,12 @@
       (req-package fuzzy
         :config
         (turn-on-fuzzy-isearch))
+
+      (req-package paradox
+        :require seq let-alist spinner hydra
+        :config
+        (setq paradox-execute-asynchronously t)
+        (setq paradox-github-token private/paradox-github-token))
     #+END_SRC
 ** operations with windows
    #+BEGIN_SRC emacs-lisp
