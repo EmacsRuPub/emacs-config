@@ -132,36 +132,6 @@
      (setq request-storage-directory (at-data-dir "/request"))
      (setq image-dired-dir (at-data-dir "/image-dired/"))
    #+END_SRC
-** set some constants
-   #+BEGIN_SRC emacs-lisp
-     (setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
-     (setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
-
-
-     (setq custom/org-capture-file (at-org-dir "/refile.org"))
-
-     (setq custom/jabber-history-dir (at-homedir "/.emacs-jabber"))
-
-     (setq custom/erc-autoaway-message "I'm gone (autoaway after %i seconds)")
-
-     (setq custom/juick-tmp-dir "~/.juick-avatars/")
-     (setq custom/psto-tmp-dir "~/.psto-avatars/")
-
-     (setq custom/jabber-resource "laptoptop")
-     (setq custom/hyperspec-root "~/help/HyperSpec/")
-
-     (setq custom/wl-domain "ronin.homelinux.net")
-
-     (setq custom/maildir-folder "~/Mail")
-
-     ;; pylookup
-     (defun at-pylookup-dir (&optional suffix)
-       (concat (at-config-basedir "el-get/pylookup") suffix))
-
-     (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
-
-     (setq custom/php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
-   #+END_SRC
 * appearance
 ** populate fonts inventory
    #+BEGIN_SRC emacs-lisp
@@ -315,6 +285,8 @@
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp
+     (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
+
      (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
      (setq auto-save-visited-file-name t)
      (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
@@ -2205,6 +2177,9 @@
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
+      (setq yasnippet-dir (at-config-basedir "resources/yasnippet/"))
+      (setq yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
+
       ;; Inter-field navigation
       (defun yas-goto-end-of-active-field ()
         (interactive)
@@ -2758,6 +2733,8 @@
     #+END_SRC
 *** lisp
     #+BEGIN_SRC emacs-lisp
+      (setq custom/hyperspec-root "~/help/HyperSpec/")
+
       (req-package inf-lisp
         :config
         (setq inferior-lisp-program "sbcl"))
@@ -2913,6 +2890,8 @@
        (req-package pylookup
          :disabled t ;;package archives do not seem to have it, so maybe use el-get version later
          :config
+         (defun at-pylookup-dir (&optional suffix)
+           (concat (at-config-basedir "el-get/pylookup") suffix))
          ;; set executable file and db file
          (setq pylookup-program (at-pylookup-dir "/pylookup.py"))
          (setq pylookup-db-file (at-pylookup-dir "/pylookup.db"))
@@ -3127,7 +3106,7 @@
       (req-package php-mode
         :init
         :config
-        (setq php-manual-path custom/php-manual-path)
+        (setq php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
         (defun custom/php-mode-hook ()
           ;; style customization
           (setq tab-width 4) ;; was 4
@@ -3374,7 +3353,7 @@
                              ))
         (setq erc-nick private/erc-nick-main)
         (setq erc-track-priority-faces-only 'all)
-        (setq erc-autoaway-message custom/erc-autoaway-message)
+        (setq erc-autoaway-message "I'm gone (autoaway after %i seconds)")
         (setq erc-auto-query 'buffer)
         (setq erc-max-buffer-size 20000)
 
@@ -3645,13 +3624,13 @@
          (setq jabber-backlog-number 100)
          (setq jabber-chat-buffer-format "*-jc-%n-*")
          (setq jabber-groupchat-buffer-format "*-jg-%n-*")
-         (setq jabber-history-dir custom/jabber-history-dir)
+         (setq jabber-history-dir (at-homedir "/.emacs-jabber"))
          (setq jabber-history-enabled t)
          (setq jabber-mode-line-mode t)
          (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
          (setq jabber-nickname (capitalize global-username))
          (setq jabber-rare-time-format "%e %b %Y %H:00")
-         (setq jabber-resource custom/jabber-resource)
+         (setq jabber-resource "laptoptop")
          (setq jabber-roster-buffer "*-jroster-*")
          (setq jabber-roster-line-format " %c %-25n %u %-8s  %S")
          (setq jabber-use-global-history nil)
@@ -4726,7 +4705,7 @@
        (setq org-cycle-include-plain-lists 'integrate)
        (setq org-cycle-separator-lines 0)
        (setq org-deadline-warning-days 30)
-       (setq org-default-notes-file custom/org-capture-file)
+       (setq org-default-notes-file (at-org-dir "/refile.org"))
        (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
        (setq org-ellipsis "⤵")
        (setq org-enforce-todo-checkbox-dependencies t)
