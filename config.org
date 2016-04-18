@@ -253,10 +253,6 @@
      (defun desktop-autosave-save ()
        (desktop-save-in-desktop-dir))
      (add-hook 'auto-save-hook (lambda () (desktop-autosave-save)))
-
-     (defun my-desktop-ignore-semantic (desktop-buffer-file-name)
-       "Function to ignore cedet minor modes during restore of buffers"
-       nil)
    #+END_SRC
 ** save history
    #+BEGIN_SRC emacs-lisp
@@ -282,9 +278,7 @@
        (setq recentf-save-file (at-data-dir "/.recentf"))
        (setq recentf-max-saved-items 250)
        (setq recentf-max-menu-items 15)
-       ;; get rid of `find-file-read-only' and replace it with something more useful.
-       (recentf-mode t) ;enable recent files mode.
-       )
+       (recentf-mode t))
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp
@@ -430,13 +424,11 @@
    #+BEGIN_SRC emacs-lisp
      (put 'dired-find-alternate-file 'disabled nil)
      (put 'downcase-region 'disabled nil)
-     (put 'downcase-region 'disabled nil)
      (put 'erase-buffer 'disabled nil)
      (put 'narrow-to-region 'disabled nil)
      (put 'scroll-left 'disabled nil)
      (put 'scroll-right 'disabled nil)
      (put 'set-goal-column 'disabled nil)
-     (put 'upcase-region 'disabled nil)
      (put 'upcase-region 'disabled nil)
 
      (setq disabled-command-function nil)
@@ -1958,7 +1950,6 @@
      (setq kmacro-ring-max 16)
      (setq mark-even-if-inactive t)
      (setq next-line-add-newlines nil)
-     (setq redisplay-dont-pause t) ;; Redraw the entire screen before checking for pending input events.
      (setq sentence-end-double-space nil)
      (setq tab-always-indent t)
      (setq transient-mark-mode t)
@@ -2314,9 +2305,6 @@
         (setq ac-quick-help-delay 0.5)
         (setq ac-fuzzy-enable t)
         (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
-        (add-to-list 'ac-modes 'slime-repl-mode)
-        (add-hook 'slime-mode-hook 'set-up-slime-ac)
-        (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
         (add-hook 'auto-complete-mode-hook 'ac-common-setup)
         (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
         (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
