@@ -236,8 +236,10 @@
 
      (custom/set-xwindows-font "consolas-base")
 
-     (req-package unicode-fonts)
-     (unicode-fonts-setup)
+     (req-package unicode-fonts
+       :disabled t
+       :config
+       (unicode-fonts-setup))
    #+END_SRC
 ** update some faces values
    #+BEGIN_SRC emacs-lisp
@@ -394,8 +396,11 @@
              (princ "\n\n")))))
 
      (req-package keyfreq
-       :defer t
+       :disabled t
        :config
+       (setq keyfreq-excluded-commands
+             '(self-insert-command
+               abort-recursive-edit))
        (keyfreq-mode 1)
        (keyfreq-autosave-mode 1))
 
@@ -621,7 +626,7 @@
      (req-package diminish :commands diminish)
    #+END_SRC
 ** view system processes info
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle no
      (req-package list-processes+)
 
      (global-set-key (kbd "C-x c") 'proced)
