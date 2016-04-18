@@ -82,6 +82,7 @@
    #+BEGIN_SRC emacs-lisp
      (req-package epa
        :config
+       (setq epg-gpg-program "gpg2")
        (epa-file-enable)
        (setq epg-gpg-home-directory "~/.gnupg"))
    #+END_SRC
@@ -977,7 +978,7 @@
       (req-package projectile
         :require dash pkg-info
         :config
-        (projectile-global-mode -1) ;; to explicitly disable in all buffers
+        (projectile-global-mode t)
         (setq projectile-enable-caching t)
         (setq projectile-cache-file (at-data-dir "/projectile.cache"))
         (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
