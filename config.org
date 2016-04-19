@@ -3967,6 +3967,7 @@
          (setq smtpmail-smtp-server "smtp.gmail.com")
          (setq smtpmail-smtp-service 587)
          (setq smtpmail-debug-info t)
+         (setq smtpmail-debug-verb t)
 
          ;; don't keep message buffers around
          (setq message-kill-buffer-on-exit t))
