@@ -2558,6 +2558,7 @@
       (autoload 'vc-svn-root "vc-svn")
       (autoload 'vc-hg-root "vc-hg")
 
+      (remove-hook 'find-file-hooks 'vc-find-file-hook)
       (req-package ediff
         :config
         (setq ediff-window-setup-function 'ediff-setup-windows-plain)
