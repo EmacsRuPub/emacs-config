@@ -814,9 +814,8 @@
      (req-package saveplace
        :config
        (setq save-place-file (at-data-dir "/.emacs-places"))
-       (setq save-place t))
-
-     (setq-default save-place t)
+       (setq save-place t)
+       (setq-default save-place t))
    #+END_SRC
 ** helm
 *** definitions
