@@ -3995,6 +3995,50 @@
        (req-package helm-mu
          :require helm mu4e)
      #+END_SRC
+*** notmuch
+    #+BEGIN_SRC emacs-lisp
+      (req-package notmuch
+        :config
+        (setq mm-text-html-renderer nil)
+        (setq notmuch-fcc-dirs
+              '(("aaermolov@gmail.com" . "aaermolov@gmail.com/Sent")
+                ("aermolov@mirantis.com" . "aermolov@mirantis.com/Sent")))
+        (define-key notmuch-search-mode-map "!"
+          (lambda (&optional beg end)
+            "mark thread as spam"
+            (interactive (notmuch-search-interactive-region))
+            (notmuch-search-tag (list "-spam" "-unread") beg end)
+            (next-line)))
+        ;; stores postponed messages to the specified directory
+        ;; (setq message-directory "MailLocation/Drafts") ;TODO: customize with if/cond
+        (setq notmuch-saved-searches
+              '((:name "all unread" :query "tag:unread" :key "a")
+                (:name "personal" :query "to:aaermolov@gmail.com tag:unread" :key "p")
+                (:name "work" :query "(to:aermolov@mirantis.com OR to:mos-dev@mirantis.com) tag:unread" :key "w")
+                (:name "emacs maillist" :query "emacs-devel-request@gnu.org tag:unread" :key "e")
+                (:name "orgmode maillist" :query "emacs-orgmode-request@gnu.org tag:unread" :key "o")
+                (:name "postgresql maillist" :query "pgsql-hackers@postgresql.org tag:unread" :key "P")))
+        (add-hook 'notmuch-hello-refresh-hook
+                  (lambda ()
+                    (if (and (eq (point) (point-min))
+                             (search-forward "Saved searches:" nil t))
+                        (progn
+                          (forward-line)
+                          (widget-forward 1))
+                      (if (eq (widget-type (widget-at)) 'editable-field)
+                          (beginning-of-line)))))
+        ;; Reading mail settings:
+        (setq notmuch-crypto-process-mime t) ; Automatically check signatures
+        ;; Crypto Settings
+        (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+        (add-hook 'message-setup-hook 'mml-secure-message-sign-pgpmime)
+        ;;Settings for main screen
+        (setq notmuch-hello-hide-tags (quote ("killed")))
+        (require 'org-notmuch))
+
+      (req-package helm-notmuch
+        :require helm notmuch)
+    #+END_SRC
 ** mu4e extension for Orgmode
    #+BEGIN_SRC emacs-lisp
      ;;TODO: try to use use-package
