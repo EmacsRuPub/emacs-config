@@ -3060,6 +3060,12 @@
 **** TBD
 ***** TODO review and maybe rebind keys
 ***** TODO bind helm-gtags-find-{rtags,symbol}
+**** semanticdb
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (when (cedet-gnu-global-version-check t)
+         (semanticdb-enable-gnu-global-databases 'c-mode)
+         (semanticdb-enable-gnu-global-databases 'c++-mode))
+     #+END_SRC
 *** perl
     #+BEGIN_SRC emacs-lisp :tangle no
       (fset 'perl-mode 'cperl-mode)
