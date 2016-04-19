@@ -420,6 +420,7 @@
 
      )
    #+END_SRC
+*** TODO check if `with-major-mode` works as expected
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp
      (put 'dired-find-alternate-file 'disabled nil)
@@ -1393,6 +1394,7 @@
 ** warping
    #+BEGIN_SRC emacs-lisp
      (req-package swoop
+       ;;TODO: compare and play with helm-swoop
        :require ht pcre2el async
        :config
        (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
