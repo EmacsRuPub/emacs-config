@@ -4048,6 +4048,14 @@
       (req-package helm-notmuch
         :require helm notmuch)
     #+END_SRC
+*** hydra
+    #+BEGIN_SRC emacs-lisp
+      (defhydra hydra-email (:exit t :color red)
+        "Read mail"
+        ("m" mu4e nil)
+        ("n" notmuch nil))
+      (global-set-key (kbd "C-c 4") 'hydra-email/body)
+    #+END_SRC
 ** mu4e extension for Orgmode
    #+BEGIN_SRC emacs-lisp
      ;;TODO: try to use use-package
