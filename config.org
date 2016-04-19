@@ -825,14 +825,13 @@
 
       (defun helm-find-files ()
         (interactive)
-        (helm-other-buffer '(
-                             helm-source-files-in-current-dir
-                             helm-source-recentf
-                             helm-source-file-name-history
-                             helm-source-findutils
-                             helm-source-locate
-                             )
-                           "*helm-find-files*"))
+        (helm-other-buffer
+           '(helm-source-files-in-current-dir
+               helm-source-recentf
+               helm-source-file-name-history
+               helm-source-findutils
+               helm-source-locate)
+           "*helm-find-files*"))
 
       (require 'helm-utils)
       (defvar helm-source-portage-files
@@ -878,26 +877,22 @@
         (bind-key "M-x" 'helm-M-x)
         (bind-key "C-h a" 'helm-apropos)
         (bind-key "C-h r" 'helm-info-emacs)
-        (bind-key "C-h r" 'helm-info-at-point)
+        (bind-key "C-h o" 'helm-info-at-point)
         (bind-key "C-x C-r" 'helm-recentf)
         ;;TODO: investigate and bind 'helm-resume
         ;;TODO: investigate and bind 'helm-multi-files
         (helm-mode t)
-        (helm-adaptive-mode 1)
-        (helm-autoresize-mode 1)
-        (helm-descbinds-mode 1)             ; find the cause of "attempt to delete minibuffer window"
-        ;;TODO: investigate and bind 'helm-descbinds
-        )
+        (helm-autoresize-mode 1))
 
       (req-package wgrep-helm
         :require helm wgrep) ;TODO: maybe configure
 
-      (req-package helm-projectile
-        :require helm projectile dash cl-lib
+      (req-package helm-descbinds
+        :require helm
         :config
-        (helm-projectile-on))
+        (helm-descbinds-mode 1)
+        (bind-key "C-x C-d" 'helm-descbinds))
 
-      (req-package helm-descbinds :require helm)
       (req-package helm-themes :require helm)
       (req-package helm-helm-commands :require helm)
       (req-package helm-dired-recent-dirs :require helm)
@@ -1025,6 +1020,11 @@
           ("s" projectile-run-command-in-root)
           ("S" projectile-run-async-shell-command-in-root))
         (global-set-key (kbd "<f8>") 'hydra-projectile/body))
+
+      (req-package helm-projectile
+        :require helm projectile dash cl-lib
+        :config
+        (helm-projectile-on))
 
       (req-package projectile-sift :require sift projectile) ;;TODO: customize
     #+END_SRC
