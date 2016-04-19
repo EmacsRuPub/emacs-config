@@ -1725,6 +1725,11 @@
         :require multiple-cursors
         :defer t)
 
+      (req-package ace-mc
+        :require ace-jump-mode multiple-cursors dash
+        :config
+        (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors))
+
       ;; Transpose stuff with M-t
       (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
       ;;TODO: plan docstring
