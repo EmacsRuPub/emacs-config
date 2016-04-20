@@ -2622,6 +2622,10 @@
        (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
        (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
        (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
+       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
+       (dolist (mode '(paredit-mode smartparens-mode))
+         (when (fboundp mode)
+           (add-hook 'eval-expression-minibuffer-setup-hook mode)))
      #+END_SRC
 **** try
 ***** 1
