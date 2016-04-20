@@ -536,7 +536,7 @@
      (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
      (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
    #+END_SRC
-** hooks for tabs and spaces ;]
+** mode lists for common needs
    #+BEGIN_SRC emacs-lisp
      ;; clean trailing whitespaces automatically
      (setq custom/trailing-whitespace-modes
@@ -566,7 +566,9 @@
              clojure-mode
              python-mode
              ))
-
+   #+END_SRC
+** hooks for tabs and spaces ;]
+   #+BEGIN_SRC emacs-lisp
      (defun common-hooks/trailing-whitespace-hook ()
        (when (member major-mode custom/trailing-whitespace-modes)
          (delete-trailing-whitespace)))
