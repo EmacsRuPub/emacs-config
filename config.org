@@ -4568,6 +4568,8 @@
 
        (req-package org-linkany
          :require log4e yaxception)
+
+       (req-package org-bookmark-heading)
      #+END_SRC
 **** common 
      #+BEGIN_SRC emacs-lisp
