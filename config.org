@@ -1860,6 +1860,11 @@
 
       ;;TODO: consolidate all whitespaces utils
       (req-package ws-butler :commands ws-buttler-mode)
+
+      (req-package composable
+        :config
+        (composable-mode)
+        (composable-mark-mode))
     #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp
