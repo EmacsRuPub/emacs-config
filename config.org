@@ -4784,7 +4784,8 @@
        (setq org-deadline-warning-days 30)
        (setq org-default-notes-file (at-org-dir "/refile.org"))
        (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
-       (setq org-ellipsis "⤵")
+       (when (featurep 'unicode-fonts)
+         (setq org-ellipsis "⤵"))
        (setq org-enforce-todo-checkbox-dependencies t)
        (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
        (setq org-export-coding-system 'utf-8)
