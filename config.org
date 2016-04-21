@@ -945,94 +945,69 @@
         (helm-flx-mode 1))
     #+END_SRC
 ** projectile
-*** definitions
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp
+     (req-package projectile
+       :require dash pkg-info
+       :config
+       (projectile-global-mode t)
+       (setq projectile-enable-caching t)
+       (setq projectile-cache-file (at-data-dir "/projectile.cache"))
+       (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
+       (setq projectile-require-project-root nil)
+       (setq projectile-switch-project-action 'helm-projectile)
+       (setq projectile-switch-project-action #'projectile-commander)
+       (def-projectile-commander-method ?d
+         "Open project root in dired."
+         (projectile-dired))
+       (setq projectile-completion-system 'ivy)
+       (setq projectile-tags-command
+             "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
+       (add-to-list 'projectile-other-file-alist '("html" "js"))
+       (add-to-list 'projectile-other-file-alist '("js" "html"))
+       (diminish 'projectile-mode "prj")
+       (defhydra hydra-projectile (:color teal)
+         "
+         PROJECT: %(projectile-project-root)
+         find                         Project               More
+         ---------------------------------------------------------------------------------------
+         _fd_irectory                 i_pb_uffer            _c_ommander
+         _ft_est file                 in_pf_o               _s_witch to buffer
+         _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
+         file d_fw_im                 _pc_ompile            _d_ired
+         file o_ft_her window         _pi_nvalidate cache   display _b_uffer
+         _fo_ther file                _pk_ill buffers       _r_ecentf
+         other file _fO_ther window
+         "
+         ("fd" helm-projectile-find-dir)
+         ("ft" projectile-find-test-file)
+         ("ff" helm-projectile-find-file)
+         ("fw" helm-projectile-find-file-dwim)
+         ("ft" projectile-find-file-dwim-other-window)
+         ("fo" helm-projectile-find-other-file)
+         ("fO" projectile-find-other-file-other-window)
+         ("pb" projectile-ibuffer)
+         ("pf" projectile-project-info)
+         ("pt" projectile-test-project)
+         ("pc" projectile-compile-project)
+         ("pi" projectile-invalidate-cache)
+         ("pk" projectile-kill-buffers)
+         ("ps" projectile-switch-project)
+         ("c" projectile-commander)
+         ("s" projectile-switch-to-buffer)
+         ("w" projectile-switch-to-buffer-other-window)
+         ("d" projectile-dired)
+         ("b" projectile-display-buffer)
+         ("r" projectile-recentf)
+         ;;TODO: write legend
+         ("s" projectile-run-command-in-root)
+         ("S" projectile-run-async-shell-command-in-root))
+       (global-set-key (kbd "<f8>") 'hydra-projectile/body))
 
-      (defvar suppress-projectile-symbol-at-point nil
-        "Whether to suppress inserting symbol at point while using projectile searches")
-
-      (defadvice projectile-symbol-at-point (around projectile-suppress-symbol-at-point activate)
-        (if suppress-projectile-symbol-at-point
-            (setq ad-return-value "")
-          (setq ad-return-value ad-do-it)))
-
-      (defun projectile-ag (arg)
-        (interactive "p")
-        (message "arg: %s" arg)
-        (if (equal arg 4)
-            (setq suppress-projectile-symbol-at-point t)
-          (setq suppress-projectile-symbol-at-point nil))
-        (call-interactively 'projectile-ag))
-
-      )
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (req-package projectile
-        :require dash pkg-info
-        :config
-        (projectile-global-mode t)
-        (setq projectile-enable-caching t)
-        (setq projectile-cache-file (at-data-dir "/projectile.cache"))
-        (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
-        (setq projectile-require-project-root nil)
-        (setq projectile-switch-project-action 'helm-projectile)
-        (setq projectile-switch-project-action #'projectile-commander)
-        (def-projectile-commander-method ?d
-          "Open project root in dired."
-          (projectile-dired))
-        (setq projectile-completion-system 'ivy)
-        (setq projectile-tags-command
-              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-        (add-to-list 'projectile-other-file-alist '("html" "js"))
-        (add-to-list 'projectile-other-file-alist '("js" "html"))
-        (diminish 'projectile-mode "prj")
-        (defhydra hydra-projectile (:color teal)
-          "
-          PROJECT: %(projectile-project-root)
-          find                         Project               More
-          ---------------------------------------------------------------------------------------
-          _fd_irectory                 i_pb_uffer            _c_ommander
-          _ft_est file                 in_pf_o               _s_witch to buffer
-          _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
-          file d_fw_im                 _pc_ompile            _d_ired
-          file o_ft_her window         _pi_nvalidate cache   display _b_uffer
-          _fo_ther file                _pk_ill buffers       _r_ecentf
-          other file _fO_ther window
-          "
-          ("fd" helm-projectile-find-dir)
-          ("ft" projectile-find-test-file)
-          ("ff" helm-projectile-find-file)
-          ("fw" helm-projectile-find-file-dwim)
-          ("ft" projectile-find-file-dwim-other-window)
-          ("fo" helm-projectile-find-other-file)
-          ("fO" projectile-find-other-file-other-window)
-          ("pb" projectile-ibuffer)
-          ("pf" projectile-project-info)
-          ("pt" projectile-test-project)
-          ("pc" projectile-compile-project)
-          ("pi" projectile-invalidate-cache)
-          ("pk" projectile-kill-buffers)
-          ("ps" projectile-switch-project)
-          ("c" projectile-commander)
-          ("s" projectile-switch-to-buffer)
-          ("w" projectile-switch-to-buffer-other-window)
-          ("d" projectile-dired)
-          ("b" projectile-display-buffer)
-          ("r" projectile-recentf)
-          ;;TODO: write legend
-          ("s" projectile-run-command-in-root)
-          ("S" projectile-run-async-shell-command-in-root))
-        (global-set-key (kbd "<f8>") 'hydra-projectile/body))
-
-      (req-package helm-projectile
-        :require helm projectile dash cl-lib
-        :config
-        (helm-projectile-on))
-
-      (req-package projectile-sift :require sift projectile) ;;TODO: customize
-    #+END_SRC
+     (req-package helm-projectile
+       :require helm projectile dash cl-lib
+       :config
+       (helm-projectile-on))
+   #+END_SRC
 ** dired
 *** always refresh contents
     #+BEGIN_SRC emacs-lisp
