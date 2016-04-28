@@ -515,6 +515,17 @@
       (display-battery-mode 1)
       (display-time)
 
+      (defun custom/display-buffer-fullframe (buffer alist)
+        "Display BUFFER in fullscreen.
+      ALIST is a `display-buffer' ALIST.
+      Return the new window for BUFFER."
+        (let ((window
+               (or (display-buffer-use-some-window buffer alist)
+                   (display-buffer-pop-up-window buffer alist))))
+          (when window
+            (delete-other-windows window))
+          window))
+
       (req-package popwin)
       (req-package vline)
 
@@ -2480,6 +2491,10 @@
         (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
         (setq magit-blame-heading-format "%H %-20a %C %s")
         (setq magit-diff-refine-hunk t)
+        (add-to-list 'display-buffer-alist
+                     `(,(rx "*magit: ")
+                       (custom/display-buffer-fullframe)
+                       (reusable-frames . nil)))
         (defhydra hydra-magit (:color teal :hint nil)
           "
            PROJECT: %(projectile-project-root)
