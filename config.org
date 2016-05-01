@@ -3679,7 +3679,15 @@
 ** terminal
 *** common
     #+BEGIN_SRC emacs-lisp
-      (req-package ansi-color)
+      (req-package ansi-color
+        :config
+        (defun custom/colorize-compilation ()
+          "Colorize from `compilation-filter-start' to `point'."
+          (let ((inhibit-read-only t))
+            (ansi-color-apply-on-region
+             compilation-filter-start (point))))
+        (add-hook 'compilation-filter-hook
+                  #custom/colorize-compilation))
     #+END_SRC
 *** comint
     #+BEGIN_SRC emacs-lisp
