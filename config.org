@@ -838,12 +838,12 @@
       (defun helm-find-files ()
         (interactive)
         (helm-other-buffer
-           '(helm-source-files-in-current-dir
-               helm-source-recentf
-               helm-source-file-name-history
-               helm-source-findutils
-               helm-source-locate)
-           "*helm-find-files*"))
+         '(helm-source-files-in-current-dir
+           helm-source-recentf
+           helm-source-file-name-history
+           helm-source-findutils
+           helm-source-locate)
+         "*helm-find-files*"))
 
       (require 'helm-utils)
       (defvar helm-source-portage-files
