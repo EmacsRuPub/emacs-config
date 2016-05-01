@@ -852,6 +852,17 @@
           (action . (lambda (candidate)
                       (helm-find-file-as-root candidate)))))
 
+      ;;TODO: make hydra for such custom helm sources
+      (defun open-portage-file ()
+        (interactive)
+        (helm :sources '(custom/helm-source-portage-files)))
+
+      (defadvice disable-projectile-globalmode (around open-portage-file)
+          (projectile-global-mode -1)
+          (ad-do-it)
+          (projectile-global-mode t))
+      (ad-activate 'disable-projectile-globalmode)
+
       )
     #+END_SRC
 *** setup
@@ -2071,9 +2082,7 @@
      ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
-     (global-set-key (kbd "C-c r p") '(lambda () ;;TODO: make hydra for such custom helm sources
-                                        (interactive)
-                                        (helm :sources '(custom/helm-source-portage-files))))
+     (global-set-key (kbd "C-c r p") 'custom/open-portage-file)
    #+END_SRC
 ** try
 *** unicode and indentation
