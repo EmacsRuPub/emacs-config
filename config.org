@@ -3687,7 +3687,7 @@
             (ansi-color-apply-on-region
              compilation-filter-start (point))))
         (add-hook 'compilation-filter-hook
-                  #custom/colorize-compilation))
+                  #'custom/colorize-compilation))
     #+END_SRC
 *** comint
     #+BEGIN_SRC emacs-lisp
