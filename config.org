@@ -1632,6 +1632,19 @@
         (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
         (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
 
+      (req-package selected
+        :commands selected-minor-mode
+        :init
+        (setq selected-org-mode-map (make-sparse-keymap))
+        :bind (:map selected-keymap
+                    ("q" . selected-off)
+                    ("u" . upcase-region)
+                    ("d" . downcase-region)
+                    ("w" . count-words-region)
+                    ("m" . apply-macro-to-region-lines)
+                    :map selected-org-mode-map
+                    ("t" . org-table-convert-region)))
+
       (req-package whole-line-or-region ;; if no region is active, act on current line
         :defer t
         :config
