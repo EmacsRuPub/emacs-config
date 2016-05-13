@@ -4903,6 +4903,14 @@
                ("jp" "project" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:project:")
                ("l" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
                ))
+
+       (defadvice org-protocol-do-capture (around display-notify-after-capture activate)
+         (let ((result ad-do-it))
+           (custom/notify "Link captured"
+                          (concat (caar org-stored-links)
+                                  "\n"
+                                  (cadar org-stored-links))))
+         result)
      #+END_SRC
 **** holidays
      #+BEGIN_SRC emacs-lisp
