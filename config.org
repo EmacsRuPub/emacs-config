@@ -2852,6 +2852,7 @@
     #+BEGIN_SRC emacs-lisp
       (req-package haskell-mode
         :require cl-lib
+        :mode "\\.hs\\'"
         :init
         (req-package haskell-indent)
         (req-package haskell-align-imports)
@@ -2860,9 +2861,10 @@
         (req-package inf-haskell)
         (req-package haskell-ghci)
         :config
-        (setq haskell-program-name "ghci")
         (setq inferior-haskell-wait-and-jump t)
-        (setq haskell-program-name "ghci \"+.\"")
+        (setf haskell-process-path-ghci "ghci-ng")
+        (setf haskell-process-type 'cabal-repl)
+        (setf haskell-process-args-cabal-repl '("--ghc-option=-ferror-spans" "--with-ghc=ghci-ng"))
         (bind-key "C-," 'haskell-move-nested-left haskell-mode-map)
         (bind-key "C-." 'haskell-move-nested-right haskell-mode-map)
         (bind-key "<tab>" 'haskell-indent-cycle haskell-mode-map)
@@ -2873,15 +2875,25 @@
         (add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
         (add-hook 'haskell-mode-hook 'common-hooks/newline-hook)
         (add-hook 'haskell-mode-hook 'common-hooks/prog-helpers)
-        (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci))
+        (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+        (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+        (add-hook 'haskell-mode-hook #'haskell-simple-indent-mode))
+
+      (req-package hindent
+        :commands hindent-mode
+        :init
+        (add-hook 'haskell-mode-hook #'hindent-mode))
+
+      (req-package shm
+        :commands (structured-haskell-mode structured-haskell-repl-mode)
+        :init
+        (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+        (add-hook 'haskell-interactive-mode-hook 'structured-haskell-repl-mode))
 
       ;;TODO: setup flycheck
       ;;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
       ;;TODO: investigate the difference between builtin and el-get versions of haskell-mode
     #+END_SRC
-**** try
-***** hindent
-***** shm
 *** python
 **** linux traits
      #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
