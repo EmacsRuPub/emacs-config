@@ -4286,46 +4286,14 @@
 
        )
      #+END_SRC
-**** Org journalling utils
+**** Org journalling and archiving
+     :PROPERTIES:
+     :ID:       ac9bd4a6-f167-4408-aa97-c58843003584
+     :END:
      #+BEGIN_SRC emacs-lisp
-       (define-namespace custom/
+       (defvar custom/org-journal-file (at-org-dir "/journal.org"))
 
-       (defvar org-journal-file "/home/octocat/docs/org/journal.org")
-
-       ;;TODO: develop some kind of harness to automate, for example
-       ;; - run-at-time, then traverse agenda and copy appropriate headings to journal
-       ;; - try to make solution with #'org-todo-changed-hook work
-       ;;TODO: filter out recurrent tasks
-       (defun org-save-to-journal ()
-           (interactive)
-           (org-refile-to-datetree org-journal-file))
-
-       (defun org-refile-to-datetree (&optional file cut)
-         "Refile a subtree to a datetree corresponding to it's timestamp.
-
-       The current time is used if the entry has no timestamp. If FILE
-       is nil, refile in the current file."
-         (interactive "f")
-         (let* ((datetree-date (or (org-entry-get nil "TIMESTAMP" t)
-                                   (org-read-date t nil "now")))
-                (date (org-date-to-gregorian datetree-date))
-                )
-           (save-excursion
-             (with-current-buffer (current-buffer))
-               (if cut
-                   (org-cut-subtree)
-                 (org-copy-subtree))
-               (if file (find-file file))
-               (org-datetree-find-date-create date)
-               (org-narrow-to-subtree)
-               (show-subtree)
-               (org-end-of-subtree t)
-               (newline)
-               (goto-char (point-max))
-               (org-paste-subtree 4)
-               (widen)
-               )))
-       )
+       (setq org-archive-location (concat custom/org-journal-file "::datetree/"))
      #+END_SRC
 **** open org agenda when we need it
      #+BEGIN_SRC emacs-lisp
