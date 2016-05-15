@@ -4585,6 +4585,9 @@
                                              ("B." . "-")
                                              ("a." . "-")
                                              ("b." . "-")))
+
+       ;; extend priorities set
+       (setq org-lowest-priority 70)
      #+END_SRC
 **** user speed commands
      #+BEGIN_SRC emacs-lisp
@@ -4838,7 +4841,10 @@
        (setq org-priority-faces
              '((?A :foreground "red" :weight bold)
                (?B :foreground "#94bff3" :weight bold)
-               (?C :foreground "#6f6f6f")))
+               (?C :foreground "#6f6f6f")
+               (?D :foreground "#c390d4")
+               (?E :foreground "#90c3d4")
+               (?F :foreground "#a1d490")))
 
        (set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
        (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
