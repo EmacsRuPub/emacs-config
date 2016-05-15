@@ -294,6 +294,12 @@
 
      (req-package backup-walker) ;TODO: bind to key and other stuff
    #+END_SRC
+** lock files
+   Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
+   dirs from being clobbered with.
+   #+BEGIN_SRC emacs-lisp
+     (setf create-lockfiles nil)
+   #+END_SRC
 ** desktop
    #+BEGIN_SRC emacs-lisp
      (req-package desktop
