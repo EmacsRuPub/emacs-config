@@ -2630,8 +2630,7 @@
 
        (defun custom/elisp-mode-hook ()
          (auto-fill-mode 1)
-         (setq indent-tabs-mode t)
-         (setq tab-width 2)
+         (setq indent-tabs-mode nil)
          (setq comment-start ";;")
          (turn-on-eldoc-mode))
 
