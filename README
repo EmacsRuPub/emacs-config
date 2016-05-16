@@ -1,14 +1,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GNU Emacs configuration
-;; (c) Alexander Ermolov 2009-2015
+;; (c) Alexander Ermolov 2009-2016
 ;; aaermolov AT gmail.com
 ;;
 ;; Thanks to all, who has helped me in creation, especially to:
 ;; Alex Ott
 ;; Alexander Solovyov
+;; Alexey Lebedev aka binarin
 ;; Emacswiki.org
 ;; Ivan Shvedunov aka ivan4th
 ;; Sacha Chua
-;; Alexey Lebedev aka binarin
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
