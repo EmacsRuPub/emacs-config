@@ -4532,6 +4532,9 @@
        (req-package orgit :requires dash magit org)
        (req-package org-bullets)
 
+       (req-package helm-org
+         :require helm)
+
        (req-package org-context
          :config
          ;;TODO: leverage real contexts
@@ -4548,6 +4551,8 @@
          :require log4e yaxception)
 
        (req-package org-bookmark-heading)
+
+       (req-package org-random-todo)
      #+END_SRC
 **** common 
      #+BEGIN_SRC emacs-lisp
