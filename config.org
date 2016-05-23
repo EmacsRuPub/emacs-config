@@ -821,23 +821,37 @@
            helm-source-locate)
          "*helm-find-files*"))
 
-      (require 'helm-utils)
+      (req-package-force helm-utils)
+
       (defvar helm-source-portage-files
         `((name . "Portage files")
           (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
           (action . (lambda (candidate)
                       (helm-find-file-as-root candidate)))))
 
-      ;;TODO: make hydra for such custom helm sources
+      (defvar helm-source-enc-docs
+        `((name . "Various documents")
+          (candidates . ,(helm-walk-directory (at-homedir "/docs/enc") :path 'full))
+          (action . (lambda (candidate)
+                      (find-file candidate)))))
+
+      (defvar helm-source-org-files
+        `((name . "Org files")
+          (candidates . ,(helm-walk-directory (at-org-dir) :path 'full))
+          (action . (lambda (candidate)
+                      (find-file candidate)))))
+
       (defun open-portage-file ()
         (interactive)
         (helm :sources '(custom/helm-source-portage-files)))
 
-      (defadvice disable-projectile-globalmode (around open-portage-file)
-          (projectile-global-mode -1)
-          (ad-do-it)
-          (projectile-global-mode t))
-      (ad-activate 'disable-projectile-globalmode)
+      (defun open-encrypted-document ()
+        (interactive)
+        (helm :sources '(custom/helm-source-enc-docs)))
+
+      (defun open-org-file ()
+        (interactive)
+        (helm :sources '(custom/helm-source-org-files)))
 
       )
     #+END_SRC
@@ -941,6 +955,15 @@
         :require helm flx
         :config
         (helm-flx-mode 1))
+    #+END_SRC
+*** hydras
+    #+BEGIN_SRC emacs-lisp
+      (defhydra hydra-custom-helm ()
+        ("p" custom/open-portage-file "open portage file")
+        ("e" custom/open-encrypted-document "open encrypted document")
+        ("o" custom/open-org-file "open Org file")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "C-c r") 'hydra-custom-helm/body)
     #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
@@ -2072,7 +2095,6 @@
      ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
-     (global-set-key (kbd "C-c r p") 'custom/open-portage-file)
    #+END_SRC
 ** try
 *** unicode and indentation
@@ -4343,13 +4365,6 @@
          With prefix argument, also display headlines without a TODO keyword."
          (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
 
-       (req-package-force helm-utils)
-       (defvar helm-source-org-files
-         `((name . "Org files")
-           (candidates . ,(helm-walk-directory (at-org-dir) :path 'full))
-           (action . (lambda (candidate)
-                       (find-file candidate)))))
-
        )
      #+END_SRC
 **** utils
@@ -4935,10 +4950,6 @@
        (define-key org-mode-map (kbd "C-c [") nil)
        (define-key org-mode-map (kbd "C-c ]") nil)
        (define-key org-mode-map (kbd "C-c C-o") nil)
-
-       (global-set-key (kbd "C-c r o") '(lambda () ;;TODO: make hydra for such custom helm sources
-                                          (interactive)
-                                          (helm :sources '(custom/helm-source-org-files))))
      #+END_SRC
 *** try
 **** excerpt from sachac
