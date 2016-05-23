@@ -25,6 +25,23 @@
        (concat (at-config-basedir "data") suffix))
    #+END_SRC
 **** TODO unify slashes usage
+** working directories
+   A bunch of directories for various working datasets
+   As the order of loading corresponding extensions,
+   is cumbersome to maintain we should customize them ASAP (here)
+   #+BEGIN_SRC emacs-lisp
+     ;;TODO: think of less straightforward customization way
+     (setq auto-save-list-file-prefix (at-data-dir "/auto-save-list/.saves-"))
+     (setq bookmark-default-file (at-data-dir "/bookmarks"))
+     (setq tramp-persistency-file-name (at-data-dir "/tramp"))
+     (setq eshell-directory-name (at-data-dir "/eshell/"))
+     (setq shared-game-score-directory (at-data-dir "/games"))
+     (setq pcache-directory (at-data-dir "/var/pcache/"))
+     (setq url-configuration-directory (at-data-dir "/url/"))
+     (setq request-storage-directory (at-data-dir "/request"))
+     (setq image-dired-dir (at-data-dir "/image-dired/"))
+   #+END_SRC
+
 ** input method utils (internal emacs keyboard layouts switching)
 *** reverse input method
     it makes Emacs with non-English system keyboard layout
@@ -116,22 +133,6 @@
      (req-package diminish)
      (req-package names)
      (req-package anaphora)
-   #+END_SRC
-** working directories
-   A bunch of directories for various working datasets
-   As the order of loading corresponding extensions,
-   is cumbersome to maintain we should customize them ASAP (here)
-   #+BEGIN_SRC emacs-lisp
-     ;;TODO: think of less straightforward customization way
-     (setq auto-save-list-file-prefix (at-data-dir "/auto-save-list/.saves-"))
-     (setq bookmark-default-file (at-data-dir "/bookmarks"))
-     (setq tramp-persistency-file-name (at-data-dir "/tramp"))
-     (setq eshell-directory-name (at-data-dir "/eshell/"))
-     (setq shared-game-score-directory (at-data-dir "/games"))
-     (setq pcache-directory (at-data-dir "/var/pcache/"))
-     (setq url-configuration-directory (at-data-dir "/url/"))
-     (setq request-storage-directory (at-data-dir "/request"))
-     (setq image-dired-dir (at-data-dir "/image-dired/"))
    #+END_SRC
 * appearance
 ** populate fonts inventory
@@ -226,7 +227,7 @@
    #+END_SRC
 ** save history
    #+BEGIN_SRC emacs-lisp
-     (req-package savehist
+     (req-package-force savehist
        :config
        (setq savehist-file (at-data-dir "/savehist"))
        (setq savehist-save-minibuffer-history t)
