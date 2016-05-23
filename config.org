@@ -2758,88 +2758,124 @@
                (getenv "CLASSPATH")))
     #+END_SRC
 *** lisp
-    #+BEGIN_SRC emacs-lisp
-      (setq custom/hyperspec-root "~/help/HyperSpec/")
+**** definitions
+     This code represents almost original slime-helper functions definitions (except hooks, of course).
+     The reason to not use slime-helper itself is that it provides its own slime setup thus
+     omitting my own one completely.
+     #+BEGIN_SRC emacs-lisp
+       (unless (boundp 'quicklisp-slime-helper-dist)
+         (setq quicklisp-slime-helper-dist "quicklisp"))
 
-      (req-package inf-lisp
-        :config
-        (setq inferior-lisp-program "sbcl"))
-      (req-package common-lisp-snippets :require yasnippet)
+       (setq quicklisp-slime-helper-base (expand-file-name "~/quicklisp/"))
 
-      (defun custom/lisp-mode-hook ()
-        (auto-fill-mode 1)
-        (setq indent-tabs-mode t)
-        (setq tab-width 2)
-        (turn-on-eldoc-mode))
+       (defun quicklisp-slime-helper-file-contents (file)
+         (with-temp-buffer
+           (insert-file-contents file)
+           (buffer-string)))
 
-      (defun custom/slime-hook ()
-        (slime-mode t)
-        (set (make-local-variable 'slime-lisp-implementations)
-             (list (assoc 'sbcl slime-lisp-implementations))))
+       (defun quicklisp-slime-helper-system-directory (system)
+         (let ((location-file (concat quicklisp-slime-helper-base
+                                      "dists/"
+                                      quicklisp-slime-helper-dist
+                                      "/installed/systems/"
+                                      system
+                                      ".txt")))
+           (when (file-exists-p location-file)
+             (let ((relative (quicklisp-slime-helper-file-contents location-file)))
+               (file-name-directory (concat quicklisp-slime-helper-base
+                                            relative))))))
 
-      (req-package slime
-          :require cl-lib
-        :defer t
-        :init
-        (req-package slime-autoloads)
-        :config
-        (eval-after-load "auto-complete"
-          '(add-to-list 'ac-modes 'slime-repl-mode))
-        (add-hook 'lisp-mode-hook 'custom/slime-hook)
-        (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-        (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
-        (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
-        (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
-        (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
-        (add-hook 'lisp-mode-hook 'set-up-slime-ac)
-        (add-hook 'slime-mode-hook 'set-up-slime-ac)
-        (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-        (slime-setup
-         '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
-                                 slime-hyperdoc slime-package-fu slime-references
-                                 slime-snapshot slime-sprof slime-trace-dialog slime-xref-browser
-                                 slime-asdf slime-autodoc slime-banner slime-fancy slime-fuzzy
-                                 slime-repl slime-sbcl-exts))
-        (defadvice slime-documentation-lookup
-            (around change-browse-url-browser-function activate)
-          "Use w3m for slime documentation lookup."
-          (let ((browse-url-browser-function 'w3m-browse-url))
-            ad-do-it))
-        (setq slime-complete-symbol*-fancy t)
-        (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-        (setq slime-net-coding-system 'utf-8-unix)
-        (setq slime-lisp-implementations '((clojure ("clj-cmd") :init swank-clojure-init)))
-        (setq slime-use-autodoc-mode nil)
-        (setq slime-backend (concat (package-desc-dir (cadr (assq 'slime package-alist))) "/swank-loader.lisp"))
-        (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
-        ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
-        (defhydra hydra-slime ()
-          "
-        Slime
-        -----------
-        _s_ run
-        _l_ selector
-        _;_ insert balanced comments
-        _M-;_ remove balanced comments
-        _h_ documentation lookup
-        "
-          ("s" slime "run slime" :color blue)
-          ("l" slime-selector "slime selector" :color blue)
-          (";" slime-insert-balanced-comments)
-          ("M-;" slime-remove-balanced-comments)
-          ("h" slime-documentation-lookup)
-          ("q" nil "cancel"))
-        (global-set-key (kbd "M-p") 'hydra-slime/body))
+       (defun quicklisp-slime-helper-slime-directory ()
+         (quicklisp-slime-helper-system-directory "swank"))
 
-      (req-package ac-slime :require auto-complete slime cl-lib)
+       (defun custom/lisp-mode-hook ()
+         (auto-fill-mode 1)
+         (setq indent-tabs-mode t)
+         (setq tab-width 2)
+         (turn-on-eldoc-mode))
 
-      ;; lookup information in hyperspec
-      (info-lookup-add-help
-       :mode 'lisp-mode
-       :regexp "[^][()'\" \t\n]+"
-       :ignore-case t
-       :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
-    #+END_SRC
+       (defun custom/slime-hook ()
+         (slime-mode t)
+         (set (make-local-variable 'slime-lisp-implementations)
+              (list (assoc 'sbcl slime-lisp-implementations))))
+
+       (defadvice slime-documentation-lookup
+           (around change-browse-url-browser-function activate)
+         "Use w3m for slime documentation lookup."
+         (let ((browse-url-browser-function 'w3m-browse-url))
+           ad-do-it))
+     #+END_SRC
+**** slime setup
+     Here follow slime customizations using version from quicklisp (which is slime-helper designed for)
+     Let clause is borrowed from slime-helper source and its contents are superseded by my own setup.
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
+         (add-to-list 'load-path quicklisp-slime-directory)
+         (require 'cl-lib)
+         (require 'slime-autoloads)
+         (setq slime-backend (expand-file-name "swank-loader.lisp"
+                                               quicklisp-slime-directory))
+         (setq slime-path quicklisp-slime-directory)
+         (slime-setup
+          '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
+            slime-hyperdoc slime-package-fu slime-references
+            slime-snapshot slime-sprof slime-trace-dialog slime-xref-browser
+            slime-asdf slime-autodoc slime-banner slime-fancy slime-fuzzy
+            slime-repl slime-sbcl-exts))
+         (add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")  :coding-system utf-8-unix))
+         (setq slime-complete-symbol*-fancy t)
+         (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+         (setq slime-net-coding-system 'utf-8-unix)
+         (setq slime-use-autodoc-mode nil)
+         ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
+         (add-hook 'lisp-mode-hook 'custom/slime-hook)
+         (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+         (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
+         (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
+         (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
+         (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
+         (add-hook 'lisp-mode-hook 'set-up-slime-ac)
+         (add-hook 'slime-mode-hook 'set-up-slime-ac)
+         (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+         (eval-after-load "auto-complete"
+           '(add-to-list 'ac-modes 'slime-repl-mode)))
+     #+END_SRC
+**** additional setup
+     #+BEGIN_SRC emacs-lisp
+       (setq custom/hyperspec-root "~/help/HyperSpec/")
+
+       (req-package inf-lisp
+         :config
+         (setq inferior-lisp-program "sbcl"))
+       (req-package common-lisp-snippets :require yasnippet)
+
+       (req-package ac-slime :require auto-complete slime cl-lib)
+
+       ;; lookup information in hyperspec
+       (info-lookup-add-help
+        :mode 'lisp-mode
+        :regexp "[^][()'\" \t\n]+"
+        :ignore-case t
+        :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
+
+       (defhydra hydra-slime ()
+         "
+       Slime
+       -----------
+       _s_ run
+       _l_ selector
+       _;_ insert balanced comments
+       _M-;_ remove balanced comments
+       _h_ documentation lookup
+       "
+         ("s" slime "run slime" :color blue)
+         ("l" slime-selector "slime selector" :color blue)
+         (";" slime-insert-balanced-comments)
+         ("M-;" slime-remove-balanced-comments)
+         ("h" slime-documentation-lookup)
+         ("q" nil "cancel"))
+       (global-set-key (kbd "M-p") 'hydra-slime/body)
+     #+END_SRC
 *** haskell
     #+BEGIN_SRC emacs-lisp
       (req-package haskell-mode
