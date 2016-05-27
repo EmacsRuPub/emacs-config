@@ -4681,16 +4681,18 @@
 
        (setq org-agenda-custom-commands
              `(("d" . "some non-straightforward TODO statuses")
-               ("dc" todo "SOMEDAY|CANCELLED|CLOSED" nil)
-               ("dw" todo "WAITING|LATER" nil)
+               ("db" todo "BACKLOG" nil)
+               ("ds" todo "SOON" nil)
+               ("dc" todo "CANCELLED" nil)
+               ("dw" todo "WAITING|FEEDBACK" nil)
                ("dg" todo "GOING" ,agenda-opts-all-with-time)
                ("da" tags "+actual_p")
                ("c" . "by context")
-               ("cp" tags "+@personal/GOING|WAITING|TODO")
-               ("cr" tags "+@project/GOING|WAITING|TODO")
-               ("cj" tags "+@job/GOING|WAITING|TODO")
-               ("cw" tags "+@workplace/GOING|WAITING|TODO")
-               ("ct" tags "+@phonecall/WAITING|TODO")
+               ("cp" tags "+@personal/GOING|WAITING|BACKLOG|SOON")
+               ("cr" tags "+@project/GOING|WAITING|BACKLOG|SOON")
+               ("cj" tags "+@job/GOING|WAITING|FEEDBACK|BACKLOG|SOON")
+               ("cw" tags "+@workplace/GOING|WAITING|BACKLOG|SOON")
+               ("ct" tags "+@phonecall/WAITING|BACKLOG|SOON")
                ("cs" tags "+@someday")
                ("cq" tags "+@quicknote")
                ("e" . "by essence")
@@ -4713,16 +4715,7 @@
                ("eD" tags-todo "+develop")
                ("eI" tags-todo "+investigate")
                ("eE" tags-todo "+entertainment")
-               ("eE" tags-todo "+entertainment")
                ("u" . "unassigned")
-               ("uu" alltodo "Unscheduled TODO entries"
-                ((org-agenda-skip-function
-                  (lambda nil
-                    (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "<[^>\n]+>")))
-                 (org-tags-match-list-sublevels 'indented)
-                 (org-agenda-sorting-strategy
-                  '((agenda priority-down todo-state-up tag-up) ))
-                 (org-agenda-overriding-header "Unscheduled TODO entries: ")))
                ("up" alltodo "Unprioritized TODO entries"
                 ((org-agenda-skip-function
                   (lambda nil
@@ -4748,7 +4741,7 @@
                ("b" . "tickets")
                ("be" tags "+ticket+emacs")
                ("bs" tags "+ticket+stumpwm")
-               ("jc" tags "+@job+current/GOING|HOLD")
+               ("jc" tags "+@job+current/GOING|FEEDBACK")
                ))
 
        (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s %b")
@@ -4836,19 +4829,21 @@
      #+END_SRC
 **** keywords setup
      #+BEGIN_SRC emacs-lisp
-       (setq kw-seq-common '(sequence "TODO(t)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "HOLD" "SOMEDAY(s@)"
+       (setq kw-seq-common '(sequence "BACKLOG(b)" "SOON(s)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"
                                       "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
        (setq org-todo-keywords
              `(,kw-seq-common))
-       (setq org-todo-keywords-for-agenda '("TODO(t)" "WAITING(w)" "HOLD(h)" "GOING(g)" "NEXT(x)"))
+       (setq org-todo-keywords-for-agenda '("BACKLOG(b)" "SOON(s)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"))
        (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
      #+END_SRC
 **** faces
      #+BEGIN_SRC emacs-lisp
        (setq org-todo-keyword-faces
-             '(("TODO" . (:foreground "red" :weight bold))
+             '(("BACKLOG" . (:foreground "gray" :weight bold))
+               ("SOON" . (:foreground "magenta" :weight bold))
+               ("NEXT" . (:foreground "red" :weight bold))
                ("WAITING" . (:foreground "orange" :weight bold))
-               ("HOLD" . (:foreground "yellow" :weight bold))
+               ("FEEDBACK" . (:foreground "yellow" :weight bold))
                ("CANCELLED" . (:foreground "cyan" :weight bold))
                ("DONE" . (:foreground "green" :weight bold))))
 
@@ -4895,14 +4890,12 @@
      #+BEGIN_SRC emacs-lisp
        (setq org-capture-templates
              '(("d" "todo")
-               ("dp" "personal tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@personal:")
-               ("dw" "workplace tasks" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@workplace:")
-               ("dc" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* TODO [#C] %? %U :@phonecall:")
-               ("dy" "someday" entry (file (at-org-dir "/tasks.org")) "* %? %U :@someday:")
+               ("dp" "personal tasks" entry (file (at-org-dir "/tasks.org")) "* BACKLOG [#C] %? %U :@personal:")
+               ("dw" "workplace tasks" entry (file (at-org-dir "/tasks.org")) "* BACKLOG [#C] %? %U :@workplace:")
+               ("dc" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* SOON [#C] %? %U :@phonecall:")
                ("dq" "quick notes (uncategorized)" entry (file (at-org-dir "/refile.org")) "* %? %U :@quicknote:")
-               ("de" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* TODO [#C] %? %U :emacs:ticket:")
-               ("dS" "emacs code snippets" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* %? %U :snippet:\n#+BEGIN_SRC emacs-lisp\n\n#+END_SRC")
-               ("ds" "stumpwm todo" entry (file (at-org-dir "/configs/stumpwm.org")) "* TODO [#C] %? %U :stumpwm:ticket:")
+               ("de" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* BACKLOG [#C] %? %U :emacs:ticket:")
+               ("ds" "stumpwm todo" entry (file (at-org-dir "/configs/stumpwm.org")) "* BACKLOG [#C] %? %U :stumpwm:ticket:")
                ("t" "try")
                ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
                ("te" "emacs try" entry (file+headline (at-org-dir "/configs/emacs.org") "to try") "* %? %U :emacs:try:")
@@ -4924,11 +4917,10 @@
                ("m" "mastering" entry (file+headline (at-org-dir "/mastering.org") "inbox") "* %? %U")
                ("p" "new project" entry (file (at-org-dir "/projects.org")) "* %? %U :@project:")
                ("j" "job tasks")
-               ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:current:")
-               ("jb" "bug" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:bug:")
+               ("jc" "current" entry (file (at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:current:")
+               ("jb" "bug" entry (file (at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:bug:")
                ("jr" "reference item" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
-               ("jp" "project" entry (file (at-org-dir private/job-tasks-file)) "* TODO %? %U :@job:project:")
-               ("l" "journal (test mode)" entry (file+datetree (at-org-dir "/journal.org")) "* %? %U")
+               ("jp" "project" entry (file (at-org-dir private/job-tasks-file)) "* BACKLOG %? %U :@job:project:")
                ))
 
        (defadvice org-protocol-do-capture (around display-notify-after-capture activate)
