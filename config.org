@@ -2752,6 +2752,14 @@
 
       (req-package tern-auto-complete :require tern auto-complete cl-lib)
 
+      (req-package xref-js2
+        :require js2-mode
+        :config
+        (define-key js2-mode-map (kbd "M-.") nil)
+        (add-hook 'js2-mode-hook
+                  (lambda ()
+                    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+
       (setenv "CLASSPATH"
               (concat
                "/usr/share/rhino-1.6/lib/js.jar:"
