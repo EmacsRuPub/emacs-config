@@ -3891,7 +3891,8 @@
                ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
                ("\\.doc\\'" "abiword" (file))
                ("\\.swf\\'" "swfdec-player" (file))
-               )))
+               ))
+       (add-to-list  'mm-inhibit-file-name-handlers 'openwith-file-handler))
    #+END_SRC
 ** email
 *** definitions
