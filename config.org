@@ -882,6 +882,8 @@
         (setq helm-move-to-line-cycle-in-source t)
         (setq helm-buffer-max-length nil)
         (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
+        (setq helm-input-idle-delay 0.2)
+        (setq helm-exit-idle-delay 0.2)
         (bind-key "C-<down>" 'helm-next-source helm-map)
         (bind-key "C-<up>" 'helm-previous-source helm-map)
         (bind-key "C-x b" 'helm-buffers-list)
