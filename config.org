@@ -4893,6 +4893,7 @@
                ("dy" "someday" entry (file (at-org-dir "/tasks.org")) "* %? %U :@someday:")
                ("dq" "quick notes (uncategorized)" entry (file (at-org-dir "/refile.org")) "* %? %U :@quicknote:")
                ("de" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* TODO [#C] %? %U :emacs:ticket:")
+               ("dS" "emacs code snippets" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* %? %U :snippet:\n#+BEGIN_SRC emacs-lisp\n\n#+END_SRC")
                ("ds" "stumpwm todo" entry (file (at-org-dir "/configs/stumpwm.org")) "* TODO [#C] %? %U :stumpwm:ticket:")
                ("t" "try")
                ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
