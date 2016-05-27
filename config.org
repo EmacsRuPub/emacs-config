@@ -1720,7 +1720,6 @@
       (req-package anchored-transpose)
 
       (req-package drag-stuff
-        :defer t
         :config
         (setq drag-stuff-modifier '(meta shift))
         (turn-off-drag-stuff-mode))
