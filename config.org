@@ -894,6 +894,8 @@
         (bind-key "C-h r" 'helm-info-emacs)
         (bind-key "C-h o" 'helm-info-at-point)
         (bind-key "C-x C-r" 'helm-recentf)
+        (when (executable-find "curl")
+          (setq helm-google-suggest-use-curl-p t))
         ;;TODO: investigate and bind 'helm-resume
         ;;TODO: investigate and bind 'helm-multi-files
         (helm-mode t)
