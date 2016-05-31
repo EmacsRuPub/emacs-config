@@ -129,7 +129,7 @@
        (setq auto-compile-display-buffer nil)
        (setq auto-compile-mode-line-counter t))
 
-     (req-package-force f :require s dash)
+     (req-package f :force t :require s dash)
      (req-package diminish)
      (req-package names)
      (req-package anaphora)
@@ -227,7 +227,8 @@
    #+END_SRC
 ** save history
    #+BEGIN_SRC emacs-lisp
-     (req-package-force savehist
+     (req-package savehist
+       :force t
        :config
        (setq savehist-file (at-data-dir "/savehist"))
        (setq savehist-save-minibuffer-history t)
@@ -821,7 +822,7 @@
            helm-source-locate)
          "*helm-find-files*"))
 
-      (req-package-force helm-utils)
+      (req-package helm-utils :force t)
 
       (defvar helm-source-portage-files
         `((name . "Portage files")
@@ -857,7 +858,8 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (req-package-force helm
+      (req-package helm
+        :force t
         :init
         (req-package helm-config)
         (req-package helm-files)
@@ -2618,7 +2620,7 @@
 ** languages
 *** common
     #+BEGIN_SRC emacs-lisp
-      (req-package-force info-look)
+      (req-package info-look :force t)
     #+END_SRC
 *** elisp
 **** setup
@@ -3423,7 +3425,8 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (req-package-force erc
+      (req-package erc
+        :force t
         :init
         ;;TODO: try using 'erc-modules
         (req-package erc-pcomplete)
@@ -3636,7 +3639,8 @@
 *** setup
 **** common
      #+BEGIN_SRC emacs-lisp
-       (req-package-force jabber
+       (req-package jabber
+         :force t
          :require fsm
          :init
          (load "jabber-autoloads") ;; For 0.7.90 and above:
