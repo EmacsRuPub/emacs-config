@@ -41,7 +41,6 @@
      (setq request-storage-directory (at-data-dir "/request"))
      (setq image-dired-dir (at-data-dir "/image-dired/"))
    #+END_SRC
-
 ** input method utils (internal emacs keyboard layouts switching)
 *** reverse input method
     it makes Emacs with non-English system keyboard layout
