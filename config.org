@@ -4113,6 +4113,7 @@
               '((:name "all unread" :query "tag:unread" :key "a")
                 (:name "personal" :query "to:aaermolov@gmail.com tag:unread" :key "p")
                 (:name "work" :query "(to:aermolov@mirantis.com OR to:mos-dev@mirantis.com) tag:unread" :key "w")
+                (:name "TODO items" :query "tag:todo" :key "t")
                 (:name "emacs maillist" :query "emacs-devel-request@gnu.org tag:unread" :key "e")
                 (:name "orgmode maillist" :query "emacs-orgmode-request@gnu.org tag:unread" :key "o")
                 (:name "postgresql maillist" :query "pgsql-hackers@postgresql.org tag:unread" :key "P")))
