@@ -3416,10 +3416,10 @@
       (defun connect-slack-irc ()
         (interactive)
         (erc-tls
-         :server private/irc-mira-slack-server
-         :full-name private/erc-full-name
-         :nick private/irc-mira-slack-nick
-         :password private/irc-mira-slack-password))
+         :server private/irc-server-mira-slack
+         :full-name private/irc-full-name
+         :nick private/irc-nick-mira-slack
+         :password private/irc-password-mira-slack))
 
       )
     #+END_SRC
@@ -3441,13 +3441,13 @@
         (req-package erc-services
           :config
           (setq erc-nickserv-passwords
-                '((freenode ((private/erc-nick-main . private/erc-password-main)
-                             (private/erc-nick-work . private/erc-password-work)))))
+                '((freenode ((private/irc-nick-main . private/irc-password-main)
+                             (private/irc-nick-work . private/irc-password-work)))))
           (setq erc-prompt-for-nickserv-password nil)
           (erc-nickserv-mode 1))
         (req-package erc-log
           :config
-          (setq erc-log-channels-directory custom/erc-logs-directory)
+          (setq erc-log-channels-directory custom/irc-logs-directory)
           (setq erc-log-channels t)
           (erc-log-enable))
         ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
@@ -3464,7 +3464,7 @@
                              (".*Away" (:foreground "red"))
                              (".*Idle" (:foreground "orange"))
                              ))
-        (setq erc-nick private/erc-nick-main)
+        (setq erc-nick private/irc-nick-main)
         (setq erc-track-priority-faces-only 'all)
         (setq erc-autoaway-message "I'm gone (autoaway after %i seconds)")
         (setq erc-auto-query 'buffer)
