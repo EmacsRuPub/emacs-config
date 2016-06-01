@@ -12,6 +12,12 @@
 (setq use-package-verbose t)
 (setq load-prefer-newer t)
 
+;; open literate config fast in case of emergency
+(global-set-key (kbd "C-x C-g")
+                (lambda ()
+                  (interactive)
+                  (find-file "/home/octocat/.emacs.d/config.org")))
+
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
