@@ -2197,7 +2197,6 @@
       (setq save-abbrevs 'silently)
       (setq-default abbrev-mode t)
     #+END_SRC
-
 * completion
 ** yasnippet
 *** definitions
@@ -3213,11 +3212,11 @@
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp
-      (req-package actionscript-mode)
-      (req-package go-mode)
+      (req-package actionscript-mode :defer t)
+      (req-package go-mode :defer t)
       (req-package json-mode :require json-reformat json-snatcher)
-      (req-package lua-mode)
-      (req-package rust-mode)
+      (req-package lua-mode :defer t)
+      (req-package rust-mode :defer t)
     #+END_SRC
 ** webdev
 *** major modes
@@ -3274,7 +3273,9 @@
     #+END_SRC
 *** multiple major modes
     #+BEGIN_SRC emacs-lisp
-      (req-package web :require dash s)
+      (req-package web
+        :require dash s
+        :defer t)
 
       (setq mumamo-background-colors nil)
       (setq mumamo-submode-indent-offset 4)
@@ -3287,11 +3288,12 @@
     #+END_SRC
 *** color helper
     #+BEGIN_SRC emacs-lisp
-      (req-package rainbow-mode)
+      (req-package rainbow-mode :defer t)
     #+END_SRC
 *** emmet mode setup
     #+BEGIN_SRC emacs-lisp
       (req-package emmet-mode
+        :defer t
         :config
         (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
         (add-hook 'css-mode-hook 'ac-emmet-css-setup)
@@ -3311,11 +3313,14 @@
 
       (req-package ac-emmet
         :require emmet-mode auto-complete
+        :defer t
         :config
         (push 'html-mode ac-modes)
         (push 'web-mode ac-modes))
 
-      (req-package helm-emmet :require helm emmet-mode)
+      (req-package helm-emmet
+        :require helm emmet-mode
+        defer t)
     #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -3830,6 +3835,7 @@
       )
 
       (req-package term
+        :defer t
         :config
         (add-hook 'term-exec-hook 'custom/term-exec-hook)
         (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
@@ -3869,6 +3875,7 @@
 *** eshell
     #+BEGIN_SRC emacs-lisp
       (req-package eshell
+        :defer t
         :config
         (defun eshell-handle-ansi-color ()
           (ansi-color-apply-on-region eshell-last-output-start
@@ -3933,6 +3940,7 @@
 ** MPD
    #+BEGIN_SRC emacs-lisp
      (req-package mingus
+       :defer t
        :require libmpdee
        :config
        (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
@@ -3957,6 +3965,7 @@
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
      (req-package openwith
+       :defer t
        :config
        (setq openwith-associations
              '(("\\.pdf\\'" "zathura" (file))
@@ -4332,10 +4341,13 @@
            (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
            (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")))))
 
-     (req-package calfw-gcal :require calfw)
+     (req-package calfw-gcal
+       :defer t
+       :require calfw)
 
      (req-package org-gcal
        :require request-deferred alert cl-lib org
+       :defer t
        :config
        (setq org-gcal-dir (at-data-dir "/org-gcal/"))
        (setq org-gcal-client-id private/org-gcal-client-id)
@@ -4368,6 +4380,7 @@
 *** setup
     #+BEGIN_SRC emacs-lisp
       (req-package deft
+        :defer t
         :config
         (setq deft-directory (at-homedir "/deft"))
         (setq deft-extension "org")
@@ -4636,33 +4649,39 @@
      #+END_SRC
 **** additional packages
      #+BEGIN_SRC emacs-lisp
-       (req-package icalendar)
-       (req-package org-footnote)
+       (req-package icalendar :defer t)
+       (req-package org-footnote :defer t)
        (req-package org-magit :require magit org)
        (req-package org-pomodoro :require alert cl-lib)
 
        (req-package ox-html)
-       (req-package org-dashboard :require cl-lib)
+       (req-package org-dashboard
+         :require cl-lib
+         :defer t)
        (req-package orgit :requires dash magit org)
        (req-package org-bullets)
 
        (req-package helm-org
-         :require helm)
+         :require helm
+         :defer t)
 
        (req-package org-context
+         :defer t
          :config
          ;;TODO: leverage real contexts
          (org-context-activate))
 
        (req-package orglink
          :require dash org
+         :defer t
          :config
          ;; TODO: customize orglink-activate-in-modes
          (global-orglink-mode)
          (diminish 'orglink-mode "OL"))
 
        (req-package org-linkany
-         :require log4e yaxception)
+         :require log4e yaxception
+         :defer t)
 
        (req-package org-bookmark-heading)
 
