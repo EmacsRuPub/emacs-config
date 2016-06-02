@@ -347,7 +347,6 @@
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp
-       ;;;###autoload
      (defun keys-describe-prefixes ()
        (interactive)
        (with-output-to-temp-buffer "*Bindings*"
@@ -614,7 +613,7 @@
    #+END_SRC
 ** OS-specific stuff
    Besides the common part of the common setup (sic!) there is also 
-   a little part of customizations begin specific to OS Emacs is 
+   a little part of customizations being specific to OS Emacs is
    running on. So here they are (conditionally loaded):
 *** linux specific
     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
@@ -716,8 +715,7 @@
 
       (defun find-url-forward ()
         (interactive)
-        (re-search-forward url-regexp nil t)
-        )
+        (re-search-forward url-regexp nil t))
 
       )
     #+END_SRC
@@ -1234,12 +1232,6 @@
 
       (defadvice occur-mode-goto-occurrence (after close-occur activate)
         (delete-other-windows))
-
-      (defun isearch-occur ()
-        (interactive)
-        (let ((case-fold-search isearch-case-fold-search))
-          (occur-and-switch (if isearch-regexp isearch-string
-                              (regexp-quote isearch-string)))))
 
       )
     #+END_SRC
@@ -1910,6 +1902,11 @@
      (req-package vimrc-mode
        :defer t
        :mode ".vim\\(rc\\)?$")
+
+     (req-package crontab-mode)
+     (req-package csv-mode)
+     (req-package fic-mode)
+     (req-package nginx-mode)
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp
@@ -1973,13 +1970,6 @@
      (global-auto-revert-mode 1);; Auto refresh buffers
      (show-paren-mode t)
      (transient-mark-mode 1)
-   #+END_SRC
-** some handy major modes
-   #+BEGIN_SRC emacs-lisp
-     (req-package crontab-mode)
-     (req-package csv-mode)
-     (req-package fic-mode)
-     (req-package nginx-mode)
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp
@@ -2666,12 +2656,6 @@
       #+END_SRC
 ***** 2
       #+BEGIN_SRC emacs-lisp :tangle no
-        (req-package erefactor
-          :require cl-lib
-          :defer t
-          :config
-          (define-key emacs-lisp-mode-map "\C-c\C-v" erefactor-map))
-
         (req-package redshank
           :ensure t
           :defer t
@@ -4056,6 +4040,10 @@
        )
      #+END_SRC
 *** setup
+**** common
+     #+BEGIN_SRC emacs-lisp
+       (req-package footnote)
+     #+END_SRC
 **** mu4e
      #+BEGIN_SRC emacs-lisp
        (req-package mu4e
