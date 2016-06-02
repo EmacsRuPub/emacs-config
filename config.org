@@ -394,7 +394,7 @@
           (when (eq major-mode ,mode)
             (progn ,@body))))
    #+END_SRC
-*** TODO check if `with-major-mode` works as expected
+*** BACKLOG check if `with-major-mode` works as expected
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp
      (put 'dired-find-alternate-file 'disabled nil)
@@ -1915,6 +1915,7 @@
    #+BEGIN_SRC emacs-lisp
      (req-package highlight-sexp)
 
+     ;; TODO compare with paredit and finally choose one (sane non-lisp modes setup intended)
      (req-package smartparens
        :require cl-lib dash
        :config
@@ -2395,7 +2396,7 @@
 
       )
     #+END_SRC
-**** TODO review flake8 known problems and OBV search for solutions
+**** BACKLOG review flake8 known problems and OBV search for solutions
 *** flycheck
     #+BEGIN_SRC emacs-lisp
       (req-package flycheck
@@ -2406,6 +2407,7 @@
 
       (req-package flycheck-color-mode-line :require flycheck dash)
     #+END_SRC
+**** BACKLOG review concrete checkers functionality and usage
 *** gdb
     #+BEGIN_SRC emacs-lisp
       (req-package gud
@@ -2857,6 +2859,8 @@
          (eval-after-load "auto-complete"
            '(add-to-list 'ac-modes 'slime-repl-mode)))
      #+END_SRC
+***** BACKLOG investigate and fix the issue with not found slime extensions within remote lisp image
+      example: Can't locate module: SWANK-IO-PACKAGE::SWANK-SBCL-EXTS
 **** additional setup
      #+BEGIN_SRC emacs-lisp
        (setq custom/hyperspec-root "~/help/HyperSpec/")
@@ -3149,8 +3153,8 @@
         (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
       #+END_SRC
 **** TBD
-***** TODO review and maybe rebind keys
-***** TODO bind helm-gtags-find-{rtags,symbol}
+***** BACKLOG review and maybe rebind keys
+***** BACKLOG bind helm-gtags-find-{rtags,symbol}
 **** semanticdb
      #+BEGIN_SRC emacs-lisp :tangle no
        (when (cedet-gnu-global-version-check t)
@@ -3877,6 +3881,7 @@
 
       (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
     #+END_SRC
+**** BACKLOG try to leverage shellcheck util usage
 *** eshell
     #+BEGIN_SRC emacs-lisp
       (req-package eshell
@@ -4970,6 +4975,7 @@
              '(("GOING" ("current" . t))
                ("DONE" ("current"))))
      #+END_SRC
+***** BACKLOG review whole tags cloud (in org corpus) and update org-tag-alist accordingly
 **** org-habit
      #+BEGIN_SRC emacs-lisp
        (setq org-habit-graph-column 50)
