@@ -212,7 +212,8 @@
        (unicode-fonts-setup))
    #+END_SRC
 ** update some faces values
-   #+BEGIN_SRC emacs-lisp
+   Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
+   #+BEGIN_SRC emacs-lisp :tangle no
      (when (boundp 'zenburn-colors-alist)
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
@@ -375,7 +376,7 @@
        (keyfreq-mode 1)
        (keyfreq-autosave-mode 1))
 
-     (req-package unbound)
+     (req-package unbound :disabled t)
    #+END_SRC
 ** remove elc after save
    If you're saving an elisp file, likely the .elc is no longer valid.
@@ -504,9 +505,10 @@
           window))
 
       (req-package popwin)
-      (req-package vline)
+      (req-package vline :disabled t)
 
       (req-package volatile-highlights
+        :disabled t
         :config
         (volatile-highlights-mode t))
     #+END_SRC
@@ -955,12 +957,14 @@
         (add-hook 'c-mode-hook 'helm-gtags-mode)
         (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
-      ;; (req-package helm-fuzzier
-      ;;   :require helm
-      ;;   :config
-      ;;   (helm-fuzzier-mode 1))
+      (req-package helm-fuzzier
+        :disabled t
+        :require helm
+        :config
+        (helm-fuzzier-mode 1))
 
       (req-package helm-flx
+        :disabled t
         :require helm flx
         :config
         (helm-flx-mode 1))
@@ -1048,6 +1052,7 @@
              (message "projectile-global-mode is ON")))))
 
      (req-package helm-projectile
+       :disabled t
        :require helm projectile dash cl-lib
        :config
        (helm-projectile-on))
@@ -1166,7 +1171,7 @@
         (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
         (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
-      (req-package dired-sort-menu)
+      (req-package dired-sort-menu :disabled t)
 
       (req-package dired+
         :config
@@ -1444,6 +1449,7 @@
        (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
      (req-package beacon
+       :disabled t
        :require seq
        :config
        (setq beacon-color "#666600")
@@ -1679,6 +1685,7 @@
                 (yank whole-line-or-region-yank nil))))
 
       (req-package wrap-region
+        :disabled t
         :require dash
         :config
         (wrap-region-global-mode 1)
@@ -1815,6 +1822,7 @@
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp
      (req-package xclip
+       :disabled t
        :config
        (xclip-mode 1))
 
@@ -1855,11 +1863,10 @@
 *** setup
     #+BEGIN_SRC emacs-lisp
       (req-package table) ;; table
-      (req-package footnote)
-      (req-package epoch-view)
+      (req-package epoch-view :disabled t)
       (req-package re-builder :defer t)
 
-      (req-package wc-mode)
+      (req-package wc-mode :disabled t)
 
       (req-package yatemplate
         :require yasnippet
@@ -1884,10 +1891,11 @@
         :config
         (turn-on-page-break-lines-mode))
 
-      ;; (req-package macro-math
-      ;;   :config
-      ;;   (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
-      ;;   (global-set-key "\C-x=" 'macro-math-eval-region))
+      (req-package macro-math
+        :disabled t
+        :config
+        (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
+        (global-set-key "\C-x=" 'macro-math-eval-region))
 
       ;;TODO: consolidate all whitespaces utils
       (req-package ws-butler :commands ws-buttler-mode)
@@ -1901,19 +1909,19 @@
    #+BEGIN_SRC emacs-lisp
      (req-package rst)
 
-     ;; (req-package generic
-     ;;   :defer t
-     ;;   :init
-     ;;   (req-package generic-x)
-     ;;   :config
-     ;;   (define-generic-mode 'keymap-mode
-     ;;     '("#")
-     ;;     '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-     ;;     nil
-     ;;     '(".keymap\\'" ".map\\'")
-     ;;     nil)
-     ;;   (setq generic-default-modes (delete 'javascript-generic-mode
-     ;;                                       generic-default-modes)))
+     (req-package generic
+       :disabled t
+       :init
+       (req-package generic-x)
+       :config
+       (define-generic-mode 'keymap-mode
+         '("#")
+         '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
+         nil
+         '(".keymap\\'" ".map\\'")
+         nil)
+       (setq generic-default-modes (delete 'javascript-generic-mode
+                                           generic-default-modes)))
 
      (req-package vimrc-mode
        :defer t
@@ -2383,7 +2391,7 @@
 * programming
 ** common
 *** flake8 utils
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (define-namespace custom/
 
       (defvar flake8-conf-alist nil
@@ -2611,6 +2619,7 @@
 
       (remove-hook 'find-file-hooks 'vc-find-file-hook)
       (req-package ediff
+        :disabled t
         :config
         (setq ediff-window-setup-function 'ediff-setup-windows-plain)
         (setq ediff-split-window-function 'split-window-horizontally)
@@ -2634,6 +2643,7 @@
            (add-hook hook 'elisp-slime-nav-mode)))
 
        (req-package erefactor
+         :disabled t
          :require cl-lib
          :config
          ;;TODO: investigate package
@@ -3099,6 +3109,7 @@
          (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local))
 
        (req-package rtags
+         :disabled t ; TODO rtags backend deployment shoud be done correctly and repeatably before using
          :require cc-mode
          :config
          (define-key c-mode-map (kbd "C-,") 'rtags-location-stack-back)
@@ -4071,6 +4082,7 @@
 **** mu4e
      #+BEGIN_SRC emacs-lisp
        (req-package mu4e
+         :disabled t
          :init
          (req-package mu4e-contrib)
          (req-package mu4e-context)
@@ -4152,6 +4164,7 @@
 **** unread count extension
      #+BEGIN_SRC emacs-lisp :tangle no
        (req-package mu4e-maildirs-extension
+         :disabled t
          :require dash
          :commands mu4e-maildirs-extension
          :init
@@ -4168,6 +4181,7 @@
 **** mu extensions
      #+BEGIN_SRC emacs-lisp
        (req-package helm-mu
+         :disabled t
          :require helm mu4e)
      #+END_SRC
 *** notmuch
@@ -4249,6 +4263,7 @@
        (req-package google-translate-default-ui))
 
      (req-package jenkins
+       :disabled t
        :require dash json
        :config
        (setq jenkins-api-token private/jenkins-api-token)
@@ -5425,7 +5440,9 @@
   #+BEGIN_SRC emacs-lisp
     (req-package info)
     (req-package help+)
-    (req-package discover-my-major :require makey)
+    (req-package discover-my-major
+      :require makey
+      :disabled t)
 
     (add-to-list 'Info-directory-list "/usr/share/info")
 
@@ -5485,10 +5502,7 @@
 * staging
   #+BEGIN_SRC emacs-lisp
     (req-package sauron
-      ;; note, you add (setq sauron-debug t) to get errors which can debug if
-      ;; there's something wrong; normally, we catch such errors, since e.g an error
-      ;; in one of the hooks may cause ERC to fail (i.e., the message won't come
-      ;; trough).
+      :disabled t ; TODO play extensively with package, then likely enable
       :config
       (setq sauron-separate-frame nil)
       (setq sauron-hide-mode-line t)
@@ -5552,13 +5566,14 @@
 
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-    ;; (req-package typing :disabled t
-    ;;   :init
-    ;;   (autoload 'typing-of-emacs "typing" nil t)
-    ;;   :config
-    ;;   (setq toe-starting-length 6)
-    ;;   (setq toe-starting-time-per-word 2)
-    ;;   (setq toe-max-length 20))
+    (req-package typing
+      :disabled t
+      :init
+      (autoload 'typing-of-emacs "typing" nil t)
+      :config
+      (setq toe-starting-length 6)
+      (setq toe-starting-time-per-word 2)
+      (setq toe-max-length 20))
   #+END_SRC
 * auto-modes
   #+BEGIN_SRC emacs-lisp
