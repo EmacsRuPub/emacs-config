@@ -389,14 +389,10 @@
    #+END_SRC
 ** a handy macro to execute code only in major mode it makes sense in
    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defmacro with-major-mode (mode &rest body)
+     (defmacro custom/with-major-mode (mode &rest body)
        `(lambda () (interactive)
           (when (eq major-mode ,mode)
             (progn ,@body))))
-
-     )
    #+END_SRC
 *** TODO check if `with-major-mode` works as expected
 ** Enable functions that are disabled by default
@@ -1721,17 +1717,11 @@
    #+END_SRC
 ** move and bind text around
 *** definitions
+    This override for transpose-words fixes what I consider to be a flaw with the default implementation in simple.el. To transpose chars or lines, you always put the point on the second char or line
+    to transpose with the previous char or line. The default transpose-words implementation does the opposite by flipping the current word with the next word instead of the previous word. The new
+    implementation below instead makes transpose-words more consistent with how transpose-chars and trasponse-lines behave.
     #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      ;; This override for transpose-words fixes what I consider to be a flaw with the
-      ;; default implementation in simple.el. To traspose chars or lines, you always
-      ;; put the point on the second char or line to transpose with the previous char
-      ;; or line. The default transpose-words implementation does the opposite by
-      ;; flipping the current word with the next word instead of the previous word.
-      ;; The new implementation below instead makes transpose-words more consistent
-      ;; with how transpose-chars and trasponse-lines behave.
-      (defun transpose-words (arg)
+      (defun custom/transpose-words (arg)
         "[Override for default transpose-words in simple.el]
         Interchange words around point, leaving point at end of
         them. With prefix arg ARG, effect is to take word before or
@@ -1742,8 +1732,6 @@
         (if (eolp) (forward-char -1))
         (transpose-subr 'backward-word arg)
         (forward-word (+ arg 1)))
-
-      )
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
@@ -1793,10 +1781,8 @@
     #+END_SRC
 ** commenting
    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
      ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
-     (defun duplicate-and-comment-line (arg)
+     (defun custom/duplicate-and-comment-line (arg)
        "comment line at point; if COMMENTFIRST is non-nil, comment the original"
        (interactive "P")
        (beginning-of-line)
@@ -1808,8 +1794,6 @@
          (insert-string
           (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
          (forward-line -1)))
-
-     )
 
      (req-package comment-dwim-2
        :config
@@ -2332,9 +2316,7 @@
 ** auto-complete
 *** definitions
     #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun ielm-auto-complete ()
+      (defun custom/ielm-auto-complete ()
         "Enables `auto-complete' support in \\[ielm]."
         (setq ac-sources '(ac-source-functions
                            ac-source-variables
@@ -2342,8 +2324,6 @@
                            ac-source-symbols
                            ac-source-words-in-same-mode-buffers))
         (add-to-list 'ac-modes 'inferior-emacs-lisp-mode))
-
-      )
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
@@ -2475,9 +2455,7 @@
      #+END_SRC
 *** print path within json
     #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun js2-print-json-path ()
+      (defun custom/js2-print-json-path ()
         "Print the path to the JSON value under point, and save it in the kill ring."
         (interactive)
         (let (next-node node-type rlt key-name)
@@ -2508,8 +2486,6 @@
             (kill-new rlt)
             (message "%s => kill-ring" rlt))
           rlt))
-
-      )
     #+END_SRC
 *** common hooks
     #+BEGIN_SRC emacs-lisp
@@ -3368,15 +3344,11 @@
 * clients
 ** restclient
    #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defun create-restclient-sandbox ()
+     (defun custom/create-restclient-sandbox ()
        (interactive)
        (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
          (switch-to-buffer restbuffer)
          (restclient-mode)))
-
-     )
 
      (req-package restclient
        :defer t
