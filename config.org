@@ -3955,12 +3955,13 @@
 ** MPD
    #+BEGIN_SRC emacs-lisp
      (req-package mingus
-       :defer t
+       :commands mingus
        :require libmpdee
        :config
-       (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
-       (defhydra hydra-mingus ()
-         "
+       (bind-key "<Backspace>" 'mingus-del mingus-playlist-map))
+
+     (defhydra hydra-mingus ()
+       "
        Control               Playlist
        ------------------------------
        _<up>_ volume up        _s_ show playlist
@@ -3968,14 +3969,14 @@
        _<right>_ seek forward
        _<left>_ seek backward
        "
-         ("s" mingus "open mingus")
-         ("/" mingus-search "Search")
-         ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
-         ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
-         ("<right>" mingus-seek "seek forward")
-         ("<left>" mingus-seek-backward "seek backward")
-         ("q" nil "cancel"))
-       (global-set-key (kbd "C-c m") 'hydra-mingus/body))
+       ("s" mingus "open mingus")
+       ("/" mingus-search "Search")
+       ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
+       ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
+       ("<right>" mingus-seek "seek forward")
+       ("<left>" mingus-seek-backward "seek backward")
+       ("q" nil "cancel"))
+     (global-set-key (kbd "C-c m") 'hydra-mingus/body)
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
