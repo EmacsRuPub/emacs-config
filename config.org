@@ -4037,9 +4037,9 @@
                 (:name "work" :query "(to:aermolov@mirantis.com OR to:mos-dev@mirantis.com) tag:unread" :key "w")
                 (:name "TODO items" :query "tag:todo" :key "t")
                 (:name "notmuch maillist" :query "notmuch@notmuchmail.org tag:unread" :key "n")
-                (:name "stumpwm maillist" :query "stumpwm-devel-request@nongnu.org tag:unread" :key "s")
-                (:name "emacs maillist" :query "emacs-devel-request@gnu.org tag:unread" :key "e")
-                (:name "orgmode maillist" :query "emacs-orgmode-request@gnu.org tag:unread" :key "o")
+                (:name "stumpwm maillist" :query "stumpwm-devel@nongnu.org tag:unread" :key "s")
+                (:name "emacs maillist" :query "emacs-devel@gnu.org tag:unread" :key "e")
+                (:name "orgmode maillist" :query "emacs-orgmode@gnu.org tag:unread" :key "o")
                 (:name "postgresql maillist" :query "pgsql-hackers@postgresql.org tag:unread" :key "P")))
         (add-hook 'notmuch-hello-refresh-hook
                   (lambda ()
