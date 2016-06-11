@@ -4850,6 +4850,7 @@
                ("dc" "phonecalls" entry (file (at-org-dir "/tasks.org")) "* SOON [#C] %? %U :@phonecall:")
                ("dq" "quick notes (uncategorized)" entry (file (at-org-dir "/refile.org")) "* %? %U :@quicknote:")
                ("de" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* BACKLOG [#C] %? %U :emacs:ticket:")
+               ("dE" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* BACKLOG %? %U :emacs:code_snippet:\n#+BEGIN_SRC emacs-lisp\n %i%?\n#+END_SRC\n")
                ("ds" "stumpwm todo" entry (file (at-org-dir "/configs/stumpwm.org")) "* BACKLOG [#C] %? %U :stumpwm:ticket:")
                ("t" "try")
                ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
