@@ -3400,18 +3400,16 @@
       )
     #+END_SRC
 *** connect to Slack IRC gate (work chats)
+    For obvious reasons it's better to use ZNC to connect to IRC, especially at work
     #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun connect-slack-irc ()
+      (defun custom/connect-slack-irc-znc ()
         (interactive)
-        (erc-tls
-         :server private/irc-server-mira-slack
+        (erc
+         :server private/irc-server-mira-slack-znc
+         :port 6697
          :full-name private/irc-full-name
          :nick private/irc-nick-mira-slack
-         :password private/irc-password-mira-slack))
-
-      )
+         :password private/irc-password-mira-slack-znc))
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
@@ -3489,6 +3487,7 @@
         :config
         (req-package erc-menu)) ;TODO: add notifications handler function
     #+END_SRC
+*** BACKLOG [#B] make freenode connection via ZNC also
 ** circe
 *** definitions
     #+BEGIN_SRC emacs-lisp :tangle no
