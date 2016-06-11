@@ -3992,6 +3992,10 @@
                ("\\.swf\\'" "swfdec-player" (file))
                ))
        (add-to-list  'mm-inhibit-file-name-handlers 'openwith-file-handler))
+
+     (req-package launch
+       :config
+       (global-launch-mode +1))
    #+END_SRC
 ** email
 *** common
