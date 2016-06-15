@@ -3445,6 +3445,7 @@
                                         "324" "329" "332" "333" "353" "477"))
         (setq erc-kill-queries-on-quit t)
         (setq erc-kill-server-buffer-on-quit t)
+        (setq erc-track-shorten-function nil)
         (setq erc-autojoin-channels-alist
               '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
                 ))
