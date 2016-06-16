@@ -20,9 +20,6 @@
 
      (defun at-config-basedir (&optional suffix)
        (concat config-basedir suffix))
-
-     (defun at-data-dir (&optional suffix)
-       (concat (at-config-basedir "data") suffix))
    #+END_SRC
 **** TODO unify slashes usage
 ** working directories
@@ -30,16 +27,13 @@
    As the order of loading corresponding extensions,
    is cumbersome to maintain we should customize them ASAP (here)
    #+BEGIN_SRC emacs-lisp
-     ;;TODO: think of less straightforward customization way
-     (setq auto-save-list-file-prefix (at-data-dir "/auto-save-list/.saves-"))
-     (setq bookmark-default-file (at-data-dir "/bookmarks"))
-     (setq tramp-persistency-file-name (at-data-dir "/tramp"))
-     (setq eshell-directory-name (at-data-dir "/eshell/"))
-     (setq shared-game-score-directory (at-data-dir "/games"))
-     (setq pcache-directory (at-data-dir "/var/pcache/"))
-     (setq url-configuration-directory (at-data-dir "/url/"))
-     (setq request-storage-directory (at-data-dir "/request"))
-     (setq image-dired-dir (at-data-dir "/image-dired/"))
+     (req-package no-littering
+       :force t
+       :require cl-lib
+       :init
+       (setq no-littering-var-directory
+             (expand-file-name "data/" user-emacs-directory)))
+
    #+END_SRC
 ** input method utils (internal emacs keyboard layouts switching)
 *** reverse input method
@@ -230,7 +224,6 @@
      (req-package savehist
        :force t
        :config
-       (setq savehist-file (at-data-dir "/savehist"))
        (setq savehist-save-minibuffer-history t)
          (setq savehist-autosave-interval 60)
          (setq history-length t)
@@ -247,7 +240,6 @@
        :require recentf-ext
        :defer t
        :config
-       (setq recentf-save-file (at-data-dir "/.recentf"))
        (setq recentf-max-saved-items 250)
        (setq recentf-max-menu-items 15)
        (recentf-mode t))
@@ -798,7 +790,6 @@
 
      (req-package saveplace
        :config
-       (setq save-place-file (at-data-dir "/.emacs-places"))
        (setq save-place t)
        (setq-default save-place t))
    #+END_SRC
@@ -878,7 +869,6 @@
         (setq helm-apropos-fuzzy-match t)
         (setq helm-move-to-line-cycle-in-source t)
         (setq helm-buffer-max-length nil)
-        (setq helm-adaptive-history-file (at-data-dir "/helm-adaptive-history"))
         (setq helm-input-idle-delay 0.2)
         (setq helm-exit-idle-delay 0.2)
         (bind-key "C-<down>" 'helm-next-source helm-map)
@@ -979,8 +969,6 @@
        :config
        (projectile-global-mode t)
        (setq projectile-enable-caching t)
-       (setq projectile-cache-file (at-data-dir "/projectile.cache"))
-       (setq projectile-known-projects-file (at-data-dir "/projectile-bookmarks.eld"))
        (setq projectile-require-project-root nil)
        (setq projectile-switch-project-action 'helm-projectile)
        (setq projectile-switch-project-action #'projectile-commander)
@@ -1213,10 +1201,7 @@
     #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp
-     (req-package bookmark+
-       :init
-       :config
-       (setq bmkp-last-bookmark-file (at-data-dir "/bookmarks")))
+     (req-package bookmark+)
 
      (req-package crosshairs :require hl-line+ col-highlight vline)
    #+END_SRC
@@ -1739,9 +1724,7 @@
       (req-package hungry-delete)
       (req-package replace+)
 
-      (req-package multiple-cursors
-        :config
-        (setq mc/list-file (at-data-dir "/.mc-lists.el")))
+      (req-package multiple-cursors)
 
       (req-package mc-extras
         ;;TODO: explore and bind functions
@@ -1802,9 +1785,7 @@
        :config
        (xclip-mode 1))
 
-     (req-package savekill
-       :config
-       (setq save-kill-file-name (at-data-dir "/kill-ring-saved.el")))
+     (req-package savekill)
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp
@@ -2344,7 +2325,6 @@
         (setq ac-auto-start nil)
         (setq ac-quick-help-delay 0.5)
         (setq ac-fuzzy-enable t)
-        (setq ac-comphist-file (at-data-dir "/ac-comphist.dat"))
         (add-hook 'auto-complete-mode-hook 'ac-common-setup)
         (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
         (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
@@ -4203,7 +4183,6 @@
        :require request-deferred alert cl-lib org
        :defer t
        :config
-       (setq org-gcal-dir (at-data-dir "/org-gcal/"))
        (setq org-gcal-client-id private/org-gcal-client-id)
        (setq org-gcal-client-secret private/org-gcal-client-secret)
        (setq org-gcal-file-alist private/org-gcal-file-alist))
@@ -4718,7 +4697,6 @@
        (setq org-clock-into-drawer "CLOCK")
        (setq org-clock-out-remove-zero-time-clocks t)
        (setq org-clock-persist t)
-       (setq org-clock-persist-file (at-data-dir "/org-clock-save.el"))
      #+END_SRC
 **** refiling customizations
      #+BEGIN_SRC emacs-lisp
@@ -4758,7 +4736,6 @@
        (setq org-global-properties '(("STYLE_ALL" . "habit")))
        (setq org-goto-max-level 10)
        (setq org-hide-leading-stars t)
-       (setq org-id-locations-file (at-data-dir "/.org-id-locations"))
        (setq org-indirect-buffer-display 'current-window)
        (setq org-insert-mode-line-in-empty-file t)
        (setq org-log-done t)
