@@ -3456,7 +3456,7 @@
         select _u_nread buffer
         _i_nsert nick
         "
-          ("s" custom/connect-slack-irc)
+          ("s" custom/connect-slack-irc-znc)
           ("q" custom/leave-irc-server)
           ("b" custom/select-erc-buffer)
           ("u" custom/select-erc-unread-buffer)
