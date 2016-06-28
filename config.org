@@ -543,6 +543,12 @@
              clojure-mode
              python-mode
              ))
+     ;; sexp-based editing modes list
+     (setq custom/sexp-editing-modes
+           '(
+             lisp-mode
+             emacs-lisp-mode
+             ))
    #+END_SRC
 ** hooks for tabs and spaces ;]
    #+BEGIN_SRC emacs-lisp
@@ -1895,6 +1901,7 @@
 
      ;; TODO compare with paredit and finally choose one (sane non-lisp modes setup intended)
      (req-package smartparens
+       :disabled t
        :require cl-lib dash
        :config
        (req-package smartparens-config)
@@ -1921,6 +1928,13 @@
        (define-key sp-keymap (kbd "C-c s n") 'sp-add-to-next-sexp)
        (define-key sp-keymap (kbd "C-c s j") 'sp-join-sexp)
        (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
+
+     (req-package paredit
+       :config
+       (defun common-hooks/sexp-editing-hook ()
+         (when (member major-mode custom/sexp-editing-modes)
+           (paredit-mode 1)))
+       (add-hook 'prog-mode-hook 'common-hooks/sexp-editing-hook))
    #+END_SRC
 ** some fancy editing methods
    #+BEGIN_SRC emacs-lisp
