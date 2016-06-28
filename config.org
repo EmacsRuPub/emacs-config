@@ -3762,7 +3762,6 @@
          (setq jabber-message-alert-same-buffer t))
          (setq jabber-alert-presence-message-function (lambda (who oldstatus newstatus statustext) nil))
          (add-hook 'jabber-chat-mode-hook 'goto-address)
-         (add-hook 'jabber-chat-mode-hook (lambda () (toggle-input-method)))
          (add-hook 'jabber-post-connect-hook 'jabber-autoaway-start)
          (add-hook 'jabber-post-connect-hooks 'custom/jabber-connect-hook)
          (add-hook 'jabber-alert-message-hooks 'jabber-message-beep)
