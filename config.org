@@ -4767,11 +4767,11 @@
 **** keywords setup
      #+BEGIN_SRC emacs-lisp
        (setq kw-seq-common '(sequence "BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"
-                                      "|" "DONE(d!/@)" "CANCELLED(c@/!)"))
+                                      "|" "DONE(d!/@)" "CANCELLED(c@/!)" "OUTDATED(o)"))
        (setq org-todo-keywords
              `(,kw-seq-common))
        (setq org-todo-keywords-for-agenda '("BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"))
-       (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)"))
+       (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)" "OUTDATED(o)"))
      #+END_SRC
 **** faces
      #+BEGIN_SRC emacs-lisp
