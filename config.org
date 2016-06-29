@@ -39,7 +39,7 @@
 *** reverse input method
     it makes Emacs with non-English system keyboard layout
     to behave correctly with keybindings
-    It definitley makes sense while using Emacs in such X WMs
+    It definitely makes sense while using Emacs in such X WMs
     when there is no chance to hook into keyboard layouts switching
     (those are probably all, except StumpWM/XMonad, AFAIK)
     #+BEGIN_SRC emacs-lisp

@@ -5,6 +5,8 @@
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
+             '("RSW-Packages" . "http://www.plasmas.biz/rswe/") t)
 (setf (cdr (assoc "gnu" package-archives))
       "https://elpa.gnu.org/packages/")
 (package-initialize)
