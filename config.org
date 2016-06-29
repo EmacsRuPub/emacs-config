@@ -65,10 +65,6 @@
                                       (vector (append mod (list to)))))))))
               (when input-method
                   (activate-input-method current))))
-
-      (defadvice read-passwd (around my-read-passwd disable)
-        (let ((local-function-key-map nil))
-          ad-do-it))
     #+END_SRC
 *** toggling input method
     This method uses external kbdd utility
