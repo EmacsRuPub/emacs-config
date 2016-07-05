@@ -118,7 +118,9 @@
        (setq auto-compile-display-buffer nil)
        (setq auto-compile-mode-line-counter t))
 
-     (req-package f :force t :require s dash)
+     (req-package f
+       :force t
+       :require s dash)
      (req-package diminish)
      (req-package names)
      (req-package anaphora)
