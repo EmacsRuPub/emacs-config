@@ -2637,7 +2637,7 @@
         ;; C-c C-v ? : Display flymake elint warnings/errors
       #+END_SRC
 *** javascript
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package js2-mode
         :require cl-lib
         :init
@@ -2842,7 +2842,7 @@
        (global-set-key (kbd "M-p") 'hydra-slime/body)
      #+END_SRC
 *** haskell
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package haskell-mode
         :require cl-lib
         :mode "\\.hs\\'"
@@ -3183,11 +3183,13 @@
 *** major modes
     #+BEGIN_SRC emacs-lisp
       (req-package sgml-mode
+        :defer t
         :config
         (bind-key "C-c C-w" 'html-wrap-in-tag html-mode-map))
 
       (req-package markdown-mode
         :require cl-lib
+        :defer t
         :config
         (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
         (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
@@ -4158,7 +4160,7 @@
    #+END_SRC
 ** deft
 *** definitions
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (define-namespace custom/deft/
 
       ;;advise deft to save window config
@@ -4180,7 +4182,7 @@
       )
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package deft
         :defer t
         :config
