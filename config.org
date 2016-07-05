@@ -972,13 +972,11 @@
         (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
       (req-package helm-fuzzier
-        :disabled t
         :require helm
         :config
         (helm-fuzzier-mode 1))
 
       (req-package helm-flx
-        :disabled t
         :require helm flx
         :config
         (helm-flx-mode 1))
@@ -1648,7 +1646,6 @@
                 (yank whole-line-or-region-yank nil))))
 
       (req-package wrap-region
-        :disabled t
         :require dash
         :config
         (wrap-region-global-mode 1)
