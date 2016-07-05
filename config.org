@@ -1222,17 +1222,13 @@
 ** search
 *** definitions
     #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun occur-and-switch (search)
+      (defun custom/occur-and-switch (search)
         (interactive "sSearch for: ")
         (occur (regexp-quote search))
         (switch-to-buffer-other-window "*Occur*"))
 
       (defadvice occur-mode-goto-occurrence (after close-occur activate)
         (delete-other-windows))
-
-      )
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
@@ -2457,15 +2453,12 @@
               (setq key-name (js2-prop-node-name (js2-object-prop-node-left next-node)))
               (if rlt (setq rlt (concat "." key-name rlt))
                 (setq rlt (concat "." key-name))))
-
              ;; array node
              ((or (eq node-type 'cl-struct-js2-array-node)
                   (eq node-type 'cl-struct-js2-infix-node))
               (if rlt (setq rlt (concat "[0]" rlt))
                 (setq rlt "[0]")))
-
              (t)) ; do nothing
-
             ;; get parent node
             (setq next-node (aref next-node 5)))
           ;; clean final result
