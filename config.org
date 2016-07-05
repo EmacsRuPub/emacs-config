@@ -168,15 +168,10 @@
        (set-face-attribute 'sml/discharging nil :foreground "tomato"))
    #+END_SRC
 ** load themes and choose one
+   Also some other good-looking themes are "deep-thought-theme" and "material-theme"
    #+BEGIN_SRC emacs-lisp
-     (req-package deep-thought-theme :disabled t)
-     (req-package material-theme :disabled t)
-     (req-package nzenburn-theme :disabled t)
-     (req-package zenburn-theme :disabled t)
      (req-package darkburn-theme)
-
      (load-theme 'darkburn t)
-     (setq color-theme-is-global t)
    #+END_SRC
 ** set common colors
    #+BEGIN_SRC emacs-lisp
