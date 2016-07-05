@@ -231,11 +231,7 @@
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp
-     (defconst emacs-tmp-dir (at-homedir "/.emacs-backups"))
-
-     (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
      (setq auto-save-visited-file-name t)
-     (setq backup-directory-alist `(("." . ,emacs-tmp-dir)))
      (setq backup-by-copying t)
      (setq backup-by-copying-when-linked t)
      (setq delete-old-versions -1)
