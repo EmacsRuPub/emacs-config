@@ -895,7 +895,6 @@
         (helm-descbinds-mode 1)
         (bind-key "C-x C-d" 'helm-descbinds))
 
-      (req-package helm-themes :require helm)
       (req-package helm-helm-commands :require helm)
       (req-package helm-dired-recent-dirs :require helm)
       (req-package helm-flycheck :require helm)
@@ -1178,20 +1177,6 @@
                  (revert-buffer))))
 
       (req-package dired-filetype-face)
-
-      (req-package dired-narrow
-        :bind (:map dired-mode-map
-                    ("/" . dired-narrow)))
-
-      (req-package peep-dired
-        :bind (:map dired-mode-map
-                    ("P" . peep-dired)))
-
-      (req-package dired-subtree
-        :require dired
-        :config
-        (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
-        (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
     #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp
@@ -1415,13 +1400,6 @@
        (setq avy-timeout-seconds 0.5)
        (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
-     (req-package beacon
-       :disabled t
-       :require seq
-       :config
-       (setq beacon-color "#666600")
-       (setq beacon-size 60))
-
      (req-package filecache)
    #+END_SRC
 ** hydras and keybindings
@@ -1505,19 +1483,6 @@
            (kill-new filename)
            (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-     (defun rename-file-and-buffer ()
-       "Rename the current buffer and file it is visiting."
-       (interactive)
-       (let ((filename (buffer-file-name)))
-         (if (not (and filename (file-exists-p filename)))
-             (message "Buffer is not visiting a file!")
-           (let ((new-name (read-file-name "New name: " filename)))
-             (cond
-              ((vc-backend filename) (vc-rename-file filename new-name))
-              (t
-               (rename-file filename new-name t)
-               (set-visited-file-name new-name t t)))))))
-
      ;;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
      (defun rename-file-and-buffer (new-name)
        "Renames both current buffer and file it is visiting to NEW-NAME."
@@ -1533,12 +1498,6 @@
                (rename-buffer new-name)
                (set-visited-file-name new-name)
                (set-buffer-modified-p nil))))))
-
-     (defun spawn-buffer()
-       (interactive)
-       (let ((buffer-name (generate-new-buffer-name "*new-buffer*")))
-         (generate-new-buffer buffer-name)
-         (switch-to-buffer buffer-name)))
 
      (defun get-file-md5 ()
        (interactive)
@@ -1774,11 +1733,6 @@
    #+END_SRC
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp
-     (req-package xclip
-       :disabled t
-       :config
-       (xclip-mode 1))
-
      (req-package savekill)
    #+END_SRC
 ** undo/redo
@@ -1815,9 +1769,6 @@
     #+BEGIN_SRC emacs-lisp
       (req-package table) ;; table
       (req-package epoch-view :disabled t)
-      (req-package re-builder :defer t)
-
-      (req-package wc-mode :disabled t)
 
       (req-package yatemplate
         :require yasnippet
@@ -1928,7 +1879,6 @@
    #+BEGIN_SRC emacs-lisp
      (req-package edit-indirect)
      (req-package narrow-indirect)
-     (req-package multifiles)
 
      (req-package miniedit
        :defer t
@@ -2022,7 +1972,6 @@
        ("]" uncomment-region)
        ("`" redraw-display)
        ("b" subword-mode)
-       ("c" wc-mode)
        ("d" diff-buffer-with-file)
        ("f" custom/copy-file-name-to-clipboard)
        ("i" custom/insert-current-date-time)
@@ -2080,7 +2029,6 @@
      (global-set-key (kbd "M-g") 'goto-line)
      (global-set-key (kbd "M-\"") 'eval-region)
      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-     (global-set-key (kbd "C-$") 'mf/mirror-region-in-multifile)
      ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key [remap move-beginning-of-line] 'custom/smarter-move-beginning-of-line)
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
@@ -2536,13 +2484,6 @@
           ("t" git-timemachine))
         (global-set-key (kbd "C-'") 'hydra-magit/body))
 
-      (req-package magit-gerrit
-        :require magit
-        :disabled t
-        :config
-        (setq-default magit-gerrit-ssh-creds "aermolov@review.fuel-infra.org")
-        (setq-default magit-gerrit-remote "gerrit"))
-
       (req-package magit-filenotify
         :require magit diminish
         :config
@@ -2649,27 +2590,6 @@
         ;; C-c C-v c : Switch prefix bunch of symbols.
         ;;             ex: '(hoge-var hoge-func) -> '(foo-var foo-func)
         ;; C-c C-v ? : Display flymake elint warnings/errors
-      #+END_SRC
-***** 2
-      #+BEGIN_SRC emacs-lisp :tangle no
-        (req-package redshank
-          :ensure t
-          :defer t
-          :init (add-hook 'emacs-lisp-mode-hook 'redshank-mode))
-
-        (define-key emacs-lisp-mode-map (kbd "C-c .") 'find-function-at-point)
-        (bind-key "C-c f" 'find-function)
-
-        (bind-key "M-:" 'pp-eval-expression)
-
-        (defun sanityinc/eval-last-sexp-or-region (prefix)
-          "Eval region from BEG to END if active, otherwise the last sexp."
-          (interactive "P")
-          (if (and (mark) (use-region-p))
-              (eval-region (min (point) (mark)) (max (point) (mark)))
-            (pp-eval-last-sexp prefix)))
-
-        (bind-key "C-x C-e" 'sanityinc/eval-last-sexp-or-region emacs-lisp-mode-map)
       #+END_SRC
 *** javascript
     #+BEGIN_SRC emacs-lisp
@@ -4071,14 +3991,6 @@
        :defer t
        :init
        (req-package google-translate-default-ui))
-
-     (req-package jenkins
-       :disabled t
-       :require dash json
-       :config
-       (setq jenkins-api-token private/jenkins-api-token)
-       (setq jenkins-hostname private/jenkins-hostname)
-       (setq jenkins-username private/jenkins-username))
 
      (imagemagick-register-types)
 
