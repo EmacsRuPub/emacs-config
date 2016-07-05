@@ -204,12 +204,6 @@
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
 * persistence
-** definitions
-   #+BEGIN_SRC emacs-lisp
-     (defun desktop-autosave-save ()
-       (desktop-save-in-desktop-dir))
-     (add-hook 'auto-save-hook (lambda () (desktop-autosave-save)))
-   #+END_SRC
 ** save history
    #+BEGIN_SRC emacs-lisp
      (req-package savehist
@@ -270,6 +264,7 @@
              (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
                      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
                      "\\)$"))
+       (add-hook 'auto-save-hook (lambda () (desktop-save-in-desktop-dir)))
        (desktop-save-mode t)
        (setq desktop-restore-eager 10)
        (desktop-load-default)
