@@ -362,12 +362,17 @@
    #+END_SRC
 ** a handy macro to execute code only in major mode it makes sense in
    #+BEGIN_SRC emacs-lisp
-     (defmacro custom/with-major-mode (mode &rest body)
-       `(lambda () (interactive)
-          (when (eq major-mode ,mode)
-            (progn ,@body))))
+     (defmacro custom/advice-for-major-mode (mode function)
+       `(defadvice ,(intern (symbol-name function))
+            (around ,(intern (concatenate
+                              'string
+                              (symbol-name function)
+                              "-only-in-"
+                              (symbol-name mode)))
+                    activate)
+          (when (eq major-mode ',mode)
+            ad-do-it)))
    #+END_SRC
-*** BACKLOG check if `with-major-mode` works as expected
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp
      (put 'dired-find-alternate-file 'disabled nil)
@@ -1471,7 +1476,7 @@
        ("w" w3m-select-buffer)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
-       ("l" (custom/with-major-mode 'org-mode (helm-org-in-buffer-headings)))
+       ("l" helm-org-in-buffer-headings)
        ("L" helm-org-agenda-files-headings)
        ("a" avy-goto-char-timer "goto char within window" :color blue)
        ("A" avy-goto-word-0 "goto word within window" :color blue))
@@ -4493,7 +4498,9 @@
 
        (req-package helm-org
          :require helm
-         :commands helm-org)
+         :commands helm-org
+         :config
+         (custom/advice-for-major-mode org-mode helm-org-in-buffer-headings))
 
        (req-package org-context
          :defer t
@@ -4701,6 +4708,8 @@
        (setq org-refile-target-verify-function 'custom/verify-refile-target)
        (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
        (setq org-refile-use-outline-path 'file)
+
+       (custom/advice-for-major-mode org-mode org-refile)
      #+END_SRC
 **** various customizations
      #+BEGIN_SRC emacs-lisp
@@ -5161,7 +5170,7 @@
        ("A" show-all)
        ("t" org-toggle-timestamp-type)
        ("m" org-pomodoro)
-       ("r" (custom/with-major-mode 'org-mode (org-refile)) "refile")
+       ("r" org-refile "refile")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
