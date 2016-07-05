@@ -2251,7 +2251,6 @@
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
         (setq yas-expand-only-for-last-commands '(self-insert-command))
-        (yas-global-mode 1)
         (bind-key "\t" 'hippie-expand yas-minor-mode-map)
         ;; unset both to remove ALL translations
         (define-key yas-minor-mode-map [(tab)] nil) ;FIXME: try using unbind-key
@@ -2264,13 +2263,13 @@
         (setq helm-yas-space-match-any-greedy t)
         (push custom/yasnippet-dir yas-snippet-dirs)
         (push custom/yasnippet-private-dir yas-snippet-dirs)
-        (yas-global-mode 1)
         (setq yas-prompt-functions
               '(yas-completing-prompt
                 yas-x-prompt
                 yas-no-prompt))
         ;; Wrap around region
         (setq yas/wrap-around-region t)
+        (yas-global-mode 1)
         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
         ;; Jump to end of snippet definition
         (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
