@@ -3848,7 +3848,12 @@
         (set (make-local-variable 'compilation-finish-functions)
              (list 'custom/sh-check-finish-hook)))
 
-      (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
+      (req-package shell
+        :config
+        (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
+        (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+        (add-hook 'shell-mode-hook 'common-hooks/newline-hook)
+        (add-hook 'shell-mode-hook 'common-hooks/prog-helpers))
     #+END_SRC
 **** BACKLOG try to leverage shellcheck util usage
 *** eshell
@@ -3860,12 +3865,6 @@
           (ansi-color-apply-on-region eshell-last-output-start
                                       eshell-last-output-end))
         (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color))
-    #+END_SRC
-*** hooks
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-      (add-hook 'shell-mode-hook 'common-hooks/newline-hook)
-      (add-hook 'shell-mode-hook 'common-hooks/prog-helpers)
     #+END_SRC
 ** Twitter
    #+BEGIN_SRC emacs-lisp
