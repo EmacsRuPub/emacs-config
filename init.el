@@ -19,6 +19,10 @@
                 (lambda ()
                   (interactive)
                   (find-file "/home/octocat/.emacs.d/config.org")))
+(global-set-key (kbd "C-x C-.")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "*Messages*")))
 
 (mapcar
  (lambda (package)
