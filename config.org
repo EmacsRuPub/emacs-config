@@ -3972,6 +3972,10 @@
       (req-package smtpmail
         :config
         (setq message-send-mail-function 'smtpmail-send-it)
+        (setq mail-host-address "smtp.gmail.com")
+        (setq mail-specify-envelope-from t)
+        (setq message-sendmail-envelope-from 'header)
+        (setq mail-envelope-from 'header)
         (setq starttls-use-gnutls t)
         (setq smtpmail-smtp-server "smtp.gmail.com")
         (setq smtpmail-smtp-service 587)
