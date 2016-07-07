@@ -449,6 +449,7 @@
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
+      ;; TODO simplify
       (defun update-frames (heads-count)
         (let ((frames-count (length (frame-list))))
           (cond
