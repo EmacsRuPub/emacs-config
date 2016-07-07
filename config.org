@@ -898,7 +898,6 @@
         (setq helm-locate-fuzzy-match t)
         (setq helm-M-x-fuzzy-match t)
         (setq helm-apropos-fuzzy-match t)
-        (setq helm-apropos-fuzzy-match t)
         (setq helm-move-to-line-cycle-in-source t)
         (setq helm-buffer-max-length nil)
         (setq helm-input-idle-delay 0.2)
