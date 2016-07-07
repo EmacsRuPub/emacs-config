@@ -1066,6 +1066,9 @@
        :require helm projectile dash cl-lib
        :config
        (helm-projectile-on))
+
+     (req-package f3
+       :require helm cl-lib)
    #+END_SRC
 ** dired
 *** always refresh contents
