@@ -1829,7 +1829,10 @@
         (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
         (yatemplate-fill-alist))
 
-      (req-package whitespace :defer t)
+      (req-package whitespace
+        :defer t
+        :config
+        (global-whitespace-mode t))
 
       (req-package mark
         :require fm
@@ -2057,6 +2060,7 @@
        "
        ("b" toggle-debug-on-error "debug on error")
        ("w" whitespace-mode "whitespace mode")
+       ("W" global-whitespace-mode "*global* whitespace mode")
        ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
        ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
        ("h" highlight-sexp-mode "toggle highlight-sexp mode")
