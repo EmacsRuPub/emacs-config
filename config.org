@@ -321,32 +321,13 @@
         (require 'server)
         (server-start))
     #+END_SRC
-** some ubiquious packages
-*** ubiquitous hydra
-**** some definitions
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (define-namespace custom/
-
-       ;; some customizations for nested hydras
-       (defvar hydra-stack nil)
-
-       (defun hydra-push (expr)
-         (push `(lambda () ,expr) hydra-stack))
-
-       (defun hydra-pop ()
-         (interactive)
-         (let ((x (pop hydra-stack)))
-           (when x
-             (funcall x))))
-
-       )
-     #+END_SRC
-**** use it
-     #+BEGIN_SRC emacs-lisp
-       (req-package hydra
-         :config
-         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
-     #+END_SRC
+** some ubiquitous packages
+*** hydra
+    #+BEGIN_SRC emacs-lisp
+      (req-package hydra
+        :config
+        (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
+    #+END_SRC
 *** helm
 **** definitions
      #+BEGIN_SRC emacs-lisp
