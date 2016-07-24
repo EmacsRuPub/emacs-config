@@ -1864,6 +1864,7 @@
      (req-package csv-mode)
      (req-package fic-mode)
      (req-package nginx-mode)
+     (req-package dockerfile-mode)
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp
@@ -2384,6 +2385,13 @@
         (setq gdb-use-separate-io-buffer t)
         (setq gud-chdir-before-run nil)
         (setq gud-tooltip-mode t))
+    #+END_SRC
+*** docker
+    #+BEGIN_SRC emacs-lisp
+      (req-package docker
+        :require dash docker-tramp magit-popup s tablist)
+      (req-package docker-tramp)
+      ;; TODO: think of some automation of opening files with docker (and other TRAMP backends as well)
     #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp
