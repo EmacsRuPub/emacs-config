@@ -2534,6 +2534,8 @@
         (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
         (global-git-gutter-mode +1))
 
+      (req-package git-gutter+)
+
       (req-package git-timemachine)
       (req-package gitignore-mode)
     #+END_SRC
