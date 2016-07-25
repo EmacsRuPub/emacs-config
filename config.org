@@ -343,23 +343,21 @@
             helm-source-locate)
           "*helm-find-files*"))
 
-       (req-package helm-utils :force t)
-
        (defvar helm-source-portage-files
          `((name . "Portage files")
-           (candidates . ,(helm-walk-directory "/etc/portage" :path 'full))
+           (candidates . ,(f-files "/etc/portage" nil t))
            (action . (lambda (candidate)
-                       (helm-find-file-as-root candidate)))))
+                       (find-file (concat "/sudo::" (expand-file-name candidate)))))))
 
        (defvar helm-source-enc-docs
          `((name . "Various documents")
-           (candidates . ,(helm-walk-directory (at-homedir "/docs/enc") :path 'full))
+           (candidates . ,(f-files (at-homedir "/docs/enc") nil t))
            (action . (lambda (candidate)
                        (find-file candidate)))))
 
        (defvar helm-source-org-files
          `((name . "Org files")
-           (candidates . ,(helm-walk-directory (at-org-dir) :path 'full))
+           (candidates . ,(f-files (at-org-dir) nil t))
            (action . (lambda (candidate)
                        (find-file candidate)))))
 
