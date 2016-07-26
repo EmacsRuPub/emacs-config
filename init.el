@@ -27,6 +27,8 @@
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
+     (unless package-archive-contents
+       (package-refresh-contents))
      (package-install package)))
  ;;base system packages for bootstrapping
  '(req-package el-get))
