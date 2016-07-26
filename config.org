@@ -1594,8 +1594,7 @@
         (bind-key "9" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
         (bind-key "0" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
         (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
-        (bind-key "1" 'mc/insert-numbers region-bindings-mode-map)
-        (bind-key "<up>" 'mc/reverse-regions region-bindings-mode-map))
+        (bind-key "1" 'mc/insert-numbers region-bindings-mode-map))
 
       (req-package selected
         :commands selected-minor-mode
