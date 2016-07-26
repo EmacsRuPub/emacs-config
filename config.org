@@ -122,7 +122,7 @@
        :force t
        :require s dash)
      (req-package diminish)
-     (req-package names)
+     (req-package names :force t)
      (req-package anaphora)
    #+END_SRC
 * appearance
@@ -172,8 +172,9 @@
 ** load themes and choose one
    Also some other good-looking themes are "deep-thought-theme" and "material-theme"
    #+BEGIN_SRC emacs-lisp
-     (req-package darkburn-theme)
-     (load-theme 'darkburn t)
+     (req-package darkburn-theme
+       :config
+       (load-theme 'darkburn t))
    #+END_SRC
 ** set common colors
    #+BEGIN_SRC emacs-lisp
@@ -325,6 +326,7 @@
 *** hydra
     #+BEGIN_SRC emacs-lisp
       (req-package hydra
+        :force t
         :config
         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
@@ -2601,12 +2603,16 @@
          (setq comment-start ";;")
          (turn-on-eldoc-mode))
 
-       (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
-       (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
-       (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-       (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete)
-       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
+       (req-package emacs-lisp-mode
+         :require auto-complete
+         :config
+         (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
+         (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
+         (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
+         (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+         (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete))
+
+       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
        (dolist (mode '(paredit-mode smartparens-mode))
          (when (fboundp mode)
            (add-hook 'eval-expression-minibuffer-setup-hook mode)))
@@ -3658,7 +3664,6 @@
 **** common
      #+BEGIN_SRC emacs-lisp
        (req-package jabber
-         :force t
          :require fsm
          :init
          (load "jabber-autoloads") ;; For 0.7.90 and above:
