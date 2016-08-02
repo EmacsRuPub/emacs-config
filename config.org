@@ -3278,7 +3278,7 @@
 
       (req-package helm-emmet
         :require helm emmet-mode
-        defer t)
+        :defer t)
     #+END_SRC
 *** web client
     #+BEGIN_SRC emacs-lisp
