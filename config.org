@@ -4511,18 +4511,6 @@
      #+END_SRC
 **** collect files for agenda
      #+BEGIN_SRC emacs-lisp
-       ;; (setf org-agenda-files
-       ;;      (-map #'f-expand
-       ;;            (-filter #'f-exists?
-       ;;                     '("~/org/personal.org"
-       ;;                       "~/org/refile.org"
-       ;;                       "~/org/subscriptions.org"
-       ;;                       "~/org/mirantis.org"
-       ;;                       "~/org/mira-cal.org"
-       ;;                       "~/.rc/emacs-config.org"
-       ;;                       "~/org/ference.org"))))
-
-
        (f-entries (at-org-dir)
                   (lambda (entry) (when (and (f-file? entry)
                                              (s-suffix? "org" entry)
