@@ -212,9 +212,9 @@
        :force t
        :config
        (setq savehist-save-minibuffer-history t)
-         (setq savehist-autosave-interval 60)
-         (setq history-length t)
-         (setq history-delete-duplicates t)
+       (setq savehist-autosave-interval 60)
+       (setq history-length t)
+       (setq history-delete-duplicates t)
        (setq savehist-additional-variables
              '(kill-ring
                search-ring
