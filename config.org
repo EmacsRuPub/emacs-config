@@ -292,35 +292,26 @@
    #+END_SRC
 * common
 ** emacs server
-*** defininitions
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun server-save-edit ()
-          (interactive)
-          (save-buffer)
-          (server-edit))
-
-      (defun save-buffer-clients-on-exit ()
-          (interactive)
-          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
-                  (server-save-edit)
-              (save-buffers-kill-emacs t)))
-
-      )
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'server-visit-hook
-                (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
-      ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
-
-      (unless (and (string-equal "root" (getenv "USER"))
-                   (server-running-p))
-        ;; Only start server mode if I'm not root and it is not running
-        (require 'server)
-        (server-start))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (req-package server
+       :config
+       (defun custom/server-save-edit ()
+         (interactive)
+         (save-buffer)
+         (server-edit))
+       (defun custom/save-buffer-clients-on-exit ()
+         (interactive)
+         (if (and (boundp 'server-buffer-clients) server-buffer-clients)
+             (server-save-edit)
+           (save-buffers-kill-emacs t)))
+       (unless (and (string-equal "root" (getenv "USER"))
+                  (server-running-p))
+       (require 'server)
+       (server-start))
+       ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
+       (add-hook 'server-visit-hook
+                 (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit))))
+   #+END_SRC
 ** some ubiquitous packages
 *** hydra
     #+BEGIN_SRC emacs-lisp
