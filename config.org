@@ -2175,9 +2175,6 @@
     #+BEGIN_SRC emacs-lisp
       (define-namespace custom/
 
-      (setq yasnippet-dir (at-config-basedir "resources/yasnippet/"))
-      (setq yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
-
       ;; Inter-field navigation
       (defun yas-goto-end-of-active-field ()
         (interactive)
@@ -2194,11 +2191,6 @@
           (if (= (point) position)
               (move-beginning-of-line)
             (goto-char position))))
-
-      ;; hook for automatic reloading of changed snippets
-      (defun update-yasnippets-on-save ()
-        (when (string-match "/resources/yasnippet" buffer-file-name)
-          (yas/load-directory custom/yasnippet-dir)))
 
       (defun ac-page-next ()
         "Select next completion candidate per `ac-menu-height' range.
@@ -2221,11 +2213,14 @@
 *** setup
     #+BEGIN_SRC emacs-lisp
       (req-package yasnippet
-        :require diminish
-        :defer t
         :diminish yas-minor-mode
-        :commands yas-global-mode
         :config
+        (setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
+        (setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
+        ;; hook for automatic reloading of changed snippets
+        (defun custom/update-yasnippets-on-save ()
+          (when (string-match "/resources/yasnippet" buffer-file-name)
+            (yas/load-directory custom/yasnippet-dir)))
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
         (setq yas-expand-only-for-last-commands '(self-insert-command))
