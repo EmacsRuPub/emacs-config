@@ -132,7 +132,7 @@
      (defvar fonts-def (make-hash-table :test 'equal)
        "User's font definitions")
 
-     (defun set-xwindows-font (key)
+     (defun set-x-font (key)
        (set-face-attribute 'default nil :font (gethash key fonts-def)))
 
      (setf (gethash "consolas-base" fonts-def) "Consolas:size=12")
@@ -191,7 +191,7 @@
      (setq font-lock-maximum-decoration t)
      (setq scalable-fonts-allowed t)
 
-     (custom/set-xwindows-font "consolas-base")
+     (custom/set-x-font "consolas-base")
 
      (req-package unicode-fonts
        :disabled t
