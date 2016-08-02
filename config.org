@@ -2911,22 +2911,6 @@
          (add-hook 'python-mode-hook 'jedi:setup)
          (add-hook 'python-mode-hook 'jedi:ac-setup))
 
-       (req-package pylookup
-         :disabled t ;;package archives do not seem to have it, so maybe use el-get version later
-         :config
-         (defun at-pylookup-dir (&optional suffix)
-           (concat (at-config-basedir "el-get/pylookup") suffix))
-         ;; set executable file and db file
-         (setq pylookup-program (at-pylookup-dir "/pylookup.py"))
-         (setq pylookup-db-file (at-pylookup-dir "/pylookup.db"))
-         ;; set search option if you want
-         (setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
-         (defadvice pylookup-lookup
-             (around change-browse-url-browser-function activate)
-           "Use w3m for slime documentation lookup."
-           (let ((browse-url-browser-function 'w3m-browse-url))
-             ad-do-it)))
-
        (req-package python
          :require region-bindings-mode
          :defer t
