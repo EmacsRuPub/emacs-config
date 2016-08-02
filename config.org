@@ -33,7 +33,6 @@
        :init
        (setq no-littering-var-directory
              (expand-file-name "data/" user-emacs-directory)))
-
    #+END_SRC
 ** input method utils (internal emacs keyboard layouts switching)
 *** reverse input method
