@@ -98,7 +98,6 @@
 ** set the very basic variable values
    #+BEGIN_SRC emacs-lisp
      (setq message-log-max t) ;; we don't want to lose any startup log info
-     (setq global-username private/real-name)
      (setq shell-file-name "/bin/bash")
      (setq custom-file (at-config-basedir "customizations.el"))
 
@@ -1943,7 +1942,7 @@
      (setq sentence-end-double-space nil)
      (setq tab-always-indent t)
      (setq transient-mark-mode t)
-     (setq user-full-name (capitalize global-username))
+     (setq user-full-name (capitalize private/real-name))
      (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
      ;; don't let the cursor go into minibuffer prompt
      (setq minibuffer-prompt-properties
@@ -3721,7 +3720,7 @@
          (setq jabber-history-enabled t)
          (setq jabber-mode-line-mode t)
          (setq jabber-muc-private-buffer-format "*-jmuc-priv-%g-%n-*")
-         (setq jabber-nickname (capitalize global-username))
+         (setq jabber-nickname (capitalize private/real-name))
          (setq jabber-rare-time-format "%e %b %Y %H:00")
          (setq jabber-resource "laptoptop")
          (setq jabber-roster-buffer "*-jroster-*")
