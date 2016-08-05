@@ -823,7 +823,7 @@
      (global-set-key (kbd "C-x c") 'proced)
    #+END_SRC
 ** OS-specific stuff
-   Besides the common part of the common setup (sic!) there is also 
+   Besides the common part of the common setup (sic!) there is also
    a little part of customizations being specific to OS Emacs is
    running on. So here they are (conditionally loaded):
 *** linux specific
@@ -4443,7 +4443,7 @@
 
        (req-package org-random-todo)
      #+END_SRC
-**** common 
+**** common
      #+BEGIN_SRC emacs-lisp
        (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
