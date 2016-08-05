@@ -2533,15 +2533,14 @@
     #+END_SRC
 *** smerge mode
     #+BEGIN_SRC emacs-lisp
-      (req-package smerge-mode)
-
-      (defun sm-try-smerge ()
-        (save-excursion
-          (goto-char (point-min))
-          (when (re-search-forward "^<<<<<<< " nil t)
-            (smerge-mode 1))))
-
-      (add-hook 'find-file-hooks 'sm-try-smerge t)
+      (req-package smerge-mode
+        :config
+        (defun sm-try-smerge ()
+          (save-excursion
+            (goto-char (point-min))
+            (when (re-search-forward "^<<<<<<< " nil t)
+              (smerge-mode 1))))
+        (add-hook 'find-file-hooks 'sm-try-smerge t))
     #+END_SRC
 *** common
     #+BEGIN_SRC emacs-lisp
