@@ -2397,9 +2397,7 @@
         (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
         (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
         (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
-        (add-hook 'css-mode-hook 'turn-on-css-eldoc)
-        :config
-        (diminish 'eldoc-mode "ED"))
+        (add-hook 'css-mode-hook 'turn-on-css-eldoc))
 
       (req-package css-eldoc
         :ensure t
