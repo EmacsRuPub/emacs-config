@@ -119,7 +119,6 @@
      (req-package f
        :force t
        :require s dash)
-     (req-package diminish)
      (req-package names :force t)
      (req-package anaphora)
    #+END_SRC
@@ -798,21 +797,24 @@
    #+END_SRC
 ** diminish modeline contents
    #+BEGIN_SRC emacs-lisp
-     (req-package rich-minority
+     (req-package delight
+       :force t
        :config
-       (setq rm-blacklist
-             '(" GitGutter"
-               " VHl"
-               " WLR"
-               " Emmet"
-               " Wrap"
-               " Fill"
-               " Abbrev"
-               " SliNav"
-               " Helm"
-               )))
-
-     (req-package diminish :commands diminish)
+       (delight 'git-gutter-mode " +-" 'git-gutter)
+       (delight 'volatile-highlights-mode nil 'volatile-highlights)
+       (delight 'emmet-mode nil 'emmet-mode)
+       (delight 'whole-line-or-region-mode " WLR" 'whole-line-or-region)
+       (delight 'abbrev-mode " Abv" 'abbrev)
+       (delight 'auto-fill-function nil 'simple)
+       (delight 'composable-mode " @" 'composable)
+       (delight 'wrap-region-mode " wr" 'wrap-region)
+       (delight 'helm-mode nil 'helm-mode)
+       (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
+       (delight 'projectile-mode " prj" 'projectile)
+       (delight 'auto-complete-mode " α" 'auto-complete)
+       (delight 'eldoc-mode " ED" 'eldoc)
+       (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
+       (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
 ** view system processes info
    #+BEGIN_SRC emacs-lisp :tangle no
@@ -982,7 +984,6 @@
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
-       (diminish 'projectile-mode "prj")
        (defhydra hydra-projectile (:color teal)
          "
          PROJECT: %(projectile-project-root)
@@ -2215,7 +2216,7 @@
 *** setup
     #+BEGIN_SRC emacs-lisp
       (req-package yasnippet
-        :diminish yas-minor-mode
+        :delight yas-minor-mode
         :config
         (setq custom/yasnippet-dir (at-config-basedir "resources/yasnippet/"))
         (setq custom/yasnippet-private-dir (at-config-basedir "resources/yasnippet-private/"))
@@ -2293,7 +2294,6 @@
         :config
         (ac-config-default)
         (global-auto-complete-mode t)
-        (diminish 'auto-complete-mode " α")
         (setq ac-auto-start nil)
         (setq ac-quick-help-delay 0.5)
         (setq ac-fuzzy-enable t)
@@ -2409,8 +2409,7 @@
 **** try
      #+BEGIN_SRC emacs-lisp :tangle no
        (req-package "eldoc"
-         :require diminish
-         :diminish eldoc-mode
+         :delight eldoc-mode
          :commands turn-on-eldoc-mode
          :defer t
          :init
@@ -2511,10 +2510,9 @@
         (global-set-key (kbd "C-'") 'hydra-magit/body))
 
       (req-package magit-filenotify
-        :require magit diminish
+        :require magit
         :config
-        (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-        (diminish 'magit-filenotify-mode "FN"))
+        (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
 
       (req-package git-gutter
         :require cl-lib
@@ -4435,8 +4433,7 @@
          :defer t
          :config
          ;; TODO: customize orglink-activate-in-modes
-         (global-orglink-mode)
-         (diminish 'orglink-mode "OL"))
+         (global-orglink-mode))
 
        (req-package org-linkany
          :require log4e yaxception
