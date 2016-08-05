@@ -405,10 +405,10 @@
          (bind-key "C-h r" 'helm-info-emacs)
          (bind-key "C-h o" 'helm-info-at-point)
          (bind-key "C-x C-r" 'helm-recentf)
-         (global-set-key (kbd "C-x C-h") 'helm-command-prefix)
-         (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-         (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-         (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+         (bind-key "C-x C-h" 'helm-command-prefix)
+         (bind-key "<tab>" 'helm-execute-persistent-action helm-map) ; rebind tab to run persistent action
+         (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
+         (bind-key "C-z" 'helm-select-action helm-map) ; list actions using C-z
          (when (executable-find "curl")
            (setq helm-google-suggest-use-curl-p t))
          ;;TODO: investigate and bind 'helm-resume
