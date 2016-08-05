@@ -2309,7 +2309,7 @@
     #+END_SRC
 ** hippie-expand
    #+BEGIN_SRC emacs-lisp
-     (req-package hippie-expand
+     (req-package hippie-exp
        :config
        (setq hippie-expand-try-functions-list
              '(yas-hippie-try-expand
@@ -2588,7 +2588,7 @@
          (setq comment-start ";;")
          (turn-on-eldoc-mode))
 
-       (req-package emacs-lisp-mode
+       (req-package lisp-mode
          :require auto-complete
          :config
          (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
