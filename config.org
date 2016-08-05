@@ -3933,21 +3933,11 @@
     #+END_SRC
 *** send mail
     #+BEGIN_SRC emacs-lisp
-      (req-package smtpmail
-        :config
-        (setq message-send-mail-function 'smtpmail-send-it)
-        (setq mail-host-address "smtp.gmail.com")
-        (setq mail-specify-envelope-from t)
-        (setq message-sendmail-envelope-from 'header)
-        (setq mail-envelope-from 'header)
-        (setq starttls-use-gnutls t)
-        (setq smtpmail-smtp-server "smtp.gmail.com")
-        (setq smtpmail-smtp-service 587)
-        (setq smtpmail-debug-info t)
-        (setq smtpmail-debug-verb t)
-
-        ;; don't keep message buffers around
-        (setq message-kill-buffer-on-exit t))
+      (setq mail-specify-envelope-from t)
+      (setq message-sendmail-envelope-from 'header)
+      (setq mail-envelope-from 'header)
+      (setq send-mail-function 'sendmail-send-it)
+      (setq message-kill-buffer-on-exit t)
     #+END_SRC
 *** notmuch
     #+BEGIN_SRC emacs-lisp
