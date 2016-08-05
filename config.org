@@ -2546,12 +2546,6 @@
       (autoload 'vc-hg-root "vc-hg")
 
       (remove-hook 'find-file-hooks 'vc-find-file-hook)
-      (req-package ediff
-        :disabled t
-        :config
-        (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-        (setq ediff-split-window-function 'split-window-horizontally)
-        (setq ediff-diff-options "-w"))
     #+END_SRC
 ** languages
 *** common
