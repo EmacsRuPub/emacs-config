@@ -664,10 +664,13 @@
 
       (setq column-number-mode t)
 
-      (setq display-time-day-and-date t)
-      (setq display-time-form-list (list 'time 'load))
-      (setq display-time-mail-file t)
-      (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes))
+      (req-package time
+        :config
+        (display-time)
+        (setq display-time-day-and-date t)
+        ;; (setq display-time-form-list (list 'time 'load))
+        (setq display-time-mail-file t)
+        (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
 
       (setq use-dialog-box nil)
       (setq visible-bell t)
@@ -687,7 +690,6 @@
       (tooltip-mode nil)
       (global-font-lock-mode t)
       (display-battery-mode 1)
-      (display-time)
 
       (defun custom/display-buffer-fullframe (buffer alist)
         "Display BUFFER in fullscreen.
