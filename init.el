@@ -45,6 +45,6 @@
                           org-man org-velocity))
 (setq org-modules `(,@org-contrib-base ,@org-contrib-extra))
 
-(org-babel-load-file (concat (file-name-directory load-file-name) "config.org") t)
+(org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
 
 (req-package-finish)
