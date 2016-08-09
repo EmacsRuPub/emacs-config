@@ -1803,9 +1803,7 @@
         (yatemplate-fill-alist))
 
       (req-package whitespace
-        :defer t
-        :config
-        (global-whitespace-mode t))
+        :defer t)
 
       (req-package mark
         :require fm
