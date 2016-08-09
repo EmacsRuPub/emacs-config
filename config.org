@@ -5094,6 +5094,10 @@
      ;;TODO: bind hydra-org-movement to a key
    #+END_SRC
 * publishing
+** try pdf-tools
+   #+BEGIN_SRC emacs-lisp
+     (req-package pdf-tools)
+   #+END_SRC
 ** setup
    #+BEGIN_SRC emacs-lisp :tangle no
      (req-package tex-site)
@@ -5334,6 +5338,8 @@
     (add-to-list 'auto-mode-alist '("nginx" . nginx-mode))
 
     (add-to-list 'auto-mode-alist '("diff" . diff-mode))
+
+    (add-to-list 'auto-mode-alist '("pdf" . pdf-view-mode))
   #+END_SRC
 * try
 ** kenobi
