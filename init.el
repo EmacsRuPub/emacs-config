@@ -33,7 +33,9 @@
 
 (require 'req-package)
 
-(req-package org-plus-contrib)
+(req-package org-plus-contrib :force t)
+(require 'org)
+
 (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
                          org-bibtex org-clock org-docview org-habit
                          org-id org-info org-inlinetask org-irc
