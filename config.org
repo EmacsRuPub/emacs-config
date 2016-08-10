@@ -368,7 +368,6 @@
 **** setup
      #+BEGIN_SRC emacs-lisp
        (req-package helm
-         :force t
          :init
          (req-package helm-config)
          (req-package helm-files)
