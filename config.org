@@ -5180,9 +5180,6 @@
   #+BEGIN_SRC emacs-lisp
     (req-package info)
     (req-package help+)
-    (req-package discover-my-major
-      :require makey
-      :disabled t)
 
     (add-to-list 'Info-directory-list "/usr/share/info")
 
