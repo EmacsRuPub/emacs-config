@@ -3938,6 +3938,9 @@
         (setq notmuch-fcc-dirs
               '(("aaermolov@gmail.com" . "aaermolov@gmail.com/Sent")
                 ("aermolov@mirantis.com" . "aermolov@mirantis.com/Sent")))
+        (setq notmuch-search-line-faces '(("unread" . (:foreground "white"))
+                                          ("deleted" . (:foreground "red"
+                                                        :background "blue"))))
         (define-key notmuch-search-mode-map "!"
           (lambda (&optional beg end)
             "mark thread as spam"
