@@ -22,6 +22,7 @@
        (concat config-basedir suffix))
    #+END_SRC
 **** TODO unify slashes usage
+     see https://github.com/amadev/emacs-conf#Пути-от-домашней-папки-и-emacsd for example
 ** working directories
    A bunch of directories for various working datasets
    As the order of loading corresponding extensions,
