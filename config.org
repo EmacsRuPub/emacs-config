@@ -2356,6 +2356,7 @@
       (req-package flycheck
         :require dash pkg-info let-alist seq
         :config
+        (global-flycheck-mode)
         (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
         (setq flycheck-check-syntax-automatically '(idle-change)))
 
