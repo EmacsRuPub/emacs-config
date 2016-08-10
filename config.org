@@ -1409,6 +1409,9 @@
        (set-face-attribute 'avy-goto-char-timer-face nil :foreground "green" :weight 'bold))
 
      (req-package filecache)
+
+     (req-package hyperbole
+       :require zoom-frm)
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp
