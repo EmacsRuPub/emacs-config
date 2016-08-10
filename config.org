@@ -1161,7 +1161,6 @@
 
       (req-package dired+
         :config
-        ;; TODO: check if this is not obsolete yet
         (setq diredp-ignored-file-name 'green-face)
         (setq diredp-other-priv 'white-face)
         (setq diredp-rare-priv 'white-red-face)
