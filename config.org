@@ -135,7 +135,7 @@
 
      (setf (gethash "consolas-base" fonts-def) "Consolas:size=12")
      (setf (gethash "terminus" fonts-def) "Terminus:size=14")
-     (setf (gethash "terminus-bold" fonts-def) "TerminusBold:size=12")
+     (setf (gethash "terminus-bold" fonts-def) "Terminus:style=Bold:size=14")
      (setf (gethash "monaco" fonts-def) "Monaco:size=12")
      (setf (gethash "ptmono" fonts-def) "PTMono:size=12")
      (setf (gethash "microsoft-consolas-for-powerline-bold" fonts-def) "-microsoft-Consolas for Powerline-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1")
