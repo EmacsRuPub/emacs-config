@@ -180,7 +180,7 @@
      (custom/set-x-font "consolas-base")
 
      (req-package unicode-fonts
-       :disabled t
+       :require persistent-soft
        :config
        (unicode-fonts-setup))
    #+END_SRC
