@@ -5094,7 +5094,23 @@
      (req-package pdf-tools
        :require tablist let-alist
        :config
-       (add-to-list 'auto-mode-alist '("\\.pdf$" . pdf-view-mode)))
+       (add-hook 'after-init-hook 'pdf-tools-install)
+       (add-to-list 'auto-mode-alist '("\\.pdf$" . pdf-view-mode))
+       (defun custom/scroll-other-window (&optional arg)
+         (interactive "P")
+         (awhen (ignore-errors (other-window-for-scrolling))
+           (let* ((buffer (window-buffer it))
+                  (mode (with-current-buffer buffer major-mode)))
+             (cond
+              ((eq mode 'pdf-view-mode)
+               (save-selected-window
+                 (select-window it)
+                 (with-current-buffer buffer
+                   (pdf-view-next-page (cond ((eq arg '-) -1)
+                                             ((numberp arg) arg)
+                                             (t 1))))))
+              (t (scroll-other-window arg))))))
+       (global-set-key (kbd "C-M-v") #'custom/scroll-other-window))
 
      (req-package whizzytex
        :config
