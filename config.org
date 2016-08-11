@@ -5101,58 +5101,64 @@
      ;;TODO: bind hydra-org-movement to a key
    #+END_SRC
 * publishing
-** try pdf-tools
-   #+BEGIN_SRC emacs-lisp
-     (req-package pdf-tools)
-   #+END_SRC
 ** setup
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (req-package tex-site)
-     (req-package preview-latex)
-     (req-package cdlatex)
-     (req-package bib-cite)
-     (req-package whizzytex)
-     (req-package auctex)
-     (req-package latex-preview-pane)
-     (req-package pdf-tools :require tablist let-alist)
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package pdf-tools
+       :require tablist let-alist
+       :config
+       (add-to-list 'auto-mode-alist '("\\.pdf$" . pdf-view-mode)))
 
-     (setq-default TeX-master nil)
-     (setq TeX-parse-self t)
-     (setq TeX-auto-save t)
-     (setq TeX-default-mode 'latex-mode)
-     (setq TeX-open-quote "``")
-     (setq TeX-close-quote "''")
-     (setq TeX-PDF-mode t)
+     (req-package whizzytex
+       :config
+       (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv"))))
+
+     (req-package reftex
+       :config
+       (setq reftex-enable-partial-scans t)
+       (setq reftex-save-parse-info t)
+       (setq reftex-use-multiple-selection-buffers t)
+       (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+       (add-hook 'latex-mode-hook 'turn-on-reftex))
+
+     (req-package auctex
+       :init
+       (req-package tex-site)
+       (req-package bib-cite)
+       :config
+       (setq-default TeX-master nil)
+       (setq TeX-parse-self t)
+       (setq TeX-auto-save t)
+       (setq TeX-default-mode 'latex-mode)
+       (setq TeX-open-quote "``")
+       (setq TeX-close-quote "''")
+       (setq TeX-PDF-mode t)
+       (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
+       (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
+       (defun custom/tex-mode-hook ()
+         (TeX-fold-mode 1)
+         (turn-on-bib-cite)
+         (setq bib-cite-use-reftex-view-crossref t))
+       (add-hook 'TeX-mode-hook 'custom/tex-mode-hook)
+       (add-hook 'LaTeX-mode-hook 'custom/tex-mode-hook)
+       (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+       (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+       (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode))
+
+     (req-package cdlatex
+       :config
+       (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+       (add-hook 'latex-mode-hook 'turn-on-cdlatex))
+
+     (req-package latex-preview-pane)
+
      (setq font-latex-title-fontify 'color)      ; this gets rid of the large fonts
      (setq font-latex-fontify-sectioning 'color) ; in sections etc
-     (setq reftex-enable-partial-scans t)
-     (setq reftex-save-parse-info t)
-     (setq reftex-use-multiple-selection-buffers t)
-     (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv")))
-     (setq ps-multibyte-buffer 'bdf-font-except-latin)
 
-     (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
-     (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
+     (setq ps-multibyte-buffer 'bdf-font-except-latin)
 
      (defvar ps-print-path "~/ps-print"
        "Path for ps-print output")
-
-     (defun custom/tex-mode-hook ()
-       (TeX-fold-mode 1)
-       (turn-on-bib-cite)
-       (setq bib-cite-use-reftex-view-crossref t))
-
-     (add-hook 'TeX-mode-hook 'custom/tex-mode-hook)
-     (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
-     (add-hook 'LaTeX-mode-hook 'custom/tex-mode-hook)
-     (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-     (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
-     (add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
-     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-     (add-hook 'latex-mode-hook 'turn-on-reftex)
-
 
      ;;TODO: plan docstring or reorganize hydra
      (defhydra hydra-publishing ()
@@ -5297,7 +5303,6 @@
       (add-to-list 'auto-mode-alist '("crontab" . crontab-mode))
       (add-to-list 'auto-mode-alist '("nginx" . nginx-mode))
       (add-to-list 'auto-mode-alist '("diff" . diff-mode))
-      (add-to-list 'auto-mode-alist '("pdf" . pdf-view-mode))
     #+END_SRC
 ** snippets
    #+BEGIN_SRC emacs-lisp
