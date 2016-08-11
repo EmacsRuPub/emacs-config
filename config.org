@@ -308,175 +308,152 @@
         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
 *** helm
-**** definitions
-     #+BEGIN_SRC emacs-lisp
-       (define-namespace custom/
+    #+BEGIN_SRC emacs-lisp
+      (req-package helm
+        :init
+        (req-package helm-config)
+        (req-package helm-files)
+        (req-package helm-info)
+        (req-package helm-locate)
+        (req-package helm-misc)
+        (req-package helm-grep)
+        (req-package helm-buffers
+          :config
+          (pushnew 'python-mode helm-buffers-favorite-modes))
+        :config
+        (defun custom/helm-find-files ()
+          (interactive)
+          (helm-other-buffer
+           '(helm-source-files-in-current-dir
+             helm-source-recentf
+             helm-source-file-name-history
+             helm-source-findutils
+             helm-source-locate)
+           "*helm-find-files*"))
+        (defun custom/open-portage-file ()
+          (interactive)
+          (helm :sources '((name . "Portage files")
+                           (candidates . (lambda () (f-files "/etc/portage" nil t)))
+                           (action . (lambda (candidate)
+                                       (find-file (concat "/sudo::" (expand-file-name candidate))))))))
+        (defun custom/open-encrypted-document ()
+          (interactive)
+          (helm :sources '((name . "Various documents")
+                           (candidates . (lambda () (f-files (at-homedir "/docs/enc") nil t)))
+                           (action . (lambda (candidate)
+                                       (find-file candidate))))))
+        (defun custom/open-org-file ()
+          (interactive)
+          (helm :sources '((name . "Org files")
+                           (candidates . (lambda () (f-files (at-org-dir) nil t)))
+                           (action . (lambda (candidate)
+                                       (find-file candidate))))))
+        (setq helm-quick-update t)
+        (setq helm-split-window-in-side-p t)
+        (setq helm-ff-search-library-in-sexp t)
+        (setq helm-ff-file-name-history-use-recentf t)
+        (setq helm-buffers-fuzzy-matching t)
+        (setq helm-recentf-fuzzy-match t)
+        (setq helm-locate-fuzzy-match t)
+        (setq helm-M-x-fuzzy-match t)
+        (setq helm-apropos-fuzzy-match t)
+        (setq helm-move-to-line-cycle-in-source t)
+        (setq helm-buffer-max-length nil)
+        (setq helm-input-idle-delay 0.2)
+        (setq helm-exit-idle-delay 0.2)
+        (setq helm-ff-skip-boring-files t)
+        (bind-key "C-<down>" 'helm-next-source helm-map)
+        (bind-key "C-<up>" 'helm-previous-source helm-map)
+        (bind-key "C-x b" 'helm-buffers-list)
+        (bind-key "C-*" 'helm-mark-all helm-map)
+        (bind-key "C-x j j" 'helm-bookmarks)
+        (bind-key "M-x" 'helm-M-x)
+        (bind-key "C-x f" 'helm-for-files)
+        (bind-key "C-h a" 'helm-apropos)
+        (bind-key "C-h r" 'helm-info-emacs)
+        (bind-key "C-h o" 'helm-info-at-point)
+        (bind-key "C-x C-r" 'helm-recentf)
+        (bind-key "C-x C-h" 'helm-command-prefix)
+        (bind-key "<tab>" 'helm-execute-persistent-action helm-map) ; rebind tab to run persistent action
+        (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
+        (bind-key "C-z" 'helm-select-action helm-map) ; list actions using C-z
+        (when (executable-find "curl")
+          (setq helm-google-suggest-use-curl-p t))
+        ;;TODO: investigate and bind 'helm-resume
+        ;;TODO: investigate and bind 'helm-multi-files
+        (helm-mode t)
+        (helm-autoresize-mode 1)
+        (defhydra hydra-custom-helm ()
+          ("p" custom/open-portage-file "open portage file")
+          ("e" custom/open-encrypted-document "open encrypted document")
+          ("o" custom/open-org-file "open Org file")
+          ("h" helm-hunks "view hunks in a file") ;TODO move to more appropriate place
+          ("q" nil "cancel"))
+        (global-set-key (kbd "C-c r") 'hydra-custom-helm/body))
 
-       (defun helm-find-files ()
-         (interactive)
-         (helm-other-buffer
-          '(helm-source-files-in-current-dir
-            helm-source-recentf
-            helm-source-file-name-history
-            helm-source-findutils
-            helm-source-locate)
-          "*helm-find-files*"))
+      (req-package wgrep-helm
+        :require helm wgrep) ;TODO: maybe configure
 
-       (defvar helm-source-portage-files
-         `((name . "Portage files")
-           (candidates . ,(f-files "/etc/portage" nil t))
-           (action . (lambda (candidate)
-                       (find-file (concat "/sudo::" (expand-file-name candidate)))))))
+      (req-package helm-descbinds
+        :require helm
+        :config
+        (helm-descbinds-mode 1)
+        (bind-key "C-x C-d" 'helm-descbinds))
 
-       (defvar helm-source-enc-docs
-         `((name . "Various documents")
-           (candidates . ,(f-files (at-homedir "/docs/enc") nil t))
-           (action . (lambda (candidate)
-                       (find-file candidate)))))
+      (req-package helm-helm-commands :require helm)
+      (req-package helm-dired-recent-dirs :require helm)
+      (req-package helm-flycheck :require helm)
+      (req-package ac-helm :require helm auto-complete popup cl-lib)
 
-       (defvar helm-source-org-files
-         `((name . "Org files")
-           (candidates . ,(f-files (at-org-dir) nil t))
-           (action . (lambda (candidate)
-                       (find-file candidate)))))
+      (req-package helm-ag
+        :require helm
+        :config
+        (setq helm-ag-insert-at-point 'symbol)
+        (setq helm-ag-fuzzy-match t)
+        ;;TODO: add other common escapes
+        (defadvice helm-ag--query (after escape-search-term activate)
+          (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
 
-       (defun open-portage-file ()
-         (interactive)
-         (helm :sources '(custom/helm-source-portage-files)))
+      ;;TODO: sync and maybe slurp something from rc-cc
+      (req-package helm-gtags
+        :require helm
+        :defer t
+        :config
+        (setq helm-gtags-path-style 'relative)
+        (setq helm-gtags-ignore-case t)
+        (setq helm-gtags-auto-update t)
+        (setq helm-gtags-use-input-at-cursor t)
+        (setq helm-gtags-pulse-at-cursor t)
+        (setq helm-gtags-suggested-key-mapping t)
+        (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
+        (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
+        (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
+        (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
+        (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
+        (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
+        (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
+        (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
+        (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
+        (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
+        (add-hook 'dired-mode-hook 'helm-gtags-mode)
+        (add-hook 'c-mode-hook 'helm-gtags-mode)
+        (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
-       (defun open-encrypted-document ()
-         (interactive)
-         (helm :sources '(custom/helm-source-enc-docs)))
+      (req-package helm-fuzzier
+        :require helm
+        :config
+        (helm-fuzzier-mode 1))
 
-       (defun open-org-file ()
-         (interactive)
-         (helm :sources '(custom/helm-source-org-files)))
+      (req-package helm-flx
+        :require helm flx
+        :config
+        (helm-flx-mode 1))
 
-       )
-     #+END_SRC
-**** setup
-     #+BEGIN_SRC emacs-lisp
-       (req-package helm
-         :init
-         (req-package helm-config)
-         (req-package helm-files)
-         (req-package helm-info)
-         (req-package helm-locate)
-         (req-package helm-misc)
-         (req-package helm-grep)
-         (req-package helm-buffers
-           :config
-           (pushnew 'python-mode helm-buffers-favorite-modes))
-         :config
-         (setq helm-quick-update t)
-         (setq helm-split-window-in-side-p t)
-         (setq helm-ff-search-library-in-sexp t)
-         (setq helm-ff-file-name-history-use-recentf t)
-         (setq helm-buffers-fuzzy-matching t)
-         (setq helm-recentf-fuzzy-match t)
-         (setq helm-locate-fuzzy-match t)
-         (setq helm-M-x-fuzzy-match t)
-         (setq helm-apropos-fuzzy-match t)
-         (setq helm-move-to-line-cycle-in-source t)
-         (setq helm-buffer-max-length nil)
-         (setq helm-input-idle-delay 0.2)
-         (setq helm-exit-idle-delay 0.2)
-         (setq helm-ff-skip-boring-files t)
-         (bind-key "C-<down>" 'helm-next-source helm-map)
-         (bind-key "C-<up>" 'helm-previous-source helm-map)
-         (bind-key "C-x b" 'helm-buffers-list)
-         (bind-key "C-*" 'helm-mark-all helm-map)
-         (bind-key "C-x j j" 'helm-bookmarks)
-         (bind-key "M-x" 'helm-M-x)
-         (bind-key "C-x f" 'helm-for-files)
-         (bind-key "C-h a" 'helm-apropos)
-         (bind-key "C-h r" 'helm-info-emacs)
-         (bind-key "C-h o" 'helm-info-at-point)
-         (bind-key "C-x C-r" 'helm-recentf)
-         (bind-key "C-x C-h" 'helm-command-prefix)
-         (bind-key "<tab>" 'helm-execute-persistent-action helm-map) ; rebind tab to run persistent action
-         (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
-         (bind-key "C-z" 'helm-select-action helm-map) ; list actions using C-z
-         (when (executable-find "curl")
-           (setq helm-google-suggest-use-curl-p t))
-         ;;TODO: investigate and bind 'helm-resume
-         ;;TODO: investigate and bind 'helm-multi-files
-         (helm-mode t)
-         (helm-autoresize-mode 1))
-
-       (req-package wgrep-helm
-         :require helm wgrep) ;TODO: maybe configure
-
-       (req-package helm-descbinds
-         :require helm
-         :config
-         (helm-descbinds-mode 1)
-         (bind-key "C-x C-d" 'helm-descbinds))
-
-       (req-package helm-helm-commands :require helm)
-       (req-package helm-dired-recent-dirs :require helm)
-       (req-package helm-flycheck :require helm)
-       (req-package ac-helm :require helm auto-complete popup cl-lib)
-
-       (req-package helm-ag
-         :require helm
-         :config
-         (setq helm-ag-insert-at-point 'symbol)
-         (setq helm-ag-fuzzy-match t)
-         ;;TODO: add other common escapes
-         (defadvice helm-ag--query (after escape-search-term activate)
-           (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
-
-       ;;TODO: sync and maybe slurp something from rc-cc
-       (req-package helm-gtags
-         :require helm
-         :defer t
-         :config
-         (setq helm-gtags-path-style 'relative)
-         (setq helm-gtags-ignore-case t)
-         (setq helm-gtags-auto-update t)
-         (setq helm-gtags-use-input-at-cursor t)
-         (setq helm-gtags-pulse-at-cursor t)
-         (setq helm-gtags-suggested-key-mapping t)
-         (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
-         (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
-         (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-         (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
-         (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
-         (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
-         (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
-         (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
-         (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
-         (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
-         (add-hook 'dired-mode-hook 'helm-gtags-mode)
-         (add-hook 'c-mode-hook 'helm-gtags-mode)
-         (add-hook 'c++-mode-hook 'helm-gtags-mode))
-
-       (req-package helm-fuzzier
-         :require helm
-         :config
-         (helm-fuzzier-mode 1))
-
-       (req-package helm-flx
-         :require helm flx
-         :config
-         (helm-flx-mode 1))
-
-       (req-package helm-hunks
-         :commands helm-hunks
-         :config
-         (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
-     #+END_SRC
-**** hydras
-     #+BEGIN_SRC emacs-lisp
-       (defhydra hydra-custom-helm ()
-         ("p" custom/open-portage-file "open portage file")
-         ("e" custom/open-encrypted-document "open encrypted document")
-         ("o" custom/open-org-file "open Org file")
-         ("h" helm-hunks "view hunks in a file") ;TODO move to more appropriate place
-         ("q" nil "cancel"))
-       (global-set-key (kbd "C-c r") 'hydra-custom-helm/body)
-     #+END_SRC
+      (req-package helm-hunks
+        :commands helm-hunks
+        :config
+        (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
+    #+END_SRC
 *** tramp
      #+BEGIN_SRC emacs-lisp :tangle no
        (req-package tramp
