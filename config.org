@@ -1011,149 +1011,119 @@
        :require helm cl-lib)
    #+END_SRC
 ** dired
-*** always refresh contents
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp
+     (defvar *directory-separator* '?/)
+     (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
+     (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
 
-      ;; Updated file system on all buffer switches if in dired mode
-      (defadvice switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
-        (if (equal major-mode 'dired-mode)
-            (revert-buffer)))
-      (defadvice switch-to-buffer (after auto-refresh-dired (buffer &optional norecord) activate)
-        (if (equal major-mode 'dired-mode)
-            (revert-buffer)))
-      (defadvice display-buffer (after auto-refresh-dired (buffer &optional not-this-window frame) activate)
-        (if (equal major-mode 'dired-mode)
-            (revert-buffer)))
-      (defadvice other-window (after auto-refresh-dired (arg &optional all-frame) activate)
-        (if (equal major-mode 'dired-mode)
-            (revert-buffer)))
+     (req-package dired
+       :init
+       :config
+       ;; always refresh contents
+       ;; Updated file system on all buffer switches if in dired mode
+       (defadvice custom/switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
+         (if (equal major-mode 'dired-mode)
+             (revert-buffer)))
+       (defadvice custom/switch-to-buffer (after auto-refresh-dired (buffer &optional norecord) activate)
+         (if (equal major-mode 'dired-mode)
+             (revert-buffer)))
+       (defadvice custom/display-buffer (after auto-refresh-dired (buffer &optional not-this-window frame) activate)
+         (if (equal major-mode 'dired-mode)
+             (revert-buffer)))
+       (defadvice custom/other-window (after auto-refresh-dired (arg &optional all-frame) activate)
+         (if (equal major-mode 'dired-mode)
+             (revert-buffer)))
+       ;; navigate to margins
+       ;; C-a is nicer in dired if it moves back to start of files
+       (defun custom/dired-back-to-start-of-files ()
+         (interactive)
+         (backward-char (- (current-column) 2)))
+       ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
+       (defun custom/dired-back-to-top ()
+         (interactive)
+         (beginning-of-buffer)
+         (next-line 2)
+         (custom/dired-back-to-start-of-files))
+       ;; M-down is nicer in dired if it moves to the last file
+       (defun custom/dired-jump-to-bottom ()
+         (interactive)
+         (end-of-buffer)
+         (next-line -1)
+         (custom/dired-back-to-start-of-files))
+       ;; sort contents
+       (defun custom/dired-sort ()
+         "Sort dired listings with directories first."
+         (save-excursion
+           (let (buffer-read-only)
+             (forward-line 2) ;; beyond dir. header
+             (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+           (set-buffer-modified-p nil)))
+       (defadvice custom/dired-readin
+           (after dired-after-updating-hook first () activate)
+         "Sort dired listings with directories first before adding marks."
+         (dired-sort))
+       (defun dired-open-term ()
+         "Open an `ansi-term' that corresponds to current directory."
+         (interactive)
+         (let ((current-dir (dired-current-directory)))
+           (term-send-string
+            (custom/terminal)
+            (if (file-remote-p current-dir)
+                (let ((v (tramp-dissect-file-name current-dir t)))
+                  (format "ssh %s@%s\n"
+                          (aref v 1) (aref v 2)))
+              (format "cd '%s'\n" current-dir)))))
+       (defun sudo-dired ()
+         (interactive)
+         (let ((dir (expand-file-name default-directory)))
+           (if (string-match "^/sudo:" dir)
+               (user-error "Already in sudo")
+             (dired (concat "/sudo::" dir)))))
+       (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
+       (setq dired-dwim-target t)
+       (setq dired-listing-switches "-lah1v --group-directories-first")
+       (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
+       ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
+       (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
+       (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
+       (bind-key "!" 'custom/sudo-dired dired-mode-map)
+       (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
+       (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
+       (bind-key "`" 'custom/dired-open-term dired-mode-map)
+       (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
+       (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
-      )
-    #+END_SRC
-*** navigate to margins
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+     (req-package dired-sort-menu :disabled t)
 
-      ;; C-a is nicer in dired if it moves back to start of files
-      (defun dired-back-to-start-of-files ()
-        (interactive)
-        (backward-char (- (current-column) 2)))
+     (req-package dired+
+       :config
+       (setq diredp-ignored-file-name 'green-face)
+       (setq diredp-other-priv 'white-face)
+       (setq diredp-rare-priv 'white-red-face)
+       (setq diredp-compressed-file-suffix 'darkyellow-face))
 
-      ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
-      (defun dired-back-to-top ()
-        (interactive)
-        (beginning-of-buffer)
-        (next-line 2)
-        (dired-back-to-start-of-files))
+     (req-package wdired
+       :defer t
+       :config
+       (setq wdired-allow-to-change-permissions 'advanced)
+       (setq wdired-allow-to-change-permissions t)
+       (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
+       (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
+       (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
+       (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
-      ;; M-down is nicer in dired if it moves to the last file
-      (defun dired-jump-to-bottom ()
-        (interactive)
-        (end-of-buffer)
-        (next-line -1)
-        (dired-back-to-start-of-files))
+     (req-package dired-x)
+     (req-package dired-toggle-sudo)
 
-      )
-    #+END_SRC
-*** sort contents
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+     ;; Reload dired after making changes
+     (--each '(dired-do-rename
+               dired-create-directory
+               wdired-abort-changes)
+       (eval `(defadvice ,it (after revert-buffer activate)
+                (revert-buffer))))
 
-      (defun dired-sort ()
-        "Sort dired listings with directories first."
-        (save-excursion
-          (let (buffer-read-only)
-            (forward-line 2) ;; beyond dir. header
-            (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-          (set-buffer-modified-p nil)))
-
-      (defadvice dired-readin
-          (after dired-after-updating-hook first () activate)
-        "Sort dired listings with directories first before adding marks."
-        (dired-sort))
-
-      )
-    #+END_SRC
-*** utils
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      (defun dired-open-term ()
-        "Open an `ansi-term' that corresponds to current directory."
-        (interactive)
-        (let ((current-dir (dired-current-directory)))
-          (term-send-string
-           (custom/terminal)
-           (if (file-remote-p current-dir)
-               (let ((v (tramp-dissect-file-name current-dir t)))
-                 (format "ssh %s@%s\n"
-                         (aref v 1) (aref v 2)))
-             (format "cd '%s'\n" current-dir)))))
-
-      (defun sudo-dired ()
-        (interactive)
-        (let ((dir (expand-file-name default-directory)))
-          (if (string-match "^/sudo:" dir)
-              (user-error "Already in sudo")
-            (dired (concat "/sudo::" dir)))))
-
-      )
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (defvar *directory-separator* '?/)
-      (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
-      (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
-
-      (req-package dired
-        :init
-        :config
-        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
-        (setq dired-dwim-target t)
-        (setq dired-listing-switches "-lah1v --group-directories-first")
-        (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
-        ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
-        (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
-        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
-        (bind-key "!" 'custom/sudo-dired dired-mode-map)
-        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
-        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-        (bind-key "`" 'custom/dired-open-term dired-mode-map)
-        (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
-        (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
-
-      (req-package dired-sort-menu :disabled t)
-
-      (req-package dired+
-        :config
-        (setq diredp-ignored-file-name 'green-face)
-        (setq diredp-other-priv 'white-face)
-        (setq diredp-rare-priv 'white-red-face)
-        (setq diredp-compressed-file-suffix 'darkyellow-face))
-
-      (req-package wdired
-        :defer t
-        :config
-        (setq wdired-allow-to-change-permissions 'advanced)
-        (setq wdired-allow-to-change-permissions t)
-        (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
-        (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
-        (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
-        (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
-
-      (req-package dired-x)
-      (req-package dired-toggle-sudo)
-
-      ;; Reload dired after making changes
-      (--each '(dired-do-rename
-                dired-create-directory
-                wdired-abort-changes)
-        (eval `(defadvice ,it (after revert-buffer activate)
-                 (revert-buffer))))
-
-      (req-package dired-filetype-face)
-    #+END_SRC
+     (req-package dired-filetype-face)
+   #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp
      (req-package bookmark+)
