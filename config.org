@@ -1209,69 +1209,60 @@
        ("q" nil "cancel"))
    #+END_SRC
 ** scope
-*** definitions
-**** ibuffer
-     #+BEGIN_SRC emacs-lisp
-       (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp
+     (defhydra hydra-scope (:color blue)
+       "
+       Narrow to            Widen
+       ------------------------------------
+       _r_egion             _w_iden
+       _d_efun              _z_oom window
+       defun + _c_omments
+       "
+       ("r" narrow-to-region)
+       ("d" narrow-to-defun)
+       ("c" narrow-to-defun+comments-above)
+       ("o" org-narrow-to-subtree)
+       ("w" widen)
+       ("z" zoom-window-zoom)
+       ("N" recursive-narrow-or-widen-dwim)
+       ("W" recursive-widen-dwim)
+       ;;TODO: maybe add org narrowing
+       ("q" nil "cancel"))
+     (global-set-key (kbd "<f9>") 'hydra-scope/body)
 
-       (defun ibuffer-filter-by-extname (qualifier)
+     (req-package ibuffer
+       :defer t
+       :config
+       (defun custom/ibuffer-filter-by-extname (qualifier)
          (interactive "sFilter by extname: ")
          (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
+       (setq ibuffer-default-sorting-mode 'major-mode) ;recency
+       (setq ibuffer-always-show-last-buffer :nomini)
+       (setq ibuffer-default-shrink-to-minimum-size t)
+       (setq ibuffer-jump-offer-only-visible-buffers t)
+       (setq ibuffer-saved-filters
+             '(("dired" ((mode . dired-mode)))
+               ("foss" ((filename . "foss")))
+               ("pets" ((filename . "pets")))
+               ("jabberchat" ((mode . jabber-chat-mode)))
+               ("orgmode" ((mode . org-mode)))
+               ("elisp" ((mode . emacs-lisp-mode)))
+               ("fundamental" ((mode . fundamental-mode)))
+               ("haskell" ((mode . haskell-mode)))))
+       (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
+       (add-hook 'ibuffer-mode-hook
+                 (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
+       (add-hook 'ibuffer-mode-hook
+                 (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+       (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map))
 
-       )
-     #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (defhydra hydra-scope (:color blue)
-        "
-        Narrow to            Widen
-        ------------------------------------
-        _r_egion             _w_iden
-        _d_efun              _z_oom window
-        defun + _c_omments
-        "
-        ("r" narrow-to-region)
-        ("d" narrow-to-defun)
-        ("c" narrow-to-defun+comments-above)
-        ("o" org-narrow-to-subtree)
-        ("w" widen)
-        ("z" zoom-window-zoom)
-        ("N" recursive-narrow-or-widen-dwim)
-        ("W" recursive-widen-dwim)
-        ;;TODO: maybe add org narrowing
-        ("q" nil "cancel"))
-      (global-set-key (kbd "<f9>") 'hydra-scope/body)
+     ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
+     (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
+     (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
+     (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
 
-      (req-package ibuffer
-        :defer t
-        :config
-        (setq ibuffer-default-sorting-mode 'major-mode) ;recency
-        (setq ibuffer-always-show-last-buffer :nomini)
-        (setq ibuffer-default-shrink-to-minimum-size t)
-        (setq ibuffer-jump-offer-only-visible-buffers t)
-        (setq ibuffer-saved-filters
-              '(("dired" ((mode . dired-mode)))
-                ("foss" ((filename . "foss")))
-                ("pets" ((filename . "pets")))
-                ("jabberchat" ((mode . jabber-chat-mode)))
-                ("orgmode" ((mode . org-mode)))
-                ("elisp" ((mode . emacs-lisp-mode)))
-                ("fundamental" ((mode . fundamental-mode)))
-                ("haskell" ((mode . haskell-mode)))))
-        (setq ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
-        (add-hook 'ibuffer-mode-hook
-                  (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
-        (add-hook 'ibuffer-mode-hook
-                  (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
-        (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map))
-
-      ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
-      (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
-      (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
-      (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
-
-      (req-package recursive-narrow)
-    #+END_SRC
+     (req-package recursive-narrow)
+   #+END_SRC
 ** warping
    #+BEGIN_SRC emacs-lisp
      (req-package swoop
