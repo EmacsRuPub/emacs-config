@@ -1185,6 +1185,10 @@
         ("C-s-<right>" . windmove-right)
         ))
 
+     (req-package winner-mode
+       :config
+       (winner-mode))
+
      (req-package windsize)
 
      (req-package framemove
