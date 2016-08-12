@@ -955,20 +955,6 @@
          ("S" projectile-run-async-shell-command-in-root))
        (global-set-key (kbd "<f8>") 'hydra-projectile/body))
 
-     (defun toggle-projectile-global-mode (arg)
-       (interactive "P")
-       (if projectile-global-mode
-           (if (= (prefix-numeric-value arg) 4)
-               (message "projectile-global-mode is ON")
-             (progn
-               (projectile-global-mode -1)
-               (message "projectile-global-mode is OFF")))
-         (if (= (prefix-numeric-value arg) 4)
-             (message "projectile-global-mode is OFF")
-           (progn
-             (projectile-global-mode t)
-             (message "projectile-global-mode is ON")))))
-
      (req-package helm-projectile
        :disabled t
        :require helm projectile dash cl-lib
