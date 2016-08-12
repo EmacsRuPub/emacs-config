@@ -755,12 +755,6 @@
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
        (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
-** view system processes info
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (req-package list-processes+)
-
-     (global-set-key (kbd "C-x c") 'proced)
-   #+END_SRC
 ** OS-specific stuff
    Besides the common part of the common setup (sic!) there is also
    a little part of customizations being specific to OS Emacs is
