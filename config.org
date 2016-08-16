@@ -1377,22 +1377,6 @@
            (kill-new filename)
            (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-     ;;<http://www.cabochon.com/~stevey/blog-rants/my-dot-emacs-file.html>
-     (defun rename-file-and-buffer (new-name)
-       "Renames both current buffer and file it is visiting to NEW-NAME."
-       (interactive "sNew name: ")
-       (let ((name (buffer-name))
-             (filename (buffer-file-name)))
-         (if (not filename)
-             (message "Buffer '%s' is not visiting a file!" name)
-           (if (get-buffer new-name)
-               (message "A buffer named '%s' already exists!" new-name)
-             (progn
-               (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
-
      (defun get-file-md5 ()
        (interactive)
        (when (derived-mode-p 'dired-mode)
@@ -1619,20 +1603,6 @@
     #+END_SRC
 ** commenting
    #+BEGIN_SRC emacs-lisp
-     ;; see http://emacs-fu.blogspot.ru/2010/01/duplicating-lines-and-commenting-them.html
-     (defun custom/duplicate-and-comment-line (arg)
-       "comment line at point; if COMMENTFIRST is non-nil, comment the original"
-       (interactive "P")
-       (beginning-of-line)
-       (push-mark)
-       (end-of-line)
-       (let ((str (buffer-substring (region-beginning) (region-end))))
-         (when arg
-           (comment-region (region-beginning) (region-end)))
-         (insert-string
-          (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
-         (forward-line -1)))
-
      (req-package comment-dwim-2
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
@@ -1871,7 +1841,7 @@
      ;;TODO: plan docstring
      (defhydra hydra-edit (:color blue)
        ("0" custom/compact-spaces-in-region)
-       ("2" custom/duplicate-and-comment-line)
+       ("2" crux-duplicate-and-comment-current-line-or-region)
        ("4" snakehump-next-at-point)
        ("<left>" jump-char-backward)
        ("<right>" jump-char-forward)
@@ -1890,7 +1860,7 @@
        ("o" just-one-space)
        ("p" whitespace-mode)
        ("r" query-replace)
-       ("n" custom/rename-file-and-buffer)
+       ("n" crux-rename-file-and-buffer)
        ("s" sort-lines)
        ("t" delete-trailing-whitespace)
        ("u" delete-duplicate-lines)
@@ -2004,39 +1974,7 @@
     credits to amalabarba
     #+BEGIN_SRC emacs-lisp
       (define-key ctl-x-map "\C-i"
-        #'endless/ispell-word-then-abbrev)
-
-      (defun endless/ispell-word-then-abbrev (p)
-        "Call `ispell-word', then create an abbrev for it.
-      With prefix P, create local abbrev. Otherwise it will
-      be global.
-      If there's nothing wrong with the word at point, keep
-      looking for a typo until the beginning of buffer. You can
-      skip typos you don't want to fix with `SPC', and you can
-      abort completely with `C-g'."
-        (interactive "P")
-        (let (bef aft)
-          (save-excursion
-            (while (if (setq bef (thing-at-point 'word))
-                       ;; Word was corrected or used quit.
-                       (if (ispell-word nil 'quiet)
-                           nil ; End the loop.
-                         ;; Also end if we reach `bob'.
-                         (not (bobp)))
-                     ;; If there's no word at point, keep looking
-                     ;; until `bob'.
-                     (not (bobp)))
-              (backward-word))
-            (setq aft (thing-at-point 'word)))
-          (if (and aft bef (not (equal aft bef)))
-              (let ((aft (downcase aft))
-                    (bef (downcase bef)))
-                (define-abbrev
-                  (if p local-abbrev-table global-abbrev-table)
-                  bef aft)
-                (message "\"%s\" now expands to \"%s\" %sally"
-                         bef aft (if p "loc" "glob")))
-            (user-error "No typo at or before point"))))
+        #'crux-ispell-word-then-abbrev)
 
       (setq save-abbrevs 'silently)
       (setq-default abbrev-mode t)
