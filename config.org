@@ -3095,142 +3095,128 @@
 * clients
 ** restclient
    #+BEGIN_SRC emacs-lisp
-     (defun custom/create-restclient-sandbox ()
-       (interactive)
-       (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
-         (switch-to-buffer restbuffer)
-         (restclient-mode)))
-
      (req-package restclient
        :defer t
-       :bind ("C-c C-r C-s" . custom/create-restclient-sandbox))
+       :bind ("C-c C-r C-s" . custom/create-restclient-sandbox)
+       :config
+       (defun custom/create-restclient-sandbox ()
+         (interactive)
+         (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
+           (switch-to-buffer restbuffer)
+           (restclient-mode))))
    #+END_SRC
 ** ERC
-*** some handy navigation functions
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp
+     (req-package erc
+       :force t
+       :init
+       ;;TODO: try using 'erc-modules
+       (req-package erc-pcomplete)
+       (req-package erc-join)
+       (req-package erc-lang)
+       (req-package erc-fill)
+       (req-package erc-log)
+       (req-package erc-autoaway)
+       (req-package erc-services)
+       (req-package erc-ring)
+       (req-package erc-match)
+       (req-package erc-services
+         :config
+         (setq erc-nickserv-passwords
+               '((freenode ((private/irc-nick-main . private/irc-password-main)
+                            (private/irc-nick-work . private/irc-password-work)))))
+         (setq erc-prompt-for-nickserv-password nil)
+         (erc-nickserv-mode 1))
+       (req-package erc-log
+         :config
+         (setq erc-log-channels-directory custom/irc-logs-directory)
+         (setq erc-log-channels t)
+         (erc-log-enable))
+       ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
+       :config
+       ;; some handy navigation functions
+       ;; FIXME should be able to quit server
+       ;; being invoked from barely any buffer
+       (defun custom/leave-irc-server ()
+         (interactive)
+         (erc-quit-server "Leaving"))
+       (defun custom/select-erc-buffer ()
+         (interactive)
+         (switch-to-buffer
+          (helm-comp-read
+           "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
+       (defun custom/select-erc-unread-buffer ()
+         (interactive)
+         (switch-to-buffer
+          (helm-comp-read
+           "Select unread ERC buffer:"
+           (mapcar #'buffer-name
+                   (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
+       ;;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
+       (defun custom/insert-erc-nick (&optional atsign)
+         (interactive)
+         (insert
+          (concatenate 'string
+                       (when atsign
+                         "@")
+                       (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")))
+       ;; connect to Slack IRC gate (work chats)
+       (defun custom/connect-slack-irc-znc () ; For obvious reasons it's better to use ZNC to connect to IRC, especially at work
+         (interactive)
+         (erc
+          :server private/irc-server-mira-slack-znc
+          :port 6697
+          :full-name private/irc-full-name
+          :nick private/irc-nick-mira-slack
+          :password private/irc-password-mira-slack-znc))
+       (erc-pcomplete-mode 1)
+       (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                       "324" "329" "332" "333" "353" "477"))
+       (setq erc-kill-queries-on-quit t)
+       (setq erc-kill-server-buffer-on-quit t)
+       (setq erc-track-shorten-function nil)
+       (setq erc-autojoin-channels-alist
+             '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
+               ))
+       (setq erc-keywords '((".*Online.*" (:foreground "green"))
+                            (".*Busy" (:foreground "red"))
+                            (".*Away" (:foreground "red"))
+                            (".*Idle" (:foreground "orange"))
+                            ))
+       (setq erc-nick private/irc-nick-main)
+       (setq erc-track-priority-faces-only 'all)
+       (setq erc-autoaway-message "I'm gone (autoaway after %i seconds)")
+       (setq erc-auto-query 'buffer)
+       (setq erc-max-buffer-size 20000)
 
-      ;; FIXME should be able to quit server
-      ;; being invoked from barely any buffer
-      (defun leave-irc-server ()
-        (interactive)
-        (erc-quit-server "Leaving"))
+       (erc-autojoin-mode t)
+       (erc-fill-mode t)
+       (erc-ring-mode t)
+       (erc-match-enable)
+       (erc-match-mode 1)
+       (erc-timestamp-mode t)
 
-      (defun select-erc-buffer ()
-        (interactive)
-        (switch-to-buffer
-         (helm-comp-read
-          "Select ERC buffer:" (mapcar #'buffer-name (erc-buffer-list)))))
+       (defhydra hydra-erc (:color blue)
+         "
+             IRC   ^Connection^ ^Tools^
+             ------------------------
+             _s_lack      _q_ leave server
+             select _b_uffer
+             select _u_nread buffer
+             _i_nsert nick
+             "
+         ("s" custom/connect-slack-irc-znc)
+         ("q" custom/leave-irc-server)
+         ("b" custom/select-erc-buffer)
+         ("u" custom/select-erc-unread-buffer)
+         ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
+       (global-set-key (kbd "C-q") 'hydra-erc/body))
 
-      (defun select-erc-unread-buffer ()
-        (interactive)
-        (switch-to-buffer
-         (helm-comp-read
-          "Select unread ERC buffer:"
-          (mapcar #'buffer-name
-                  (mapcar (lambda (x) (nth 0 x)) erc-modified-channels-alist)))))
-      ;;TODO: check if '(mapcar #'buffer-name (erc-buffer-list #'buffer-modified-p)) works
-
-      (defun insert-erc-nick (&optional atsign)
-        (interactive)
-        (insert
-         (concatenate 'string
-                      (when atsign
-                        "@")
-                      (helm-comp-read "nick: " (pcomplete-erc-nicks)) ": ")
-         ))
-
-      )
-    #+END_SRC
-*** connect to Slack IRC gate (work chats)
-    For obvious reasons it's better to use ZNC to connect to IRC, especially at work
-    #+BEGIN_SRC emacs-lisp
-      (defun custom/connect-slack-irc-znc ()
-        (interactive)
-        (erc
-         :server private/irc-server-mira-slack-znc
-         :port 6697
-         :full-name private/irc-full-name
-         :nick private/irc-nick-mira-slack
-         :password private/irc-password-mira-slack-znc))
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (req-package erc
-        :force t
-        :init
-        ;;TODO: try using 'erc-modules
-        (req-package erc-pcomplete)
-        (req-package erc-join)
-        (req-package erc-lang)
-        (req-package erc-fill)
-        (req-package erc-log)
-        (req-package erc-autoaway)
-        (req-package erc-services)
-        (req-package erc-ring)
-        (req-package erc-match)
-        (req-package erc-services
-          :config
-          (setq erc-nickserv-passwords
-                '((freenode ((private/irc-nick-main . private/irc-password-main)
-                             (private/irc-nick-work . private/irc-password-work)))))
-          (setq erc-prompt-for-nickserv-password nil)
-          (erc-nickserv-mode 1))
-        (req-package erc-log
-          :config
-          (setq erc-log-channels-directory custom/irc-logs-directory)
-          (setq erc-log-channels t)
-          (erc-log-enable))
-        ;;TODO: find a way to use erc extra modules on behalf of package.el (resurrect erc-nicklist)
-        :config
-        (erc-pcomplete-mode 1)
-        (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                        "324" "329" "332" "333" "353" "477"))
-        (setq erc-kill-queries-on-quit t)
-        (setq erc-kill-server-buffer-on-quit t)
-        (setq erc-track-shorten-function nil)
-        (setq erc-autojoin-channels-alist
-              '(("irc.freenode.net" "#git" "#stumpwm" "#emacsconf")
-                ))
-        (setq erc-keywords '((".*Online.*" (:foreground "green"))
-                             (".*Busy" (:foreground "red"))
-                             (".*Away" (:foreground "red"))
-                             (".*Idle" (:foreground "orange"))
-                             ))
-        (setq erc-nick private/irc-nick-main)
-        (setq erc-track-priority-faces-only 'all)
-        (setq erc-autoaway-message "I'm gone (autoaway after %i seconds)")
-        (setq erc-auto-query 'buffer)
-        (setq erc-max-buffer-size 20000)
-
-        (erc-autojoin-mode t)
-        (erc-fill-mode t)
-        (erc-ring-mode t)
-        (erc-match-enable)
-        (erc-match-mode 1)
-        (erc-timestamp-mode t)
-
-        (defhydra hydra-erc (:color blue)
-          "
-        IRC   ^Connection^ ^Tools^
-        ------------------------
-        _s_lack      _q_ leave server
-        select _b_uffer
-        select _u_nread buffer
-        _i_nsert nick
-        "
-          ("s" custom/connect-slack-irc-znc)
-          ("q" custom/leave-irc-server)
-          ("b" custom/select-erc-buffer)
-          ("u" custom/select-erc-unread-buffer)
-          ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
-        (global-set-key (kbd "C-q") 'hydra-erc/body))
-
-      (req-package erc-hl-nicks)
-      (req-package ercn
-        :config
-        (req-package erc-menu)) ;TODO: add notifications handler function
-    #+END_SRC
+     (req-package erc-hl-nicks)
+     (req-package ercn
+       :config
+       (req-package erc-menu)) ;TODO: add notifications handler function
+   #+END_SRC
 *** BACKLOG [#B] make freenode connection via ZNC also
 ** circe
 *** definitions
@@ -3699,10 +3685,9 @@
        :commands mingus
        :require libmpdee
        :config
-       (bind-key "<Backspace>" 'mingus-del mingus-playlist-map))
-
-     (defhydra hydra-mingus ()
-       "
+       (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
+       (defhydra hydra-mingus ()
+         "
        Control               Playlist
        ------------------------------
        _<up>_ volume up        _s_ show playlist
@@ -3710,14 +3695,14 @@
        _<right>_ seek forward
        _<left>_ seek backward
        "
-       ("s" mingus "open mingus")
-       ("/" mingus-search "Search")
-       ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
-       ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
-       ("<right>" mingus-seek "seek forward")
-       ("<left>" mingus-seek-backward "seek backward")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "C-c m") 'hydra-mingus/body)
+         ("s" mingus "open mingus")
+         ("/" mingus-search "Search")
+         ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
+         ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
+         ("<right>" mingus-seek "seek forward")
+         ("<left>" mingus-seek-backward "seek backward")
+         ("q" nil "cancel"))
+       (global-set-key (kbd "C-c m") 'hydra-mingus/body))
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
