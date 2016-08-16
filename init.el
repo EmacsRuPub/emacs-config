@@ -32,6 +32,7 @@
  '(req-package el-get))
 
 (require 'req-package)
+(setq req-package-log-level 'trace)
 
 (req-package org-plus-contrib :force t)
 (require 'org)
