@@ -403,7 +403,7 @@
       (req-package helm-helm-commands :require helm)
       (req-package helm-dired-recent-dirs :require helm)
       (req-package helm-flycheck :require helm)
-      (req-package ac-helm :require helm auto-complete popup cl-lib)
+      (req-package helm-company)
 
       (req-package helm-ag
         :require helm
@@ -750,7 +750,7 @@
        (delight 'helm-mode nil 'helm-mode)
        (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
        (delight 'projectile-mode " prj" 'projectile)
-       (delight 'auto-complete-mode " α" 'auto-complete)
+       (delight 'company-mode " γ" 'company)
        (delight 'eldoc-mode " ED" 'eldoc)
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
        (delight 'orglink-mode " OL" 'orglink))
@@ -2017,21 +2017,19 @@
               (move-beginning-of-line)
             (goto-char position))))
 
-      (defun ac-page-next ()
-        "Select next completion candidate per `ac-menu-height' range.
-         Pages down through completion menu."
-        (interactive)
-        (let ((counter 0))
-          (dotimes (counter (1- ac-menu-height))
-            (ac-next))))
+      (defun do-yas-expand ()
+        (let ((yas/fallback-behavior 'return-nil))
+          (yas/expand)))
 
-      (defun ac-page-previous ()
-        "Select previous completion candidate per `ac-menu-height' range.
-         Pages up through completion menu."
+      (defun tab-indent-or-complete ()
         (interactive)
-        (let ((counter 0))
-          (dotimes (counter (1- ac-menu-height))
-            (ac-previous))))
+        (if (minibufferp)
+            (minibuffer-complete)
+          (if (or (not yas/minor-mode)
+                  (null (custom/do-yas-expand)))
+              (if (check-expansion)
+                  (company-complete-common)
+                (indent-for-tab-command)))))
 
       )
     #+END_SRC
@@ -2072,7 +2070,8 @@
         ;; Jump to end of snippet definition
         (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
         (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
-        (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field))
+        (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
+        (bind-key (kbd "<tab>") 'custom/tab-indent-or-complete))
 
       (req-package helm-c-yasnippet :require helm yasnippet cl-lib)
       (req-package auto-yasnippet :require yasnippet)
@@ -2094,41 +2093,19 @@
         ("q" nil))
       (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
     #+END_SRC
-** auto-complete
-*** definitions
-    #+BEGIN_SRC emacs-lisp
-      (defun custom/ielm-auto-complete ()
-        "Enables `auto-complete' support in \\[ielm]."
-        (setq ac-sources '(ac-source-functions
-                           ac-source-variables
-                           ac-source-features
-                           ac-source-symbols
-                           ac-source-words-in-same-mode-buffers))
-        (add-to-list 'ac-modes 'inferior-emacs-lisp-mode))
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (req-package auto-complete
-        :require popup cl-lib
-        :commands auto-complete
-        :init
-        (req-package auto-complete-config)
-        :config
-        (ac-config-default)
-        (global-auto-complete-mode t)
-        (setq ac-auto-start nil)
-        (setq ac-quick-help-delay 0.5)
-        (setq ac-fuzzy-enable t)
-        (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-        (define-key ac-complete-mode-map [next] 'custom/ac-page-next)
-        (define-key ac-complete-mode-map [prior] 'custom/ac-page-previous)
-        (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-        (global-set-key (kbd "C-<tab>") 'auto-complete)
-        ;; TODO: bind lambda (setq ac-comphist nil) for emeregency completion history purge
-        )
+** company
+   #+BEGIN_SRC emacs-lisp
+     (req-package company
+       :init
+       (req-package company-flx)
+       :config
+       (setq company-idle-delay 0.2)
+       (setq company-tooltip-align-annotations t)
+       (global-company-mode))
 
-      (req-package ac-math :require auto-complete math-symbol-lists)
-    #+END_SRC
+     (req-package company-quickhelp
+       :require company)
+   #+END_SRC
 ** hippie-expand
    #+BEGIN_SRC emacs-lisp
      (req-package hippie-exp
@@ -2408,13 +2385,13 @@
          (turn-on-eldoc-mode))
 
        (req-package lisp-mode
-         :require auto-complete
+         :init
+         (req-package company-elisp)
          :config
          (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
          (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
          (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook)
-         (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-         (add-hook 'ielm-mode-hook 'custom/ielm-auto-complete))
+         )
 
        (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
        (dolist (mode '(paredit-mode smartparens-mode))
@@ -2503,11 +2480,8 @@
       (req-package tern
         :require json cl-lib
         :commands tern-mode
-        :init
         :config
-        (tern-ac-setup))
-
-      (req-package tern-auto-complete :require tern auto-complete cl-lib)
+        (req-package company-tern))
 
       (req-package xref-js2
         :require js2-mode
@@ -2578,6 +2552,7 @@
          (add-to-list 'load-path quicklisp-slime-directory)
          (require 'cl-lib)
          (require 'slime-autoloads)
+         (require 'slime-company)
          (setq slime-backend (expand-file-name "swank-loader.lisp"
                                                quicklisp-slime-directory))
          (setq slime-path quicklisp-slime-directory)
@@ -2598,11 +2573,10 @@
          (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
          (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
          (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
-         (add-hook 'lisp-mode-hook 'set-up-slime-ac)
-         (add-hook 'slime-mode-hook 'set-up-slime-ac)
-         (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-         (eval-after-load "auto-complete"
-           '(add-to-list 'ac-modes 'slime-repl-mode)))
+         (define-key company-active-map (kbd "\C-n") 'company-select-next)
+         (define-key company-active-map (kbd "\C-p") 'company-select-previous)
+         (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+         (define-key company-active-map (kbd "M-.") 'company-show-location))
      #+END_SRC
 ***** BACKLOG investigate and fix the issue with not found slime extensions within remote lisp image
       example: Can't locate module: SWANK-IO-PACKAGE::SWANK-SBCL-EXTS
@@ -2614,8 +2588,6 @@
          :config
          (setq inferior-lisp-program "sbcl"))
        (req-package common-lisp-snippets :require yasnippet)
-
-       (req-package ac-slime :require auto-complete slime cl-lib)
 
        ;; lookup information in hyperspec
        (info-lookup-add-help
@@ -2654,6 +2626,8 @@
         (req-package haskell-sort-imports)
         (req-package inf-haskell)
         (req-package haskell-ghci)
+        (req-package company-ghc)
+        (req-package company-ghci)
         :config
         (setq inferior-haskell-wait-and-jump t)
         (setf haskell-process-path-ghci "ghci-ng")
@@ -2703,8 +2677,9 @@
        (req-package python-pep8)
 
        (req-package jedi
-         :require jedi-core auto-complete
+         :require jedi-core auto-complete ; unfortunately, auto-complete is hard dep here
          :init
+         (req-package company-jedi)
          (setq jedi:complete-on-dot t)
          (setq jedi:goto-definition-marker-ring-length 32)
          :config
@@ -2735,8 +2710,6 @@
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
          (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
          (bind-key "_" 'python-indent-shift-left region-bindings-mode-map))
-
-       (req-package ac-python :require auto-complete)
 
        ;; Highlight the call to ipdb
        ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
@@ -2800,12 +2773,13 @@
          (define-key c++-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
          (define-key c++-mode-map (kbd "C-j") 'helm-gtags-select))
 
-       (req-package ac-c-headers :require auto-complete)
-       (req-package ac-clang :require cl-lib auto-complete pos-tip yasnippet)
-       (req-package auto-complete-clang :require auto-complete)
+       (req-package company-c-headers)
 
        (req-package irony
          :require cl-lib json
+         :init
+         (req-package company-irony)
+         (req-package company-irony-c-headers)
          :config
          (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
@@ -2838,13 +2812,6 @@
      #+END_SRC
 **** hooks
      #+BEGIN_SRC emacs-lisp
-       (defun custom/c-mode-common-hook ()
-         (require 'auto-complete-c-headers)
-         (add-to-list 'ac-sources 'ac-source-c-headers)
-         (add-to-list 'ac-sources 'ac-source-gtags)
-         (add-to-list 'ac-sources 'ac-source-clang)
-         (irony-mode))
-
        ;; replace the `completion-at-point' and `complete-symbol' bindings in
        ;; irony-mode's buffers by irony-mode's function
        (defun custom/irony-mode-hook ()
@@ -2854,11 +2821,9 @@
            'irony-completion-at-point-async))
 
        (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'c++-mode-hook 'custom/c-mode-common-hook)
        (add-hook 'c++-mode-hook 'irony-mode)
        (add-hook 'c-mode-common-hook 'common-hooks/prog-helpers)
        (add-hook 'c-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'c-mode-hook 'custom/c-mode-common-hook)
        (add-hook 'c-mode-hook 'irony-mode)
        (add-hook 'irony-mode-hook 'custom/irony-mode-hook)
      #+END_SRC
@@ -2953,15 +2918,19 @@
         :require php-mode
         :disabled t) ;; autocompletion, not present in xLPA
 
-      (req-package ac-php :require php-mode)
+      (req-package company-php)
     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp
       (req-package actionscript-mode :defer t)
-      (req-package go-mode :defer t)
+      (req-package go-mode :defer t
+        :init
+        (req-package company-go))
       (req-package json-mode :require json-reformat json-snatcher)
-      (req-package lua-mode :defer t)
+      (req-package lua-mode :defer t
+        :init
+        (req-package company-lua))
       (req-package rust-mode :defer t)
     #+END_SRC
 ** webdev
@@ -3015,11 +2984,14 @@
       (req-package web-mode
         :defer t
         :mode "\\.html?\\'"
+        :init
+        (req-package company-web-html)
         :config
         (setq web-mode-enable-current-element-highlight t)
-        (setq web-mode-ac-sources-alist
-              '(("css" . (ac-source-css-property))
-                ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+        (add-hook 'web-mode-hook
+                  (lambda ()
+                    (set (make-local-variable 'company-backends) '(company-web-html))
+                    (company-mode t)))
         (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
         (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
         (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -3047,9 +3019,6 @@
       (req-package emmet-mode
         :defer t
         :config
-        (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
-        (add-hook 'css-mode-hook 'ac-emmet-css-setup)
-        (add-hook 'web-mode-hook 'ac-emmet-html-setup)
         (bind-key "C-j" nil emmet-mode-keymap)
         (bind-key "<C-return>" nil emmet-mode-keymap)
         (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
@@ -3062,13 +3031,6 @@
         (add-hook 'css-mode-hook 'emmet-mode)
         (add-hook 'emmet-mode-hook
                   (lambda () (setq emmet-indentation 2))))
-
-      (req-package ac-emmet
-        :require emmet-mode auto-complete
-        :defer t
-        :config
-        (push 'html-mode ac-modes)
-        (push 'web-mode ac-modes))
 
       (req-package helm-emmet
         :require helm emmet-mode
@@ -3098,6 +3060,8 @@
      (req-package restclient
        :defer t
        :bind ("C-c C-r C-s" . custom/create-restclient-sandbox)
+       :init
+       (req-package company-restclient)
        :config
        (defun custom/create-restclient-sandbox ()
          (interactive)
@@ -3613,6 +3577,8 @@
              (list 'custom/sh-check-finish-hook)))
 
       (req-package shell
+        :init
+        (req-package company-shell)
         :config
         (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
         (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -4946,6 +4912,7 @@
        :init
        (req-package tex-site)
        (req-package bib-cite)
+       (req-package company-auctex)
        :config
        (setq-default TeX-master nil)
        (setq TeX-parse-self t)
