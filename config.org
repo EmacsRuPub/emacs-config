@@ -1139,9 +1139,9 @@
         ("C-s-<right>" . windmove-right)
         ))
 
-     (req-package winner-mode
+     (req-package winner
        :config
-       (winner-mode))
+       (winner-mode 1))
 
      (req-package windsize)
 
