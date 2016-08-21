@@ -1367,6 +1367,7 @@
    #+BEGIN_SRC emacs-lisp
      (define-namespace custom/
 
+     ;; TODO implement variant with path for some VCS-controlled tree
      (defun copy-file-name-to-clipboard ()
        "Copy the current buffer file name to the clipboard."
        (interactive)
