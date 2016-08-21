@@ -84,13 +84,19 @@
                          "ru.gentoo.kbdd.set_layout"
                          "uint32:1")))
     #+END_SRC
-** Encryption
+** Encryption and security
    #+BEGIN_SRC emacs-lisp
      (req-package epa
+       :require epg
        :config
        (setq epg-gpg-program "gpg2")
        (epa-file-enable)
        (setq epg-gpg-home-directory "~/.gnupg"))
+
+     (req-package password-cache
+       :config
+       (setq password-cache-expiry 86400)
+       (setq password-cache t))
    #+END_SRC
 ** load various private credentials from GPG-encrypted file
    #+BEGIN_SRC emacs-lisp
@@ -550,13 +556,6 @@
      (setq display-time-world-list
            '(("Europe/Moscow" "Moscow")
              ("America/New_York" "New York")))
-   #+END_SRC
-** security
-   #+BEGIN_SRC emacs-lisp
-     (req-package epg)
-
-     (setq password-cache-expiry 86400)
-     (setq password-cache t)
    #+END_SRC
 ** local variables processing
    #+BEGIN_SRC emacs-lisp
