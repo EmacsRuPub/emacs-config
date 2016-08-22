@@ -1096,7 +1096,6 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp
-      (req-package wgrep)
 
       (req-package occur-context-resize)
 
