@@ -1084,45 +1084,36 @@
      (req-package crosshairs :require hl-line+ col-highlight vline)
    #+END_SRC
 ** search
-*** definitions
-    #+BEGIN_SRC emacs-lisp
-      (defun custom/occur-and-switch (search)
-        (interactive "sSearch for: ")
-        (occur (regexp-quote search))
-        (switch-to-buffer-other-window "*Occur*"))
+   #+BEGIN_SRC emacs-lisp
+     (req-package occur-context-resize)
 
-      (defadvice occur-mode-goto-occurrence (after close-occur activate)
-        (delete-other-windows))
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
+     (req-package phi-search)
 
-      (req-package occur-context-resize)
+     (req-package sift
+       :config
+       (defadvice sift-regexp (around escape-search-term activate)
+         (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
+         ad-do-it))
 
-      (req-package phi-search)
+     (req-package phi-search-mc
+       :require phi-search multiple-cursors
+       :config
+       (phi-search-mc/setup-keys)
+       (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
 
-      (req-package sift
-        :config
-        (defadvice sift-regexp (around escape-search-term activate)
-          (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
-          ad-do-it))
+     (req-package fuzzy
+       :config
+       (turn-on-fuzzy-isearch))
 
-      (req-package phi-search-mc
-        :require phi-search multiple-cursors
-        :config
-        (phi-search-mc/setup-keys)
-        (add-hook 'isearch-mode-hook 'phi-search-from-isearch-mc/setup-keys))
+     (req-package paradox
+       :require seq let-alist spinner hydra
+       :config
+       (setq paradox-execute-asynchronously t)
+       (setq paradox-github-token private/paradox-github-token))
 
-      (req-package fuzzy
-        :config
-        (turn-on-fuzzy-isearch))
-
-      (req-package paradox
-        :require seq let-alist spinner hydra
-        :config
-        (setq paradox-execute-asynchronously t)
-        (setq paradox-github-token private/paradox-github-token))
-    #+END_SRC
+     (defadvice occur-mode-goto-occurrence (after close-occur activate)
+       (delete-other-windows))
+   #+END_SRC
 ** operations with windows
    #+BEGIN_SRC emacs-lisp
      (req-package zoom-window
