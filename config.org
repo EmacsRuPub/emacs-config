@@ -198,6 +198,100 @@
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
+** frames
+   #+BEGIN_SRC emacs-lisp
+     (setq frame-title-format "emacs - %b %f")
+
+     (setq inhibit-startup-echo-area-message "octocat")
+     (setq inhibit-startup-message t)
+     (setq inhibit-startup-screen t)
+     (setq initial-scratch-message nil)
+
+     (setq line-number-mode t)
+
+     (setq resize-mini-windows t)
+     (setq max-mini-window-height 0.33)
+
+     (setq column-number-mode t)
+
+     (req-package time
+       :config
+       (display-time)
+       (setq display-time-day-and-date t)
+       ;; (setq display-time-form-list (list 'time 'load))
+       (setq display-time-mail-file t)
+       (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
+
+     (setq use-dialog-box nil)
+     (setq visible-bell t)
+     (setq ring-bell-function 'ignore)
+     (setq size-indication-mode t)
+     (setq split-width-threshold nil)
+     (setq enable-recursive-minibuffers t)
+     (setq echo-keystrokes 0.1)
+     (setq truncate-partial-width-windows nil)
+
+     (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+     (menu-bar-mode -1)
+     (when (= emacs-major-version 25)
+       (horizontal-scroll-bar-mode -1))
+     (blink-cursor-mode 0)
+     (tool-bar-mode 0)
+     (tooltip-mode nil)
+     (global-font-lock-mode t)
+     (display-battery-mode 1)
+
+     (defun custom/display-buffer-fullframe (buffer alist)
+       "Display BUFFER in fullscreen.
+     ALIST is a `display-buffer' ALIST.
+     Return the new window for BUFFER."
+       (let ((window
+              (or (display-buffer-use-some-window buffer alist)
+                  (display-buffer-pop-up-window buffer alist))))
+         (when window
+           (delete-other-windows window))
+         window))
+
+     (req-package popwin)
+     (req-package vline :disabled t)
+
+     (req-package volatile-highlights
+       :disabled t
+       :config
+       (volatile-highlights-mode t))
+   #+END_SRC
+
+** uniquify buffer names
+   #+BEGIN_SRC emacs-lisp
+     (req-package uniquify
+       :config
+       (setq uniquify-buffer-name-style 'post-forward)
+       (setq uniquify-separator ":")
+       (setq uniquify-ignore-buffers-re "^\\*")
+       (setq uniquify-strip-common-suffix nil))
+   #+END_SRC
+** diminish modeline contents
+   #+BEGIN_SRC emacs-lisp
+     (req-package delight
+       :force t
+       :config
+       (delight 'git-gutter-mode " +-" 'git-gutter)
+       (delight 'volatile-highlights-mode nil 'volatile-highlights)
+       (delight 'emmet-mode nil 'emmet-mode)
+       (delight 'whole-line-or-region-mode " WLR" 'whole-line-or-region)
+       (delight 'abbrev-mode " Abv" 'abbrev)
+       (delight 'auto-fill-function nil 'simple)
+       (delight 'composable-mode " @" 'composable)
+       (delight 'wrap-region-mode " wr" 'wrap-region)
+       (delight 'helm-mode nil 'helm-mode)
+       (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
+       (delight 'projectile-mode " prj" 'projectile)
+       (delight 'company-mode " γ" 'company)
+       (delight 'eldoc-mode " ED" 'eldoc)
+       (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
+       (delight 'orglink-mode " OL" 'orglink))
+   #+END_SRC
+
 * persistence
 ** save history
    #+BEGIN_SRC emacs-lisp
@@ -565,88 +659,6 @@
    #+BEGIN_SRC emacs-lisp
      (setq warning-suppress-types nil)
    #+END_SRC
-** frames
-*** call this on WM side to sync frames and heads count
-    #+BEGIN_SRC emacs-lisp
-      (define-namespace custom/
-
-      ;; TODO simplify
-      (defun update-frames (heads-count)
-        (let ((frames-count (length (frame-list))))
-          (cond
-           ((= heads-count 2)
-            (when (= frames-count 1)
-              (make-frame-command)))
-           ((= heads-count 1)
-            (when (> frames-count 1)
-              (delete-other-frames)))
-           (t
-            (delete-other-frames)))))
-
-      )
-    #+END_SRC
-*** appearance
-    #+BEGIN_SRC emacs-lisp
-      (setq frame-title-format "emacs - %b %f")
-
-      (setq inhibit-startup-echo-area-message "octocat")
-      (setq inhibit-startup-message t)
-      (setq inhibit-startup-screen t)
-      (setq initial-scratch-message nil)
-
-      (setq line-number-mode t)
-
-      (setq resize-mini-windows t)
-      (setq max-mini-window-height 0.33)
-
-      (setq column-number-mode t)
-
-      (req-package time
-        :config
-        (display-time)
-        (setq display-time-day-and-date t)
-        ;; (setq display-time-form-list (list 'time 'load))
-        (setq display-time-mail-file t)
-        (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
-
-      (setq use-dialog-box nil)
-      (setq visible-bell t)
-      (setq ring-bell-function 'ignore)
-      (setq size-indication-mode t)
-      (setq split-width-threshold nil)
-      (setq enable-recursive-minibuffers t)
-      (setq echo-keystrokes 0.1)
-      (setq truncate-partial-width-windows nil)
-
-      (and (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
-      (menu-bar-mode -1)
-      (when (= emacs-major-version 25)
-        (horizontal-scroll-bar-mode -1))
-      (blink-cursor-mode 0)
-      (tool-bar-mode 0)
-      (tooltip-mode nil)
-      (global-font-lock-mode t)
-      (display-battery-mode 1)
-
-      (defun custom/display-buffer-fullframe (buffer alist)
-        "Display BUFFER in fullscreen.
-      ALIST is a `display-buffer' ALIST.
-      Return the new window for BUFFER."
-        (let ((window
-               (or (display-buffer-use-some-window buffer alist)
-                   (display-buffer-pop-up-window buffer alist))))
-          (when window
-            (delete-other-windows window))
-          window))
-
-      (req-package popwin)
-      (req-package vline :disabled t)
-
-      (req-package volatile-highlights
-        :disabled t
-        :config
-        (volatile-highlights-mode t))
-    #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp
      (setq gc-cons-percentage 0.3)
@@ -723,36 +735,6 @@
      (set-selection-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
      (define-coding-system-alias 'UTF-8 'utf-8)
-   #+END_SRC
-** uniquify buffer names
-   #+BEGIN_SRC emacs-lisp
-     (req-package uniquify
-       :config
-       (setq uniquify-buffer-name-style 'post-forward)
-       (setq uniquify-separator ":")
-       (setq uniquify-ignore-buffers-re "^\\*")
-       (setq uniquify-strip-common-suffix nil))
-   #+END_SRC
-** diminish modeline contents
-   #+BEGIN_SRC emacs-lisp
-     (req-package delight
-       :force t
-       :config
-       (delight 'git-gutter-mode " +-" 'git-gutter)
-       (delight 'volatile-highlights-mode nil 'volatile-highlights)
-       (delight 'emmet-mode nil 'emmet-mode)
-       (delight 'whole-line-or-region-mode " WLR" 'whole-line-or-region)
-       (delight 'abbrev-mode " Abv" 'abbrev)
-       (delight 'auto-fill-function nil 'simple)
-       (delight 'composable-mode " @" 'composable)
-       (delight 'wrap-region-mode " wr" 'wrap-region)
-       (delight 'helm-mode nil 'helm-mode)
-       (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
-       (delight 'projectile-mode " prj" 'projectile)
-       (delight 'company-mode " γ" 'company)
-       (delight 'eldoc-mode " ED" 'eldoc)
-       (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
-       (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
 ** OS-specific stuff
    Besides the common part of the common setup (sic!) there is also
@@ -898,6 +880,21 @@
        (setq save-place t)
        (setq-default save-place t))
    #+END_SRC
+** frames spawning
+      ;; TODO simplify
+    #+BEGIN_SRC emacs-lisp
+      (defun custom/update-frames (heads-count)
+        (let ((frames-count (length (frame-list))))
+          (cond
+           ((= heads-count 2)
+            (when (= frames-count 1)
+              (make-frame-command)))
+           ((= heads-count 1)
+            (when (> frames-count 1)
+              (delete-other-frames)))
+           (t
+            (delete-other-frames)))))
+    #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
      (req-package projectile
