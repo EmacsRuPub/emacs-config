@@ -891,7 +891,9 @@
             (dotimes (i diff-count-abs)
               (make-frame-command)))
            ((minusp diff-count)
-            (delete-other-frames))
+            (let ((frame (selected-frame)))
+              (dolist (fr (frame-list))
+                (unless (eq fr frame) (condition-case nil (delete-frame fr) (error nil))))))
            (t t))))
     #+END_SRC
 ** projectile
