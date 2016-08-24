@@ -1286,6 +1286,8 @@
      ;;TODO: plan docstring
      (defhydra hydra-entries ()
        ("!" flycheck-first-error "ace" :color blue)
+       ("?" flycheck-list-errors "list errors" :color blue)
+       ("@" flycheck-buffer "check buffer" :color blue)
        ("<up>" flycheck-previous-error "previous error")
        ("<down>" flycheck-next-error "next error")
        ("<prior>" custom/find-url-backward "previous url")
@@ -2143,7 +2145,10 @@
       (req-package flycheck
         :require dash pkg-info let-alist seq
         :config
-        (global-flycheck-mode)
+        (set-face-attribute 'flycheck-warning nil
+                         :foreground "yellow"
+                          :background "red")
+        ;; TODO: try to setup some of http://www.flycheck.org/en/latest/languages.html
         (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
         (setq flycheck-check-syntax-automatically '(idle-change)))
 
