@@ -881,19 +881,18 @@
        (setq-default save-place t))
    #+END_SRC
 ** frames spawning
-      ;; TODO simplify
     #+BEGIN_SRC emacs-lisp
       (defun custom/update-frames (heads-count)
-        (let ((frames-count (length (frame-list))))
+        (let* ((frames-count (length (frame-list)))
+               (diff-count (- heads-count frames-count))
+               (diff-count-abs (abs diff-count)))
           (cond
-           ((= heads-count 2)
-            (when (= frames-count 1)
+           ((plusp diff-count)
+            (dotimes (i diff-count-abs)
               (make-frame-command)))
-           ((= heads-count 1)
-            (when (> frames-count 1)
-              (delete-other-frames)))
-           (t
-            (delete-other-frames)))))
+           ((minusp diff-count)
+            (delete-other-frames))
+           (t t))))
     #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
