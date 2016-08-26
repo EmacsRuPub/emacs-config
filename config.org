@@ -3774,6 +3774,16 @@
        (setq wttrin-default-cities '("Moscow")))
    #+END_SRC
 * pim
+** elfeed
+   #+BEGIN_SRC emacs-lisp
+     (req-package elfeed-org
+       :require elfeed)
+
+     (req-package elfeed-goodies
+       :require elfeed
+       :config
+       (elfeed-goodies/setup))
+   #+END_SRC
 ** bbdb
    the code below need to be reorganized, it seems to not work
    req-package is not usable before it
