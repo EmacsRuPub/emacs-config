@@ -2880,7 +2880,7 @@
 *** php
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package php-mode
-        :init
+        :require cl-lib
         :config
         (setq php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
         (defun custom/php-mode-hook ()
