@@ -241,17 +241,6 @@
      (global-font-lock-mode t)
      (display-battery-mode 1)
 
-     (defun custom/display-buffer-fullframe (buffer alist)
-       "Display BUFFER in fullscreen.
-     ALIST is a `display-buffer' ALIST.
-     Return the new window for BUFFER."
-       (let ((window
-              (or (display-buffer-use-some-window buffer alist)
-                  (display-buffer-pop-up-window buffer alist))))
-         (when window
-           (delete-other-windows window))
-         window))
-
      (req-package popwin)
      (req-package vline :disabled t)
 
@@ -2271,10 +2260,7 @@
         (bind-key "E" 'magit-rebase-interactive magit-status-mode-map)
         (setq magit-blame-heading-format "%H %-20a %C %s")
         (setq magit-diff-refine-hunk t)
-        (add-to-list 'display-buffer-alist
-                     `(,(rx "*magit: ")
-                       (custom/display-buffer-fullframe)
-                       (reusable-frames . nil)))
+        (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
         (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
         (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode))
         (defhydra hydra-magit (:color teal :hint nil)
