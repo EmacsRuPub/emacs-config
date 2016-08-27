@@ -2041,7 +2041,6 @@
         (unbind-key [(tab)] yas-minor-mode-map)
         (unbind-key (kbd "TAB") yas-minor-mode-map)
         (unbind-key (kbd "<tab>") yas-minor-mode-map)
-        ;;TODO: bind helm-yas-create-snippet-on-region
         (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
         (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
         (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap))
@@ -2049,11 +2048,11 @@
       (req-package helm-c-yasnippet
         :require helm yasnippet cl-lib
         :config
+        ;;TODO: bind helm-yas-create-snippet-on-region
         (bind-key "C-M-<return>" 'helm-yas-complete))
 
       (req-package auto-yasnippet :require yasnippet)
 
-      ;;TODO: splice into yasnippet package definition
       (defhydra hydra-yasnippet (:color teal)
         "
         _c_reate auto snippet
