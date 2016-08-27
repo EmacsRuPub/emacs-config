@@ -2077,7 +2077,7 @@
        :init
        (req-package company-flx)
        :config
-       (setq company-idle-delay 0.2)
+       (setq company-idle-delay t)
        (setq company-tooltip-align-annotations t)
        (global-company-mode))
 
