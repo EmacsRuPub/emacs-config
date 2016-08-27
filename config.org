@@ -2049,8 +2049,7 @@
         ;; Jump to end of snippet definition
         (define-key yas/keymap (kbd "<return>") 'yas/exit-all-snippets) ;FIXME: try using bind-key
         (define-key yas/keymap (kbd "C-e") 'custom/yas-goto-end-of-active-field)
-        (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field)
-        (bind-key (kbd "<tab>") 'custom/tab-indent-or-complete))
+        (define-key yas/keymap (kbd "C-a") 'custom/yas-goto-start-of-active-field))
 
       (req-package helm-c-yasnippet :require helm yasnippet cl-lib)
       (req-package auto-yasnippet :require yasnippet)
