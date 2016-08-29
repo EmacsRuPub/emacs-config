@@ -2082,6 +2082,13 @@
      (req-package company-quickhelp
        :require company)
    #+END_SRC
+*** try 3rdparty packages
+**** https://github.com/nsf/gocode
+**** https://github.com/sebastiw/distel-completion
+**** https://github.com/iquiw/company-ghc
+**** https://github.com/iquiw/company-cabal
+**** https://github.com/iquiw/company-restclient
+**** https://github.com/Valloric/ycmd + https://github.com/abingham/emacs-ycmd
 ** hippie-expand
    #+BEGIN_SRC emacs-lisp
      (req-package hippie-exp
