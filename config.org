@@ -3714,6 +3714,7 @@
             (if (member "unread" (notmuch-search-get-tags))
                 (notmuch-search-tag '("-unread" "-spam"))
               (notmuch-search-tag '("+unread")))))
+        (define-key notmuch-message-mode-map "@" 'mml-attach-file)
         (setq notmuch-saved-searches
               '((:name "all unread" :query "tag:unread" :key "a")
                 (:name "personal" :query "to:aaermolov@gmail.com tag:unread" :key "p")
