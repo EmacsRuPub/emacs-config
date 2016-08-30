@@ -43,28 +43,9 @@
     when there is no chance to hook into keyboard layouts switching
     (those are probably all, except StumpWM/XMonad, AFAIK)
     #+BEGIN_SRC emacs-lisp
-      (defun reverse-input-method (input-method)
-          "Build the reverse mapping of single letters from INPUT-METHOD."
-          (interactive
-           (list (read-input-method-name "Use input method (default current): ")))
-          (if (and input-method (symbolp input-method))
-                  (setq input-method (symbol-name input-method)))
-          (let ((current current-input-method)
-                      (modifiers '(nil (control) (meta) (control meta))))
-              (when input-method
-                  (activate-input-method input-method))
-              (when (and current-input-method quail-keyboard-layout)
-                  (dolist (map (cdr (quail-map)))
-                      (let* ((to (car map))
-                                   (from (quail-get-translation
-                                                  (cadr map) (char-to-string to) 1)))
-                          (when (and (characterp from) (characterp to))
-                              (dolist (mod modifiers)
-                                  (define-key local-function-key-map
-                                      (vector (append mod (list from)))
-                                      (vector (append mod (list to)))))))))
-              (when input-method
-                  (activate-input-method current))))
+      (req-package reverse-im
+        :config
+        (reverse-im-activate "russian-computer"))
     #+END_SRC
 *** toggling input method
     This method uses external kbdd utility
@@ -109,8 +90,6 @@
      (setq custom-file (at-config-basedir "customizations.el"))
 
      (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
-
-     (reverse-input-method 'russian-computer)
 
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
