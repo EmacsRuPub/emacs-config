@@ -2738,14 +2738,6 @@
 
        (req-package company-c-headers)
 
-       (req-package irony
-         :require cl-lib json
-         :init
-         (req-package company-irony)
-         (req-package company-irony-c-headers)
-         :config
-         (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
        (req-package function-args
          :require swiper cc-mode
          :config
@@ -2755,17 +2747,62 @@
          (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local))
 
        (req-package rtags
-         :disabled t ; TODO rtags backend deployment shoud be done correctly and repeatably before using
          :require cc-mode
          :config
-         (define-key c-mode-map (kbd "C-,") 'rtags-location-stack-back)
-         (define-key c-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-         (define-key c-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
-         (define-key c-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point)
-         (define-key c++-mode-map (kbd "C-,") 'rtags-location-stack-back)
-         (define-key c++-mode-map (kbd "C-.") 'rtags-find-symbol-at-point)
-         (define-key c++-mode-map (kbd "C-c TAB") 'rtags-diagnostics)
-         (define-key c++-mode-map (kbd "C-u C-.") 'rtags-find-references-at-point))
+         (defun use-rtags (&optional useFileManager)
+           (and (rtags-executable-find "rc")
+                (cond ((not (gtags-get-rootpath)) t)
+                      ((and (not (eq major-mode 'c++-mode))
+                            (not (eq major-mode 'c-mode))) (rtags-has-filemanager))
+                      (useFileManager (rtags-has-filemanager))
+                      (t (rtags-is-indexed)))))
+         (defun tags-find-symbol-at-point (&optional prefix)
+           (interactive "P")
+           (if (and (not (rtags-find-symbol-at-point prefix)) rtags-last-request-not-indexed)
+               (gtags-find-tag)))
+         (defun tags-find-references-at-point (&optional prefix)
+           (interactive "P")
+           (if (and (not (rtags-find-references-at-point prefix)) rtags-last-request-not-indexed)
+               (gtags-find-rtag)))
+         (defun tags-find-symbol ()
+           (interactive)
+           (call-interactively (if (use-rtags) 'rtags-find-symbol 'gtags-find-symbol)))
+         (defun tags-find-references ()
+           (interactive)
+           (call-interactively (if (use-rtags) 'rtags-find-references 'gtags-find-rtag)))
+         (defun tags-find-file ()
+           (interactive)
+           (call-interactively (if (use-rtags t) 'rtags-find-file 'gtags-find-file)))
+         (setq rtags-completions-enabled t)
+         (setq rtags-autostart-diagnostics t)
+         (setq rtags-use-helm t)
+         (bind-key "M-." 'tags-find-symbol-at-point c-mode-base-map)
+         (bind-key "M-," 'tags-find-references-at-point c-mode-base-map)
+         (bind-key "M-;" 'tags-find-file c-mode-base-map)
+         (bind-key "C-." 'tags-find-symbol c-mode-base-map)
+         (bind-key "C-," 'tags-find-references c-mode-base-map)
+         (bind-key "C-<" 'rtags-find-virtuals-at-point c-mode-base-map)
+         (bind-key "M-." 'tags-find-symbol-at-point global-map)
+         (bind-key "M-," 'tags-find-references-at-point global-map)
+         (bind-key "M-;" 'tags-find-file global-map)
+         (bind-key "C-." 'tags-find-symbol global-map)
+         (bind-key "C-," 'tags-find-references global-map)
+         (bind-key "C-<" 'rtags-find-virtuals-at-point global-map))
+
+       (req-package company-rtags
+         :require company rtags)
+
+       (add-hook 'c++-mode-hook 'flycheck-mode)
+       (add-hook 'c-mode-hook 'flycheck-mode)
+
+       (req-package flycheck-rtags
+         :require rtags
+         :config
+         (defun my-flycheck-rtags-setup ()
+           (flycheck-select-checker 'rtags)
+           (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+           (setq-local flycheck-check-syntax-automatically nil))
+         (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup))
 
        (info-lookup-add-help
         :mode 'c-mode
@@ -2775,20 +2812,9 @@
      #+END_SRC
 **** hooks
      #+BEGIN_SRC emacs-lisp
-       ;; replace the `completion-at-point' and `complete-symbol' bindings in
-       ;; irony-mode's buffers by irony-mode's function
-       (defun custom/irony-mode-hook ()
-         (define-key irony-mode-map [remap completion-at-point]
-           'irony-completion-at-point-async)
-         (define-key irony-mode-map [remap complete-symbol]
-           'irony-completion-at-point-async))
-
        (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'c++-mode-hook 'irony-mode)
        (add-hook 'c-mode-common-hook 'common-hooks/prog-helpers)
        (add-hook 'c-mode-hook 'common-hooks/newline-hook)
-       (add-hook 'c-mode-hook 'irony-mode)
-       (add-hook 'irony-mode-hook 'custom/irony-mode-hook)
      #+END_SRC
 **** auto-mode setup
 ***** common
