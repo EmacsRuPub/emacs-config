@@ -422,7 +422,6 @@
         (setq helm-ff-file-name-history-use-recentf t)
         (setq helm-buffers-fuzzy-matching t)
         (setq helm-recentf-fuzzy-match t)
-        (setq helm-locate-fuzzy-match t)
         (setq helm-M-x-fuzzy-match t)
         (setq helm-apropos-fuzzy-match t)
         (setq helm-move-to-line-cycle-in-source t)
@@ -430,13 +429,16 @@
         (setq helm-input-idle-delay 0.2)
         (setq helm-exit-idle-delay 0.2)
         (setq helm-ff-skip-boring-files t)
+        (when (eq system-type 'gnu/linux)
+          (setq helm-locate-fuzzy-match t))
         (bind-key "C-<down>" 'helm-next-source helm-map)
         (bind-key "C-<up>" 'helm-previous-source helm-map)
-        (bind-key "C-x b" 'helm-buffers-list)
+        (bind-key "C-x b" 'helm-mini)
         (bind-key "C-*" 'helm-mark-all helm-map)
         (bind-key "C-x j j" 'helm-bookmarks)
         (bind-key "M-x" 'helm-M-x)
         (bind-key "C-x f" 'helm-for-files)
+        (bind-key "C-x C-f" 'helm-find-files)
         (bind-key "C-h a" 'helm-apropos)
         (bind-key "C-h r" 'helm-info-emacs)
         (bind-key "C-h o" 'helm-info-at-point)
@@ -449,7 +451,7 @@
           (setq helm-google-suggest-use-curl-p t))
         ;;TODO: investigate and bind 'helm-resume
         ;;TODO: investigate and bind 'helm-multi-files
-        (helm-mode t)
+        (helm-mode 1)
         (helm-autoresize-mode 1)
         (defhydra hydra-custom-helm ()
           ("p" custom/open-portage-file "open portage file")
@@ -873,11 +875,10 @@
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil)
        (setq projectile-switch-project-action 'helm-projectile)
-       (setq projectile-switch-project-action #'projectile-commander)
        (def-projectile-commander-method ?d
          "Open project root in dired."
          (projectile-dired))
-       (setq projectile-completion-system 'ivy)
+       (setq projectile-completion-system 'helm)
        (setq projectile-tags-command
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
@@ -921,7 +922,6 @@
        (global-set-key (kbd "<f8>") 'hydra-projectile/body))
 
      (req-package helm-projectile
-       :disabled t
        :require helm projectile dash cl-lib
        :config
        (helm-projectile-on))
