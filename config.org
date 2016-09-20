@@ -3786,8 +3786,27 @@
 * pim
 ** elfeed
    #+BEGIN_SRC emacs-lisp
+     (req-package elfeed
+       :config
+       (defface elfeed-lisp-tag-face
+         '((t :weight bold :foreground "cyan"))
+         "Face used in search mode for unread entry titles.")
+       (push '(lisp elfeed-lisp-tag-face) elfeed-search-face-alist)
+       (defface elfeed-functional-tag-face
+         '((t :weight bold :foreground "green"))
+         "Face used in search mode for unread entry titles.")
+       (push '(functional elfeed-functional-tag-face) elfeed-search-face-alist)
+       (bind-key "C-x w" 'elfeed)
+       (define-key elfeed-search-mode-map "!" 'elfeed-search-untag-all-unread)
+       (define-key elfeed-search-mode-map "=" 'elfeed-search-update--force)
+       (define-key elfeed-search-mode-map "+" 'elfeed-search-fetch)
+       (setq-default elfeed-search-filter "-junk @1-week-ago +unread"))
+
      (req-package elfeed-org
-       :require elfeed)
+       :require elfeed
+       :config
+       (elfeed-org)
+       (setq rmh-elfeed-org-files `(,(at-org-kb-dir "/feeds.org"))))
 
      (req-package elfeed-goodies
        :require elfeed
