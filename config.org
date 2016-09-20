@@ -2052,11 +2052,19 @@
    #+BEGIN_SRC emacs-lisp
      (req-package company
        :init
-       (req-package company-flx)
        :config
        (setq company-idle-delay t)
        (setq company-tooltip-align-annotations t)
-       (global-company-mode))
+       (global-company-mode)
+       (define-key company-active-map (kbd "\C-n") 'company-select-next)
+       (define-key company-active-map (kbd "\C-p") 'company-select-previous)
+       (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+       (define-key company-active-map (kbd "M-.") 'company-show-location))
+
+     (req-package company-flx
+       :require company
+       :config
+       (company-flx-mode +1))
 
      (req-package company-quickhelp
        :require company)
@@ -2507,7 +2515,6 @@
          (add-to-list 'load-path quicklisp-slime-directory)
          (require 'cl-lib)
          (require 'slime-autoloads)
-         (require 'slime-company)
          (setq slime-backend (expand-file-name "swank-loader.lisp"
                                                quicklisp-slime-directory))
          (setq slime-path quicklisp-slime-directory)
@@ -2527,11 +2534,11 @@
          (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
          (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
          (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
-         (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers)
-         (define-key company-active-map (kbd "\C-n") 'company-select-next)
-         (define-key company-active-map (kbd "\C-p") 'company-select-previous)
-         (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
-         (define-key company-active-map (kbd "M-.") 'company-show-location))
+         (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers))
+
+       (req-package slime-company
+         :force t
+         :require slime company)
      #+END_SRC
 ***** BACKLOG investigate and fix the issue with not found slime extensions within remote lisp image
       example: Can't locate module: SWANK-IO-PACKAGE::SWANK-SBCL-EXTS
