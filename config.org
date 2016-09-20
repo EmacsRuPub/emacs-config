@@ -2328,13 +2328,6 @@
          (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
            (add-hook hook 'elisp-slime-nav-mode)))
 
-       (req-package erefactor
-         :disabled t
-         :require cl-lib
-         :config
-         ;;TODO: investigate package
-         (bind-key "C-c C-v" erefactor-map emacs-lisp-mode-map))
-
        (setq print-circle t)
        (setq print-gensym t)
        (setq eval-expression-print-length nil)
