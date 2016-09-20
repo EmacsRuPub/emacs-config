@@ -1222,7 +1222,6 @@
 ** warping
    #+BEGIN_SRC emacs-lisp
      (req-package swoop
-       ;;TODO: compare and play with helm-swoop
        :require ht pcre2el async
        :config
        (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
