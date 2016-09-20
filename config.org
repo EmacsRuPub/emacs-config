@@ -1009,6 +1009,7 @@
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
        (bind-key "`" 'custom/dired-open-term dired-mode-map)
+       (define-key dired-mode-map "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))))
        (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
        (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
