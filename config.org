@@ -2670,9 +2670,8 @@
          (add-hook 'python-mode-hook 'jedi:setup)
          (add-hook 'python-mode-hook 'jedi:ac-setup))
 
-       (req-package python
+       (req-package python-mode
          :require region-bindings-mode
-         :defer t
          :config
          (bind-key "M-." 'jedi:goto-definition python-mode-map)
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
