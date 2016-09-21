@@ -3681,21 +3681,10 @@
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
-     (req-package openwith
-       :defer t
+     (req-package dired-launch
        :config
-       (setq openwith-associations
-             '(("\\.pdf\\'" "zathura" (file))
-               ("\\.djvu\\'" "zathura" (file))
-               ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|flv\\|mp4\\)\\'" "vlc" (file))
-               ("\\.\\(?:jp?g\\|png\\)\\'" "feh" (file))
-               ("\\.doc\\'" "abiword" (file))
-               ))
-       (add-to-list  'mm-inhibit-file-name-handlers 'openwith-file-handler))
-
-     (req-package launch
-       :config
-       (global-launch-mode +1))
+       (dired-launch-enable)
+       (define-key dired-launch-mode-map (kbd "C-!") 'dired-launch-command))
    #+END_SRC
 ** email
 *** common
