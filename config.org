@@ -2068,6 +2068,11 @@
 
      (req-package company-quickhelp
        :require company)
+
+     (req-package helm-company
+       :config
+       (define-key company-mode-map (kbd "C-:") 'helm-company)
+       (define-key company-active-map (kbd "C-:") 'helm-company))
    #+END_SRC
 *** try 3rdparty packages
 **** https://github.com/nsf/gocode
