@@ -416,8 +416,20 @@
                            (candidates . (lambda () (f-files (at-org-dir) nil t)))
                            (action . (lambda (candidate)
                                        (find-file candidate))))))
+        (defun custom/helm-hide-minibuffer-maybe ()
+          "Hide minibuffer in Helm session if we use the header line as input field."
+          (when (with-helm-buffer helm-echo-input-in-header-line)
+            (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+              (overlay-put ov 'window (selected-window))
+              (overlay-put ov 'face
+                           (let ((bg-color (face-background 'default nil)))
+                             `(:background ,bg-color :foreground ,bg-color)))
+              (setq-local cursor-type nil))))
+        (add-hook 'helm-minibuffer-set-up-hook
+                  'custom/helm-hide-minibuffer-maybe)
         (setq helm-quick-update t)
         (setq helm-split-window-in-side-p t)
+        (setq helm-echo-input-in-header-line t)
         (setq helm-ff-search-library-in-sexp t)
         (setq helm-ff-file-name-history-use-recentf t)
         (setq helm-buffers-fuzzy-matching t)
