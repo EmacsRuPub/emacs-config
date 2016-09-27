@@ -4915,7 +4915,8 @@
        ("A" show-all)
        ("t" org-toggle-timestamp-type)
        ("m" org-pomodoro)
-       ("r" org-refile "refile")
+       ("r" org-reveal "reveal")
+       ("R" org-refile "refile")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
