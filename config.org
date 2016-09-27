@@ -2038,6 +2038,10 @@
                 yas-no-prompt))
         ;; Wrap around region
         (setq yas-wrap-around-region t)
+        (set-default 'yas-dont-activate
+                     #'(lambda ()
+                         (and yas-root-directory
+                              (null (yas-get-snippet-tables)))))
         (yas-global-mode 1)
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
@@ -2045,9 +2049,15 @@
         (unbind-key [(tab)] yas-minor-mode-map)
         (unbind-key (kbd "TAB") yas-minor-mode-map)
         (unbind-key (kbd "<tab>") yas-minor-mode-map)
+        (unbind-key [(tab)] yas-keymap)
+        (unbind-key (kbd "TAB") yas-keymap)
+        (unbind-key [(shift tab)] yas-keymap)
+        (unbind-key [backtab] yas-keymap)
         (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
         (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
-        (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap))
+        (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
+        (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
+        (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
 
       (req-package helm-c-yasnippet
         :require helm yasnippet cl-lib
