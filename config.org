@@ -1364,6 +1364,116 @@
 
      (req-package scratch)
    #+END_SRC
+** switch case
+   #+BEGIN_SRC emacs-lisp
+     (define-namespace custom/
+
+     (defun downcase-dwim (arg)
+       (interactive "p")
+       (if (region-active-p)
+           (downcase-region (region-beginning) (region-end))
+         (downcase-word arg)))
+
+     (defun upcase-dwim (arg)
+       (interactive "p")
+       (if (region-active-p)
+           (upcase-region (region-beginning) (region-end))
+         (upcase-word arg)))
+
+     (defun capitalize-dwim (arg)
+       (interactive "P")
+       (when (consp arg) (setq arg 1))
+       (if (region-active-p)
+           (capitalize-region (region-beginning) (region-end))
+         (capitalize-word (prefix-numeric-value arg))))
+
+     )
+
+     (defvar custom/transform-whole-words nil)
+
+     (defadvice upcase-word (before upcase-word-advice activate)
+       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+         (backward-word)))
+
+     (defadvice downcase-word (before downcase-word-advice activate)
+       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+         (backward-word)))
+
+     (defadvice capitalize-word (before capitalize-word-advice activate)
+       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
+         (backward-word)))
+   #+END_SRC
+** move and bend text around
+*** definitions
+    This override for transpose-words fixes what I consider to be a flaw with the default implementation in simple.el. To transpose chars or lines, you always put the point on the second char or line
+    to transpose with the previous char or line. The default transpose-words implementation does the opposite by flipping the current word with the next word instead of the previous word. The new
+    implementation below instead makes transpose-words more consistent with how transpose-chars and trasponse-lines behave.
+    #+BEGIN_SRC emacs-lisp
+      (defun custom/transpose-words (arg)
+        "[Override for default transpose-words in simple.el]
+        Interchange words around point, leaving point at end of
+        them. With prefix arg ARG, effect is to take word before or
+        around point and drag it backward past ARG other words (forward
+        if ARG negative). If ARG is zero, the words around or after
+        point and around or after mark are interchanged."
+        (interactive "*p")
+        (if (eolp) (forward-char -1))
+        (transpose-subr 'backward-word arg)
+        (forward-word (+ arg 1)))
+
+      (defun fix-screwed-up-paragraphs(beg end)
+        (interactive "r")
+        (shell-command-on-region beg end "fmt -w2000" nil t))
+    #+END_SRC
+*** setup
+    #+BEGIN_SRC emacs-lisp
+      (req-package anchored-transpose)
+
+      (req-package drag-stuff
+        :config
+        (setq drag-stuff-modifier '(meta shift))
+        (turn-off-drag-stuff-mode))
+
+      (req-package snakehump)
+      (req-package adaptive-wrap)
+      (req-package hungry-delete)
+      (req-package replace+)
+
+      (req-package multiple-cursors)
+
+      (req-package mc-extras
+        ;;TODO: explore and bind functions
+        :require multiple-cursors
+        :defer t)
+
+      (req-package ace-mc
+        :require ace-jump-mode multiple-cursors dash
+        :config
+        (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors))
+
+      ;; Transpose stuff with M-t
+      (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
+      ;;TODO: plan docstring
+      (defhydra hydra-transpose ()
+        ("M-b" backward-word "prev word")
+        ("M-f" forward-word "next word")
+        ("<up>" previous-line "prev line")
+        ("<down>" next-line "next line")
+        ("<left>" backward-char "prev char")
+        ("<right>" forward-char "next char")
+        ("_" undo-tree-undo "undo last")
+        ("w" custom/transpose-words "on words")
+        ("s" transpose-sexps "on sexps")
+        ("p" transpose-params "on params")
+        ("a" anchored-transpose "anchored")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "M-t") 'hydra-transpose/body)
+    #+END_SRC
+*** BACKLOG make MC setup work correctly in all needed modes, review and setup additional modes
+**** check and collect these modes
+**** reference links
+***** https://github.com/magnars/multiple-cursors.el
+***** https://github.com/knu/mc-extras.el
 ** regions and rectangles
 *** definitions
     #+BEGIN_SRC emacs-lisp
@@ -1436,6 +1546,10 @@
         (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
         (bind-key "1" 'mc/insert-numbers region-bindings-mode-map))
 
+      (req-package rectangular-region-mode
+        :config
+        (bind-key "H-SPC" 'set-rectangular-region-anchor))
+
       (req-package selected
         :commands selected-minor-mode
         :init
@@ -1469,111 +1583,7 @@
         (wrap-region-add-wrapper "{-" "-}" "#")
         (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode)))
     #+END_SRC
-** switch case
-   #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
 
-     (defun downcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (downcase-region (region-beginning) (region-end))
-         (downcase-word arg)))
-
-     (defun upcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (upcase-region (region-beginning) (region-end))
-         (upcase-word arg)))
-
-     (defun capitalize-dwim (arg)
-       (interactive "P")
-       (when (consp arg) (setq arg 1))
-       (if (region-active-p)
-           (capitalize-region (region-beginning) (region-end))
-         (capitalize-word (prefix-numeric-value arg))))
-
-     )
-
-     (defvar custom/transform-whole-words nil)
-
-     (defadvice upcase-word (before upcase-word-advice activate)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
-
-     (defadvice downcase-word (before downcase-word-advice activate)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
-
-     (defadvice capitalize-word (before capitalize-word-advice activate)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
-   #+END_SRC
-** move and bind text around
-*** definitions
-    This override for transpose-words fixes what I consider to be a flaw with the default implementation in simple.el. To transpose chars or lines, you always put the point on the second char or line
-    to transpose with the previous char or line. The default transpose-words implementation does the opposite by flipping the current word with the next word instead of the previous word. The new
-    implementation below instead makes transpose-words more consistent with how transpose-chars and trasponse-lines behave.
-    #+BEGIN_SRC emacs-lisp
-      (defun custom/transpose-words (arg)
-        "[Override for default transpose-words in simple.el]
-        Interchange words around point, leaving point at end of
-        them. With prefix arg ARG, effect is to take word before or
-        around point and drag it backward past ARG other words (forward
-        if ARG negative). If ARG is zero, the words around or after
-        point and around or after mark are interchanged."
-        (interactive "*p")
-        (if (eolp) (forward-char -1))
-        (transpose-subr 'backward-word arg)
-        (forward-word (+ arg 1)))
-
-      (defun fix-screwed-up-paragraphs(beg end)
-        (interactive "r")
-        (shell-command-on-region beg end "fmt -w2000" nil t))
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp
-      (req-package anchored-transpose)
-
-      (req-package drag-stuff
-        :config
-        (setq drag-stuff-modifier '(meta shift))
-        (turn-off-drag-stuff-mode))
-
-      (req-package snakehump)
-      (req-package adaptive-wrap)
-      (req-package hungry-delete)
-      (req-package replace+)
-
-      (req-package multiple-cursors)
-
-      (req-package mc-extras
-        ;;TODO: explore and bind functions
-        :require multiple-cursors
-        :defer t)
-
-      (req-package ace-mc
-        :require ace-jump-mode multiple-cursors dash
-        :config
-        (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors))
-
-      ;; Transpose stuff with M-t
-      (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-      ;;TODO: plan docstring
-      (defhydra hydra-transpose ()
-        ("M-b" backward-word "prev word")
-        ("M-f" forward-word "next word")
-        ("<up>" previous-line "prev line")
-        ("<down>" next-line "next line")
-        ("<left>" backward-char "prev char")
-        ("<right>" forward-char "next char")
-        ("_" undo-tree-undo "undo last")
-        ("w" custom/transpose-words "on words")
-        ("s" transpose-sexps "on sexps")
-        ("p" transpose-params "on params")
-        ("a" anchored-transpose "anchored")
-        ("q" nil "cancel"))
-      (global-set-key (kbd "M-t") 'hydra-transpose/body)
-    #+END_SRC
 ** commenting
    #+BEGIN_SRC emacs-lisp
      (req-package comment-dwim-2
