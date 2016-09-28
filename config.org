@@ -3325,22 +3325,25 @@
                                          (jabber-muc-nicknames)) ": ")))
 
 
-       (defvar helm-source-jabber-contact-jids
-         '((name . "Jabber Contacts")
-           (init . (lambda () (require 'jabber)))
-           (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
-           (action . (lambda (x)
-                       (jabber-chat-with
-                        (jabber-read-account)
-                        x)))))
+       (defun jabber-chat-using-nick ()
+         (interactive)
+         (helm :sources 'helm-source-jabber-contacts))
+
+       (defun jabber-chat-using-jid ()
+         (interactive)
+         (helm :sources '((name . "Jabber Contacts")
+                          (init . (lambda () (require 'jabber)))
+                          (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
+                          (action . (lambda (x)
+                                      (jabber-chat-with
+                                       (jabber-read-account)
+                                       x))))))
 
        (defun helm-jabber-chat-with (arg)
          (interactive "P")
          (if (= (prefix-numeric-value arg) 4)
-             (helm-other-buffer '(helm-source-jabber-contact-jids)
-                                "*jabber: chat with*")
-           (helm-other-buffer '(helm-source-jabber-contacts)
-                              "*jabber: chat with*")))
+             (jabber-chat-using-jid)
+           (jabber-chat-using-nick)))
 
        (defun jabber-abbrev ()
          (interactive)
