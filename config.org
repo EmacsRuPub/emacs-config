@@ -1670,6 +1670,11 @@
         :config
         (composable-mode)
         (composable-mark-mode))
+
+      (req-package mwim
+        :config
+        (global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
+        (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line))
     #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp
@@ -1896,7 +1901,6 @@
      (global-set-key (kbd "M-\"") 'eval-region)
      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
      ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
-     (global-set-key [remap move-beginning-of-line] 'crux-move-beginning-of-line)
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
    #+END_SRC
 ** try
