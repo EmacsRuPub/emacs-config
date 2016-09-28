@@ -2038,10 +2038,6 @@
                 yas-no-prompt))
         ;; Wrap around region
         (setq yas-wrap-around-region t)
-        (set-default 'yas-dont-activate
-                     #'(lambda ()
-                         (and yas-root-directory
-                              (null (yas-get-snippet-tables)))))
         (yas-global-mode 1)
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
