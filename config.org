@@ -4451,7 +4451,7 @@
      #+END_SRC
 **** various customizations
      #+BEGIN_SRC emacs-lisp
-       (setf org-catch-invisible-edits 'show)
+       (setf org-catch-invisible-edits nil)
        (setf org-fast-tag-selection-include-todo nil)
        (setf org-id-link-to-org-use-id t)
        (setq appt-display-interval 5)
