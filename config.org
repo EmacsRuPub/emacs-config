@@ -3325,25 +3325,16 @@
                                          (jabber-muc-nicknames)) ": ")))
 
 
-       (defun jabber-chat-using-nick ()
+       (defun helm-jabber-chat-with ()
          (interactive)
-         (helm :sources 'helm-source-jabber-contacts))
-
-       (defun jabber-chat-using-jid ()
-         (interactive)
-         (helm :sources '((name . "Jabber Contacts")
-                          (init . (lambda () (require 'jabber)))
-                          (candidates . (lambda () (mapcar 'cdr (helm-jabber-online-contacts))))
-                          (action . (lambda (x)
-                                      (jabber-chat-with
-                                       (jabber-read-account)
-                                       x))))))
-
-       (defun helm-jabber-chat-with (arg)
-         (interactive "P")
-         (if (= (prefix-numeric-value arg) 4)
-             (jabber-chat-using-jid)
-           (jabber-chat-using-nick)))
+         (helm :sources '(helm-source-jabber-contacts
+                          ((name . "Jabber jids")
+                           (init . (lambda () (require 'jabber)))
+                           (candidates . (lambda () (jabber-concat-rosters-full)))
+                           (action . (lambda (x)
+                                       (jabber-chat-with
+                                        (jabber-read-account)
+                                        x)))))))
 
        (defun jabber-abbrev ()
          (interactive)
@@ -3500,6 +3491,7 @@
            ;;TODO: move other insertions here, for example, current time, etc.
            ("q" nil "cancel"))
          (global-set-key (kbd "<f6>") 'hydra-jabber/body)
+         (global-set-key (kbd "C-x C-j C-j") 'custom/helm-jabber-chat-with)
          (setq fsm-debug nil)
          (setq gnutls-algorithm-priority "NORMAL:+COMP-DEFLATE")
          (setq jabber-account-list custom/jabber-account-list)
