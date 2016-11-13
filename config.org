@@ -3734,7 +3734,8 @@
     #+BEGIN_SRC emacs-lisp
       (req-package notmuch
         :config
-        (setq mm-text-html-renderer nil)
+        (setq mm-text-html-renderer 'shr)
+        (setq notmuch-mua-compose-in 'current-window)
         (setq notmuch-identities custom/gmail-accounts)
         (setq notmuch-fcc-dirs
               '(("aaermolov@gmail.com" . "aaermolov@gmail.com/Sent")
