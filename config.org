@@ -1597,6 +1597,8 @@
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp
      (req-package savekill)
+
+     (setq save-interprogram-paste-before-kill t)
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp
