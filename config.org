@@ -4973,31 +4973,39 @@
        (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
        (add-hook 'latex-mode-hook 'turn-on-reftex))
 
-     (req-package auctex
-       :init
-       (req-package tex-site)
-       (req-package bib-cite)
-       (req-package company-auctex)
+     ;;TODO: maybe handle interdependencies between below features of auctex package
+     ;; At the moment it works just fine, but there is no warranty.
+     (req-package tex
        :config
        (setq-default TeX-master nil)
        (setq TeX-parse-self t)
-       (setq TeX-auto-save t)
        (setq TeX-default-mode 'latex-mode)
        (setq TeX-open-quote "``")
        (setq TeX-close-quote "''")
        (setq TeX-PDF-mode t)
        (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
        (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
+       (add-hook 'TeX-mode-hook 'custom/tex-mode-hook))
+
+     (req-package bib-cite
+       :config
+       (req-package tex-fold)
+       (setq TeX-auto-save t)
        (defun custom/tex-mode-hook ()
          (TeX-fold-mode 1)
          (turn-on-bib-cite)
-         (setq bib-cite-use-reftex-view-crossref t))
-       (add-hook 'TeX-mode-hook 'custom/tex-mode-hook)
+         (setq bib-cite-use-reftex-view-crossref t)))
+
+     (req-package latex
+       :config
        (add-hook 'LaTeX-mode-hook 'custom/tex-mode-hook)
        (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
        (add-hook 'LaTeX-mode-hook 'visual-line-mode)
        (add-hook 'LaTeX-mode-hook 'flyspell-mode)
        (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode))
+
+     (req-package tex-site)
+     (req-package company-auctex)
 
      (req-package cdlatex
        :config
