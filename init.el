@@ -1,3 +1,6 @@
+(setq debug-on-error t)
+(setq debug-on-quit t)
+
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "https://marmalade-repo.org/packages/"))
@@ -51,3 +54,6 @@
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
 
 (req-package-finish)
+
+(setq debug-on-error nil)
+(setq debug-on-quit nil)
