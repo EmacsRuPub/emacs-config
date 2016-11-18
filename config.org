@@ -427,9 +427,17 @@
               (setq-local cursor-type nil))))
         (add-hook 'helm-minibuffer-set-up-hook
                   'custom/helm-hide-minibuffer-maybe)
+        (add-to-list 'display-buffer-alist
+                     '("\\`\\*helm.*\\*\\'"
+                       (display-buffer-in-side-window)
+                       (window-height . 0.4)))
+        (add-to-list 'display-buffer-alist
+                     '("\\`\\*helm help\\*\\'"
+                       (display-buffer-pop-up-window)))
         (setq helm-quick-update t)
         (setq helm-split-window-in-side-p t)
         (setq helm-echo-input-in-header-line t)
+        (setq helm-display-header-line nil)
         (setq helm-ff-search-library-in-sexp t)
         (setq helm-ff-file-name-history-use-recentf t)
         (setq helm-buffers-fuzzy-matching t)
