@@ -1329,6 +1329,7 @@
        ("T" google-translate-query-translate)
        ("l" helm-org-in-buffer-headings)
        ("L" helm-org-agenda-files-headings)
+       (">" reposition-window)
        ("a" avy-goto-char-timer "goto char within window" :color blue)
        ("A" avy-goto-word-0 "goto word within window" :color blue))
      (global-set-key (kbd "C-`") 'hydra-navigate/body)
