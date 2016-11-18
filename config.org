@@ -1791,6 +1791,13 @@
 
      (setq-default tab-width 4)
    #+END_SRC
+** Using settings from .editorconfig
+    #+BEGIN_SRC emacs-lisp
+      (req-package editorconfig
+        :config
+        (add-hook 'prog-mode-hook #'(lambda () (editorconfig-mode 1)))
+        (add-hook 'text-mode-hook #'(lambda () (editorconfig-mode 1))))
+    #+END_SRC
 ** setup basic minor modes
    #+BEGIN_SRC emacs-lisp
      (auto-compression-mode t)
