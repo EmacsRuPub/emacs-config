@@ -12,6 +12,8 @@
       "https://elpa.gnu.org/packages/")
 (package-initialize)
 
+(require 'cl)
+
 (setq use-package-verbose t)
 (setq load-prefer-newer t)
 
