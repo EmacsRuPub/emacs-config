@@ -539,7 +539,7 @@
         (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
     #+END_SRC
 *** tramp
-     #+BEGIN_SRC emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle no
        (req-package tramp
          :init
          (setq tramp-default-method "ssh")
@@ -550,9 +550,9 @@
                       '(".*" "\\`.+\\'" "/ssh:%h:")))
      #+END_SRC
 *** crux
-     #+BEGIN_SRC emacs-lisp
-       (req-package crux)
-     #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (req-package crux)
+    #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp
      (defun keys-describe-prefixes ()
