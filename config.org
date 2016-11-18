@@ -2,7 +2,7 @@
 #+OPTIONS: toc:4 h:4
 
 * bootstrapping
-** path utils
+** basic utils
    #+BEGIN_SRC emacs-lisp
      (setq home-directory (getenv "HOME"))
      (setq config-basedir
@@ -20,6 +20,15 @@
 
      (defun at-config-basedir (&optional suffix)
        (concat config-basedir suffix))
+
+     (cl-defmacro with-unmanaged-errors (&rest body)
+       `(let ((debug-on-error-orig debug-on-error)
+              (debug-on-quit-orig debug-on-quit))
+          (setq debug-on-error nil)
+          (setq debug-on-quit nil)
+          ,@body
+          (setq debug-on-error debug-on-error-orig)
+          (setq debug-on-quit debug-on-quit-orig)))
    #+END_SRC
 **** TODO unify slashes usage
      see https://github.com/amadev/emacs-conf#Пути-от-домашней-папки-и-emacsd for example
@@ -2063,13 +2072,14 @@
         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
         ;; unsetting Tab, removing ALL translations
-        (unbind-key [(tab)] yas-minor-mode-map)
-        (unbind-key (kbd "TAB") yas-minor-mode-map)
-        (unbind-key (kbd "<tab>") yas-minor-mode-map)
-        (unbind-key [(tab)] yas-keymap)
-        (unbind-key (kbd "TAB") yas-keymap)
-        (unbind-key [(shift tab)] yas-keymap)
-        (unbind-key [backtab] yas-keymap)
+        (with-unmanaged-errors
+         (unbind-key [(tab)] yas-minor-mode-map)
+         (unbind-key [(tab)] yas-keymap)
+         (unbind-key [(shift tab)] yas-keymap)
+         (unbind-key [backtab] yas-keymap)
+         (unbind-key (kbd "<tab>") yas-minor-mode-map)
+         (unbind-key (kbd "TAB") yas-minor-mode-map)
+         (unbind-key (kbd "TAB") yas-keymap))
         (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
         (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
         (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
