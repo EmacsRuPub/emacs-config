@@ -230,12 +230,11 @@
      (display-battery-mode 1)
 
      (req-package popwin)
-     (req-package vline :disabled t)
+     (req-package vline)
 
      (req-package volatile-highlights
-       :disabled t
        :config
-       (volatile-highlights-mode t))
+       (volatile-highlights-mode 1))
    #+END_SRC
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp
