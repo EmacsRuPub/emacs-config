@@ -264,6 +264,7 @@
        (delight 'company-mode " γ" 'company)
        (delight 'eldoc-mode " ED" 'eldoc)
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
+       (delight 'editorconfig-mode " EC" 'editorconfig)
        (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
 * persistence
