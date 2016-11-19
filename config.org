@@ -237,7 +237,6 @@
        :config
        (volatile-highlights-mode t))
    #+END_SRC
-
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp
      (req-package uniquify
@@ -268,7 +267,6 @@
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
        (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
-
 * persistence
 ** save history
    #+BEGIN_SRC emacs-lisp
