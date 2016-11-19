@@ -1558,15 +1558,15 @@
         (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
         (bind-key "C->" 'mc/mark-next-like-this region-bindings-mode-map)
         (bind-key "C-<" 'mc/mark-previous-like-this region-bindings-mode-map)
-        (bind-key "C-c C-<" 'mc/mark-all-like-this region-bindings-mode-map)
-        (bind-key "b" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
-        (bind-key "e" 'mc/edit-ends-of-lines region-bindings-mode-map)
-        (bind-key "m" 'mc/mark-more-like-this-extended region-bindings-mode-map)
-        (bind-key "a" 'mc/mark-all-in-region region-bindings-mode-map)
-        (bind-key "d" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
-        (bind-key "D" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
+        (bind-key "C-c C-o" 'mc/mark-all-like-this region-bindings-mode-map)
+        (bind-key "M-<" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
+        (bind-key "M->" 'mc/edit-ends-of-lines region-bindings-mode-map)
+        (bind-key "M-+" 'mc/mark-more-like-this-extended region-bindings-mode-map)
+        (bind-key "C-c a" 'mc/mark-all-in-region region-bindings-mode-map)
+        (bind-key "C-c d" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
+        (bind-key "C-c D" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
         (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
-        (bind-key "n" 'mc/insert-numbers region-bindings-mode-map))
+        (bind-key "C-+" 'mc/insert-numbers region-bindings-mode-map))
 
       (req-package rectangular-region-mode
         :config
