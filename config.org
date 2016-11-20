@@ -3725,10 +3725,7 @@
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp
-     (req-package dired-launch
-       :config
-       (dired-launch-enable)
-       (define-key dired-launch-mode-map (kbd "C-!") 'dired-launch-command))
+     (define-key dired-launch-mode-map (kbd "C-!") 'crux-open-with)
    #+END_SRC
 ** email
 *** common
