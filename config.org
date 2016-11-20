@@ -3841,6 +3841,16 @@
        :require xterm-color
        :config
        (setq wttrin-default-cities '("Moscow")))
+
+     (req-package webpaste
+       :disabled t
+       :config
+       ;;TODO: fix keybindings
+       (defhydra hydra-webpaste ()
+         ("b" webpaste-paste-buffer "paste buffer")
+         ("r" webpaste-paste-region "paste region")
+         ("q" nil "cancel"))
+       (global-set-key (kbd "M-t") 'hydra-transpose/body))
    #+END_SRC
 * pim
 ** elfeed
