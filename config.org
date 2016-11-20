@@ -4866,6 +4866,11 @@
 
        ;;TODO: bind org-store-link and org-insert-link-global
      #+END_SRC
+**** open pdf
+     #+BEGIN_SRC elisp
+       (add-to-list 'org-file-apps '("\\.pdf\\'" . (org-pdfview-open link)))
+       (add-to-list 'org-file-apps '("\\.pdf::\\(\\d+\\)\\'" . (org-pdfview-open link)))
+     #+END_SRC
 ** sauron
    #+BEGIN_SRC emacs-lisp
      (req-package sauron
