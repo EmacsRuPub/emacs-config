@@ -4314,6 +4314,12 @@
        (req-package org-bookmark-heading)
 
        (req-package org-random-todo)
+
+       (req-package org-clock-today
+         :config
+         (org-clock-today-mode 1))
+
+       (req-package secretaria)
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp
