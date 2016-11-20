@@ -634,13 +634,11 @@
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp
      (put 'dired-find-alternate-file 'disabled nil)
-     (put 'downcase-region 'disabled nil)
      (put 'erase-buffer 'disabled nil)
      (put 'narrow-to-region 'disabled nil)
      (put 'scroll-left 'disabled nil)
      (put 'scroll-right 'disabled nil)
      (put 'set-goal-column 'disabled nil)
-     (put 'upcase-region 'disabled nil)
 
      (setq disabled-command-function nil)
    #+END_SRC
@@ -1384,45 +1382,31 @@
      )
 
      (req-package scratch)
+
+     ;; https://github.com/Fanael/persistent-scratch
    #+END_SRC
-** switch case
-   #+BEGIN_SRC emacs-lisp
-     (define-namespace custom/
-
-     (defun downcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (downcase-region (region-beginning) (region-end))
-         (downcase-word arg)))
-
-     (defun upcase-dwim (arg)
-       (interactive "p")
-       (if (region-active-p)
-           (upcase-region (region-beginning) (region-end))
-         (upcase-word arg)))
-
-     (defun capitalize-dwim (arg)
-       (interactive "P")
-       (when (consp arg) (setq arg 1))
-       (if (region-active-p)
-           (capitalize-region (region-beginning) (region-end))
-         (capitalize-word (prefix-numeric-value arg))))
-
-     )
+** case switching
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (put 'upcase-region 'disabled nil)
+     (put 'downcase-region 'disabled nil)
 
      (defvar custom/transform-whole-words nil)
 
-     (defadvice upcase-word (before upcase-word-advice activate)
+     (defun ensure-region-active (oldfun &rest args)
+       (when (region-active-p)
+         (apply oldfun args)))
+
+     (defun maybe-backward-word (oldfun &rest args)
        (when (and (not (looking-back "\\b")) custom/transform-whole-words)
          (backward-word)))
 
-     (defadvice downcase-word (before downcase-word-advice activate)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
+     (advice-add 'upcase-region :around 'ensure-region-active)
+     (advice-add 'downcase-region :around 'ensure-region-active)
+     (advice-add 'capitalize-region :around 'ensure-region-active)
 
-     (defadvice capitalize-word (before capitalize-word-advice activate)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
+     (advice-add 'upcase-region :before 'maybe-backward-word)
+     (advice-add 'downcase-region :before 'maybe-backward-word)
+     (advice-add 'capitalize-region :before 'maybe-backward-word)
    #+END_SRC
 ** move and bend text around
 *** definitions
