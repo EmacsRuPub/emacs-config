@@ -3031,6 +3031,8 @@
         (req-package company-web-html)
         :config
         (setq web-mode-enable-current-element-highlight t)
+        (setq web-mode-enable-auto-closing t)
+        (setq web-mode-enable-auto-quoting t)
         (add-hook 'web-mode-hook
                   (lambda ()
                     (set (make-local-variable 'company-backends)
