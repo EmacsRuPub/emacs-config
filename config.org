@@ -4355,8 +4355,10 @@
                                     (push entry org-agenda-files)))
                   t)
 
-       ;; TODO: maybe do it less straightforward
-       (setq org-agenda-files (delete (at-org-dir "/journal.org") org-agenda-files))
+       (dolist (orgfile (directory-files (at-org-dir) t "journal") )
+         (setq org-agenda-files
+               (delete orgfile org-agenda-files)))
+
      #+END_SRC
 **** agenda customizations
      #+BEGIN_SRC emacs-lisp
