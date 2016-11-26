@@ -4078,6 +4078,16 @@
          ;;    (org-agenda-goto-calendar)))
          )
 
+       (defun jump-to-custom-agenda-random ()
+         (interactive)
+         (let* ((agendas
+                 (remove-if
+                  (lambda (agenda) (= (length agenda) 1))
+                  (mapcar (lambda (x) (car x)) org-agenda-custom-commands)))
+                (agendas-count (length agendas)))
+           (org-agenda nil
+                       (car (nthcdr (random agendas-count) agendas)))))
+
        )
      #+END_SRC
 **** timestamps utils
@@ -4668,7 +4678,7 @@
        (org-add-link-type "tag" 'custom/follow-tag-link)
        (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
        (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
-       (run-with-idle-timer 1800 t 'custom/jump-to-org-agenda)
+       (run-with-idle-timer 1800 t 'custom/jump-to-custom-agenda-random)
        (set-charset-priority 'unicode)
        (turn-on-orgtbl)
 
@@ -4957,6 +4967,7 @@
        ("m" org-pomodoro)
        ("r" org-reveal "reveal")
        ("R" org-refile "refile")
+       ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
