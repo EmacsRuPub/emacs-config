@@ -3760,6 +3760,10 @@
       (defvar custom/gmail-accounts '("aaermolov@gmail.com" "aermolov@mirantis.com"))
 
       (req-package footnote)
+
+      ;; use org structures and tables in message mode
+      (add-hook 'message-mode-hook 'turn-on-orgtbl)
+      (add-hook 'message-mode-hook 'turn-on-orgstruct++)
     #+END_SRC
 *** send mail
     #+BEGIN_SRC emacs-lisp
