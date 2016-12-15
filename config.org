@@ -771,6 +771,27 @@
       (set-clipboard-coding-system 'utf-8)
       (set-terminal-coding-system 'utf-8)
     #+END_SRC
+** debug snippets
+*** show last command in minibuffer
+     #+BEGIN_SRC emacs-lisp
+       (defun custom/print-last-command ()
+         (message "last command was: %s" last-command))
+
+       (defvar last-command-debug-p nil)
+
+       (let ((last-command-debug-p nil))
+         (global-set-key (kbd "C-c C-g")
+                         (lambda ()
+                           (interactive)
+                           (if last-command-debug-p
+                               (progn
+                                 (add-hook 'post-command-hook 'custom/print-last-command)
+                                 (setq last-command-debug-p nil))
+                             (progn
+                               (remove-hook 'post-command-hook 'custom/print-last-command)
+                               (setq last-command-debug-p t))))))
+
+     #+END_SRC
 * navigate
 ** URLs, links and TAPs
 *** definitions
