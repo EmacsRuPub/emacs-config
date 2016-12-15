@@ -3082,6 +3082,10 @@
         (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
         (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
+      (req-package web-mode-edit-element
+        :config
+        (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
+
       (setq mumamo-background-colors nil)
       (setq mumamo-submode-indent-offset 4)
 
