@@ -3,7 +3,7 @@
 
 * bootstrapping
 ** basic utils
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq home-directory (getenv "HOME"))
      (setq config-basedir
            (file-name-directory
@@ -36,7 +36,7 @@
    A bunch of directories for various working datasets
    As the order of loading corresponding extensions,
    is cumbersome to maintain we should customize them ASAP (here)
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package no-littering
        :force t
        :require cl-lib
@@ -51,7 +51,7 @@
     It definitely makes sense while using Emacs in such X WMs
     when there is no chance to hook into keyboard layouts switching
     (those are probably all, except StumpWM/XMonad, AFAIK)
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package reverse-im
         :config
         (reverse-im-activate "russian-computer"))
@@ -75,7 +75,7 @@
                          "uint32:1")))
     #+END_SRC
 ** Encryption and security
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package epa
        :require epg
        :config
@@ -89,11 +89,11 @@
        (setq password-cache t))
    #+END_SRC
 ** load various private credentials from GPG-encrypted file
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (load (at-config-basedir "credentials.el.gpg"))
    #+END_SRC
 ** set the very basic variable values
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq message-log-max t) ;; we don't want to lose any startup log info
      (setq shell-file-name "/bin/bash")
      (setq custom-file (at-config-basedir "customizations.el"))
@@ -103,7 +103,7 @@
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
 ** init essential packages
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package auto-compile
        :config
        (auto-compile-on-load-mode 1)
@@ -119,7 +119,7 @@
    #+END_SRC
 * appearance
 ** populate fonts inventory
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
      (defvar fonts-def (make-hash-table :test 'equal)
@@ -139,7 +139,7 @@
      )
    #+END_SRC
 ** setup smart modeline
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package smart-mode-line
        :require rich-minority
        :config
@@ -151,13 +151,13 @@
    #+END_SRC
 ** load themes and choose one
    Also some other good-looking themes are "deep-thought-theme" and "material-theme"
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package darkburn-theme
        :config
        (load-theme 'darkburn t))
    #+END_SRC
 ** set common colors
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defvar bg-colors "emacs background colors list")
      (defvar fg-colors "emacs foreground colors list")
 
@@ -168,7 +168,7 @@
      (set-cursor-color "chartreuse2")
    #+END_SRC
 ** setup fonts
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq font-lock-maximum-decoration t)
      (setq scalable-fonts-allowed t)
 
@@ -187,7 +187,7 @@
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
 ** frames
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq frame-title-format "emacs - %b %f")
 
      (setq inhibit-startup-echo-area-message "octocat")
@@ -237,7 +237,7 @@
        (volatile-highlights-mode 1))
    #+END_SRC
 ** uniquify buffer names
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package uniquify
        :config
        (setq uniquify-buffer-name-style 'post-forward)
@@ -246,7 +246,7 @@
        (setq uniquify-strip-common-suffix nil))
    #+END_SRC
 ** diminish modeline contents
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package delight
        :force t
        :config
@@ -269,7 +269,7 @@
    #+END_SRC
 * persistence
 ** save history
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package savehist
        :force t
        :config
@@ -284,7 +284,7 @@
        (savehist-mode t))
    #+END_SRC
 ** maintain recent files
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package recentf
        :require recentf-ext
        :defer t
@@ -294,7 +294,7 @@
        (recentf-mode t))
    #+END_SRC
 ** backups
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq auto-save-visited-file-name t)
      (setq backup-by-copying t)
      (setq backup-by-copying-when-linked t)
@@ -306,11 +306,11 @@
 ** lock files
    Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
    dirs from being clobbered with.
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setf create-lockfiles nil)
    #+END_SRC
 ** desktop
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package desktop
        :config
        (setq-default desktop-missing-file-warning nil)
@@ -354,7 +354,7 @@
    #+END_SRC
 * common
 ** emacs server
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package server
        :config
        (defun custom/server-save-edit ()
@@ -376,14 +376,14 @@
    #+END_SRC
 ** some ubiquitous packages
 *** hydra
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package hydra
         :force t
         :config
         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
 *** helm
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package helm
         :init
         (req-package helm-config)
@@ -565,11 +565,11 @@
                       '(".*" "\\`.+\\'" "/ssh:%h:")))
      #+END_SRC
 *** crux
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package crux)
     #+END_SRC
 ** some keyboard related stuff
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defun keys-describe-prefixes ()
        (interactive)
        (with-output-to-temp-buffer "*Bindings*"
@@ -611,7 +611,7 @@
    #+END_SRC
 ** remove elc after save
    If you're saving an elisp file, likely the .elc is no longer valid.
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (add-hook 'after-save-hook
                (lambda ()
                (if (and (equal major-mode 'emacs-lisp-mode)
@@ -619,7 +619,7 @@
                      (delete-file (concat buffer-file-name "c")))))
    #+END_SRC
 ** a handy macro to execute code only in major mode it makes sense in
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defmacro custom/advice-for-major-mode (mode function)
        `(defadvice ,(intern (symbol-name function))
             (around ,(intern (concatenate
@@ -632,7 +632,7 @@
             ad-do-it)))
    #+END_SRC
 ** Enable functions that are disabled by default
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (put 'dired-find-alternate-file 'disabled nil)
      (put 'erase-buffer 'disabled nil)
      (put 'narrow-to-region 'disabled nil)
@@ -643,21 +643,21 @@
      (setq disabled-command-function nil)
    #+END_SRC
 ** world time
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq display-time-world-list
            '(("Europe/Moscow" "Moscow")
              ("America/New_York" "New York")))
    #+END_SRC
 ** local variables processing
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq enable-local-variables nil)
    #+END_SRC
 ** warnings processing
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq warning-suppress-types nil)
    #+END_SRC
 ** GC tweaks
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
      (setq gc-cons-threshold 20000000)
 
@@ -671,7 +671,7 @@
      (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
    #+END_SRC
 ** mode lists for common needs
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      ;; clean trailing whitespaces automatically
      (setq custom/trailing-whitespace-modes
            '(
@@ -708,7 +708,7 @@
              ))
    #+END_SRC
 ** hooks for tabs and spaces ;]
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defun common-hooks/trailing-whitespace-hook ()
        (when (member major-mode custom/trailing-whitespace-modes)
          (delete-trailing-whitespace)))
@@ -721,7 +721,7 @@
      (add-hook 'before-save-hook 'common-hooks/untabify-hook)
    #+END_SRC
 ** encodings
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq locale-coding-system 'utf-8)
      (set-default buffer-file-coding-system 'utf-8-unix)
      (prefer-coding-system 'utf-8)
@@ -773,7 +773,7 @@
     #+END_SRC
 ** debug snippets
 *** show last command in minibuffer
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (defun custom/print-last-command ()
          (message "last command was: %s" last-command))
 
@@ -795,7 +795,7 @@
 * navigate
 ** URLs, links and TAPs
 *** definitions
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       ;;TODO: make implemetation less straightforward or find "right way" to do it
@@ -837,7 +837,7 @@
       )
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package ace-link
         :config
         (ace-link-setup-default))
@@ -845,7 +845,7 @@
       (req-package link-hint)
     #+END_SRC
 ** cursor positioning
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
      ;;Make cursor stay in the same column when scrolling using pgup/dn.
@@ -898,7 +898,7 @@
        (setq-default save-place t))
    #+END_SRC
 ** frames spawning
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/update-frames (heads-count)
         (let* ((frames-count (length (frame-list)))
                (diff-count (- heads-count frames-count))
@@ -914,7 +914,7 @@
            (t t))))
     #+END_SRC
 ** projectile
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package projectile
        :require dash pkg-info
        :config
@@ -977,7 +977,7 @@
        :require helm cl-lib)
    #+END_SRC
 ** dired
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defvar *directory-separator* '?/)
      (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
      (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
@@ -1092,13 +1092,13 @@
      (req-package dired-filetype-face)
    #+END_SRC
 ** bookmark+
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package bookmark+)
 
      (req-package crosshairs :require hl-line+ col-highlight vline)
    #+END_SRC
 ** search
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package occur-context-resize)
 
      (req-package phi-search)
@@ -1129,7 +1129,7 @@
        (delete-other-windows))
    #+END_SRC
 ** operations with windows
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package zoom-window
        :config
        (setq zoom-window-mode-line-color "DarkGreen"))
@@ -1218,7 +1218,7 @@
        ("q" nil "cancel"))
    #+END_SRC
 ** scope
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-scope (:color blue)
        "
        Narrow to            Widen
@@ -1273,7 +1273,7 @@
      (req-package recursive-narrow)
    #+END_SRC
 ** warping
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package swoop
        :require ht pcre2el async
        :config
@@ -1305,7 +1305,7 @@
        :require zoom-frm)
    #+END_SRC
 ** hydras and keybindings
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: plan docstring
      (defhydra hydra-entries ()
        ("!" flycheck-first-error "ace" :color blue)
@@ -1376,7 +1376,7 @@
    #+END_SRC
 * editing
 ** utils for files and buffers
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
      ;; TODO implement variant with path for some VCS-controlled tree
@@ -1434,7 +1434,7 @@
     This override for transpose-words fixes what I consider to be a flaw with the default implementation in simple.el. To transpose chars or lines, you always put the point on the second char or line
     to transpose with the previous char or line. The default transpose-words implementation does the opposite by flipping the current word with the next word instead of the previous word. The new
     implementation below instead makes transpose-words more consistent with how transpose-chars and trasponse-lines behave.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/transpose-words (arg)
         "[Override for default transpose-words in simple.el]
         Interchange words around point, leaving point at end of
@@ -1452,7 +1452,7 @@
         (shell-command-on-region beg end "fmt -w2000" nil t))
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package anchored-transpose)
 
       (req-package drag-stuff
@@ -1502,7 +1502,7 @@
 ***** https://github.com/knu/mc-extras.el
 ** regions and rectangles
 *** definitions
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       (defadvice whole-line-or-region-kill-region
@@ -1551,7 +1551,7 @@
       )
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package expand-region
         :defer t
         :bind ("C-=" . er/expand-region))
@@ -1611,7 +1611,7 @@
     #+END_SRC
 
 ** commenting
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package comment-dwim-2
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
@@ -1621,13 +1621,13 @@
      (setq comment-style 'indent)
    #+END_SRC
 ** clipboard and killring
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package savekill)
 
      (setq save-interprogram-paste-before-kill t)
    #+END_SRC
 ** undo/redo
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq undo-limit 1000000)
 
      (req-package undo-tree
@@ -1640,7 +1640,7 @@
    #+END_SRC
 ** utils
 *** definitions
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       ;; current date and time.
@@ -1657,7 +1657,7 @@
       )
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package table) ;; table
       (req-package epoch-view :disabled t)
 
@@ -1705,7 +1705,7 @@
         (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line))
     #+END_SRC
 ** major modes
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package rst)
 
      (req-package generic
@@ -1733,7 +1733,7 @@
      (req-package dockerfile-mode)
    #+END_SRC
 ** sexps
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package highlight-sexp)
 
      ;; TODO compare with paredit and finally choose one (sane non-lisp modes setup intended)
@@ -1774,7 +1774,7 @@
        (add-hook 'prog-mode-hook 'common-hooks/sexp-editing-hook))
    #+END_SRC
 ** some fancy editing methods
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package edit-indirect)
      (req-package narrow-indirect)
 
@@ -1784,7 +1784,7 @@
        :init (miniedit-install))
    #+END_SRC
 ** indentation
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq indent-tabs-mode nil)
 
      (req-package dtrt-indent
@@ -1794,14 +1794,14 @@
      (setq-default tab-width 4)
    #+END_SRC
 ** Using settings from .editorconfig
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package editorconfig
         :config
         (add-hook 'prog-mode-hook #'(lambda () (editorconfig-mode 1)))
         (add-hook 'text-mode-hook #'(lambda () (editorconfig-mode 1))))
     #+END_SRC
 ** setup basic minor modes
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (auto-compression-mode t)
      (delete-selection-mode t)
      (electric-indent-mode -1)
@@ -1810,7 +1810,7 @@
      (transient-mark-mode 1)
    #+END_SRC
 ** set variables
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq auto-revert-verbose nil)
      (setq global-auto-revert-non-file-buffers t)
      (setq default-input-method 'russian-computer)
@@ -1854,13 +1854,13 @@
                               tabs))
    #+END_SRC
 ** add hooks
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
      (add-hook 'text-mode-hook 'turn-on-auto-fill)
      (add-hook 'text-mode-hook 'text-mode-hook-identify)
    #+END_SRC
 ** hydras and keys
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: plan docstring
      (defhydra hydra-edit (:color blue)
        ("0" custom/compact-spaces-in-region)
@@ -1994,7 +1994,7 @@
 **** TODO consolidate all narrow/widen functionality
 *** fix spelling
     credits to amalabarba
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-key ctl-x-map "\C-i"
         #'crux-ispell-word-then-abbrev)
 
@@ -2019,7 +2019,7 @@
 * completion
 ** yasnippet
 *** definitions
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       ;; Inter-field navigation
@@ -2056,7 +2056,7 @@
       )
     #+END_SRC
 *** setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package yasnippet
         :delight yas-minor-mode
         :config
@@ -2120,7 +2120,7 @@
       (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
     #+END_SRC
 ** company
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package company
        :init
        :config
@@ -2153,7 +2153,7 @@
 **** https://github.com/iquiw/company-restclient
 **** https://github.com/Valloric/ycmd + https://github.com/abingham/emacs-ycmd
 ** hippie-expand
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package hippie-exp
        :config
        (setq hippie-expand-try-functions-list
@@ -2199,7 +2199,7 @@
     #+END_SRC
 **** BACKLOG review flake8 known problems and OBV search for solutions
 *** flycheck
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package flycheck
         :require dash pkg-info let-alist seq
         :config
@@ -2214,7 +2214,7 @@
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 *** gdb
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package gud
         :init
         (req-package gdb-mi)
@@ -2226,14 +2226,14 @@
         (setq gud-tooltip-mode t))
     #+END_SRC
 *** docker
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package docker
         :require dash docker-tramp magit-popup s tablist)
       (req-package docker-tramp)
       ;; TODO: think of some automation of opening files with docker (and other TRAMP backends as well)
     #+END_SRC
 *** eldoc
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package c-eldoc)
       (req-package eldoc-eval)
 
@@ -2265,7 +2265,7 @@
          (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
      #+END_SRC
 *** print path within json
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/js2-print-json-path ()
         "Print the path to the JSON value under point, and save it in the kill ring."
         (interactive)
@@ -2296,7 +2296,7 @@
           rlt))
     #+END_SRC
 *** common hooks
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun common-hooks/newline-hook ()
         (local-set-key (kbd "C-m") 'newline-and-indent)
         (local-set-key (kbd "<return>") 'newline-and-indent))
@@ -2312,7 +2312,7 @@
           (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
     #+END_SRC
 *** handy packages
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package compile)
       (req-package gtags)
       (req-package hide-comnt)
@@ -2320,7 +2320,7 @@
     #+END_SRC
 ** vcs
 *** git
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package magit
         :require async dash with-editor git-commit magit-popup
         :config
@@ -2376,7 +2376,7 @@
       (req-package gitignore-mode)
     #+END_SRC
 *** smerge mode
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package smerge-mode
         :config
         (defun sm-try-smerge ()
@@ -2387,7 +2387,7 @@
         (add-hook 'find-file-hooks 'sm-try-smerge t))
     #+END_SRC
 *** common
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       ;; FIXME code duplication, think of finding the widely used util or something similar
       (autoload 'vc-git-root "vc-git")
       (autoload 'vc-svn-root "vc-svn")
@@ -2397,12 +2397,12 @@
     #+END_SRC
 ** languages
 *** common
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package info-look :force t)
     #+END_SRC
 *** elisp
 **** setup
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package el-spice :require thingatpt+)
        (req-package edebug-x)
 
@@ -2540,7 +2540,7 @@
      This code represents almost original slime-helper functions definitions (except hooks, of course).
      The reason to not use slime-helper itself is that it provides its own slime setup thus
      omitting my own one completely.
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (unless (boundp 'quicklisp-slime-helper-dist)
          (setq quicklisp-slime-helper-dist "quicklisp"))
 
@@ -2619,7 +2619,7 @@
 ***** BACKLOG investigate and fix the issue with not found slime extensions within remote lisp image
       example: Can't locate module: SWANK-IO-PACKAGE::SWANK-SBCL-EXTS
 **** additional setup
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq custom/hyperspec-root "~/help/HyperSpec/")
 
        (req-package inf-lisp
@@ -2710,7 +2710,7 @@
        (setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
      #+END_SRC
 **** setup
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package pep8)
        (req-package python-pep8)
 
@@ -2786,7 +2786,7 @@
      #+END_SRC
 *** cc
 **** specialization for PostgreSQL development
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (defun pgsql-c-mode ()
          ;; sets up formatting for PostgreSQL C code
          (interactive)
@@ -2798,7 +2798,7 @@
          (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
      #+END_SRC
 **** packages
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package cc-mode
          :require helm-gtags
          :config
@@ -2886,14 +2886,14 @@
         :doc-spec '(("(libc)Symbol Index" nil nil nil)))
      #+END_SRC
 **** hooks
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (add-hook 'c++-mode-hook 'common-hooks/newline-hook)
        (add-hook 'c-mode-common-hook 'common-hooks/prog-helpers)
        (add-hook 'c-mode-hook 'common-hooks/newline-hook)
      #+END_SRC
 **** auto-mode setup
 ***** common
-      #+BEGIN_SRC emacs-lisp
+      #+BEGIN_SRC emacs-lisp :tangle yes
         (add-to-list 'auto-mode-alist '("\\.ipp?$" . c++-mode))
         (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
         ;; (add-to-list 'auto-mode-alist '("/usr/include/qt4" . c++-mode))
@@ -2906,7 +2906,7 @@
         (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
       #+END_SRC
 ***** PostgreSQL specialized
-      #+BEGIN_SRC emacs-lisp
+      #+BEGIN_SRC emacs-lisp :tangle yes
         (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode))
         (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
       #+END_SRC
@@ -2986,7 +2986,7 @@
     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package actionscript-mode :defer t)
       (req-package go-mode :defer t
         :init
@@ -2999,7 +2999,7 @@
     #+END_SRC
 ** webdev
 *** major modes
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package sgml-mode
         :defer t
         :config
@@ -3015,7 +3015,7 @@
       (req-package yaml-mode)
     #+END_SRC
 *** xml
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/nxml-mode-hook ()
         (auto-fill-mode)
         (hs-minor-mode 1)
@@ -3044,7 +3044,7 @@
       ;; http://www.emacswiki.org/emacs/DocbookXmlMode
     #+END_SRC
 *** multiple major modes
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package web-mode
         :defer t
         :mode "\\.html?\\'"
@@ -3096,11 +3096,11 @@
                   (setq sgml-basic-offset 4)))
     #+END_SRC
 *** color helper
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package rainbow-mode :defer t)
     #+END_SRC
 *** emmet mode setup
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package emmet-mode
         :defer t
         :config
@@ -3122,7 +3122,7 @@
         :defer t)
     #+END_SRC
 *** web client
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package web
         :require dash s
         :defer t)
@@ -3141,7 +3141,7 @@
     #+END_SRC
 * clients
 ** restclient
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package restclient
        :defer t
        :bind ("C-c C-r C-s" . custom/create-restclient-sandbox)
@@ -3155,7 +3155,7 @@
            (restclient-mode))))
    #+END_SRC
 ** ERC
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package erc
        :force t
        :init
@@ -3348,7 +3348,7 @@
 ** jabber
 *** definitions
 **** common utils
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        (defvar use-zenburn-in-jabber t "Paint jabber-el buffers with zenburn colors")
@@ -3479,7 +3479,7 @@
     #+END_SRC
 *** setup
 **** common
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package jabber
          :require fsm
          :init
@@ -3579,7 +3579,7 @@
      #+END_SRC
 ** terminal
 *** common
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package ansi-color
         :config
         (defun custom/colorize-compilation ()
@@ -3591,7 +3591,7 @@
                   #'custom/colorize-compilation))
     #+END_SRC
 *** comint
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       ;;TODO: parametrize shell for terminal
@@ -3631,7 +3631,7 @@
       (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
     #+END_SRC
 *** shell/check syntax
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
       (defun sh-check-finish-hook (buf msg)
@@ -3667,7 +3667,7 @@
     #+END_SRC
 **** BACKLOG try to leverage shellcheck util usage
 *** eshell
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package eshell
         :defer t
         :config
@@ -3677,7 +3677,7 @@
         (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color))
     #+END_SRC
 ** Twitter
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package twittering-mode
        :defer t
        :commands twit
@@ -3686,7 +3686,7 @@
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
    #+END_SRC
 ** internal browser (w3m/eww)
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package w3m
        :defer t
        :commands w3m
@@ -3726,7 +3726,7 @@
        (standard-display-ascii ?\227 " -- "))
    #+END_SRC
 ** MPD
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package mingus
        :commands mingus
        :require libmpdee
@@ -3751,12 +3751,12 @@
        (global-set-key (kbd "C-c m") 'hydra-mingus/body))
    #+END_SRC
 ** open files in external apps
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (define-key dired-mode-map (kbd "C-!") 'crux-open-with)
    #+END_SRC
 ** email
 *** common
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defvar custom/gmail-accounts '("aaermolov@gmail.com" "aermolov@mirantis.com"))
 
       (req-package footnote)
@@ -3766,7 +3766,7 @@
       (add-hook 'message-mode-hook 'turn-on-orgstruct++)
     #+END_SRC
 *** send mail
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (setq mail-specify-envelope-from t)
       (setq message-sendmail-envelope-from 'header)
       (setq mail-envelope-from 'header)
@@ -3774,7 +3774,7 @@
       (setq message-kill-buffer-on-exit t)
     #+END_SRC
 *** notmuch
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package notmuch
         :config
         (setq mm-text-html-renderer 'shr)
@@ -3821,14 +3821,14 @@
         :require helm notmuch)
     #+END_SRC
 *** hydra
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-email (:exit t :color red)
         "Read mail"
         ("n" notmuch nil))
       (global-set-key (kbd "C-c 4") 'hydra-email/body)
     #+END_SRC
 ** various useful packages
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package google-translate
        :defer t
        :init
@@ -3855,7 +3855,7 @@
    #+END_SRC
 * pim
 ** elfeed
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package elfeed
        :config
        (defface elfeed-lisp-tag-face
@@ -3917,7 +3917,7 @@
        (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map))
    #+END_SRC
 ** calendars
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package calfw
        :require google-maps
        :defer t
@@ -4040,7 +4040,7 @@
      MimeType=x-scheme-handler/org-protocol;
 *** definitions
 **** process thing at point
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        (defun open-or-browse-at-point (arg)
@@ -4064,13 +4064,13 @@
      :PROPERTIES:
      :ID:       ac9bd4a6-f167-4408-aa97-c58843003584
      :END:
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (defvar custom/org-journal-file (at-org-dir "/journal.org"))
 
        (setq org-archive-location (concat custom/org-journal-file "::datetree/"))
      #+END_SRC
 **** open org agenda when we need it
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        (defun jump-to-org-agenda ()
@@ -4109,7 +4109,7 @@
        )
      #+END_SRC
 **** timestamps utils
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        ;;TODO: use prefix arg
@@ -4131,7 +4131,7 @@
        )
      #+END_SRC
 **** navigation
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        ;; Exclude DONE state tasks from refile targets
@@ -4148,7 +4148,7 @@
        )
      #+END_SRC
 **** utils
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
 
        ;; Remove empty CLOCK drawers on clock out
@@ -4200,7 +4200,7 @@
        )
      #+END_SRC
 **** pick up random Org task
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (defun org-random-entry (&optional arg)
          "Select and goto a random todo item from the global agenda"
          (interactive "P")
@@ -4286,7 +4286,7 @@
                                    '(read-only t))))
      #+END_SRC
 **** additional packages
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package icalendar :defer t)
        (req-package org-footnote :defer t)
        (req-package org-magit :require magit org)
@@ -4333,7 +4333,7 @@
        (req-package secretaria)
      #+END_SRC
 **** common
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
        (setq org-list-demote-modify-bullet '(("+" . "-")
@@ -4353,7 +4353,7 @@
        (setq org-lowest-priority 70)
      #+END_SRC
 **** user speed commands
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
        (setq org-use-speed-commands t)
 
@@ -4365,7 +4365,7 @@
        (add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
      #+END_SRC
 **** collect files for agenda
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (f-entries (at-org-dir)
                   (lambda (entry) (when (and (f-file? entry)
                                              (s-suffix? "org" entry)
@@ -4379,7 +4379,7 @@
 
      #+END_SRC
 **** agenda customizations
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setf org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :narrow 60))
        (setq org-agenda-dim-blocked-tasks 'invisible)
        (setq org-agenda-include-all-todo t)
@@ -4490,7 +4490,7 @@
                                         (search . " %i %-12:c")))
      #+END_SRC
 **** clocking customizations
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-clock-history-length 35)
        (setq org-clock-idle-time 3)
        (setq org-clock-in-resume t)
@@ -4501,7 +4501,7 @@
        (setq org-clock-persist t)
      #+END_SRC
 **** refiling customizations
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-refile-allow-creating-parent-nodes 'confirm)
        (setq org-refile-target-verify-function 'custom/verify-refile-target)
        (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
@@ -4510,7 +4510,7 @@
        (custom/advice-for-major-mode org-mode org-refile)
      #+END_SRC
 **** various customizations
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setf org-catch-invisible-edits nil)
        (setf org-fast-tag-selection-include-todo nil)
        (setf org-id-link-to-org-use-id t)
@@ -4567,7 +4567,7 @@
        ;; (setq org-drawers '("PROPERTIES" "LOGBOOK" "CLOCK" "FILES"))
      #+END_SRC
 **** keywords setup
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq kw-seq-common '(sequence "BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"
                                       "|" "DONE(d!/@)" "CANCELLED(c@/!)" "OUTDATED(o)"))
        (setq org-todo-keywords
@@ -4576,7 +4576,7 @@
        (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)" "OUTDATED(o)"))
      #+END_SRC
 **** faces
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-todo-keyword-faces
              '(("BACKLOG" . (:foreground "gray" :weight bold))
                ("SOON" . (:foreground "magenta" :weight bold))
@@ -4599,7 +4599,7 @@
        (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
      #+END_SRC
 **** tags
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-tag-alist '(("current" . ?c)
                              ("reference" . ?f)
                              ("orgmode" . ?g)
@@ -4619,7 +4619,7 @@
      #+END_SRC
 ***** BACKLOG review whole tags cloud (in org corpus) and update org-tag-alist accordingly
 **** org-habit
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-habit-graph-column 50)
        (setq org-habit-preceding-days 10)
        (setq org-habit-following-days 4)
@@ -4628,7 +4628,7 @@
 **** org-capture
      org-id usage example for the future:
      "* TODO___ %a\n  :PROPERTIES:\n  :ID: %(org-id-new)\n  :END:\n  %U\n\n  %i"
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq org-capture-templates
              '(("d" "todo")
                ("dp" "personal tasks" entry (file (at-org-dir "/tasks.org")) "* BACKLOG [#C] %? %U :@personal:")
@@ -4674,7 +4674,7 @@
          result)
      #+END_SRC
 **** holidays
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
        (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
 
@@ -4686,14 +4686,14 @@
                      holiday-solar-holidays))
      #+END_SRC
 **** hooks
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (add-hook 'org-mode-hook 'turn-on-font-lock)
        (add-hook 'org-mode-hook 'org-bullets-mode)
        (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
        (add-hook 'org-after-refile-insert-hook 'save-buffer)
      #+END_SRC
 **** run some commands
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (run-at-time nil 60 'org-save-all-org-buffers)
        (org-add-link-type "tag" 'custom/follow-tag-link)
        (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
@@ -4716,7 +4716,7 @@
           (sh . t)))
      #+END_SRC
 **** keybindings
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
        (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
        (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
        (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
@@ -4901,7 +4901,7 @@
        (add-to-list 'org-file-apps '("\\.pdf::\\(\\d+\\)\\'" . (org-pdfview-open link)))
      #+END_SRC
 ** sauron
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package sauron
        :disabled t ; TODO play extensively with package, then likely enable
        :config
@@ -4916,7 +4916,7 @@
        (sauron-start))
    #+END_SRC
 ** hydras
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: clusterize various extensions
      (defhydra hydra-pim ()
        "
@@ -5112,7 +5112,7 @@
                                    ("^html?$" "." "open %o")))
    #+END_SRC
 * help
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle yes
     (req-package info)
     (req-package help+)
 
@@ -5174,19 +5174,19 @@
 * auto-modes
 ** programming languages
 *** scheme
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.dsl$" . scheme-mode))
       (add-to-list 'auto-mode-alist '("\\.scm$" . scheme-mode))
     #+END_SRC
 *** haskell
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.hsc$" . haskell-mode))
       (add-to-list 'auto-mode-alist '("\\.[hg]s$"  . haskell-mode))
       (add-to-list 'auto-mode-alist '("\\.hi$"     . haskell-mode))
       (add-to-list 'auto-mode-alist '("\\.l[hg]s$" . literate-haskell-mode))
     #+END_SRC
 *** lispy modes
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.wl$" . emacs-lisp-mode))
       (add-to-list 'auto-mode-alist '("\\.el" . emacs-lisp-mode))
       (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
@@ -5195,21 +5195,21 @@
       (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
     #+END_SRC
 *** erlang
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
       (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
     #+END_SRC
 *** JS
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
       (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
     #+END_SRC
 *** PHP
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.php" . php-mode))
     #+END_SRC
 *** sh-mode
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("bashrc$" . sh-mode))
       (add-to-list 'auto-mode-alist '("bash_profile$" . sh-mode))
       (add-to-list 'auto-mode-alist '("bash_aliases$" . sh-mode))
@@ -5218,7 +5218,7 @@
       (add-to-list 'auto-mode-alist '(".powenv$" . sh-mode))
     #+END_SRC
 *** various major modes
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
       (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
       (add-to-list 'auto-mode-alist '("\\.log$" . auto-revert-mode))
@@ -5231,25 +5231,25 @@
       (add-to-list 'auto-mode-alist '("diff" . diff-mode))
     #+END_SRC
 ** snippets
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
      (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
    #+END_SRC
 ** presentation
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
      (add-to-list 'auto-mode-alist '("\\.svg$" . image-mode))
    #+END_SRC
 ** markUP
 *** html
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       ;; (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
       (add-to-list 'auto-mode-alist '("\\.html$" . html-mode))
       (add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
       (add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
     #+END_SRC
 *** xml
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist
                    (cons (concat "\\."
                                  (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
@@ -5258,7 +5258,7 @@
       (push '("<\\?xml" . nxml-mode) magic-mode-alist)
     #+END_SRC
 *** markdown
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
       (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
       (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
@@ -5266,7 +5266,7 @@
       (add-to-list 'auto-mode-alist '("\\bREADME$" . markdown-mode))
     #+END_SRC
 *** rest
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
       (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
       (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -5332,7 +5332,7 @@
      (add-hook 'python-mode-local-vars-hook 'jedi:setup)
    #+END_SRC
 ** the rest
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
      ;;TODO: maybe make org-protocol solution instead
