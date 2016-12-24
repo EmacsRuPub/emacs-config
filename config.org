@@ -87,6 +87,10 @@
        :config
        (setq password-cache-expiry 86400)
        (setq password-cache t))
+
+     (req-package keychain-environment
+       :config
+       (keychain-refresh-environment))
    #+END_SRC
 ** load various private credentials from GPG-encrypted file
    #+BEGIN_SRC emacs-lisp :tangle yes
