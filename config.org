@@ -2148,6 +2148,11 @@
        :config
        (define-key company-mode-map (kbd "C-:") 'helm-company)
        (define-key company-active-map (kbd "C-:") 'helm-company))
+
+     (req-package company-statistics
+       :require company
+       :config
+       (company-statistics-mode))
    #+END_SRC
 *** try 3rdparty packages
 **** https://github.com/nsf/gocode
