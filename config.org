@@ -4625,6 +4625,8 @@
        (setq org-todo-state-tags-triggers
              '(("GOING" ("current" . t))
                ("DONE" ("current"))))
+
+       (setq org-complete-tags-always-offer-all-agenda-tags t)
      #+END_SRC
 ***** BACKLOG review whole tags cloud (in org corpus) and update org-tag-alist accordingly
 **** org-habit
