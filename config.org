@@ -291,7 +291,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package recentf
        :require recentf-ext
-       :defer t
        :config
        (setq recentf-max-saved-items 250)
        (setq recentf-max-menu-items 15)
