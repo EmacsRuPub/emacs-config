@@ -144,14 +144,9 @@
    #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package smart-mode-line
-       :require rich-minority
+     (req-package powerline
        :config
-       (setq sml/no-confirm-load-theme t)
-       (setq sml/theme 'respectful)
-       (setq sml/battery-format " %p%% ")
-       (sml/setup)
-       (set-face-attribute 'sml/discharging nil :foreground "tomato"))
+       (powerline-default-theme))
    #+END_SRC
 ** load themes and choose one
    Also some other good-looking themes are "deep-thought-theme" and "material-theme"
