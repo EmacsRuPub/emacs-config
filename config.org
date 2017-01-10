@@ -185,7 +185,7 @@
    #+END_SRC
 ** update some faces values
    Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (when (boundp 'zenburn-colors-alist)
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
