@@ -822,15 +822,13 @@
               (dolist (url (reverse urls))
                 (browse-url url))))))
 
-      (defvar url-regexp "\\(http\\(s\\)*://\\)\\(www.\\)*\\|\\(www.\\)")
-
       (defun find-url-backward ()
         (interactive)
-        (re-search-backward url-regexp nil t))
+        (re-search-backward org-plain-link-re nil t))
 
       (defun find-url-forward ()
         (interactive)
-        (re-search-forward url-regexp nil t))
+        (re-search-forward org-plain-link-re nil t))
 
       )
     #+END_SRC
@@ -4024,7 +4022,7 @@
                (org-back-to-heading t)
                (setq end (save-excursion (outline-next-heading) (point))))
              (org-back-to-heading t)
-             (re-search-forward custom/url-regexp end t))))
+             (re-search-forward org-plain-link-re end t))))
 
        )
      #+END_SRC
