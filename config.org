@@ -4026,12 +4026,13 @@
 
        )
      #+END_SRC
-**** Org journalling and archiving
+**** Org locations
      :PROPERTIES:
      :ID:       ac9bd4a6-f167-4408-aa97-c58843003584
      :END:
      #+BEGIN_SRC emacs-lisp :tangle yes
        (defvar custom/org-journal-file (at-org-dir "/journal.org"))
+       (defvar custom/org-browser-tabs (at-org-dir "/browser-tabs.org"))
 
        (setq org-archive-location (concat custom/org-journal-file "::datetree/"))
      #+END_SRC
