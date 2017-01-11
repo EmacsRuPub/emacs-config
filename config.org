@@ -4607,6 +4607,7 @@
                ("de" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* BACKLOG [#C] %? %U :emacs:ticket:")
                ("dE" "emacs todo" entry (file+headline (at-org-dir "/configs/emacs.org") "tickets") "* BACKLOG %? %U :emacs:code_snippet:\n#+BEGIN_SRC emacs-lisp\n %i%?\n#+END_SRC\n")
                ("ds" "stumpwm todo" entry (file (at-org-dir "/configs/stumpwm.org")) "* BACKLOG [#C] %? %U :stumpwm:ticket:")
+               ("dd" "deferred tabs" entry (file+olp custom/org-browser-tabs "groups" "deferred tabs") "* %? %U :deferred:")
                ("t" "try")
                ("tw" "workplace try" entry (file (at-org-dir "/workspace_totry.org")) "* %? %U :@workplace:try")
                ("te" "emacs try" entry (file+headline (at-org-dir "/configs/emacs.org") "to try") "* %? %U :emacs:try:")
