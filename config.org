@@ -85,7 +85,7 @@
 
      (req-package password-cache
        :config
-       (setq password-cache-expiry 86400)
+       (setq password-cache-expiry nil)
        (setq password-cache t))
 
      (req-package keychain-environment
