@@ -983,20 +983,6 @@
      (req-package dired
        :init
        :config
-       ;; always refresh contents
-       ;; Updated file system on all buffer switches if in dired mode
-       (defadvice custom/switch-to-buffer-other-window (after auto-refresh-dired (buffer &optional norecord) activate)
-         (if (equal major-mode 'dired-mode)
-             (revert-buffer)))
-       (defadvice custom/switch-to-buffer (after auto-refresh-dired (buffer &optional norecord) activate)
-         (if (equal major-mode 'dired-mode)
-             (revert-buffer)))
-       (defadvice custom/display-buffer (after auto-refresh-dired (buffer &optional not-this-window frame) activate)
-         (if (equal major-mode 'dired-mode)
-             (revert-buffer)))
-       (defadvice custom/other-window (after auto-refresh-dired (arg &optional all-frame) activate)
-         (if (equal major-mode 'dired-mode)
-             (revert-buffer)))
        ;; navigate to margins
        ;; C-a is nicer in dired if it moves back to start of files
        (defun custom/dired-back-to-start-of-files ()
@@ -1026,23 +1012,6 @@
            (after dired-after-updating-hook first () activate)
          "Sort dired listings with directories first before adding marks."
          (dired-sort))
-       (defun dired-open-term ()
-         "Open an `ansi-term' that corresponds to current directory."
-         (interactive)
-         (let ((current-dir (dired-current-directory)))
-           (term-send-string
-            (custom/terminal)
-            (if (file-remote-p current-dir)
-                (let ((v (tramp-dissect-file-name current-dir t)))
-                  (format "ssh %s@%s\n"
-                          (aref v 1) (aref v 2)))
-              (format "cd '%s'\n" current-dir)))))
-       (defun sudo-dired ()
-         (interactive)
-         (let ((dir (expand-file-name default-directory)))
-           (if (string-match "^/sudo:" dir)
-               (user-error "Already in sudo")
-             (dired (concat "/sudo::" dir)))))
        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
        (setq dired-dwim-target t)
        (setq dired-listing-switches "-lah1v --group-directories-first")
@@ -1050,15 +1019,11 @@
        ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
        (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
-       (bind-key "!" 'custom/sudo-dired dired-mode-map)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-       (bind-key "`" 'custom/dired-open-term dired-mode-map)
        (define-key dired-mode-map "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))))
        (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
        (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
-
-     (req-package dired-sort-menu :disabled t)
 
      (req-package dired+
        :config
