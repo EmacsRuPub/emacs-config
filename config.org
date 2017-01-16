@@ -1694,6 +1694,7 @@
      (req-package fic-mode)
      (req-package nginx-mode)
      (req-package dockerfile-mode)
+     (req-package graphql-mode)
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp :tangle yes
