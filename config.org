@@ -2690,41 +2690,36 @@
          (setq jedi:complete-on-dot t)
          (setq jedi:goto-definition-marker-ring-length 32)
          :config
-         (defun custom/python-mode-hook ()
-           (auto-fill-mode 1)
-           (flycheck-mode)
-           (setq flycheck-checker 'python-flake8)
-           (setq indent-tabs-mode nil)
-           (setq tab-width 4)
-           ;;FIXME: find-project-flake8-config id somehow broken
-           ;; (setq flycheck-flake8rc (or (custom/find-project-flake8-config) flycheck-flake8rc))
-           (tooltip-mode -1)
-           (auto-complete-mode -1))
-         (add-hook 'python-mode-hook 'custom/python-mode-hook)
-         (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
-         (add-hook 'python-mode-hook 'common-hooks/newline-hook)
-         (add-hook 'python-mode-hook
-                   (lambda ()
-                     (setq imenu-create-index-function 'imenu-default-create-index-function)))
-         (add-hook 'python-mode-hook 'yas/minor-mode-on)
          (add-hook 'python-mode-hook 'jedi:setup)
          (add-hook 'python-mode-hook 'jedi:ac-setup))
 
        (req-package python-mode
-         :require region-bindings-mode
+         :require region-bindings-mode jedi
          :config
+         (defun custom/python-mode-hook ()
+           (setq flycheck-checker 'python-flake8)
+           (setq indent-tabs-mode nil)
+           (setq tab-width 4)
+           (setq imenu-create-index-function 'imenu-default-create-index-function)
+           (auto-fill-mode 1)
+           (flycheck-mode)
+           (tooltip-mode -1)
+           (auto-complete-mode -1)
+           (add-function :before-until (local 'eldoc-documentation-function)
+                         #'(lambda () "")))
+         ;; Highlight the call to ipdb
+         ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
+         (defun annotate-pdb ()
+           (highlight-lines-matching-regexp "import ipdb")
+           (highlight-lines-matching-regexp "ipdb.set_trace()"))
+         (add-hook 'python-mode-hook 'custom/python-mode-hook)
+         (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
+         (add-hook 'python-mode-hook 'common-hooks/newline-hook)
+         (add-hook 'python-mode-hook 'yas/minor-mode-on)
+         (add-hook 'python-mode-hook 'annotate-pdb)
          (bind-key "M-." 'jedi:goto-definition python-mode-map)
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
-         (bind-key "+" 'python-indent-shift-right region-bindings-mode-map)
-         (bind-key "_" 'python-indent-shift-left region-bindings-mode-map))
-
-       ;; Highlight the call to ipdb
-       ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
-       (defun annotate-pdb ()
-         (interactive)
-         (highlight-lines-matching-regexp "import ipdb")
-         (highlight-lines-matching-regexp "ipdb.set_trace()"))
-       (add-hook 'python-mode-hook 'annotate-pdb)
+         (bind-key "C-c >" 'indent-tools-hydra/body python-mode-map))
 
        (defhydra hydra-python ()
          "
