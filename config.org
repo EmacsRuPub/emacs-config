@@ -519,6 +519,14 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package crux)
     #+END_SRC
+*** paradox
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package paradox
+        :require seq let-alist spinner hydra
+        :config
+        (setq paradox-execute-asynchronously t)
+        (setq paradox-github-token private/paradox-github-token))
+    #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defun custom/keys-describe-prefixes ()
@@ -1072,11 +1080,6 @@
        (add-hook 'c-mode-hook 'helm-gtags-mode)
        (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
-     (req-package paradox
-       :require seq let-alist spinner hydra
-       :config
-       (setq paradox-execute-asynchronously t)
-       (setq paradox-github-token private/paradox-github-token))
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
