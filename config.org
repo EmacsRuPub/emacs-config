@@ -967,7 +967,6 @@
        (setq dired-listing-switches "-lah1v --group-directories-first")
        (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
        ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
-       (bind-key "C-c C-s" 'dired-toggle-sudo dired-mode-map)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
@@ -975,6 +974,17 @@
        (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
        (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
 
+     ;; Reload dired after making changes
+     (--each '(dired-do-rename
+               dired-create-directory
+               wdired-abort-changes)
+       (eval `(defadvice ,it (after revert-buffer activate)
+                (revert-buffer))))
+
+     (req-package dired-filetype-face)
+   #+END_SRC
+** dired extension packs
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package dired+
        :config
        (setq diredp-ignored-file-name 'green-face)
@@ -982,6 +992,10 @@
        (setq diredp-rare-priv 'white-red-face)
        (setq diredp-compressed-file-suffix 'darkyellow-face))
 
+     (req-package dired-x)
+   #+END_SRC
+** dired standalone extensions
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package wdired
        :defer t
        :config
@@ -992,17 +1006,9 @@
        (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
        (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
-     (req-package dired-x)
-     (req-package dired-toggle-sudo)
-
-     ;; Reload dired after making changes
-     (--each '(dired-do-rename
-               dired-create-directory
-               wdired-abort-changes)
-       (eval `(defadvice ,it (after revert-buffer activate)
-                (revert-buffer))))
-
-     (req-package dired-filetype-face)
+     (req-package dired-toggle-sudo
+       :config
+       (bind-key "!" 'dired-toggle-sudo dired-mode-map))
    #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp :tangle yes
