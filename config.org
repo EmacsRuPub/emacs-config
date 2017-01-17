@@ -4401,14 +4401,6 @@
                ("jr" "reference item" entry (file (at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
                ("jp" "project" entry (file (at-org-dir private/job-tasks-file)) "* BACKLOG %? %U :@job:project:")
                ))
-
-       (defadvice org-protocol-do-capture (around display-notify-after-capture activate)
-         (let ((result ad-do-it))
-           (custom/notify "Link captured"
-                          (concat (caar org-stored-links)
-                                  "\n"
-                                  (cadar org-stored-links))))
-         result)
      #+END_SRC
 **** holidays
      #+BEGIN_SRC emacs-lisp :tangle yes
