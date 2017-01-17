@@ -118,6 +118,9 @@
      (req-package f
        :force t
        :require s dash)
+   #+END_SRC
+** elisp extensions
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package names :force t)
      (req-package anaphora)
    #+END_SRC
