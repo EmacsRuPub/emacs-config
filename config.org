@@ -2090,6 +2090,7 @@
        :config
        (setq company-idle-delay t)
        (setq company-tooltip-align-annotations t)
+       (setq company-show-numbers t)
        (global-company-mode)
        (define-key company-active-map (kbd "\C-n") 'company-select-next)
        (define-key company-active-map (kbd "\C-p") 'company-select-previous)
