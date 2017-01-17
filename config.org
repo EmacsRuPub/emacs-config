@@ -572,7 +572,7 @@
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun keys-describe-prefixes ()
+     (defun custom/keys-describe-prefixes ()
        (interactive)
        (with-output-to-temp-buffer "*Bindings*"
          (dolist (letter-group (list
