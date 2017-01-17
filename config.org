@@ -1098,11 +1098,22 @@
        :config
        (winner-mode 1))
 
-     (req-package windsize)
+     (req-package golden-ratio
+       :delight golden-ratio-mode
+       :init
+       (golden-ratio-mode 1))
 
      (req-package framemove
        :config
        (setq framemove-hook-into-windmove t))
+     (req-package windsize
+       :disabled t ; have no sense with golden-ratio enabled
+       :bind
+       (("C-s-k" . windsize-up)
+        ("C-s-j" . windsize-down)
+        ("C-s-h" . windsize-left)
+        ("C-s-l" . windsize-right)
+        ))
 
      (req-package ace-window
        :require avy
@@ -1114,6 +1125,8 @@
        (custom-set-faces
         '(aw-leading-char-face
           ((t (:inherit ace-jump-face-foreground :height 3.0))))))
+
+     (req-package tile)
 
      (req-package transpose-frame
        :config
@@ -1127,8 +1140,6 @@
          ("<right>" rotate-frame-clockwise "rotate ->")
          ("q" nil "cancel"))
        (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
-
-     (req-package tile)
 
      ;;TODO: plan docstring
      (defhydra hydra-window (global-map "<f2>")
@@ -1163,6 +1174,7 @@
        ("-" text-scale-decrease)
        ("f" make-frame-command)
        ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
+       ("t" tile :color blue)
        ("q" nil "cancel"))
    #+END_SRC
 ** scope
