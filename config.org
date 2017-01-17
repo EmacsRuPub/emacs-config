@@ -1143,10 +1143,6 @@
          ("q" nil "cancel"))
        (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
 
-     (req-package ewmctrl
-       :config
-       (global-set-key (kbd "<f12>") 'ewmctrl))
-
      (req-package tile)
 
      ;;TODO: plan docstring
