@@ -4413,6 +4413,11 @@
      #+END_SRC
 **** holidays
      #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package russian-holidays
+         :config
+         (setq calendar-holidays
+               (push russian-holidays calendar-holidays)))
+
        (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
        (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
 
