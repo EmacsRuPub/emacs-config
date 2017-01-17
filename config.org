@@ -4825,6 +4825,9 @@
 * help
   #+BEGIN_SRC emacs-lisp :tangle yes
     (req-package info)
+    (req-package info-buffer
+      :bind (("C-h i" . info-buffer)))
+
     (req-package help+)
 
     (req-package helm-descbinds
