@@ -1758,6 +1758,11 @@
        (dtrt-indent-mode))
 
      (setq-default tab-width 4)
+
+     ;;TODO: ensure python part is installed
+     (req-package indent-tools
+       :config
+       (global-set-key (kbd "C-c 3") 'indent-tools-hydra/body))
    #+END_SRC
 ** Using settings from .editorconfig
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4642,6 +4647,112 @@
      #+BEGIN_SRC elisp
        (add-to-list 'org-file-apps '("\\.pdf\\'" . (org-pdfview-open link)))
        (add-to-list 'org-file-apps '("\\.pdf::\\(\\d+\\)\\'" . (org-pdfview-open link)))
+     #+END_SRC
+**** agenda navigation
+     #+BEGIN_SRC emacs-lisp :tangle no
+     (defun air-org-agenda-next-header ()
+       "Jump to the next header in an agenda series."
+       (interactive)
+       (air--org-agenda-goto-header))
+
+     (defun air-org-agenda-previous-header ()
+       "Jump to the previous header in an agenda series."
+       (interactive)
+       (air--org-agenda-goto-header t))
+
+     (defun air--org-agenda-goto-header (&optional backwards)
+       "Find the next agenda series header forwards or BACKWARDS."
+       (let ((pos (save-excursion
+                    (goto-char (if backwards
+                                   (line-beginning-position)
+                                 (line-end-position)))
+                    (let* ((find-func (if backwards
+                                          'previous-single-property-change
+                                        'next-single-property-change))
+                           (end-func (if backwards
+                                         'max
+                                       'min))
+                           (all-pos-raw (list (funcall find-func (point) 'org-agenda-structural-header)
+                                              (funcall find-func (point) 'org-agenda-date-header)))
+                           (all-pos (cl-remove-if-not 'numberp all-pos-raw))
+                           (prop-pos (if all-pos (apply end-func all-pos) nil)))
+                      prop-pos))))
+         (if pos (goto-char pos))
+         (if backwards (goto-char (line-beginning-position)))))
+     #+END_SRC
+
+**** my-org-region-to-property
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (defun org-read-entry-property-name ()
+         "Read a property name from the current entry."
+         (let ((completion-ignore-case t)
+               (default-prop (or (and (org-at-property-p)
+                                      (org-match-string-no-properties 2))
+                                 org-last-set-property)))
+           (org-completing-read
+            (format "Property [%s]: " (if default-prop default-prop ""))
+            (org-entry-properties nil nil)
+            nil nil nil nil default-prop)))
+
+       (defun my-org-region-to-property (&optional property)
+         "Copies the region as value to an Org-mode property"
+         (interactive)
+         ;; if no region is defined, do nothing
+         (if (use-region-p)
+             ;; if a region string is found, ask for a property and set property to
+             ;; the string in the region
+             (let ((val (replace-regexp-in-string
+                         "\\`[ \t\n]*" ""
+                         (replace-regexp-in-string "[ \t\n]*\\'" ""
+                                                   (substring (buffer-string)
+                                                              (- (region-beginning) 1)
+                                                              (region-end))))
+                        )
+                   ;; if none was stated by user, read property from user
+                   (prop (or property
+                             (org-read-entry-property-name))))
+               ;; set property
+               (org-set-property prop val))))
+     #+END_SRC
+
+**** #'org-tags-completion-function
+**** file+datetree navigation
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (goto-char (org-find-olp (list "2016" "2016-01 January") 't))
+       (goto-char (org-find-exact-headline-in-buffer "2016-01 January"))
+     #+END_SRC
+**** org-protocol + capture
+     :PROPERTIES:
+     :ID:       556df909-6821-4384-b2ae-1ddfaf8edde7
+     :END:
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (req-package org-protocol
+         :config
+         (defun custom/org-protocol-handler ()
+           "Create a new frame and run org-capture."
+           (interactive)
+           (make-frame '((name . "capture")))
+           (select-frame-by-name "capture")
+           (delete-other-windows)
+           (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+             (org-capture)))
+         (pushnew org-protocol-protocol-alist
+                  '(("capture"
+                     :protocol "capture"
+                     :function custom/org-protocol-handler))))
+     #+END_SRC
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (defadvice org-capture-finalize
+           (after delete-capture-frame activate)
+         "Advise capture-finalize to close the frame"
+         (if (equal "capture" (frame-parameter nil 'name))
+             (delete-frame)))
+
+       (defadvice org-capture-destroy
+           (after delete-capture-frame activate)
+         "Advise capture-destroy to close the frame"
+         (if (equal "capture" (frame-parameter nil 'name))
+             (delete-frame)))
      #+END_SRC
 ** sauron
    #+BEGIN_SRC emacs-lisp :tangle yes
