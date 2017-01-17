@@ -1046,6 +1046,11 @@
        :config
        (turn-on-fuzzy-isearch))
 
+     (req-package wgrep
+       :config
+       (bind-key "C-x C-q" 'wgrep-change-to-wgrep-mode grep-mode-map)
+       (bind-key "C-c C-c" 'wgrep-finish-edit grep-mode-map))
+
      (req-package helm-ag
        :require helm
        :config
