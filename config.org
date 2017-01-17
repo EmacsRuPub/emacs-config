@@ -1094,10 +1094,6 @@
    #+END_SRC
 ** operations with windows
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package zoom-window
-       :config
-       (setq zoom-window-mode-line-color "DarkGreen"))
-
      (req-package windmove
        :bind
        (("C-s-<up>" . windmove-up)
