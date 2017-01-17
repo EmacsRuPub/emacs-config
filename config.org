@@ -491,55 +491,9 @@
           ("h" helm-hunks "view hunks in a file") ;TODO move to more appropriate place
           ("q" nil "cancel"))
         (global-set-key (kbd "C-c r") 'hydra-custom-helm/body))
-
-      (req-package wgrep-helm
-        :require helm wgrep) ;TODO: maybe configure
-
-      (req-package helm-descbinds
-        :require helm
-        :config
-        (helm-descbinds-mode 1)
-        (bind-key "C-x C-d" 'helm-descbinds))
-
-      (req-package helm-helm-commands :require helm)
-      (req-package helm-dired-recent-dirs :require helm)
-      (req-package helm-flycheck :require helm)
-      (req-package helm-company)
-
-      (req-package helm-ag
-        :require helm
-        :config
-        (setq helm-ag-insert-at-point 'symbol)
-        (setq helm-ag-fuzzy-match t)
-        ;;TODO: add other common escapes
-        (defadvice helm-ag--query (after escape-search-term activate)
-          (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
-
-      ;;TODO: sync and maybe slurp something from rc-cc
-      (req-package helm-gtags
-        :require helm
-        :defer t
-        :config
-        (setq helm-gtags-path-style 'relative)
-        (setq helm-gtags-ignore-case t)
-        (setq helm-gtags-auto-update t)
-        (setq helm-gtags-use-input-at-cursor t)
-        (setq helm-gtags-pulse-at-cursor t)
-        (setq helm-gtags-suggested-key-mapping t)
-        (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
-        (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
-        (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-        (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
-        (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
-        (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
-        (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
-        (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
-        (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
-        (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
-        (add-hook 'dired-mode-hook 'helm-gtags-mode)
-        (add-hook 'c-mode-hook 'helm-gtags-mode)
-        (add-hook 'c++-mode-hook 'helm-gtags-mode))
-
+    #+END_SRC
+*** fuzzy searching for helm
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package helm-fuzzier
         :require helm
         :config
@@ -549,11 +503,6 @@
         :require helm flx
         :config
         (helm-flx-mode 1))
-
-      (req-package helm-hunks
-        :commands helm-hunks
-        :config
-        (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
     #+END_SRC
 *** tramp
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -1082,6 +1031,40 @@
      (req-package fuzzy
        :config
        (turn-on-fuzzy-isearch))
+
+     (req-package helm-ag
+       :require helm
+       :config
+       (setq helm-ag-insert-at-point 'symbol)
+       (setq helm-ag-fuzzy-match t)
+       ;;TODO: add other common escapes
+       (defadvice helm-ag--query (after escape-search-term activate)
+         (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
+
+     ;;TODO: sync and maybe slurp something from rc-cc
+     (req-package helm-gtags
+       :require helm
+       :defer t
+       :config
+       (setq helm-gtags-path-style 'relative)
+       (setq helm-gtags-ignore-case t)
+       (setq helm-gtags-auto-update t)
+       (setq helm-gtags-use-input-at-cursor t)
+       (setq helm-gtags-pulse-at-cursor t)
+       (setq helm-gtags-suggested-key-mapping t)
+       (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
+       (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
+       (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
+       (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
+       (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
+       (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
+       (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
+       (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
+       (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
+       (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
+       (add-hook 'dired-mode-hook 'helm-gtags-mode)
+       (add-hook 'c-mode-hook 'helm-gtags-mode)
+       (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
      (req-package paradox
        :require seq let-alist spinner hydra
@@ -2174,6 +2157,7 @@
         (setq flycheck-check-syntax-automatically '(idle-change)))
 
       (req-package flycheck-color-mode-line :require flycheck dash)
+      (req-package helm-flycheck :require helm)
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 *** gdb
@@ -2355,6 +2339,11 @@
       (autoload 'vc-git-root "vc-git")
       (autoload 'vc-svn-root "vc-svn")
       (autoload 'vc-hg-root "vc-hg")
+
+      (req-package helm-hunks
+        :commands helm-hunks
+        :config
+        (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
 
       (remove-hook 'find-file-hooks 'vc-find-file-hook)
     #+END_SRC
@@ -4837,6 +4826,12 @@
   #+BEGIN_SRC emacs-lisp :tangle yes
     (req-package info)
     (req-package help+)
+
+    (req-package helm-descbinds
+      :require helm
+      :config
+      (helm-descbinds-mode 1)
+      (bind-key "C-x C-d" 'helm-descbinds))
 
     (add-to-list 'Info-directory-list "/usr/share/info")
 
