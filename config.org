@@ -123,6 +123,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package names :force t)
      (req-package anaphora)
+     (req-package noflet)
    #+END_SRC
 * appearance
 ** populate fonts inventory
