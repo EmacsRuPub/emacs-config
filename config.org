@@ -3507,7 +3507,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package notmuch
         :config
-        (setq mm-text-html-renderer 'shr)
+        (setq mm-text-html-renderer 'w3m)
         (setq notmuch-mua-compose-in 'current-window)
         (setq notmuch-identities custom/gmail-accounts)
         (setq notmuch-fcc-dirs
