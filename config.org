@@ -2203,6 +2203,7 @@
         (setq gud-chdir-before-run nil)
         (setq gud-tooltip-mode t))
     #+END_SRC
+**** BACKLOG [#B] check setup
 *** docker
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package docker
