@@ -4120,7 +4120,7 @@
                                     (push entry org-agenda-files)))
                   t)
 
-       (dolist (orgfile (directory-files (at-org-dir) t "journal") )
+       (dolist (orgfile (directory-files (at-org-dir "/journals") t "journal") )
          (setq org-agenda-files
                (delete orgfile org-agenda-files)))
 
