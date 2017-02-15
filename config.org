@@ -1008,7 +1008,6 @@
        :defer t
        :config
        (setq wdired-allow-to-change-permissions 'advanced)
-       (setq wdired-allow-to-change-permissions t)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
        (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
        (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
