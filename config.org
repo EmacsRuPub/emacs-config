@@ -4442,6 +4442,7 @@
           (dot . t)
           (ditaa . t)
           (emacs-lisp . t)
+          (lisp . t)
           (js . t)
           (latex . t)
           (org . t)
