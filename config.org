@@ -77,7 +77,6 @@
 ** Encryption and security
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package epa
-       :require epg
        :config
        (setq epg-gpg-program "gpg2")
        (epa-file-enable)
@@ -159,16 +158,6 @@
        :config
        (load-theme 'darkburn t))
    #+END_SRC
-** set common colors
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defvar bg-colors "emacs background colors list")
-     (defvar fg-colors "emacs foreground colors list")
-
-     (setq bg-colors '("cornsilk" "gray0" "gray18" "gray40"))
-     (setq fg-colors '("gainsboro" "navy"))
-     (setq mouse-colors '("firebrick" "yellow"))
-
-     (set-cursor-color "chartreuse2")
    #+END_SRC
 ** setup fonts
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -182,7 +171,6 @@
        :config
        (unicode-fonts-setup))
    #+END_SRC
-** update some faces values
    Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
    #+BEGIN_SRC emacs-lisp :tangle yes
      (when (boundp 'zenburn-colors-alist)
@@ -372,7 +360,6 @@
                     (server-running-p))
          (require 'server)
          (server-start))
-       ;; (add-hook 'kill-emacs-hook 'custom/save-buffer-clients-on-exit)
        (add-hook 'server-visit-hook
                  (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit))))
    #+END_SRC
