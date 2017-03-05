@@ -2684,18 +2684,22 @@
        (req-package pep8)
        (req-package python-pep8)
 
-       (req-package jedi
-         :require jedi-core auto-complete ; unfortunately, auto-complete is hard dep here
+       (req-package jedi-core
          :init
-         (req-package company-jedi)
          (setq jedi:complete-on-dot t)
          (setq jedi:goto-definition-marker-ring-length 32)
          :config
          (add-hook 'python-mode-hook 'jedi:setup)
-         (add-hook 'python-mode-hook 'jedi:ac-setup))
+         ;; (add-hook 'python-mode-hook 'jedi:ac-setup)
+         )
+
+       (req-package company-jedi
+         :require company jedi-core
+         :config
+         (add-to-list 'company-backends 'company-jedi))
 
        (req-package python-mode
-         :require region-bindings-mode jedi
+         :require region-bindings-mode
          :config
          (defun custom/python-mode-hook ()
            (setq flycheck-checker 'python-flake8)
@@ -2705,7 +2709,6 @@
            (auto-fill-mode 1)
            (flycheck-mode)
            (tooltip-mode -1)
-           (auto-complete-mode -1)
            (add-function :before-until (local 'eldoc-documentation-function)
                          #'(lambda () "")))
          ;; Highlight the call to ipdb
