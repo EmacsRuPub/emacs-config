@@ -1002,6 +1002,10 @@
      (req-package dired-toggle-sudo
        :config
        (bind-key "!" 'dired-toggle-sudo dired-mode-map))
+
+     (req-package dired-narrow
+       :config
+       (bind-key "/" 'dired-narrow dired-mode-map))
    #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp :tangle yes
