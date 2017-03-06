@@ -467,10 +467,10 @@
           (setq helm-google-suggest-use-curl-p t))
         ;;TODO: investigate and bind 'helm-resume
         ;;TODO: investigate and bind 'helm-multi-files
-        (helm-mode 1)
         (helm-autoresize-mode 1)
         (setq helm-autoresize-max-height 0)
         (setq helm-autoresize-min-height 20)
+        (helm-mode 1)
         (defhydra hydra-custom-helm ()
           ("p" custom/open-portage-file "open portage file")
           ("e" custom/open-encrypted-document "open encrypted document")
