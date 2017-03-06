@@ -4238,7 +4238,6 @@
      #+END_SRC
 **** refiling customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-refile-allow-creating-parent-nodes 'confirm)
        (setq org-refile-target-verify-function 'custom/verify-refile-target)
        (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
        (setq org-refile-use-outline-path 'file)
