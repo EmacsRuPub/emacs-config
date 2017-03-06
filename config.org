@@ -466,7 +466,6 @@
         (when (executable-find "curl")
           (setq helm-google-suggest-use-curl-p t))
         ;;TODO: investigate and bind 'helm-resume
-        ;;TODO: investigate and bind 'helm-multi-files
         (helm-autoresize-mode 1)
         (setq helm-autoresize-max-height 0)
         (setq helm-autoresize-min-height 20)
