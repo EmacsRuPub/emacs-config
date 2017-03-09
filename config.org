@@ -1025,6 +1025,10 @@
          (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
          ad-do-it))
 
+     (req-package socyl
+       :config
+       (setq socyl-backend 'ripgrep))
+
      (req-package phi-search-mc
        :require phi-search multiple-cursors
        :config
@@ -1300,7 +1304,7 @@
        "
        ("h" helm-mini)
        ("q" helm-projectile)
-       ("r" sift-regexp)
+       ("r" socyl-search-regexp)
        ("f" custom/helm-find-files)
        ("s" helm-semantic-or-imenu)
        ("p" helm-projectile-switch-project)
@@ -1328,6 +1332,7 @@
      (global-set-key (kbd "C-r") 'phi-search-backward)
      (global-set-key (kbd "C-x k") 'kill-buffer)
    #+END_SRC
+** BACKLOG make searching more integral, in terms of backends, packages, etc.
 * editing
 ** utils for files and buffers
    #+BEGIN_SRC emacs-lisp :tangle yes
