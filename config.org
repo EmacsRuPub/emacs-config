@@ -125,7 +125,7 @@
      (req-package noflet)
    #+END_SRC
 * appearance
-** populate fonts inventory
+** define fonts
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
