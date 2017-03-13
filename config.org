@@ -164,7 +164,7 @@
      (setq font-lock-maximum-decoration t)
      (setq scalable-fonts-allowed t)
 
-     (custom/set-x-font "iosevka")
+     (custom/set-x-font "hack-regular")
 
      (req-package unicode-fonts
        :require persistent-soft
