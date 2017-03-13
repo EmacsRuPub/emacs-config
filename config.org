@@ -152,7 +152,7 @@
        (powerline-default-theme))
    #+END_SRC
 ** load themes and choose one
-   Also some other good-looking themes are "deep-thought-theme" and "material-theme"
+   Also some other good-looking theme is "material-theme"
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package darkburn-theme
        :config
