@@ -667,6 +667,8 @@
    #+END_SRC
 ** encodings
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (define-coding-system-alias 'UTF-8 'utf-8)
+     (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
      (setq locale-coding-system 'utf-8)
      (set-default buffer-file-coding-system 'utf-8-unix)
      (prefer-coding-system 'utf-8)
@@ -675,7 +677,6 @@
      (set-keyboard-coding-system 'utf-8)
      (set-selection-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
-     (define-coding-system-alias 'UTF-8 'utf-8)
    #+END_SRC
 ** OS-specific stuff
    Besides the common part of the common setup (sic!) there is also
@@ -3664,7 +3665,6 @@
        (setq bbdb/mail-auto-create-p 'bbdb-ignore-most-messages-hook)
        (setq news-reply-header-hook nil)
        (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
-       (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
        (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
        (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
        (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
