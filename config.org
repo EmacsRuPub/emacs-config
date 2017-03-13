@@ -3598,6 +3598,8 @@
          ("r" webpaste-paste-region "paste region")
          ("q" nil "cancel"))
        (global-set-key (kbd "M-t") 'hydra-transpose/body))
+
+     (req-package ein)
    #+END_SRC
 * pim
 ** elfeed
