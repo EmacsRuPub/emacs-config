@@ -2717,6 +2717,7 @@
            (auto-fill-mode 1)
            (flycheck-mode)
            (tooltip-mode -1)
+           (highlight-indentation-mode -1)
            (add-function :before-until (local 'eldoc-documentation-function)
                          #'(lambda () "")))
          ;; Highlight the call to ipdb
@@ -2734,6 +2735,11 @@
          (bind-key "M-." 'jedi:goto-definition python-mode-map)
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
          (bind-key "C-c >" 'indent-tools-hydra/body python-mode-map))
+
+       (req-package elpy
+         :config
+         (elpy-enable)
+         (setq elpy-rpc-backend "jedi"))
 
        (defhydra hydra-python ()
          "

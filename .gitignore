@@ -9,6 +9,7 @@ credentials.el.gpg
 customizations.el
 data
 elpa
+etc
 private
 request
 savehist
