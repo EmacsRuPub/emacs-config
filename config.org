@@ -9,14 +9,21 @@
            (file-name-directory
             (or (buffer-file-name) load-file-name)))
 
+     (defun ensure-leading-slash (suffix)
+       (if suffix
+           (concat (if (string-match "^/" suffix) "" "/") suffix)
+         ""))
+
      (defun at-homedir (&optional suffix)
-       (concat home-directory suffix))
+       (concat home-directory (ensure-leading-slash suffix)))
 
      (defun at-org-dir (&optional suffix)
-       (concat (at-homedir "/docs/org") suffix))
+       (concat (at-homedir "/docs/org")
+               (ensure-leading-slash suffix)))
 
      (defun at-org-kb-dir (&optional suffix)
-         (concat (at-homedir "/docs/org-kb") suffix))
+       (concat (at-homedir "/docs/org-kb")
+               (ensure-leading-slash suffix)))
 
      (defun at-config-basedir (&optional suffix)
        (concat config-basedir suffix))
@@ -30,8 +37,6 @@
           (setq debug-on-error debug-on-error-orig)
           (setq debug-on-quit debug-on-quit-orig)))
    #+END_SRC
-**** TODO unify slashes usage
-     see https://github.com/amadev/emacs-conf#Пути-от-домашней-папки-и-emacsd for example
 ** working directories
    A bunch of directories for various working datasets
    As the order of loading corresponding extensions,
