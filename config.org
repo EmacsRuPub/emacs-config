@@ -4091,6 +4091,8 @@
          (org-clock-today-mode 1))
 
        (req-package secretaria)
+
+       (req-package org-mru-clock)
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4833,6 +4835,8 @@
        ("l" org-deadline :color blue)
        ("." org-clock-in)
        ("," org-clock-out)
+       (">" org-mru-clock-in)
+       ("^" org-mru-clock-select-recent-task)
        ("t" org-clock-modify-effort-estimate)
        ("c" org-clock-cancel)
        ("r" org-clock-report)
