@@ -162,6 +162,11 @@
      (req-package darkburn-theme
        :config
        (load-theme 'darkburn t))
+
+     (req-package nimbus-theme
+       :disabled t
+       :config
+       (load-theme 'nimbus t))
    #+END_SRC
    #+END_SRC
 ** setup fonts
