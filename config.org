@@ -635,8 +635,6 @@
              haskell-mode
              emacs-lisp-mode
              lisp-mode
-             scheme-mode
-             erlang-mode
              python-mode
              js-mode
              js2-mode
@@ -650,9 +648,6 @@
              haskell-mode
              emacs-lisp-mode
              lisp-mode
-             scheme-mode
-             erlang-mode
-             clojure-mode
              python-mode
              ))
      ;; sexp-based editing modes list
@@ -1696,10 +1691,23 @@
        :defer t
        :mode ".vim\\(rc\\)?$")
 
-     (req-package crontab-mode)
+     (req-package sh-script
+       :mode (("bashrc$" . sh-mode)
+              ("bash_profile$" . sh-mode)
+              ("bash_aliases$" . sh-mode)
+              ("bash_local$" . sh-mode)
+              ("bash_completion$" . sh-mode)
+              (".powenv$" . sh-mode)))
+
+     (req-package nginx-mode
+       :mode ("nginx" . nginx-mode))
+
+     (req-package crontab-mode
+       :mode (("cron" . crontab-mode)
+              ("crontab" . crontab-mode)))
+
      (req-package csv-mode)
      (req-package fic-mode)
-     (req-package nginx-mode)
      (req-package dockerfile-mode)
      (req-package graphql-mode)
    #+END_SRC
@@ -2036,6 +2044,8 @@
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package yasnippet
          :delight yas-minor-mode
+         :mode (("yasnippet/snippets" . snippet-mode)
+                ("\\.yasnippet$" . snippet-mode))
          :config
          ;; hook for automatic reloading of changed snippets
          (defun custom/update-yasnippets-on-save ()
@@ -2322,6 +2332,15 @@
       (req-package hide-comnt)
       (req-package regex-tool)
     #+END_SRC
+*** related major modes
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
+      (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
+      (add-to-list 'auto-mode-alist '("\\.log$" . auto-revert-mode))
+      (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
+      (add-to-list 'auto-mode-alist '("diff" . diff-mode))
+      (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+    #+END_SRC
 ** vcs
 *** git
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2466,6 +2485,7 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package js2-mode
         :require cl-lib
+        :mode ("\\.js$" . js2-mode)
         :init
         (req-package js2-imenu-extras)
         :config
@@ -2665,7 +2685,11 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package haskell-mode
         :require cl-lib
-        :mode "\\.hs\\'"
+        :mode (("\\.hs\\'" . haskell-mode)
+               ("\\.hsc$" . haskell-mode)
+               ("\\.[hg]s$"  . haskell-mode)
+               ("\\.hi$"     . haskell-mode)
+               ("\\.l[hg]s$" . literate-haskell-mode))
         :init
         (req-package haskell-indent)
         (req-package haskell-align-imports)
@@ -2816,6 +2840,12 @@
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package cc-mode
          :require helm-gtags
+         :mode (("\\.ipp?$" . c++-mode)
+                ("\\.h$" . c++-mode)
+                ("CMakeLists\\.txt\\'" . cmake-mode)
+                ("\\.cmake\\'" . cmake-mode)
+                ("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode)
+                ("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
          :config
          (define-key c-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
          (define-key c-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
@@ -2906,25 +2936,6 @@
        (add-hook 'c-mode-common-hook 'common-hooks/prog-helpers)
        (add-hook 'c-mode-hook 'common-hooks/newline-hook)
      #+END_SRC
-**** auto-mode setup
-***** common
-      #+BEGIN_SRC emacs-lisp :tangle yes
-        (add-to-list 'auto-mode-alist '("\\.ipp?$" . c++-mode))
-        (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-        ;; (add-to-list 'auto-mode-alist '("/usr/include/qt4" . c++-mode))
-        (add-to-list 'auto-mode-alist '("/usr/include/qt4/Qt" . c++-mode))
-        (add-to-list 'auto-mode-alist '("/usr/include/qt4/QtNetwork" . c++-mode))
-        (add-to-list 'auto-mode-alist '("/usr/include/boost" . c++-mode))
-        (add-to-list 'auto-mode-alist '("/usr/include/c++/4.3" . c++-mode))
-
-        (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
-        (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
-      #+END_SRC
-***** PostgreSQL specialized
-      #+BEGIN_SRC emacs-lisp :tangle yes
-        (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode))
-        (add-to-list 'auto-mode-alist '("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
-      #+END_SRC
 **** TBD
 ***** BACKLOG review and maybe rebind keys
 ***** BACKLOG bind helm-gtags-find-{rtags,symbol}
@@ -2980,6 +2991,7 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package php-mode
         :require cl-lib
+        :mode ("\\.php" . php-mode)
         :config
         (setq php-manual-path "/home/octocat/documentation/php-chunked-xhtml/")
         (defun custom/php-mode-hook ()
@@ -3003,13 +3015,19 @@
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package actionscript-mode :defer t)
+
       (req-package go-mode :defer t
         :init
         (req-package company-go))
-      (req-package json-mode :require json-reformat json-snatcher)
+
+      (req-package json-mode
+        :require json-reformat json-snatcher
+        :mode ("\\.json$" . json-mode))
+
       (req-package lua-mode :defer t
         :init
         (req-package company-lua))
+
       (req-package rust-mode :defer t)
     #+END_SRC
 ** webdev
@@ -3022,7 +3040,11 @@
 
       (req-package markdown-mode
         :require cl-lib
-        :defer t
+        :mode (("\\.markdown$" . markdown-mode)
+               ("\\.md$" . markdown-mode)
+               ("\\.mkd$" . markdown-mode)
+               ("\\.pdc$" . markdown-mode)
+               ("\\bREADME$" . markdown-mode))
         :config
         (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
         (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
@@ -3054,6 +3076,13 @@
       (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
       (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
 
+      (add-to-list 'auto-mode-alist
+                   (cons (concat "\\."
+                                 (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
+                         'nxml-mode))
+
+      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
+
       ;; TODO: integrate docbook-menu into el-get, probable relevant links below
       ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
       ;; http://www.emacswiki.org/emacs/DocbookXmlMode
@@ -3061,8 +3090,14 @@
 *** multiple major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package web-mode
-        :defer t
-        :mode "\\.html?\\'"
+        :mode (("\\.phtml\\'" . web-mode)
+               ("\\.tpl\\.php\\'" . web-mode)
+               ("\\.[agj]sp\\'" . web-mode)
+               ("\\.as[cp]x\\'" . web-mode)
+               ("\\.erb\\'" . web-mode)
+               ("\\.mustache\\'" . web-mode)
+               ("\\.djhtml\\'" . web-mode)
+               ("\\.html?\\'" . web-mode))
         :init
         (req-package company-web-html)
         :config
@@ -3087,15 +3122,7 @@
                     (unless tern-mode (tern-mode))
                   (if tern-mode (tern-mode -1))))))
         ;; manual autocomplete
-        (define-key web-mode-map (kbd "M-SPC") 'company-complete)
-        (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-        (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+        (define-key web-mode-map (kbd "M-SPC") 'company-complete))
 
       (req-package web-mode-edit-element
         :config
@@ -4138,6 +4165,9 @@
 
        ;; extend priorities set
        (setq org-lowest-priority 70)
+
+       (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+       (add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
      #+END_SRC
 **** user speed commands
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4903,9 +4933,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package pdf-tools
        :require tablist let-alist
+       :mode ("\\.pdf$" . pdf-view-mode)
        :config
        (add-hook 'after-init-hook 'pdf-tools-install)
-       (add-to-list 'auto-mode-alist '("\\.pdf$" . pdf-view-mode))
        (defun custom/scroll-other-window (&optional arg)
          (interactive "P")
          (awhen (ignore-errors (other-window-for-scrolling))
@@ -4958,6 +4988,7 @@
          (setq bib-cite-use-reftex-view-crossref t)))
 
      (req-package latex
+       :mode ("\\.tex$" . latex-mode)
        :config
        (add-hook 'LaTeX-mode-hook 'custom/tex-mode-hook)
        (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
@@ -5077,109 +5108,6 @@
       ("h" (custom/open-info "gcl" "*hyperspec*")))
     (global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
   #+END_SRC
-* auto-modes
-** programming languages
-*** scheme
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.dsl$" . scheme-mode))
-      (add-to-list 'auto-mode-alist '("\\.scm$" . scheme-mode))
-    #+END_SRC
-*** haskell
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.hsc$" . haskell-mode))
-      (add-to-list 'auto-mode-alist '("\\.[hg]s$"  . haskell-mode))
-      (add-to-list 'auto-mode-alist '("\\.hi$"     . haskell-mode))
-      (add-to-list 'auto-mode-alist '("\\.l[hg]s$" . literate-haskell-mode))
-    #+END_SRC
-*** lispy modes
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.wl$" . emacs-lisp-mode))
-      (add-to-list 'auto-mode-alist '("\\.el" . emacs-lisp-mode))
-      (add-to-list 'auto-mode-alist '("\\.emacs$" . emacs-lisp-mode))
-      (add-to-list 'auto-mode-alist '("\\.gnus$" . emacs-lisp-mode))
-      (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
-      (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
-    #+END_SRC
-*** erlang
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
-      (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
-    #+END_SRC
-*** JS
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-      (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
-    #+END_SRC
-*** PHP
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.php" . php-mode))
-    #+END_SRC
-*** sh-mode
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("bashrc$" . sh-mode))
-      (add-to-list 'auto-mode-alist '("bash_profile$" . sh-mode))
-      (add-to-list 'auto-mode-alist '("bash_aliases$" . sh-mode))
-      (add-to-list 'auto-mode-alist '("bash_local$" . sh-mode))
-      (add-to-list 'auto-mode-alist '("bash_completion$" . sh-mode))
-      (add-to-list 'auto-mode-alist '(".powenv$" . sh-mode))
-    #+END_SRC
-*** various major modes
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
-      (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
-      (add-to-list 'auto-mode-alist '("\\.log$" . auto-revert-mode))
-      (add-to-list 'auto-mode-alist '("\\.doku?$" . simple-dokuwiki-mode))
-      (add-to-list 'auto-mode-alist '("\\.properties$" . java-properties-generic-mode))
-      (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
-      (add-to-list 'auto-mode-alist '("cron" . crontab-mode))
-      (add-to-list 'auto-mode-alist '("crontab" . crontab-mode))
-      (add-to-list 'auto-mode-alist '("nginx" . nginx-mode))
-      (add-to-list 'auto-mode-alist '("diff" . diff-mode))
-    #+END_SRC
-** snippets
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
-     (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
-   #+END_SRC
-** presentation
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
-     (add-to-list 'auto-mode-alist '("\\.svg$" . image-mode))
-   #+END_SRC
-** markUP
-*** html
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      ;; (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
-      (add-to-list 'auto-mode-alist '("\\.html$" . html-mode))
-      (add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
-      (add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
-    #+END_SRC
-*** xml
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist
-                   (cons (concat "\\."
-                                 (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
-                         'nxml-mode))
-
-      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
-    #+END_SRC
-*** markdown
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-      (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-      (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
-      (add-to-list 'auto-mode-alist '("\\.pdc$" . markdown-mode))
-      (add-to-list 'auto-mode-alist '("\\bREADME$" . markdown-mode))
-    #+END_SRC
-*** rest
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
-      (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
-      (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-      (add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
-      (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
-      (add-to-list 'auto-mode-alist '("\\.rest$" . rst-mode))
-    #+END_SRC
 * try
 ** kenobi
    #+BEGIN_SRC emacs-lisp :tangle no
