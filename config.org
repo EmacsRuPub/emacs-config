@@ -1993,92 +1993,109 @@
                       #'endless/fill-or-unfill)
     #+END_SRC
 * completion
-** yasnippet
-*** definitions
+** snippets
+*** yasnippet
+**** definitions
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (define-namespace custom/
+
+       ;; Inter-field navigation
+       (defun yas-goto-end-of-active-field ()
+         (interactive)
+         (let* ((snippet (car (yas--snippets-at-point)))
+                (position (yas--field-end (yas--snippet-active-field snippet))))
+           (if (= (point) position)
+               (move-end-of-line)
+             (goto-char position))))
+
+       (defun yas-goto-start-of-active-field ()
+         (interactive)
+         (let* ((snippet (car (yas--snippets-at-point)))
+                (position (yas--field-start (yas--snippet-active-field snippet))))
+           (if (= (point) position)
+               (move-beginning-of-line)
+             (goto-char position))))
+
+       (defun do-yas-expand ()
+         (let ((yas/fallback-behavior 'return-nil))
+           (yas/expand)))
+
+       (defun tab-indent-or-complete ()
+         (interactive)
+         (if (minibufferp)
+             (minibuffer-complete)
+           (if (or (not yas/minor-mode)
+                   (null (custom/do-yas-expand)))
+               (if (check-expansion)
+                   (company-complete-common)
+                 (indent-for-tab-command)))))
+
+       )
+     #+END_SRC
+**** setup
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package yasnippet
+         :delight yas-minor-mode
+         :config
+         ;; hook for automatic reloading of changed snippets
+         (defun custom/update-yasnippets-on-save ()
+           (when (string-match "/resources/yasnippet" buffer-file-name)
+             (yas-load-directory (at-config-basedir "resources/"))))
+         (setq yas-snippet-dirs nil)
+         (push yas-installed-snippets-dir yas-snippet-dirs)
+         (push (at-config-basedir "resources/yasnippet/") yas-snippet-dirs)
+         (push (at-config-basedir "resources/yasnippet-private/") yas-snippet-dirs)
+         (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
+         (setq yas-expand-only-for-last-commands '(self-insert-command))
+         (setq helm-yas-space-match-any-greedy t)
+         (setq yas-prompt-functions
+               '(yas-completing-prompt
+                 yas-x-prompt
+                 yas-no-prompt))
+         ;; Wrap around region
+         (setq yas-wrap-around-region t)
+         (yas-global-mode 1)
+         (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+         (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
+         ;; unsetting Tab, removing ALL translations
+         (with-unmanaged-errors
+          (unbind-key [(tab)] yas-minor-mode-map)
+          (unbind-key [(tab)] yas-keymap)
+          (unbind-key [(shift tab)] yas-keymap)
+          (unbind-key [backtab] yas-keymap)
+          (unbind-key (kbd "<tab>") yas-minor-mode-map)
+          (unbind-key (kbd "TAB") yas-minor-mode-map)
+          (unbind-key (kbd "TAB") yas-keymap))
+         (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
+         (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
+         (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
+         (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
+         (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
+     #+END_SRC
+**** additional packages
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package helm-c-yasnippet
+         :require helm yasnippet cl-lib
+         :config
+         ;;TODO: bind helm-yas-create-snippet-on-region
+         (bind-key "C-M-<return>" 'helm-yas-complete))
+
+       (req-package auto-yasnippet :require yasnippet)
+     #+END_SRC
+*** yankpad
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
-
-      ;; Inter-field navigation
-      (defun yas-goto-end-of-active-field ()
-        (interactive)
-        (let* ((snippet (car (yas--snippets-at-point)))
-               (position (yas--field-end (yas--snippet-active-field snippet))))
-          (if (= (point) position)
-              (move-end-of-line)
-            (goto-char position))))
-
-      (defun yas-goto-start-of-active-field ()
-        (interactive)
-        (let* ((snippet (car (yas--snippets-at-point)))
-               (position (yas--field-start (yas--snippet-active-field snippet))))
-          (if (= (point) position)
-              (move-beginning-of-line)
-            (goto-char position))))
-
-      (defun do-yas-expand ()
-        (let ((yas/fallback-behavior 'return-nil))
-          (yas/expand)))
-
-      (defun tab-indent-or-complete ()
-        (interactive)
-        (if (minibufferp)
-            (minibuffer-complete)
-          (if (or (not yas/minor-mode)
-                  (null (custom/do-yas-expand)))
-              (if (check-expansion)
-                  (company-complete-common)
-                (indent-for-tab-command)))))
-
-      )
+      (req-package yankpad
+        :config
+        (setq yankpad-file (at-org-kb-dir "/yankpad.org"))
+        (add-to-list 'company-backends #'company-yankpad))
     #+END_SRC
-*** setup
+**** BACKLOG hydra for yankpad operation
+     :PROPERTIES:
+     :ID:       07449205-a322-4ba5-9427-6b519c911abe
+     :END:
+***** BACKLOG bind special tags insertion, see https://kungsgeten.github.io/yankpad13.html + https://github.com/Kungsgeten/yankpad/blob/master/README.org
+*** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package yasnippet
-        :delight yas-minor-mode
-        :config
-        ;; hook for automatic reloading of changed snippets
-        (defun custom/update-yasnippets-on-save ()
-          (when (string-match "/resources/yasnippet" buffer-file-name)
-            (yas-load-directory (at-config-basedir "resources/"))))
-        (setq yas-snippet-dirs nil)
-        (push yas-installed-snippets-dir yas-snippet-dirs)
-        (push (at-config-basedir "resources/yasnippet/") yas-snippet-dirs)
-        (push (at-config-basedir "resources/yasnippet-private/") yas-snippet-dirs)
-        (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
-        (setq yas-expand-only-for-last-commands '(self-insert-command))
-        (setq helm-yas-space-match-any-greedy t)
-        (setq yas-prompt-functions
-              '(yas-completing-prompt
-                yas-x-prompt
-                yas-no-prompt))
-        ;; Wrap around region
-        (setq yas-wrap-around-region t)
-        (yas-global-mode 1)
-        (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-        (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
-        ;; unsetting Tab, removing ALL translations
-        (with-unmanaged-errors
-         (unbind-key [(tab)] yas-minor-mode-map)
-         (unbind-key [(tab)] yas-keymap)
-         (unbind-key [(shift tab)] yas-keymap)
-         (unbind-key [backtab] yas-keymap)
-         (unbind-key (kbd "<tab>") yas-minor-mode-map)
-         (unbind-key (kbd "TAB") yas-minor-mode-map)
-         (unbind-key (kbd "TAB") yas-keymap))
-        (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
-        (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
-        (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
-        (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
-        (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
-
-      (req-package helm-c-yasnippet
-        :require helm yasnippet cl-lib
-        :config
-        ;;TODO: bind helm-yas-create-snippet-on-region
-        (bind-key "C-M-<return>" 'helm-yas-complete))
-
-      (req-package auto-yasnippet :require yasnippet)
-
       (defhydra hydra-yasnippet (:color teal)
         "
         _c_reate auto snippet
@@ -2092,6 +2109,9 @@
         ("p" aya-persist-snippet)
         ("v" yas-visit-snippet-file)
         ("i" yas-insert-snippet)
+        ;;TODO: maybe bind 'yankpad-map
+        ;;TODO: bind 'yankpad-expand
+        ;; bind special tags insertion, see https://kungsgeten.github.io/yankpad13.html + https://github.com/Kungsgeten/yankpad/blob/master/README.org
         ("q" nil))
       (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
     #+END_SRC
