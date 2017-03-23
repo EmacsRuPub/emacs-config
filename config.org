@@ -970,9 +970,9 @@
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-       (define-key dired-mode-map "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))))
-       (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top)
-       (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom))
+       (bind-key "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))) dired-mode-map)
+       (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top dired-mode-map)
+       (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom dired-mode-map))
 
      ;; Reload dired after making changes
      (--each '(dired-do-rename
@@ -1226,13 +1226,13 @@
        (add-hook 'ibuffer-mode-hook
                  (lambda () (ibuffer-switch-to-saved-filter-groups "default"))) ;; Make sure we're always using our buffer groups
        (add-hook 'ibuffer-mode-hook
-                 (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+                 (lambda () (bind-key "M-o" 'other-window ibuffer-mode-map))) ; was ibuffer-visit-buffer-1-window
        (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map))
 
      ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
-     (define-key ctl-x-4-map "nd" 'ni-narrow-to-defun-indirect-other-window)
-     (define-key ctl-x-4-map "nn" 'ni-narrow-to-region-indirect-other-window)
-     (define-key ctl-x-4-map "np" 'ni-narrow-to-page-indirect-other-window)
+     (bind-key "nd" 'ni-narrow-to-defun-indirect-other-window ctl-x-4-map)
+     (bind-key "nn" 'ni-narrow-to-region-indirect-other-window ctl-x-4-map)
+     (bind-key "np" 'ni-narrow-to-page-indirect-other-window ctl-x-4-map)
 
      (req-package recursive-narrow)
    #+END_SRC
@@ -1724,26 +1724,26 @@
        (smartparens-global-strict-mode t)
        (show-smartparens-global-mode t)
        (sp-use-smartparens-bindings)
-       (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+       (bind-key "C-M-t" 'sp-transpose-sexp smartparens-mode-map)
        (bind-key "M-F" nil smartparens-mode-map)
        (bind-key "M-B" nil smartparens-mode-map)
        (bind-key "M-<backspace>" nil smartparens-mode-map)
-       (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-       (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-       (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
-       (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-       (define-key sp-keymap (kbd "C-c s r n") 'sp-narrow-to-sexp)
-       (define-key sp-keymap (kbd "C-c s t") 'sp-prefix-tag-object)
-       (define-key sp-keymap (kbd "C-c s p") 'sp-prefix-pair-object)
-       (define-key sp-keymap (kbd "C-c s y") 'sp-prefix-symbol-object)
-       (define-key sp-keymap (kbd "C-c s c") 'sp-convolute-sexp)
-       (define-key sp-keymap (kbd "C-c s a") 'sp-absorb-sexp)
-       (define-key sp-keymap (kbd "C-c s w") 'sp-rewrap-sexp)
-       (define-key sp-keymap (kbd "C-c s e") 'sp-emit-sexp)
-       (define-key sp-keymap (kbd "C-c s p") 'sp-add-to-previous-sexp)
-       (define-key sp-keymap (kbd "C-c s n") 'sp-add-to-next-sexp)
-       (define-key sp-keymap (kbd "C-c s j") 'sp-join-sexp)
-       (define-key sp-keymap (kbd "C-c s s") 'sp-split-sexp))
+       (bind-key "C-S-a" 'sp-beginning-of-sexp sp-keymap)
+       (bind-key "C-S-d" 'sp-end-of-sexp sp-keymap)
+       (bind-key ")" 'sp-up-sexp emacs-lisp-mode-map)
+       (bind-key "C-<left_bracket>" 'sp-select-previous-thing sp-keymap)
+       (bind-key "C-c s r n" 'sp-narrow-to-sexp sp-keymap)
+       (bind-key "C-c s t" 'sp-prefix-tag-object sp-keymap)
+       (bind-key "C-c s p" 'sp-prefix-pair-object sp-keymap)
+       (bind-key "C-c s y" 'sp-prefix-symbol-object sp-keymap)
+       (bind-key "C-c s c" 'sp-convolute-sexp sp-keymap)
+       (bind-key "C-c s a" 'sp-absorb-sexp sp-keymap)
+       (bind-key "C-c s w" 'sp-rewrap-sexp sp-keymap)
+       (bind-key "C-c s e" 'sp-emit-sexp sp-keymap)
+       (bind-key "C-c s p" 'sp-add-to-previous-sexp sp-keymap)
+       (bind-key "C-c s n" 'sp-add-to-next-sexp sp-keymap)
+       (bind-key "C-c s j" 'sp-join-sexp sp-keymap)
+       (bind-key "C-c s s" 'sp-split-sexp sp-keymap))
 
      (req-package paredit
        :config
@@ -1967,20 +1967,19 @@
                (LaTeX-narrow-to-environment))
               (t (narrow-to-defun))))
 
-      (define-key endless/toggle-map "n" #'narrow-or-widen-dwim)
+      (bind-key "n" 'narrow-or-widen-dwim endless/toggle-map)
       ;; This line actually replaces Emacs' entire narrowing
       ;; keymap, that's how much I like this command. Only copy it
       ;; if that's what you want.
-      (define-key ctl-x-map "n" #'narrow-or-widen-dwim)
+      (bind-key "n" 'narrow-or-widen-dwim ctl-x-map)
       (eval-after-load 'latex
-        '(define-key LaTeX-mode-map "\C-xn" nil))
+        '(bind-key "\C-xn" nil LaTeX-mode-map))
     #+END_SRC
 **** TODO consolidate all narrow/widen functionality
 *** fix spelling
     credits to amalabarba
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-key ctl-x-map "\C-i"
-        #'crux-ispell-word-then-abbrev)
+      (bind-key "\C-i" 'crux-ispell-word-then-abbrev ctl-x-map)
 
       (setq save-abbrevs 'silently)
       (setq-default abbrev-mode t)
@@ -2134,10 +2133,10 @@
        (setq company-tooltip-align-annotations t)
        (setq company-show-numbers t)
        (global-company-mode)
-       (define-key company-active-map (kbd "\C-n") 'company-select-next)
-       (define-key company-active-map (kbd "\C-p") 'company-select-previous)
-       (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
-       (define-key company-active-map (kbd "M-.") 'company-show-location))
+       (bind-key (kbd "\C-n") 'company-select-next company-active-map)
+       (bind-key (kbd "\C-p") 'company-select-previous company-active-map)
+       (bind-key (kbd "\C-d") 'company-show-doc-buffer company-active-map)
+       (bind-key (kbd "M-.") 'company-show-location company-active-map))
 
      (req-package company-flx
        :require company
@@ -2149,8 +2148,8 @@
 
      (req-package helm-company
        :config
-       (define-key company-mode-map (kbd "C-:") 'helm-company)
-       (define-key company-active-map (kbd "C-:") 'helm-company))
+       (bind-key "C-:" 'helm-company company-mode-map)
+       (bind-key "C-:" 'helm-company company-active-map))
 
      (req-package company-statistics
        :require company
@@ -2533,11 +2532,11 @@
                                     (setq flycheck-checker 'javascript-jshint)
                                     (tern-mode t)))
         ;;TODO: maybe make hydra
-        (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
-        (define-key js2-mode-map (kbd "C-M-x") 'js-send-last-sexp-and-go)
-        (define-key js2-mode-map (kbd "C-c b") 'js-send-buffer)
-        (define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
-        (define-key js2-mode-map (kbd "C-c l") 'js-load-file-and-go))
+        (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
+        (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
+        (bind-key "C-c b" 'js-send-buffer js2-mode-map)
+        (bind-key "C-c C-b" 'js-send-buffer-and-go js2-mode-map)
+        (bind-key "C-c l" 'js-load-file-and-go js2-mode-map))
 
       ;; TODO: play with js2-refactor
       (req-package js2-refactor
@@ -2554,7 +2553,7 @@
       (req-package xref-js2
         :require js2-mode
         :config
-        (define-key js2-mode-map (kbd "M-.") nil)
+        (bind-key "M-." nil js2-mode-map)
         (add-hook 'js2-mode-hook
                   (lambda ()
                     (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
@@ -2847,24 +2846,24 @@
                 ("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode)
                 ("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
          :config
-         (define-key c-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
-         (define-key c-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
-         (define-key c-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
-         (define-key c-mode-map (kbd "M-.") 'helm-gtags-select)
-         (define-key c++-mode-map (kbd "C-c i") 'helm-gtags-tags-in-this-function)
-         (define-key c++-mode-map (kbd "C-c t") 'helm-gtags-show-stack)
-         (define-key c++-mode-map (kbd "C-c u") 'helm-gtags-update-tags)
-         (define-key c++-mode-map (kbd "C-j") 'helm-gtags-select))
+         (bind-key "C-c i" 'helm-gtags-tags-in-this-function c-mode-map)
+         (bind-key "C-c t" 'helm-gtags-show-stack c-mode-map)
+         (bind-key "C-c u" 'helm-gtags-update-tags c-mode-map)
+         (bind-key "M-." 'helm-gtags-select c-mode-map)
+         (bind-key "C-c i" 'helm-gtags-tags-in-this-function c++-mode-map)
+         (bind-key "C-c t" 'helm-gtags-show-stack c++-mode-map)
+         (bind-key "C-c u" 'helm-gtags-update-tags c++-mode-map)
+         (bind-key "C-j" 'helm-gtags-select c++-mode-map))
 
        (req-package company-c-headers)
 
        (req-package function-args
          :require swiper cc-mode
          :config
-         (define-key c-mode-map (kbd "C-c C-<tab>") 'moo-complete)
-         (define-key c-mode-map (kbd "C-c j") 'moo-jump-local)
-         (define-key c++-mode-map (kbd "C-c C-<tab>") 'moo-complete)
-         (define-key c++-mode-map (kbd "C-c j") 'moo-jump-local))
+         (bind-key "C-c C-<tab>" 'moo-complete c-mode-map)
+         (bind-key "C-c j" 'moo-jump-local c-mode-map)
+         (bind-key "C-c C-<tab>" 'moo-complete c++-mode-map)
+         (bind-key "C-c j" 'moo-jump-local c++-mode-map))
 
        (req-package rtags
          :require cc-mode
@@ -3122,7 +3121,7 @@
                     (unless tern-mode (tern-mode))
                   (if tern-mode (tern-mode -1))))))
         ;; manual autocomplete
-        (define-key web-mode-map (kbd "M-SPC") 'company-complete))
+        (bind-key "M-SPC" 'company-complete web-mode-map))
 
       (req-package web-mode-edit-element
         :config
@@ -3385,7 +3384,7 @@
         (setq lui-track-bar-behavior 'before-switch-to-buffer)
         (enable-lui-track-bar)
         (eval-after-load 'lui
-          '(define-key lui-mode-map (kbd "C-c C-b") 'lui-track-bar-move)))
+          '(bind-key "C-c C-b" 'lui-track-bar-move lui-mode-map)))
     #+END_SRC
 ** terminal
 *** common
@@ -3435,10 +3434,10 @@
         :defer t
         :config
         (add-hook 'term-exec-hook 'custom/term-exec-hook)
-        (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
+        (bind-key "C-c C-y" 'term-paste term-raw-map)
         (setq explicit-shell-file-name "/bin/zsh"))
 
-      (define-key comint-mode-map "\C-c\M-o" #'custom/comint-clear-buffer)
+      (bind-key "\C-c\M-o" 'custom/comint-clear-buffer comint-mode-map)
     #+END_SRC
 *** shell/check syntax
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3470,7 +3469,7 @@
         :init
         (req-package company-shell)
         :config
-        (define-key shell-mode-map (kbd "C-c l") 'custom/sh-check-syntax)
+        (bind-key "C-c l" 'custom/sh-check-syntax shell-mode-map)
         (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
         (add-hook 'shell-mode-hook 'common-hooks/newline-hook)
         (add-hook 'shell-mode-hook 'common-hooks/prog-helpers))
@@ -3562,7 +3561,7 @@
    #+END_SRC
 ** open files in external apps
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (define-key dired-mode-map (kbd "C-!") 'crux-open-with)
+     (bind-key "C-!" 'crux-open-with dired-mode-map)
    #+END_SRC
 ** email
 *** common
@@ -3596,19 +3595,19 @@
         (setq notmuch-search-line-faces '(("unread" . (:foreground "white"))
                                           ("deleted" . (:foreground "red"
                                                         :background "blue"))))
-        (define-key notmuch-search-mode-map "!"
+        (bind-key "!"
           (lambda ()
             "toggle unread tag for thread"
             (interactive)
             (if (member "unread" (notmuch-search-get-tags))
                 (notmuch-search-tag '("-unread" "-spam"))
-              (notmuch-search-tag '("+unread")))))
-        (define-key notmuch-search-mode-map "g"
+              (notmuch-search-tag '("+unread")))) notmuch-search-mode-map)
+        (bind-key "g"
           (lambda ()
             "Refresh search results"
             (interactive)
-            (notmuch-refresh-this-buffer)))
-        (define-key notmuch-message-mode-map "#" 'mml-attach-file)
+            (notmuch-refresh-this-buffer)) notmuch-search-mode-map)
+        (bind-key "#" 'mml-attach-file notmuch-message-mode-map)
         (setq notmuch-saved-searches private/notmuch-saved-searches)
         (add-hook 'notmuch-hello-refresh-hook
                   (lambda ()
@@ -3679,9 +3678,9 @@
          "Face used in search mode for unread entry titles.")
        (push '(functional elfeed-functional-tag-face) elfeed-search-face-alist)
        (bind-key "C-x w" 'elfeed)
-       (define-key elfeed-search-mode-map "!" 'elfeed-search-untag-all-unread)
-       (define-key elfeed-search-mode-map "=" 'elfeed-search-update--force)
-       (define-key elfeed-search-mode-map "+" 'elfeed-search-fetch)
+       (bind-key "!" 'elfeed-search-untag-all-unread elfeed-search-mode-map)
+       (bind-key "=" 'elfeed-search-update--force elfeed-search-mode-map)
+       (bind-key "+" 'elfeed-search-fetch elfeed-search-mode-map)
        (setq-default elfeed-search-filter "-junk @1-week-ago +unread"))
 
      (req-package elfeed-org
@@ -4536,15 +4535,15 @@
      #+END_SRC
 **** keybindings
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (define-key org-agenda-mode-map (kbd "<f7> .") 'org-agenda-clock-in)
-       (define-key org-agenda-mode-map (kbd "<f7> ,") 'org-agenda-clock-out)
-       (define-key org-agenda-mode-map (kbd "<f7> o") 'ace-link-org)
-       (define-key org-mode-map (kbd "M-o") 'ace-link-org)
+       (bind-key "<f7> ." 'org-agenda-clock-in org-agenda-mode-map)
+       (bind-key "<f7> ," 'org-agenda-clock-out org-agenda-mode-map)
+       (bind-key "<f7> o" 'ace-link-org org-agenda-mode-map)
+       (bind-key "M-o" 'ace-link-org org-mode-map)
 
-       (define-key org-mode-map (kbd "C-'") nil)
-       (define-key org-mode-map (kbd "C-c [") nil)
-       (define-key org-mode-map (kbd "C-c ]") nil)
-       (define-key org-mode-map (kbd "C-c C-o") nil)
+       (bind-key "C-'" nil org-mode-map)
+       (bind-key "C-c [" nil org-mode-map)
+       (bind-key "C-c ]" nil org-mode-map)
+       (bind-key "C-c C-o" nil org-mode-map)
      #+END_SRC
 *** try
 **** excerpt from sachac
@@ -4584,7 +4583,7 @@
          (org-agenda-switch-to)
          (org-capture 0))
        ;; New key assignment
-       (define-key org-agenda-mode-map "N" 'my/org-agenda-new)
+       (bind-key "N" 'my/org-agenda-new org-agenda-mode-map)
 
        (setq org-agenda-sorting-strategy
              '((agenda time-up priority-down tag-up effort-up category-keep)
