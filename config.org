@@ -2785,6 +2785,8 @@
        (req-package elpy
          :config
          (elpy-enable)
+         (setq elpy-modules
+               (delete 'elpy-module-highlight-indentation elpy-modules))
          (setq elpy-rpc-backend "jedi"))
 
        (defhydra hydra-python ()
