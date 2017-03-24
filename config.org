@@ -2094,8 +2094,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package yankpad
         :config
-        (setq yankpad-file (at-org-kb-dir "/yankpad.org"))
-        (add-to-list 'company-backends #'company-yankpad))
+        (setq yankpad-file (at-org-kb-dir "/yankpad.org")))
     #+END_SRC
 **** BACKLOG hydra for yankpad operation
      :PROPERTIES:
