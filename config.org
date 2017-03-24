@@ -455,6 +455,8 @@
         (setq helm-input-idle-delay 0.2)
         (setq helm-exit-idle-delay 0.2)
         (setq helm-ff-skip-boring-files t)
+        (setq helm-mode-fuzzy-match t
+              helm-completion-in-region-fuzzy-match t)
         (when (eq system-type 'gnu/linux)
           (setq helm-locate-fuzzy-match t))
         (bind-key "C-<down>" 'helm-next-source helm-map)
