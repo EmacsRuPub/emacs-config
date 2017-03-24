@@ -2789,11 +2789,26 @@
          (bind-key "C-c >" 'indent-tools-hydra/body python-mode-map))
 
        (req-package elpy
+         :init
+         (req-package py-autopep8)
          :config
          (elpy-enable)
+         (when (executable-find "ipython")
+           (elpy-use-ipython))
          (setq elpy-modules
                (delete 'elpy-module-highlight-indentation elpy-modules))
-         (setq elpy-rpc-backend "jedi"))
+         (setq elpy-modules
+               (delete 'elpy-module-flymake elpy-modules))
+         (add-hook 'elpy-mode-hook 'flycheck-mode)
+         (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+         (setq elpy-rpc-backend "jedi")
+         (bind-key "M-," 'pop-tag-mark elpy-mode-map))
+
+       (req-package pyvenv
+         :require jedi-core
+         :config
+         (add-hook 'pyvenv-post-activate-hooks 'jedi:stop-server)
+         (add-hook 'pyvenv-post-deactivate-hooks 'jedi:stop-server))
 
        (defhydra hydra-python ()
          "
