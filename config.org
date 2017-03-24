@@ -1261,6 +1261,11 @@
 
      (req-package hyperbole
        :require zoom-frm)
+
+     (req-package beacon
+       :config
+       (setq beacon-color "#fce94f")
+       (beacon-mode 1))
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
