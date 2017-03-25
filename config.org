@@ -1040,7 +1040,6 @@
        (add-hook 'c-mode-hook 'helm-gtags-mode)
        (add-hook 'c++-mode-hook 'helm-gtags-mode))
 
-
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
    #+END_SRC
@@ -1087,79 +1086,11 @@
           ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 
      (req-package tile)
-
-     (req-package transpose-frame
-       :config
-       (defhydra hydra-transpose-frame ()
-         "frames geometry management"
-         ("t" transpose-frame "transpose")
-         ("i" flip-frame "flip")
-         ("o" flop-frame "flop")
-         ("r" rotate-frame "rotate")
-         ("<left>" rotate-frame-anticlockwise "rotate <-")
-         ("<right>" rotate-frame-clockwise "rotate ->")
-         ("q" nil "cancel"))
-       (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body))
-
-     ;;TODO: plan docstring
-     (defhydra hydra-window (global-map "<f2>")
-       "window"
-       ("<left>" windmove-left "left")
-       ("<down>" windmove-down "down")
-       ("<up>" windmove-up "up")
-       ("<right>" windmove-right "right")
-       ("w" ace-window "ace" :color blue)
-       ("3" (lambda ()
-              (interactive)
-              (split-window-right)
-              (windmove-right)
-              (switch-to-next-buffer))
-        "vert")
-       ("2" (lambda ()
-              (interactive)
-              (split-window-below)
-              (windmove-down)
-              (switch-to-next-buffer))
-        "horiz")
-       ("u" hydra-universal-argument "universal")
-       ("s" (lambda () (interactive) (ace-window 4)) "swap")
-       ("d" (lambda () (interactive) (ace-window 16)) "delete")
-       ("1" delete-other-windows "1" :color blue)
-       ("i" ace-maximize-window "a1" :color blue)
-       ("<C-up>" windsize-up "move splitter up")
-       ("<C-down>" windsize-down "move splitter down")
-       ("<C-left>" windsize-left "move splitter left")
-       ("<C-right>" windsize-right "move splitter right")
-       ("=" text-scale-increase)
-       ("-" text-scale-decrease)
-       ("f" make-frame-command)
-       ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
-       ("t" tile :color blue)
-       ("q" nil "cancel"))
+     (req-package transpose-frame)
    #+END_SRC
 ** scope
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-scope (:color blue)
-       "
-       Narrow to            Widen
-       ------------------------------------
-       _r_egion             _w_iden
-       _d_efun              _z_oom window
-       defun + _c_omments
-       "
-       ("r" narrow-to-region)
-       ("d" narrow-to-defun)
-       ("c" narrow-to-defun+comments-above)
-       ("o" org-narrow-to-subtree)
-       ("w" widen)
-       ("z" zoom-window-zoom)
-       ("N" recursive-narrow-or-widen-dwim)
-       ("W" recursive-widen-dwim)
-       ;;TODO: maybe add org narrowing
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f9>") 'hydra-scope/body)
-
-     (req-package ibuffer
+      (req-package ibuffer
        :defer t
        :config
        (defun custom/ibuffer-filter-by-extname (qualifier)
@@ -1231,6 +1162,53 @@
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (defhydra hydra-transpose-frame ()
+       "frames geometry management"
+       ("t" transpose-frame "transpose")
+       ("i" flip-frame "flip")
+       ("o" flop-frame "flop")
+       ("r" rotate-frame "rotate")
+       ("<left>" rotate-frame-anticlockwise "rotate <-")
+       ("<right>" rotate-frame-clockwise "rotate ->")
+       ("q" nil "cancel"))
+     (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body)
+
+     ;;TODO: plan docstring
+     (defhydra hydra-window (global-map "<f2>")
+       "window"
+       ("<left>" windmove-left "left")
+       ("<down>" windmove-down "down")
+       ("<up>" windmove-up "up")
+       ("<right>" windmove-right "right")
+       ("w" ace-window "ace" :color blue)
+       ("3" (lambda ()
+              (interactive)
+              (split-window-right)
+              (windmove-right)
+              (switch-to-next-buffer))
+        "vert")
+       ("2" (lambda ()
+              (interactive)
+              (split-window-below)
+              (windmove-down)
+              (switch-to-next-buffer))
+        "horiz")
+       ("u" hydra-universal-argument "universal")
+       ("s" (lambda () (interactive) (ace-window 4)) "swap")
+       ("d" (lambda () (interactive) (ace-window 16)) "delete")
+       ("1" delete-other-windows "1" :color blue)
+       ("i" ace-maximize-window "a1" :color blue)
+       ("<C-up>" windsize-up "move splitter up")
+       ("<C-down>" windsize-down "move splitter down")
+       ("<C-left>" windsize-left "move splitter left")
+       ("<C-right>" windsize-right "move splitter right")
+       ("=" text-scale-increase)
+       ("-" text-scale-decrease)
+       ("f" make-frame-command)
+       ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
+       ("t" tile :color blue)
+       ("q" nil "cancel"))
+
      ;;TODO: plan docstring
      (defhydra hydra-entries ()
        ("!" flycheck-first-error "ace" :color blue)
@@ -1254,6 +1232,26 @@
        ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f3>") 'hydra-entries/body)
+
+     (defhydra hydra-scope (:color blue)
+       "
+       Narrow to            Widen
+       ------------------------------------
+       _r_egion             _w_iden
+       _d_efun              _z_oom window
+       defun + _c_omments
+       "
+       ("r" narrow-to-region)
+       ("d" narrow-to-defun)
+       ("c" narrow-to-defun+comments-above)
+       ("o" org-narrow-to-subtree)
+       ("w" widen)
+       ("z" zoom-window-zoom)
+       ("N" recursive-narrow-or-widen-dwim)
+       ("W" recursive-widen-dwim)
+       ;;TODO: maybe add org narrowing
+       ("q" nil "cancel"))
+     (global-set-key (kbd "<f9>") 'hydra-scope/body)
 
      (defhydra hydra-projectile (:color teal)
        "
