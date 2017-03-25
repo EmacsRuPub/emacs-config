@@ -881,44 +881,7 @@
        (setq projectile-tags-command
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
-       (add-to-list 'projectile-other-file-alist '("js" "html"))
-       (defhydra hydra-projectile (:color teal)
-         "
-         PROJECT: %(projectile-project-root)
-         find                         Project               More
-         ---------------------------------------------------------------------------------------
-         _fd_irectory                 i_pb_uffer            _c_ommander
-         _ft_est file                 in_pf_o               _s_witch to buffer
-         _ff_ile                      run _pt_ests          switch to buffer (other _w_indow)
-         file d_fw_im                 _pc_ompile            _d_ired
-         file o_ft_her window         _pi_nvalidate cache   display _b_uffer
-         _fo_ther file                _pk_ill buffers       _r_ecentf
-         other file _fO_ther window
-         "
-         ("fd" helm-projectile-find-dir)
-         ("ft" projectile-find-test-file)
-         ("ff" helm-projectile-find-file)
-         ("fw" helm-projectile-find-file-dwim)
-         ("ft" projectile-find-file-dwim-other-window)
-         ("fo" helm-projectile-find-other-file)
-         ("fO" projectile-find-other-file-other-window)
-         ("pb" projectile-ibuffer)
-         ("pf" projectile-project-info)
-         ("pt" projectile-test-project)
-         ("pc" projectile-compile-project)
-         ("pi" projectile-invalidate-cache)
-         ("pk" projectile-kill-buffers)
-         ("ps" projectile-switch-project)
-         ("c" projectile-commander)
-         ("s" projectile-switch-to-buffer)
-         ("w" projectile-switch-to-buffer-other-window)
-         ("d" projectile-dired)
-         ("b" projectile-display-buffer)
-         ("r" projectile-recentf)
-         ;;TODO: write legend
-         ("s" projectile-run-command-in-root)
-         ("S" projectile-run-async-shell-command-in-root))
-       (global-set-key (kbd "<f8>") 'hydra-projectile/body))
+       (add-to-list 'projectile-other-file-alist '("js" "html")))
 
      (req-package helm-projectile
        :require helm projectile dash cl-lib
@@ -1292,6 +1255,34 @@
        ("q" nil "cancel"))
      (global-set-key (kbd "<f3>") 'hydra-entries/body)
 
+     (defhydra hydra-projectile (:color teal)
+       "
+       PROJECT: %(projectile-project-root)
+       Project               More
+       ----------------------------------------------------------
+       _i_buffer             _c_ommander
+       _I_nfo                _d_ired
+       run _t_ests           _r_ecentf
+       _C_ompile             _s_witch project
+       in_v_alidate cache    _R_un command in rootdir
+       _k_ill buffers        run _A_sync command in rootdir
+                             _h_elm-projectile
+       "
+       ("i" projectile-ibuffer)
+       ("I" projectile-project-info)
+       ("t" projectile-test-project)
+       ("C" projectile-compile-project)
+       ("v" projectile-invalidate-cache)
+       ("k" projectile-kill-buffers)
+       ("c" projectile-commander)
+       ("d" projectile-dired)
+       ("r" projectile-recentf)
+       ("s" projectile-switch-project)
+       ("R" projectile-run-command-in-root)
+       ("A" projectile-run-async-shell-command-in-root)
+       ("h" helm-projectile))
+     (global-set-key (kbd "<f8>") 'hydra-projectile/body)
+
      (defhydra hydra-navigate (:color blue)
        "
        Search                 Various
@@ -1307,11 +1298,9 @@
        _l_ org headlines
        "
        ("h" helm-mini)
-       ("q" helm-projectile)
        ("r" socyl-search-regexp)
        ("f" custom/helm-find-files)
        ("s" helm-semantic-or-imenu)
-       ("p" helm-projectile-switch-project)
        ("c" helm-flycheck)
        ("m" swoop-multi)
        ("i" swoop)
