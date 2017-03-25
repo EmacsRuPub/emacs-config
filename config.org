@@ -4165,6 +4165,8 @@
        (req-package secretaria)
 
        (req-package org-mru-clock)
+
+       (req-package org-vcard)
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
