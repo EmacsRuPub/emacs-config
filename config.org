@@ -1174,7 +1174,7 @@
      (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body)
 
      ;;TODO: plan docstring
-     (defhydra hydra-window (global-map "<f2>")
+     (defhydra hydra-window ()
        "window"
        ("<left>" windmove-left "left")
        ("<down>" windmove-down "down")
@@ -1208,6 +1208,7 @@
        ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
        ("t" tile :color blue)
        ("q" nil "cancel"))
+     (global-set-key (kbd "<f2>") 'hydra-window/body)
 
      ;;TODO: plan docstring
      (defhydra hydra-entries ()
