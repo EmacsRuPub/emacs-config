@@ -490,18 +490,18 @@
           ("q" nil "cancel"))
         (global-set-key (kbd "C-c r") 'hydra-custom-helm/body))
     #+END_SRC
-*** fuzzy searching for helm
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package helm-fuzzier
-        :require helm
-        :config
-        (helm-fuzzier-mode 1))
+**** fuzzy searching
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package helm-fuzzier
+         :require helm
+         :config
+         (helm-fuzzier-mode 1))
 
-      (req-package helm-flx
-        :require helm flx
-        :config
-        (helm-flx-mode 1))
-    #+END_SRC
+       (req-package helm-flx
+         :require helm flx
+         :config
+         (helm-flx-mode 1))
+     #+END_SRC
 *** tramp
     #+BEGIN_SRC emacs-lisp :tangle no
        (req-package tramp
@@ -658,9 +658,7 @@
              lisp-mode
              emacs-lisp-mode
              ))
-   #+END_SRC
-** hooks for tabs and spaces ;]
-   #+BEGIN_SRC emacs-lisp :tangle yes
+
      (defun common-hooks/trailing-whitespace-hook ()
        (when (member major-mode custom/trailing-whitespace-modes)
          (delete-trailing-whitespace)))
