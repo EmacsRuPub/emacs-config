@@ -778,12 +778,13 @@
       (defun find-url-backward ()
         (interactive)
         (re-search-backward org-plain-link-re nil t)
-        (backward-word))
+        (forward-word))
 
       (defun find-url-forward ()
         (interactive)
         (re-search-forward org-plain-link-re nil t)
-        (backward-word))
+        (re-search-backward org-plain-link-re nil t)
+        (forward-word))
 
       )
     #+END_SRC
