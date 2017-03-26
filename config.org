@@ -1185,56 +1185,28 @@
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
 
-     ;;TODO: plan docstring
-     (defhydra hydra-entries ()
+     (defhydra hydra-errors ()
        ("!" flycheck-first-error "ace" :color blue)
        ("?" flycheck-list-errors "list errors" :color blue)
        ("@" flycheck-buffer "check buffer" :color blue)
+       ("c" helm-flycheck :color blue)
        ("<up>" flycheck-previous-error "previous error")
        ("<down>" flycheck-next-error "next error")
-       ("<prior>" custom/find-url-backward "previous url")
-       ("<next>" custom/find-url-forward "next url")
        ("<left>" previous-error "previous error")
        ("<right>" next-error "next error")
-       ("r" custom/open-urls-in-region :color blue)
-       ("=" custom/skip-to-next-blank-line)
-       ("-" custom/skip-to-previous-blank-line)
-       ("f" link-hint-open-link :color blue)
-       ("y" link-hint-copy-link :color blue)
-       ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
        ("q" nil "cancel"))
-     (global-set-key (kbd "<f3>") 'hydra-entries/body)
+     (global-set-key (kbd "C-q") 'hydra-errors/body)
 
-     (defhydra hydra-scope (:color blue)
-       "
-       Narrow to            Widen
-       ------------------------------------
-       _r_egion             _w_iden
-       _d_efun              _z_oom window
-       defun + _c_omments
-       "
-       ("r" narrow-to-region)
-       ("d" narrow-to-defun)
-       ("c" narrow-to-defun+comments-above)
-       ("o" org-narrow-to-subtree)
-       ("w" widen)
-       ("z" zoom-window-zoom)
-       ("N" recursive-narrow-or-widen-dwim)
-       ("W" recursive-widen-dwim)
-       ;;TODO: maybe add org narrowing
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f9>") 'hydra-scope/body)
-
-     (defhydra hydra-projectile (:color teal)
+     (defhydra hydra-projects (:color teal)
        "
        PROJECT: %(projectile-project-root)
-       Project               More
-       ----------------------------------------------------------
-       _i_buffer             _c_ommander
-       _I_nfo                _d_ired
-       run _t_ests           _r_ecentf
-       _C_ompile             _s_witch project
-       in_v_alidate cache    _R_un command in rootdir
+       Project               More                              Search
+       --------------------------------------------------------------------------------
+       _i_buffer             _c_ommander                       _H_elm-mini
+       _I_nfo                _d_ired                           _r_egexp
+       run _t_ests           recent_F_                         _f_ind files
+       _C_ompile             _s_witch project                  a_g_
+       in_v_alidate cache    _R_un command in rootdir          _m_ulti-swoop
        _k_ill buffers        run _A_sync command in rootdir
                              _h_elm-projectile
        "
@@ -1246,45 +1218,57 @@
        ("k" projectile-kill-buffers)
        ("c" projectile-commander)
        ("d" projectile-dired)
-       ("r" projectile-recentf)
+       ("F" projectile-recentf)
        ("s" projectile-switch-project)
        ("R" projectile-run-command-in-root)
        ("A" projectile-run-async-shell-command-in-root)
-       ("h" helm-projectile))
-     (global-set-key (kbd "<f8>") 'hydra-projectile/body)
-
-     (defhydra hydra-navigate (:color blue)
-       "
-       Search                 Various
-       ------------------------------
-       _r_ recursive grep     _h_ helm-mini
-       _s_ semantic/imenu     _q_ projectile
-       _m_ multi swoop        _f_ find files
-       _i_ find occurencies   _p_ switch project
-       _o_ find in buffer     _c_ helm-flycheck
-       _g_ ag in project      _w_ select w3m buffer
-       _t_ google-translate at point
-       _T_ google translate
-       _l_ org headlines
-       "
-       ("h" helm-mini)
+       ("h" helm-projectile)
+       ("H" helm-mini)
        ("r" socyl-search-regexp)
        ("f" custom/helm-find-files)
-       ("s" helm-semantic-or-imenu)
-       ("c" helm-flycheck)
-       ("m" swoop-multi)
+       ("g" helm-ag-project-root)
+       ("m" swoop-multi))
+     (global-set-key (kbd "<f8>") 'hydra-projects/body)
+
+     (defhydra hydra-navigate ()
+       "
+       Locate                  Narrow/widen               Links
+       -----------------------------------------------------------------------
+       _i_ search TAP          _r_egion                   _f_ hint & open
+       _o_ search query        _d_efun                    _y_ hint & copy
+       _s_ semantic/imenu      defun + _C_omments         select w_3_m buffer
+       goto _c_har             _W_iden                    open _u_rls in region
+       goto _W_ord             recursive _N_arrow DWIM
+       <prior> URL backward  recursive wi_D_en DWIM
+       <next>  URL forward
+       _=_ next blank line
+       _-_ prev blank line
+       _>_ reposition buffer
+
+       _<return>_ Execute TAP
+       "
        ("i" swoop)
        ("o" (lambda () (interactive) (swoop "")))
-       ("g" helm-ag-project-root)
-       ("w" w3m-select-buffer)
-       ("t" google-translate-at-point)
-       ("T" google-translate-query-translate)
-       ("l" helm-org-in-buffer-headings)
-       ("L" helm-org-agenda-files-headings)
+       ("s" helm-semantic-or-imenu)
+       ("c" avy-goto-char-timer "goto char within window" :color blue)
+       ("W" avy-goto-word-0 "goto word within window" :color blue)
+       ("<prior>" custom/find-url-backward "previous url")
+       ("<next>" custom/find-url-forward "next url")
+       ("=" custom/skip-to-next-blank-line)
+       ("-" custom/skip-to-previous-blank-line)
        (">" reposition-window)
-       ("a" avy-goto-char-timer "goto char within window" :color blue)
-       ("A" avy-goto-word-0 "goto word within window" :color blue))
-     (global-set-key (kbd "C-`") 'hydra-navigate/body)
+       ("r" narrow-to-region)
+       ("d" narrow-to-defun)
+       ("C" narrow-to-defun+comments-above)
+       ("w" widen)
+       ("N" recursive-narrow-or-widen-dwim)
+       ("D" recursive-widen-dwim)
+       ("f" link-hint-open-link :color blue)
+       ("y" link-hint-copy-link :color blue)
+       ("3" w3m-select-buffer :color blue)
+       ("u" custom/open-urls-in-region :color blue)
+       ("<return>" custom/process-thing-at-point "execute ;)" :color blue))
+     (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
      (global-unset-key (kbd "C-s"))
      (global-unset-key (kbd "C-r"))
@@ -1826,7 +1810,7 @@
        ("r" query-replace)
        ("n" crux-rename-file-and-buffer)
        ("s" sort-lines)
-       ("t" delete-trailing-whitespace)
+       ("w" delete-trailing-whitespace)
        ("u" delete-duplicate-lines)
        ("v" view-mode)
        ("x" query-replace-regexp)
@@ -1839,8 +1823,10 @@
        ("k" custom/kill-save-rectangle)
        ("K" append-next-kill)
        ("/" comment-box)
-       ("w" wrap-to-fill-column-mode)
+       ("W" wrap-to-fill-column-mode)
        ("=" edit-indirect-region)
+       ("t" google-translate-at-point)
+       ("T" google-translate-query-translate)
        ("q" nil "cancel"))
      (global-set-key (kbd "C-z") 'hydra-edit/body)
 
@@ -3288,8 +3274,7 @@
          ("q" custom/leave-irc-server)
          ("b" custom/select-erc-buffer)
          ("u" custom/select-erc-unread-buffer)
-         ("i" (lambda () (interactive) (custom/insert-erc-nick t))))
-       (global-set-key (kbd "C-q") 'hydra-erc/body))
+         ("i" (lambda () (interactive) (custom/insert-erc-nick t)))))
 
      (req-package erc-hl-nicks)
      (req-package ercn
@@ -4860,6 +4845,7 @@
        ("c" org-table-create)
        ("s" org-sparse-tree))
 
+     ;;TODO: update docstring
      (defhydra hydra-org-global (:color teal)
        "
          ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
@@ -4891,7 +4877,7 @@
        ("r" org-clock-report)
        ("?" (org-info "Clocking commands"))
        ("k" org-clock-display)
-       ("n" org-footnote-action)
+       ("f" org-footnote-action)
        ("w" org-store-link)
        ("y" org-insert-link)
        ("Y" org-insert-link-global)
@@ -4909,6 +4895,9 @@
        ("r" org-reveal "reveal")
        ("R" org-refile "refile")
        ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
+       ("n" org-narrow-to-subtree)
+       ("h" helm-org-in-buffer-headings)
+       ("H" helm-org-agenda-files-headings)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
 
