@@ -1162,17 +1162,6 @@
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-transpose-frame ()
-       "frames geometry management"
-       ("t" transpose-frame "transpose")
-       ("i" flip-frame "flip")
-       ("o" flop-frame "flop")
-       ("r" rotate-frame "rotate")
-       ("<left>" rotate-frame-anticlockwise "rotate <-")
-       ("<right>" rotate-frame-clockwise "rotate ->")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "C-<f2>") 'hydra-transpose-frame/body)
-
      ;;TODO: plan docstring
      (defhydra hydra-window ()
        "window"
@@ -1181,32 +1170,18 @@
        ("<up>" windmove-up "up")
        ("<right>" windmove-right "right")
        ("w" ace-window "ace" :color blue)
-       ("3" (lambda ()
-              (interactive)
-              (split-window-right)
-              (windmove-right)
-              (switch-to-next-buffer))
-        "vert")
-       ("2" (lambda ()
-              (interactive)
-              (split-window-below)
-              (windmove-down)
-              (switch-to-next-buffer))
-        "horiz")
-       ("u" hydra-universal-argument "universal")
        ("s" (lambda () (interactive) (ace-window 4)) "swap")
        ("d" (lambda () (interactive) (ace-window 16)) "delete")
-       ("1" delete-other-windows "1" :color blue)
-       ("i" ace-maximize-window "a1" :color blue)
-       ("<C-up>" windsize-up "move splitter up")
-       ("<C-down>" windsize-down "move splitter down")
-       ("<C-left>" windsize-left "move splitter left")
-       ("<C-right>" windsize-right "move splitter right")
+       ("m" ace-maximize-window "a1" :color blue)
        ("=" text-scale-increase)
        ("-" text-scale-decrease)
        ("f" make-frame-command)
        ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
        ("t" tile :color blue)
+       ("T" transpose-frame "transpose")
+       ("i" flip-frame "flip")
+       ("o" flop-frame "flop")
+       ("r" rotate-frame "rotate")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
 
