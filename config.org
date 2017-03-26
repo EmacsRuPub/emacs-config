@@ -1279,7 +1279,6 @@
      (global-set-key (kbd "C-r") 'phi-search-backward)
      (global-set-key (kbd "C-x k") 'kill-buffer)
    #+END_SRC
-** BACKLOG make searching more integral, in terms of backends, packages, etc.
 * editing
 ** utils for files and buffers
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4882,7 +4881,6 @@
        ("y" org-insert-link)
        ("Y" org-insert-link-global)
        ;;TODO: add org-open-at-point-global
-       ;;TODO: add org-reveal
        ;;TODO: add org-show-todo-tree
        ("i" custom/org-update-timestamp-with-time)
        ("o" ace-link-org :color blue)
