@@ -1196,13 +1196,9 @@
        ("<next>" custom/find-url-forward "next url")
        ("<left>" previous-error "previous error")
        ("<right>" next-error "next error")
-       ("k" smerge-prev "previous conflict")
-       ("j" smerge-next "next conflict")
        ("r" custom/open-urls-in-region :color blue)
        ("=" custom/skip-to-next-blank-line)
        ("-" custom/skip-to-previous-blank-line)
-       ("h" git-gutter:previous-hunk)
-       ("l" git-gutter:next-hunk)
        ("f" link-hint-open-link :color blue)
        ("y" link-hint-copy-link :color blue)
        ("<return>" custom/process-thing-at-point "execute ;)" :color blue)
@@ -2311,31 +2307,7 @@
         (setq magit-diff-refine-hunk t)
         (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
         (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
-        (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode))
-        (defhydra hydra-magit (:color teal :hint nil)
-          "
-           PROJECT: %(projectile-project-root)
-
-           Immuting            Mutating
-           -----------------------------------------
-           _s_: status          _c_: checkout
-           _l_: log             _B_: branch mgr
-           _f_: file log
-           _r_: reflog
-           _w_: diff worktree
-           _t_: time machine
-           _b_: blame
-           "
-          ("s" magit-status)
-          ("f" magit-log-buffer-file)
-          ("c" magit-checkout)
-          ("w" magit-diff-working-tree)
-          ("r" magit-reflog)
-          ("b" magit-blame)
-          ("B" magit-branch-manager)
-          ("l" magit-log)
-          ("t" git-timemachine))
-        (global-set-key (kbd "C-'") 'hydra-magit/body))
+        (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode)))
 
       (req-package magit-filenotify
         :require magit
@@ -2381,6 +2353,39 @@
         (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
 
       (remove-hook 'find-file-hooks 'vc-find-file-hook)
+    #+END_SRC
+*** hydra
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (defhydra hydra-vcs ()
+        "
+        PROJECT: %(projectile-project-root)
+
+        Magit               Additional
+        -----------------------------------------
+        _s_: status         _k_ smerge / goto prev conflict
+        _l_: log            _j_ smerge / goto next conflict
+        _f_: file log       _h_ git-gutter / prev-hunk
+        _r_: reflog         _l_ git-gutter / next-hunk
+        _w_: diff worktree
+        _t_: time machine
+        _b_: blame
+        _c_: checkout
+        _B_: branch mgr
+        "
+        ("s" magit-status :color blue)
+        ("f" magit-log-buffer-file :color blue)
+        ("c" magit-checkout :color blue)
+        ("w" magit-diff-working-tree :color blue)
+        ("r" magit-reflog :color blue)
+        ("b" magit-blame :color blue)
+        ("B" magit-branch-manager :color blue)
+        ("l" magit-log :color blue)
+        ("t" git-timemachine :color blue)
+        ("k" smerge-prev "previous conflict")
+        ("j" smerge-next "next conflict")
+        ("h" git-gutter:previous-hunk)
+        ("l" git-gutter:next-hunk))
+      (global-set-key (kbd "C-'") 'hydra-vcs/body)
     #+END_SRC
 ** languages
 *** common
