@@ -1386,12 +1386,6 @@
       (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
       ;;TODO: plan docstring
       (defhydra hydra-transpose ()
-        ("M-b" backward-word "prev word")
-        ("M-f" forward-word "next word")
-        ("<up>" previous-line "prev line")
-        ("<down>" next-line "next line")
-        ("<left>" backward-char "prev char")
-        ("<right>" forward-char "next char")
         ("_" undo-tree-undo "undo last")
         ("w" custom/transpose-words "on words")
         ("s" transpose-sexps "on sexps")
