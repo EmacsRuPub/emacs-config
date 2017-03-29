@@ -1739,7 +1739,6 @@
      (setq next-line-add-newlines nil)
      (setq sentence-end-double-space nil)
      (setq tab-always-indent t)
-     (setq transient-mark-mode t)
      (setq user-full-name (capitalize private/real-name))
      (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
      ;; don't let the cursor go into minibuffer prompt
@@ -1749,7 +1748,6 @@
      (set-default 'indent-tabs-mode nil);; Never insert tabs
      (setq-default fill-column 200)
      (setq-default indicate-empty-lines t)
-     (setq-default transient-mark-mode t)
      (setq-default truncate-lines t);; Don't break lines for me, please
 
      (setq x-stretch-cursor t)
@@ -1759,7 +1757,6 @@
      (setq mouse-wheel-progressive-speed nil)
      (setq set-mark-command-repeat-pop t)
 
-     (make-variable-buffer-local 'transient-mark-mode)
      (put 'transient-mark-mode 'permanent-local t)
 
      (setq whitespace-style '(indentation::space
