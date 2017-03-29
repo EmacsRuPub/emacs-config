@@ -1848,10 +1848,10 @@
      (global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
 
-     (global-set-key (kbd "M-g") 'goto-line)
+     (global-set-key (kbd "M-g") 'goto-line) ;;TODO: bind goto-char
      (global-set-key (kbd "M-\"") 'eval-region)
      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-     ;; (global-set-key "\C-x\ f" 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
+     (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
    #+END_SRC
 ** try
