@@ -1779,45 +1779,54 @@
    #+END_SRC
 ** hydras and keys
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: plan docstring
      (defhydra hydra-edit (:color blue)
+       "
+       Editing                         Kill/yank                 Buffers                    Case
+       ----------------------------------------------------------------------------------------------------------------------------------
+       _0_ compact spaces              _y_ank to register        _`_ redraw display         _d_ / _d_ downcase word/region
+       just _o_ne space between        _p_ut from register       create _S_cratch           _u_ / _u_ upcase word/region
+       _2_ duplicate + comment         _f_ilename -> clipboard   _d_iff buffer <-> file     _I_       capitalize region
+       _/_ make comment box            _k_ yank rectangle        re_n_ame buffer+file
+       _SPC_ untabify                  append next _K_ill        query/replace rege_x_p
+       _TAB_ tabify                    _a_ppend cited region     _=_ edit region indirect
+       delete trailing _w_hitespaces
+       _s_ort lines
+       keep _u_nique lines
+       _4_ snakehump TAP
+
+       Custom:
+       _i_nsert current date+time
+       _t_ranslate TAP with Google
+       _T_ranslate query with Google
+       "
        ("0" custom/compact-spaces-in-region)
+       ("o" just-one-space)
        ("2" crux-duplicate-and-comment-current-line-or-region)
-       ("4" snakehump-next-at-point)
-       ("<left>" jump-char-backward)
-       ("<right>" jump-char-forward)
-       ("C-SPC" comment-dwim)
-       ("C-r" custom/join-region) ;;FIXME: custom/join-region is inexistent
-       ("M-a" indent-region)
+       ("/" comment-box)
        ("SPC" untabify)
        ("TAB" tabify)
-       ("[" comment-region)
-       ("]" uncomment-region)
-       ("`" redraw-display)
-       ("b" subword-mode)
-       ("d" diff-buffer-with-file)
-       ("f" custom/copy-file-name-to-clipboard)
-       ("i" custom/insert-current-date-time)
-       ("o" just-one-space)
-       ("p" whitespace-mode)
-       ("r" query-replace)
-       ("n" crux-rename-file-and-buffer)
-       ("s" sort-lines)
        ("w" delete-trailing-whitespace)
+       ("s" sort-lines)
        ("u" delete-duplicate-lines)
-       ("v" view-mode)
-       ("x" query-replace-regexp)
-       ("a" custom/append-cited-region)
-       ("g" insert-register)
-       ("e" copy-to-register)
-       ("m" rename-uniquely)
-       ("S" scratch)
-       ("y" revbufs)
+       ("4" snakehump-next-at-point)
+       ("y" copy-to-register)
+       ("p" insert-register)
+       ("f" custom/copy-file-name-to-clipboard)
        ("k" custom/kill-save-rectangle)
        ("K" append-next-kill)
-       ("/" comment-box)
-       ("W" wrap-to-fill-column-mode)
+       ("a" custom/append-cited-region)
+       ("`" redraw-display)
+       ("S" scratch)
+       ("d" diff-buffer-with-file)
+       ("n" crux-rename-file-and-buffer)
+       ("x" query-replace-regexp)
        ("=" edit-indirect-region)
+       ("d" downcase-word)
+       ("d" downcase-region :color blue)
+       ("u" upcase-word)
+       ("u" upcase-region :color blue)
+       ("I" upcase-initials-region :color blue)
+       ("i" custom/insert-current-date-time)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
        ("q" nil "cancel"))
@@ -1832,6 +1841,8 @@
        ("b" toggle-debug-on-error "debug on error")
        ("w" whitespace-mode "whitespace mode")
        ("W" global-whitespace-mode "*global* whitespace mode")
+       ("b" subword-mode)
+       ("v" view-mode)
        ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
        ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
        ("h" highlight-sexp-mode "toggle highlight-sexp mode")
@@ -1839,18 +1850,6 @@
        ("p" toggle-projectile-global-mode "toggle projectile-global-mode"))
      (global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
-     (defhydra hydra-cases (:color pink)
-       "
-       _d_ / _d_ downcase word/region
-       _u_ / _u_ upcase word/region
-       _I_       capitalize region
-       "
-       ("d" downcase-word)
-       ("d" downcase-region :color blue)
-       ("u" upcase-word)
-       ("u" upcase-region :color blue)
-       ("I" upcase-initials-region :color blue))
-     (global-set-key (kbd "<f10>") 'hydra-cases/body)
 
      (global-set-key (kbd "M-g") 'goto-line)
      (global-set-key (kbd "M-\"") 'eval-region)
