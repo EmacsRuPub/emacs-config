@@ -3814,15 +3814,7 @@
 *** definitions
 **** process thing at point
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (define-namespace custom/
-
-       (defun open-or-browse-at-point (arg)
-         (interactive "P")
-         (if arg
-             (browse-url-at-point)
-           (org-open-at-point)))
-
-       (defadvice browse-url-at-point (before org-position-url activate)
+       (defadvice custom/browse-url-at-point (before org-position-url activate)
          (when (derived-mode-p 'org-mode)
            (let ((end nil))
              (save-excursion
@@ -3830,8 +3822,6 @@
                (setq end (save-excursion (outline-next-heading) (point))))
              (org-back-to-heading t)
              (re-search-forward org-plain-link-re end t))))
-
-       )
      #+END_SRC
 **** Org locations
      :PROPERTIES:
@@ -4753,7 +4743,6 @@
                ;; set property
                (org-set-property prop val))))
      #+END_SRC
-
 **** #'org-tags-completion-function
 **** file+datetree navigation
      #+BEGIN_SRC emacs-lisp :tangle no
