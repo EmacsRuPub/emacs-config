@@ -4810,7 +4810,6 @@
    #+END_SRC
 ** hydras
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: clusterize various extensions
      (defhydra hydra-pim ()
        "
        BBDB                        Various
@@ -4830,74 +4829,65 @@
        ("q" nil))
      (global-set-key (kbd "C-c c") 'hydra-pim/body)
 
-     (defhydra hydra-org-sandbox ()
-       ("c" org-table-create)
-       ("s" org-sparse-tree))
-
      ;;TODO: update docstring
      (defhydra hydra-org-global (:color teal)
        "
-         ^Navigation^               ^Agenda^                  ^Clock^             ^Properties^        ^Capture^
-         ---------------------------------------------------------------------------------------------------------------
-         _<up>_:     up heading     show _a_genda             _._ clock in        set _p_roperty      captur_e_
-         _C-<down>_: next heading   _s_chedule                _,_ clock out       _d_elete property   _w_ store link
-         _C-<up>_:   prev heading   dead_l_ine                cloc_k_ display                       _y_ insert link
-         ace-link for _o_rg         agenda _c_olumns          _g_oto last clock
-         _O_pen at point            foot_n_ote action         estimate effor_t_
-         show _A_ll                 add t_i_me to timestamp   _c_ancel clock
-         clock _r_eport
-         po_m_odoro
-         "
-       ("<up>" outline-up-heading "")
-       ("C-<down>" outline-next-heading "")
-       ("C-<up>" outline-previous-heading "")
+       ^Control^                 ^Editing^            ^Context^               ^Movement^
+       ---------------------------------------------------------------------------------------------------------
+       _g_oto clock              captur_e_            _a_genda                _<right>_ next visible heading
+       _._ clock in              _w_ store link       dash_b_oard             _<left>_  prev visible heading
+       _,_ clock out             _y_ank link          re_v_eal                _<down>_  forward same level
+       _\^_ recently clocked     _S_et property       _f_ ace-link            _<up>_    backward same level
+       _c_ancel clock            _D_elete property    _n_arrow to subtree     heading _u_p
+       _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         Org _G_oto
+       _R_eport clocks           _r_efile             _h_eadings in buffer
+       _p_omodoro                create _T_able       global _H_eadings
+       _s_chedule                                     _=_ todo tree
+       _|_ deadline                                   _2_ random agenda
+       _i_ add time to TS
+       _t_oggle TS type
+
+       _\?_ clocking commands
+       "
        ("g" org-clock-goto)
-       ("p" org-set-property)
-       ("d" org-delete-property)
-       ("D" org-dashboard-display :color blue)
-       ("s" org-schedule :color blue)
-       ("l" org-deadline :color blue)
        ("." org-clock-in)
        ("," org-clock-out)
-       (">" org-mru-clock-in)
        ("^" org-mru-clock-select-recent-task)
-       ("t" org-clock-modify-effort-estimate)
        ("c" org-clock-cancel)
-       ("r" org-clock-report)
-       ("?" (org-info "Clocking commands"))
-       ("k" org-clock-display)
-       ("f" org-footnote-action)
-       ("w" org-store-link)
-       ("y" org-insert-link)
-       ("Y" org-insert-link-global)
-       ;;TODO: add org-open-at-point-global
-       ;;TODO: add org-show-todo-tree
+       ("d" org-clock-display)
+       ("R" org-clock-report)
+       ("p" org-pomodoro)
+       ("s" org-schedule :color blue)
+       ("|" org-deadline :color blue)
        ("i" custom/org-update-timestamp-with-time)
-       ("o" ace-link-org :color blue)
-       ("O" custom/open-or-browse-at-point)
-       ("e" org-capture :color blue)
-       ("a" org-agenda :color blue)
-       ("A" show-all)
        ("t" org-toggle-timestamp-type)
-       ("m" org-pomodoro)
-       ("r" org-reveal "reveal")
-       ("R" org-refile "refile")
-       ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
+       ("e" org-capture :color blue)
+       ("w" org-store-link)
+       ("y" org-insert-link-global)
+       ("S" org-set-property)
+       ("D" org-delete-property)
+       ("A" org-footnote-action)
+       ("r" org-refile "refile")
+       ("T" org-table-create)
+       ("a" org-agenda :color blue)
+       ("b" org-dashboard-display :color blue)
+       ("v" org-reveal "reveal")
+       ("f" ace-link-org :color blue)
        ("n" org-narrow-to-subtree)
+       ("-" org-sparse-tree)
        ("h" helm-org-in-buffer-headings)
        ("H" helm-org-agenda-files-headings)
+       ("=" org-show-todo-tree)
+       ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
+       ("<right>" outline-next-visible-heading "next heading")
+       ("<left>" outline-previous-visible-heading "prev heading")
+       ("<down>" org-forward-heading-same-level "next heading at same level")
+       ("<up>" org-backward-heading-same-level "prev heading at same level")
+       ("u" outline-up-heading "up heading")
+       ("G" org-goto "goto" :exit t)
+       ("?" (org-info "Clocking commands") "")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
-
-     (defhydra hydra-org-movement (:color red :columns 3)
-       "Org Mode Movements"
-       ("n" outline-next-visible-heading "next heading")
-       ("p" outline-previous-visible-heading "prev heading")
-       ("N" org-forward-heading-same-level "next heading at same level")
-       ("P" org-backward-heading-same-level "prev heading at same level")
-       ("u" outline-up-heading "up heading")
-       ("g" org-goto "goto" :exit t))
-     ;;TODO: bind hydra-org-movement to a key
    #+END_SRC
 * publishing
 ** setup
