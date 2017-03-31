@@ -1476,17 +1476,19 @@
         (bind-key "H-SPC" 'set-rectangular-region-anchor))
 
       (req-package selected
-        :commands selected-minor-mode
         :init
         (setq selected-org-mode-map (make-sparse-keymap))
+        :config
+        (selected-global-mode)
         :bind (:map selected-keymap
-                    ("q" . selected-off)
-                    ("u" . upcase-region)
-                    ("d" . downcase-region)
-                    ("w" . count-words-region)
-                    ("m" . apply-macro-to-region-lines)
-                    :map selected-org-mode-map
-                    ("t" . org-table-convert-region)))
+               ("q" . selected-off)
+               ("u" . upcase-region)
+               ("d" . downcase-region)
+               ("c" . upcase-initials-region)
+               ("w" . count-words-region)
+               ("m" . apply-macro-to-region-lines)
+               :map selected-org-mode-map
+               ("t" . org-table-convert-region)))
 
       (req-package whole-line-or-region ;; if no region is active, act on current line
         :defer t
@@ -1778,11 +1780,11 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-edit (:color blue)
        "
-       Editing                         Kill/yank                 Buffers                    Case
-       ----------------------------------------------------------------------------------------------------------------------------------
-       _0_ compact spaces              _y_ank to register        _`_ redraw display         _d_ / _d_ downcase word/region
-       just _o_ne space between        _p_ut from register       create _S_cratch           _u_ / _u_ upcase word/region
-       _2_ duplicate + comment         _f_ilename -> clipboard   _d_iff buffer <-> file     _I_       capitalize region
+       Editing                         Kill/yank                 Buffers
+       -------------------------------------------------------------------------------------
+       _0_ compact spaces              _y_ank to register        _`_ redraw display
+       just _o_ne space between        _p_ut from register       create _S_cratch
+       _2_ duplicate + comment         _f_ilename -> clipboard   _d_iff buffer <-> file
        _/_ make comment box            _k_ yank rectangle        re_n_ame buffer+file
        _SPC_ untabify                  append next _K_ill        query/replace rege_x_p
        _TAB_ tabify                    _a_ppend cited region     _=_ edit region indirect
@@ -1818,11 +1820,6 @@
        ("n" crux-rename-file-and-buffer)
        ("x" query-replace-regexp)
        ("=" edit-indirect-region)
-       ("d" downcase-word)
-       ("d" downcase-region :color blue)
-       ("u" upcase-word)
-       ("u" upcase-region :color blue)
-       ("I" upcase-initials-region :color blue)
        ("i" custom/insert-current-date-time)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
