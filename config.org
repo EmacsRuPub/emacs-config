@@ -1578,13 +1578,8 @@
         :defer t)
 
       (req-package mark
-        :require fm
-        :config
-        (defhydra hydra-mark ()
-          ("<right>" forward-mark "forward-mark")
-          ("<left>" backward-mark "backward-mark")
-          ("<down>" show-marks "show-marks"))
-        (global-set-key (kbd "<f12>") 'hydra-mark/body))
+        :disabled t
+        :require fm)
 
       (req-package page-break-lines
         :config
