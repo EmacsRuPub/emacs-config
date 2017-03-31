@@ -1118,6 +1118,14 @@
                  (lambda () (bind-key "M-o" 'other-window ibuffer-mode-map))) ; was ibuffer-visit-buffer-1-window
        (bind-key "/ ." 'custom/ibuffer-filter-by-extname ibuffer-mode-map))
 
+     (req-package ibuffer-vc
+       :config
+       (add-hook 'ibuffer-hook
+                 (lambda ()
+                   (ibuffer-vc-set-filter-groups-by-vc-root)
+                   (unless (eq ibuffer-sorting-mode 'alphabetic)
+                     (ibuffer-do-sort-by-alphabetic)))))
+
      ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
      (bind-key "nd" 'ni-narrow-to-defun-indirect-other-window ctl-x-4-map)
      (bind-key "nn" 'ni-narrow-to-region-indirect-other-window ctl-x-4-map)
