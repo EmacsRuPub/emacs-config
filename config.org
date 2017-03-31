@@ -2019,6 +2019,7 @@
 
        (req-package auto-yasnippet :require yasnippet)
      #+END_SRC
+**** BACKLOG try https://github.com/abrochard/org-sync-snippets
 *** yankpad
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package yankpad
@@ -4778,6 +4779,7 @@
          (if (equal "capture" (frame-parameter nil 'name))
              (delete-frame)))
      #+END_SRC
+**** BACKLOG org-log-re{schedule, deadline}
 ** sauron
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package sauron
