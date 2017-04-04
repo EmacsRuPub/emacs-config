@@ -3163,6 +3163,8 @@
          (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
            (switch-to-buffer restbuffer)
            (restclient-mode))))
+
+     (req-package ob-restclient)
    #+END_SRC
 ** ERC
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4495,7 +4497,8 @@
           (org . t)
           (plantuml . t)
           (scheme . t)
-          (sh . t)))
+          (sh . t)
+          (restclient . t)))
      #+END_SRC
 **** keybindings
      #+BEGIN_SRC emacs-lisp :tangle yes
