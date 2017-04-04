@@ -917,6 +917,7 @@
        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
        (setq dired-dwim-target t)
        (setq dired-listing-switches "-lah1v --group-directories-first")
+       (add-hook 'dired-mode-hook 'auto-revert-mode)
        (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
        ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
