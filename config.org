@@ -1221,7 +1221,7 @@
        _k_ill buffers        run _A_sync command in rootdir    _G_it grep
                              _h_elm-projectile                 _G_it grep TAP
        "
-       ("i" projectile-ibuffer)
+       ("i" ibuffer)
        ("I" projectile-project-info)
        ("t" projectile-test-project)
        ("C" projectile-compile-project)
