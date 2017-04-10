@@ -1016,8 +1016,6 @@
        (defadvice helm-ag--query (after escape-search-term activate)
          (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
 
-     (req-package helm-git-grep)
-
      ;;TODO: sync and maybe slurp something from rc-cc
      (req-package helm-gtags
        :require helm
@@ -1218,8 +1216,8 @@
        run _t_ests           recent_F_                         _f_ind files
        _C_ompile             _s_witch project                  a_g_
        in_v_alidate cache    _R_un command in rootdir          _m_ulti-swoop
-       _k_ill buffers        run _A_sync command in rootdir    _G_it grep
-                             _h_elm-projectile                 _G_it grep TAP
+       _k_ill buffers        run _A_sync command in rootdir
+                             _h_elm-projectile
        "
        ("i" ibuffer)
        ("I" projectile-project-info)
@@ -1238,8 +1236,6 @@
        ("r" socyl-search-regexp)
        ("f" custom/helm-find-files)
        ("g" helm-ag-project-root)
-       ("G" helm-git-grep)
-       ("." helm-git-grep-at-point)
        ("m" swoop-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
 
