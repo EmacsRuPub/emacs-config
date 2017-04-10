@@ -3165,7 +3165,11 @@
            (switch-to-buffer restbuffer)
            (restclient-mode))))
 
-     (req-package ob-restclient)
+     (req-package ob-restclient
+       :config
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((restclient . t))))
    #+END_SRC
 ** terminal
 *** common
@@ -4308,8 +4312,7 @@
           (org . t)
           (plantuml . t)
           (scheme . t)
-          (sh . t)
-          (restclient . t)))
+          (sh . t)))
      #+END_SRC
 **** keybindings
      #+BEGIN_SRC emacs-lisp :tangle yes
