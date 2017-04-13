@@ -80,22 +80,41 @@
                          "uint32:1")))
     #+END_SRC
 ** Encryption and security
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package epa
-       :config
-       (setq epg-gpg-program "gpg2")
-       (epa-file-enable)
-       (setq epg-gpg-home-directory "~/.gnupg"))
+*** packages
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package epa
+        :config
+        (setq epg-gpg-program "gpg2")
+        (epa-file-enable)
+        (setq epg-gpg-home-directory "~/.gnupg"))
 
-     (req-package password-cache
-       :config
-       (setq password-cache-expiry nil)
-       (setq password-cache t))
+      (req-package password-cache
+        :config
+        (setq password-cache-expiry nil)
+        (setq password-cache t))
 
-     (req-package keychain-environment
-       :config
-       (keychain-refresh-environment))
-   #+END_SRC
+      (req-package keychain-environment
+        :config
+        (keychain-refresh-environment))
+
+      (req-package pass)
+
+      (req-package helm-pass
+        :require pass
+        :commands (helm-pass))
+
+      (req-package auth-password-store
+        :config
+        (auth-pass-enable))
+    #+END_SRC
+*** hydras
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (defhydra hydra-security ()
+        ("p" pass "pass" :color blue)
+        ("!" helm-pass "Helm interface to Pass" :color blue)
+        ("q" nil "cancel"))
+      (global-set-key (kbd "<f6>") 'hydra-security/body)
+    #+END_SRC
 ** load various private credentials from GPG-encrypted file
    #+BEGIN_SRC emacs-lisp :tangle yes
      (load (at-config-basedir "credentials.el.gpg"))
