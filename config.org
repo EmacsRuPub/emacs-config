@@ -409,15 +409,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package helm
         :init
-        (req-package helm-config)
-        (req-package helm-files)
         (req-package helm-info)
-        (req-package helm-locate)
-        (req-package helm-misc)
-        (req-package helm-grep)
-        (req-package helm-buffers
-          :config
-          (pushnew 'python-mode helm-buffers-favorite-modes))
         :config
         (defun custom/helm-find-files ()
           (interactive)
@@ -485,17 +477,11 @@
           (setq helm-locate-fuzzy-match t))
         (bind-key "C-<down>" 'helm-next-source helm-map)
         (bind-key "C-<up>" 'helm-previous-source helm-map)
-        (bind-key "C-x b" 'helm-mini)
         (bind-key "C-*" 'helm-mark-all helm-map)
-        (bind-key "C-x j j" 'helm-bookmarks)
-        (bind-key "M-x" 'helm-M-x)
-        (bind-key "C-x f" 'helm-for-files)
-        (bind-key "C-x C-f" 'helm-find-files)
+        (bind-key "C-x C-h" 'helm-command-prefix)
         (bind-key "C-h a" 'helm-apropos)
         (bind-key "C-h r" 'helm-info-emacs)
         (bind-key "C-h o" 'helm-info-at-point)
-        (bind-key "C-x C-r" 'helm-recentf)
-        (bind-key "C-x C-h" 'helm-command-prefix)
         (bind-key "<tab>" 'helm-execute-persistent-action helm-map) ; rebind tab to run persistent action
         (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
         (bind-key "C-z" 'helm-select-action helm-map) ; list actions using C-z
@@ -526,7 +512,49 @@
          :config
          (helm-flx-mode 1))
      #+END_SRC
-*** tramp
+*** ivy-based
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package ivy
+        :delight ivy-mode
+        :config
+        (ivy-mode 1)
+        (setq ivy-display-style 'fancy)
+        (setq ivy-use-virtual-buffers t) ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
+        (setq ivy-height 10) ;; number of result lines to display
+        ;; (setq ivy-count-format "") ;; does not count candidates
+        (setq ivy-initial-inputs-alist nil) ;; no regexp by default
+        ;; configure regexp engine.
+        (setq ivy-re-builders-alist
+              ;; allow input not in order
+              '((t   . ivy--regex-ignore-order)))
+        (bind-key "C-x b" 'ivy-switch-buffer)
+        ;;TODO: bind ivy-resume
+        ;;TODO: bind ffip-ivy-resume
+        )
+
+      (req-package counsel
+        :require swiper
+        :config
+        (bind-key "C-x j j" 'counsel-bookmark)
+        (bind-key "M-x" 'counsel-M-x)
+        (bind-key "C-x C-f" 'counsel-find-file)
+        (bind-key "C-h f" 'counsel-describe-function)
+        (bind-key "C-h v" 'counsel-describe-variable)
+        (bind-key "C-h l" 'counsel-find-library)
+        (bind-key "C-x C-r" 'counsel-recentf)
+        (bind-key "C-x C-d" 'counsel-descbinds)
+        )
+
+      (req-package ivy-hydra
+        :require ivy
+        :disabled t)
+
+      (req-package ivy-rich
+        :require ivy
+        :config
+        (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
+    #+END_SRC
+*** tramp                                                      :current:orgmode:
     #+BEGIN_SRC emacs-lisp :tangle no
        (req-package tramp
          :init
@@ -897,11 +925,11 @@
        (projectile-global-mode t)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil)
-       (setq projectile-switch-project-action 'helm-projectile)
+       (setq projectile-switch-project-action 'counsel-projectile)
        (def-projectile-commander-method ?d
          "Open project root in dired."
          (projectile-dired))
-       (setq projectile-completion-system 'helm)
+       (setq projectile-completion-system 'ivy)
        (setq projectile-tags-command
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
@@ -909,8 +937,14 @@
 
      (req-package helm-projectile
        :require helm projectile dash cl-lib
+       :disabled t
        :config
        (helm-projectile-on))
+
+     (req-package counsel-projectile
+       :require swiper projectile
+       :config
+       (counsel-projectile-on))
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1033,6 +1067,7 @@
 
      (req-package helm-ag
        :require helm
+       :disabled t
        :config
        (setq helm-ag-insert-at-point 'symbol)
        (setq helm-ag-fuzzy-match t)
@@ -1064,6 +1099,9 @@
        (add-hook 'dired-mode-hook 'helm-gtags-mode)
        (add-hook 'c-mode-hook 'helm-gtags-mode)
        (add-hook 'c++-mode-hook 'helm-gtags-mode))
+
+     (req-package counsel-gtags
+       :require counsel gtags)
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
@@ -1166,7 +1204,7 @@
 
      (req-package swiper
        :config
-       (setq ivy-display-style 'fancy)
+       (setq swiper-include-line-number-in-search t)
        (custom-set-faces
         '(swiper-minibuffer-match-face-1
           ((t :background "#dddddd")))
@@ -1230,16 +1268,25 @@
        ("q" nil "cancel"))
      (global-set-key (kbd "C-q") 'hydra-errors/body)
 
+     (defhydra hydra-history ()
+       ("y" counsel-yank-pop)
+       ("m" counsel-mark-ring)
+       ("c" counsel-command-history)
+       ("e" counsel-expression-history)
+       ("p" counsel-package)
+       ("q" nil "cancel"))
+     (global-set-key (kbd "<f9>") 'hydra-history/body)
+
      (defhydra hydra-projects (:color teal)
        "
        PROJECT: %(projectile-project-root)
        Project               More                              Search
        --------------------------------------------------------------------------------
-       _i_buffer             _c_ommander                       _H_elm-mini
-       _I_nfo                _d_ired                           _r_egexp
-       run _t_ests           recent_F_                         _f_ind files
-       _C_ompile             _s_witch project                  a_g_
-       in_v_alidate cache    _R_un command in rootdir          _m_ulti-swoop
+       _i_buffer             _c_ommander                       _r_egexp
+       _I_nfo                _d_ired                           _f_ind files
+       run _t_ests           recent_F_                         a_g_
+       _C_ompile             _s_witch project                  _m_ulti-swoop
+       in_v_alidate cache    _R_un command in rootdir
        _k_ill buffers        run _A_sync command in rootdir
                              _h_elm-projectile
        "
@@ -1252,15 +1299,15 @@
        ("c" projectile-commander)
        ("d" projectile-dired)
        ("F" projectile-recentf)
-       ("s" projectile-switch-project)
+       ("s" counsel-projectile-switch-project)
        ("R" projectile-run-command-in-root)
        ("A" projectile-run-async-shell-command-in-root)
-       ("h" helm-projectile)
-       ("H" helm-mini)
+       ("h" counsel-projectile)
        ("r" socyl-search-regexp)
        ("f" custom/helm-find-files)
-       ("g" helm-ag-project-root)
-       ("m" swoop-multi))
+       ("g" counsel-ag)
+       ("l" counsel-git-log)
+       ("m" swiper-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
 
      (defhydra hydra-navigate ()
@@ -1280,8 +1327,8 @@
 
        _<return>_ Execute TAP
        "
-       ("i" swoop :color blue)
-       ("o" (lambda () (interactive) (swoop "")) :color blue)
+       ("i" (lambda () (interactive) (swiper (thing-at-point 'symbol))) :color blue)
+       ("o" (lambda () (interactive) (swiper "")) :color blue)
        ("s" helm-semantic-or-imenu :color blue)
        ("c" avy-goto-char-timer "goto char within window" :color blue)
        ("W" avy-goto-word-0 "goto word within window" :color blue)
@@ -1875,7 +1922,6 @@
 
      (global-set-key (kbd "M-g") 'goto-line) ;;TODO: bind goto-char
      (global-set-key (kbd "M-\"") 'eval-region)
-     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
      (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
    #+END_SRC
@@ -3530,6 +3576,11 @@
        (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
        (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
        (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map))
+
+     ;;TODO: setup
+     (req-package counsel-bbdb
+       :require counsel bbdb
+       :disabled t)
    #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4708,8 +4759,9 @@
        ("n" org-narrow-to-subtree)
        ("-" org-sparse-tree)
        ("h" helm-org-in-buffer-headings)
-       ("H" helm-org-agenda-files-headings)
+       ("H" counsel-org-agenda-headlines)
        ("=" org-show-todo-tree)
+       ("\\" counsel-org-tag)
        ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
        ("<right>" outline-next-visible-heading "next heading")
        ("<left>" outline-previous-visible-heading "prev heading")
@@ -4842,6 +4894,7 @@
 
     (req-package helm-descbinds
       :require helm
+      :disabled t
       :config
       (helm-descbinds-mode 1)
       (bind-key "C-x C-d" 'helm-descbinds))
