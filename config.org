@@ -99,19 +99,31 @@
 
       (req-package pass)
 
-      (req-package helm-pass
-        :require pass
-        :commands (helm-pass))
-
       (req-package auth-password-store
         :config
         (auth-pass-enable))
+
+      (eval-after-load 'ivy
+        ;;TODO: relocate more appropriately
+        '(progn
+           (defun counsel-pass ()
+             (interactive)
+             (ivy-read "Counsel interface for Pass: "
+                       (funcall #'password-store-list)
+                       :action #'password-store-copy)
+             :require-match t
+             :caller 'counsel-pass)
+           (ivy-set-actions
+            'counsel-pass
+            '(("c" password-store-copy "Copy password to clipboard")
+              ("e" password-store-edit "Edit entry")
+              ("b" password-store-url "Browse url of entry")))))
     #+END_SRC
 *** hydras
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-security ()
         ("p" pass "pass" :color blue)
-        ("!" helm-pass "Helm interface to Pass" :color blue)
+        ("!" counsel-pass "Counsel interface to Pass" :color blue)
         ("q" nil "cancel"))
       (global-set-key (kbd "<f6>") 'hydra-security/body)
     #+END_SRC
@@ -283,7 +295,6 @@
        (delight 'auto-fill-function nil 'simple)
        (delight 'composable-mode " @" 'composable)
        (delight 'wrap-region-mode " wr" 'wrap-region)
-       (delight 'helm-mode nil 'helm-mode)
        (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
        (delight 'projectile-mode " prj" 'projectile)
        (delight 'company-mode " γ" 'company)
@@ -405,113 +416,6 @@
         :config
         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
-*** helm
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package helm
-        :init
-        (req-package helm-info)
-        :config
-        (defun custom/helm-find-files ()
-          (interactive)
-          (helm-other-buffer
-           '(helm-source-files-in-current-dir
-             helm-source-recentf
-             helm-source-file-name-history
-             helm-source-findutils
-             helm-source-locate)
-           "*helm-find-files*"))
-        (defun custom/open-portage-file ()
-          (interactive)
-          (helm :sources '((name . "Portage files")
-                           (candidates . (lambda () (f-files "/etc/portage" nil t)))
-                           (action . (lambda (candidate)
-                                       (find-file (concat "/sudo::" (expand-file-name candidate))))))))
-        (defun custom/open-encrypted-document ()
-          (interactive)
-          (helm :sources '((name . "Various documents")
-                           (candidates . (lambda () (f-files (at-homedir "/docs/enc") nil t)))
-                           (action . (lambda (candidate)
-                                       (find-file candidate))))))
-        (defun custom/open-org-file ()
-          (interactive)
-          (helm :sources '((name . "Org files")
-                           (candidates . (lambda () (f-files (at-org-dir) nil t)))
-                           (action . (lambda (candidate)
-                                       (find-file candidate))))))
-        (defun custom/helm-hide-minibuffer-maybe ()
-          "Hide minibuffer in Helm session if we use the header line as input field."
-          (when (with-helm-buffer helm-echo-input-in-header-line)
-            (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-              (overlay-put ov 'window (selected-window))
-              (overlay-put ov 'face
-                           (let ((bg-color (face-background 'default nil)))
-                             `(:background ,bg-color :foreground ,bg-color)))
-              (setq-local cursor-type nil))))
-        (add-hook 'helm-minibuffer-set-up-hook
-                  'custom/helm-hide-minibuffer-maybe)
-        (add-to-list 'display-buffer-alist
-                     '("\\`\\*helm.*\\*\\'"
-                       (display-buffer-in-side-window)
-                       (window-height . 0.4)))
-        (add-to-list 'display-buffer-alist
-                     '("\\`\\*helm help\\*\\'"
-                       (display-buffer-pop-up-window)))
-        (setq helm-quick-update t)
-        (setq helm-split-window-in-side-p t)
-        (setq helm-echo-input-in-header-line t)
-        (setq helm-display-header-line nil)
-        (setq helm-ff-search-library-in-sexp t)
-        (setq helm-ff-file-name-history-use-recentf t)
-        (setq helm-buffers-fuzzy-matching t)
-        (setq helm-recentf-fuzzy-match t)
-        (setq helm-M-x-fuzzy-match t)
-        (setq helm-apropos-fuzzy-match t)
-        (setq helm-move-to-line-cycle-in-source t)
-        (setq helm-buffer-max-length nil)
-        (setq helm-input-idle-delay 0.2)
-        (setq helm-exit-idle-delay 0.2)
-        (setq helm-ff-skip-boring-files t)
-        (setq helm-mode-fuzzy-match t
-              helm-completion-in-region-fuzzy-match t)
-        (when (eq system-type 'gnu/linux)
-          (setq helm-locate-fuzzy-match t))
-        (bind-key "C-<down>" 'helm-next-source helm-map)
-        (bind-key "C-<up>" 'helm-previous-source helm-map)
-        (bind-key "C-*" 'helm-mark-all helm-map)
-        (bind-key "C-x C-h" 'helm-command-prefix)
-        (bind-key "C-h a" 'helm-apropos)
-        (bind-key "C-h r" 'helm-info-emacs)
-        (bind-key "C-h o" 'helm-info-at-point)
-        (bind-key "<tab>" 'helm-execute-persistent-action helm-map) ; rebind tab to run persistent action
-        (bind-key "C-i" 'helm-execute-persistent-action helm-map) ; make TAB works in terminal
-        (bind-key "C-z" 'helm-select-action helm-map) ; list actions using C-z
-        (when (executable-find "curl")
-          (setq helm-google-suggest-use-curl-p t))
-        ;;TODO: investigate and bind 'helm-resume
-        (helm-autoresize-mode 1)
-        (setq helm-autoresize-max-height 0)
-        (setq helm-autoresize-min-height 20)
-        (helm-mode 1)
-        (defhydra hydra-custom-helm ()
-          ("p" custom/open-portage-file "open portage file")
-          ("e" custom/open-encrypted-document "open encrypted document")
-          ("o" custom/open-org-file "open Org file")
-          ("h" helm-hunks "view hunks in a file") ;TODO move to more appropriate place
-          ("q" nil "cancel"))
-        (global-set-key (kbd "C-c r") 'hydra-custom-helm/body))
-    #+END_SRC
-**** fuzzy searching
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (req-package helm-fuzzier
-         :require helm
-         :config
-         (helm-fuzzier-mode 1))
-
-       (req-package helm-flx
-         :require helm flx
-         :config
-         (helm-flx-mode 1))
-     #+END_SRC
 *** ivy-based
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package ivy
@@ -525,8 +429,7 @@
         (setq ivy-initial-inputs-alist nil) ;; no regexp by default
         ;; configure regexp engine.
         (setq ivy-re-builders-alist
-              ;; allow input not in order
-              '((t   . ivy--regex-ignore-order)))
+              '((t . ivy--regex-ignore-order))) ;; allow input not in order
         (bind-key "C-x b" 'ivy-switch-buffer)
         ;;TODO: bind ivy-resume
         ;;TODO: bind ffip-ivy-resume
@@ -553,6 +456,77 @@
         :require ivy
         :config
         (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
+
+      (defun custom/open-portage-file ()
+        "Choose and open Portage file"
+        (interactive)
+        (ivy-read "Portage files: "
+                  (funcall #'(lambda () (f-files "/etc/portage" nil t)))
+                  :action #'(lambda (candidate)
+                              (find-file (concat "/sudo::" (expand-file-name candidate))))
+                  :require-match t
+                  :caller 'custom/open-portage-file))
+
+      (defun custom/open-encrypted-document ()
+        (interactive)
+        (ivy-read "Various documents: "
+                  (funcall #'(lambda () (f-files (at-homedir "/docs/enc") nil t)))
+                  :action #'(lambda (candidate)
+                              (find-file candidate))
+                  :require-match t
+                  :caller 'custom/open-encrypted-document))
+
+      (defun custom/open-org-file ()
+        (interactive)
+        (ivy-read "Org files: "
+                  (funcall #'(lambda () (f-files (at-org-dir) nil t)))
+                  :action #'(lambda (candidate)
+                              (find-file candidate))
+                  :require-match t
+                  :caller 'custom/open-portage-file))
+
+      (defun custom/open-org-kb-file ()
+        (interactive)
+        (ivy-read "Org files: "
+                  (funcall #'(lambda () (f-files (at-org-kb-dir) nil t)))
+                  :action #'(lambda (candidate)
+                              (find-file candidate))
+                  :require-match t
+                  :caller 'custom/open-portage-file))
+
+      ;; CREDITS: https://github.com/nathankot/dotemacs
+      (defvar counsel-flycheck-history nil
+        "History for `counsel-flycheck'")
+
+      (defun counsel-flycheck ()
+        (interactive)
+        (if (not (bound-and-true-p flycheck-mode))
+            (message "Flycheck mode is not available or enabled")
+          (ivy-read "Error: "
+                    (let ((source-buffer (current-buffer)))
+                      (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
+                                               (progn
+                                                 (with-current-buffer
+                                                     (get-buffer-create flycheck-error-list-buffer)
+                                                   (flycheck-error-list-mode)
+                                                   (current-buffer))))
+                        (flycheck-error-list-set-source source-buffer)
+                        (flycheck-error-list-reset-filter)
+                        (revert-buffer t t t)
+                        (split-string (buffer-string) "\n" t " *")))
+                    :action (lambda (s &rest _)
+                              (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
+                                            (pos (flycheck-error-pos error)) )
+                                (goto-char (flycheck-error-pos error))))
+                    :history 'counsel-flycheck-history)))
+
+      (defhydra hydra-custom-counsel ()
+        ("p" custom/open-portage-file "open portage file")
+        ("e" custom/open-encrypted-document "open encrypted document")
+        ("o" custom/open-org-file "open Org file")
+        ("k" custom/open-org-kb-file "open Org KB file")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "C-c r") 'hydra-custom-counsel/body)
     #+END_SRC
 *** tramp                                                      :current:orgmode:
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -765,7 +739,6 @@
       (add-to-list 'ido-ignore-files "\\.DS_Store")
 
       (setq locate-command "mdfind")
-      (setq helm-locate-command "mdfind")
 
       (prefer-coding-system 'utf-8-unix)
       (set-default-coding-systems 'utf-8-unix)
@@ -935,12 +908,6 @@
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html")))
 
-     (req-package helm-projectile
-       :require helm projectile dash cl-lib
-       :disabled t
-       :config
-       (helm-projectile-on))
-
      (req-package counsel-projectile
        :require swiper projectile
        :config
@@ -1065,43 +1032,21 @@
        (bind-key "C-x C-q" 'wgrep-change-to-wgrep-mode grep-mode-map)
        (bind-key "C-c C-c" 'wgrep-finish-edit grep-mode-map))
 
-     (req-package helm-ag
-       :require helm
-       :disabled t
-       :config
-       (setq helm-ag-insert-at-point 'symbol)
-       (setq helm-ag-fuzzy-match t)
-       ;;TODO: add other common escapes
-       (defadvice helm-ag--query (after escape-search-term activate)
-         (setq helm-ag--last-query (replace-regexp-in-string "\\*" "\\\\*" helm-ag--last-query))))
-
      ;;TODO: sync and maybe slurp something from rc-cc
-     (req-package helm-gtags
-       :require helm
-       :defer t
-       :config
-       (setq helm-gtags-path-style 'relative)
-       (setq helm-gtags-ignore-case t)
-       (setq helm-gtags-auto-update t)
-       (setq helm-gtags-use-input-at-cursor t)
-       (setq helm-gtags-pulse-at-cursor t)
-       (setq helm-gtags-suggested-key-mapping t)
-       (bind-key "M-t" 'helm-gtags-find-tag helm-gtags-mode-map)
-       (bind-key "M-r" 'helm-gtags-find-rtag helm-gtags-mode-map)
-       (bind-key "C-M-s" 'helm-gtags-find-symbol helm-gtags-mode-map)
-       (bind-key "M-s s" 'helm-gtags-select helm-gtags-mode-map)
-       (bind-key "M-g M-p" 'helm-gtags-parse-file helm-gtags-mode-map)
-       (bind-key "C-c <" 'helm-gtags-previous-history helm-gtags-mode-map)
-       (bind-key "C-c >" 'helm-gtags-next-history helm-gtags-mode-map)
-       (bind-key "M-." 'helm-gtags-dwim helm-gtags-mode-map)
-       (bind-key "M-," 'helm-gtags-pop-stack helm-gtags-mode-map)
-       (bind-key "M-s t" 'helm-gtags-tags-in-this-function helm-gtags-mode-map)
-       (add-hook 'dired-mode-hook 'helm-gtags-mode)
-       (add-hook 'c-mode-hook 'helm-gtags-mode)
-       (add-hook 'c++-mode-hook 'helm-gtags-mode))
-
      (req-package counsel-gtags
-       :require counsel gtags)
+       :require counsel gtags
+       :config
+       (setq counsel-gtags-path-style 'relative)
+       (setq counsel-gtags-ignore-case t)
+       (setq counsel-gtags-auto-update t)
+       (setq counsel-gtags-suggested-key-mapping t)
+       (bind-key "C-M-s" 'counsel-gtags-find-symbol counsel-gtags-mode-map)
+       (bind-key "M-." 'counsel-gtags-dwim counsel-gtags-mode-map)
+       (bind-key "M-r" 'counsel-gtags-find-reference counsel-gtags-mode-map)
+       (bind-key "M-," 'counsel-gtags-go-backward counsel-gtags-mode-map)
+       (add-hook 'dired-mode-hook 'counsel-gtags-mode)
+       (add-hook 'c-mode-hook 'counsel-gtags-mode)
+       (add-hook 'c++-mode-hook 'counsel-gtags-mode))
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
@@ -1260,7 +1205,7 @@
        ("!" flycheck-first-error "ace" :color blue)
        ("?" flycheck-list-errors "list errors" :color blue)
        ("@" flycheck-buffer "check buffer" :color blue)
-       ("c" helm-flycheck :color blue)
+       ("c" counsel-flycheck :color blue)
        ("<up>" flycheck-previous-error "previous error")
        ("<down>" flycheck-next-error "next error")
        ("<left>" previous-error "previous error")
@@ -1283,9 +1228,9 @@
        Project               More                              Search
        --------------------------------------------------------------------------------
        _i_buffer             _c_ommander                       _r_egexp
-       _I_nfo                _d_ired                           _f_ind files
-       run _t_ests           recent_F_                         a_g_
-       _C_ompile             _s_witch project                  _m_ulti-swoop
+       _I_nfo                _d_ired                           a_g_
+       run _t_ests           recent_f_                         _m_ulti-swoop
+       _C_ompile             _s_witch project
        in_v_alidate cache    _R_un command in rootdir
        _k_ill buffers        run _A_sync command in rootdir
                              _h_elm-projectile
@@ -1298,13 +1243,12 @@
        ("k" projectile-kill-buffers)
        ("c" projectile-commander)
        ("d" projectile-dired)
-       ("F" projectile-recentf)
+       ("f" projectile-recentf)
        ("s" counsel-projectile-switch-project)
        ("R" projectile-run-command-in-root)
        ("A" projectile-run-async-shell-command-in-root)
        ("h" counsel-projectile)
        ("r" socyl-search-regexp)
-       ("f" custom/helm-find-files)
        ("g" counsel-ag)
        ("l" counsel-git-log)
        ("m" swiper-multi))
@@ -1316,11 +1260,10 @@
        -----------------------------------------------------------------------
        _i_ search TAP          _r_egion                   _f_ hint & open
        _o_ search query        _d_efun                    _y_ hint & copy
-       _s_ semantic/imenu      defun + _C_omments         select w_3_m buffer
-       goto _c_har             _W_iden                    open _u_rls in region
-       goto _W_ord             recursive _N_arrow DWIM
-       <prior> URL backward  recursive wi_D_en DWIM
-       <next>  URL forward
+       goto _c_har             defun + _C_omments         select w_3_m buffer
+       goto _W_ord             _W_iden                    open _u_rls in region
+       <prior> URL backward    recursive _N_arrow DWIM
+       <next>  URL forward     recursive wi_D_en DWIM
        _=_ next blank line
        _-_ prev blank line
        _>_ reposition buffer
@@ -1329,7 +1272,6 @@
        "
        ("i" (lambda () (interactive) (swiper (thing-at-point 'symbol))) :color blue)
        ("o" (lambda () (interactive) (swiper "")) :color blue)
-       ("s" helm-semantic-or-imenu :color blue)
        ("c" avy-goto-char-timer "goto char within window" :color blue)
        ("W" avy-goto-word-0 "goto word within window" :color blue)
        ("<prior>" custom/find-url-backward "previous url")
@@ -2059,7 +2001,6 @@
          (push (at-config-basedir "resources/yasnippet-private/") yas-snippet-dirs)
          (setq yas-key-syntaxes '("w" "w_" "w_." "^ " "w_.()" yas-try-key-from-whitespace))
          (setq yas-expand-only-for-last-commands '(self-insert-command))
-         (setq helm-yas-space-match-any-greedy t)
          (setq yas-prompt-functions
                '(yas-completing-prompt
                  yas-x-prompt
@@ -2086,12 +2027,6 @@
      #+END_SRC
 **** additional packages
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (req-package helm-c-yasnippet
-         :require helm yasnippet cl-lib
-         :config
-         ;;TODO: bind helm-yas-create-snippet-on-region
-         (bind-key "C-M-<return>" 'helm-yas-complete))
-
        (req-package auto-yasnippet :require yasnippet)
      #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
@@ -2148,11 +2083,6 @@
 
      (req-package company-quickhelp
        :require company)
-
-     (req-package helm-company
-       :config
-       (bind-key "C-:" 'helm-company company-mode-map)
-       (bind-key "C-:" 'helm-company company-active-map))
 
      (req-package company-statistics
        :require company
@@ -2225,7 +2155,6 @@
         (setq flycheck-check-syntax-automatically '(idle-change)))
 
       (req-package flycheck-color-mode-line :require flycheck dash)
-      (req-package helm-flycheck :require helm)
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 *** gdb
@@ -2393,11 +2322,6 @@
       (autoload 'vc-git-root "vc-git")
       (autoload 'vc-svn-root "vc-svn")
       (autoload 'vc-hg-root "vc-hg")
-
-      (req-package helm-hunks
-        :commands helm-hunks
-        :config
-        (add-hook 'helm-hunks-refresh-hook 'git-gutter+-refresh))
 
       (remove-hook 'find-file-hooks 'vc-find-file-hook)
     #+END_SRC
@@ -2644,7 +2568,6 @@
          (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
          (setq slime-net-coding-system 'utf-8-unix)
          (setq slime-use-autodoc-mode nil)
-         ;;TODO: make more concrete use of helm-slime, see comments at https://github.com/emacs-helm/helm-slime/blob/master/helm-slime.el
          (add-hook 'lisp-mode-hook 'custom/slime-hook)
          (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
          (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
@@ -2829,14 +2752,13 @@
          ^Checks:^       ^Nav^
          ------------------------------------
          py_l_int        _p_ylookup at point
-         pep_8_          find _r_elated names (helm+jedi)
+         pep_8_
          _m_ulti flake8
          "
          ("l" pylint)
          ("8" pep8)
          ("m" flake8-multi)
          ("p" pylookup-lookup-at-point)
-         ("r" helm-jedi-related-names)
          ("q" nil))
        (global-set-key (kbd "C-c C-p") 'hydra-python/body)
 
@@ -2867,7 +2789,7 @@
 **** packages
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package cc-mode
-         :require helm-gtags
+         :require counsel-gtags
          :mode (("\\.ipp?$" . c++-mode)
                 ("\\.h$" . c++-mode)
                 ("CMakeLists\\.txt\\'" . cmake-mode)
@@ -2875,14 +2797,16 @@
                 ("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode)
                 ("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
          :config
-         (bind-key "C-c i" 'helm-gtags-tags-in-this-function c-mode-map)
-         (bind-key "C-c t" 'helm-gtags-show-stack c-mode-map)
-         (bind-key "C-c u" 'helm-gtags-update-tags c-mode-map)
-         (bind-key "M-." 'helm-gtags-select c-mode-map)
-         (bind-key "C-c i" 'helm-gtags-tags-in-this-function c++-mode-map)
-         (bind-key "C-c t" 'helm-gtags-show-stack c++-mode-map)
-         (bind-key "C-c u" 'helm-gtags-update-tags c++-mode-map)
-         (bind-key "C-j" 'helm-gtags-select c++-mode-map))
+         (bind-key "C-M-s" 'counsel-gtags-find-symbol c-mode-map)
+         (bind-key "M-." 'counsel-gtags-dwim c-mode-map)
+         (bind-key "M-r" 'counsel-gtags-find-reference c-mode-map)
+         (bind-key "M-," 'counsel-gtags-go-backward c-mode-map)
+         (bind-key "C-c u" 'counsel-gtags-update-tags c-mode-map)
+         (bind-key "C-M-s" 'counsel-gtags-find-symbol c++-mode-map)
+         (bind-key "M-." 'counsel-gtags-dwim c++-mode-map)
+         (bind-key "M-r" 'counsel-gtags-find-reference c++-mode-map)
+         (bind-key "M-," 'counsel-gtags-go-backward c++-mode-map)
+         (bind-key "C-c u" 'counsel-gtags-update-tags c++-mode-map))
 
        (req-package company-c-headers)
 
@@ -2923,7 +2847,6 @@
            (call-interactively (if (use-rtags t) 'rtags-find-file 'gtags-find-file)))
          (setq rtags-completions-enabled t)
          (setq rtags-autostart-diagnostics t)
-         (setq rtags-use-helm t)
          (bind-key "M-." 'tags-find-symbol-at-point c-mode-base-map)
          (bind-key "M-," 'tags-find-references-at-point c-mode-base-map)
          (bind-key "M-;" 'tags-find-file c-mode-base-map)
@@ -2966,7 +2889,6 @@
      #+END_SRC
 **** TBD
 ***** BACKLOG review and maybe rebind keys
-***** BACKLOG bind helm-gtags-find-{rtags,symbol}
 **** semanticdb
      #+BEGIN_SRC emacs-lisp :tangle no
        (when (cedet-gnu-global-version-check t)
@@ -3184,7 +3106,6 @@
         (bind-key "C-j" nil emmet-mode-keymap)
         (bind-key "<C-return>" nil emmet-mode-keymap)
         (bind-key "C-c C-j" 'emmet-expand-line emmet-mode-keymap)
-        (bind-key "C-c C-h" 'helm-emmet emmet-mode-keymap)
         (setq emmet-move-cursor-between-quotes t)
         (add-hook 'sgml-mode-hook 'emmet-mode)
         (add-hook 'nxml-mode-hook 'emmet-mode)
@@ -3193,10 +3114,6 @@
         (add-hook 'css-mode-hook 'emmet-mode)
         (add-hook 'emmet-mode-hook
                   (lambda () (setq emmet-indentation 2))))
-
-      (req-package helm-emmet
-        :require helm emmet-mode
-        :defer t)
     #+END_SRC
 *** web client
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3476,9 +3393,6 @@
         ;;Settings for main screen
         (setq notmuch-hello-hide-tags (quote ("killed")))
         (require 'org-notmuch))
-
-      (req-package helm-notmuch
-        :require helm notmuch)
     #+END_SRC
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3955,12 +3869,6 @@
          :defer t)
        (req-package orgit :requires dash magit org)
        (req-package org-bullets)
-
-       (req-package helm-org
-         :require helm
-         :commands helm-org
-         :config
-         (custom/advice-for-major-mode org-mode helm-org-in-buffer-headings))
 
        (req-package org-context
          :defer t
@@ -4723,10 +4631,10 @@
        _\^_ recently clocked     _S_et property       _f_ ace-link            _<up>_    backward same level
        _c_ancel clock            _D_elete property    _n_arrow to subtree     heading _u_p
        _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         Org _G_oto
-       _R_eport clocks           _r_efile             _h_eadings in buffer
-       _p_omodoro                create _T_able       global _H_eadings
-       _s_chedule                                     _=_ todo tree
-       _|_ deadline                                   _2_ random agenda
+       _R_eport clocks           _r_efile             agenda _h_eadings
+       _p_omodoro                create _T_able       _=_ todo tree
+       _s_chedule                                     _2_ random agenda
+       _|_ deadline
        _i_ add time to TS
        _t_oggle TS type
 
@@ -4758,8 +4666,7 @@
        ("f" ace-link-org :color blue)
        ("n" org-narrow-to-subtree)
        ("-" org-sparse-tree)
-       ("h" helm-org-in-buffer-headings)
-       ("H" counsel-org-agenda-headlines)
+       ("h" counsel-org-agenda-headlines)
        ("=" org-show-todo-tree)
        ("\\" counsel-org-tag)
        ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
@@ -4892,13 +4799,6 @@
 
     (req-package help+)
 
-    (req-package helm-descbinds
-      :require helm
-      :disabled t
-      :config
-      (helm-descbinds-mode 1)
-      (bind-key "C-x C-d" 'helm-descbinds))
-
     (add-to-list 'Info-directory-list "/usr/share/info")
 
     (push "/usr/share/info" Info-directory-list)
@@ -4931,7 +4831,6 @@
       _i_nfo
       _t_ags
       valu_e_
-      _m_an pages
       "
       ("a" apropos)
       ("d" apropos-documentation)
@@ -4941,8 +4840,7 @@
       ("u" apropos-user-option)
       ("i" info-apropos "info")
       ("t" tags-apropos "tags")
-      ("e" apropos-value)
-      ("m" helm-man-woman))
+      ("e" apropos-value))
     (global-set-key (kbd "C-c h") 'hydra-apropos/body)
 
     (defhydra hydra-info-to (:hint nil :color teal)
