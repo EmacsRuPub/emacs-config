@@ -3517,7 +3517,7 @@
    #+END_SRC
 * pim
 ** elfeed
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle no
      (req-package elfeed
        :config
        (defface elfeed-lisp-tag-face
