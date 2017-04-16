@@ -2271,6 +2271,7 @@
       (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
       (add-to-list 'auto-mode-alist '("diff" . diff-mode))
       (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+      (add-to-list 'auto-mode-alist '("[Mm]akefile" . makefile-mode))
     #+END_SRC
 ** vcs
 *** git
