@@ -2,6 +2,31 @@
 #+OPTIONS: toc:4 h:4
 
 * bootstrapping
+** init essential packages
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package auto-compile
+       :config
+       (auto-compile-on-load-mode 1)
+       (auto-compile-on-save-mode 1)
+       (setq auto-compile-display-buffer nil)
+       (setq auto-compile-mode-line-counter t))
+
+     (req-package f
+       :force t
+       :require s dash)
+   #+END_SRC
+** working directories
+   A bunch of directories for various working datasets
+   As the order of loading corresponding extensions,
+   is cumbersome to maintain we should customize them ASAP (here)
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package no-littering
+       :force t
+       :require cl-lib
+       :init
+       (setq no-littering-var-directory
+             (expand-file-name "data/" user-emacs-directory)))
+   #+END_SRC
 ** basic utils
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq home-directory (getenv "HOME"))
@@ -36,18 +61,6 @@
           ,@body
           (setq debug-on-error debug-on-error-orig)
           (setq debug-on-quit debug-on-quit-orig)))
-   #+END_SRC
-** working directories
-   A bunch of directories for various working datasets
-   As the order of loading corresponding extensions,
-   is cumbersome to maintain we should customize them ASAP (here)
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package no-littering
-       :force t
-       :require cl-lib
-       :init
-       (setq no-littering-var-directory
-             (expand-file-name "data/" user-emacs-directory)))
    #+END_SRC
 ** input method utils (internal emacs keyboard layouts switching)
 *** reverse input method
@@ -140,19 +153,6 @@
      (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
 
      (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
-** init essential packages
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package auto-compile
-       :config
-       (auto-compile-on-load-mode 1)
-       (auto-compile-on-save-mode 1)
-       (setq auto-compile-display-buffer nil)
-       (setq auto-compile-mode-line-counter t))
-
-     (req-package f
-       :force t
-       :require s dash)
    #+END_SRC
 ** elisp extensions
    #+BEGIN_SRC emacs-lisp :tangle yes
