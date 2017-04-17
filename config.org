@@ -160,6 +160,20 @@
      (req-package anaphora)
      (req-package noflet)
    #+END_SRC
+** GC tweaks
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (setq gc-cons-percentage 0.3)
+     (setq gc-cons-threshold 20000000)
+
+     (defun my-minibuffer-setup-hook ()
+       (setq gc-cons-threshold most-positive-fixnum))
+
+     (defun my-minibuffer-exit-hook ()
+       (setq gc-cons-threshold 800000))
+
+     (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+     (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+   #+END_SRC
 * appearance
 ** fonts
 *** defininitions
@@ -638,20 +652,6 @@
 ** warnings processing
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq warning-suppress-types nil)
-   #+END_SRC
-** GC tweaks
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq gc-cons-percentage 0.3)
-     (setq gc-cons-threshold 20000000)
-
-     (defun my-minibuffer-setup-hook ()
-       (setq gc-cons-threshold most-positive-fixnum))
-
-     (defun my-minibuffer-exit-hook ()
-       (setq gc-cons-threshold 800000))
-
-     (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-     (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
    #+END_SRC
 ** mode lists for common needs
    #+BEGIN_SRC emacs-lisp :tangle yes
