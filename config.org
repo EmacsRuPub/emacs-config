@@ -34,24 +34,24 @@
            (file-name-directory
             (or (buffer-file-name) load-file-name)))
 
-     (defun ensure-leading-slash (suffix)
-       (if suffix
-           (concat (if (string-match "^/" suffix) "" "/") suffix)
-         ""))
+     (defun concat-normalize-slashes (prefix suffix)
+       (concat "/" (s-join "/"
+                           (s-split "/"
+                                    (concat prefix "/" suffix) t))))
 
      (defun at-homedir (&optional suffix)
-       (concat home-directory (ensure-leading-slash suffix)))
+       (concat-normalize-slashes home-directory suffix))
 
      (defun at-org-dir (&optional suffix)
-       (concat (at-homedir "/docs/org")
-               (ensure-leading-slash suffix)))
+       (concat-normalize-slashes (at-homedir "/docs/org")
+                                 suffix))
 
      (defun at-org-kb-dir (&optional suffix)
-       (concat (at-homedir "/docs/org-kb")
-               (ensure-leading-slash suffix)))
+       (concat-normalize-slashes (at-homedir "/docs/org-kb")
+                                 suffix))
 
      (defun at-config-basedir (&optional suffix)
-       (concat config-basedir suffix))
+       (concat-normalize-slashes config-basedir suffix))
 
      (cl-defmacro with-unmanaged-errors (&rest body)
        `(let ((debug-on-error-orig debug-on-error)
