@@ -3991,6 +3991,7 @@
          (setq org-agenda-files
                (delete orgfile org-agenda-files)))
 
+       (add-to-list 'org-agenda-files (at-config-basedir "config.org"))
      #+END_SRC
 **** agenda customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
