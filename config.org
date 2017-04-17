@@ -53,6 +53,9 @@
      (defun at-config-basedir (&optional suffix)
        (concat-normalize-slashes config-basedir suffix))
 
+     (defun at-user-data-dir (&optional suffix)
+       (concat-normalize-slashes no-littering-var-directory suffix))
+
      (cl-defmacro with-unmanaged-errors (&rest body)
        `(let ((debug-on-error-orig debug-on-error)
               (debug-on-quit-orig debug-on-quit))
@@ -3942,6 +3945,11 @@
        (req-package ob-async
          :config
          (add-to-list 'org-ctrl-c-ctrl-c-hook 'ob-async-org-babel-execute-src-block))
+
+       (req-package org-recent-headings
+         :config
+         (setq org-recent-headings-save-file (at-user-data-dir "org-recent-headings"))
+         (org-recent-headings-mode 1))
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4669,8 +4677,8 @@
        _,_ clock out             _y_ank link          re_v_eal                _<down>_  forward same level
        _\^_ recently clocked     _S_et property       _f_ ace-link            _<up>_    backward same level
        _c_ancel clock            _D_elete property    _n_arrow to subtree     heading _u_p
-       _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         Org _G_oto
-       _R_eport clocks           _r_efile             agenda _h_eadings
+       _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         recent _H_eadings
+       _R_eport clocks           _r_efile             agenda _h_eadings       Org _G_oto
        _p_omodoro                create _T_able       _=_ todo tree
        _s_chedule                                     _2_ random agenda
        _|_ deadline
@@ -4706,6 +4714,7 @@
        ("n" org-narrow-to-subtree)
        ("-" org-sparse-tree)
        ("h" counsel-org-agenda-headlines)
+       ("H" org-recent-headings-ivy)
        ("=" org-show-todo-tree)
        ("\\" counsel-org-tag)
        ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
