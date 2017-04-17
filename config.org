@@ -483,7 +483,7 @@
                   :action #'(lambda (candidate)
                               (find-file candidate))
                   :require-match t
-                  :caller 'custom/open-portage-file))
+                  :caller 'custom/open-org-file))
 
       (defun custom/open-org-kb-file ()
         (interactive)
@@ -492,7 +492,7 @@
                   :action #'(lambda (candidate)
                               (find-file candidate))
                   :require-match t
-                  :caller 'custom/open-portage-file))
+                  :caller 'custom/open-org-kb-file))
 
       ;; CREDITS: https://github.com/nathankot/dotemacs
       (defvar counsel-flycheck-history nil
