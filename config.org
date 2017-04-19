@@ -135,6 +135,10 @@
               ("e" password-store-edit "Edit entry")
               ("b" password-store-url "Browse url of entry")))))
     #+END_SRC
+*** load encrypted credentials
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (load (at-config-basedir "credentials.el.gpg"))
+    #+END_SRC
 *** hydras
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-security ()
@@ -143,10 +147,6 @@
         ("q" nil "cancel"))
       (global-set-key (kbd "<f6>") 'hydra-security/body)
     #+END_SRC
-** load various private credentials from GPG-encrypted file
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (load (at-config-basedir "credentials.el.gpg"))
-   #+END_SRC
 ** set the very basic variable values
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq message-log-max t) ;; we don't want to lose any startup log info
