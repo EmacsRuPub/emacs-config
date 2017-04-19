@@ -3951,6 +3951,10 @@
          :config
          (setq org-recent-headings-save-file (at-user-data-dir "org-recent-headings"))
          (org-recent-headings-mode 1))
+
+       (req-package org-sticky-header
+         :config
+         (add-hook 'org-mode-hook 'org-sticky-header-mode))
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
