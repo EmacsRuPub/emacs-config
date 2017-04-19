@@ -1238,6 +1238,7 @@
        ("i" flip-frame "flip")
        ("o" flop-frame "flop")
        ("r" rotate-frame "rotate")
+       ("a" counsel-load-theme :color blue)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
 
