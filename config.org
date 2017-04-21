@@ -1260,6 +1260,7 @@
        ("c" counsel-command-history)
        ("e" counsel-expression-history)
        ("p" counsel-package)
+       ("b" backup-walker-start)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f9>") 'hydra-history/body)
 
