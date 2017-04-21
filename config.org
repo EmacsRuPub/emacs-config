@@ -362,7 +362,7 @@
      (setf create-lockfiles nil)
    #+END_SRC
 ** desktop
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle no
      (req-package desktop
        :config
        (setq-default desktop-missing-file-warning nil)
