@@ -369,7 +369,6 @@
        (setq-default desktop-path '("~"))
        (setq-default desktop-save t)
        (setq-default desktop-save-mode t)
-       (setq-default save-place t)
        (setq history-length t)
        (setq history-delete-duplicates t)
        (setq desktop-buffers-not-to-save
@@ -911,8 +910,7 @@
 
      (req-package saveplace
        :config
-       (setq save-place t)
-       (setq-default save-place t))
+       (save-place-mode 1))
    #+END_SRC
 ** frames spawning
     #+BEGIN_SRC emacs-lisp :tangle yes
