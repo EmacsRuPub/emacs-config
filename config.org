@@ -3084,6 +3084,10 @@
         :config
         (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
+      (req-package web-narrow-mode
+        :config
+        (add-hook 'web-mode-hook 'web-narrow-mode))
+
       (setq mumamo-background-colors nil)
       (setq mumamo-submode-indent-offset 4)
 
