@@ -2743,8 +2743,17 @@
        (req-package pyvenv
          :require jedi-core
          :config
+         (defalias 'workon 'pyvenv-workon)
          (add-hook 'pyvenv-post-activate-hooks 'jedi:stop-server)
          (add-hook 'pyvenv-post-deactivate-hooks 'jedi:stop-server))
+
+       (req-package pip-requirements
+         :mode ("requirements\\." . pip-requirements-mode))
+
+       (req-package py-isort
+         :config
+         (add-hook 'before-save-hook 'py-isort-before-save)
+         (setq py-isort-options '("-sl")))
 
        (defhydra hydra-python ()
          "
