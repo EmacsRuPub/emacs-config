@@ -361,48 +361,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setf create-lockfiles nil)
    #+END_SRC
-** desktop
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (req-package desktop
-       :config
-       (setq-default desktop-missing-file-warning nil)
-       (setq-default desktop-path '("~"))
-       (setq-default desktop-save t)
-       (setq-default desktop-save-mode t)
-       (setq history-length t)
-       (setq history-delete-duplicates t)
-       (setq desktop-buffers-not-to-save
-             (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-                     "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-                     "\\)$"))
-       (add-hook 'auto-save-hook (lambda () (desktop-save-in-desktop-dir)))
-       (desktop-save-mode t)
-       (setq desktop-restore-eager 10)
-       (desktop-load-default)
-
-       (add-to-list 'desktop-globals-to-save '(buffer-name-history      . 100))
-       (add-to-list 'desktop-globals-to-save '(dired-regexp-history     . 20))
-       (add-to-list 'desktop-globals-to-save '(extended-command-history . 100))
-       (add-to-list 'desktop-globals-to-save '(file-name-history        . 500))
-       (add-to-list 'desktop-globals-to-save '(grep-history             . 50))
-       (add-to-list 'desktop-globals-to-save '(minibuffer-history       . 100))
-       (add-to-list 'desktop-globals-to-save '(query-replace-history    . 60))
-       (add-to-list 'desktop-globals-to-save '(read-expression-history  . 60))
-       (add-to-list 'desktop-globals-to-save '(regexp-history           . 60))
-       (add-to-list 'desktop-globals-to-save '(regexp-search-ring       . 20))
-       (add-to-list 'desktop-globals-to-save '(search-ring              . 20))
-       (add-to-list 'desktop-globals-to-save '(shell-command-history    . 50))
-       (add-to-list 'desktop-globals-to-save 'file-name-history)
-
-       (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-       (add-to-list 'desktop-locals-to-save 'tab-width)
-       (add-to-list 'desktop-locals-to-save 'buffer-file-coding-system)
-
-       (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-       (add-to-list 'desktop-modes-not-to-save 'Info-mode)
-       (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-       (add-to-list 'desktop-modes-not-to-save 'fundamental-mode))
-   #+END_SRC
 * common
 ** emacs server
    #+BEGIN_SRC emacs-lisp :tangle yes
