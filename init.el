@@ -41,6 +41,12 @@
 (require 'req-package)
 (setq req-package-log-level 'trace)
 
+(req-package exec-path-from-shell
+  :force t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 (req-package org-plus-contrib :force t)
 (require 'org)
 
