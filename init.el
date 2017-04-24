@@ -8,6 +8,8 @@
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
+             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (setf (cdr (assoc "gnu" package-archives))
       "https://elpa.gnu.org/packages/")
 (package-initialize)
