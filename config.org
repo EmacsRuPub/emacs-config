@@ -1258,20 +1258,16 @@
        -----------------------------------------------------------------------
        _i_ search TAP          _r_egion                   _f_ hint & open
        _o_ search query        _d_efun                    _y_ hint & copy
-       goto _c_har             defun + _C_omments         select w_3_m buffer
-       goto _W_ord             _W_iden                    open _u_rls in region
-       <prior> URL backward    recursive _N_arrow DWIM
-       <next>  URL forward     recursive wi_D_en DWIM
-       _=_ next blank line
-       _-_ prev blank line
+       <prior> URL backward    defun + _C_omments         select w_3_m buffer
+       <next>  URL forward     _w_iden                    open _u_rls in region
+       _=_ next blank line     recursive _N_arrow DWIM
+       _-_ prev blank line     recursive wi_D_en DWIM
        _>_ reposition buffer
 
        _<return>_ Execute TAP
        "
        ("i" (lambda () (interactive) (swiper (thing-at-point 'symbol))) :color blue)
        ("o" (lambda () (interactive) (swiper "")) :color blue)
-       ("c" avy-goto-char-timer "goto char within window" :color blue)
-       ("W" avy-goto-word-0 "goto word within window" :color blue)
        ("<prior>" custom/find-url-backward "previous url")
        ("<next>" custom/find-url-forward "next url")
        ("=" custom/skip-to-next-blank-line)
