@@ -525,19 +525,6 @@
                         (file-exists-p (concat buffer-file-name "c")))
                      (delete-file (concat buffer-file-name "c")))))
    #+END_SRC
-** a handy macro to execute code only in major mode it makes sense in
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defmacro custom/advice-for-major-mode (mode function)
-       `(defadvice ,(intern (symbol-name function))
-            (around ,(intern (concatenate
-                              'string
-                              (symbol-name function)
-                              "-only-in-"
-                              (symbol-name mode)))
-                    activate)
-          (when (eq major-mode ',mode)
-            ad-do-it)))
-   #+END_SRC
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp :tangle yes
      (put 'dired-find-alternate-file 'disabled nil)
@@ -4082,8 +4069,6 @@
        (setq org-refile-target-verify-function 'custom/verify-refile-target)
        (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
        (setq org-refile-use-outline-path 'file)
-
-       (custom/advice-for-major-mode org-mode org-refile)
      #+END_SRC
 **** various customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
