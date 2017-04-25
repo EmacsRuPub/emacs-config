@@ -10,6 +10,7 @@ customizations.el
 data
 elpa
 etc
+network-security.data
 private
 request
 savehist
