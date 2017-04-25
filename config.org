@@ -112,40 +112,10 @@
       (req-package keychain-environment
         :config
         (keychain-refresh-environment))
-
-      (req-package pass)
-
-      (req-package auth-password-store
-        :config
-        (auth-pass-enable))
-
-      (eval-after-load 'ivy
-        ;;TODO: relocate more appropriately
-        '(progn
-           (defun counsel-pass ()
-             (interactive)
-             (ivy-read "Counsel interface for Pass: "
-                       (funcall #'password-store-list)
-                       :action #'password-store-copy)
-             :require-match t
-             :caller 'counsel-pass)
-           (ivy-set-actions
-            'counsel-pass
-            '(("c" password-store-copy "Copy password to clipboard")
-              ("e" password-store-edit "Edit entry")
-              ("b" password-store-url "Browse url of entry")))))
     #+END_SRC
 *** load encrypted credentials
     #+BEGIN_SRC emacs-lisp :tangle yes
       (load (at-config-basedir "credentials.el.gpg"))
-    #+END_SRC
-*** hydras
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-security ()
-        ("p" pass "pass" :color blue)
-        ("!" counsel-pass "Counsel interface to Pass" :color blue)
-        ("q" nil "cancel"))
-      (global-set-key (kbd "<f6>") 'hydra-security/body)
     #+END_SRC
 ** set the very basic variable values
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3408,6 +3378,39 @@
         "Read mail"
         ("n" notmuch nil))
       (global-set-key (kbd "C-c 4") 'hydra-email/body)
+    #+END_SRC
+** security
+*** packages
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package pass)
+
+      (req-package auth-password-store
+        :config
+        (auth-pass-enable))
+
+      (eval-after-load 'ivy
+        ;;TODO: relocate more appropriately
+        '(progn
+           (defun counsel-pass ()
+    	 (interactive)
+    	 (ivy-read "Counsel interface for Pass: "
+    		   (funcall #'password-store-list)
+    		   :action #'password-store-copy)
+    	 :require-match t
+    	 :caller 'counsel-pass)
+           (ivy-set-actions
+    	'counsel-pass
+    	'(("c" password-store-copy "Copy password to clipboard")
+              ("e" password-store-edit "Edit entry")
+              ("b" password-store-url "Browse url of entry")))))
+    #+END_SRC
+*** hydras
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (defhydra hydra-security ()
+        ("p" pass "pass" :color blue)
+        ("!" counsel-pass "Counsel interface to Pass" :color blue)
+        ("q" nil "cancel"))
+      (global-set-key (kbd "<f6>") 'hydra-security/body)
     #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp :tangle yes
