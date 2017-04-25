@@ -515,26 +515,6 @@
                      letter-group
                      "\n"))
              (princ "\n\n")))))
-
-     (req-package keyfreq
-       :disabled t
-       :config
-       (setq keyfreq-excluded-commands
-             '(self-insert-command
-               abort-recursive-edit))
-       (keyfreq-mode 1)
-       (keyfreq-autosave-mode 1))
-
-     (req-package unbound :disabled t)
-
-     (req-package typing
-       :disabled t
-       :init
-       (autoload 'typing-of-emacs "typing" nil t)
-       :config
-       (setq toe-starting-length 6)
-       (setq toe-starting-time-per-word 2)
-       (setq toe-max-length 20))
    #+END_SRC
 ** remove elc after save
    If you're saving an elisp file, likely the .elc is no longer valid.
