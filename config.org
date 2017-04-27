@@ -379,10 +379,11 @@
         ;;TODO: bind ffip-ivy-resume
         )
 
+      (req-package smex) ;; for #'counsel-M-x sorting improvements
+
       (req-package counsel
         :require swiper
         :config
-        (req-package smex) ;; for #'counsel-M-x sorting improvements
         (bind-key "C-x j j" 'counsel-bookmark)
         (bind-key "M-x" 'counsel-M-x)
         (bind-key "C-x C-f" 'counsel-find-file)
