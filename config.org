@@ -3279,7 +3279,7 @@
 ** email
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defvar custom/gmail-accounts '("aaermolov@gmail.com" "aermolov@mirantis.com"))
+      (defvar custom/gmail-accounts '("aaermolov@gmail.com"))
 
       (req-package footnote)
 
