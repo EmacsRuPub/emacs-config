@@ -1600,15 +1600,18 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package highlight-sexp)
 
-     ;; TODO compare with paredit and finally choose one (sane non-lisp modes setup intended)
      (req-package smartparens
-       :disabled t
        :require cl-lib dash
        :config
        (req-package smartparens-config)
-       (smartparens-global-strict-mode t)
        (show-smartparens-global-mode t)
        (sp-use-smartparens-bindings)
+       (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
+       (add-hook 'yaml-mode-hook 'turn-on-smartparens-mode)
+       (add-hook 'lisp-mode-hook 'turn-on-smartparens-strict-mode)
+       (add-hook 'emacs-lisp-mode-hook 'turn-on-smartparens-strict-mode)
+       (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+       ;;TODO: review custom keybindings
        (bind-key "C-M-t" 'sp-transpose-sexp smartparens-mode-map)
        (bind-key "M-F" nil smartparens-mode-map)
        (bind-key "M-B" nil smartparens-mode-map)
@@ -1629,13 +1632,6 @@
        (bind-key "C-c s n" 'sp-add-to-next-sexp sp-keymap)
        (bind-key "C-c s j" 'sp-join-sexp sp-keymap)
        (bind-key "C-c s s" 'sp-split-sexp sp-keymap))
-
-     (req-package paredit
-       :config
-       (defun common-hooks/sexp-editing-hook ()
-         (when (member major-mode custom/sexp-editing-modes)
-           (paredit-mode 1)))
-       (add-hook 'prog-mode-hook 'common-hooks/sexp-editing-hook))
    #+END_SRC
 ** some fancy editing methods
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2657,6 +2653,9 @@
          (bind-key "M-." 'jedi:goto-definition python-mode-map)
          (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
          (bind-key "C-c >" 'indent-tools-hydra/body python-mode-map))
+
+       (when (featurep 'smartparens)
+         (req-package smartparens-python))
 
        (req-package elpy
          :init
