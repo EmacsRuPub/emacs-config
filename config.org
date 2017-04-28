@@ -194,15 +194,11 @@
        :config
        (load-theme 'darkburn t))
 
-     (req-package nimbus-theme
-       :disabled t
-       :config
-       (load-theme 'nimbus t))
+     (req-package nimbus-theme)
 
-     (req-package nord-theme
-       :disabled t
-       :config
-       (load-theme 'nord t))
+     (req-package nord-theme)
+
+     (req-package flatui-dark-theme)
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
      (when (boundp 'zenburn-colors-alist)
