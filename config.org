@@ -3698,6 +3698,28 @@
          With prefix argument, also display headlines without a TODO keyword."
          (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
 
+       ;; http://irreal.org/blog/?p=6166
+       (defun org-tags-all ()
+         (interactive)
+         (with-current-buffer (get-buffer-create "*org-tags*")
+           (delete-region (point-min) (point-max))
+           (org-mode)
+           (let ((tags (sort (delete-dups
+                              (cl-loop for buffer in (org-buffer-list 'agenda t)
+                                       append (with-current-buffer buffer
+                                                (org-with-wide-buffer
+                                                 (goto-char (point-min))
+                                                 (cl-loop while (re-search-forward org-complex-heading-regexp nil t)
+                                                          when (match-string 5)
+                                                          append (split-string (substring-no-properties (match-string 5))
+                                                                               ":" t "[[:space:]]+"))))))
+                             'string<)))
+             (dolist (tag tags)
+               (insert (concat "[[elisp:(org-tags-view nil \"" tag "\")][" tag "]]\n"))))
+           (beginning-of-buffer)
+           (switch-to-buffer (current-buffer))
+           (read-only-mode)))
+
        )
      #+END_SRC
 **** utils
@@ -4667,6 +4689,7 @@
        ("<up>" org-backward-heading-same-level "prev heading at same level")
        ("u" outline-up-heading "up heading")
        ("G" org-goto "goto" :exit t)
+       (";" custom/org-tags-all  :exit t)
        ("?" (org-info "Clocking commands") "")
        ("q" nil "cancel"))
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
