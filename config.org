@@ -2287,6 +2287,11 @@
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package info-look :force t)
+
+      (req-package lsp-mode
+        :require flycheck
+        :config
+        (global-lsp-mode))
     #+END_SRC
 *** elisp
 **** setup
@@ -2668,6 +2673,9 @@
          (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
          (setq elpy-rpc-backend "jedi")
          (bind-key "M-," 'pop-tag-mark elpy-mode-map))
+
+       (req-package lsp-python
+         :require lsp-mode)
 
        (req-package pyvenv
          :require jedi-core
