@@ -284,7 +284,8 @@
        (delight 'eldoc-mode " ED" 'eldoc)
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
        (delight 'editorconfig-mode " EC" 'editorconfig)
-       (delight 'orglink-mode " OL" 'orglink))
+       (delight 'orglink-mode " OL" 'orglink)
+       (delight 'counsel-gtags-mode " CGT" 'counsel-gtags))
    #+END_SRC
 * persistence
 ** save history
