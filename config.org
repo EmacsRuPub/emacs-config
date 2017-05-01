@@ -2666,9 +2666,9 @@
        (when (featurep 'smartparens)
          (req-package smartparens-python))
 
+       (req-package py-autopep8)
+
        (req-package elpy
-         :init
-         (req-package py-autopep8)
          :config
          (elpy-enable)
          (when (executable-find "ipython")
