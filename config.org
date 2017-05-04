@@ -190,15 +190,13 @@
 ** load themes and choose one
    Also some other good-looking theme is "material-theme"
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package nimbus-theme :disabled t)
+     (req-package nord-theme :disabled t)
+     (req-package flatui-dark-theme :disabled t)
+
      (req-package darkburn-theme
        :config
        (load-theme 'darkburn t))
-
-     (req-package nimbus-theme)
-
-     (req-package nord-theme)
-
-     (req-package flatui-dark-theme)
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
      (when (boundp 'zenburn-colors-alist)
