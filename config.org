@@ -470,14 +470,14 @@
     #+END_SRC
 *** tramp                                                      :current:orgmode:
     #+BEGIN_SRC emacs-lisp :tangle no
-       (req-package tramp
-         :init
-         (setq tramp-default-method "ssh")
-         :config
-         ;; Allow to use: /sudo:user@host:/path/to/file
-         (setq tramp-ssh-controlmaster-options "")
-         (add-to-list 'tramp-default-proxies-alist
-                      '(".*" "\\`.+\\'" "/ssh:%h:")))
+      (req-package tramp
+        :init
+        (setq tramp-default-method "ssh")
+        :config
+        ;; Allow to use: /sudo:user@host:/path/to/file
+        (setq tramp-ssh-controlmaster-options "")
+        (add-to-list 'tramp-default-proxies-alist
+                     '(".*" "\\`.+\\'" "/ssh:%h:")))
      #+END_SRC
 *** crux
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -740,9 +740,7 @@
              (org-return)))
           (t
            (org-return))))
-
      #+END_SRC
-
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package ace-link
@@ -1033,7 +1031,7 @@
    #+END_SRC
 ** scope
    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package ibuffer
+     (req-package ibuffer
        :defer t
        :config
        (defun custom/ibuffer-filter-by-extname (qualifier)
@@ -3370,15 +3368,15 @@
         ;;TODO: relocate more appropriately
         '(progn
            (defun counsel-pass ()
-    	 (interactive)
-    	 (ivy-read "Counsel interface for Pass: "
-    		   (funcall #'password-store-list)
-    		   :action #'password-store-copy)
-    	 :require-match t
-    	 :caller 'counsel-pass)
+             (interactive)
+             (ivy-read "Counsel interface for Pass: "
+                       (funcall #'password-store-list)
+                       :action #'password-store-copy)
+             :require-match t
+             :caller 'counsel-pass)
            (ivy-set-actions
-    	'counsel-pass
-    	'(("c" password-store-copy "Copy password to clipboard")
+            'counsel-pass
+            '(("c" password-store-copy "Copy password to clipboard")
               ("e" password-store-edit "Edit entry")
               ("b" password-store-url "Browse url of entry")))))
     #+END_SRC
