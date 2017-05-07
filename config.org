@@ -1588,7 +1588,9 @@
 
       (req-package whitespace
         :loader :path
-        :defer t)
+        :defer t
+        :config
+        (setf whitespace-style '(tabs trailing tab-mark face lines-tail)))
 
       (req-package mark
         :loader :elpa
