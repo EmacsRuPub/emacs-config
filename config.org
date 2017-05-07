@@ -853,7 +853,6 @@
      (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
 
      (req-package dired
-       :init
        :config
        ;; navigate to margins
        ;; C-a is nicer in dired if it moves back to start of files
@@ -1074,12 +1073,6 @@
    #+END_SRC
 ** warping
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package swoop
-       :require ht pcre2el async
-       :config
-       (bind-key "<down>" 'swoop-action-goto-line-next swoop-map)
-       (bind-key "<up>" 'swoop-action-goto-line-prev swoop-map))
-
      (req-package swiper
        :config
        (setq swiper-include-line-number-in-search t)
@@ -1992,7 +1985,6 @@
 ** company
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package company
-       :init
        :config
        (setq company-idle-delay t)
        (setq company-tooltip-align-annotations t)
@@ -2110,6 +2102,9 @@
       (req-package eldoc-eval)
 
       (req-package eldoc
+        :loader :built-in
+        :delight eldoc-mode
+        :commands turn-on-eldoc-mode
         :defer t
         :init
         (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
@@ -2125,17 +2120,6 @@
         :config
         (turn-on-css-eldoc))
     #+END_SRC
-**** try
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (req-package "eldoc"
-         :delight eldoc-mode
-         :commands turn-on-eldoc-mode
-         :defer t
-         :init
-         (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-         (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-         (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
-     #+END_SRC
 *** print path within json
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/js2-print-json-path ()
