@@ -47,7 +47,9 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(req-package org-plus-contrib :force t)
+(req-package org-plus-contrib
+  :loader :elpa
+  :force t)
 (require 'org)
 
 (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
