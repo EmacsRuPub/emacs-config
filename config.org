@@ -846,9 +846,8 @@
       (req-package frame-mode
         :loader :elpa
         :config
-        (progn
-          (frame-mode +1)
-          (frame-keys-mode +1)))
+        (frame-mode +1)
+        (frame-keys-mode +1))
     #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp :tangle yes
