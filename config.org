@@ -3642,12 +3642,10 @@
 ** bbdb
    the code below need to be reorganized, it seems to not work
    req-package is not usable before it
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (req-package bbdb-loaddefs
-       :defer t
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package bbdb
+       :loader :elpa
        :commands bbdb
-       :init
-       (req-package bbdb)
        :config
        (setq bbdb-change-hook 'bbdb-timestamp-hook)
        (setq bbdb-complete-name-allow-cycling t)
@@ -3670,6 +3668,10 @@
        (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
        (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
        (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map))
+
+     (req-package bbdb-
+       :loader :elpa
+       :require bbdb log4e yaxception)
 
      ;;TODO: setup
      (req-package counsel-bbdb
