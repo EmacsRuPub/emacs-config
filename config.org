@@ -202,6 +202,7 @@
      (req-package nimbus-theme :loader :elpa :disabled t)
      (req-package nord-theme :loader :elpa :disabled t)
      (req-package flatui-dark-theme :loader :elpa :disabled t)
+     (req-package kaolin-theme :loader :elpa)
 
      (req-package darkburn-theme
        :loader :elpa
