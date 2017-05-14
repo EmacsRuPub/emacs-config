@@ -859,7 +859,16 @@
        :loader :elpa
        :require dash pkg-info
        :config
-       (projectile-global-mode t)
+       ;; Bad interaction happens between epg, tramp and projectile.
+       ;; Waiting for proper fix of https://github.com/bbatsov/projectile/issues/835
+       (defun custom/disable-delete-file-advice (orig-fun &rest args)
+         (let ((was-active (and (ad-is-active 'delete-file)
+                                (ad-deactivate 'delete-file))))
+           (unwind-protect
+                  (apply orig-fun args)
+             (when was-active (ad-activate 'delete-file)))))
+       (advice-add 'epg-delete-output-file :around #'custom/disable-delete-file-advice)
+       (projectile-global-mode 1)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil)
        (setq projectile-switch-project-action 'counsel-projectile)
