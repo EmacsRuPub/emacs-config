@@ -4047,18 +4047,22 @@
 *** setup
 **** advices
      show desktop notifications for org-capture
-     #+BEGIN_SRC emacs-lisp :tangle no
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package notifications
+         :loader :built-in) ;; relocate properly when it will be used more broader
+
        (defadvice org-protocol-do-capture (around display-notify-after-capture)
          (let ((result ad-do-it))
-           (if (and result
-                    (file-executable-p "/usr/bin/notify-send"))
-               (call-process "/usr/bin/notify-send" nil 0 nil
-                             "--expire-time" "3000" "-u" "low"
-                             "-i" (expand-file-name "~/.emacs.d/org.svg")
-                             "Link captured"
-                             (concat (caar org-stored-links)
-                                     "\n"
-                                     (cadar org-stored-links))))
+           (when result
+             (notifications-notify
+              :title "Link captured"
+              :body (concat (caar org-stored-links)
+                            "\n"
+                            (cadar org-stored-links))
+              :app-name "emacs"
+              :app-icon (expand-file-name "~/.rc/org.svg")
+              :timeout 3000
+              :urgency 'low))
            result))
      #+END_SRC
      and remove read-only props from yanked text (e.g. from jabber.el chat buffer)
