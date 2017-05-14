@@ -356,7 +356,7 @@
          (interactive)
          (save-buffer)
          (server-edit))
-       (defun custom/save-buffer-clients-on-exit ()
+       (defun custom/save-buffer-clients-on-exit () ;TODO: add to appropriate hook
          (interactive)
          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
              (server-save-edit)
