@@ -106,6 +106,7 @@
         :loader :built-in
         :config
         (setq epg-gpg-program "gpg2")
+        (setq epa-pinentry-mode 'loopback)
         (epa-file-enable)
         (setq epg-gpg-home-directory "~/.gnupg"))
 
