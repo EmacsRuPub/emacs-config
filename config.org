@@ -4939,6 +4939,7 @@
        :mode ("\\.pdf$" . pdf-view-mode)
        :config
        (add-hook 'after-init-hook 'pdf-tools-install)
+       (add-hook 'pdf-tools-mode-hook 'pdf-isearch-minor-mode)
        (defun custom/scroll-other-window (&optional arg)
          (interactive "P")
          (awhen (ignore-errors (other-window-for-scrolling))
