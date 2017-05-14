@@ -5041,6 +5041,11 @@
               (t (scroll-other-window arg))))))
        (global-set-key (kbd "C-M-v") #'custom/scroll-other-window))
 
+     (req-package pdf-view
+       :loader :path
+       :config
+       (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode))
+
      (req-package whizzytex
        :loader :path
        :config
