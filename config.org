@@ -668,6 +668,60 @@
       (set-clipboard-coding-system 'utf-8)
       (set-terminal-coding-system 'utf-8)
     #+END_SRC
+** navigation macros for special modes
+   creds to https://fuco1.github.io/2017-05-06-Enhanced-beginning--and-end-of-buffer-in-special-mode-buffers-(dired-etc.).html
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (defmacro custom/special-beginning-of-buffer (mode &rest forms)
+       "Define a special version of `beginning-of-buffer' in MODE.
+
+     The special function is defined such that the point first moves
+     to `point-min' and then FORMS are evaluated.  If the point did
+     not change because of the evaluation of FORMS, jump
+     unconditionally to `point-min'.  This way repeated invocations
+     toggle between real beginning and logical beginning of the
+     buffer."
+       (declare (indent 1))
+       (let ((fname (intern (concat "my-" (symbol-name mode) "-beginning-of-buffer")))
+             (mode-map (intern (concat (symbol-name mode) "-mode-map")))
+             (mode-hook (intern (concat (symbol-name mode) "-mode-hook"))))
+         `(progn
+            (defun ,fname ()
+              (interactive)
+              (let ((p (point)))
+                (goto-char (point-min))
+                ,@forms
+                (when (= p (point))
+                  (goto-char (point-min)))))
+            (add-hook ',mode-hook
+                      (lambda ()
+                        (define-key ,mode-map
+                          [remap beginning-of-buffer] ',fname))))))
+
+     (defmacro custom/special-end-of-buffer (mode &rest forms)
+       "Define a special version of `end-of-buffer' in MODE.
+
+     The special function is defined such that the point first moves
+     to `point-max' and then FORMS are evaluated.  If the point did
+     not change because of the evaluation of FORMS, jump
+     unconditionally to `point-max'.  This way repeated invocations
+     toggle between real end and logical end of the buffer."
+       (declare (indent 1))
+       (let ((fname (intern (concat "my-" (symbol-name mode) "-end-of-buffer")))
+             (mode-map (intern (concat (symbol-name mode) "-mode-map")))
+             (mode-hook (intern (concat (symbol-name mode) "-mode-hook"))))
+         `(progn
+            (defun ,fname ()
+              (interactive)
+              (let ((p (point)))
+                (goto-char (point-max))
+                ,@forms
+                (when (= p (point))
+                  (goto-char (point-max)))))
+            (add-hook ',mode-hook
+                      (lambda ()
+                        (define-key ,mode-map
+                          [remap end-of-buffer] ',fname))))))
+   #+END_SRC
 ** debug snippets
 *** show last command in minibuffer
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -902,16 +956,14 @@
          (interactive)
          (backward-char (- (current-column) 2)))
        ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
-       (defun custom/dired-back-to-top ()
-         (interactive)
-         (beginning-of-buffer)
-         (next-line 2)
+       (custom/special-beginning-of-buffer dired
+         (while (not (ignore-errors (dired-get-filename)))
+           (dired-next-line 1))
+         (dired-previous-line 1)
          (custom/dired-back-to-start-of-files))
        ;; M-down is nicer in dired if it moves to the last file
-       (defun custom/dired-jump-to-bottom ()
-         (interactive)
-         (end-of-buffer)
-         (next-line -1)
+       (custom/special-end-of-buffer dired
+         (dired-previous-line 1)
          (custom/dired-back-to-start-of-files))
        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
        (setq dired-dwim-target t)
@@ -922,9 +974,7 @@
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-       (bind-key "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))) dired-mode-map)
-       (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top dired-mode-map)
-       (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom dired-mode-map))
+       (bind-key "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))) dired-mode-map))
 
      ;; Reload dired after making changes
      (--each '(dired-do-rename
@@ -1127,6 +1177,11 @@
                    (ibuffer-vc-set-filter-groups-by-vc-root)
                    (unless (eq ibuffer-sorting-mode 'alphabetic)
                      (ibuffer-do-sort-by-alphabetic)))))
+
+     (custom/special-beginning-of-buffer ibuffer
+       (ibuffer-forward-line 1))
+     (custom/special-end-of-buffer ibuffer
+       (ibuffer-backward-line 1))
 
      ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
      (bind-key "nd" 'ni-narrow-to-defun-indirect-other-window ctl-x-4-map)
@@ -3549,6 +3604,14 @@
         ;;Settings for main screen
         (setq notmuch-hello-hide-tags (quote ("killed")))
         (require 'org-notmuch))
+
+      (custom/special-beginning-of-buffer notmuch-search
+        (notmuch-search-first-thread)
+        (beginning-of-line))
+
+      (custom/special-end-of-buffer notmuch-search
+        (notmuch-search-last-thread)
+        (end-of-line))
     #+END_SRC
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4327,6 +4390,11 @@
                                         (todo . " %i %-12:c")
                                         (tags . " %i %-12:c")
                                         (search . " %i %-12:c")))
+
+       (custom/special-beginning-of-buffer org-agenda
+         (org-agenda-next-item 1))
+       (custom/special-end-of-buffer org-agenda
+         (org-agenda-previous-item 1))
      #+END_SRC
 **** clocking customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
