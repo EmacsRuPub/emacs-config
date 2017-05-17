@@ -1311,6 +1311,7 @@
        _=_ next blank line     recursive _N_arrow DWIM
        _-_ prev blank line     recursive wi_D_en DWIM
        _>_ reposition buffer
+       counsel-_I_menu
 
        _<return>_ Execute TAP
        "
@@ -1331,6 +1332,7 @@
        ("y" link-hint-copy-link :color blue)
        ("3" w3m-select-buffer :color blue)
        ("u" custom/open-urls-in-region :color blue)
+       ("I" counsel-imenu :color blue)
        ("<return>" custom/process-thing-at-point "execute ;)" :color blue))
      (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
