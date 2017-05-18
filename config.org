@@ -2891,12 +2891,6 @@
          :loader :elpa
          :mode ("requirements\\." . pip-requirements-mode))
 
-       (req-package py-isort
-         :loader :elpa
-         :config
-         (add-hook 'before-save-hook 'py-isort-before-save)
-         (setq py-isort-options '("-sl")))
-
        (defhydra hydra-python ()
          "
          ^Checks:^       ^Nav^
