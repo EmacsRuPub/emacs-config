@@ -2870,7 +2870,6 @@
          (setq elpy-modules
                (delete 'elpy-module-flymake elpy-modules))
          (add-hook 'elpy-mode-hook 'flycheck-mode)
-         (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
          (setq elpy-rpc-backend "jedi")
          (bind-key "M-," 'pop-tag-mark elpy-mode-map))
 
