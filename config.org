@@ -422,8 +422,7 @@
 
       (req-package ivy-hydra
         :loader :elpa
-        :require ivy
-        :disabled t)
+        :require ivy)
 
       (req-package ivy-rich
         :loader :elpa
