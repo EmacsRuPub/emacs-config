@@ -3681,7 +3681,6 @@
 
      (req-package webpaste
        :loader :elpa
-       :disabled t
        :config
        ;;TODO: fix keybindings
        (defhydra hydra-webpaste ()
