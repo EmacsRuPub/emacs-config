@@ -938,12 +938,6 @@
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html")))
-
-     (req-package counsel-projectile
-       :loader :elpa
-       :require swiper projectile
-       :config
-       (counsel-projectile-on))
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1303,7 +1297,7 @@
        ("s" counsel-projectile-switch-project)
        ("R" projectile-run-command-in-root)
        ("A" projectile-run-async-shell-command-in-root)
-       ("h" counsel-projectile)
+       ("h" projectile-find-file)
        ("r" socyl-search-regexp)
        ("g" counsel-ag)
        ("G" (lambda () (interactive)
