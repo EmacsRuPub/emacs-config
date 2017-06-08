@@ -174,6 +174,7 @@
       (setf (gethash "bsvera-sans-mono" fonts-def) "Bitstream Vera Sans Mono:size=12")
       (setf (gethash "hack-regular" fonts-def) "Hack:size=12")
       (setf (gethash "iosevka" fonts-def) "IosevkaCC-10:weight=bold")
+      (setf (gethash "mononoki" fonts-def) "mononoki-10:weight=bold")
 
       )
     #+END_SRC
@@ -182,7 +183,7 @@
       (setq font-lock-maximum-decoration t)
       (setq scalable-fonts-allowed t)
 
-      (custom/set-x-font "iosevka")
+      (custom/set-x-font "mononoki")
 
       (req-package unicode-fonts
         :loader :elpa
