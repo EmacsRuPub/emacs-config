@@ -1296,6 +1296,8 @@
        ("h" counsel-projectile)
        ("r" socyl-search-regexp)
        ("g" counsel-ag)
+       ("G" (lambda () (interactive)
+              (counsel-ag (thing-at-point 'symbol) (projectile-project-root))))
        ("l" counsel-git-log)
        ("m" swiper-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
