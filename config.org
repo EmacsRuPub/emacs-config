@@ -86,6 +86,7 @@
         :config
         (reverse-im-activate "russian-computer"))
     #+END_SRC
+**** BACKLOG Find some way to check WM running or configured in xsession and tangle basing on this fact
 *** toggling input method
     This method uses external kbdd utility
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -1046,6 +1047,7 @@
          (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
          ad-do-it))
 
+     ;;TODO: try to make analog of counsel-ag(?) in terms of ivy-occur(?) activation (to process to wgrep afterwards)
      (req-package socyl
        :loader :elpa
        :config
@@ -2402,6 +2404,7 @@
       (req-package git-timemachine :loader :elpa)
       (req-package gitignore-mode :loader :elpa)
     #+END_SRC
+**** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** smerge mode
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package smerge-mode
@@ -2867,6 +2870,7 @@
 
        (req-package py-autopep8 :loader :elpa)
 
+       ;;TODO: Importmagic seems to delete used imports sometimes, try to fix it
        (req-package elpy
          :loader :elpa
          :config
@@ -5025,6 +5029,7 @@
        :config
        (add-hook 'after-init-hook 'pdf-tools-install)
        (add-hook 'pdf-tools-mode-hook 'pdf-isearch-minor-mode)
+       ;; TODO: bind pdf-view-kill-ring-save
        (defun custom/scroll-other-window (&optional arg)
          (interactive "P")
          (awhen (ignore-errors (other-window-for-scrolling))
@@ -5139,6 +5144,18 @@
        (org-babel-do-load-languages 'org-babel-load-languages
                                     '((blockdiag . t))))
    #+END_SRC
+*** BACKLOG test blockdiag on work projects
+    example
+    #+BEGIN_SRC blockdiag :tool blockdiag-3.5 :file ololo.png
+      blockdiag {
+         A [label = "foo"];
+         B [label = "bar"];
+         C [label = "baz"];
+         A -> B [label = "click bar", textcolor="red"];
+         B -> C [label = "click baz"];
+         C -> A;
+      }
+    #+END_SRC
 ** linux traits
    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "no" "no")
      (setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
