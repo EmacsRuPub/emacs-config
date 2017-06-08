@@ -1086,6 +1086,11 @@
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
+
+     (req-package imenu-anywhere
+       :loader :elpa
+       :config
+       (global-set-key (kbd "C->") 'ivy-imenu-anywhere))
    #+END_SRC
 ** operations with windows
    #+BEGIN_SRC emacs-lisp :tangle yes
