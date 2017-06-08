@@ -430,6 +430,9 @@
         :config
         (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
 
+      (global-set-key (kbd "C-c v") 'ivy-push-view)
+      (global-set-key (kbd "C-c V") 'ivy-pop-view)
+
       (defun custom/open-portage-file ()
         "Choose and open Portage file"
         (interactive)
