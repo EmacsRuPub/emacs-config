@@ -177,7 +177,6 @@
       (setf (gethash "terminus" fonts-def) "Terminus:size=14")
       (setf (gethash "terminus-bold" fonts-def) "Terminus:style=Bold:size=14")
       (setf (gethash "ptmono" fonts-def) "PTMono:size=12")
-      (setf (gethash "bsvera-sans-mono" fonts-def) "Bitstream Vera Sans Mono:size=12")
       (setf (gethash "hack-regular" fonts-def) "Hack:size=12")
       (setf (gethash "iosevka" fonts-def) "IosevkaCC-10:weight=bold")
       (setf (gethash "mononoki" fonts-def) "mononoki-10:weight=bold")
