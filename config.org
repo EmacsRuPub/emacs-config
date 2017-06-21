@@ -500,7 +500,7 @@
                                 (goto-char (flycheck-error-pos error))))
                     :history 'counsel-flycheck-history)))
 
-      (defhydra hydra-custom-counsel ()
+      (defhydra hydra-custom-counsel (:idle 1.0)
         ("p" custom/open-portage-file "open portage file")
         ("e" custom/open-encrypted-document "open encrypted document")
         ("o" custom/open-org-file "open Org file")
@@ -1238,7 +1238,7 @@
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: plan docstring
-     (defhydra hydra-window ()
+     (defhydra hydra-window (:idle 1.0)
        "window"
        ("<left>" windmove-left "left")
        ("<down>" windmove-down "down")
@@ -1285,7 +1285,7 @@
        ("q" nil "cancel"))
      (global-set-key (kbd "<f9>") 'hydra-history/body)
 
-     (defhydra hydra-projects (:color teal)
+     (defhydra hydra-projects (:color teal :idle 1.0)
        "
        PROJECT: %(projectile-project-root)
        Project               More                              Search
@@ -1891,7 +1891,7 @@
    #+END_SRC
 ** hydras and keys
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-edit (:color blue)
+     (defhydra hydra-edit (:color blue :idle 1.0)
        "
        Editing                         Kill/yank                 Buffers
        -------------------------------------------------------------------------------------
@@ -3628,7 +3628,7 @@
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-email (:exit t :color red)
+      (defhydra hydra-email (:exit t :color red :idle 1.0)
         "Read mail"
         ("n" notmuch nil))
       (global-set-key (kbd "C-c 4") 'hydra-email/body)
@@ -3661,7 +3661,7 @@
     #+END_SRC
 *** hydras
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-security ()
+      (defhydra hydra-security (:idle 1.0)
         ("p" pass "pass" :color blue)
         ("!" counsel-pass "Counsel interface to Pass" :color blue)
         ("q" nil "cancel"))
@@ -4966,7 +4966,7 @@
      (global-set-key (kbd "C-c c") 'hydra-pim/body)
 
      ;;TODO: update docstring
-     (defhydra hydra-org-global (:color teal)
+     (defhydra hydra-org-global (:color teal :idle 1.0)
        "
        ^Control^                 ^Editing^            ^Context^               ^Movement^
        ---------------------------------------------------------------------------------------------------------
