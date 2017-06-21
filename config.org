@@ -917,7 +917,7 @@
                 (unless (eq fr frame) (condition-case nil (delete-frame fr) (error nil))))))
            (t t))))
     #+END_SRC
-** projectile
+** projects
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package projectile
        :loader :elpa
@@ -944,6 +944,8 @@
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html")))
+
+     (req-package treemacs) ;TODO: setup
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
