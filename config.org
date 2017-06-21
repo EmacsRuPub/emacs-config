@@ -2401,6 +2401,7 @@
 
       (req-package git-gutter
         :loader :elpa
+        :disabled t
         :require cl-lib
         :config
         (setq git-gutter:modified-sign "?")
@@ -2410,10 +2411,15 @@
         (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
         (global-git-gutter-mode +1))
 
-      (req-package git-gutter+ :loader :elpa)
+      (req-package git-gutter+ :loader :elpa :disabled t)
 
       (req-package git-timemachine :loader :elpa)
       (req-package gitignore-mode :loader :elpa)
+
+      (req-package diff-hl
+        :config
+        (eval-after-load 'magit
+          (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
     #+END_SRC
 **** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** smerge mode
