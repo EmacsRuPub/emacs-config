@@ -429,6 +429,11 @@
         :config
         (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
 
+      (req-package ivy-dired-history
+        :require dired savehist
+        :config
+        (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
+
       (global-set-key (kbd "C-c v") 'ivy-push-view)
       (global-set-key (kbd "C-c V") 'ivy-pop-view)
 
