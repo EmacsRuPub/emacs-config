@@ -180,6 +180,7 @@
       (setf (gethash "hack-regular" fonts-def) "Hack:size=12")
       (setf (gethash "iosevka" fonts-def) "IosevkaCC-10:weight=bold")
       (setf (gethash "mononoki" fonts-def) "mononoki-10:weight=bold")
+      (setf (gethash "fantasque" fonts-def) "Fantasque Sans Mono:style=Bold:size=14")
 
       )
     #+END_SRC
