@@ -334,6 +334,9 @@
        :loader :built-in
        :require recentf-ext
        :config
+       (eval-after-load no-littering
+         (add-to-list 'recentf-exclude no-littering-var-directory)
+         (add-to-list 'recentf-exclude no-littering-etc-directory))
        (setq recentf-max-saved-items 250)
        (setq recentf-max-menu-items 15)
        (recentf-mode t))
