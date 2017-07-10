@@ -4446,6 +4446,7 @@
        (setq appt-display-interval 5)
        (setq appt-message-warning-time 10)
        (setq calendar-date-style 'european)
+       (setq org-M-RET-may-split-line '((default . nil)))
        (setq org-align-all-tags t)
        (setq org-attach-directory (at-org-dir "/org-attach-data"))
        (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
