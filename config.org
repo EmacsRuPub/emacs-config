@@ -2949,6 +2949,7 @@
                (at-config-basedir
                 "contrib/.pylintrc"))
      #+END_SRC
+***** BACKLOG https://github.com/syl20bnr/spacemacs/tree/master/layers/+lang/python
 *** cc
 **** specialization for PostgreSQL development
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -4940,6 +4941,7 @@
              (delete-frame)))
      #+END_SRC
 **** BACKLOG org-log-re{schedule, deadline}
+**** BACKLOG https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 ** sauron
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package sauron
