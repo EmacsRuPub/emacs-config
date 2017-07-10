@@ -189,7 +189,7 @@
       (setq font-lock-maximum-decoration t)
       (setq scalable-fonts-allowed t)
 
-      (custom/set-x-font "mononoki")
+      (custom/set-x-font "iosevka")
 
       (req-package unicode-fonts
         :loader :elpa
