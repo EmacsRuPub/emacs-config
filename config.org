@@ -5163,6 +5163,15 @@
        :config
        (org-babel-do-load-languages 'org-babel-load-languages
                                     '((blockdiag . t))))
+
+     (req-package plantuml-mode
+       :config
+       (setq plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar")
+       (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+       (add-to-list
+        'org-src-lang-modes '("plantuml" . plantuml))
+       (org-babel-do-load-languages 'org-babel-load-languages
+                                    '((plantuml . t))))
    #+END_SRC
 *** BACKLOG test blockdiag on work projects
     example
