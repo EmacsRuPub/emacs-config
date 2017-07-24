@@ -214,6 +214,7 @@
      (req-package material-theme :loader :elpa :disabled t)
      (req-package drakula-theme :loader :elpa :disabled t)
      (req-package challenger-deep-theme :loader :elpa :disabled t)
+     (req-package hc-zenburn-theme :loader :elpa :disabled t)
 
      (req-package darkburn-theme
        :loader :elpa
