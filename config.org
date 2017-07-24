@@ -558,6 +558,9 @@
                      letter-group
                      "\n"))
              (princ "\n\n")))))
+
+     (req-package speed-type
+       :loader :elpa)
    #+END_SRC
 ** remove elc after save
    If you're saving an elisp file, likely the .elc is no longer valid.
