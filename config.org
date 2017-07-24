@@ -4665,7 +4665,7 @@
 **** excerpt from sachac
      #+BEGIN_SRC emacs-lisp :tangle no
        ;; review
-       (use-package org
+       (req-package org
          :loader :elpa
          :init
          (setq org-clock-idle-time nil)
@@ -4710,7 +4710,7 @@
 
        (defun my/org-gcal-notify (title mes)
          (message "%s - %s" title mes))
-       (use-package org-gcal
+       (req-package org-gcal
          :load-path "~/elisp/org-gcal.el"
          :init (fset 'org-gcal-notify 'my/org-gcal-notify))
 
@@ -4818,7 +4818,7 @@
 
        ;;TODO: think of autosaving org files after refiling/status changes/etc
 
-       (use-package org-fstree
+       (req-package org-fstree
          :ensure t
          :defer t
          :commands (org-fstree-apply-maybe org-fstree-show-entry-maybe)
@@ -4826,7 +4826,7 @@
          (progn (add-hook 'org-ctrl-c-ctrl-c-hook 'org-fstree-apply-maybe)
                 (add-hook 'org-pre-cycle-hook 'org-fstree-show-entry-maybe)))
 
-       (use-package ox-reveal :disabled t)
+       (req-package ox-reveal :disabled t)
 
        ;;TODO: bind org-store-link and org-insert-link-global
      #+END_SRC
