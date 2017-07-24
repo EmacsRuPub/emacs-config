@@ -1036,6 +1036,10 @@
        :loader :elpa
        :config
        (dired-quick-sort-setup))
+
+     (req-package dired-collapse
+       :config
+       (add-hook 'dired-mode-hook 'dired-collapse-mode))
    #+END_SRC
 ** bookmark+
    #+BEGIN_SRC emacs-lisp :tangle yes
