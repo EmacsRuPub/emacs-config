@@ -328,11 +328,21 @@
 
      (req-package backup-walker :loader :elpa) ;TODO: bind to key and other stuff
    #+END_SRC
-** lock files
+** lock files and auto-save
    Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
    dirs from being clobbered with.
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setf create-lockfiles nil)
+     (setf auto-save-default nil)
+   #+END_SRC
+** remove elc after save
+   If you're saving an elisp file, likely the .elc is no longer valid.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (add-hook 'after-save-hook
+               (lambda ()
+               (if (and (equal major-mode 'emacs-lisp-mode)
+                        (file-exists-p (concat buffer-file-name "c")))
+                     (delete-file (concat buffer-file-name "c")))))
    #+END_SRC
 * common
 ** emacs server
@@ -537,15 +547,6 @@
 
      (req-package speed-type
        :loader :elpa)
-   #+END_SRC
-** remove elc after save
-   If you're saving an elisp file, likely the .elc is no longer valid.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (add-hook 'after-save-hook
-               (lambda ()
-               (if (and (equal major-mode 'emacs-lisp-mode)
-                        (file-exists-p (concat buffer-file-name "c")))
-                     (delete-file (concat buffer-file-name "c")))))
    #+END_SRC
 ** Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp :tangle yes
