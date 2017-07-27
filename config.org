@@ -5111,8 +5111,8 @@
        :config
        (setq plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar")
        (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-       (add-to-list
-        'org-src-lang-modes '("plantuml" . plantuml))
+       (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+       (setq org-plantuml-jar-path plantuml-jar-path)
        (org-babel-do-load-languages 'org-babel-load-languages
                                     '((plantuml . t))))
    #+END_SRC
