@@ -126,8 +126,8 @@
 ** elisp extensions
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package names :loader :elpa :force t)
-     (req-package anaphora :loader :elpa)
-     (req-package noflet :loader :elpa)
+     (req-package anaphora :loader :elpa :force t)
+     (req-package noflet :loader :elpa :force t)
    #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
