@@ -906,8 +906,6 @@
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html")))
 
-     (req-package treemacs) ;TODO: setup
-
      (req-package emacs-home
        :config
        (emacs-home-set-day-start-time 1000)
