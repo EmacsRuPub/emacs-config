@@ -87,24 +87,6 @@
         (reverse-im-activate "russian-computer"))
     #+END_SRC
 **** BACKLOG Find some way to check WM running or configured in xsession and tangle basing on this fact
-*** toggling input method
-    This method uses external kbdd utility
-    #+BEGIN_SRC emacs-lisp :tangle no
-      ;;TODO: maybe implement as advice
-      (defun toggle-input-method ()
-        "Toggle input method while keeping system keyboard layout in latin.
-        Essential for WMs without this functionality built-in."
-        (interactive)
-        (toggle-input-method)
-        (when (executable-find "kbdd")
-          (start-process "dbus-send"
-                         nil
-                         "dbus-send"
-                         "--dest=ru.gentoo.KbddService"
-                         "/ru/gentoo/KbddService"
-                         "ru.gentoo.kbdd.set_layout"
-                         "uint32:1")))
-    #+END_SRC
 ** Encryption and security
 *** packages
     #+BEGIN_SRC emacs-lisp :tangle yes
