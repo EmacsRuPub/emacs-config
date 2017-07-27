@@ -855,6 +855,7 @@
      (setq scroll-preserve-screen-position 'always)
 
      (req-package saveplace
+       :disabled t
        :loader :built-in
        :config
        (save-place-mode 1))
