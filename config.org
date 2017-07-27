@@ -327,6 +327,8 @@
      (setq version-control t)
 
      (req-package backup-walker :loader :elpa) ;TODO: bind to key and other stuff
+
+     (setq delete-by-moving-to-trash t)
    #+END_SRC
 ** lock files and auto-save
    Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
@@ -1848,7 +1850,6 @@
      (setq auto-revert-verbose nil)
      (setq global-auto-revert-non-file-buffers t)
      (setq default-input-method 'russian-computer)
-     (setq delete-by-moving-to-trash t);; Move files to trash when deleting
      (setq kill-whole-line t)
      (setq kmacro-ring-max 16)
      (setq mark-even-if-inactive t)
