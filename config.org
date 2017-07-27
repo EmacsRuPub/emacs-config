@@ -1556,22 +1556,6 @@
         :config
         (bind-key "H-SPC" 'set-rectangular-region-anchor))
 
-      (req-package selected
-        :loader :elpa
-        :init
-        (setq selected-org-mode-map (make-sparse-keymap))
-        :config
-        (selected-global-mode)
-        :bind (:map selected-keymap
-               ("q" . selected-off)
-               ("u" . upcase-region)
-               ("d" . downcase-region)
-               ("c" . upcase-initials-region)
-               ("w" . count-words-region)
-               ("m" . apply-macro-to-region-lines)
-               :map selected-org-mode-map
-               ("t" . org-table-convert-region)))
-
       (req-package whole-line-or-region ;; if no region is active, act on current line
         :loader :elpa
         :defer t
@@ -1583,18 +1567,7 @@
                 (kill-region whole-line-or-region-kill-region nil)
                 (kill-ring-save whole-line-or-region-kill-ring-save nil)
                 (yank whole-line-or-region-yank nil))))
-
-      (req-package wrap-region
-        :loader :elpa
-        :require dash
-        :config
-        (wrap-region-global-mode 1)
-        (wrap-region-add-wrapper "*" "*")
-        (wrap-region-add-wrapper "(" ")")
-        (wrap-region-add-wrapper "{-" "-}" "#")
-        (wrap-region-add-wrapper "/* " " */" "#" '(javascript-mode css-mode)))
     #+END_SRC
-
 ** commenting
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package comment-dwim-2
@@ -1635,11 +1608,6 @@
         "Insert the current date and time at point."
         (interactive "*")
         (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
-
-      (defun strip-prefix (prefix lines)
-        (s-join "\n"
-                (mapcar (lambda (s) (s-chop-prefix prefix s))
-                        (s-lines lines))))
 
       )
     #+END_SRC
@@ -1684,12 +1652,6 @@
       (req-package ws-butler
         :loader :elpa
         :commands ws-buttler-mode)
-
-      (req-package composable
-        :loader :elpa
-        :config
-        (composable-mode)
-        (composable-mark-mode))
 
       (req-package mwim
         :loader :elpa
@@ -1792,13 +1754,6 @@
 ** some fancy editing methods
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package edit-indirect :loader :elpa)
-     (req-package narrow-indirect :loader :elpa)
-
-     (req-package miniedit
-       :loader :elpa
-       :defer t
-       :commands minibuffer-edit
-       :init (miniedit-install))
    #+END_SRC
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
