@@ -1015,13 +1015,6 @@
 
      (req-package phi-search :loader :elpa)
 
-     (req-package sift
-       :loader :elpa
-       :config
-       (defadvice sift-regexp (around escape-search-term activate)
-         (ad-set-arg 0 (replace-regexp-in-string "\\*" "\\\\*" (ad-get-arg 0)))
-         ad-do-it))
-
      ;;TODO: try to make analog of counsel-ag(?) in terms of ivy-occur(?) activation (to process to wgrep afterwards)
      (req-package socyl
        :loader :elpa
