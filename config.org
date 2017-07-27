@@ -219,15 +219,6 @@
 
      (setq column-number-mode t)
 
-     (req-package time
-       :loader :built-in
-       :config
-       (display-time)
-       (setq display-time-day-and-date t)
-       ;; (setq display-time-form-list (list 'time 'load))
-       (setq display-time-mail-file t)
-       (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
-
      (setq use-dialog-box nil)
      (setq visible-bell t)
      (setq ring-bell-function 'ignore)
@@ -254,6 +245,15 @@
        :loader :elpa
        :config
        (volatile-highlights-mode 1))
+
+     (req-package time
+       :loader :built-in
+       :config
+       (display-time)
+       (setq display-time-day-and-date t)
+       ;; (setq display-time-form-list (list 'time 'load))
+       (setq display-time-mail-file t)
+       (setq display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
    #+END_SRC
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp :tangle yes
