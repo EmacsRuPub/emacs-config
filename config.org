@@ -1256,8 +1256,6 @@
        ("m" ace-maximize-window "a1" :color blue)
        ("=" text-scale-increase)
        ("-" text-scale-decrease)
-       ("f" make-frame-command)
-       ("F" delete-other-frames)              ;; TODO: maybe provide current frame deletion also
        ("t" tile :color blue)
        ("T" transpose-frame "transpose")
        ("i" flip-frame "flip")
@@ -1265,6 +1263,7 @@
        ("r" rotate-frame "rotate")
        ("n" make-frame-command "create frame" :color blue)
        ("k" delete-frame "delete frame" :color blue)
+       ("s" delete-other-frames "delete other frames" :color blue)
        ("a" counsel-load-theme :color blue)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
