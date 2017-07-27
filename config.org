@@ -5116,18 +5116,6 @@
        (org-babel-do-load-languages 'org-babel-load-languages
                                     '((plantuml . t))))
    #+END_SRC
-*** BACKLOG test blockdiag on work projects
-    example
-    #+BEGIN_SRC blockdiag :tool blockdiag-3.5 :file ololo.png
-      blockdiag {
-         A [label = "foo"];
-         B [label = "bar"];
-         C [label = "baz"];
-         A -> B [label = "click bar", textcolor="red"];
-         B -> C [label = "click baz"];
-         C -> A;
-      }
-    #+END_SRC
 ** linux traits
    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "no" "no")
      (setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
