@@ -738,49 +738,50 @@
      #+END_SRC
 * navigate
 ** URLs, links and TAPs
-*** definitions
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (define-namespace custom/
 
-      ;;TODO: make implemetation less straightforward or find "right way" to do it
-      (defun process-thing-at-point ()
-        (interactive)
-        (cond
-         ((equal major-mode 'ag-mode) (compile-goto-error))
-         ((or (equal major-mode 'org-agenda-mode)
-              (equal major-mode 'org-mode)) (org-return))
-         ((or (equal major-mode 'jabber-chat-mode)
-              (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
-         (t (browse-url (thing-at-point 'url t)))))
+     ;;TODO: make implemetation less straightforward or find "right way" to do it
+     (defun process-thing-at-point ()
+       (interactive)
+       (cond
+        ((equal major-mode 'ag-mode) (compile-goto-error))
+        ((or (equal major-mode 'org-agenda-mode)
+             (equal major-mode 'org-mode)) (org-return))
+        ((or (equal major-mode 'jabber-chat-mode)
+             (equal major-mode 'erc-mode)) (browse-url (thing-at-point 'url t)))
+        (t (browse-url (thing-at-point 'url t)))))
 
-      ;;TODO: find a common way for all url-browsing functionality in config
-      ;;to handle special cases like spaces in urls, etc.
-      (defun open-urls-in-region (beg end)
-        "Open URLs between BEG and END."
-        (interactive "r")
-        (save-excursion
-          (save-restriction
-            (let ((urls))
-              (narrow-to-region beg end)
-              (goto-char (point-min))
-              (while (re-search-forward org-plain-link-re nil t)
-                (push (thing-at-point 'url) urls))
-              (dolist (url (reverse urls))
-                (browse-url url))))))
+     ;;TODO: find a common way for all url-browsing functionality in config
+     ;;to handle special cases like spaces in urls, etc.
+     (defun open-urls-in-region (beg end)
+       "Open URLs between BEG and END."
+       (interactive "r")
+       (save-excursion
+         (save-restriction
+           (let ((urls))
+             (narrow-to-region beg end)
+             (goto-char (point-min))
+             (while (re-search-forward org-plain-link-re nil t)
+               (push (thing-at-point 'url) urls))
+             (dolist (url (reverse urls))
+               (browse-url url))))))
 
-      (defun find-url-backward ()
-        (interactive)
-        (re-search-backward org-plain-link-re nil t)
-        (forward-word))
+     (defun find-url-backward ()
+       (interactive)
+       (re-search-backward org-plain-link-re nil t)
+       (forward-word))
 
-      (defun find-url-forward ()
-        (interactive)
-        (re-search-forward org-plain-link-re nil t)
-        (re-search-backward org-plain-link-re nil t)
-        (forward-word))
+     (defun find-url-forward ()
+       (interactive)
+       (re-search-forward org-plain-link-re nil t)
+       (re-search-backward org-plain-link-re nil t)
+       (forward-word))
 
-      )
-    #+END_SRC
+     )
+
+     (req-package link-hint :loader :elpa)
+   #+END_SRC
 **** try
      #+BEGIN_SRC emacs-lisp :tangle no
        (defun org-return-dwim ()
@@ -816,15 +817,6 @@
           (t
            (org-return))))
      #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package ace-link
-        :loader :elpa
-        :config
-        (ace-link-setup-default))
-
-      (req-package link-hint :loader :elpa)
-    #+END_SRC
 ** cursor positioning
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
