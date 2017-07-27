@@ -2351,6 +2351,16 @@
         :config
         (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
 
+      (req-package magit-vdiff
+        :loader :elpa
+        :config
+        (bind-key (kbd "e") 'vdiff-magit-dwim magit-mode-map)
+        (bind-key (kbd "E") 'vdiff-magit-popup magit-mode-map)
+        (setcdr (assoc ?e (plist-get magit-dispatch-popup :actions))
+                '("vdiff dwim" 'vdiff-magit-dwim))
+        (setcdr (assoc ?E (plist-get magit-dispatch-popup :actions))
+                '("vdiff popup" 'vdiff-magit-popup)))
+
       (req-package git-gutter
         :loader :elpa
         :disabled t
