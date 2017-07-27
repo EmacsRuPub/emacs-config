@@ -354,7 +354,7 @@
          (interactive)
          (save-buffer)
          (server-edit))
-       (defun custom/save-buffer-clients-on-exit () ;TODO: add to appropriate hook
+       (defun custom/save-buffer-clients-on-exit ()
          (interactive)
          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
              (server-save-edit)
@@ -364,7 +364,8 @@
          (require 'server)
          (server-start))
        (add-hook 'server-visit-hook
-                 (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit))))
+                 (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
+       (advice-add 'save-buffers-kill-terminal :before 'custom/save-buffer-clients-on-exit))
    #+END_SRC
 ** some ubiquitous packages
 *** hydra
