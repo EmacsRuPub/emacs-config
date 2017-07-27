@@ -1575,7 +1575,15 @@
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
 
-     (req-package rebox2 :loader :elpa) ;;TODO: bind commands
+     (req-package rebox2
+       :loader :elpa
+       :config
+       (defhydra hydra-rebox ()
+         ("r" rebox-dwim :color blue)
+         ("<space>" rebox-cycle "cycle box styles")
+         ("q" nil "cancel"))
+       ;;TODO: check for more appropriate keybinding
+       (global-set-key (kbd "<f10>") 'hydra-rebox/body))
 
      (setq comment-style 'indent)
    #+END_SRC
