@@ -3442,6 +3442,22 @@
                                       eshell-last-output-end))
         (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color))
     #+END_SRC
+*** tmux
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package emamux
+        :config
+        (defhydra hydra-emamux ()
+          "
+          _n_ew window
+          _s_end region
+          _r_un command
+          "
+          ("n" emamux:new-window)
+          ("s" emamux:send-region)
+          ("r" emamux:run-command)
+          ("q" nil))
+        (global-set-key (kbd "<f12>") 'hydra-emamux/body))
+    #+END_SRC
 ** Twitter
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package twittering-mode
