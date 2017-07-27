@@ -429,16 +429,6 @@
       (global-set-key (kbd "C-c v") 'ivy-push-view)
       (global-set-key (kbd "C-c V") 'ivy-pop-view)
 
-      (defun custom/open-portage-file ()
-        "Choose and open Portage file"
-        (interactive)
-        (ivy-read "Portage files: "
-                  (funcall #'(lambda () (f-files "/etc/portage" nil t)))
-                  :action #'(lambda (candidate)
-                              (find-file (concat "/sudo::" (expand-file-name candidate))))
-                  :require-match t
-                  :caller 'custom/open-portage-file))
-
       (defun custom/open-encrypted-document ()
         (interactive)
         (ivy-read "Various documents: "
@@ -493,7 +483,6 @@
                     :history 'counsel-flycheck-history)))
 
       (defhydra hydra-custom-counsel (:idle 1.0)
-        ("p" custom/open-portage-file "open portage file")
         ("e" custom/open-encrypted-document "open encrypted document")
         ("o" custom/open-org-file "open Org file")
         ("k" custom/open-org-kb-file "open Org KB file")
