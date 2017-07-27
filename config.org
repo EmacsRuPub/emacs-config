@@ -946,8 +946,6 @@
        (setq dired-dwim-target t)
        (setq dired-listing-switches "-lah1v --group-directories-first")
        (add-hook 'dired-mode-hook 'auto-revert-mode)
-       (global-set-key (kbd "C-c x") 'direx:jump-to-directory)
-       ;; (global-set-key (kbd "C-c C-j") 'dired-jump)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
        (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
