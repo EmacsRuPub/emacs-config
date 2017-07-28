@@ -4241,6 +4241,10 @@
          :loader :elpa
          :config
          (setq alert-default-style 'libnotify))
+
+       (req-package org-link-minor-mode
+         :config
+         (org-link-minor-mode t))
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
