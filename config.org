@@ -3346,6 +3346,8 @@
        (org-babel-do-load-languages
         'org-babel-load-languages
         '((restclient . t))))
+
+     (req-package httprepl)
    #+END_SRC
 ** terminal
 *** common
