@@ -1770,13 +1770,12 @@
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq indent-tabs-mode nil)
+     (setq-default tab-width 4)
 
      (req-package dtrt-indent
        :loader :elpa
        :config
        (dtrt-indent-mode))
-
-     (setq-default tab-width 4)
 
      ;;TODO: ensure python part is installed
      (req-package indent-tools
@@ -1797,14 +1796,24 @@
      (auto-compression-mode t)
      (delete-selection-mode t)
      (electric-indent-mode -1)
-     (global-auto-revert-mode 1);; Auto refresh buffers
-     (show-paren-mode t)
      (transient-mark-mode 1)
+     (put 'transient-mark-mode 'permanent-local t)
+
+     (req-package paren
+       :loader :path
+       :config
+       (setq show-paren-delay 0)
+       (show-paren-mode t))
+
+     (req-package auto-revert
+       :loader :path
+       :config
+       (setq auto-revert-verbose nil)
+       (setq global-auto-revert-non-file-buffers t)
+       (global-auto-revert-mode 1))
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq auto-revert-verbose nil)
-     (setq global-auto-revert-non-file-buffers t)
      (setq default-input-method 'russian-computer)
      (setq kill-whole-line t)
      (setq kmacro-ring-max 16)
@@ -1818,19 +1827,15 @@
      (setq minibuffer-prompt-properties
            '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
-     (set-default 'indent-tabs-mode nil);; Never insert tabs
      (setq-default fill-column 200)
      (setq-default indicate-empty-lines t)
-     (setq-default truncate-lines t);; Don't break lines for me, please
+     (setq-default truncate-lines t)
 
      (setq x-stretch-cursor t)
      (setq blink-matching-paren nil)
-     (setq show-paren-delay 0)
      (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
      (setq mouse-wheel-progressive-speed nil)
-     (setq set-mark-command-repeat-pop t)
-
-     (put 'transient-mark-mode 'permanent-local t)
+     ;; (setq set-mark-command-repeat-pop t)
 
      (setq whitespace-style '(indentation::space
                               space-after-tab
