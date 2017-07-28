@@ -4424,6 +4424,42 @@
        (setq org-clock-into-drawer "CLOCK")
        (setq org-clock-out-remove-zero-time-clocks t)
        (setq org-clock-persist t)
+
+       ;; just clock-out unconditionally - it seems easier to maintain
+       ;; credits to @binarin
+       (setf org-clock-x11idle-program-name "xprintidle")
+       (setf org-x11idle-exists-p t)
+
+       ;; (SEC-HIGH SEC-LOW MICROSEC PICOSEC) current-idle-time
+       (defvar custom/idle-clockout-timeout 1800
+         "Perform first attempt to clock-out after this period of emacs
+          inactivity. It can decide to postpone the clocking-out if it's
+          only emacs that is idle, but not the computer itself.")
+
+       (defvar custom/idle-clockout-recheck-interval 300
+         "After a sufficient idle time was achieved by emacs, we'll
+          periodically check current idle time of the whole OS to decide
+          whether we need to clock out")
+
+       (defvar custom/idle-clockout-repeat-timer nil
+         "Timer for repeatedly (during a single idle interval) checking
+          whether we need to clock-out")
+
+       (defun custom/clockout-when-idle ()
+         (awhen custom/idle-clockout-repeat-timer
+           (cancel-timer it))
+         (when (org-clocking-p)
+           (if (> (org-user-idle-seconds)
+                  custom/idle-clockout-timeout)
+               (let ((org-clock-out-switch-to-state "WAITING")) ;TODO: introduce variable
+                 (org-clock-out nil t))
+             (setf custom/idle-clockout-repeat-timer
+                   (run-with-idle-timer
+                    (time-add (current-idle-time) custom/idle-clockout-recheck-interval)
+                    nil
+                    'custom/clockout-when-idle)))))
+
+       (run-with-idle-timer custom/idle-clockout-timeout t 'custom/clockout-when-idle)
      #+END_SRC
 **** refiling customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
