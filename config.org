@@ -1646,17 +1646,16 @@
 
       (req-package mark
         :loader :elpa
-        :disabled t
-        :require fm)
+        :require fm) ;TODO: bind keys
 
       (req-package page-break-lines
         :loader :elpa
+        :disabled t
         :config
         (turn-on-page-break-lines-mode))
 
       (req-package macro-math
         :loader :elpa
-        :disabled t
         :config
         (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
         (global-set-key "\C-x=" 'macro-math-eval-region))
