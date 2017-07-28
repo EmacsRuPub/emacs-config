@@ -1661,6 +1661,7 @@
         (global-set-key "\C-x=" 'macro-math-eval-region))
 
       ;;TODO: consolidate all whitespaces utils
+      ;;TODO: think of activating ws-butler in some modes, just for hands-on testing
       (req-package ws-butler
         :loader :elpa
         :commands ws-buttler-mode)
