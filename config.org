@@ -1606,6 +1606,11 @@
        (setq undo-tree-visualizer-timestamps t)
        (setq undo-tree-visualizer-diff t))
    #+END_SRC
+*** try
+    #+BEGIN_SRC emacs-lisp :tangle no
+      ;;; https://stackoverflow.com/a/41560712/2112489
+      (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
+    #+END_SRC
 ** utils
 *** definitions
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1902,7 +1907,7 @@
        ("b" toggle-debug-on-error "debug on error")
        ("w" whitespace-mode "whitespace mode")
        ("W" global-whitespace-mode "*global* whitespace mode")
-       ("b" subword-mode)
+       ("B" subword-mode)
        ("v" view-mode)
        ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
        ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
