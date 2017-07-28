@@ -4236,6 +4236,11 @@
          :loader :elpa
          :config
          (add-hook 'org-mode-hook 'org-sticky-header-mode))
+
+       (req-package org-alert
+         :loader :elpa
+         :config
+         (setq alert-default-style 'libnotify))
      #+END_SRC
 **** common
      #+BEGIN_SRC emacs-lisp :tangle yes
