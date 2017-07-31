@@ -4293,6 +4293,23 @@
      #+END_SRC
 **** agenda customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package org-super-agenda           ;TODO: investigate options (given initial setup below)
+         :loader :elpa
+         :config
+         (setq org-super-agenda-groups
+               '((:name "Today"
+                        :time-grid t
+                        :todo "TODAY")
+                 (:todo "WAITING" :order 7)
+                 (:todo "SOON"
+                        :order 8)
+                 (:todo ("SOMEDAY" "WAITING" "FEEDBACK" "OUTDATED")
+                        :order 9)
+                 (:priority<= "B"
+                        :order 1)
+                 ))
+         (org-super-agenda-mode 1))
+
        (setf org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :narrow 60))
        (setq org-agenda-dim-blocked-tasks 'invisible)
        (setq org-agenda-include-all-todo t)
