@@ -4682,6 +4682,11 @@
        (bind-key "C-c [" nil org-mode-map)
        (bind-key "C-c ]" nil org-mode-map)
        (bind-key "C-c C-o" nil org-mode-map)
+
+       (bind-key "s-j" 'org-babel-next-src-block org-mode-map)
+       (bind-key "s-k" 'org-babel-previous-src-block org-mode-map)
+       (bind-key "s-l" 'org-edit-src-code org-mode-map)
+       (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
      #+END_SRC
 *** try
 **** excerpt from sachac
