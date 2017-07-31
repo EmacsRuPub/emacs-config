@@ -19,16 +19,6 @@
 (setq use-package-verbose t)
 (setq load-prefer-newer t)
 
-;; open literate config fast in case of emergency
-(global-set-key (kbd "C-x C-g")
-                (lambda ()
-                  (interactive)
-                  (find-file "/home/octocat/.emacs.d/config.org")))
-(global-set-key (kbd "C-x C-.")
-                (lambda ()
-                  (interactive)
-                  (switch-to-buffer "*Messages*")))
-
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
@@ -40,6 +30,24 @@
 
 (require 'req-package)
 (setq req-package-log-level 'trace)
+
+(global-set-key (kbd "C-x C-.")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "*Messages*")))
+
+;; open literate config fast in case of emergency (and not only)
+(req-package iqa
+  :force t
+  :init
+  (setq iqa-user-init-file (concat user-emacs-directory "config.org"))
+  :config
+  (iqa-setup-default))
+
+(req-package restart-emacs
+  :force t
+  :config
+  (global-set-key (kbd "C-x C-c") 'restart-emacs))
 
 (req-package exec-path-from-shell
   :force t
