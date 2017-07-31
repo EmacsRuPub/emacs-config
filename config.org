@@ -3031,6 +3031,8 @@
            (setq-local flycheck-check-syntax-automatically nil))
          (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup))
 
+       (req-package flycheck-clang-analyzer)
+
        (info-lookup-add-help
         :mode 'c-mode
         :regexp "[^][()'\" \t\n]+"
