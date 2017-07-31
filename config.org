@@ -132,7 +132,10 @@
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
-     (setq gc-cons-threshold 20000000)
+
+     (setq gc-cons-threshold 64000000)
+     (add-hook 'after-init-hook #'(lambda ()
+                                    (setq gc-cons-threshold 800000)))
 
      (add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold most-positive-fixnum)))
      (add-hook 'minibuffer-exit-hook (lambda () (setq gc-cons-threshold 800000)))
