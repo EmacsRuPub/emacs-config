@@ -407,6 +407,8 @@
         :loader :elpa
         :require swiper
         :config
+        (setq counsel-grep-base-command
+              "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
         (bind-key "C-x j j" 'counsel-bookmark)
         (bind-key "M-x" 'counsel-M-x)
         (bind-key "C-x C-f" 'counsel-find-file)
@@ -1306,9 +1308,9 @@
        ("A" projectile-run-async-shell-command-in-root)
        ("h" projectile-find-file)
        ("r" socyl-search-regexp)
-       ("g" counsel-ag)
+       ("g" counsel-rg)
        ("G" (lambda () (interactive)
-              (counsel-ag (thing-at-point 'symbol) (projectile-project-root))))
+              (counsel-rg (thing-at-point 'symbol) (projectile-project-root))))
        ("l" counsel-git-log)
        ("m" swiper-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
