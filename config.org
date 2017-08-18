@@ -73,19 +73,18 @@
           (setq debug-on-error debug-on-error-orig)
           (setq debug-on-quit debug-on-quit-orig)))
    #+END_SRC
-** input method utils (internal emacs keyboard layouts switching)
-*** reverse input method
-    it makes Emacs with non-English system keyboard layout
-    to behave correctly with keybindings
-    It definitely makes sense while using Emacs in such X WMs
-    when there is no chance to hook into keyboard layouts switching
-    (those are probably all, except StumpWM/XMonad, AFAIK)
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package reverse-im
-        :loader :elpa
-        :config
-        (reverse-im-activate "russian-computer"))
-    #+END_SRC
+** reverse input method
+   It makes Emacs with non-English system keyboard layout
+   to behave correctly with keybindings.
+   It definitely makes sense while using Emacs in such X WMs
+   when there is no chance to hook into keyboard layouts switching
+   (those are probably all, except StumpWM/XMonad, AFAIK)
+   #+BEGIN_SRC emacs-lisp :tangle (if (not (member (getenv "CURRENT_WM") '("stumpwm" "xmonad"))) "yes" "no")
+     (req-package reverse-im
+       :loader :elpa
+       :config
+       (reverse-im-activate "russian-computer"))
+   #+END_SRC
 **** BACKLOG Find some way to check WM running or configured in xsession and tangle basing on this fact
 ** Encryption and security
 *** packages
