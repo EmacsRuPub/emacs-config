@@ -17,11 +17,10 @@
        :force t
        :require s dash)
    #+END_SRC
-** working directories
-   A bunch of directories for various working datasets
-   As the order of loading corresponding extensions,
-   is cumbersome to maintain we should customize them ASAP (here)
+   It's good to have centralized working datasets storage,
+   to prevent pollution of Emacs config directory.
    #+BEGIN_SRC emacs-lisp :tangle yes
+     ;;TODO: consolidate related extensions setup here
      (req-package no-littering
        :loader :elpa
        :force t
