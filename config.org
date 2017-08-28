@@ -79,7 +79,6 @@
        :config
        (reverse-im-activate "russian-computer"))
    #+END_SRC
-**** BACKLOG Find some way to check WM running or configured in xsession and tangle basing on this fact
 ** Encryption and security
 *** packages
     #+BEGIN_SRC emacs-lisp :tangle yes
