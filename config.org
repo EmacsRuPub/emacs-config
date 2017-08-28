@@ -1,11 +1,6 @@
 #+TITLE: Wiedzmin's literate Emacs configuration
 #+OPTIONS: toc:4 h:4
 
-* First Line
-  #+BEGIN_SRC emacs-lisp :tangle no :comments none
-    ;;; -*- lexical-binding: t; eval: (read-only-mode 1) -*-
-  #+END_SRC
-** BACKLOG make this work
 * bootstrapping
 ** init essential packages
    #+BEGIN_SRC emacs-lisp :tangle yes
