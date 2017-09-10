@@ -2362,8 +2362,8 @@
         -----------------------------------------
         _s_: status         _k_ smerge / goto prev conflict
         _l_: log            _j_ smerge / goto next conflict
-        _f_: file log       _h_ git-gutter / prev-hunk
-        _r_: reflog         _l_ git-gutter / next-hunk
+        _f_: file log
+        _r_: reflog
         _w_: diff worktree
         _t_: time machine
         _b_: blame
@@ -2380,9 +2380,7 @@
         ("l" magit-log :color blue)
         ("t" git-timemachine :color blue)
         ("k" smerge-prev "previous conflict")
-        ("j" smerge-next "next conflict")
-        ("h" git-gutter:previous-hunk)
-        ("l" git-gutter:next-hunk))
+        ("j" smerge-next "next conflict"))
       (global-set-key (kbd "C-'") 'hydra-vcs/body)
     #+END_SRC
 ** languages
