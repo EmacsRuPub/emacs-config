@@ -84,10 +84,15 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package epa
         :loader :built-in
+        :require epg
+        :config
+        (setq epa-pinentry-mode 'loopback)
+        (epa-file-enable))
+
+      (req-package epg-config
+        :loader :built-in
         :config
         (setq epg-gpg-program "gpg2")
-        (setq epa-pinentry-mode 'loopback)
-        (epa-file-enable)
         (setq epg-gpg-home-directory "~/.gnupg"))
 
       (req-package password-cache
