@@ -2,33 +2,6 @@
 #+OPTIONS: toc:4 h:4
 
 * bootstrapping
-** init essential packages
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package auto-compile
-       :loader :elpa
-       :config
-       (auto-compile-on-load-mode 1)
-       (auto-compile-on-save-mode 1)
-       (setq auto-compile-display-buffer nil)
-       (setq auto-compile-mode-line-counter t))
-
-     (req-package f
-       :loader :elpa
-       :force t
-       :require s dash)
-   #+END_SRC
-   It's good to have centralized working datasets storage,
-   to prevent pollution of Emacs config directory.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: consolidate related extensions setup here
-     (req-package no-littering
-       :loader :elpa
-       :force t
-       :require cl-lib
-       :init
-       (setq no-littering-var-directory
-             (expand-file-name "data/" user-emacs-directory)))
-   #+END_SRC
 ** basic utils
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq home-directory (getenv "HOME"))
@@ -66,6 +39,45 @@
           ,@body
           (setq debug-on-error debug-on-error-orig)
           (setq debug-on-quit debug-on-quit-orig)))
+   #+END_SRC
+** essential packages and tweaks
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package auto-compile
+       :loader :elpa
+       :config
+       (auto-compile-on-load-mode 1)
+       (auto-compile-on-save-mode 1)
+       (setq auto-compile-display-buffer nil)
+       (setq auto-compile-mode-line-counter t))
+
+     (req-package f
+       :loader :elpa
+       :force t
+       :require s dash)
+
+     (req-package names :loader :elpa :force t)
+     (req-package anaphora :loader :elpa :force t)
+     (req-package noflet :loader :elpa :force t)
+
+     (setq message-log-max t) ;; we don't want to lose any startup log info
+     (setq shell-file-name "/bin/bash")
+     (setq custom-file (at-config-basedir "customizations.el"))
+
+     (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
+
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+   It's good to have centralized working datasets storage,
+   to prevent pollution of Emacs config directory.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;;TODO: consolidate related extensions setup here
+     (req-package no-littering
+       :loader :elpa
+       :force t
+       :require cl-lib
+       :init
+       (setq no-littering-var-directory
+             (expand-file-name "data/" user-emacs-directory)))
    #+END_SRC
 ** reverse input method
    It makes Emacs with non-English system keyboard layout
@@ -110,22 +122,6 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (load (at-config-basedir "credentials.el.gpg"))
     #+END_SRC
-** set the very basic variable values
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq message-log-max t) ;; we don't want to lose any startup log info
-     (setq shell-file-name "/bin/bash")
-     (setq custom-file (at-config-basedir "customizations.el"))
-
-     (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
-
-     (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
-** elisp extensions
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package names :loader :elpa :force t)
-     (req-package anaphora :loader :elpa :force t)
-     (req-package noflet :loader :elpa :force t)
-   #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
