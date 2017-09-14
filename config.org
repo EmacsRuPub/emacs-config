@@ -10,9 +10,10 @@
             (or (buffer-file-name) load-file-name)))
 
      (defun concat-normalize-slashes (prefix suffix)
-       (concat "/" (s-join "/"
-                           (s-split "/"
-                                    (concat prefix "/" suffix) t))))
+       (concat "/"
+               (string-join
+                (split-string
+                 (string-join (list prefix suffix) "/") "/" t) "/")))
 
      (defun at-homedir (&optional suffix)
        (concat-normalize-slashes home-directory suffix))
