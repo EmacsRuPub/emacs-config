@@ -184,12 +184,12 @@
      (req-package material-theme :loader :elpa :disabled t)
      (req-package drakula-theme :loader :elpa :disabled t)
      (req-package challenger-deep-theme :loader :elpa :disabled t)
-     (req-package hc-zenburn-theme :loader :elpa :disabled t)
+     (req-package darkburn-theme :loader :elpa :disabled t)
 
-     (req-package darkburn-theme
+     (req-package hc-zenburn-theme
        :loader :elpa
        :config
-       (load-theme 'darkburn t))
+       (load-theme 'hc-zenburn t))
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
      (when (boundp 'zenburn-colors-alist)
