@@ -2389,13 +2389,6 @@
       (req-package info-look
         :loader :built-in
         :force t)
-
-      (req-package lsp-mode
-        :loader :elpa
-        :disabled t
-        :require flycheck
-        :config
-        (global-lsp-mode))
     #+END_SRC
 *** elisp
 **** setup
@@ -2807,11 +2800,6 @@
          (add-hook 'elpy-mode-hook 'flycheck-mode)
          (setq elpy-rpc-backend "jedi")
          (bind-key "M-," 'pop-tag-mark elpy-mode-map))
-
-       (req-package lsp-python
-         :loader: :elpa
-         :disabled t
-         :require lsp-mode)
 
        (req-package pyvenv
          :loader :elpa
