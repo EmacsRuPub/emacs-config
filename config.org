@@ -180,7 +180,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package nimbus-theme :loader :elpa :disabled t)
      (req-package nord-theme :loader :elpa :disabled t)
-     (req-package flatui-dark-theme :loader :elpa :disabled t)
      (req-package kaolin-theme :loader :elpa :disabled t)
      (req-package material-theme :loader :elpa :disabled t)
      (req-package drakula-theme :loader :elpa :disabled t)
