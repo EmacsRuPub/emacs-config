@@ -2717,126 +2717,78 @@
       ;;TODO: bind in haskell-mode-map: haskell-{goto-imports, {return-from, navigate, sort, align}-imports}
       ;;TODO: investigate the difference between builtin and el-get versions of haskell-mode
     #+END_SRC
-*** python
-**** linux traits
-     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
-       (setq custom/python-libs-path "/usr/lib64/python2.7:")
-     #+END_SRC
-**** darwin traits
-     #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
-       (setq custom/python-libs-path "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7:")
-     #+END_SRC
-**** setup
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (req-package pep8 :loader :elpa)
-       (req-package python-pep8 :loader :elpa)
+*** python                                                               :review:
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package jedi-core
+        :loader :elpa
+        :init
+        (add-hook 'python-mode-hook 'jedi:setup)
+        :config
+        (setq jedi:complete-on-dot t)
+        (setq jedi:goto-definition-marker-ring-length 32)
+        (setq jedi:tooltip-method nil)
+        (bind-key "M-." 'jedi:goto-definition jedi-mode-map)
+        (bind-key "M-," 'jedi:goto-definition-pop-marker jedi-mode-map))
 
-       (req-package jedi-core
-         :loader :elpa
-         :init
-         (setq jedi:complete-on-dot t)
-         (setq jedi:goto-definition-marker-ring-length 32)
-         :config
-         (add-hook 'python-mode-hook 'jedi:setup)
-         ;; (add-hook 'python-mode-hook 'jedi:ac-setup)
-         )
+      (req-package company-jedi
+        :loader :elpa
+        :require company jedi-core
+        :config
+        (add-to-list 'company-backends 'company-jedi))
 
-       (req-package company-jedi
-         :loader :elpa
-         :require company jedi-core
-         :config
-         (add-to-list 'company-backends 'company-jedi))
+      (req-package python-mode
+        :loader :built-in
+        :config
+        (defun custom/python-mode-hook ()
+          (setq flycheck-checker 'python-flake8)
+          (setq indent-tabs-mode nil)
+          (setq tab-width 4)
+          (setq imenu-create-index-function 'imenu-default-create-index-function)
+          (auto-fill-mode 1))
+        (add-function :before-until (local 'eldoc-documentation-function)
+                      #'(lambda () ""))
+        ;; Highlight the call to ipdb
+        ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
+        (defun annotate-debugger-calls ()
+          (highlight-lines-matching-regexp "import ipdb")
+          (highlight-lines-matching-regexp "ipdb.set_trace()")
+          (highlight-lines-matching-regexp "import wdb")
+          (highlight-lines-matching-regexp "wdb.set_trace()"))
+        (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
+        (add-hook 'python-mode-hook 'common-hooks/newline-hook)
+        (add-hook 'python-mode-hook 'custom/python-mode-hook)
+        (add-hook 'python-mode-hook 'annotate-debugger-calls)
+        (bind-key "<M-left>" 'python-indent-shift-left python-mode-map)
+        (bind-key "<M-right>" 'python-indent-shift-right python-mode-map))
 
-       (req-package python-mode
-         :loader :built-in
-         :require region-bindings-mode
-         :config
-         (defun custom/python-mode-hook ()
-           (setq flycheck-checker 'python-flake8)
-           (setq indent-tabs-mode nil)
-           (setq tab-width 4)
-           (setq imenu-create-index-function 'imenu-default-create-index-function)
-           (auto-fill-mode 1)
-           (flycheck-mode)
-           (tooltip-mode -1)
-           (highlight-indentation-mode -1)
-           (add-function :before-until (local 'eldoc-documentation-function)
-                         #'(lambda () "")))
-         ;; Highlight the call to ipdb
-         ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
-         (defun annotate-debugger-calls ()
-           (highlight-lines-matching-regexp "import ipdb")
-           (highlight-lines-matching-regexp "ipdb.set_trace()")
-           (highlight-lines-matching-regexp "import wdb")
-           (highlight-lines-matching-regexp "wdb.set_trace()"))
-         (add-hook 'python-mode-hook 'custom/python-mode-hook)
-         (add-hook 'python-mode-hook 'common-hooks/prog-helpers)
-         (add-hook 'python-mode-hook 'common-hooks/newline-hook)
-         (add-hook 'python-mode-hook 'yas/minor-mode-on)
-         (add-hook 'python-mode-hook 'annotate-debugger-calls)
-         (bind-key "M-." 'jedi:goto-definition python-mode-map)
-         (bind-key "M-," 'jedi:goto-definition-pop-marker python-mode-map)
-         (bind-key "C-c >" 'indent-tools-hydra/body python-mode-map))
+      (req-package virtualenvwrapper
+        :loader :elpa
+        :config
+        (setq venv-location (at-homedir ".virtualenvs/"))
+        (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+        (eval-after-load 'projectile
+          '(setq projectile-switch-project-action 'venv-projectile-auto-workon)))
 
-       (when (featurep 'smartparens)
-         (req-package smartparens-python))
+      (req-package smartparens-python
+        :loader :elpa
+        :require smartparens)
 
-       (req-package py-autopep8 :loader :elpa)
+      (req-package flycheck-pycheckers
+        :loader :elpa
+        :require flycheck
+        :config
+        (with-eval-after-load 'flycheck
+          (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)))
 
-       ;;TODO: Importmagic seems to delete used imports sometimes, try to fix it
-       (req-package elpy
-         :loader :elpa
-         :config
-         (elpy-enable)
-         (when (executable-find "ipython")
-           (elpy-use-ipython))
-         (setq elpy-modules
-               (delete 'elpy-module-highlight-indentation elpy-modules))
-         (setq elpy-modules
-               (delete 'elpy-module-flymake elpy-modules))
-         (add-hook 'elpy-mode-hook 'flycheck-mode)
-         (setq elpy-rpc-backend "jedi")
-         (bind-key "M-," 'pop-tag-mark elpy-mode-map))
+      (req-package py-autopep8 :loader :elpa)
 
-       (req-package pyvenv
-         :loader :elpa
-         :require jedi-core
-         :config
-         (defalias 'workon 'pyvenv-workon)
-         (add-hook 'pyvenv-post-activate-hooks 'jedi:stop-server)
-         (add-hook 'pyvenv-post-deactivate-hooks 'jedi:stop-server))
-
-       (req-package pip-requirements
-         :loader :elpa
-         :mode ("requirements\\." . pip-requirements-mode))
-
-       (defhydra hydra-python ()
-         "
-         ^Checks:^       ^Nav^
-         ------------------------------------
-         py_l_int        _p_ylookup at point
-         pep_8_
-         _m_ulti flake8
-         "
-         ("l" pylint)
-         ("8" pep8)
-         ("m" flake8-multi)
-         ("p" pylookup-lookup-at-point)
-         ("q" nil))
-       (global-set-key (kbd "C-c C-p") 'hydra-python/body)
-
-       (setq mumamo-background-colors nil)
-
-       (setenv "PYTHONPATH"
-               (concat
-                custom/python-libs-path
-                (mapconcat 'identity private/python-path-job-projects "")
-                (getenv "PYTHONPATH")))
-       (setenv "PYLINTRC"
-               (at-config-basedir
-                "contrib/.pylintrc"))
-     #+END_SRC
+      (req-package pip-requirements
+        :loader :elpa
+        :mode ("requirements\\." . pip-requirements-mode))
+    #+END_SRC
 ***** BACKLOG https://github.com/syl20bnr/spacemacs/tree/master/layers/+lang/python
+***** BACKLOG imports automation (search elpy/standalone extensions)
+****** importmagic
 *** cc
 **** specialization for PostgreSQL development
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -5130,62 +5082,6 @@
     (global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
   #+END_SRC
 * try
-** kenobi
-   #+BEGIN_SRC emacs-lisp :tangle no
-     ;; https://gist.github.com/nyergler/6100112
-
-     (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
-     (defun run-local-vars-mode-hook ()
-       "Run a hook for the major-mode after the local variables have been processed."
-       (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
-
-
-     (defun detect_buffer_venv (buffer-name)
-       (let ((buffer-dir (file-name-directory buffer-name)))
-         (while (and (not (file-exists-p
-                           (concat buffer-dir "py27/bin/activate")))
-                     buffer-dir)
-           (setq buffer-dir
-                 (if (equal buffer-dir "/")
-                     nil
-                   (file-name-directory (directory-file-name buffer-dir)))))
-         ;; return the buffer-dir (or nil)
-         (concat buffer-dir "py27")))
-
-     (defun detect_buffer_eggs_dirs (buffer-name)
-       (let ((buffer-dir (file-name-directory buffer-name)))
-         (while (and (not (file-exists-p
-                           (concat buffer-dir "eggs")))
-                     buffer-dir
-                     )
-           (setq buffer-dir
-                 (if (equal buffer-dir "/")
-                     nil
-                   (file-name-directory (directory-file-name buffer-dir)))))
-         (if buffer-dir
-             (directory-files (concat buffer-dir "eggs") t ".\.egg")
-           nil)))
-
-     (setq additional_paths nil)
-
-     (defun setup-jedi-extra-args ()
-       (let ((venv (detect_buffer_venv buffer-file-name))
-             (egg-dirs (detect_buffer_eggs_dirs buffer-file-name)))
-         (make-local-variable 'jedi:server-args)
-         (when venv (set 'jedi:server-args (list "--virtual-env" venv)))
-         (when egg-dirs
-           (dolist (egg egg-dirs)
-             (set 'jedi:server-args (append jedi:server-args (list "--sys-path" egg))))))
-       (make-local-variable 'additional_paths)
-       (when additional_paths
-         (dolist (path additional_paths)
-           (set 'jedi:server-args (append jedi:server-args (list "--sys-path" path))))))
-
-     (setq jedi:setup-keys t)
-
-     (add-hook 'python-mode-local-vars-hook 'setup-jedi-extra-args)
-     (add-hook 'python-mode-local-vars-hook 'jedi:setup)
-   #+END_SRC
 ** the rest
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
