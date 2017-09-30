@@ -1712,12 +1712,6 @@
        :loader :elpa
        :config
        (dtrt-indent-mode))
-
-     ;;TODO: ensure python part is installed
-     (req-package indent-tools
-       :loader :elpa
-       :config
-       (global-set-key (kbd "C-c 3") 'indent-tools-hydra/body))
    #+END_SRC
 ** Using settings from .editorconfig
     #+BEGIN_SRC emacs-lisp :tangle yes
