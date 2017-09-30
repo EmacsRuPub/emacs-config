@@ -1627,7 +1627,8 @@
      (req-package vimrc-mode
        :loader :elpa
        :defer t
-       :mode ".vim\\(rc\\)?$")
+       :mode ((".vim\\(rc\\)?$" . vimrc-mode)
+              ("*pentadactyl*" . vimrc-mode)))
 
      (req-package sh-script
        :loader :elpa
