@@ -2113,32 +2113,6 @@
    #+END_SRC
 * programming
 ** common
-*** flake8 utils
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (define-namespace custom/
-
-      (defvar flake8-conf-alist nil
-        "Alist of flake8 configuration files for various projects")
-
-      ;;FIXME: try to use flycheck's builtin functionality
-      (defun find-project-flake8-config ()
-        (let* ((project-root (file-truename (custom/project-root default-directory)))
-               (config-path (cdr (assoc (file-name-base (directory-file-name project-root)) flake8-conf-alist))))
-          (if (file-name-absolute-p config-path)
-              (when (file-exists-p config-path)
-                config-path)
-            (concat project-root config-path))))
-
-      (defun project-root (file-path)
-        "Guess the project root of the given FILE-PATH."
-        (or (vc-git-root file-path)
-            (vc-svn-root file-path)
-            (vc-hg-root file-path)
-            file-path))
-
-      )
-    #+END_SRC
-**** BACKLOG review flake8 known problems and OBV search for solutions
 *** flycheck
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package flycheck
