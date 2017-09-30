@@ -857,10 +857,10 @@
        :config
        (emacs-home-set-day-start-time 1000)
        (emacs-home-set-day-end-time 2300)
-       (emacs-home-set-pinned-files (list `("k" ,(at-org-kb-dir "/kb.org"))
-                                          `("j" ,(at-org-dir private/job-tasks-file))))
-       (emacs-home-set-pinned-functions (list '("s" snake)
-                                              '("c" calc))) ;TODO: something more useful
+       (emacs-home-set-favorite-files (list `("k" ,(at-org-kb-dir "/kb.org"))
+                                             `("j" ,(at-org-dir private/job-tasks-file))))
+       (emacs-home-set-favorite-functions (list '("s" snake)
+                                                 '("c" calc))) ;TODO: something more useful
        (global-set-key (kbd "C-$") 'emacs-home-show))
    #+END_SRC
 ** dired
