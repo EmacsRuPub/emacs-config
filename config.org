@@ -2119,16 +2119,25 @@
         :loader :elpa
         :require dash pkg-info let-alist seq
         :config
+        (global-flycheck-mode)
         (set-face-attribute 'flycheck-warning nil
-                         :foreground "yellow"
-                          :background "red")
-        ;; TODO: try to setup some of http://www.flycheck.org/en/latest/languages.html
-        (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-        (setq flycheck-check-syntax-automatically '(idle-change)))
+                            :foreground "yellow"
+                            :background "red")
+        (setq flycheck-global-modes '(not emacs-lisp-mode))
+        (setq flycheck-display-errors-delay 0.4)
+        (setq flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
+        (add-to-list 'display-buffer-alist
+                     `(,(rx bos "*Flycheck errors*" eos)
+                       (display-buffer-reuse-window
+                        display-buffer-in-side-window)
+                       (side            . bottom)
+                       (reusable-frames . visible)
+                       (window-height   . 0.33))))
 
-      (req-package flycheck-color-mode-line
-        :loader :elpa
-        :require flycheck dash)
+      (req-package flycheck-pos-tip
+        :require flycheck
+        :config
+        (flycheck-pos-tip-mode))
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 *** gdb
