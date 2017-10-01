@@ -486,7 +486,7 @@
         ("q" nil "cancel"))
       (global-set-key (kbd "C-c r") 'hydra-custom-counsel/body)
     #+END_SRC
-*** tramp                                                      :current:orgmode:
+*** other
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package tramp
         :loader :built-in
@@ -497,13 +497,9 @@
         (setq tramp-ssh-controlmaster-options "")
         (add-to-list 'tramp-default-proxies-alist
                      '(".*" "\\`.+\\'" "/ssh:%h:")))
-     #+END_SRC
-*** crux
-    #+BEGIN_SRC emacs-lisp :tangle yes
+
       (req-package crux :loader :elpa)
-    #+END_SRC
-*** paradox
-    #+BEGIN_SRC emacs-lisp :tangle yes
+
       (req-package paradox
         :loader :elpa
         :require seq let-alist spinner hydra
