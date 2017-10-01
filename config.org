@@ -3251,16 +3251,6 @@
           ("q" nil))
         (global-set-key (kbd "<f12>") 'hydra-emamux/body))
     #+END_SRC
-** Twitter
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package twittering-mode
-       :loader :elpa
-       :defer t
-       :commands twit
-       :init
-       (setq twittering-use-master-password t)
-       (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
-   #+END_SRC
 ** internal browser (w3m/eww)
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package w3m
