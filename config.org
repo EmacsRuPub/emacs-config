@@ -858,10 +858,6 @@
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defvar *directory-separator* '?/)
-     (define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
-     (define-obsolete-variable-alias 'directory-sep-char '*directory-separator*)
-
      (req-package dired
        :loader :built-in
        :config
