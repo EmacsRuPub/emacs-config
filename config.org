@@ -380,16 +380,13 @@
         (ivy-mode 1)
         (setq ivy-display-style 'fancy)
         (setq ivy-use-virtual-buffers t) ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
-        (setq ivy-height 10) ;; number of result lines to display
-        ;; (setq ivy-count-format "") ;; does not count candidates
+        (setq ivy-height 20) ;; number of result lines to display
+        (setq ivy-count-format "") ;; do not count candidates
         (setq ivy-initial-inputs-alist nil) ;; no regexp by default
-        ;; configure regexp engine.
         (setq ivy-re-builders-alist
               '((t . ivy--regex-ignore-order))) ;; allow input not in order
         (bind-key "C-x b" 'ivy-switch-buffer)
-        ;;TODO: bind ivy-resume
-        ;;TODO: bind ffip-ivy-resume
-        )
+        (bind-key "<f10>" 'ivy-resume))
 
       (req-package smex :loader :elpa) ;; for #'counsel-M-x sorting improvements
 
@@ -1512,7 +1509,7 @@
          ("<space>" rebox-cycle "cycle box styles")
          ("q" nil "cancel"))
        ;;TODO: check for more appropriate keybinding
-       (global-set-key (kbd "<f10>") 'hydra-rebox/body))
+       )
 
      (setq comment-style 'indent)
    #+END_SRC
