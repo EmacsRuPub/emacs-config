@@ -1122,9 +1122,6 @@
        ("<up>" windmove-up "up")
        ("<right>" windmove-right "right")
        ("w" ace-window "ace" :color blue)
-       ("s" (lambda () (interactive) (ace-window 4)) "swap")
-       ("d" (lambda () (interactive) (ace-window 16)) "delete")
-       ("m" ace-maximize-window "a1" :color blue)
        ("=" text-scale-increase)
        ("-" text-scale-decrease)
        ("t" tile :color blue)
@@ -1135,14 +1132,10 @@
        ("n" make-frame-command "create frame" :color blue)
        ("k" delete-frame "delete frame" :color blue)
        ("s" delete-other-frames "delete other frames" :color blue)
-       ("a" counsel-load-theme :color blue)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
 
      (defhydra hydra-errors ()
-       ("!" flycheck-first-error "ace" :color blue)
-       ("?" flycheck-list-errors "list errors" :color blue)
-       ("@" flycheck-buffer "check buffer" :color blue)
        ("c" counsel-flycheck :color blue)
        ("<up>" flycheck-previous-error "previous error")
        ("<down>" flycheck-next-error "next error")
@@ -1166,25 +1159,18 @@
        PROJECT: %(projectile-project-root)
        Project               More                              Search
        --------------------------------------------------------------------------------
-       _i_buffer             _c_ommander                       _r_egexp
-       _I_nfo                _d_ired                           a_g_
-       run _t_ests           recent_f_                         _m_ulti-swoop
-       _C_ompile             _s_witch project
-       in_v_alidate cache    _R_un command in rootdir
-       _k_ill buffers        run _A_sync command in rootdir
+       _i_nvalidate cache    _c_ommander                       _r_egexp
+       _I_buffer             _d_ired                           a_g_
+       _k_ill buffers        recent_f_                         _m_ulti-swoop
+                             _s_witch project
                              _h_elm-projectile
        "
-       ("i" ibuffer)
-       ("I" projectile-project-info)
-       ("t" projectile-test-project)
-       ("C" projectile-compile-project)
-       ("v" projectile-invalidate-cache)
+       ("I" ibuffer)
+       ("i" projectile-invalidate-cache)
        ("k" projectile-kill-buffers)
        ("c" projectile-commander)
        ("d" projectile-dired)
        ("f" projectile-recentf)
-       ("R" projectile-run-command-in-root)
-       ("A" projectile-run-async-shell-command-in-root)
        ("s" projectile-switch-project)
        ("h" projectile-find-file)
        ("r" socyl-search-regexp)
