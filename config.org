@@ -396,7 +396,6 @@
         :config
         (setq counsel-grep-base-command
               "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-        (bind-key "C-x j j" 'counsel-bookmark)
         (bind-key "M-x" 'counsel-M-x)
         (bind-key "C-x C-f" 'counsel-find-file)
         (bind-key "C-h f" 'counsel-describe-function)
@@ -844,7 +843,8 @@
        (setq projectile-tags-command
              "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        (add-to-list 'projectile-other-file-alist '("html" "js"))
-       (add-to-list 'projectile-other-file-alist '("js" "html")))
+       (add-to-list 'projectile-other-file-alist '("js" "html"))
+       (bind-key "C-x j j" 'projectile-switch-project))
 
      (req-package emacs-home
        :config
@@ -917,14 +917,6 @@
      (req-package dired-collapse
        :config
        (add-hook 'dired-mode-hook 'dired-collapse-mode))
-   #+END_SRC
-** bookmark+
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package bookmark+ :loader :elpa)
-
-     (req-package crosshairs
-       :loader :elpa
-       :require hl-line+ col-highlight vline)
    #+END_SRC
 ** search
    #+BEGIN_SRC emacs-lisp :tangle yes
