@@ -865,18 +865,11 @@
      (req-package dired
        :loader :built-in
        :config
-       ;; navigate to margins
-       ;; C-a is nicer in dired if it moves back to start of files
-       (defun custom/dired-back-to-start-of-files ()
-         (interactive)
-         (backward-char (- (current-column) 2)))
-       ;; M-up is nicer in dired if it moves to the third line - straight to the ".."
        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
        (setq dired-dwim-target t)
        (setq dired-listing-switches "-lah1v --group-directories-first")
        (add-hook 'dired-mode-hook 'auto-revert-mode)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
-       (bind-key "C-a" 'custom/dired-back-to-start-of-files dired-mode-map)
        (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
        (bind-key "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))) dired-mode-map))
 
@@ -908,9 +901,6 @@
        :defer t
        :config
        (setq wdired-allow-to-change-permissions 'advanced)
-       (bind-key "C-a" 'custom/dired-back-to-start-of-files wdired-mode-map)
-       (bind-key (vector 'remap 'beginning-of-buffer) 'custom/dired-back-to-top wdired-mode-map)
-       (bind-key (vector 'remap 'end-of-buffer) 'custom/dired-jump-to-bottom wdired-mode-map)
        (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
      (req-package dired-toggle-sudo
