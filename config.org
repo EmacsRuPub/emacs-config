@@ -836,16 +836,6 @@
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
        (bind-key "C-x j j" 'projectile-switch-project))
-
-     (req-package emacs-home
-       :config
-       (emacs-home-set-day-start-time 1000)
-       (emacs-home-set-day-end-time 2300)
-       (emacs-home-set-favorite-files (list `("k" ,(at-org-kb-dir "/kb.org"))
-                                             `("j" ,(at-org-dir private/job-tasks-file))))
-       (emacs-home-set-favorite-functions (list '("s" snake)
-                                                 '("c" calc))) ;TODO: something more useful
-       (global-set-key (kbd "C-$") 'emacs-home-show))
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
