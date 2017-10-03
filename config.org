@@ -836,7 +836,7 @@
        (projectile-global-mode 1)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil)
-       (setq projectile-switch-project-action 'counsel-projectile)
+       (setq projectile-switch-project-action 'projectile-commander)
        (def-projectile-commander-method ?d
          "Open project root in dired."
          (projectile-dired))
@@ -1210,9 +1210,9 @@
        ("c" projectile-commander)
        ("d" projectile-dired)
        ("f" projectile-recentf)
-       ("s" counsel-projectile-switch-project)
        ("R" projectile-run-command-in-root)
        ("A" projectile-run-async-shell-command-in-root)
+       ("s" projectile-switch-project)
        ("h" projectile-find-file)
        ("r" socyl-search-regexp)
        ("g" counsel-rg)
