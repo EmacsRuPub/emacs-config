@@ -527,7 +527,8 @@
      (req-package speed-type
        :loader :elpa)
    #+END_SRC
-** Enable functions that are disabled by default
+** tweaks
+   Enable functions that are disabled by default
    #+BEGIN_SRC emacs-lisp :tangle yes
      (put 'dired-find-alternate-file 'disabled nil)
      (put 'downcase-region 'disabled nil)
@@ -540,16 +541,16 @@
 
      (setq disabled-command-function nil)
    #+END_SRC
-** world time
+   world time
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq display-time-world-list
            '(("Europe/Moscow" "Moscow")))
    #+END_SRC
-** local variables processing
+   local variables processing
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq enable-local-variables nil)
    #+END_SRC
-** warnings processing
+   warnings processing
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq warning-suppress-types nil)
    #+END_SRC
