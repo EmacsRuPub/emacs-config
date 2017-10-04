@@ -3046,17 +3046,6 @@
 * clients
 ** restclient
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package restclient
-       :loader :elpa
-       :defer t
-       :bind ("C-c C-r C-s" . custom/create-restclient-sandbox)
-       :config
-       (defun custom/create-restclient-sandbox ()
-         (interactive)
-         (let ((restbuffer (generate-new-buffer "*restclient-sandbox*")))
-           (switch-to-buffer restbuffer)
-           (restclient-mode))))
-
      (req-package company-restclient
        :loader :elpa
        :require restclient company)
