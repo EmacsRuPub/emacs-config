@@ -1084,12 +1084,6 @@
        :loader :elpa
        :require zoom-frm)
 
-     (req-package beacon
-       :loader :elpa
-       :config
-       (setq beacon-color "#fce94f")
-       (beacon-mode 1))
-
      (req-package bm
        :init
        (setq bm-restore-repository-on-load t)
