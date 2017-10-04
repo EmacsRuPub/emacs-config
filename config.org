@@ -741,20 +741,6 @@
          ad-do-it
          (move-to-column col)))
 
-     (defun skip-to-next-blank-line ()
-       (interactive)
-       (let ((inhibit-changing-match-data t))
-         (forward-char 1)
-         (unless (search-forward-regexp "^\\s *$" nil t)
-           (forward-char -1))))
-
-     (defun skip-to-previous-blank-line ()
-       (interactive)
-       (let ((inhibit-changing-match-data t))
-         (forward-char -1)
-         (unless (search-backward-regexp "^\\s *$" nil t)
-           (forward-char 1))))
-
      )
 
      (setq scroll-preserve-screen-position 'always)
@@ -1153,10 +1139,8 @@
        _o_ search query        _d_efun                    _y_ hint & copy
        <prior> URL backward    defun + _C_omments         select w_3_m buffer
        <next>  URL forward     _w_iden                    open _u_rls in region
-       _=_ next blank line     recursive _N_arrow DWIM
-       _-_ prev blank line     recursive wi_D_en DWIM
-       _>_ reposition buffer
-       counsel-_I_menu
+       _>_ reposition buffer   recursive _N_arrow DWIM
+       counsel-_I_menu         recursive wi_D_en DWIM
 
        _<return>_ Execute TAP
        "
@@ -1164,8 +1148,6 @@
        ("o" (lambda () (interactive) (swiper "")) :color blue)
        ("<prior>" custom/find-url-backward "previous url")
        ("<next>" custom/find-url-forward "next url")
-       ("=" custom/skip-to-next-blank-line)
-       ("-" custom/skip-to-previous-blank-line)
        (">" reposition-window :color blue)
        ("r" narrow-to-region :color blue)
        ("d" narrow-to-defun :color blue)
