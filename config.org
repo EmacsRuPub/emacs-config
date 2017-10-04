@@ -721,41 +721,6 @@
 
      (req-package link-hint :loader :elpa)
    #+END_SRC
-**** try
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (defun org-return-dwim ()
-         "Add new list or headline"
-         (interactive)
-         (cond
-          ((org-in-item-p)
-           (if (org-element-property :contents-begin (org-element-context))
-               (org-insert-heading)
-             (beginning-of-line)
-             (setf (buffer-substring
-                    (line-beginning-position) (line-end-position)) "")
-             (org-return)))
-          ((org-at-heading-p)
-           (if (not (string= "" (org-element-property :title (org-element-context))))
-               (progn (org-end-of-meta-data)
-                      (org-insert-heading))
-             (beginning-of-line)
-             (setf (buffer-substring
-                    (line-beginning-position) (line-end-position)) "")))
-          ((org-at-table-p)
-           (if (-any?
-                (lambda (x) (not (string= "" x)))
-                (nth
-                 (- (org-table-current-dline) 1)
-                 (org-table-to-lisp)))
-               (org-return)
-             ;; empty row
-             (beginning-of-line)
-             (setf (buffer-substring
-                    (line-beginning-position) (line-end-position)) "")
-             (org-return)))
-          (t
-           (org-return))))
-     #+END_SRC
 ** cursor positioning
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
@@ -3689,6 +3654,39 @@
            (beginning-of-buffer)
            (switch-to-buffer (current-buffer))
            (read-only-mode)))
+
+       (defun org-return-dwim ()
+         "Add new list or headline"
+         (interactive)
+         (cond
+          ((org-in-item-p)
+           (if (org-element-property :contents-begin (org-element-context))
+               (org-insert-heading)
+             (beginning-of-line)
+             (setf (buffer-substring
+                    (line-beginning-position) (line-end-position)) "")
+             (org-return)))
+          ((org-at-heading-p)
+           (if (not (string= "" (org-element-property :title (org-element-context))))
+               (progn (org-end-of-meta-data)
+                      (org-insert-heading))
+             (beginning-of-line)
+             (setf (buffer-substring
+                    (line-beginning-position) (line-end-position)) "")))
+          ((org-at-table-p)
+           (if (-any?
+                (lambda (x) (not (string= "" x)))
+                (nth
+                 (- (org-table-current-dline) 1)
+                 (org-table-to-lisp)))
+               (org-return)
+             ;; empty row
+             (beginning-of-line)
+             (setf (buffer-substring
+                    (line-beginning-position) (line-end-position)) "")
+             (org-return)))
+          (t
+           (org-return))))
 
        )
      #+END_SRC
