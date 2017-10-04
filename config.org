@@ -543,8 +543,7 @@
 ** world time
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq display-time-world-list
-           '(("Europe/Moscow" "Moscow")
-             ("America/New_York" "New York")))
+           '(("Europe/Moscow" "Moscow")))
    #+END_SRC
 ** local variables processing
    #+BEGIN_SRC emacs-lisp :tangle yes
