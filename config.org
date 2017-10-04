@@ -152,6 +152,7 @@
       (setf (gethash "iosevka" fonts-def) "IosevkaCC-10:weight=bold")
       (setf (gethash "mononoki" fonts-def) "mononoki-10:weight=bold")
       (setf (gethash "fantasque" fonts-def) "Fantasque Sans Mono:style=Bold:size=14")
+      (setf (gethash "go" fonts-def) "Go Mono:style=Bold:size=12")
 
       )
     #+END_SRC
