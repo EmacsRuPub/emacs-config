@@ -1035,32 +1035,6 @@
      (req-package hyperbole
        :loader :elpa
        :require zoom-frm)
-
-     (req-package bm
-       :init
-       (setq bm-restore-repository-on-load t)
-       :config
-       (setq bm-cycle-all-buffers t)
-       (setq bm-repository-file (at-user-data-dir "/bm-repository"))
-       ;; save bookmarks
-       (setq-default bm-buffer-persistence t)
-       (add-hook' after-init-hook 'bm-repository-load)
-       (add-hook 'find-file-hooks 'bm-buffer-restore)
-       (add-hook 'kill-buffer-hook #'bm-buffer-save)
-       (add-hook 'kill-emacs-hook #'(lambda nil
-                                      (bm-buffer-save-all)
-                                      (bm-repository-save)))
-       (add-hook 'after-save-hook #'bm-buffer-save)
-       (add-hook 'find-file-hooks   #'bm-buffer-restore)
-       (add-hook 'after-revert-hook #'bm-buffer-restore)
-       (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
-       (defhydra hydra-bm (:idle 1.0)
-         "window"
-         ("<down>" bm-next "next bookmark")
-         ("<up>" bm-previous "previous bookmark")
-         ("<return>" bm-toggle "toggle bookmark" :color blue)
-         ("q" nil "cancel"))
-       (global-set-key (kbd "<f4>") 'hydra-bm/body))
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
