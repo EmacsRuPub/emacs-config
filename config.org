@@ -554,7 +554,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq warning-suppress-types nil)
    #+END_SRC
-** mode lists for common needs
+** mode lists for formatting reference
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; clean trailing whitespaces automatically
      (setq custom/trailing-whitespace-modes
