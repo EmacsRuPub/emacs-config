@@ -1212,10 +1212,6 @@
         (if (eolp) (forward-char -1))
         (transpose-subr 'backward-word arg)
         (forward-word (+ arg 1)))
-
-      (defun fix-screwed-up-paragraphs(beg end)
-        (interactive "r")
-        (shell-command-on-region beg end "fmt -w2000" nil t))
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
