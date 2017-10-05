@@ -1175,7 +1175,7 @@
        (add-hook 'after-init-hook 'persistent-scratch-restore)
        (add-hook 'kill-emacs-hook 'persistent-scratch-save))
    #+END_SRC
-** case switching
+** case folding
    #+BEGIN_SRC emacs-lisp :tangle no
      (defvar custom/transform-whole-words nil)
 
