@@ -485,7 +485,7 @@
       (global-set-key (kbd "C-c r") 'hydra-custom-counsel/body)
     #+END_SRC
 *** other
-    #+BEGIN_SRC emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package tramp
         :loader :built-in
         :init
