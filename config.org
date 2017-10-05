@@ -1234,9 +1234,12 @@
 
       (req-package mc-extras
         :loader :elpa
-        ;;TODO: explore and bind functions
-        :require multiple-cursors
-        :defer t)
+        :require multiple-cursors region-bindings-mode
+        :bind (:map region-bindings-mode-map  ; should we use this keymap or bind elsewhere?
+                    ("M->" . mc/mark-next-sexps)
+                    ("M-<" . mc/mark-previous-sexps)
+                    ("C-|" . mc/move-to-column)
+                    ("C-." . mc/remove-current-cursor)))
 
       (req-package ace-mc
         :loader :elpa
