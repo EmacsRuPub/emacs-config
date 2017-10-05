@@ -1170,9 +1170,10 @@
 
      )
 
-     (req-package scratch :loader :elpa)
-
-     ;; https://github.com/Fanael/persistent-scratch
+     (req-package persistent-scratch
+       :config
+       (add-hook 'after-init-hook 'persistent-scratch-restore)
+       (add-hook 'kill-emacs-hook 'persistent-scratch-save))
    #+END_SRC
 ** case switching
    #+BEGIN_SRC emacs-lisp :tangle no
