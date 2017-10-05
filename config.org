@@ -910,7 +910,7 @@
        :config
        (global-set-key (kbd "C->") 'ivy-imenu-anywhere))
    #+END_SRC
-** operations with windows
+** operations with windows/frames
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package windmove
        :loader :built-in
