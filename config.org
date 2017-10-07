@@ -387,7 +387,8 @@
         (setq ivy-count-format "") ;; do not count candidates
         (setq ivy-initial-inputs-alist nil) ;; no regexp by default
         (setq ivy-re-builders-alist
-              '((t . ivy--regex-ignore-order))) ;; allow input not in order
+               ;; allow input not in order
+              '((t . ivy--regex-ignore-order)))
         (bind-key "C-x b" 'ivy-switch-buffer)
         (bind-key "<f10>" 'ivy-resume))
 
