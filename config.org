@@ -1934,6 +1934,12 @@
        :loader :elpa
        :require company)
 
+     (req-package company-ansible
+       :loader :elpa
+       :require company
+       :config
+       (add-to-list 'company-backends 'company-ansible))
+
      (req-package company-statistics
        :loader :elpa
        :require company
