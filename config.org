@@ -1281,9 +1281,11 @@
 
       (defun append-cited-region (arg)
         (interactive "P")
-        (custom/cite-region (prefix-numeric-value arg))
-        (end-of-buffer)
-        (yank))
+        (let ((numarg (prefix-numeric-value arg)))
+          (custom/cite-region numarg)
+          (when (> numarg 1)
+            (end-of-buffer))
+          (yank)))
 
       ;; Compliment to kill-rectangle (just like kill-ring-save compliments
       ;; kill-region)
