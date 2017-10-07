@@ -1216,15 +1216,7 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package anchored-transpose
-        :loader :elpa)
-
-      (req-package drag-stuff
-        :loader :elpa
-        :config
-        (setq drag-stuff-modifier '(meta shift))
-        (turn-off-drag-stuff-mode))
-
+      (req-package anchored-transpose :loader :elpa)
       (req-package snakehump :loader :elpa)
       (req-package adaptive-wrap :loader :elpa)
       (req-package hungry-delete :loader :elpa)
@@ -1678,7 +1670,6 @@
      (defhydra hydra-toggle (:color blue)
        "
        TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
-       _d_ / _D_ toggle drag-stuff mode on/off (%(format \"%S\" drag-stuff-mode))
        _w_hitespace mode
        "
        ("b" toggle-debug-on-error "debug on error")
@@ -1686,8 +1677,6 @@
        ("W" global-whitespace-mode "*global* whitespace mode")
        ("B" subword-mode)
        ("v" view-mode)
-       ("d" turn-on-drag-stuff-mode "enable drag-stuff mode")
-       ("D" turn-off-drag-stuff-mode "disable drag-stuff mode")
        ("h" highlight-sexp-mode "toggle highlight-sexp mode")
        ("q" toggle-debug-on-quit "toggle debug-on-quit mode")
        ("p" toggle-projectile-global-mode "toggle projectile-global-mode"))
