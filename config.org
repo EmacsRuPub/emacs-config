@@ -1236,11 +1236,6 @@
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
 
-      (req-package ace-mc
-        :loader :elpa
-        :require ace-jump-mode multiple-cursors dash
-        :config
-        (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors))
 
       ;; Transpose stuff with M-t
       (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
