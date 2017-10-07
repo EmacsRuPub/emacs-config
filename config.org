@@ -2215,6 +2215,11 @@
       (req-package info-look
         :loader :built-in
         :force t)
+
+      (req-package highlight-stages
+        :loader :elpa
+        :config
+        (highlight-stages-global-mode))
     #+END_SRC
 *** elisp
 **** setup
