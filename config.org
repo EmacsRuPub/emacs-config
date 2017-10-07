@@ -1352,10 +1352,9 @@
 
      (req-package undo-tree
        :loader :elpa
-       :defer t
+       :delight undo-tree-mode
        :config
        (global-undo-tree-mode t)
-       (setq undo-tree-mode-lighter "")
        (setq undo-tree-visualizer-timestamps t)
        (setq undo-tree-visualizer-diff t))
    #+END_SRC
