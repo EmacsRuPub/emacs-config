@@ -1000,11 +1000,6 @@
                    (unless (eq ibuffer-sorting-mode 'alphabetic)
                      (ibuffer-do-sort-by-alphabetic)))))
 
-     ;;TODO: merge to hydra or create a new one + maybe expand with other useful bindings
-     (bind-key "nd" 'ni-narrow-to-defun-indirect-other-window ctl-x-4-map)
-     (bind-key "nn" 'ni-narrow-to-region-indirect-other-window ctl-x-4-map)
-     (bind-key "np" 'ni-narrow-to-page-indirect-other-window ctl-x-4-map)
-
      (req-package recursive-narrow :loader :elpa)
    #+END_SRC
 ** warping
