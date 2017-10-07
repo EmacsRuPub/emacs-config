@@ -167,6 +167,7 @@
       (req-package unicode-fonts
         :loader :elpa
         :require persistent-soft
+        :disabled t
         :config
         (unicode-fonts-setup))
     #+END_SRC
