@@ -1526,8 +1526,8 @@
       (req-package editorconfig
         :loader :elpa
         :config
-        (add-hook 'prog-mode-hook #'(lambda () (editorconfig-mode 1)))
-        (add-hook 'text-mode-hook #'(lambda () (editorconfig-mode 1))))
+        (add-hook 'prog-mode-hook 'editorconfig-mode)
+        (add-hook 'text-mode-hook 'editorconfig-mode))
     #+END_SRC
 ** setup basic minor modes
    #+BEGIN_SRC emacs-lisp :tangle yes
