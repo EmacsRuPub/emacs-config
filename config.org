@@ -1240,12 +1240,16 @@
 
       ;; Transpose stuff with M-t
       (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
-      ;;TODO: plan docstring
       (defhydra hydra-transpose ()
+        "
+        ___ undo last
+        transpose _w_ords
+        transpose _s_exps
+        _a_nchored transpose
+        "
         ("_" undo-tree-undo "undo last")
         ("w" custom/transpose-words "on words")
         ("s" transpose-sexps "on sexps")
-        ("p" transpose-params "on params")
         ("a" anchored-transpose "anchored")
         ("q" nil "cancel"))
       (global-set-key (kbd "M-t") 'hydra-transpose/body)
