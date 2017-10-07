@@ -1328,14 +1328,17 @@
     #+END_SRC
 ** commenting
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package newcomment
+       :loader :path
+       :config
+       (setq comment-style 'indent))
+
      (req-package comment-dwim-2
        :loader :elpa
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
 
      (req-package rebox2 :loader :elpa)
-
-     (setq comment-style 'indent)
    #+END_SRC
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp :tangle yes
