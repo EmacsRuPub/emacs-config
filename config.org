@@ -1314,16 +1314,6 @@
         (goto-char start)
         (yank-rectangle))
 
-      (defun compact-spaces-in-region (beg end)
-        "replace all whitespace in the region with single spaces"
-        (interactive "r")
-        (save-excursion
-          (save-restriction
-            (narrow-to-region beg end)
-            (goto-char (point-min))
-            (while (re-search-forward "\\s-+" nil t)
-              (replace-match "")))))
-
       )
     #+END_SRC
 *** setup
@@ -1643,13 +1633,12 @@
        "
        Editing                         Kill/yank                 Buffers
        -------------------------------------------------------------------------------------
-       _0_ compact spaces              _y_ank to register        _`_ redraw display
-       just _o_ne space between        _p_ut from register       create _S_cratch
-       _2_ duplicate + comment         _f_ilename -> clipboard   _d_iff buffer <-> file
-       _/_ make comment box            _k_ yank rectangle        re_n_ame buffer+file
-       _SPC_ untabify                  append next _K_ill        query/replace rege_x_p
-       _TAB_ tabify                    _a_ppend cited region     _=_ edit region indirect
-       delete trailing _w_hitespaces
+       just _o_ne space between        _y_ank to register        _`_ redraw display
+       _2_ duplicate + comment         _p_ut from register       create _S_cratch
+       _/_ make comment box            _f_ilename -> clipboard   _d_iff buffer <-> file
+       _SPC_ untabify                  _k_ yank rectangle        re_n_ame buffer+file
+       _TAB_ tabify                    append next _K_ill        query/replace rege_x_p
+       delete trailing _w_hitespaces   _a_ppend cited region     _=_ edit region indirect
        _s_ort lines
        keep _u_nique lines
        _4_ snakehump TAP
@@ -1659,7 +1648,6 @@
        _t_ranslate TAP with Google
        _T_ranslate query with Google
        "
-       ("0" custom/compact-spaces-in-region)
        ("o" just-one-space)
        ("2" crux-duplicate-and-comment-current-line-or-region)
        ("/" comment-box)
