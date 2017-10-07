@@ -381,7 +381,7 @@
         :config
         (ivy-mode 1)
         (setq ivy-display-style 'fancy)
-        (setq ivy-use-virtual-buffers t) ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
+        (setq ivy-use-virtual-buffers t) ;; add 'recentf-mode’and bookmarks to 'ivy-switch-buffer'.
         (setq ivy-height 20) ;; number of result lines to display
         (setq ivy-count-format "") ;; do not count candidates
         (setq ivy-initial-inputs-alist nil) ;; no regexp by default
