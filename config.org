@@ -1246,22 +1246,6 @@
                     ("M-<" . mc/mark-previous-sexps)
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
-
-      (global-unset-key (kbd "M-t")) ;; Transpose stuff with M-t // which used to be transpose-words
-
-      (defhydra hydra-transpose ()
-        "
-        ___ undo last
-        transpose _w_ords
-        transpose _s_exps
-        _a_nchored transpose
-        "
-        ("_" undo-tree-undo "undo last")
-        ("w" custom/transpose-words "on words")
-        ("s" transpose-sexps "on sexps")
-        ("a" anchored-transpose "anchored")
-        ("q" nil "cancel"))
-      (global-set-key (kbd "M-t") 'hydra-transpose/body)
     #+END_SRC
 *** BACKLOG make MC setup work correctly in all needed modes, review and setup additional modes
 **** check and collect these modes
@@ -1682,6 +1666,21 @@
        ("p" toggle-projectile-global-mode "toggle projectile-global-mode"))
      (global-set-key (kbd "<f11>") 'hydra-toggle/body)
 
+     (global-unset-key (kbd "M-t")) ;; Transpose stuff with M-t // which used to be transpose-words
+
+     (defhydra hydra-transpose ()
+       "
+       ___ undo last
+       transpose _w_ords
+       transpose _s_exps
+       _a_nchored transpose
+       "
+       ("_" undo-tree-undo "undo last")
+       ("w" custom/transpose-words "on words")
+       ("s" transpose-sexps "on sexps")
+       ("a" anchored-transpose "anchored")
+       ("q" nil "cancel"))
+     (global-set-key (kbd "M-t") 'hydra-transpose/body)
 
      (global-set-key (kbd "M-g") 'goto-line) ;;TODO: bind goto-char
      (global-set-key (kbd "M-\"") 'eval-region)
