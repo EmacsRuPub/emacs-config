@@ -1301,7 +1301,6 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package expand-region
         :loader :elpa
-        :defer t
         :bind ("C-=" . er/expand-region))
 
       (req-package region-bindings-mode
