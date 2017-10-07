@@ -1237,9 +1237,8 @@
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
 
+      (global-unset-key (kbd "M-t")) ;; Transpose stuff with M-t // which used to be transpose-words
 
-      ;; Transpose stuff with M-t
-      (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
       (defhydra hydra-transpose ()
         "
         ___ undo last
