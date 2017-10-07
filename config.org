@@ -1253,11 +1253,6 @@
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
     #+END_SRC
-*** BACKLOG make MC setup work correctly in all needed modes, review and setup additional modes
-**** check and collect these modes
-**** reference links
-***** https://github.com/magnars/multiple-cursors.el
-***** https://github.com/knu/mc-extras.el
 ** regions and rectangles
 *** definitions
     #+BEGIN_SRC emacs-lisp :tangle yes
