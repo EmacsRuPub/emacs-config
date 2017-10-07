@@ -804,8 +804,8 @@
        (setq dired-listing-switches "-lah1v --group-directories-first")
        (add-hook 'dired-mode-hook 'auto-revert-mode)
        (bind-key "C-c C-m" 'custom/get-file-md5 dired-mode-map)
-       (bind-key "C-x C-k" 'dired-do-delete dired-mode-map) ;; Delete with C-x C-k to match file buffers and magit
-       (bind-key "e" (lambda () (interactive) (eww-open-file (dired-get-file-for-visit))) dired-mode-map))
+       (bind-key "e" 'custom/eww-visit-file dired-mode-map)
+       (bind-key "C-x C-k" 'dired-do-delete dired-mode-map))
 
      ;; Reload dired after making changes
      (--each '(dired-do-rename
@@ -1163,6 +1163,11 @@
                (let ((prefix-arg t))
                  (shell-command (format "md5sum %s" abs-file-name))
                  (buffer-string)))))))
+
+     (defun eww-visit-file ()
+       (interactive)
+       (when (derived-mode-p 'dired-mode)
+         (eww-open-file (dired-get-file-for-visit))))
 
      )
 
