@@ -1139,7 +1139,7 @@
      (global-set-key (kbd "C-x k") 'kill-buffer)
    #+END_SRC
 * editing
-** utils for files and buffers
+** custom utils
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
@@ -1168,6 +1168,11 @@
        (interactive)
        (when (derived-mode-p 'dired-mode)
          (eww-open-file (dired-get-file-for-visit))))
+
+     (defun insert-current-date-time()
+       "Insert the current date and time at point."
+       (interactive "*")
+       (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
      )
 
@@ -1366,18 +1371,6 @@
       (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
     #+END_SRC
 ** utils
-*** definitions
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
-
-      ;; current date and time.
-      (defun insert-current-date-time()
-        "Insert the current date and time at point."
-        (interactive "*")
-        (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
-
-      )
-    #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package table :loader :built-in) ;; table
