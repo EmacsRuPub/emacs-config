@@ -2114,6 +2114,13 @@
         (setq magit-blame-heading-format "%H %-20a %C %s")
         (setq magit-diff-refine-hunk t)
         (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
+        (setq magit-repository-directories private/magit-repositories)
+        (defun open-global-repos-list ()
+          (interactive)
+          (let ((repos-buffer (get-buffer "*Magit Repositories*")))
+            (if repos-buffer
+                (switch-to-buffer repos-buffer)
+              (magit-list-repositories))))
         (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
         (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode)))
 
@@ -2188,7 +2195,7 @@
         -----------------------------------------
         _s_: status         _k_ smerge / goto prev conflict
         _l_: log            _j_ smerge / goto next conflict
-        _f_: file log
+        _f_: file log       _l_ Show repositories _l_ist
         _r_: reflog
         _w_: diff worktree
         _t_: time machine
@@ -2206,7 +2213,8 @@
         ("l" magit-log :color blue)
         ("t" git-timemachine :color blue)
         ("k" smerge-prev "previous conflict")
-        ("j" smerge-next "next conflict"))
+        ("j" smerge-next "next conflict")
+        ("l" open-global-repos-list :color blue))
       (global-set-key (kbd "C-'") 'hydra-vcs/body)
     #+END_SRC
 ** languages
