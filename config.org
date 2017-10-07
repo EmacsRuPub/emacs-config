@@ -1333,15 +1333,7 @@
        :config
        (global-set-key (kbd "M-]") 'comment-dwim-2))
 
-     (req-package rebox2
-       :loader :elpa
-       :config
-       (defhydra hydra-rebox ()
-         ("r" rebox-dwim :color blue)
-         ("<space>" rebox-cycle "cycle box styles")
-         ("q" nil "cancel"))
-       ;;TODO: check for more appropriate keybinding
-       )
+     (req-package rebox2 :loader :elpa)
 
      (setq comment-style 'indent)
    #+END_SRC
@@ -1625,6 +1617,8 @@
        ("s" sort-lines)
        ("u" delete-duplicate-lines)
        ("4" snakehump-next-at-point)
+       ("r" rebox-dwim :color blue)
+       ("c" rebox-cycle "cycle box styles")
        ("y" copy-to-register)
        ("p" insert-register)
        ("f" custom/copy-file-name-to-clipboard)
