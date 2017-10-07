@@ -1226,7 +1226,20 @@
       (req-package replace+ :loader :elpa)
 
       (req-package multiple-cursors
-        :loader :elpa)
+        :loader :elpa
+        :require region-bindings-mode
+        :bind (:map region-bindings-mode-map
+                    ("C->" . mc/mark-next-like-this)
+                    ("C-<" . mc/mark-previous-like-this)
+                    ("C-c C-o" . mc/mark-all-like-this)
+                    ("C-{" . mc/edit-beginnings-of-lines)
+                    ("C-}" . mc/edit-ends-of-lines)
+                    ("M-+" . mc/mark-more-like-this-extended)
+                    ("C-c a" . mc/mark-all-in-region)
+                    ("C-c d" . mc/mark-all-like-this-in-defun)
+                    ("C-c D" . mc/mark-all-like-this-dwim)
+                    ("`" . mc/sort-regions)
+                    ("C-+" . mc/insert-numbers)))
 
       (req-package mc-extras
         :loader :elpa
@@ -1318,19 +1331,8 @@
       (req-package region-bindings-mode
         :loader :elpa
         :config
-        (region-bindings-mode-enable)
         (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
-        (bind-key "C->" 'mc/mark-next-like-this region-bindings-mode-map)
-        (bind-key "C-<" 'mc/mark-previous-like-this region-bindings-mode-map)
-        (bind-key "C-c C-o" 'mc/mark-all-like-this region-bindings-mode-map)
-        (bind-key "C-{" 'mc/edit-beginnings-of-lines region-bindings-mode-map)
-        (bind-key "C-}" 'mc/edit-ends-of-lines region-bindings-mode-map)
-        (bind-key "M-+" 'mc/mark-more-like-this-extended region-bindings-mode-map)
-        (bind-key "C-c a" 'mc/mark-all-in-region region-bindings-mode-map)
-        (bind-key "C-c d" 'mc/mark-all-like-this-in-defun region-bindings-mode-map)
-        (bind-key "C-c D" 'mc/mark-all-like-this-dwim region-bindings-mode-map)
-        (bind-key "`" 'mc/sort-regions region-bindings-mode-map)
-        (bind-key "C-+" 'mc/insert-numbers region-bindings-mode-map))
+        (region-bindings-mode-enable))
 
       (req-package rectangular-region-mode
         :loader :path
