@@ -103,7 +103,7 @@
         (epa-file-enable))
 
       (req-package epg-config
-        :loader :built-in
+        :loader :path
         :config
         (setq epg-gpg-program "gpg2")
         (setq epg-gpg-home-directory "~/.gnupg"))
@@ -252,7 +252,7 @@
 ** uniquify buffer names
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package uniquify
-       :loader :built-in
+       :loader :path
        :config
        (setq uniquify-buffer-name-style 'post-forward)
        (setq uniquify-separator ":")
@@ -796,7 +796,7 @@
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package dired
-       :loader :built-in
+       :loader :path
        :config
        (setq dired-recursive-deletes 'top) ;; Allows recursive deletes
        (setq dired-dwim-target t)
@@ -825,7 +825,7 @@
        (setq diredp-rare-priv 'white-red-face)
        (setq diredp-compressed-file-suffix 'darkyellow-face))
 
-     (req-package dired-x :loader :built-in)
+     (req-package dired-x :loader :path)
    #+END_SRC
 ** dired standalone extensions
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1339,7 +1339,7 @@
         (bind-key "C-+" 'mc/insert-numbers region-bindings-mode-map))
 
       (req-package rectangular-region-mode
-        :loader :elpa
+        :loader :path
         :config
         (bind-key "H-SPC" 'set-rectangular-region-anchor))
 
@@ -1413,7 +1413,7 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package table :loader :elpa) ;; table
+      (req-package table :loader :built-in) ;; table
       (req-package epoch-view :disabled t)
 
       (req-package yatemplate
@@ -1461,7 +1461,7 @@
     #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package rst :loader :elpa)
+     (req-package rst :loader :built-in)
 
      (req-package generic
        :loader :elpa
@@ -1485,7 +1485,7 @@
               ("*pentadactyl*" . vimrc-mode)))
 
      (req-package sh-script
-       :loader :elpa
+       :loader :built-in
        :mode (("bashrc$" . sh-mode)
               ("bash_profile$" . sh-mode)
               ("bash_aliases$" . sh-mode)
@@ -1589,7 +1589,7 @@
        (setq show-paren-delay 0)
        (show-paren-mode t))
 
-     (req-package auto-revert
+     (req-package autorevert
        :loader :path
        :config
        (setq auto-revert-verbose nil)
@@ -2127,7 +2127,7 @@
         :config
         (add-hook 'magit-status-mode-hook 'magit-filenotify-mode))
 
-      (req-package magit-vdiff
+      (req-package vdiff-magit
         :loader :elpa
         :config
         (bind-key (kbd "e") 'vdiff-magit-dwim magit-mode-map)
@@ -2247,16 +2247,16 @@
          (setq comment-start ";;")
          (turn-on-eldoc-mode))
 
-       (req-package emacs-lisp-mode
-         :loader :built-in
+       (req-package elisp-mode
+         :loader :path
          :config
          (add-hook 'emacs-lisp-mode-hook 'custom/elisp-mode-hook)
          (add-hook 'emacs-lisp-mode-hook 'common-hooks/prog-helpers)
          (add-hook 'emacs-lisp-mode-hook 'common-hooks/newline-hook))
 
        (req-package company-elisp
-         :loader :elpa
-         :require emacs-lisp-mode company)
+         :loader :path
+         :require elisp-mode company)
 
        (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)       (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
        (dolist (mode '(paredit-mode smartparens-mode))
@@ -2570,7 +2570,7 @@
         (add-to-list 'company-backends 'company-jedi))
 
       (req-package python-mode
-        :loader :built-in
+        :loader :elpa
         :config
         (defun custom/python-mode-hook ()
           (setq flycheck-checker 'python-flake8)
@@ -2603,7 +2603,7 @@
           '(setq projectile-switch-project-action 'venv-projectile-auto-workon)))
 
       (req-package smartparens-python
-        :loader :elpa
+        :loader :path
         :require smartparens)
 
       (req-package flycheck-pycheckers
@@ -2965,7 +2965,7 @@
 
      (req-package ob-restclient
        :loader :elpa
-       :require org-babel restclient
+       :require ob restclient
        :config
        (org-babel-do-load-languages
         'org-babel-load-languages
@@ -2977,7 +2977,7 @@
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package ansi-color
-        :loader :elpa
+        :loader :built-in
         :config
         (defun custom/colorize-compilation ()
           "Colorize from `compilation-filter-start' to `point'."
@@ -3792,7 +3792,7 @@
          :defer t)
 
        (req-package org-footnote
-         :loader :elpa
+         :loader :path
          :defer t)
 
        (req-package org-magit
@@ -3803,7 +3803,7 @@
          :loader :elpa
          :require alert cl-lib)
 
-       (req-package ox-html :loader :elpa)
+       (req-package ox-html :loader :path)
 
        (req-package org-dashboard
          :loader :elpa
@@ -4798,7 +4798,7 @@
      (req-package tex-site :loader :path)
      (req-package company-auctex
        :loader :elpa
-       :require yasnippet company auctex)
+       :require yasnippet company tex latex)
 
      (req-package cdlatex
        :loader :elpa
