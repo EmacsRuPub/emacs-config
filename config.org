@@ -4138,6 +4138,7 @@
        (setq org-use-property-inheritance t)
        (setq org-use-sub-superscripts nil)
        (setq org-yank-adjusted-subtrees t)
+       (setq org-agenda-show-future-repeats 'next)
 
        (when (featurep 'unicode-fonts)
          (setq org-ellipsis "⤵"))
