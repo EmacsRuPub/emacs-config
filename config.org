@@ -1578,7 +1578,7 @@
                               face
                               tabs))
    #+END_SRC
-** add hooks
+** common hooks
    #+BEGIN_SRC emacs-lisp :tangle yes
      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
      (add-hook 'text-mode-hook 'turn-on-auto-fill)
