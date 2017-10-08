@@ -1502,10 +1502,6 @@
        :loader :path
        :require smartparens)
    #+END_SRC
-** some fancy editing methods
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package edit-indirect :loader :elpa)
-   #+END_SRC
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq indent-tabs-mode nil)
