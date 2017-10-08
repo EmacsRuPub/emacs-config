@@ -1362,54 +1362,53 @@
       (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
     #+END_SRC
 ** utils
-*** setup
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package table :loader :built-in) ;; table
-      (req-package epoch-view :disabled t)
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package table :loader :built-in) ;; table
+     (req-package epoch-view :disabled t)
 
-      (req-package yatemplate
-        :loader :elpa
-        :require yasnippet
-        :init
-        (auto-insert-mode)
-        :config
-        (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
-        (yatemplate-fill-alist))
+     (req-package yatemplate
+       :loader :elpa
+       :require yasnippet
+       :init
+       (auto-insert-mode)
+       :config
+       (setq yatemplate-dir (at-config-basedir "resources/auto-insert"))
+       (yatemplate-fill-alist))
 
-      (req-package whitespace
-        :loader :path
-        :defer t
-        :config
-        (setf whitespace-style '(tabs trailing tab-mark face lines-tail)))
+     (req-package whitespace
+       :loader :path
+       :defer t
+       :config
+       (setf whitespace-style '(tabs trailing tab-mark face lines-tail)))
 
-      (req-package mark
-        :loader :elpa
-        :require fm) ;TODO: bind keys
+     (req-package mark
+       :loader :elpa
+       :require fm) ;TODO: bind keys
 
-      (req-package page-break-lines
-        :loader :elpa
-        :disabled t
-        :config
-        (turn-on-page-break-lines-mode))
+     (req-package page-break-lines
+       :loader :elpa
+       :disabled t
+       :config
+       (turn-on-page-break-lines-mode))
 
-      (req-package macro-math
-        :loader :elpa
-        :config
-        (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
-        (global-set-key "\C-x=" 'macro-math-eval-region))
+     (req-package macro-math
+       :loader :elpa
+       :config
+       (global-set-key "\C-x~" 'macro-math-eval-and-round-region)
+       (global-set-key "\C-x=" 'macro-math-eval-region))
 
-      ;;TODO: consolidate all whitespaces utils
-      ;;TODO: think of activating ws-butler in some modes, just for hands-on testing
-      (req-package ws-butler
-        :loader :elpa
-        :commands ws-buttler-mode)
+     ;;TODO: consolidate all whitespaces utils
+     ;;TODO: think of activating ws-butler in some modes, just for hands-on testing
+     (req-package ws-butler
+       :loader :elpa
+       :commands ws-buttler-mode)
 
-      (req-package mwim
-        :loader :elpa
-        :config
-        (global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
-        (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line))
-    #+END_SRC
+     (req-package mwim
+       :loader :elpa
+       :config
+       (global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
+       (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line))
+   #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package rst :loader :built-in)
