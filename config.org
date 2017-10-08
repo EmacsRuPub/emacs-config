@@ -3645,35 +3645,6 @@
 
        )
      #+END_SRC
-**** custom sorting
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (define-namespace custom/
-
-       (defvar custom/priority-todos-for-sorting '("STARTED"))
-
-       (defun custom/todo-to-started-first-int ()
-         "Default todo order is modified by giving more priority to
-       todo's from custom/priority-todos-for-sorting and entries
-       without any todo keywords at all."
-         (let* ((props (org-entry-properties))
-                (item-todo (cdr (assoc "TODO" props)))
-                (item-prio (- (aif (cdr (assoc "PRIORITY" props))
-                                  (aref it 0)
-                                org-default-priority)
-                              org-highest-priority))
-                (modified-todo-order
-                 (append custom/priority-todos-for-sorting
-                         (-remove #'(lambda (todo) (member todo custom/priority-todos-for-sorting)) org-todo-keywords-1)))
-                (todo-idx (if item-todo (1+ (-elem-index item-todo modified-todo-order)) 0))
-                (prio-range (1+ (- org-default-priority org-highest-priority))))
-           (+ (* prio-range todo-idx) item-prio)))
-
-       (defun org-sort-entries ()
-         (interactive)
-         (org-sort-entries nil ?f #'custom/todo-to-started-first-int))
-
-       )
-     #+END_SRC
 **** pick up random Org task
      #+BEGIN_SRC emacs-lisp :tangle yes
        (defun org-random-entry (&optional arg)
