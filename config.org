@@ -4312,6 +4312,9 @@
        (bind-key "s-k" 'org-babel-previous-src-block org-mode-map)
        (bind-key "s-l" 'org-edit-src-code org-mode-map)
        (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
+
+       (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
+       (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
      #+END_SRC
 *** try
 **** excerpt from sachac
