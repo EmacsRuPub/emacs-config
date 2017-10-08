@@ -1508,7 +1508,7 @@
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq indent-tabs-mode nil)
-     (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NO REMOVE!!!
+     (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
      (setq-default tab-width 4)
 
      (req-package dtrt-indent
