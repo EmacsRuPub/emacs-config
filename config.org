@@ -80,12 +80,15 @@
        (setq no-littering-var-directory
              (expand-file-name "data/" user-emacs-directory)))
    #+END_SRC
-** reverse input method
-   It makes Emacs with non-English system keyboard layout
-   to behave correctly with keybindings.
-   It definitely makes sense while using Emacs in such X WMs
-   when there is no chance to hook into keyboard layouts switching
-   (those are probably all, except StumpWM/XMonad, AFAIK)
+** input methods
+   Set default input method
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (setq default-input-method 'russian-computer)
+   #+END_SRC
+   Reverse input method makes Emacs with non-English system keyboard layout
+   to behave correctly with keybindings. It definitely makes sense while
+   using Emacs in such X WMs when there is no chance to hook into keyboard
+   layouts switching (those are probably all, except StumpWM/XMonad, AFAIK)
    #+BEGIN_SRC emacs-lisp :tangle (if (not (member (getenv "CURRENT_WM") '("stumpwm" "xmonad"))) "yes" "no")
      (req-package reverse-im
        :loader :elpa
@@ -1544,7 +1547,6 @@
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq default-input-method 'russian-computer)
      (setq kill-whole-line t)
      (setq kmacro-ring-max 16)
      (setq mark-even-if-inactive t)
