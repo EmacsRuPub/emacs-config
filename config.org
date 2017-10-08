@@ -1511,10 +1511,19 @@
      (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
      (setq-default tab-width 4)
 
+     (defun custom/kill-back-to-indentation ()
+       "Kill from point back to the first non-whitespace character on the line."
+       (interactive)
+       (let ((prev-pos (point)))
+         (back-to-indentation)
+         (kill-region (point) prev-pos)))
+
      (req-package dtrt-indent
        :loader :elpa
        :config
        (dtrt-indent-mode))
+
+     (bind-key "C-M-<backspace>" 'custom/kill-back-to-indentation)
    #+END_SRC
 ** Using settings from .editorconfig
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1678,15 +1687,6 @@
            (insert-char (cdr (assoc-string ,unicode-name (ucs-names))))))
       (bind-key "C-x 8 s" (my/insert-unicode "ZERO WIDTH SPACE"))
       (bind-key "C-x 8 S" (my/insert-unicode "SNOWMAN"))
-
-      (defun sanityinc/kill-back-to-indentation ()
-        "Kill from point back to the first non-whitespace character on the line."
-        (interactive)
-        (let ((prev-pos (point)))
-          (back-to-indentation)
-          (kill-region (point) prev-pos)))
-
-      (bind-key "C-M-<backspace>" 'sanityinc/kill-back-to-indentation)
     #+END_SRC
 *** narrow and widen
     #+BEGIN_SRC emacs-lisp :tangle no
