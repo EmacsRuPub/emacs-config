@@ -1525,13 +1525,13 @@
      (bind-key "C-M-<backspace>" 'custom/kill-back-to-indentation)
    #+END_SRC
 ** Using settings from .editorconfig
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package editorconfig
-        :loader :elpa
-        :config
-        (add-hook 'prog-mode-hook 'editorconfig-mode)
-        (add-hook 'text-mode-hook 'editorconfig-mode))
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package editorconfig
+       :loader :elpa
+       :config
+       (add-hook 'prog-mode-hook 'editorconfig-mode)
+       (add-hook 'text-mode-hook 'editorconfig-mode))
+   #+END_SRC
 ** setup basic minor modes
    #+BEGIN_SRC emacs-lisp :tangle yes
      (auto-compression-mode t)
