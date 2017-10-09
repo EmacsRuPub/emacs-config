@@ -4386,11 +4386,6 @@
 
        ;;TODO: bind org-store-link and org-insert-link-global
      #+END_SRC
-**** open pdf
-     #+BEGIN_SRC elisp
-       (add-to-list 'org-file-apps '("\\.pdf\\'" . (org-pdfview-open link)))
-       (add-to-list 'org-file-apps '("\\.pdf::\\(\\d+\\)\\'" . (org-pdfview-open link)))
-     #+END_SRC
 **** agenda navigation
      #+BEGIN_SRC emacs-lisp :tangle no
      (defun air-org-agenda-next-header ()
