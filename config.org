@@ -1809,41 +1809,45 @@
       (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
     #+END_SRC
 ** company
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package company
-       :loader :elpa
-       :config
-       (setq company-idle-delay t)
-       (setq company-tooltip-align-annotations t)
-       (setq company-show-numbers t)
-       (global-company-mode)
-       (bind-key (kbd "\C-n") 'company-select-next company-active-map)
-       (bind-key (kbd "\C-p") 'company-select-previous company-active-map)
-       (bind-key (kbd "\C-d") 'company-show-doc-buffer company-active-map)
-       (bind-key (kbd "M-.") 'company-show-location company-active-map))
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package company
+        :loader :elpa
+        :bind (:map company-active-map
+                    ("\C-n" . company-select-next)
+                    ("\C-p" . company-select-previous)
+                    ("\C-d" . company-show-doc-buffer)
+                    ("M-." . company-show-location))
+        :config
+        (setq company-idle-delay t)
+        (setq company-tooltip-align-annotations t)
+        (setq company-show-numbers t)
+        (global-company-mode))
 
-     (req-package company-flx
-       :loader :elpa
-       :require company
-       :config
-       (company-flx-mode +1))
+      (req-package company-flx
+        :loader :elpa
+        :require company
+        :config
+        (company-flx-mode +1))
 
-     (req-package company-quickhelp
-       :loader :elpa
-       :require company)
+      (req-package company-quickhelp
+        :loader :elpa
+        :require company)
 
-     (req-package company-ansible
-       :loader :elpa
-       :require company
-       :config
-       (add-to-list 'company-backends 'company-ansible))
-
-     (req-package company-statistics
-       :loader :elpa
-       :require company
-       :config
-       (company-statistics-mode))
-   #+END_SRC
+      (req-package company-statistics
+        :loader :elpa
+        :require company
+        :config
+        (company-statistics-mode))
+    #+END_SRC
+*** specialized uses
+**** ansible
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package company-ansible
+         :loader :elpa
+         :require company
+         :config
+         (add-to-list 'company-backends 'company-ansible))
+     #+END_SRC
 *** try 3rdparty packages
 **** https://github.com/nsf/gocode
 **** https://github.com/sebastiw/distel-completion
