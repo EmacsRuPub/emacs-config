@@ -1679,58 +1679,6 @@
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
    #+END_SRC
 ** try
-*** unicode and indentation
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (defmacro my/insert-unicode (unicode-name)
-        `(lambda () (interactive)
-           (insert-char (cdr (assoc-string ,unicode-name (ucs-names))))))
-      (bind-key "C-x 8 s" (my/insert-unicode "ZERO WIDTH SPACE"))
-      (bind-key "C-x 8 S" (my/insert-unicode "SNOWMAN"))
-    #+END_SRC
-*** narrow and widen
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (defun narrow-or-widen-dwim (p)
-        "Widen if buffer is narrowed, narrow-dwim otherwise.
-      Dwim means: region, org-src-block, org-subtree, or defun,
-      whichever applies first. Narrowing to org-src-block actually
-      calls `org-edit-src-code'.
-
-      With prefix P, don't widen, just narrow even if buffer is
-      already narrowed."
-        (interactive "P")
-        (declare (interactive-only))
-        (cond ((and (buffer-narrowed-p) (not p)) (widen))
-              ((region-active-p)
-               (narrow-to-region (region-beginning) (region-end)))
-              ((derived-mode-p 'org-mode)
-               ;; `org-edit-src-code' is not a real narrowing
-               ;; command. Remove this first conditional if you
-               ;; don't want it.
-               (cond ((ignore-errors (org-edit-src-code))
-                      (delete-other-windows))
-                     ((ignore-errors (org-narrow-to-block) t))
-                     (t (org-narrow-to-subtree))))
-              ((derived-mode-p 'latex-mode)
-               (LaTeX-narrow-to-environment))
-              (t (narrow-to-defun))))
-
-      (bind-key "n" 'narrow-or-widen-dwim endless/toggle-map)
-      ;; This line actually replaces Emacs' entire narrowing
-      ;; keymap, that's how much I like this command. Only copy it
-      ;; if that's what you want.
-      (bind-key "n" 'narrow-or-widen-dwim ctl-x-map)
-      (eval-after-load 'latex
-        '(bind-key "\C-xn" nil LaTeX-mode-map))
-    #+END_SRC
-**** TODO consolidate all narrow/widen functionality
-*** fix spelling
-    credits to amalabarba
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (bind-key "\C-i" 'crux-ispell-word-then-abbrev ctl-x-map)
-
-      (setq save-abbrevs 'silently)
-      (setq-default abbrev-mode t)
-    #+END_SRC
 *** fill/unfill paragraph
     #+BEGIN_SRC emacs-lisp :tangle no
       (defun endless/fill-or-unfill ()
@@ -1911,7 +1859,7 @@
 **** https://github.com/iquiw/company-cabal
 **** https://github.com/iquiw/company-restclient
 **** https://github.com/Valloric/ycmd + https://github.com/abingham/emacs-ycmd
-** hippie-expand
+** abbrevs
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package hippie-exp
        :loader :built-in
@@ -1929,6 +1877,15 @@
                try-complete-lisp-symbol-partially
                try-complete-lisp-symbol))
        (global-set-key (kbd "C-S-<iso-lefttab>") 'hippie-expand))
+
+     (req-package abbrev-mode
+       :loader :built-in
+       :config
+       (setq-default abbrev-mode t))
+
+     (setq save-abbrevs 'silently)
+
+     (bind-key "\C-i" 'crux-ispell-word-then-abbrev ctl-x-map)
    #+END_SRC
 * programming
 ** common
