@@ -840,11 +840,6 @@
        (setq wdired-allow-to-change-permissions 'advanced)
        (bind-key "r" 'wdired-change-to-wdired-mode dired-mode-map))
 
-     (req-package dired-toggle-sudo
-       :loader :elpa
-       :config
-       (bind-key "!" 'dired-toggle-sudo dired-mode-map))
-
      (req-package dired-narrow
        :loader :elpa
        :config
