@@ -2055,34 +2055,22 @@
       (req-package vdiff-magit
         :loader :elpa
         :config
-        (bind-key (kbd "e") 'vdiff-magit-dwim magit-mode-map)
-        (bind-key (kbd "E") 'vdiff-magit-popup magit-mode-map)
+        (bind-key (kbd "d") 'vdiff-magit-dwim magit-mode-map)
+        (bind-key (kbd "p") 'vdiff-magit-popup magit-mode-map)
         (setcdr (assoc ?e (plist-get magit-dispatch-popup :actions))
                 '("vdiff dwim" 'vdiff-magit-dwim))
         (setcdr (assoc ?E (plist-get magit-dispatch-popup :actions))
                 '("vdiff popup" 'vdiff-magit-popup)))
 
-      (req-package git-gutter
-        :loader :elpa
-        :disabled t
-        :require cl-lib
-        :config
-        (setq git-gutter:modified-sign "?")
-        (set-face-attribute 'git-gutter:modified nil :foreground "yellow" :inverse-video nil)
-        (set-face-attribute 'git-gutter:added nil :inverse-video nil)
-        (set-face-attribute 'git-gutter:deleted nil :inverse-video nil)
-        (set-face-attribute 'git-gutter:unchanged nil :inverse-video nil)
-        (global-git-gutter-mode +1))
-
-      (req-package git-gutter+ :loader :elpa :disabled t)
-
       (req-package git-timemachine :loader :elpa)
       (req-package gitignore-mode :loader :elpa)
 
+      ;; think of relocating, cause it supports not only Git
       (req-package diff-hl
+        :require cl-lib magit
         :config
-        (eval-after-load 'magit
-          (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+        (global-diff-hl-mode 1)
+        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
     #+END_SRC
 **** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** smerge mode
