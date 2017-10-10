@@ -2609,12 +2609,6 @@
      #+END_SRC
 **** TBD
 ***** BACKLOG review and maybe rebind keys
-**** semanticdb
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (when (cedet-gnu-global-version-check t)
-         (semanticdb-enable-gnu-global-databases 'c-mode)
-         (semanticdb-enable-gnu-global-databases 'c++-mode))
-     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
