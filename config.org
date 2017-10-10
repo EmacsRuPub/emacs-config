@@ -2055,15 +2055,6 @@
         (add-hook 'find-file-hooks 'sm-try-smerge t))
     #+END_SRC
 **** BACKLOG try to make hydra, neat functions detected
-*** common
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      ;; FIXME code duplication, think of finding the widely used util or something similar
-      (autoload 'vc-git-root "vc-git")
-      (autoload 'vc-svn-root "vc-svn")
-      (autoload 'vc-hg-root "vc-hg")
-
-      (remove-hook 'find-file-hooks 'vc-find-file-hook)
-    #+END_SRC
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-vcs ()
