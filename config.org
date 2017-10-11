@@ -202,7 +202,6 @@
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
-   #+END_SRC
 ** frames
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq frame-title-format "emacs - %b %f")
