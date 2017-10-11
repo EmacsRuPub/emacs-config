@@ -139,41 +139,17 @@
    #+END_SRC
 * appearance
 ** fonts
-*** defininitions
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (setq font-lock-maximum-decoration t)
+     (setq scalable-fonts-allowed t)
 
-      (defvar fonts-def (make-hash-table :test 'equal)
-        "User's font definitions")
-
-      (defun set-x-font (key)
-        (set-face-attribute 'default nil :font (gethash key fonts-def)))
-
-      (setf (gethash "consolas-base" fonts-def) "Consolas:size=12")
-      (setf (gethash "ptmono" fonts-def) "PTMono:size=12")
-      (setf (gethash "hack-regular" fonts-def) "Hack:size=12")
-      (setf (gethash "iosevka" fonts-def) "IosevkaCC-10:weight=bold")
-      (setf (gethash "mononoki" fonts-def) "mononoki-10:weight=bold")
-      (setf (gethash "fantasque" fonts-def) "Fantasque Sans Mono:style=Bold:size=14")
-      (setf (gethash "go" fonts-def) "Go Mono:style=Bold:size=12")
-      (setf (gethash "input" fonts-def) "Input Mono:weight=Bold:size=11")
-
-      )
-    #+END_SRC
-*** setup
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (setq font-lock-maximum-decoration t)
-      (setq scalable-fonts-allowed t)
-
-      (custom/set-x-font "iosevka")
-
-      (req-package unicode-fonts
-        :loader :elpa
-        :require persistent-soft
-        :disabled t
-        :config
-        (unicode-fonts-setup))
-    #+END_SRC
+     (req-package unicode-fonts
+       :loader :elpa
+       :require persistent-soft
+       :disabled t
+       :config
+       (unicode-fonts-setup))
+   #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package powerline
