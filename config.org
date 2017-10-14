@@ -1767,18 +1767,6 @@
          :require yasnippet)
      #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
-*** yankpad
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package yankpad
-        :loader :elpa
-        :config
-        (setq yankpad-file (at-org-kb-dir "/yankpad.org")))
-    #+END_SRC
-**** BACKLOG hydra for yankpad operation
-     :PROPERTIES:
-     :ID:       07449205-a322-4ba5-9427-6b519c911abe
-     :END:
-***** BACKLOG bind special tags insertion, see https://kungsgeten.github.io/yankpad13.html + https://github.com/Kungsgeten/yankpad/blob/master/README.org
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-yasnippet (:color teal)
@@ -1794,9 +1782,6 @@
         ("p" aya-persist-snippet)
         ("v" yas-visit-snippet-file)
         ("i" yas-insert-snippet)
-        ;;TODO: maybe bind 'yankpad-map
-        ;;TODO: bind 'yankpad-expand
-        ;; bind special tags insertion, see https://kungsgeten.github.io/yankpad13.html + https://github.com/Kungsgeten/yankpad/blob/master/README.org
         ("q" nil))
       (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
     #+END_SRC
