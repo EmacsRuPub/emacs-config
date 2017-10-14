@@ -1721,9 +1721,11 @@
        (req-package yasnippet
          :loader :elpa
          :delight yas-minor-mode
-         :mode (("yasnippet/snippets" . snippet-mode)
-                ("\\.yasnippet$" . snippet-mode))
          :config
+         ;; snippets editing mode
+         (--each '("yasnippet/snippets"
+                   "\\.yasnippet$")
+           (eval `(add-to-list 'auto-mode-alist '(,it . snippet-mode))))
          ;; hook for automatic reloading of changed snippets
          (defun custom/update-yasnippets-on-save ()
            (when (string-match "/resources/yasnippet" buffer-file-name)
