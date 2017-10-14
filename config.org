@@ -1237,8 +1237,8 @@
         :loader :elpa
         :require multiple-cursors region-bindings-mode
         :bind (:map region-bindings-mode-map  ; should we use this keymap or bind elsewhere?
-                    ("M->" . mc/mark-next-sexps)
-                    ("M-<" . mc/mark-previous-sexps)
+                    ("M-." . mc/mark-next-sexps)
+                    ("M-," . mc/mark-previous-sexps)
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
     #+END_SRC
