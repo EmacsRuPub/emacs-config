@@ -1397,6 +1397,12 @@
        :config
        (global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
        (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line))
+
+     (req-package with-editor
+       :config
+       (add-hook 'shell-mode-hook 'with-editor-export-editor)
+       (add-hook 'term-mode-hook 'with-editor-export-editor)
+       (add-hook 'eshell-mode-hook 'with-editor-export-editor))
    #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
