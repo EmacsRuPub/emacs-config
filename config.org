@@ -152,10 +152,13 @@
    #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package powerline
+     (req-package spaceline :loader :elpa)
+
+     (req-package spaceline-config
        :loader :elpa
+       :require spaceline
        :config
-       (powerline-default-theme))
+       (spaceline-emacs-theme))
    #+END_SRC
 ** load themes and choose one
    Also some other good-looking theme is "material-theme"
