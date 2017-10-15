@@ -1463,7 +1463,9 @@
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package highlight-sexp :loader :elpa
+     (req-package highlight-sexp
+       :loader :elpa
+       :delight highlight-sexp-mode
        :config
        (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
        (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode))
@@ -2056,6 +2058,7 @@
 
       (req-package highlight-stages
         :loader :elpa
+        :delight highlight-stages-mode
         :config
         (highlight-stages-global-mode))
     #+END_SRC
