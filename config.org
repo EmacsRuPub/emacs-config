@@ -4392,19 +4392,3 @@
     (global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
   #+END_SRC
 * try
-** the rest
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (define-namespace custom/
-
-     ;;TODO: maybe make org-protocol solution instead
-     (defun youtube-dl ()
-       (interactive)
-       (let* ((str (current-kill 0))
-              (default-directory "~/Downloads")
-              (proc (get-buffer-process (ansi-term "/bin/bash"))))
-         (term-send-string
-          proc
-          (concat "cd ~/Downloads && youtube-dl " str "\n"))))
-
-     )
-   #+END_SRC
