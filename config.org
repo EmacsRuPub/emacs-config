@@ -1877,7 +1877,12 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package docker
         :loader :elpa
-        :require dash docker-tramp magit-popup s tablist)
+        :require dash docker-tramp magit-popup s tablist json-mode
+        :delight docker-mode
+        :config
+        ;;TODO: bind keys
+        (docker-global-mode))
+
       (req-package docker-tramp :loader :elpa)
       ;; TODO: think of some automation of opening files with docker (and other TRAMP backends as well)
     #+END_SRC
