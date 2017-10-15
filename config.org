@@ -2370,8 +2370,8 @@
         (setq jedi:complete-on-dot t)
         (setq jedi:goto-definition-marker-ring-length 32)
         (setq jedi:tooltip-method nil)
-        (bind-key "M-." 'jedi:goto-definition jedi-mode-map)
-        (bind-key "M-," 'jedi:goto-definition-pop-marker jedi-mode-map))
+        (setq epc:accept-process-timeout 200)
+        (setq jedi:use-shortcuts t))
 
       (req-package company-jedi
         :loader :elpa
