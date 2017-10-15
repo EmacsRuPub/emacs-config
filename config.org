@@ -2177,11 +2177,6 @@
         (add-hook 'js2-mode-hook
                   (lambda ()
                     (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
-
-      (setenv "CLASSPATH"
-              (concat
-               "/usr/share/rhino-1.6/lib/js.jar:"
-               (getenv "CLASSPATH")))
     #+END_SRC
 *** lisp
 **** definitions
