@@ -2970,7 +2970,7 @@
 ** email
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defvar custom/gmail-accounts '("aaermolov@gmail.com"))
+      (defvar custom/gmail-accounts private/gmail-accounts)
 
       (req-package footnote :loader :built-in)
 
@@ -2994,9 +2994,7 @@
         (setq mm-text-html-renderer 'w3m)
         (setq notmuch-mua-compose-in 'current-window)
         (setq notmuch-identities custom/gmail-accounts)
-        (setq notmuch-fcc-dirs
-              '(("aaermolov@gmail.com" . "aaermolov@gmail.com/Sent")
-                ("aermolov@mirantis.com" . "aermolov@mirantis.com/Sent")))
+        (setq notmuch-fcc-dirs private/notmuch-fcc-dirs)
         (setq notmuch-search-line-faces '(("unread" . (:foreground "white"))
                                           ("deleted" . (:foreground "red"
                                                         :background "blue"))))
