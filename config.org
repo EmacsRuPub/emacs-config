@@ -3870,6 +3870,7 @@
        (setq org-use-sub-superscripts nil)
        (setq org-yank-adjusted-subtrees t)
        (setq org-agenda-show-future-repeats 'next)
+       (setq org-highlight-latex-and-related '(latex))
 
        (when (featurep 'unicode-fonts)
          (setq org-ellipsis "⤵"))
