@@ -3507,6 +3507,12 @@
            (remove-text-properties (region-beginning) (region-end)
                                    '(read-only t))))
      #+END_SRC
+**** extensions
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (req-package ox-html :loader :path)
+
+       (req-package ob-async :loader :elpa)
+     #+END_SRC
 **** additional packages
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package org-footnote
@@ -3520,8 +3526,6 @@
        (req-package org-pomodoro
          :loader :elpa
          :require alert cl-lib)
-
-       (req-package ox-html :loader :path)
 
        (req-package org-dashboard
          :loader :elpa
@@ -3561,8 +3565,6 @@
 
        (req-package org-mru-clock :loader :elpa)
 
-       (req-package ob-async
-         :loader :elpa)
 
        (req-package org-recent-headings
          :loader :elpa
