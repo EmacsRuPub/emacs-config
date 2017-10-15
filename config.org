@@ -2654,10 +2654,6 @@
                          'nxml-mode))
 
       (push '("<\\?xml" . nxml-mode) magic-mode-alist)
-
-      ;; TODO: integrate docbook-menu into el-get, probable relevant links below
-      ;; http://www.emacswiki.org/emacs/UsingNxmlModeWithDocBook
-      ;; http://www.emacswiki.org/emacs/DocbookXmlMode
     #+END_SRC
 *** multiple major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
