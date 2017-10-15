@@ -3048,13 +3048,13 @@
     #+END_SRC
 ** various useful packages
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (imagemagick-register-types)
+
      (req-package google-translate
        :loader :elpa
        :defer t
        :init
        (req-package google-translate-default-ui))
-
-     (imagemagick-register-types)
 
      (req-package notify :loader :elpa)
 
