@@ -3531,7 +3531,7 @@
        (req-package org-dashboard
          :loader :elpa
          :require cl-lib
-         :defer t)
+         :command org-dashboard-display)
 
        (req-package orgit
          :loader :elpa
