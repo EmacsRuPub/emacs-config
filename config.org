@@ -3175,7 +3175,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package calfw
        :loader :elpa
-       :require google-maps
        :defer t
        :init
        (req-package calfw-ical :loader :elpa)
