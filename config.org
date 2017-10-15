@@ -3635,8 +3635,7 @@
                                              ("a." . "-")
                                              ("b." . "-")))
 
-       ;; extend priorities set
-       (setq org-lowest-priority 70)
+       (setq org-lowest-priority 70) ;; extend priorities set (given ascii code)
 
        (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
        (add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
@@ -3704,8 +3703,8 @@
        (setq org-agenda-skip-scheduled-if-done t)
        (setq org-agenda-skip-timestamp-if-done t)
        (setq org-agenda-span 'month)
-       (setq org-agenda-start-on-weekday 1) ;;was nil
-       (setq org-agenda-sticky nil)            ;otherwise agenda behaves strangely on non-stuck projects
+       (setq org-agenda-start-on-weekday 1)
+       (setq org-agenda-sticky nil) ;otherwise agenda behaves strangely on non-stuck projects
        (setq org-agenda-tags-todo-honor-ignore-options t)
        (setq org-agenda-todo-ignore-deadlines 'all)
        (setq org-agenda-todo-ignore-scheduled 'all)
@@ -3713,7 +3712,7 @@
        (setq org-agenda-todo-ignore-with-date t)
        (setq org-agenda-todo-list-sublevels nil)
        (setq org-agenda-use-tag-inheritance t)
-       (setq org-agenda-window-setup 'current-window) ;; was 'only-window
+       (setq org-agenda-window-setup 'current-window)
        (setf agenda-opts-all-with-time
              '((org-agenda-todo-ignore-scheduled nil)
                (org-agenda-todo-ignore-deadlines nil)
