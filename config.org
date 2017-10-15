@@ -4023,7 +4023,7 @@
           (org . t)
           (plantuml . t)
           (scheme . t)
-          (sh . t)))
+          (shell . t)))
      #+END_SRC
 **** keybindings
      #+BEGIN_SRC emacs-lisp :tangle yes
