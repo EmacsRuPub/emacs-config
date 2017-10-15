@@ -1890,21 +1890,21 @@
         :loader :built-in
         :delight eldoc-mode
         :commands turn-on-eldoc-mode
-        :defer t
         :init
         (setq eldoc-idle-delay 0) ;; eldoc mode for showing function calls in mode line
-        (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-        (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-        (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-        (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-        (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
-        (add-hook 'css-mode-hook 'turn-on-css-eldoc))
+        (--each '(emacs-lisp-mode-hook
+                  lisp-interaction-mode-hook
+                  ielm-mode-hook)
+          (eval `(add-hook ',it 'turn-on-eldoc-mode)))
+        (--each '(c-mode-hook
+                  c++-mode-hook)
+          (eval `(add-hook ',it 'c-turn-on-eldoc-mode))))
 
+      ;;TODO: maybe move to "webdev" section
       (req-package css-eldoc
         :loader :elpa
-        :ensure t
         :config
-        (turn-on-css-eldoc))
+        (add-hook 'css-mode-hook 'turn-on-css-eldoc))
     #+END_SRC
 *** common hooks
     #+BEGIN_SRC emacs-lisp :tangle yes
