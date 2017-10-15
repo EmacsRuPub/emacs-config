@@ -1873,22 +1873,6 @@
         (flycheck-pos-tip-mode))
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
-*** gdb
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package gud
-        :loader :built-in
-        :config
-        (setq gdb-many-windows t)
-        (setq gdb-show-main t)
-        (setq gdb-use-separate-io-buffer t)
-        (setq gud-chdir-before-run nil)
-        (setq gud-tooltip-mode t))
-
-      (req-package gdb-mi
-        :loader :built-in
-        :require gud)
-    #+END_SRC
-**** BACKLOG [#B] check setup
 *** docker
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package docker
