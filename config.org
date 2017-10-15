@@ -1463,6 +1463,7 @@
    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp :tangle yes
+     ;;TODO: maybe relocate
      (req-package highlight-sexp
        :loader :elpa
        :delight highlight-sexp-mode
