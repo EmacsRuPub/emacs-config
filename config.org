@@ -2930,7 +2930,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package mingus
        :loader :elpa
-       :commands mingus
        :require libmpdee
        :config
        (bind-key "<Backspace>" 'mingus-del mingus-playlist-map)
