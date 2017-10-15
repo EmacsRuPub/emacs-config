@@ -4044,6 +4044,8 @@
 
        (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
        (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
+
+       (bind-key [remap org-return] 'custom/org-return-dwim org-mode-map)
      #+END_SRC
 *** try
 **** file+datetree navigation
