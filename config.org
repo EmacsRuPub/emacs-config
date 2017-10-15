@@ -2578,7 +2578,11 @@
 
       (req-package lua-mode
         :loader :elpa
-        :defer t)
+        :defer t
+        :config
+        (defun custom/lua-mode-hook ()
+          (setq flycheck-checker 'lua-luacheck))
+        (add-hook 'lua-mode 'custom/lua-mode-hook))
 
       (req-package company-lua
         :loader :elpa
