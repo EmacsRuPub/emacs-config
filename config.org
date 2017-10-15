@@ -1929,9 +1929,9 @@
     #+END_SRC
 *** handy packages
     #+BEGIN_SRC emacs-lisp :tangle yes
+      ;;TODO: extend setup
       (req-package compile :loader :built-in)
       (req-package gtags :loader :elpa)
-      (req-package hide-comnt :loader :elpa)
       (req-package regex-tool :loader :elpa)
     #+END_SRC
 *** related major modes
