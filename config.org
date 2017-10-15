@@ -4054,22 +4054,6 @@
      #+END_SRC
 **** BACKLOG org-log-re{schedule, deadline}
 **** BACKLOG https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
-** sauron
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package sauron
-       :loader :elpa
-       :disabled t ; TODO play extensively with package, then likely enable
-       :config
-       (setq sauron-separate-frame nil)
-       (setq sauron-hide-mode-line t)
-       (setq sauron-max-line-length 200)
-       (setq sauron-modules
-             '(sauron-erc sauron-dbus sauron-org sauron-notifications))
-       (add-hook 'sauron-event-added-functions 'sauron-fx-notify)
-       (bind-key "C-c r t" 'sauron-toggle-hide-show)
-       (bind-key "C-c r c" 'sauron-clear)
-       (sauron-start))
-   #+END_SRC
 ** hydras
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-pim ()
