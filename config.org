@@ -3109,45 +3109,44 @@
        :config
        (elfeed-goodies/setup))
    #+END_SRC
-** bbdb
-   the code below need to be reorganized, it seems to not work
-   req-package is not usable before it
+** ebdb
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package bbdb
+     ;;TODO: review setup (it was blindly copied from bbdb's and may contain some warts)
+     (req-package ebdb
        :loader :elpa
-       :commands bbdb
+       :commands ebdb
        :config
-       (setq bbdb-change-hook 'bbdb-timestamp-hook)
-       (setq bbdb-complete-name-allow-cycling t)
-       (setq bbdb-completion-display-record nil)
-       (setq bbdb-dwim-net-address-allow-redundancy t)
-       (setq bbdb-file '"~/.database.bbdb")
-       (setq bbdb-north-american-phone-numbers-p nil)
-       (setq bbdb-notice-hook 'bbdb-auto-notes-hook)
-       (setq bbdb-offer-save 'savenoprompt) ;'automatic
-       (setq bbdb-phone-style 'nil)
-       (setq bbdb-quiet-about-name-mismatches t)
-       (setq bbdb-readonly-p nil)
-       (setq bbdb-sounds-directory nil)
-       (setq bbdb-use-alternate-names nil)
-       (setq bbdb-use-pop-up nil)
-       (setq bbdb/mail-auto-create-p 'bbdb-ignore-most-messages-hook)
+       (setq ebdb-change-hook 'ebdb-timestamp-hook)
+       (setq ebdb-complete-name-allow-cycling t)
+       (setq ebdb-completion-display-record nil)
+       (setq ebdb-dwim-net-address-allow-redundancy t)
+       (setq ebdb-file '"~/.database.ebdb")
+       (setq ebdb-north-american-phone-numbers-p nil)
+       (setq ebdb-notice-hook 'ebdb-auto-notes-hook)
+       (setq ebdb-offer-save 'savenoprompt) ;'automatic
+       (setq ebdb-phone-style 'nil)
+       (setq ebdb-quiet-about-name-mismatches t)
+       (setq ebdb-readonly-p nil)
+       (setq ebdb-sounds-directory nil)
+       (setq ebdb-use-alternate-names nil)
+       (setq ebdb-use-pop-up nil)
+       (setq ebdb/mail-auto-create-p 'ebdb-ignore-most-messages-hook)
        (setq news-reply-header-hook nil)
-       (add-to-list 'file-coding-system-alist (cons "\\.bbdb"  'utf-8))
-       (bind-key "<tab>" 'custom/my-bbdb-tab-complete message-mode-map)
-       (bind-key "C-c C-e" 'bbdb-edit-current-field bbdb-mode-map)
-       (bind-key "C-c C-f d" 'bbdb-delete-current-field-or-record bbdb-mode-map)
-       (bind-key "C-c C-f i" 'bbdb-insert-new-field bbdb-mode-map))
-
-     (req-package bbdb-
-       :loader :elpa
-       :require bbdb log4e yaxception)
+       (add-to-list 'file-coding-system-alist (cons "\\.ebdb"  'utf-8))
+       (bind-key "<tab>" 'custom/my-ebdb-tab-complete message-mode-map)
+       (bind-key "C-c C-e" 'ebdb-edit-current-field ebdb-mode-map)
+       (bind-key "C-c C-f d" 'ebdb-delete-current-field-or-record ebdb-mode-map)
+       (bind-key "C-c C-f i" 'ebdb-insert-new-field ebdb-mode-map))
 
      ;;TODO: setup
-     (req-package counsel-bbdb
+     (req-package counsel-ebdb
        :loader :elpa
-       :require counsel bbdb
-       :disabled t)
+       :require counsel ebdb)
+
+     ;;TODO: setup
+     (req-package company-ebdb
+       :loader :elpa
+       :require company ebdb)
    #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp :tangle yes
