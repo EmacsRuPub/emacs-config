@@ -2746,13 +2746,6 @@
         (add-hook 'emmet-mode-hook
                   (lambda () (setq emmet-indentation 2))))
     #+END_SRC
-*** web client
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (req-package web
-        :loader :elpa
-        :require dash s
-        :defer t)
-    #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
       ;; from FAQ at http://web-mode.org/ for smartparens
