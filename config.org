@@ -2746,18 +2746,6 @@
         (add-hook 'emmet-mode-hook
                   (lambda () (setq emmet-indentation 2))))
     #+END_SRC
-*** try
-    #+BEGIN_SRC emacs-lisp :tangle no
-      ;; from FAQ at http://web-mode.org/ for smartparens
-      (defun my/web-mode-hook ()
-        (setq web-mode-enable-auto-pairing nil))
-
-      (defun my/sp-web-mode-is-code-context (id action context)
-        (when (and (eq action 'insert)
-                   (not (or (get-text-property (point) 'part-side)
-                            (get-text-property (point) 'block-side))))
-          t))
-    #+END_SRC
 * clients
 ** restclient
    #+BEGIN_SRC emacs-lisp :tangle yes
