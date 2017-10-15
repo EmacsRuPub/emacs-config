@@ -469,6 +469,7 @@
     #+END_SRC
 *** other
     #+BEGIN_SRC emacs-lisp :tangle yes
+      ;;TODO: automate insertion of tramp[+docker] links (yasnippet/whatever)
       (req-package tramp
         :loader :built-in
         :init
@@ -2684,6 +2685,7 @@
                          '(company-tern company-web-html company-yasnippet company-files))
                     (company-mode t)))
         ;; Enable JavaScript completion between <script>...</script> etc.
+        ;; TODO: check why company and AC are mentioned together (see below)
         (defadvice company-tern (before web-mode-set-up-ac-sources activate)
           "Set `tern-mode' based on current language before running company-tern."
           (message "advice")
@@ -3421,6 +3423,7 @@
          (or (and (looking-at org-outline-regexp) (looking-back "^\**"))
              (save-excursion (and (looking-at (org-item-re)) (looking-back "^[ \t]*")))))
 
+       ;; TODO: bind somewhere
        (defun org-capture-refile-and-jump ()
          (interactive)
          (org-capture-refile)
@@ -3545,6 +3548,10 @@
 
        (req-package orgit
          :loader :elpa
+         ;;TODO: automate insertion of links below (yasnippet/whatever)
+         ;;    orgit:/path/to/repo/            links to a `magit-status' buffer
+         ;;    orgit-rev:/path/to/repo/::REV   links to a `magit-revision' buffer
+         ;;    orgit-log:/path/to/repo/::ARGS  links to a `magit-log' buffer
          :requires dash magit org)
 
        (req-package org-bullets :loader :elpa)
@@ -3562,6 +3569,14 @@
          :defer t
          :config
          ;; TODO: customize orglink-activate-in-modes
+         ;; TODO: automate insertion of link types below
+         ;;   [[Code]]
+         ;;   [[Code][start of code]]
+         ;;   [[define-derived-mode orglink-mode][orglink-mode]]
+         ;;   <mailto:jonas@bernoul.li>
+         ;;   man:info
+         ;;   <info:man>
+         ;;   https://github.com/tarsius/orglink
          (global-orglink-mode))
 
        (req-package org-linkany
