@@ -3509,10 +3509,6 @@
      #+END_SRC
 **** additional packages
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (req-package icalendar
-         :loader :built-in
-         :defer t)
-
        (req-package org-footnote
          :loader :path
          :defer t)
@@ -3542,13 +3538,6 @@
 
        (req-package org-bullets :loader :elpa)
 
-       (req-package org-context
-         :loader :elpa
-         :defer t
-         :config
-         ;;TODO: leverage real contexts
-         (org-context-activate))
-
        (req-package orglink
          :loader :elpa
          :require dash org
@@ -3565,25 +3554,12 @@
          ;;   https://github.com/tarsius/orglink
          (global-orglink-mode))
 
-       (req-package org-linkany
-         :loader :elpa
-         :require log4e yaxception
-         :defer t)
-
-       (req-package org-bookmark-heading :loader :elpa)
-
-       (req-package org-random-todo :loader :elpa)
-
        (req-package org-clock-today
          :loader :elpa
          :config
          (org-clock-today-mode 1))
 
-       (req-package secretaria :loader :elpa)
-
        (req-package org-mru-clock :loader :elpa)
-
-       (req-package org-vcard :loader :elpa)
 
        (req-package ob-async
          :loader :elpa)
