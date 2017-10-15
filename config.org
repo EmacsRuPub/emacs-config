@@ -2627,8 +2627,7 @@
         (hs-minor-mode 1)
         (rng-validate-mode)
         (setq ispell-skip-html t)
-        (unify-8859-on-decoding-mode)
-        )
+        (unify-8859-on-decoding-mode))
 
       (setq nxml-auto-insert-xml-declaration-flag t)
       (setq nxml-bind-meta-tab-to-complete-flag t)
