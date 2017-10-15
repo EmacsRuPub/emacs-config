@@ -4285,6 +4285,7 @@
   #+BEGIN_SRC emacs-lisp :tangle yes
     (req-package info
       :loader :built-in)
+
     (req-package info-buffer
       :loader :elpa
       :bind (("C-h i" . info-buffer)))
