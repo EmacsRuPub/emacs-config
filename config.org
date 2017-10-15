@@ -2259,13 +2259,12 @@
          (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
          (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers))
 
+       ;;TODO: check if there is any conflict inconsistency between slime-builtin/company completion
        (req-package slime-company
          :loader :elpa
          :force t
          :require slime company)
      #+END_SRC
-***** BACKLOG investigate and fix the issue with not found slime extensions within remote lisp image
-      example: Can't locate module: SWANK-IO-PACKAGE::SWANK-SBCL-EXTS
 **** additional setup
      #+BEGIN_SRC emacs-lisp :tangle yes
        (setq custom/hyperspec-root "~/help/HyperSpec/")
