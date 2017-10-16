@@ -3870,6 +3870,8 @@
        (setq org-yank-adjusted-subtrees t)
        (setq org-agenda-show-future-repeats 'next)
        (setq org-highlight-latex-and-related '(latex))
+       (setq org-confirm-shell-link-function 'y-or-n-p)
+       (setq org-confirm-elisp-link-function 'y-or-n-p)
 
        (when (featurep 'unicode-fonts)
          (setq org-ellipsis "⤵"))
