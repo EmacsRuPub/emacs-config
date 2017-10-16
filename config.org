@@ -4347,4 +4347,3 @@
       ("h" (custom/open-info "gcl" "*hyperspec*")))
     (global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
   #+END_SRC
-* try
