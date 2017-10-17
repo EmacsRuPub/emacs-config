@@ -839,6 +839,11 @@
      (req-package dired-collapse
        :config
        (add-hook 'dired-mode-hook 'dired-collapse-mode))
+
+     (req-package diredfl
+       :loader :elpa
+       :config
+       (diredfl-global-mode))
    #+END_SRC
 ** search
    #+BEGIN_SRC emacs-lisp :tangle yes
