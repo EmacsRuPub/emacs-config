@@ -1413,6 +1413,8 @@
        (add-hook 'shell-mode-hook 'with-editor-export-editor)
        (add-hook 'term-mode-hook 'with-editor-export-editor)
        (add-hook 'eshell-mode-hook 'with-editor-export-editor))
+
+     (req-package archive-rpm :loader :elpa) ;;TODO: check if there is any additional setup needed
    #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
