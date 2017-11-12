@@ -1024,10 +1024,10 @@
      ;;TODO: plan docstring
      (defhydra hydra-window (:idle 1.0)
        "window"
-       ("<left>" windmove-left "left")
-       ("<down>" windmove-down "down")
-       ("<up>" windmove-up "up")
-       ("<right>" windmove-right "right")
+       ("<left>" windmove-left "left" :color blue)
+       ("<down>" windmove-down "down" :color blue)
+       ("<up>" windmove-up "up" :color blue)
+       ("<right>" windmove-right "right" :color blue)
        ("w" ace-window "ace" :color blue)
        ("=" text-scale-increase)
        ("-" text-scale-decrease)
