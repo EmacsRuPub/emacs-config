@@ -177,6 +177,7 @@
      (req-package hc-zenburn-theme :loader :elpa :disabled t)
      (req-package sunburn-theme :loader :elpa :disabled t)
      (req-package labburn-theme :loader :elpa :disabled t)
+     (req-package cyberpunk-theme :loader :elpa :disabled t)
 
      (req-package darkburn-theme
        :loader :elpa
