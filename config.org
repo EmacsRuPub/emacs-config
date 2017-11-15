@@ -523,6 +523,12 @@
 
      (req-package speed-type
        :loader :elpa)
+
+     (req-package which-key
+       :loader :elpa
+       :config
+       (which-key-setup-side-window-right)
+       (which-key-mode))
    #+END_SRC
 ** tweaks
    Enable functions that are disabled by default
