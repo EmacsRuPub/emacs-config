@@ -1,6 +1,7 @@
 #+TITLE: Wiedzmin's literate Emacs configuration
 #+OPTIONS: toc:4 h:4
 
+* BACKLOG process all relevant place and decide if it makes sense to migrate bind-key --> :bind/use-package
 * bootstrapping
 ** basic utils
    #+BEGIN_SRC emacs-lisp :tangle yes
