@@ -381,7 +381,12 @@
         (bind-key "C-x b" 'ivy-switch-buffer)
         (bind-key "<f10>" 'ivy-resume))
 
-      (req-package smex :loader :elpa) ;; for #'counsel-M-x sorting improvements
+      (req-package amx
+        :loader :elpa
+        :config
+        (setq amx-backend 'ivy)
+        (setq amx-save-file (at-user-data-dir "amx-items"))
+        (bind-key "M-x" 'amx))
 
       (req-package counsel
         :loader :elpa
@@ -389,7 +394,6 @@
         :config
         (setq counsel-grep-base-command
               "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-        (bind-key "M-x" 'counsel-M-x)
         (bind-key "C-x C-f" 'counsel-find-file)
         (bind-key "C-h f" 'counsel-describe-function)
         (bind-key "C-h v" 'counsel-describe-variable)
