@@ -5,6 +5,10 @@
 * bootstrapping
 ** basic utils
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (req-package subr-x
+       :force t
+       :loader :built-in)
+
      (setq home-directory (getenv "HOME"))
      (setq config-basedir
            (file-name-directory
