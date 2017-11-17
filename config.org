@@ -1269,6 +1269,12 @@
                     ("M-," . mc/mark-previous-sexps)
                     ("C-|" . mc/move-to-column)
                     ("C-." . mc/remove-current-cursor)))
+
+      (req-package mc-cycle-cursors
+        :loader :path
+        :config
+        (bind-key "C-n" 'mc/cycle-forward mc/keymap)
+        (bind-key "C-p" 'mc/cycle-backward mc/keymap))
     #+END_SRC
 ** regions and rectangles
 *** definitions
