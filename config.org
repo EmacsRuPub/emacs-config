@@ -2445,6 +2445,11 @@
         (bind-key "<M-left>" 'python-indent-shift-left python-mode-map)
         (bind-key "<M-right>" 'python-indent-shift-right python-mode-map))
 
+      (req-package python-environment
+        :loader :elpa
+        :config
+        (setq python-environment-directory (at-user-data-dir ".python-environments")))
+
       (req-package virtualenvwrapper
         :loader :elpa
         :config
