@@ -1582,6 +1582,7 @@
        (show-paren-mode t))
 
      (req-package autorevert
+       :disabled t
        :loader :path
        :config
        (setq auto-revert-verbose nil)
