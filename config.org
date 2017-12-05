@@ -771,10 +771,7 @@
 ** special modes navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package beginend
-       :delight
-       (beginend-global-mode)
-       (beginend-prog-mode)
-       (beginend-magit-status-mode)
+       :delight beginend-global-mode beginend-prog-mode beginend-magit-status-mode
        :config
        (beginend-global-mode))
    #+END_SRC
