@@ -1809,6 +1809,24 @@
        ("i" yas-insert-snippet)
        ("q" nil))
      (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
+
+     (req-package eacl
+       :loader :elpa
+       :disabled t
+       :config
+       (defhydra hydra-eacl ()
+         "
+         complete _s_nippets
+         complete _t_ag
+         complete _l_ine
+         complete state_m_ent
+         "
+         ("s" eacl-complete-snippet :color blue)
+         ("t" eacl-complete-tag :color blue)
+         ("l" eacl-complete-line :color blue)
+         ("m" eacl-complete-statement :color blue)
+         ("q" nil))
+       (global-set-key (kbd "<C-tab>") 'hydra-eacl/body))
    #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
 ** company
