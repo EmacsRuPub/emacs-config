@@ -65,6 +65,11 @@
      (req-package anaphora :loader :elpa :force t)
      (req-package noflet :loader :elpa :force t)
 
+     (req-package pcre2el
+       :loader :elpa
+       :config
+       (pcre-mode))
+
      (setq message-log-max t) ;; we don't want to lose any startup log info
      (setq shell-file-name "/bin/bash")
      (setq custom-file (at-config-basedir "customizations.el"))
