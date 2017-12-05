@@ -2608,20 +2608,77 @@
      #+END_SRC
 **** TBD
 ***** BACKLOG review and maybe rebind keys
+*** golang
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package go-mode
+        :loader :elpa
+        :config
+        (req-package godoctor)
+        (add-hook 'before-save-hook 'gofmt-before-save)
+        (bind-key "C-c C-c" 'multi-compile-run go-mode-map)
+        (bind-key "M-." 'godef-jump go-mode-map)
+        (bind-key "M-," 'pop-tag-mark go-mode-map))
+
+      (req-package company-go
+        :loader :elpa
+        :require go-mode company
+        :config
+        (add-to-list 'company-backends 'company-go))
+
+      (req-package go-guru
+        :loader :elpa
+        :config
+        (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode))
+
+      (req-package flycheck-gometalinter
+        :loader :elpa
+        :config
+        (flycheck-gometalinter-setup)
+        ;; only run fast linters
+        (setq flycheck-gometalinter-fast t)
+        ;; use in tests files
+        (setq flycheck-gometalinter-test t)
+        (setq flycheck-gometalinter-deadline "10s")
+        ;; gometalinter: skips 'vendor' directories and sets GO15VENDOREXPERIMENT=1
+        (setq flycheck-gometalinter-vendor t)
+        ;; gometalinter: only enable selected linters
+        (setq flycheck-gometalinter-disable-all t)
+        (setq flycheck-gometalinter-enable-linters
+              '("golint" "vet" "vetshadow" "golint" "ineffassign" "goconst" "errcheck" "deadcode")))
+
+      (req-package go-eldoc
+        :loader :elpa
+        :config
+        (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+      (eval-after-load 'multi-compile
+          '(add-to-list 'multi-compile-alist
+                        '(go-mode . (("go-build" "go build -v"
+                                      (locate-dominating-file buffer-file-name ".git")) ;;TODO: try to guess binary name from project name (investigate how this refers to libraries builds, etc.)
+                                     ("go-build-and-run" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
+                                      (multi-compile-locate-file-dir ".git"))))))
+
+      (req-package gotest
+        :loader :elpa
+        :config
+        (define-key go-mode-map (kbd "C-x f") 'go-test-current-file)
+        (define-key go-mode-map (kbd "C-x t") 'go-test-current-test)
+        (define-key go-mode-map (kbd "C-x p") 'go-test-current-project)
+        (define-key go-mode-map (kbd "C-x T") 'go-test-current-benchmark)
+        (define-key go-mode-map (kbd "C-x F") 'go-test-current-file-benchmarks)
+        (define-key go-mode-map (kbd "C-x P") 'go-test-current-project-benchmarks)
+        (define-key go-mode-map (kbd "C-x x") 'go-run))
+
+      (req-package govet
+        :loader :elpa)
+    #+END_SRC
+**** BACKLOG try to integrate https://getgb.io/
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package actionscript-mode
         :loader :elpa
         :defer t)
-
-      (req-package go-mode
-        :loader :elpa
-        :defer t)
-
-      (req-package company-go
-        :loader :elpa
-        :require go-mode company)
 
       (req-package json-mode
         :require json-reformat json-snatcher
