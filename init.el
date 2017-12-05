@@ -3,11 +3,17 @@
 
 (require 'package)
 (add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
 (setf (cdr (assoc "gnu" package-archives))
       "https://elpa.gnu.org/packages/")
+(setq package-archive-priorities
+      '(("melpa-stable" . 10)
+        ("gnu" . 5)
+        ("melpa" . 0)))
 (package-initialize)
 
 (require 'cl)
