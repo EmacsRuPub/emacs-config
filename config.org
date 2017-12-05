@@ -1975,6 +1975,8 @@
         :loader :elpa
         :mode ("\\.ini\\'" . ini-mode))
 
+      (req-package multi-compile
+        :loader :elpa)
     #+END_SRC
 *** related major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
