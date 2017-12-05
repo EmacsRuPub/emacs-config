@@ -1480,8 +1480,8 @@
 
      (req-package crontab-mode
        :loader :elpa
-       :mode (("cron" . crontab-mode)
-              ("crontab" . crontab-mode)))
+       :mode (("cron$" . crontab-mode)
+              ("crontab$" . crontab-mode)))
 
      (req-package csv-mode :loader :elpa)
      (req-package fic-mode :loader :elpa)
