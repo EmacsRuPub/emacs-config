@@ -2763,6 +2763,7 @@
         (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
         (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
 
+      ;;TODO: is it really webdev-related?
       (req-package yaml-mode
         :loader :elpa
         :mode ("\\.yml\\'" . yaml-mode)
