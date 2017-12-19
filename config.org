@@ -2763,7 +2763,11 @@
         (bind-key "C-c C-v" 'markdown-preview markdown-mode-map)
         (bind-key "C-<tab>" 'yas/expand markdown-mode-map))
 
-      (req-package yaml-mode :loader :elpa)
+      (req-package yaml-mode
+        :loader :elpa
+        :mode ("\\.yml\\'" . yaml-mode)
+        :config
+        (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
     #+END_SRC
 *** xml
     #+BEGIN_SRC emacs-lisp :tangle yes
