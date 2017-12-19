@@ -1498,13 +1498,18 @@
 
      (req-package csv-mode :loader :elpa)
      (req-package fic-mode :loader :elpa)
-     (req-package dockerfile-mode :loader :elpa)
      (req-package graphql-mode :loader :elpa)
-
-     (req-package docker-compose-mode
-       :loader :elpa
-       :mode ("docker-compose" . docker-compose-mode))
    #+END_SRC
+*** docker
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (req-package dockerfile-mode
+        :loader :elpa
+        :mode  ("\\Dockerfile" . dockerfile-mode))
+
+      (req-package docker-compose-mode
+        :loader :elpa
+        :mode ("docker-compose" . docker-compose-mode))
+    #+END_SRC
 ** sexps
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: maybe relocate
