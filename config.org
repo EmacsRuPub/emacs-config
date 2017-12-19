@@ -2705,6 +2705,14 @@
 
       (req-package govet
         :loader :elpa)
+
+      (req-package go-tag
+        :loader :elpa
+        :config
+        (setq go-tag-args '("-transform" "camelcase"))
+        (with-eval-after-load 'go-mode
+          (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
+          (define-key go-mode-map (kbd "C-c T") #'go-tag-remove)))
     #+END_SRC
 **** BACKLOG try to integrate https://getgb.io/
 *** other
