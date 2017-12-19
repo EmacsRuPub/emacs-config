@@ -1174,11 +1174,6 @@
                  (shell-command (format "md5sum %s" abs-file-name))
                  (buffer-string)))))))
 
-     (defun eww-visit-file ()
-       (interactive)
-       (when (derived-mode-p 'dired-mode)
-         (eww-open-file (dired-get-file-for-visit))))
-
      (defun insert-current-date-time()
        "Insert the current date and time at point."
        (interactive "*")
@@ -3071,6 +3066,21 @@
        (standard-display-ascii ?\223 [?\"])
        (standard-display-ascii ?\224 [?\"])
        (standard-display-ascii ?\227 " -- "))
+
+     (defun eww-visit-file ()
+       (interactive)
+       (when (derived-mode-p 'dired-mode)
+         (eww-open-file (dired-get-file-for-visit))))
+
+     ;;TODO: add to appropriate hook
+     (defun eww-more-readable ()
+       "Makes eww more pleasant to use. Run it after eww buffer is loaded."
+       (interactive)
+       (setq eww-header-line-format nil) ;; removes page title
+       (setq mode-line-format nil) ;; removes mode-line
+       (set-window-margins (get-buffer-window) 20 20) ;; increases size of margins
+       (redraw-display) ;; apply mode-line changes
+       (eww-reload 'local)) ;; apply eww-header changes
    #+END_SRC
 ** MPD
    #+BEGIN_SRC emacs-lisp :tangle yes
