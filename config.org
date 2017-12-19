@@ -1386,6 +1386,16 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       ;;; https://stackoverflow.com/a/41560712/2112489
       (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
+
+      (defhydra hydra-undo-tree (:color yellow :hint nil )
+        " _p_: undo _n_: redo _s_: save _l_: load "
+        ("p" undo-tree-undo)
+        ("n" undo-tree-redo)
+        ("s" undo-tree-save-history)
+        ("l" undo-tree-load-history)
+        ("u" undo-tree-visualize "visualize" :color blue)
+        ("q" nil "quit" :color blue))
+      (global-set-key (kbd "M-,") 'hydra-undo-tree/undo-tree-undo) ;; or whatever
     #+END_SRC
 ** utils
    #+BEGIN_SRC emacs-lisp :tangle yes
