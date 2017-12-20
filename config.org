@@ -2557,7 +2557,7 @@
          (bind-key "C-c j" 'moo-jump-local c++-mode-map))
 
        (req-package rtags
-         :loader :elpa
+         :loader :path
          :require cc-mode
          :config
          (defun use-rtags (&optional useFileManager)
@@ -2600,15 +2600,14 @@
          (bind-key "C-<" 'rtags-find-virtuals-at-point global-map))
 
        (req-package company-rtags
-         :loader :elpa
-         :require company rtags)
+         :loader :path
+         :require company)
 
        (add-hook 'c++-mode-hook 'flycheck-mode)
        (add-hook 'c-mode-hook 'flycheck-mode)
 
        (req-package flycheck-rtags
-         :loader :elpa
-         :require rtags
+         :loader :path
          :config
          (defun my-flycheck-rtags-setup ()
            (flycheck-select-checker 'rtags)
