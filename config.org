@@ -274,8 +274,7 @@
        (delight 'eldoc-mode " ED" 'eldoc)
        (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
        (delight 'editorconfig-mode " EC" 'editorconfig)
-       (delight 'orglink-mode " OL" 'orglink)
-       (delight 'counsel-gtags-mode " CGT" 'counsel-gtags))
+       (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
 * persistence
 ** save history
@@ -895,23 +894,6 @@
        :config
        (bind-key "C-x C-q" 'wgrep-change-to-wgrep-mode grep-mode-map)
        (bind-key "C-c C-c" 'wgrep-finish-edit grep-mode-map))
-
-     ;;TODO: sync and maybe slurp something from rc-cc
-     (req-package counsel-gtags
-       :loader :elpa
-       :require counsel gtags
-       :config
-       (setq counsel-gtags-path-style 'relative)
-       (setq counsel-gtags-ignore-case t)
-       (setq counsel-gtags-auto-update t)
-       (setq counsel-gtags-suggested-key-mapping t)
-       (bind-key "C-M-s" 'counsel-gtags-find-symbol counsel-gtags-mode-map)
-       (bind-key "M-." 'counsel-gtags-dwim counsel-gtags-mode-map)
-       (bind-key "M-r" 'counsel-gtags-find-reference counsel-gtags-mode-map)
-       (bind-key "M-," 'counsel-gtags-go-backward counsel-gtags-mode-map)
-       (add-hook 'dired-mode-hook 'counsel-gtags-mode)
-       (add-hook 'c-mode-hook 'counsel-gtags-mode)
-       (add-hook 'c++-mode-hook 'counsel-gtags-mode))
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
@@ -2010,6 +1992,32 @@
 
       (req-package multi-compile
         :loader :elpa)
+
+      (req-package counsel-gtags
+        :loader :elpa
+        :require counsel gtags
+        :delight (counsel-gtags-mode " CGT")
+        :hook ((c-mode . counsel-gtags-mode)
+               (c++-mode . counsel-gtags-mode))
+        :config
+        (setq counsel-gtags-path-style 'relative)
+        (setq counsel-gtags-ignore-case t)
+        (setq counsel-gtags-auto-update t)
+        (setq counsel-gtags-suggested-key-mapping t)
+        (bind-key "C-M-s" 'counsel-gtags-find-symbol c++-mode-map)
+        (bind-key "C-M-s" 'counsel-gtags-find-symbol c-mode-map)
+        (bind-key "C-M-s" 'counsel-gtags-find-symbol counsel-gtags-mode-map)
+        (bind-key "C-c u" 'counsel-gtags-update-tags c++-mode-map)
+        (bind-key "C-c u" 'counsel-gtags-update-tags c-mode-map)
+        (bind-key "M-," 'counsel-gtags-go-backward c++-mode-map)
+        (bind-key "M-," 'counsel-gtags-go-backward c-mode-map)
+        (bind-key "M-," 'counsel-gtags-go-backward counsel-gtags-mode-map)
+        (bind-key "M-." 'counsel-gtags-dwim c++-mode-map)
+        (bind-key "M-." 'counsel-gtags-dwim c-mode-map)
+        (bind-key "M-." 'counsel-gtags-dwim counsel-gtags-mode-map)
+        (bind-key "M-r" 'counsel-gtags-find-reference c++-mode-map)
+        (bind-key "M-r" 'counsel-gtags-find-reference c-mode-map)
+        (bind-key "M-r" 'counsel-gtags-find-reference counsel-gtags-mode-map))
     #+END_SRC
 *** related major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2528,24 +2536,12 @@
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package cc-mode
          :loader :built-in
-         :require counsel-gtags
          :mode (("\\.ipp?$" . c++-mode)
                 ("\\.h$" . c++-mode)
                 ("CMakeLists\\.txt\\'" . cmake-mode)
                 ("\\.cmake\\'" . cmake-mode)
                 ("\\(postgres\\|pgsql\\).*\\.[ch]\\'" . pgsql-c-mode)
-                ("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode))
-         :config
-         (bind-key "C-M-s" 'counsel-gtags-find-symbol c-mode-map)
-         (bind-key "M-." 'counsel-gtags-dwim c-mode-map)
-         (bind-key "M-r" 'counsel-gtags-find-reference c-mode-map)
-         (bind-key "M-," 'counsel-gtags-go-backward c-mode-map)
-         (bind-key "C-c u" 'counsel-gtags-update-tags c-mode-map)
-         (bind-key "C-M-s" 'counsel-gtags-find-symbol c++-mode-map)
-         (bind-key "M-." 'counsel-gtags-dwim c++-mode-map)
-         (bind-key "M-r" 'counsel-gtags-find-reference c++-mode-map)
-         (bind-key "M-," 'counsel-gtags-go-backward c++-mode-map)
-         (bind-key "C-c u" 'counsel-gtags-update-tags c++-mode-map))
+                ("\\(postgres\\|pgsql\\).*\\.cc\\'" . pgsql-c-mode)))
 
        (req-package company-c-headers
          :loader :elpa
