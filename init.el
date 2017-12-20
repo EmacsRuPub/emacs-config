@@ -11,9 +11,9 @@
 (setf (cdr (assoc "gnu" package-archives))
       "https://elpa.gnu.org/packages/")
 (setq package-archive-priorities
-      '(("melpa-stable" . 10)
+      '(("melpa-stable" . 5)
         ("gnu" . 5)
-        ("melpa" . 0)))
+        ("melpa" . 10)))
 (package-initialize)
 
 (require 'cl)
