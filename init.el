@@ -19,6 +19,8 @@
 (require 'cl)
 
 (setq use-package-verbose t)
+(setq use-package-hook-name-suffix "")
+
 (setq load-prefer-newer t)
 
 (mapcar
