@@ -175,9 +175,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package nimbus-theme :loader :elpa :disabled)
      (req-package nord-theme :loader :elpa :disabled)
-     (req-package kaolin-theme :loader :elpa :disabled)
+     (req-package kaolin-themes :loader :elpa :disabled)
      (req-package material-theme :loader :elpa :disabled)
-     (req-package drakula-theme :loader :elpa :disabled)
+     (req-package dracula-theme :loader :elpa :disabled)
      (req-package challenger-deep-theme :loader :elpa :disabled)
      (req-package hc-zenburn-theme :loader :elpa :disabled)
      (req-package sunburn-theme :loader :elpa :disabled)
