@@ -65,6 +65,10 @@
      (req-package anaphora :loader :elpa :force t)
      (req-package noflet :loader :elpa :force t)
 
+     (req-package delight
+       :loader :elpa
+       :force t)
+
      (req-package pcre2el
        :loader :elpa
        :config
@@ -232,6 +236,7 @@
 
      (req-package volatile-highlights
        :loader :elpa
+       :delight 'volatile-highlights-mode
        :config
        (volatile-highlights-mode 1))
 
@@ -253,28 +258,6 @@
        (setq uniquify-separator ":")
        (setq uniquify-ignore-buffers-re "^\\*")
        (setq uniquify-strip-common-suffix nil))
-   #+END_SRC
-** diminish modeline contents
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package delight
-       :loader :elpa
-       :force t
-       :config
-       (delight 'git-gutter-mode " +-" 'git-gutter)
-       (delight 'volatile-highlights-mode nil 'volatile-highlights)
-       (delight 'emmet-mode nil 'emmet-mode)
-       (delight 'whole-line-or-region-mode " WLR" 'whole-line-or-region)
-       (delight 'abbrev-mode " Abv" 'abbrev)
-       (delight 'auto-fill-function nil 'simple)
-       (delight 'composable-mode " @" 'composable)
-       (delight 'wrap-region-mode " wr" 'wrap-region)
-       (delight 'elisp-slime-nav-mode nil 'elisp-slime-nav)
-       (delight 'projectile-mode " prj" 'projectile)
-       (delight 'company-mode " γ" 'company)
-       (delight 'eldoc-mode " ED" 'eldoc)
-       (delight 'magit-filenotify-mode " FN" 'magit-filenotify)
-       (delight 'editorconfig-mode " EC" 'editorconfig)
-       (delight 'orglink-mode " OL" 'orglink))
    #+END_SRC
 * persistence
 ** save history
@@ -790,6 +773,7 @@
      (req-package projectile
        :loader :elpa
        :require dash pkg-info
+       :delight (projectile-mode " prj")
        :config
        (projectile-global-mode 1)
        (setq projectile-enable-caching t)
@@ -1333,6 +1317,7 @@
 
       (req-package whole-line-or-region ;; if no region is active, act on current line
         :loader :elpa
+        :delight (whole-line-or-region-mode " WLR")
         :defer t
         :config
         (whole-line-or-region-mode 1)
@@ -1572,6 +1557,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (req-package editorconfig
        :loader :elpa
+       :delight (editorconfig-mode " EC")
        :hook ((prog-mode-hook text-mode-hook) . editorconfig-mode))
    #+END_SRC
 ** setup basic minor modes
@@ -1838,6 +1824,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package company
         :loader :elpa
+        :delight (company-mode " γ")
         :bind (:map company-active-map
                     ("\C-n" . company-select-next)
                     ("\C-p" . company-select-previous)
@@ -1898,6 +1885,7 @@
                try-complete-lisp-symbol)))
 
      (req-package abbrev
+       :delight (abbrev-mode " Abv")
        :config
        (setq-default abbrev-mode t))
 
@@ -2046,6 +2034,7 @@
         :config
         (req-package magit-filenotify
           :loader :elpa
+          :delight (magit-filenotify-mode " FN")
           :require magit
           :hook (magit-status-mode-hook . magit-filenotify-mode))
         (req-package vdiff-magit
@@ -2162,6 +2151,7 @@
        (req-package edebug-x :loader :elpa)
 
        (req-package elisp-slime-nav
+         :delight elisp-slime-nav-mode
          :loader :elpa
          :require cl-lib
          :hook ((emacs-lisp-mode-hook ielm-mode-hook) . elisp-slime-nav-mode))
@@ -2866,6 +2856,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (req-package emmet-mode
         :loader :elpa
+        :delight emmet-mode
         :commands emmet-mode
         :hook ((sgml-mode-hook . emmet-mode)
                (nxml-mode-hook . emmet-mode)
@@ -3648,6 +3639,7 @@
        (req-package orglink
          :loader :elpa
          :require dash org
+         :delight (orglink-mode " OL")
          :defer t
          :config
          ;; TODO: customize orglink-activate-in-modes
