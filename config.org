@@ -2237,64 +2237,38 @@
         (bind-key "M-." nil js2-mode-map))
     #+END_SRC
 *** lisp
-**** definitions
-     This code represents almost original slime-helper functions definitions (except hooks, of course).
-     The reason to not use slime-helper itself is that it provides its own slime setup thus
-     omitting my own one completely.
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (unless (boundp 'quicklisp-slime-helper-dist)
-         (setq quicklisp-slime-helper-dist "quicklisp"))
-
-       (setq quicklisp-slime-helper-base (expand-file-name "~/quicklisp/"))
-
-       (defun quicklisp-slime-helper-file-contents (file)
-         (with-temp-buffer
-           (insert-file-contents file)
-           (buffer-string)))
-
-       (defun quicklisp-slime-helper-system-directory (system)
-         (let ((location-file (concat quicklisp-slime-helper-base
-                                      "dists/"
-                                      quicklisp-slime-helper-dist
-                                      "/installed/systems/"
-                                      system
-                                      ".txt")))
-           (when (file-exists-p location-file)
-             (let ((relative (quicklisp-slime-helper-file-contents location-file)))
-               (file-name-directory (concat quicklisp-slime-helper-base
-                                            relative))))))
-
-       (defun quicklisp-slime-helper-slime-directory ()
-         (quicklisp-slime-helper-system-directory "swank"))
-
-       (defun custom/lisp-mode-hook ()
-         (auto-fill-mode 1)
-         (setq indent-tabs-mode t)
-         (setq tab-width 2)
-         (turn-on-eldoc-mode))
-
-       (defun custom/slime-hook ()
-         (slime-mode t)
-         (set (make-local-variable 'slime-lisp-implementations)
-              (list (assoc 'sbcl slime-lisp-implementations))))
-
-       (defadvice slime-documentation-lookup
-           (around change-browse-url-browser-function activate)
-         "Use w3m for slime documentation lookup."
-         (let ((browse-url-browser-function 'w3m-browse-url))
-           ad-do-it))
-     #+END_SRC
 **** slime setup
-     Here follow slime customizations using version from quicklisp (which is slime-helper designed for)
-     Let clause is borrowed from slime-helper source and its contents are superseded by my own setup.
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
-         (add-to-list 'load-path quicklisp-slime-directory)
-         (require 'cl-lib)
-         (require 'slime-autoloads)
-         (setq slime-backend (expand-file-name "swank-loader.lisp"
-                                               quicklisp-slime-directory))
-         (setq slime-path quicklisp-slime-directory)
+       (req-package slime
+         :loader :elpa
+         :pin melpa-stable ;; corresponds to quicklisp version
+         :hook ((lisp-mode-hook . custom/slime-hook)
+                (inferior-lisp-mode-hook . custom/inferior-slime)
+                (slime-mode-hook . custom/slime-autodoc)
+                (lisp-mode-hook . custom/lisp-mode-hook)
+                (lisp-mode-hook . common-hooks/newline-hook)
+                (lisp-mode-hook . common-hooks/prog-helpers))
+         :init
+         (req-package slime-autoloads :loader :path)
+         :config
+         (defun custom/inferior-slime ()
+           (inferior-slime-mode t))
+         (defun custom/slime-autodoc ()
+           (slime-autodoc-mode t))
+         (defun custom/lisp-mode-hook ()
+           (auto-fill-mode 1)
+           (setq indent-tabs-mode t)
+           (setq tab-width 2)
+           (turn-on-eldoc-mode))
+         (defun custom/slime-hook ()
+           (slime-mode t)
+           (set (make-local-variable 'slime-lisp-implementations)
+                (list (assoc 'sbcl slime-lisp-implementations))))
+         (defadvice slime-documentation-lookup
+             (around change-browse-url-browser-function activate)
+           "Use w3m for slime documentation lookup."
+           (let ((browse-url-browser-function 'w3m-browse-url))
+             ad-do-it))
          (slime-setup
           '(slime-fancy-inspector slime-fancy-trace slime-fontifying-fu
             slime-hyperdoc slime-package-fu slime-references slime-trace-dialog
@@ -2304,13 +2278,7 @@
          (setq slime-complete-symbol*-fancy t)
          (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
          (setq slime-net-coding-system 'utf-8-unix)
-         (setq slime-use-autodoc-mode nil)
-         (add-hook 'lisp-mode-hook 'custom/slime-hook)
-         (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-         (add-hook 'slime-mode-hook (lambda () (slime-autodoc-mode t)))
-         (add-hook 'lisp-mode-hook 'custom/lisp-mode-hook)
-         (add-hook 'lisp-mode-hook 'common-hooks/newline-hook)
-         (add-hook 'lisp-mode-hook 'common-hooks/prog-helpers))
+         (setq slime-use-autodoc-mode nil))
 
        ;;TODO: check if there is any conflict inconsistency between slime-builtin/company completion
        (req-package slime-company
