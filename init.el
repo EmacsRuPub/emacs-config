@@ -30,10 +30,9 @@
        (package-refresh-contents))
      (package-install package)))
  ;;base system packages for bootstrapping
- '(req-package el-get))
+ '(use-package el-get))
 
-(require 'req-package)
-(setq req-package-log-level 'trace)
+(setq use-package-compute-statistics t)
 
 (global-set-key (kbd "C-x C-.")
                 (lambda ()
@@ -41,27 +40,23 @@
                   (switch-to-buffer "*Messages*")))
 
 ;; open literate config fast in case of emergency (and not only)
-(req-package iqa
-  :force t
+(use-package iqa
+  :ensure t
   :init
   (setq iqa-user-init-file (concat user-emacs-directory "config.org"))
   :config
   (iqa-setup-default))
 
-(req-package restart-emacs
-  :force t
+(use-package restart-emacs
+  :ensure t
   :config
   (global-set-key (kbd "C-x C-c") 'restart-emacs))
 
-(req-package exec-path-from-shell
-  :force t
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
-
-(req-package org
-  :loader :elpa
-  :force t)
+  (exec-path-from-shell-initialize))
 
 (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
                          org-bibtex org-clock org-docview org-habit
@@ -72,11 +67,12 @@
                           org-man org-velocity))
 (setq org-modules `(,@org-contrib-base ,@org-contrib-extra))
 
-(req-package bug-hunter :disabled t)
+(use-package bug-hunter :disabled)
+
+(setq message-log-max t) ;; we don't want to lose any startup log info
+(setq shell-file-name "/bin/bash")
 
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
-
-(req-package-finish)
 
 (setq debug-on-error nil)
 (setq debug-on-quit nil)
