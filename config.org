@@ -3958,6 +3958,7 @@
        (setq org-highlight-latex-and-related '(latex))
        (setq org-confirm-shell-link-function 'y-or-n-p)
        (setq org-confirm-elisp-link-function 'y-or-n-p)
+       (setq org-src-window-setup 'current-window)
 
        (when (featurep 'unicode-fonts)
          (setq org-ellipsis "⤵"))
