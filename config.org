@@ -2485,6 +2485,15 @@
 
       (req-package py-autopep8 :loader :elpa)
 
+      (req-package importmagic
+        :loader :elpa
+        :disabled
+        :hook (python-mode-hook . importmagic-mode))
+
+      (req-package py-isort
+        :loader :elpa
+        :disabled) ;; TODO: bind py-isort-{buffer, region}
+
       (req-package pip-requirements
         :loader :elpa
         :mode ("requirements\\." . pip-requirements-mode))
