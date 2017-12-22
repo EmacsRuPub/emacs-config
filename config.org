@@ -864,11 +864,6 @@
        :config
        (setq socyl-backend 'ripgrep))
 
-     (req-package fuzzy
-       :loader :elpa
-       :config
-       (turn-on-fuzzy-isearch))
-
      (req-package wgrep
        :loader :elpa
        :config
@@ -1430,20 +1425,6 @@
    #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (req-package generic
-       :loader :elpa
-       :disabled
-       :init
-       (req-package generic-x :loader :elpa)
-       :config
-       (define-generic-mode 'keymap-mode
-         '("#")
-         '("control" "meta" "shift" "alt" "altgr" "compose" "keycode")
-         nil
-         '(".keymap\\'" ".map\\'")
-         nil)
-       (setq generic-default-modes (delete 'javascript-generic-mode
-                                           generic-default-modes)))
      (req-package rst
        :loader :built-in
        :mode ("\\.rst$" . rst-mode))
@@ -1632,7 +1613,7 @@
        _/_ make comment box            _f_ilename -> clipboard   _d_iff buffer <-> file
        _SPC_ untabify                  _k_ yank rectangle        re_n_ame buffer+file
        _TAB_ tabify                    append next _K_ill        query/replace rege_x_p
-       delete trailing _w_hitespaces   _a_ppend cited region     _=_ edit region indirect
+       delete trailing _w_hitespaces   _a_ppend cited region
        _s_ort lines
        keep _u_nique lines
        _4_ snakehump TAP
@@ -1664,7 +1645,6 @@
        ("d" diff-buffer-with-file)
        ("n" crux-rename-file-and-buffer)
        ("x" query-replace-regexp)
-       ("=" edit-indirect-region)
        ("i" custom/insert-current-date-time)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
