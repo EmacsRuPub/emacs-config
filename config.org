@@ -2498,9 +2498,16 @@
         :loader :elpa
         :mode ("requirements\\." . pip-requirements-mode))
     #+END_SRC
-***** BACKLOG https://github.com/syl20bnr/spacemacs/tree/master/layers/+lang/python
-***** BACKLOG imports automation (search elpy/standalone extensions)
-****** importmagic
+***** BACKLOG imports/formatting automation (search elpy/standalone extensions)
+****** isort
+***** BACKLOG fix new setup
+****** incorrect flake8 config (excludes)
+****** check/add W0512
+****** automatic venv changing per project fails
+****** with active venv some "cannot import.." messages still persist
+****** check epc/importmagic work
+****** actualize py-isort setup
+****** review pylint setup
 *** cc
 **** specialization for PostgreSQL development
      #+BEGIN_SRC emacs-lisp :tangle yes
