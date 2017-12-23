@@ -74,6 +74,9 @@
        :config
        (pcre-mode))
 
+     (req-package notifications
+       :loader :built-in)
+
      (setq message-log-max t) ;; we don't want to lose any startup log info
      (setq shell-file-name "/bin/bash")
      (setq custom-file (at-config-basedir "customizations.el"))
@@ -3317,8 +3320,6 @@
    #+END_SRC
 ** orgmode
 *** preface
-    org-mode is already loaded because we needed to tangle
-    emacs-config.org, so no need to use use-package.
 **** Notes about setting up org-capture
      update-desktop-database
 
@@ -3337,6 +3338,9 @@
      Terminal=false
      Categories=System;
      MimeType=x-scheme-handler/org-protocol;
+**** org-id usage
+     org-id usage example for the future:
+     "* TODO___ %a\n  :PROPERTIES:\n  :ID: %(org-id-new)\n  :END:\n  %U\n\n  %i"
 *** definitions
 **** process thing at point
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3532,18 +3536,402 @@
          (setq org-randomnote-candidates org-agenda-files)
          (setq org-randomnote-open-behavior 'indirect-buffer))
      #+END_SRC
+**** clocking customizations
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (define-namespace custom/
+
+       ;; (SEC-HIGH SEC-LOW MICROSEC PICOSEC) current-idle-time
+       (defvar idle-clockout-timeout 1800
+         "Perform first attempt to clock-out after this period of emacs
+          inactivity. It can decide to postpone the clocking-out if it's
+          only emacs that is idle, but not the computer itself.")
+
+       (defvar idle-clockout-recheck-interval 300
+         "After a sufficient idle time was achieved by emacs, we'll
+          periodically check current idle time of the whole OS to decide
+          whether we need to clock out")
+
+       (defvar idle-clockout-repeat-timer nil
+         "Timer for repeatedly (during a single idle interval) checking
+          whether we need to clock-out")
+
+       (defun clockout-when-idle ()
+         (awhen custom/idle-clockout-repeat-timer
+           (cancel-timer it))
+         (when (org-clocking-p)
+           (if (> (org-user-idle-seconds)
+                  custom/idle-clockout-timeout)
+               (let ((org-clock-out-switch-to-state "WAITING")) ;TODO: introduce variable
+                 (org-clock-out nil t))
+             (setf custom/idle-clockout-repeat-timer
+                   (run-with-idle-timer
+                    (time-add (current-idle-time) custom/idle-clockout-recheck-interval)
+                    nil
+                    'custom/clockout-when-idle)))))
+
+       )
+     #+END_SRC
 **** to be done
 ***** TODO some handle for getting 'done' tasks within particular time range
 ***** TODO some tag for those tasks not directly needed for job tasks (e.g. my own setups, ssh, etc)
 ***** TODO save done.org after refiling finished
 ***** TODO auto change status TODO --> DONE before refiling
 *** setup
+**** customizations
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (use-package org
+         :after (f)
+         :mode (("\\.org$" . org-mode)
+                ("\\.org_archive$" . org-mode))
+         :config
+         (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
+         (setq org-list-demote-modify-bullet '(("+" . "-")
+                                               ("*" . "-")
+                                               ("1." . "-")
+                                               ("1)" . "-")
+                                               ("A)" . "-")
+                                               ("B)" . "-")
+                                               ("a)" . "-")
+                                               ("b)" . "-")
+                                               ("A." . "-")
+                                               ("B." . "-")
+                                               ("a." . "-")
+                                               ("b." . "-")))
+         (setq org-lowest-priority 70) ;; extend priorities set (given ascii code)
+         (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
+         (setq org-use-speed-commands t)
+         (add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
+         (add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
+         (add-to-list 'org-speed-commands-user '("s" call-interactively 'org-schedule))
+         (add-to-list 'org-speed-commands-user '("i" call-interactively 'org-clock-in))
+         (add-to-list 'org-speed-commands-user '("o" call-interactively 'org-clock-out))
+         (add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
+         (f-entries (at-org-dir)
+                    (lambda (entry) (when (and (f-file? entry)
+                                               (s-suffix? "org" entry)
+                                               (file-exists-p entry))
+                                      (push entry org-agenda-files)))
+                    t)
+         (dolist (orgfile (directory-files (at-org-dir "/journals") t "journal") )
+           (setq org-agenda-files
+                 (delete orgfile org-agenda-files)))
+         (add-to-list 'org-agenda-files (at-config-basedir "config.org"))
+         ;; agenda customizations
+         (setf org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :narrow 60))
+         (setq org-agenda-dim-blocked-tasks 'invisible)
+         (setq org-agenda-include-all-todo t)
+         (setq org-agenda-include-diary t)
+         (setq org-agenda-inhibit-startup t)
+         (setq org-agenda-persistent-filter t)
+         (setq org-agenda-repeating-timestamp-show-all nil)
+         (setq org-agenda-restore-windows-after-quit t)
+         (setq org-agenda-show-all-dates t)
+         (setq org-agenda-show-inherited-tags nil)
+         (setq org-agenda-show-log t)
+         (setq org-agenda-skip-additional-timestamps-same-entry t)
+         (setq org-agenda-skip-deadline-if-done t)
+         (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+         (setq org-agenda-skip-scheduled-if-done t)
+         (setq org-agenda-skip-timestamp-if-done t)
+         (setq org-agenda-span 'month)
+         (setq org-agenda-start-on-weekday 1)
+         (setq org-agenda-sticky nil) ;otherwise agenda behaves strangely on non-stuck projects
+         (setq org-agenda-tags-todo-honor-ignore-options t)
+         (setq org-agenda-todo-ignore-deadlines 'all)
+         (setq org-agenda-todo-ignore-scheduled 'all)
+         (setq org-agenda-todo-ignore-timestamp 'past)
+         (setq org-agenda-todo-ignore-with-date t)
+         (setq org-agenda-todo-list-sublevels nil)
+         (setq org-agenda-use-tag-inheritance t)
+         (setq org-agenda-window-setup 'current-window)
+         (setf agenda-opts-all-with-time
+               '((org-agenda-todo-ignore-scheduled nil)
+                 (org-agenda-todo-ignore-deadlines nil)
+                 (org-agenda-todo-ignore-with-date nil)))
+         (setq org-agenda-time-grid
+               '((daily today require-timed remove-match)
+                 "----------------"
+                 (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
+         (setq org-agenda-custom-commands
+               `(("d" . "some non-straightforward TODO statuses")
+                 ("db" todo "BACKLOG" nil)
+                 ("ds" todo "SOON" nil)
+                 ("dc" todo "CANCELLED" nil)
+                 ("dw" todo "WAITING|FEEDBACK" nil)
+                 ("dg" todo "GOING" ,agenda-opts-all-with-time)
+                 ("da" tags "+actual_p")
+                 ("c" . "by context")
+                 ("cp" tags "+@personal/GOING|WAITING|BACKLOG|SOON")
+                 ("cr" tags "+@project/GOING|WAITING|BACKLOG|SOON")
+                 ("cj" tags "+@job/GOING|WAITING|FEEDBACK|BACKLOG|SOON")
+                 ("cw" tags "+@workplace/GOING|WAITING|BACKLOG|SOON")
+                 ("ct" tags "+@phonecall/WAITING|BACKLOG|SOON")
+                 ("cs" tags "+@someday")
+                 ("cq" tags "+@quicknote")
+                 ("e" . "by essence")
+                 ;;TODO: find more handy shortcuts
+                 ("ec" tags "+current")
+                 ("ef" tags "+reference")
+                 ("em" tags "+master")
+                 ("eo" tags "+ordering")
+                 ("er" tags "+repair")
+                 ("ed" tags "+develop")
+                 ("ei" tags "+investigate")
+                 ("ee" tags "+entertainment")
+                 ("ey" tags "+family")
+                 ("eH" tags-todo "+housekeeping")
+                 ("eC" tags-todo "+current")
+                 ("eF" tags-todo "+reference")
+                 ("eM" tags-todo "+master")
+                 ("eO" tags-todo "+ordering")
+                 ("eR" tags-todo "+repair")
+                 ("eD" tags-todo "+develop")
+                 ("eI" tags-todo "+investigate")
+                 ("eE" tags-todo "+entertainment")
+                 ("u" . "unassigned")
+                 ("up" alltodo "Unprioritized TODO entries"
+                  ((org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
+                   (org-tags-match-list-sublevels 'indented)
+                   (org-agenda-sorting-strategy
+                    '((agenda time-up tag-up) ))
+                   ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
+                   (org-agenda-overriding-header "Unprioritized TODO entries: ")))
+                 ("P" . "Prioritized tasks")
+                 ("Pa" "Prioritized tasks A"
+                  ((tags-todo "+PRIORITY=\"A\"") ))
+                 ("Pb" "Prioritized tasks B"
+                  ((tags-todo "+PRIORITY=\"B\"")))
+                 ("Pc" "Prioritized tasks C"
+                  ((tags-todo "+PRIORITY=\"C\"")))
+                 ("S" "Scheduled tasks" agenda ""
+                  ((org-agenda-time-grid nil)
+                   (org-deadline-warning-days 32)
+                   (org-agenda-entry-types '(:scheduled))
+                   ))
+                 ("p" tags "+purchase")
+                 ("b" . "tickets")
+                 ("be" tags "+ticket+emacs")
+                 ("bs" tags "+ticket+stumpwm")
+                 ("jc" tags "+@job+current/GOING|FEEDBACK")
+                 ))
+         (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s %b")
+                                          (timeline . "  % s")
+                                          (todo . " %i %-12:c")
+                                          (tags . " %i %-12:c")
+                                          (search . " %i %-12:c")))
+         ;; clocking customizations
+         (setq org-clock-history-length 35)
+         (setq org-clock-idle-time 3)
+         (setq org-clock-in-resume t)
+         (setq org-clock-in-switch-to-state "GOING")
+         (setq org-clock-out-switch-to-state "HOLD")
+         (setq org-clock-into-drawer "CLOCK")
+         (setq org-clock-out-remove-zero-time-clocks t)
+         (setq org-clock-persist t)
+         ;; just clock-out unconditionally - it seems easier to maintain (credits to @binarin)
+         (setf org-clock-x11idle-program-name "xprintidle")
+         (setf org-x11idle-exists-p t)
+         ;; refiling customizations
+         (setq org-refile-target-verify-function 'custom/verify-refile-target)
+         (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
+         (setq org-refile-use-outline-path 'file)
+         ;; various customizations
+         (setf org-catch-invisible-edits nil)
+         (setf org-fast-tag-selection-include-todo nil)
+         (setf org-id-link-to-org-use-id t)
+         (setq appt-display-interval 5)
+         (setq appt-message-warning-time 10)
+         (setq calendar-date-style 'european)
+         (setq org-M-RET-may-split-line '((default . nil)))
+         (setq org-align-all-tags t)
+         (setq org-attach-directory (at-org-dir "/org-attach-data"))
+         (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
+         (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
+         (setq org-confirm-elisp-link-function 'y-or-n-p)
+         (setq org-ctrl-k-protect-subtree t)
+         (setq org-cycle-include-plain-lists 'integrate)
+         (setq org-cycle-separator-lines 0)
+         (setq org-deadline-warning-days 30)
+         (setq org-default-notes-file (at-org-dir "/refile.org"))
+         (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
+         (setq org-element-use-cache nil)
+         (setq org-enforce-todo-checkbox-dependencies t)
+         (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
+         (setq org-export-coding-system 'utf-8)
+         (setq org-export-with-drawers t)
+         (setq org-extend-today-until 2)
+         (setq org-fast-tag-selection-single-key 'expert)
+         (setq org-fontify-done-headline t)
+         (setq org-global-properties '(("STYLE_ALL" . "habit")))
+         (setq org-goto-max-level 10)
+         (setq org-hide-leading-stars t)
+         (setq org-indirect-buffer-display 'current-window)
+         (setq org-insert-mode-line-in-empty-file t)
+         (setq org-log-done t)
+         (setq org-log-into-drawer t)
+         (setq org-log-repeat 'time)
+         (setq org-loop-over-headlines-in-active-region t)
+         (setq org-outline-path-complete-in-steps nil)
+         (setq org-read-date-prefer-future 'time)
+         (setq org-return-follows-link t)
+         (setq org-special-ctrl-a/e t)
+         (setq org-special-ctrl-k t)
+         (setq org-src-fontify-natively t)
+         (setq org-startup-folded nil)
+         (setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
+         (setq org-tags-column -80)
+         (setq org-track-ordered-property-with-tag t)
+         (setq org-use-effective-time t)
+         (setq org-use-property-inheritance t)
+         (setq org-use-sub-superscripts nil)
+         (setq org-yank-adjusted-subtrees t)
+         (setq org-agenda-show-future-repeats 'next)
+         (setq org-highlight-latex-and-related '(latex))
+         (setq org-confirm-shell-link-function 'y-or-n-p)
+         (setq org-confirm-elisp-link-function 'y-or-n-p)
+         (setq org-src-window-setup 'current-window)
+         (when (featurep 'unicode-fonts)
+           (setq org-ellipsis "⤵"))
+         ;; keywords setup
+         (setq kw-seq-common '(sequence "BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"
+                                        "|" "DONE(d!/@)" "CANCELLED(c@/!)" "OUTDATED(o)"))
+         (setq org-todo-keywords
+                    `(,kw-seq-common))
+         (setq org-todo-keywords-for-agenda '("BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"))
+         (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)" "OUTDATED(o)"))
+         ;; faces
+         (setq org-todo-keyword-faces
+               '(("BACKLOG" . (:foreground "gray" :weight bold))
+                 ("SOON" . (:foreground "magenta" :weight bold))
+                 ("REPEAT" . (:foreground "blue" :weight bold))
+                 ("NEXT" . (:foreground "red" :weight bold))
+                 ("WAITING" . (:foreground "orange" :weight bold))
+                 ("FEEDBACK" . (:foreground "yellow" :weight bold))
+                 ("CANCELLED" . (:foreground "cyan" :weight bold))
+                 ("DONE" . (:foreground "green" :weight bold))))
+         (setq org-priority-faces
+               '((?A :foreground "red" :weight bold)
+                 (?B :foreground "#94bff3" :weight bold)
+                 (?C :foreground "#6f6f6f")
+                 (?D :foreground "#c390d4")
+                 (?E :foreground "#90c3d4")
+                 (?F :foreground "#a1d490")))
+         (set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
+         (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
+         ;; tags
+         (setq org-tag-alist '(("current" . ?c)
+                               ("reference" . ?f)
+                               ("orgmode" . ?g)
+                               ("purchase" . ?p)
+                               ("master" . ?m)
+                               ("ordering" . ?o)
+                               ("housekeeping" . ?h)
+                               ("entertainment" . ?e)
+                               ("interesting" . ?i)
+                               ("repair" . ?r)
+                               ))
+         (setq org-tags-exclude-from-inheritance '("project"))
+         (setq org-todo-state-tags-triggers
+               '(("GOING" ("current" . t))
+                 ("DONE" ("current"))))
+         (setq org-complete-tags-always-offer-all-agenda-tags t)
+         ;;TODO: review whole tags cloud (in org corpus) and update org-tag-alist accordingly
+         ;; org-habit
+         (setq org-habit-graph-column 50)
+         (setq org-habit-preceding-days 10)
+         (setq org-habit-following-days 4)
+         (setq org-habit-show-habits-only-for-today nil)
+         ;; org-capture
+         (setq org-capture-templates
+               `(("q" "quick notes (uncategorized)" entry (file ,(at-org-dir "/refile.org")) "* %? %U :@quicknote:")
+                 ("w" "workplace")
+                 ("wt" "workplace try" entry (file+olp ,(at-org-dir "/workplace.org") "workplace" "tools reference") "* %? %U :@workplace:try")
+                 ("wd" "workplace tasks" entry (file+olp ,(at-org-dir "/workplace.org") "workplace" "tasks") "* BACKLOG [#C] %? %U :@workplace:")
+                 ("we" "emacs")
+                 ("wed" "emacs todo" entry (file+olp ,(at-org-dir "/workplace.org") "emacs" "tickets") "* BACKLOG [#C] %? %U :emacs:ticket:")
+                 ("wet" "emacs try" entry (file+olp ,(at-org-dir "/workplace.org") "emacs" "to try") "* %? %U :emacs:try:")
+                 ("wef" "emacs foreign configs" entry (file+olp ,(at-org-dir "/workplace.org") "foreign dotfiles") "* %? %U :emacs-config:")
+                 ("ws" "StumpWM")
+                 ("wsc" "stumpwm todo" entry (file+olp ,(at-org-dir "/workplace.org") "StumpWM" "tickets") "* BACKLOG [#C] %? %U :stumpwm:ticket:")
+                 ("wsf" "stumpwm foreign configs" entry (file+olp ,(at-org-dir "/workplace.org") "StumpWM" "foreign configs") "* %? %U :stumpwm-config:")
+                 ("wa" "awesome config" entry (file+olp ,(at-org-dir "/workplace.org") "AwesomeWM" "foreign configs") "* %? %U :awesome-config:")
+                 ("w." "dotfiles" entry (file+headline ,(at-org-dir "/workplace.org") "foreign dotfiles") "* %? %U :dotfiles:")
+                 ("j" "job tasks")
+                 ("jc" "current" entry (file ,(at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:current:")
+                 ("jb" "bug" entry (file ,(at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:bug:")
+                 ("jr" "reference item" entry (file ,(at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
+                 ("jp" "project" entry (file ,(at-org-dir private/job-tasks-file)) "* BACKLOG %? %U :@job:project:")
+                 ("l" "links")
+                 ("la" "links" entry (file ,(at-org-dir "/links.org")) "* %? %U :links:send:")
+                 ("ld" "deferred tabs" entry (file+olp custom/org-browser-tabs "groups" "deferred tabs") "* %? %U :deferred:")
+                 ("p" "projects")
+                 ("pi" "project ideas" entry (file ,(at-org-dir "/projects.org")) "* %? %U :@project:idea:")
+                 ("pn" "new project" entry (file ,(at-org-dir "/projects.org")) "* %? %U :@project:")
+                 ("i" "sink")
+                 ("ia" "newspaper articles" entry (file ,(at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
+                 ("ic" "code snippet" entry (file ,(at-org-dir "/sink.org"))
+                  "* %^{title} %^g :code_snippet:\n :PROPERTIES:\n :CREATED: %U\n :END:\n\n#+BEGIN_SRC %^{lang}\n %i%?\n#+END_SRC\n")
+                 ("is" "search" entry (file ,(at-org-dir "/sink.org")) "* %? %U :search:")
+                 ("g" "github")
+                 ("gc" "common" entry (file ,(at-org-dir "/github.org")) "* %? %U :github:")
+                 ("gl" "CL repo to review" entry (file ,(at-org-kb-dir "/cl-repos.org")) "* %? %U :github:common_lisp:")
+                 ("m" "mastering" entry (file+headline ,(at-org-dir "/mastering.org") "inbox") "* %? %U")
+                 ))
+         ;; holidays
+         (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
+         (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
+         (setq holiday-other-holidays
+               (append holiday-orthodox-holidays holiday-personal-holidays))
+         (setq calendar-holidays
+               (append holiday-other-holidays
+                       holiday-solar-holidays))
+         (add-hook 'org-mode-hook 'turn-on-font-lock)
+         (add-hook 'org-mode-hook 'org-bullets-mode)
+         (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
+         (add-hook 'org-after-refile-insert-hook 'save-buffer)
+         ;; run some commands
+         (run-at-time nil 60 'org-save-all-org-buffers)
+         (org-add-link-type "tag" 'custom/follow-tag-link)
+         (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
+         (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
+         (run-with-idle-timer 1800 t 'custom/jump-to-custom-agenda-random)
+         (set-charset-priority 'unicode)
+         (turn-on-orgtbl)
+         (run-with-idle-timer custom/idle-clockout-timeout t 'custom/clockout-when-idle)
+         (org-babel-do-load-languages
+          'org-babel-load-languages
+          '((css . t)
+            (dot . t)
+            (ditaa . t)
+            (emacs-lisp . t)
+            (lisp . t)
+            (js . t)
+            (latex . t)
+            (org . t)
+            (plantuml . t)
+            (scheme . t)
+            (shell . t)))
+         (bind-key "<f7> ." 'org-agenda-clock-in org-agenda-mode-map)
+         (bind-key "<f7> ," 'org-agenda-clock-out org-agenda-mode-map)
+         (bind-key "<f7> o" 'ace-link-org org-agenda-mode-map)
+         (bind-key "M-o" 'ace-link-org org-mode-map)
+         (bind-key "C-'" nil org-mode-map)
+         (bind-key "C-c [" nil org-mode-map)
+         (bind-key "C-c ]" nil org-mode-map)
+         (bind-key "C-c C-o" nil org-mode-map)
+         (bind-key "s-j" 'org-babel-next-src-block org-mode-map)
+         (bind-key "s-k" 'org-babel-previous-src-block org-mode-map)
+         (bind-key "s-l" 'org-edit-src-code org-mode-map)
+         (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
+         (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
+         (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
+         (bind-key [remap org-return] 'custom/org-return-dwim org-mode-map))
+     #+END_SRC
 **** advices
      show desktop notifications for org-capture
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (req-package notifications
-         :loader :built-in) ;; relocate properly when it will be used more broader
-
        (defadvice org-protocol-do-capture (around display-notify-after-capture)
          (let ((result ad-do-it))
            (when result
@@ -3565,14 +3953,12 @@
            (remove-text-properties (region-beginning) (region-end)
                                    '(read-only t))))
      #+END_SRC
-**** extensions
+**** additional packages / extensions
      #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package ox-html :loader :path)
 
        (req-package ob-async :loader :elpa)
-     #+END_SRC
-**** additional packages
-     #+BEGIN_SRC emacs-lisp :tangle yes
+
        (req-package org-footnote
          :loader :path
          :defer t)
@@ -3643,58 +4029,7 @@
        (req-package org-link-minor-mode
          :config
          (org-link-minor-mode t))
-     #+END_SRC
-**** common
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (add-to-list 'file-coding-system-alist (cons "\\.\\(org\\|org_archive\\|/TODO\\)$"  'utf-8))
 
-       (setq org-list-demote-modify-bullet '(("+" . "-")
-                                             ("*" . "-")
-                                             ("1." . "-")
-                                             ("1)" . "-")
-                                             ("A)" . "-")
-                                             ("B)" . "-")
-                                             ("a)" . "-")
-                                             ("b)" . "-")
-                                             ("A." . "-")
-                                             ("B." . "-")
-                                             ("a." . "-")
-                                             ("b." . "-")))
-
-       (setq org-lowest-priority 70) ;; extend priorities set (given ascii code)
-
-       (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-       (add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
-     #+END_SRC
-**** user speed commands
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-use-speed-commands 'custom/org-use-speed-commands-for-headings-and-lists)
-       (setq org-use-speed-commands t)
-
-       (add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
-       (add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
-       (add-to-list 'org-speed-commands-user '("s" call-interactively 'org-schedule))
-       (add-to-list 'org-speed-commands-user '("i" call-interactively 'org-clock-in))
-       (add-to-list 'org-speed-commands-user '("o" call-interactively 'org-clock-out))
-       (add-to-list 'org-speed-commands-user '("$" call-interactively 'org-archive-subtree))
-     #+END_SRC
-**** collect files for agenda
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (f-entries (at-org-dir)
-                  (lambda (entry) (when (and (f-file? entry)
-                                             (s-suffix? "org" entry)
-                                             (file-exists-p entry))
-                                    (push entry org-agenda-files)))
-                  t)
-
-       (dolist (orgfile (directory-files (at-org-dir "/journals") t "journal") )
-         (setq org-agenda-files
-               (delete orgfile org-agenda-files)))
-
-       (add-to-list 'org-agenda-files (at-config-basedir "config.org"))
-     #+END_SRC
-**** agenda customizations
-     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package org-super-agenda           ;TODO: investigate options (given initial setup below)
          :loader :elpa
          :config
@@ -3707,417 +4042,16 @@
                         :order 8)
                  (:todo ("SOMEDAY" "WAITING" "FEEDBACK" "OUTDATED")
                         :order 9)
-                 (:priority<= "B"
-                        :order 1)
+                 (:priority<= "B" :order 1)
                  ))
          (org-super-agenda-mode 1))
 
-       (setf org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :narrow 60))
-       (setq org-agenda-dim-blocked-tasks 'invisible)
-       (setq org-agenda-include-all-todo t)
-       (setq org-agenda-include-diary t)
-       (setq org-agenda-inhibit-startup t)
-       (setq org-agenda-persistent-filter t)
-       (setq org-agenda-repeating-timestamp-show-all nil)
-       (setq org-agenda-restore-windows-after-quit t)
-       (setq org-agenda-show-all-dates t)
-       (setq org-agenda-show-inherited-tags nil)
-       (setq org-agenda-show-log t)
-       (setq org-agenda-skip-additional-timestamps-same-entry t)
-       (setq org-agenda-skip-deadline-if-done t)
-       (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
-       (setq org-agenda-skip-scheduled-if-done t)
-       (setq org-agenda-skip-timestamp-if-done t)
-       (setq org-agenda-span 'month)
-       (setq org-agenda-start-on-weekday 1)
-       (setq org-agenda-sticky nil) ;otherwise agenda behaves strangely on non-stuck projects
-       (setq org-agenda-tags-todo-honor-ignore-options t)
-       (setq org-agenda-todo-ignore-deadlines 'all)
-       (setq org-agenda-todo-ignore-scheduled 'all)
-       (setq org-agenda-todo-ignore-timestamp 'past)
-       (setq org-agenda-todo-ignore-with-date t)
-       (setq org-agenda-todo-list-sublevels nil)
-       (setq org-agenda-use-tag-inheritance t)
-       (setq org-agenda-window-setup 'current-window)
-       (setf agenda-opts-all-with-time
-             '((org-agenda-todo-ignore-scheduled nil)
-               (org-agenda-todo-ignore-deadlines nil)
-               (org-agenda-todo-ignore-with-date nil)))
-
-
-       (setq org-agenda-time-grid
-             '((daily today require-timed remove-match)
-               "----------------"
-               (930 1000 1200 1400 1600 1800 2000 2200 2400 2500)))
-
-       (setq org-agenda-custom-commands
-             `(("d" . "some non-straightforward TODO statuses")
-               ("db" todo "BACKLOG" nil)
-               ("ds" todo "SOON" nil)
-               ("dc" todo "CANCELLED" nil)
-               ("dw" todo "WAITING|FEEDBACK" nil)
-               ("dg" todo "GOING" ,agenda-opts-all-with-time)
-               ("da" tags "+actual_p")
-               ("c" . "by context")
-               ("cp" tags "+@personal/GOING|WAITING|BACKLOG|SOON")
-               ("cr" tags "+@project/GOING|WAITING|BACKLOG|SOON")
-               ("cj" tags "+@job/GOING|WAITING|FEEDBACK|BACKLOG|SOON")
-               ("cw" tags "+@workplace/GOING|WAITING|BACKLOG|SOON")
-               ("ct" tags "+@phonecall/WAITING|BACKLOG|SOON")
-               ("cs" tags "+@someday")
-               ("cq" tags "+@quicknote")
-               ("e" . "by essence")
-               ;;TODO: find more handy shortcuts
-               ("ec" tags "+current")
-               ("ef" tags "+reference")
-               ("em" tags "+master")
-               ("eo" tags "+ordering")
-               ("er" tags "+repair")
-               ("ed" tags "+develop")
-               ("ei" tags "+investigate")
-               ("ee" tags "+entertainment")
-               ("ey" tags "+family")
-               ("eH" tags-todo "+housekeeping")
-               ("eC" tags-todo "+current")
-               ("eF" tags-todo "+reference")
-               ("eM" tags-todo "+master")
-               ("eO" tags-todo "+ordering")
-               ("eR" tags-todo "+repair")
-               ("eD" tags-todo "+develop")
-               ("eI" tags-todo "+investigate")
-               ("eE" tags-todo "+entertainment")
-               ("u" . "unassigned")
-               ("up" alltodo "Unprioritized TODO entries"
-                ((org-agenda-skip-function
-                  (lambda nil
-                    (org-agenda-skip-entry-if 'regexp "\\[#[ABC]]")))
-                 (org-tags-match-list-sublevels 'indented)
-                 (org-agenda-sorting-strategy
-                  '((agenda time-up tag-up) ))
-                 ;; '(org-agenda-sorting-strategy '((agenda time-up priority-down tag-up) (todo tag-up)))
-                 (org-agenda-overriding-header "Unprioritized TODO entries: ")))
-               ("P" . "Prioritized tasks")
-               ("Pa" "Prioritized tasks A"
-                ((tags-todo "+PRIORITY=\"A\"") ))
-               ("Pb" "Prioritized tasks B"
-                ((tags-todo "+PRIORITY=\"B\"")))
-               ("Pc" "Prioritized tasks C"
-                ((tags-todo "+PRIORITY=\"C\"")))
-               ("S" "Scheduled tasks" agenda ""
-                ((org-agenda-time-grid nil)
-                 (org-deadline-warning-days 32)
-                 (org-agenda-entry-types '(:scheduled))
-                 ))
-               ("p" tags "+purchase")
-               ("b" . "tickets")
-               ("be" tags "+ticket+emacs")
-               ("bs" tags "+ticket+stumpwm")
-               ("jc" tags "+@job+current/GOING|FEEDBACK")
-               ))
-
-       (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s %b")
-                                        (timeline . "  % s")
-                                        (todo . " %i %-12:c")
-                                        (tags . " %i %-12:c")
-                                        (search . " %i %-12:c")))
-     #+END_SRC
-**** clocking customizations
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-clock-history-length 35)
-       (setq org-clock-idle-time 3)
-       (setq org-clock-in-resume t)
-       (setq org-clock-in-switch-to-state "GOING")
-       (setq org-clock-out-switch-to-state "HOLD")
-       (setq org-clock-into-drawer "CLOCK")
-       (setq org-clock-out-remove-zero-time-clocks t)
-       (setq org-clock-persist t)
-
-       ;; just clock-out unconditionally - it seems easier to maintain
-       ;; credits to @binarin
-       (setf org-clock-x11idle-program-name "xprintidle")
-       (setf org-x11idle-exists-p t)
-
-       (define-namespace custom/
-
-       ;; (SEC-HIGH SEC-LOW MICROSEC PICOSEC) current-idle-time
-       (defvar idle-clockout-timeout 1800
-         "Perform first attempt to clock-out after this period of emacs
-          inactivity. It can decide to postpone the clocking-out if it's
-          only emacs that is idle, but not the computer itself.")
-
-       (defvar idle-clockout-recheck-interval 300
-         "After a sufficient idle time was achieved by emacs, we'll
-          periodically check current idle time of the whole OS to decide
-          whether we need to clock out")
-
-       (defvar idle-clockout-repeat-timer nil
-         "Timer for repeatedly (during a single idle interval) checking
-          whether we need to clock-out")
-
-       (defun clockout-when-idle ()
-         (awhen custom/idle-clockout-repeat-timer
-           (cancel-timer it))
-         (when (org-clocking-p)
-           (if (> (org-user-idle-seconds)
-                  custom/idle-clockout-timeout)
-               (let ((org-clock-out-switch-to-state "WAITING")) ;TODO: introduce variable
-                 (org-clock-out nil t))
-             (setf custom/idle-clockout-repeat-timer
-                   (run-with-idle-timer
-                    (time-add (current-idle-time) custom/idle-clockout-recheck-interval)
-                    nil
-                    'custom/clockout-when-idle)))))
-
-       )
-
-       (run-with-idle-timer custom/idle-clockout-timeout t 'custom/clockout-when-idle)
-     #+END_SRC
-**** refiling customizations
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-refile-target-verify-function 'custom/verify-refile-target)
-       (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
-       (setq org-refile-use-outline-path 'file)
-     #+END_SRC
-**** various customizations
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setf org-catch-invisible-edits nil)
-       (setf org-fast-tag-selection-include-todo nil)
-       (setf org-id-link-to-org-use-id t)
-       (setq appt-display-interval 5)
-       (setq appt-message-warning-time 10)
-       (setq calendar-date-style 'european)
-       (setq org-M-RET-may-split-line '((default . nil)))
-       (setq org-align-all-tags t)
-       (setq org-attach-directory (at-org-dir "/org-attach-data"))
-       (setq org-blank-before-new-entry '((heading) (plain-list-item . auto)))
-       (setq org-columns-default-format "%42ITEM %TODO %3Effort(E){:} %3CLOCKSUM_T(R) %SCHEDULED")
-       (setq org-confirm-elisp-link-function 'y-or-n-p)
-       (setq org-ctrl-k-protect-subtree t)
-       (setq org-cycle-include-plain-lists 'integrate)
-       (setq org-cycle-separator-lines 0)
-       (setq org-deadline-warning-days 30)
-       (setq org-default-notes-file (at-org-dir "/refile.org"))
-       (setq org-ditaa-jar-path (at-config-basedir "resources/ditaa0_9.jar"))
-       (setq org-element-use-cache nil)
-       (setq org-enforce-todo-checkbox-dependencies t)
-       (setq org-enforce-todo-dependencies t)  ;;TODO: try ORDERED/NOBLOCKING props : org-toggle-ordered-property
-       (setq org-export-coding-system 'utf-8)
-       (setq org-export-with-drawers t)
-       (setq org-extend-today-until 2)
-       (setq org-fast-tag-selection-single-key 'expert)
-       (setq org-fontify-done-headline t)
-       (setq org-global-properties '(("STYLE_ALL" . "habit")))
-       (setq org-goto-max-level 10)
-       (setq org-hide-leading-stars t)
-       (setq org-indirect-buffer-display 'current-window)
-       (setq org-insert-mode-line-in-empty-file t)
-       (setq org-log-done t)
-       (setq org-log-into-drawer t)
-       (setq org-log-repeat 'time)
-       (setq org-loop-over-headlines-in-active-region t)
-       (setq org-outline-path-complete-in-steps nil)
-       (setq org-read-date-prefer-future 'time)
-       (setq org-return-follows-link t)
-       (setq org-special-ctrl-a/e t)
-       (setq org-special-ctrl-k t)
-       (setq org-src-fontify-natively t)
-       (setq org-startup-folded nil)
-       (setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
-       (setq org-tags-column -80)
-       (setq org-track-ordered-property-with-tag t)
-       (setq org-use-effective-time t)
-       (setq org-use-property-inheritance t)
-       (setq org-use-sub-superscripts nil)
-       (setq org-yank-adjusted-subtrees t)
-       (setq org-agenda-show-future-repeats 'next)
-       (setq org-highlight-latex-and-related '(latex))
-       (setq org-confirm-shell-link-function 'y-or-n-p)
-       (setq org-confirm-elisp-link-function 'y-or-n-p)
-       (setq org-src-window-setup 'current-window)
-
-       (when (featurep 'unicode-fonts)
-         (setq org-ellipsis "⤵"))
-     #+END_SRC
-**** keywords setup
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq kw-seq-common '(sequence "BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"
-                                      "|" "DONE(d!/@)" "CANCELLED(c@/!)" "OUTDATED(o)"))
-       (setq org-todo-keywords
-             `(,kw-seq-common))
-       (setq org-todo-keywords-for-agenda '("BACKLOG(b)" "SOON(s)" "REPEAT(r)" "GOING(g!)" "NEXT(x)" "WAITING(w@/!)" "FEEDBACK"))
-       (setq org-done-keywords-for-agenda '("DONE(d)" "CANCELLED(c)" "OUTDATED(o)"))
-     #+END_SRC
-**** faces
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-todo-keyword-faces
-             '(("BACKLOG" . (:foreground "gray" :weight bold))
-               ("SOON" . (:foreground "magenta" :weight bold))
-               ("REPEAT" . (:foreground "blue" :weight bold))
-               ("NEXT" . (:foreground "red" :weight bold))
-               ("WAITING" . (:foreground "orange" :weight bold))
-               ("FEEDBACK" . (:foreground "yellow" :weight bold))
-               ("CANCELLED" . (:foreground "cyan" :weight bold))
-               ("DONE" . (:foreground "green" :weight bold))))
-
-       (setq org-priority-faces
-             '((?A :foreground "red" :weight bold)
-               (?B :foreground "#94bff3" :weight bold)
-               (?C :foreground "#6f6f6f")
-               (?D :foreground "#c390d4")
-               (?E :foreground "#90c3d4")
-               (?F :foreground "#a1d490")))
-
-       (set-face-attribute 'org-done nil :foreground "PaleGreen" :weight 'normal :strike-through t)
-       (set-face-attribute 'org-headline-done nil :foreground "LightSalmon" :weight 'normal :strike-through t)
-     #+END_SRC
-**** tags
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-tag-alist '(("current" . ?c)
-                             ("reference" . ?f)
-                             ("orgmode" . ?g)
-                             ("purchase" . ?p)
-                             ("master" . ?m)
-                             ("ordering" . ?o)
-                             ("housekeeping" . ?h)
-                             ("entertainment" . ?e)
-                             ("interesting" . ?i)
-                             ("repair" . ?r)
-                             ))
-       (setq org-tags-exclude-from-inheritance '("project"))
-
-       (setq org-todo-state-tags-triggers
-             '(("GOING" ("current" . t))
-               ("DONE" ("current"))))
-
-       (setq org-complete-tags-always-offer-all-agenda-tags t)
-     #+END_SRC
-***** BACKLOG review whole tags cloud (in org corpus) and update org-tag-alist accordingly
-**** org-habit
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-habit-graph-column 50)
-       (setq org-habit-preceding-days 10)
-       (setq org-habit-following-days 4)
-       (setq org-habit-show-habits-only-for-today nil)
-     #+END_SRC
-**** org-capture
-     org-id usage example for the future:
-     "* TODO___ %a\n  :PROPERTIES:\n  :ID: %(org-id-new)\n  :END:\n  %U\n\n  %i"
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq org-capture-templates
-             `(("q" "quick notes (uncategorized)" entry (file ,(at-org-dir "/refile.org")) "* %? %U :@quicknote:")
-               ("w" "workplace")
-               ("wt" "workplace try" entry (file+olp ,(at-org-dir "/workplace.org") "workplace" "tools reference") "* %? %U :@workplace:try")
-               ("wd" "workplace tasks" entry (file+olp ,(at-org-dir "/workplace.org") "workplace" "tasks") "* BACKLOG [#C] %? %U :@workplace:")
-               ("we" "emacs")
-               ("wed" "emacs todo" entry (file+olp ,(at-org-dir "/workplace.org") "emacs" "tickets") "* BACKLOG [#C] %? %U :emacs:ticket:")
-               ("wet" "emacs try" entry (file+olp ,(at-org-dir "/workplace.org") "emacs" "to try") "* %? %U :emacs:try:")
-               ("wef" "emacs foreign configs" entry (file+olp ,(at-org-dir "/workplace.org") "foreign dotfiles") "* %? %U :emacs-config:")
-               ("ws" "StumpWM")
-               ("wsc" "stumpwm todo" entry (file+olp ,(at-org-dir "/workplace.org") "StumpWM" "tickets") "* BACKLOG [#C] %? %U :stumpwm:ticket:")
-               ("wsf" "stumpwm foreign configs" entry (file+olp ,(at-org-dir "/workplace.org") "StumpWM" "foreign configs") "* %? %U :stumpwm-config:")
-               ("wa" "awesome config" entry (file+olp ,(at-org-dir "/workplace.org") "AwesomeWM" "foreign configs") "* %? %U :awesome-config:")
-               ("w." "dotfiles" entry (file+headline ,(at-org-dir "/workplace.org") "foreign dotfiles") "* %? %U :dotfiles:")
-               ("j" "job tasks")
-               ("jc" "current" entry (file ,(at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:current:")
-               ("jb" "bug" entry (file ,(at-org-dir private/job-tasks-file)) "* SOON %? %U :@job:bug:")
-               ("jr" "reference item" entry (file ,(at-org-dir private/job-tasks-file)) "* %? %U :@job:reference:")
-               ("jp" "project" entry (file ,(at-org-dir private/job-tasks-file)) "* BACKLOG %? %U :@job:project:")
-               ("l" "links")
-               ("la" "links" entry (file ,(at-org-dir "/links.org")) "* %? %U :links:send:")
-               ("ld" "deferred tabs" entry (file+olp custom/org-browser-tabs "groups" "deferred tabs") "* %? %U :deferred:")
-               ("p" "projects")
-               ("pi" "project ideas" entry (file ,(at-org-dir "/projects.org")) "* %? %U :@project:idea:")
-               ("pn" "new project" entry (file ,(at-org-dir "/projects.org")) "* %? %U :@project:")
-               ("i" "sink")
-               ("ia" "newspaper articles" entry (file ,(at-org-dir "/sink.org")) "* %? %U :newspaper:toread:")
-               ("ic" "code snippet" entry (file ,(at-org-dir "/sink.org"))
-                "* %^{title} %^g :code_snippet:\n :PROPERTIES:\n :CREATED: %U\n :END:\n\n#+BEGIN_SRC %^{lang}\n %i%?\n#+END_SRC\n")
-               ("is" "search" entry (file ,(at-org-dir "/sink.org")) "* %? %U :search:")
-               ("g" "github")
-               ("gc" "common" entry (file ,(at-org-dir "/github.org")) "* %? %U :github:")
-               ("gl" "CL repo to review" entry (file ,(at-org-kb-dir "/cl-repos.org")) "* %? %U :github:common_lisp:")
-               ("m" "mastering" entry (file+headline ,(at-org-dir "/mastering.org") "inbox") "* %? %U")
-               ))
-     #+END_SRC
-**** holidays
-     #+BEGIN_SRC emacs-lisp :tangle yes
        (req-package russian-holidays
          :loader :elpa
          :config
          (setq calendar-holidays
                (push russian-holidays calendar-holidays)))
-
-       (setq holiday-orthodox-holidays nil) ; Orthodox holidays to some extent
-       (setq holiday-personal-holidays nil) ; personal anniversaries, etc.
-
-       (setq holiday-other-holidays
-             (append holiday-orthodox-holidays holiday-personal-holidays))
-
-       (setq calendar-holidays
-             (append holiday-other-holidays
-                     holiday-solar-holidays))
      #+END_SRC
-**** hooks
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (add-hook 'org-mode-hook 'turn-on-font-lock)
-       (add-hook 'org-mode-hook 'org-bullets-mode)
-       (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
-       (add-hook 'org-after-refile-insert-hook 'save-buffer)
-     #+END_SRC
-**** run some commands
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (run-at-time nil 60 'org-save-all-org-buffers)
-       (org-add-link-type "tag" 'custom/follow-tag-link)
-       (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
-       (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
-       (run-with-idle-timer 1800 t 'custom/jump-to-custom-agenda-random)
-       (set-charset-priority 'unicode)
-       (turn-on-orgtbl)
-
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((css . t)
-          (dot . t)
-          (ditaa . t)
-          (emacs-lisp . t)
-          (lisp . t)
-          (js . t)
-          (latex . t)
-          (org . t)
-          (plantuml . t)
-          (scheme . t)
-          (shell . t)))
-     #+END_SRC
-**** keybindings
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (bind-key "<f7> ." 'org-agenda-clock-in org-agenda-mode-map)
-       (bind-key "<f7> ," 'org-agenda-clock-out org-agenda-mode-map)
-       (bind-key "<f7> o" 'ace-link-org org-agenda-mode-map)
-       (bind-key "M-o" 'ace-link-org org-mode-map)
-
-       (bind-key "C-'" nil org-mode-map)
-       (bind-key "C-c [" nil org-mode-map)
-       (bind-key "C-c ]" nil org-mode-map)
-       (bind-key "C-c C-o" nil org-mode-map)
-
-       (bind-key "s-j" 'org-babel-next-src-block org-mode-map)
-       (bind-key "s-k" 'org-babel-previous-src-block org-mode-map)
-       (bind-key "s-l" 'org-edit-src-code org-mode-map)
-       (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
-
-       (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
-       (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
-
-       (bind-key [remap org-return] 'custom/org-return-dwim org-mode-map)
-     #+END_SRC
-*** try
-**** file+datetree navigation
-     #+BEGIN_SRC emacs-lisp :tangle no
-       (goto-char (org-find-olp (list "2016" "2016-01 January") 't))
-       (goto-char (org-find-exact-headline-in-buffer "2016-01 January"))
-     #+END_SRC
-**** BACKLOG org-log-re{schedule, deadline}
-**** BACKLOG https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 ** hydras
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-pim ()
