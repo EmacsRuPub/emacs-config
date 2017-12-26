@@ -1184,8 +1184,8 @@
         :commands anchored-transpose)
 
       (use-package snakehump
-        :ensure t
-        :disabled ;; FIXME: use quelpa
+        :quelpa
+        (snakehump :repo "aes/snakehump" :fetcher github :version original)
         :commands snakehump-next-at-point snakehump-prev-at-point)
 
       (use-package adaptive-wrap :ensure t)
@@ -1440,8 +1440,8 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: maybe relocate
      (use-package highlight-sexp
-       :ensure t
-       :disabled ;; FIXME: find the right source and use quelpa
+       :quelpa
+       (highlight-sexp :repo "daimrod/highlight-sexp" :fetcher github :version original)
        :delight highlight-sexp-mode
        :hook ((lisp-mode-hook emacs-lisp-mode-hook) . highlight-sexp-mode))
 

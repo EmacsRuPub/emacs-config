@@ -16,10 +16,18 @@
         ("melpa" . 10)))
 (package-initialize)
 
+(unless (require 'quelpa nil t) ;;TODO: consider trying self-upgrades
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
+
 (require 'cl)
 
 (setq use-package-verbose t)
 (setq use-package-hook-name-suffix "")
+
+(use-package quelpa :ensure t)
+(use-package quelpa-use-package :ensure t)
 
 (setq load-prefer-newer t)
 
