@@ -27,7 +27,11 @@
 (setq use-package-hook-name-suffix "")
 
 (use-package quelpa :ensure t)
-(use-package quelpa-use-package :ensure t)
+(use-package quelpa-use-package
+  :ensure t
+  :custom
+  (quelpa-use-package-inhibit-loading-quelpa
+   t "Improve performance"))
 
 (setq load-prefer-newer t)
 
