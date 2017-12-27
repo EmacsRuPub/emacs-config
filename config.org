@@ -811,9 +811,6 @@
          :ensure t
          :config
          (dired-quick-sort-setup))
-       (use-package dired-collapse
-         :ensure t
-         :hook (dired-mode-hook . dired-collapse-mode))
        (use-package diredfl
          :ensure t
          :config
