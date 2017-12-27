@@ -67,6 +67,9 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns x))
+  :custom
+  (exec-path-from-shell-check-startup-files
+   nil "Used WM(s) do not check non-interactive startup files anyway")
   :config
   (exec-path-from-shell-initialize))
 
