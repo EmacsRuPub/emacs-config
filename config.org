@@ -2219,7 +2219,7 @@
          :pin melpa-stable ;; corresponds to quicklisp version
          :hook ((lisp-mode-hook . custom/slime-hook)
                 (inferior-lisp-mode-hook . custom/inferior-slime)
-                (slime-mode-hook . custom/slime-autodoc)
+                ;; (slime-mode-hook . custom/slime-autodoc) ;; some signature down the call stack is broken in 2.20
                 (lisp-mode-hook . custom/lisp-mode-hook)
                 (lisp-mode-hook . common-hooks/newline-hook)
                 (lisp-mode-hook . common-hooks/prog-helpers))
