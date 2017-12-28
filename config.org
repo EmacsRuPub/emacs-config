@@ -1870,19 +1870,28 @@
         (flycheck-pos-tip-mode))
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
-*** docker
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package docker
-        :ensure t
-        :after (dash docker-tramp magit-popup s tablist json-mode)
-        :delight docker-mode
-        :config
-        ;;TODO: bind keys
-        (docker-global-mode))
+*** virtualization
+**** navigation
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (use-package counsel-tramp
+         :ensure t
+         :after (docker-tramp vagrant-tramp)
+         :bind ("C-c s" . counsel-tramp))
+     #+END_SRC
+**** methods
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (use-package docker
+         :ensure t
+         :after (dash docker-tramp magit-popup s tablist json-mode)
+         :delight docker-mode
+         :config
+         ;;TODO: bind keys
+         (docker-global-mode))
 
-      (use-package docker-tramp :ensure t)
-      ;; TODO: think of some automation of opening files with docker (and other TRAMP backends as well)
-    #+END_SRC
+       (use-package docker-tramp :ensure t)
+
+       (use-package vagrant-tramp :ensure t)
+     #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package c-eldoc :ensure t)
