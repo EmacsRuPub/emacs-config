@@ -742,6 +742,14 @@
                 (unless (eq fr frame) (condition-case nil (delete-frame fr) (error nil))))))
            (t t))))
     #+END_SRC
+** unset keybindings
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (global-unset-key (kbd "C-s"))
+      (global-unset-key (kbd "C-r"))
+      (global-unset-key (kbd "C-M-s"))
+      (global-unset-key (kbd "C-M-r"))
+      (global-unset-key (kbd "C-x C-b"))
+    #+END_SRC
 ** special modes navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package beginend
@@ -1079,13 +1087,6 @@
        ("<return>" custom/process-thing-at-point "execute ;)" :color blue))
      (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
-     (global-unset-key (kbd "C-s"))
-     (global-unset-key (kbd "C-r"))
-     (global-unset-key (kbd "C-M-s"))
-     (global-unset-key (kbd "C-M-r"))
-     (global-unset-key (kbd "C-x C-b"))
-     (global-set-key (kbd "C-s") 'phi-search)
-     (global-set-key (kbd "C-r") 'phi-search-backward)
      (global-set-key (kbd "C-x k") 'kill-buffer)
    #+END_SRC
 * editing
