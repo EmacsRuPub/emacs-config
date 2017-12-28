@@ -1983,6 +1983,7 @@
         :bind (:map magit-status-mode-map
                ("E" . magit-rebase-interactive))
         :custom
+        (magit-completing-read-function 'ivy-completing-read)
         (magit-blame-heading-format "%H %-20a %C %s")
         (magit-diff-refine-hunk t)
         (magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
