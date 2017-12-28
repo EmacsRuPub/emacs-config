@@ -3000,13 +3000,19 @@
           (if (member "unread" (notmuch-search-get-tags))
               (notmuch-search-tag '("-unread" "-spam"))
             (notmuch-search-tag '("+unread")))))
+
+      (use-package counsel-notmuch
+        :ensure t
+        :after (counsel notmuch)
+        :commands counsel-notmuch)
     #+END_SRC
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-email (:exit t :color red :idle 1.0)
         "Read mail"
-        ("n" notmuch nil))
+        ("n" notmuch nil)
+        ("N" counsel-notmuch nil))
       (global-set-key (kbd "C-c 4") 'hydra-email/body)
     #+END_SRC
 ** security
