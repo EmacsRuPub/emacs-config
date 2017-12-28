@@ -971,6 +971,7 @@
      (use-package swiper
        :ensure t
        :commands swiper swiper-multi swiper-occur
+       :bind ("C-s" . swiper)
        :custom
        (swiper-include-line-number-in-search t)
        :custom-face (swiper-match-face-1 ((t (:background "#dddddd"))))
