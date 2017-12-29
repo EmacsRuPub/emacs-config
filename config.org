@@ -2142,86 +2142,86 @@
      #+END_SRC
 *** javascript
     #+BEGIN_SRC emacs-lisp :tangle no
-            (use-package js2-mode
-              :ensure t
-              :mode ("\\.js$" . js2-mode)
-              :hook ((js2-post-parse-callbacks-hook . custom/parse-additional-externs)
-                     (js2-mode-hook . custom/js-setup-flycheck))
-              :custom
-              :config
-              (use-package js2-imenu-extras :ensure t)
-              (use-package xref-js2 :ensure t)
-              (js2-imenu-extras-setup)
-              (setq js2-use-font-lock-faces t)
-              (setq js2-allow-keywords-as-property-names nil)
-              (setq js2-bounce-indent-flag nil)
-              (setq js2-cleanup-whitespace t)
-              (setq js2-enter-indents-newline nil)
-              (setq js2-highlight-level 3)
-              (setq js2-indent-on-enter-key nil)
-              (setq js2-skip-preprocessor-directives t)
-              (setq js2-basic-offset 4)
-              (setq js2-bounce-indent-p t)
-              ;; Special improvements using the mooz fork
-              ;; https://github.com/mooz/js2-mode
-              (setq js2-consistent-level-indent-inner-bracket-p t)
-              (setq js2-use-ast-for-indentation-p t)
-              (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
-              (setq-default js2-global-externs
-                            '("module" "require" "jQuery" "$" "_" "buster"
-                              "sinon" "assert" "refute" "setTimeout" "clearTimeout"
-                              "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
-              (setq-default js2-idle-timer-delay 0.1)
-              (setq-default js2-mirror-mode t)
-              (setq-default js2-auto-indent-p t)
-              (setq-default js2-concat-multiline-strings 'eol)
-              ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
-              ;; add any symbols to a buffer-local var of acceptable global vars
-              ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
-              ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
-              ;; you can;t have a symbol called "someName:false"
-              (defun custom/parse-additional-externs ()
-                (when (> (buffer-size) 0)
-                  (let ((btext (replace-regexp-in-string
-                                ": *true" " "
-                                (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
-                              (mapc (apply-partially 'add-to-list 'js2-additional-externs)
-                                    (split-string
-                                     (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
-                                     " *, *" t))
-                              )))
-              (defun custom/js-setup-flycheck ()
-                (setq flycheck-checker 'javascript-jshint)
-                (tern-mode t))
-              ;;TODO: maybe make hydra
-              (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
-              (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
-              (bind-key "C-c b" 'js-send-buffer js2-mode-map)
-              (bind-key "C-c C-b" 'js-send-buffer-and-go js2-mode-map)
-              (bind-key "C-c l" 'js-load-file-and-go js2-mode-map))
+      (use-package js2-mode
+        :ensure t
+        :mode ("\\.js$" . js2-mode)
+        :hook ((js2-post-parse-callbacks-hook . custom/parse-additional-externs)
+               (js2-mode-hook . custom/js-setup-flycheck))
+        :custom
+        :config
+        (use-package js2-imenu-extras :ensure t)
+        (use-package xref-js2 :ensure t)
+        (js2-imenu-extras-setup)
+        (setq js2-use-font-lock-faces t)
+        (setq js2-allow-keywords-as-property-names nil)
+        (setq js2-bounce-indent-flag nil)
+        (setq js2-cleanup-whitespace t)
+        (setq js2-enter-indents-newline nil)
+        (setq js2-highlight-level 3)
+        (setq js2-indent-on-enter-key nil)
+        (setq js2-skip-preprocessor-directives t)
+        (setq js2-basic-offset 4)
+        (setq js2-bounce-indent-p t)
+        ;; Special improvements using the mooz fork
+        ;; https://github.com/mooz/js2-mode
+        (setq js2-consistent-level-indent-inner-bracket-p t)
+        (setq js2-use-ast-for-indentation-p t)
+        (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode))
+        (setq-default js2-global-externs
+                      '("module" "require" "jQuery" "$" "_" "buster"
+                        "sinon" "assert" "refute" "setTimeout" "clearTimeout"
+                        "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
+        (setq-default js2-idle-timer-delay 0.1)
+        (setq-default js2-mirror-mode t)
+        (setq-default js2-auto-indent-p t)
+        (setq-default js2-concat-multiline-strings 'eol)
+        ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
+        ;; add any symbols to a buffer-local var of acceptable global vars
+        ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
+        ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
+        ;; you can;t have a symbol called "someName:false"
+        (defun custom/parse-additional-externs ()
+          (when (> (buffer-size) 0)
+            (let ((btext (replace-regexp-in-string
+                          ": *true" " "
+                          (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
+                        (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+                              (split-string
+                               (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+                               " *, *" t))
+                        )))
+        (defun custom/js-setup-flycheck ()
+          (setq flycheck-checker 'javascript-jshint)
+          (tern-mode t))
+        ;;TODO: maybe make hydra
+        (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
+        (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
+        (bind-key "C-c b" 'js-send-buffer js2-mode-map)
+        (bind-key "C-c C-b" 'js-send-buffer-and-go js2-mode-map)
+        (bind-key "C-c l" 'js-load-file-and-go js2-mode-map))
 
-            ;; TODO: play with js2-refactor
-            (use-package js2-refactor
-              :ensure t
-              :after (js2-mode s multiple-cursors dash s yasnippet)
-              :config
-              (js2r-add-keybindings-with-prefix "C-c C-j"))
+      ;; TODO: play with js2-refactor
+      (use-package js2-refactor
+        :ensure t
+        :after (js2-mode s multiple-cursors dash s yasnippet)
+        :config
+        (js2r-add-keybindings-with-prefix "C-c C-j"))
 
-            (use-package tern
-              :ensure t
-              :after (json cl-lib)
-              :commands tern-mode)
+      (use-package tern
+        :ensure t
+        :after (json cl-lib)
+        :commands tern-mode)
 
-            (use-package company-tern
-              :ensure t
-              :after (company tern))
+      (use-package company-tern
+        :ensure t
+        :after (company tern))
 
-            (use-package xref-js2
-              :ensure t
-              :after (js2-mode)
-              :bind (:map js2-mode-map
-                          ("M-." . nil))
-              :hook (xref-backend-functions . xref-js2-xref-backend))
+      (use-package xref-js2
+        :ensure t
+        :after (js2-mode)
+        :bind (:map js2-mode-map
+                    ("M-." . nil))
+        :hook (xref-backend-functions . xref-js2-xref-backend))
     #+END_SRC
 *** lisp
 **** slime setup
