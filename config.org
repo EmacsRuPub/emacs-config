@@ -2897,8 +2897,6 @@
 
      (use-package mingus
        :ensure t
-       ;; :demand t
-       ;; :after (libmpdee)
        :bind (("C-c m" . hydra-mingus/body)
               :map mingus-playlist-map
               ("<Backspace>" . mingus-del))
