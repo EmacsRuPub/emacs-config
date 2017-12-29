@@ -4002,6 +4002,11 @@
 * publishing
 ** setup
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (defun custom/tex-mode-hook ()
+         (TeX-fold-mode 1)
+         (turn-on-bib-cite)
+         (setq bib-cite-use-reftex-view-crossref t))
+
      (use-package whizzytex
        :config
        (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv"))))
@@ -4033,11 +4038,7 @@
        :custom
        (TeX-auto-save t)
        :config
-       (use-package tex-fold)
-       (defun custom/tex-mode-hook ()
-         (TeX-fold-mode 1)
-         (turn-on-bib-cite)
-         (setq bib-cite-use-reftex-view-crossref t)))
+       (use-package tex-fold))
 
      (use-package latex
        :mode ("\\.tex$" . latex-mode)
