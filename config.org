@@ -1764,6 +1764,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package company
         :ensure t
+        :demand t
         :delight (company-mode " γ")
         :bind (:map company-active-map
                ("\C-n" . company-select-next)
