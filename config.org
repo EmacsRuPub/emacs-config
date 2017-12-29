@@ -309,7 +309,7 @@
 ** emacs server
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package server
-       :hook (server-visit-hook . custom/server-update-keybindings)
+       :hook (server-visit-hook . (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
        :config
        (defun custom/server-save-edit ()
          (interactive)
@@ -320,8 +320,6 @@
          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
              (server-save-edit)
            (save-buffers-kill-emacs t)))
-       (defun custom/server-update-keybindings ()
-         (local-set-key (kbd "C-c C-c") 'custom/server-save-edit))
        (unless (and (string-equal "root" (getenv "USER"))
                     (server-running-p))
          (require 'server)
@@ -790,17 +788,16 @@
        :hook (dired-mode-hook . auto-revert-mode)
        :bind (:map dired-mode-map
               ("C-c C-m" . custom/get-file-md5)
-              ("e" . custom/eww-visit-file)
+              ("e" . (lambda ()
+                       (interactive)
+                       (when (derived-mode-p 'dired-mode)
+                         (eww-open-file (dired-get-file-for-visit)))))
               ("C-x C-k" . dired-do-delete))
        :custom
        (dired-recursive-deletes 'top) ;; Allows recursive deletes
        (dired-dwim-target t)
        (dired-listing-switches "-lah1v --group-directories-first")
        :config
-       (defun custom/eww-visit-file ()
-         (interactive)
-         (when (derived-mode-p 'dired-mode)
-           (eww-open-file (dired-get-file-for-visit))))
        (use-package dired-filetype-face :ensure t)
        (use-package dired+
          :ensure t
@@ -930,9 +927,13 @@
      (use-package ibuffer
        :commands ibuffer
        :bind (:map ibuffer-mode-map
-              ("/ ." . custom/ibuffer-filter-by-extname)
+              ("/ ." . (lambda (qualifier)
+                         (interactive "sFilter by extname: ")
+                         (ibuffer-filter-by-filename (concat "\\." qualifier "$"))))
               ("M-o" . other-window)) ; was ibuffer-visit-buffer-1-window
-       :hook (ibuffer-mode-hook . custom/ibuffer-goto-default)
+       :hook (ibuffer-mode-hook . (lambda ()
+                                    ;; Make sure we're always using our buffer groups
+                                    (ibuffer-switch-to-saved-filter-groups "default")))
        :custom
        (ibuffer-default-sorting-mode 'major-mode) ;recency
        (ibuffer-always-show-last-buffer :nomini)
@@ -947,23 +948,14 @@
           ("elisp" ((mode . emacs-lisp-mode)))
           ("fundamental" ((mode . fundamental-mode)))
           ("haskell" ((mode . haskell-mode)))))
-       (ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups)
-       :config
-       (defun custom/ibuffer-filter-by-extname (qualifier)
-         (interactive "sFilter by extname: ")
-         (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
-       (defun custom/ibuffer-goto-default ()
-         ;; Make sure we're always using our buffer groups
-         (ibuffer-switch-to-saved-filter-groups "default")))
+       (ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups))
 
      (use-package ibuffer-vc
        :ensure t
-       :hook (ibuffer-hook . custom/ibuffer-vc-setup)
-       :config
-       (defun custom/ibuffer-vc-setup ()
-         (ibuffer-vc-set-filter-groups-by-vc-root)
-         (unless (eq ibuffer-sorting-mode 'alphabetic)
-           (ibuffer-do-sort-by-alphabetic))))
+       :hook (ibuffer-hook . (lambda ()
+                               (ibuffer-vc-set-filter-groups-by-vc-root)
+                               (unless (eq ibuffer-sorting-mode 'alphabetic)
+                                 (ibuffer-do-sort-by-alphabetic)))))
 
      (use-package recursive-narrow :ensure t)
    #+END_SRC
@@ -2052,13 +2044,11 @@
 *** smerge mode
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package smerge-mode
-        :hook (find-file-hooks . sm-try-smerge)
-        :config
-        (defun sm-try-smerge ()
-          (save-excursion
-            (goto-char (point-min))
-            (when (re-search-forward "^<<<<<<< " nil t)
-              (smerge-mode 1)))))
+        :hook (find-file-hooks . (lambda ()
+                                   (save-excursion
+                                     (goto-char (point-min))
+                                     (when (re-search-forward "^<<<<<<< " nil t)
+                                       (smerge-mode 1))))))
     #+END_SRC
 **** BACKLOG try to make hydra, neat functions detected
 *** hydra
@@ -2112,12 +2102,6 @@
        (setq eval-expression-print-length nil)
        (setq eval-expression-print-level nil)
 
-       (defun custom/elisp-mode-hook ()
-         (auto-fill-mode 1)
-         (setq indent-tabs-mode nil)
-         (setq comment-start ";;")
-         (turn-on-eldoc-mode))
-
        (use-package edebug-x :ensure t)
 
        (use-package elisp-slime-nav
@@ -2126,7 +2110,11 @@
          :hook ((emacs-lisp-mode-hook ielm-mode-hook) . elisp-slime-nav-mode))
 
        (use-package elisp-mode
-         :hook ((emacs-lisp-mode-hook . custom/elisp-mode-hook)
+         :hook ((emacs-lisp-mode-hook . (lambda ()
+                                          (auto-fill-mode 1)
+                                          (setq indent-tabs-mode nil)
+                                          (setq comment-start ";;")
+                                          (turn-on-eldoc-mode)))
                 (emacs-lisp-mode-hook . common-hooks/prog-helpers)
                 (emacs-lisp-mode-hook . common-hooks/newline-hook)))
 
@@ -2146,7 +2134,9 @@
         :ensure t
         :mode ("\\.js$" . js2-mode)
         :hook ((js2-post-parse-callbacks-hook . custom/parse-additional-externs)
-               (js2-mode-hook . custom/js-setup-flycheck))
+               (js2-mode-hook . (lambda ()
+                                  (setq flycheck-checker 'javascript-jshint)
+                                  (tern-mode t))))
         :custom
         :config
         (use-package js2-imenu-extras :ensure t)
@@ -2190,9 +2180,6 @@
                                (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
                                " *, *" t))
                         )))
-        (defun custom/js-setup-flycheck ()
-          (setq flycheck-checker 'javascript-jshint)
-          (tern-mode t))
         ;;TODO: maybe make hydra
         (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
         (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
@@ -2229,28 +2216,22 @@
        (use-package slime
          :ensure t
          :pin melpa-stable ;; corresponds to quicklisp version
-         :hook ((lisp-mode-hook . custom/slime-hook)
-                (inferior-lisp-mode-hook . custom/inferior-slime)
-                ;; (slime-mode-hook . custom/slime-autodoc) ;; some signature down the call stack is broken in 2.20
-                (lisp-mode-hook . custom/lisp-mode-hook)
+         :hook ((lisp-mode-hook . (lambda ()
+                                    (slime-mode t)
+                                    (set (make-local-variable 'slime-lisp-implementations)
+                                         (list (assoc 'sbcl slime-lisp-implementations)))))
+                (inferior-lisp-mode-hook . inferior-slime-mode)
+                ;; (slime-mode-hook . slime-autodoc-mode) ;; some signature down the call stack is broken in 2.20
+                (lisp-mode-hook . (lambda ()
+                                    (auto-fill-mode 1)
+                                    (setq indent-tabs-mode t)
+                                    (setq tab-width 2)
+                                    (turn-on-eldoc-mode)))
                 (lisp-mode-hook . common-hooks/newline-hook)
                 (lisp-mode-hook . common-hooks/prog-helpers))
          :init
          (use-package slime-autoloads)
          :config
-         (defun custom/inferior-slime ()
-           (inferior-slime-mode t))
-         (defun custom/slime-autodoc ()
-           (slime-autodoc-mode t))
-         (defun custom/lisp-mode-hook ()
-           (auto-fill-mode 1)
-           (setq indent-tabs-mode t)
-           (setq tab-width 2)
-           (turn-on-eldoc-mode))
-         (defun custom/slime-hook ()
-           (slime-mode t)
-           (set (make-local-variable 'slime-lisp-implementations)
-                (list (assoc 'sbcl slime-lisp-implementations))))
          (defadvice slime-documentation-lookup
              (around change-browse-url-browser-function activate)
            "Use w3m for slime documentation lookup."
@@ -2332,27 +2313,24 @@
         :mode ("\\.py$" . python-mode)
         :hook ((python-mode-hook . common-hooks/prog-helpers)
                (python-mode-hook . common-hooks/newline-hook)
-               (python-mode-hook . custom/python-mode-hook)
-               (python-mode-hook . annotate-debugger-calls))
+               (python-mode-hook . (lambda ()
+                                     (setq flycheck-checker 'python-flake8)
+                                     (setq indent-tabs-mode nil)
+                                     (setq tab-width 4)
+                                     (setq imenu-create-index-function 'imenu-default-create-index-function)
+                                     (auto-fill-mode 1)))
+               ;; Highlight the call to ipdb, src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
+               (python-mode-hook . (lambda ()
+                                     (highlight-lines-matching-regexp "import ipdb")
+                                     (highlight-lines-matching-regexp "ipdb.set_trace()")
+                                     (highlight-lines-matching-regexp "import wdb")
+                                     (highlight-lines-matching-regexp "wdb.set_trace()"))))
         :bind (:map python-mode-map
                ("<M-left>" . py-shift-indent-left)
                ("<M-right>" . py-shift-indent-right))
         :config
-        (defun custom/python-mode-hook ()
-          (setq flycheck-checker 'python-flake8)
-          (setq indent-tabs-mode nil)
-          (setq tab-width 4)
-          (setq imenu-create-index-function 'imenu-default-create-index-function)
-          (auto-fill-mode 1))
         (add-function :before-until (local 'eldoc-documentation-function)
-                      #'(lambda () ""))
-        ;; Highlight the call to ipdb
-        ;; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
-        (defun annotate-debugger-calls ()
-          (highlight-lines-matching-regexp "import ipdb")
-          (highlight-lines-matching-regexp "ipdb.set_trace()")
-          (highlight-lines-matching-regexp "import wdb")
-          (highlight-lines-matching-regexp "wdb.set_trace()")))
+                      #'(lambda () "")))
 
       (use-package python-environment
         :ensure t
@@ -2467,12 +2445,10 @@
          (use-package company-rtags
            :after (company))
          (use-package flycheck-rtags
-           :hook (c-mode-common-hook . my-flycheck-rtags-setup)
-           :config
-           (defun my-flycheck-rtags-setup ()
-             (flycheck-select-checker 'rtags)
-             (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-             (setq-local flycheck-check-syntax-automatically nil)))
+           :hook (c-mode-common-hook . (lambda ()
+                                         (flycheck-select-checker 'rtags)
+                                         (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+                                         (setq-local flycheck-check-syntax-automatically nil))))
          (defun use-rtags (&optional useFileManager)
            (and (rtags-executable-find "rc")
                 (cond ((not (gtags-get-rootpath)) t)
@@ -2598,10 +2574,8 @@
       (use-package lua-mode
         :ensure t
         :mode ("\\.lua$" . lua-mode)
-        :hook (lua-mode-hook . custom/lua-mode-hook)
-        :config
-        (defun custom/lua-mode-hook ()
-          (setq flycheck-checker 'lua-luacheck)))
+        :hook (lua-mode-hook . (lambda ()
+                                 (setq flycheck-checker 'lua-luacheck))))
 
       (use-package company-lua
         :ensure t
@@ -2679,7 +2653,10 @@
                ("\\.html?\\'" . web-mode))
         :bind (:map web-mode-map
                ("M-SPC" . company-complete)) ;; manual autocomplete
-        :hook (web-mode-hook . custom/web-mode-company)
+        :hook (web-mode-hook . (lambda ()
+                                 (set (make-local-variable 'company-backends)
+                                      '(company-tern company-web-html company-yasnippet company-files))
+                                 (company-mode t)))
         :custom
         (web-mode-enable-current-element-highlight t)
         (web-mode-enable-auto-closing t)
@@ -2693,10 +2670,6 @@
         :config
         (use-package web-mode-edit-element :ensure t)
         (use-package web-narrow-mode :ensure t)
-        (defun custom/web-mode-company ()
-          (set (make-local-variable 'company-backends)
-               '(company-tern company-web-html company-yasnippet company-files))
-          (company-mode t))
         (add-to-list 'web-mode-engines-alist '("django" . "\\.html\\'"))
         ;; Enable JavaScript completion between <script>...</script> etc.
         ;; TODO: check why company and AC are mentioned together (see below)
@@ -2770,13 +2743,11 @@
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package ansi-color
-        :hook (compilation-filter-hook . custom/colorize-compilation)
-        :config
-        (defun custom/colorize-compilation ()
-          "Colorize from `compilation-filter-start' to `point'."
-          (let ((inhibit-read-only t))
-            (ansi-color-apply-on-region
-             compilation-filter-start (point)))))
+        :hook (compilation-filter-hook . (lambda ()
+                                           "Colorize from `compilation-filter-start' to `point'."
+                                           (let ((inhibit-read-only t))
+                                             (ansi-color-apply-on-region
+                                              compilation-filter-start (point))))))
     #+END_SRC
 *** comint
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2836,18 +2807,16 @@
       (use-package shell
         :mode ("\\.sh$" . shell-mode)
         :bind (:map shell-mode-map
-                    ("C-c l" . custom/sh-check-syntax))
+                    ("C-c l" . (lambda ()
+                                 "Check syntax of current file"
+                                 (interactive)
+                                 (when (string-match "^\\(ba\\|z\\)sh" (symbol-name sh-shell))
+                                   (save-some-buffers t)
+                                   (compilation-start (concat (symbol-name sh-shell) " -n " (buffer-file-name))
+                                                      'sh-check-mode)))))
         :hook ((shell-mode-hook . ansi-color-for-comint-mode-on)
                (shell-mode-hook . common-hooks/newline-hook)
-               (shell-mode-hook . common-hooks/prog-helpers))
-        :config
-        (defun sh-check-syntax ()
-          "Check syntax of current file"
-          (interactive)
-          (when (string-match "^\\(ba\\|z\\)sh" (symbol-name sh-shell))
-            (save-some-buffers t)
-            (compilation-start (concat (symbol-name sh-shell) " -n " (buffer-file-name))
-                               'sh-check-mode))))
+               (shell-mode-hook . common-hooks/prog-helpers)))
 
       (use-package company-shell
         :ensure t
@@ -2876,7 +2845,10 @@
      (use-package w3m
        :ensure t
        :commands w3m
-       :hook (w3m-display-hook . custom/rename-w3m-buffer)
+       :hook (w3m-display-hook . (lambda (url)
+                                   (rename-buffer
+                                    (format "*w3m: %s*" (or w3m-current-title
+                                                            w3m-current-url)) t)))
        :custom
        (w3m-coding-system 'utf-8)
        (w3m-file-coding-system 'utf-8)
@@ -2886,10 +2858,6 @@
        (w3m-terminal-coding-system 'utf-8)
        (w3m-use-cookies t)
        :config
-       (defun custom/rename-w3m-buffer (url)
-         (rename-buffer
-          (format "*w3m: %s*" (or w3m-current-title
-                                  w3m-current-url)) t))
        ;; special chars
        (standard-display-ascii ?\200 [15])
        (standard-display-ascii ?\201 [21])
@@ -2982,11 +2950,23 @@
         :no-require t
         :commands notmuch
         :bind (:map notmuch-search-mode-map
-               ("!" . custom/toggle-unread)
+               ("!" . (lambda ()
+                        "toggle unread tag for thread"
+                        (interactive)
+                        (if (member "unread" (notmuch-search-get-tags))
+                            (notmuch-search-tag '("-unread" "-spam"))
+            (notmuch-search-tag '("+unread")))))
                ("g" . notmuch-refresh-this-buffer)
                :map notmuch-message-mode-map
                ("#" . mml-attach-file))
-        :hook ((notmuch-hello-refresh-hook . custom/notmuch-refresh-hello)
+        :hook ((notmuch-hello-refresh-hook . (lambda ()
+                                               (if (and (eq (point) (point-min))
+                                                        (search-forward "Saved searches:" nil t))
+                                                   (progn
+                                                     (forward-line)
+                                                     (widget-forward 1))
+                                                 (if (eq (widget-type (widget-at)) 'editable-field)
+                                                     (beginning-of-line)))))
                (message-setup-hook . mml-secure-message-sign-pgpmime))  ;; Crypto Settings
         :custom
         (mm-text-html-renderer 'w3m)
@@ -2999,21 +2979,7 @@
         (notmuch-crypto-process-mime t) ; Automatically check signatures
         (notmuch-hello-hide-tags (quote ("killed")))
         :config
-        (use-package org-notmuch)
-        (defun custom/notmuch-refresh-hello ()
-          (if (and (eq (point) (point-min))
-                   (search-forward "Saved searches:" nil t))
-              (progn
-                (forward-line)
-                (widget-forward 1))
-            (if (eq (widget-type (widget-at)) 'editable-field)
-                (beginning-of-line))))
-        (defun custom/toggle-unread ()
-          "toggle unread tag for thread"
-          (interactive)
-          (if (member "unread" (notmuch-search-get-tags))
-              (notmuch-search-tag '("-unread" "-spam"))
-            (notmuch-search-tag '("+unread")))))
+        (use-package org-notmuch))
 
       (use-package counsel-notmuch
         :ensure t
