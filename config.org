@@ -3083,21 +3083,17 @@
      ;;TODO: review setup (it was blindly copied from bbdb's and may contain some warts)
      (use-package ebdb
        :ensure t
-       :commands ebdb
-       :bind (:map message-mode-map
-              ("<tab>" . custom/my-ebdb-tab-complete)
-              :map ebdb-mode-map
-              ("C-c C-e" . ebdb-edit-current-field)
-              ("C-c C-f d" . ebdb-delete-current-field-or-record)
-              ("C-c C-f i" . ebdb-insert-new-field))
+       :commands ebdb ebdb-create-record
+       :config
+       (use-package counsel-ebdb :ensure t) ;;TODO: setup
+       (use-package company-ebdb :ensure t) ;;TODO: setup
+       (add-to-list 'file-coding-system-alist (cons "\\.ebdb"  'utf-8))
        :custom
-       (ebdb-change-hook 'ebdb-timestamp-hook)
+       (ebdb-sources '("~/.database.ebdb"))
        (ebdb-complete-name-allow-cycling t)
        (ebdb-completion-display-record nil)
        (ebdb-dwim-net-address-allow-redundancy t)
-       (ebdb-file "~/.database.ebdb")
        (ebdb-north-american-phone-numbers-p nil)
-       (ebdb-notice-hook 'ebdb-auto-notes-hook)
        (ebdb-offer-save 'savenoprompt) ;'automatic
        (ebdb-phone-style 'nil)
        (ebdb-quiet-about-name-mismatches t)
@@ -3105,20 +3101,7 @@
        (ebdb-sounds-directory nil)
        (ebdb-use-alternate-names nil)
        (ebdb-use-pop-up nil)
-       (ebdb/mail-auto-create-p 'ebdb-ignore-most-messages-hook)
-       (news-reply-header-hook nil)
-       :config
-       (add-to-list 'file-coding-system-alist (cons "\\.ebdb"  'utf-8)))
-
-     ;;TODO: setup
-     (use-package counsel-ebdb
-       :ensure t
-       :after (counsel ebdb))
-
-     ;;TODO: setup
-     (use-package company-ebdb
-       :ensure t
-       :after (company ebdb))
+       (ebdb/mail-auto-create-p 'ebdb-ignore-most-messages-hook))
    #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp :tangle yes
