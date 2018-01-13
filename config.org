@@ -168,11 +168,11 @@
      (use-package nord-theme :ensure t :disabled)
      (use-package kaolin-themes :ensure t :disabled)
      (use-package material-theme :ensure t :disabled)
-     (use-package dracula-theme :ensure t :disabled)
      (use-package challenger-deep-theme :ensure t :disabled)
      (use-package hc-zenburn-theme :ensure t :disabled)
      (use-package sunburn-theme :ensure t :disabled)
      (use-package labburn-theme :ensure t :disabled)
+     (use-package darcula-theme :ensure t :disabled)
      (use-package cyberpunk-theme :ensure t :disabled)
 
      (use-package darkburn-theme
