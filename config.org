@@ -2495,6 +2495,7 @@
         :hook (before-save-hook . gofmt-before-save)
         :config
         (use-package godoctor :ensure t)
+        (setq  gofmt-command "goimports")
         (add-to-list 'multi-compile-alist
                      '(go-mode . (("go-build" "go build -v"
                                    (locate-dominating-file buffer-file-name ".git")) ;;TODO: try to guess binary name from project name (investigate how this refers to libraries builds, etc.)
