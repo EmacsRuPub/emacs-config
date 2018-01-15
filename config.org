@@ -3831,7 +3831,11 @@
          ;;    orgit-log:/path/to/repo/::ARGS  links to a `magit-log' buffer
          :ensure t)
 
-       (use-package org-bullets :ensure t)
+       (use-package org-bullets
+         :ensure t
+         :disabled
+         :hook (org-mode-hook . (lambda () (org-bullets-mode 1)))
+         :after (org))
 
        (use-package orglink
          :ensure t
