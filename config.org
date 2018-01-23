@@ -2031,13 +2031,13 @@
         :config
         (global-diff-hl-mode 1))
 
-      (use-package commit-msg-prefix
-        :quelpa
-        (commit-msg-prefix :repo "kidd/commit-msg-prefix" :fetcher github :version original)
+      (use-package git-msg-prefix
+        :ensure t
         :bind (:map git-commit-mode-map
                ("C-c i" . commit-msg-prefix))
-        :config
-        (setq commit-msg-prefix-input-method 'ivy-read))
+        :custom
+        (git-msg-prefix-log-flags " --since='1 week ago' ")
+        (commit-msg-prefix-input-method 'ivy-read))
     #+END_SRC
 **** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** smerge mode
