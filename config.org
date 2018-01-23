@@ -2294,11 +2294,16 @@
       (use-package jedi-core
         :ensure t
         :hook (python-mode-hook . jedi:setup)
+        :bind (:map python-mode-map
+               ("M-/" . jedi:show-doc))
         :custom
         (jedi:complete-on-dot t)
         (jedi:goto-definition-marker-ring-length 32)
         (jedi:tooltip-method nil)
         (epc:accept-process-timeout 200)
+        (jedi:get-in-function-call-timeout 0)
+        (jedi:get-in-function-call-delay 0)
+        (jedi:goto-definition-config '((nil definition nil)))
         (jedi:use-shortcuts t))
 
       (use-package company-jedi
