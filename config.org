@@ -1133,6 +1133,16 @@
        :hook ((after-init-hook . persistent-scratch-restore)
               (kill-emacs-hook . persistent-scratch-save)))
    #+END_SRC
+** common hooks
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+     (add-hook 'text-mode-hook 'turn-on-auto-fill)
+     (add-hook 'text-mode-hook 'text-mode-hook-identify)
+
+     (defun common-hooks/newline-hook ()
+       (local-set-key (kbd "C-m") 'newline-and-indent)
+       (local-set-key (kbd "<return>") 'newline-and-indent))
+   #+END_SRC
 ** case folding
    #+BEGIN_SRC emacs-lisp :tangle no
      (defvar custom/transform-whole-words nil)
@@ -1416,9 +1426,7 @@
        :ensure t
        :mode (("\\.yml\\'" . yaml-mode)
               ("\\.yaml\\'" . yaml-mode))
-       :bind (:map yaml-mode-map
-              ("\C-m" . newline-and-indent)))
-
+       :hook (yaml-mode-hook . common-hooks/newline-hook))
    #+END_SRC
 *** docker
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1554,12 +1562,6 @@
                               tab-mark
                               face
                               tabs))
-   #+END_SRC
-** common hooks
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-     (add-hook 'text-mode-hook 'turn-on-auto-fill)
-     (add-hook 'text-mode-hook 'text-mode-hook-identify)
    #+END_SRC
 ** hydras and keys
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1905,10 +1907,6 @@
     #+END_SRC
 *** common hooks
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun common-hooks/newline-hook ()
-        (local-set-key (kbd "C-m") 'newline-and-indent)
-        (local-set-key (kbd "<return>") 'newline-and-indent))
-
       ;; show FIXME/TODO/BUG keywords
       (defun common-hooks/prog-helpers ()
           ;; highlight additional keywords
