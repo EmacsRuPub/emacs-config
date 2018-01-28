@@ -1333,11 +1333,13 @@
        :config
        (global-undo-tree-mode t))
    #+END_SRC
+   Should undo process things [nearly] char-by-char?
+   #+BEGIN_SRC emacs-lisp :tangle no
+     ;;; https://stackoverflow.com/a/41560712/2112489
+     (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
+   #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
-      ;;; https://stackoverflow.com/a/41560712/2112489
-      (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
-
       (defhydra hydra-undo-tree (:color yellow :hint nil )
         " _p_: undo _n_: redo _s_: save _l_: load "
         ("p" undo-tree-undo)
