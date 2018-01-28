@@ -33,6 +33,11 @@
   (quelpa-use-package-inhibit-loading-quelpa
    t "Improve performance"))
 
+(use-package use-package-el-get
+  :ensure t
+  :config
+  (use-package-el-get-setup))
+
 (setq load-prefer-newer t)
 
 (mapcar
