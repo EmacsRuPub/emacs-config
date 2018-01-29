@@ -2575,6 +2575,19 @@
                ("C-c T" . go-tag-remove))
         :custom
         (go-tag-args '("-transform" "camelcase")))
+
+      (use-package go-fill-struct
+        :ensure t
+        :disabled t ;;TODO: figure out how to actually use it
+        :after (go-mode))
+
+      (use-package go-playground
+        :ensure t
+        :after (go-mode))
+
+      (use-package gorepl-mode
+        :ensure t
+        :hook (go-mode-hook . gorepl-mode))
     #+END_SRC
 **** BACKLOG try to integrate https://getgb.io/
 *** other
