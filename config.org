@@ -1887,9 +1887,11 @@
          :ensure t
          :after (dash docker-tramp magit-popup s tablist json-mode)
          :delight docker-mode
+         :custom
+         (docker-containers-show-all t)
          :config
          ;;TODO: bind keys
-         (docker-global-mode))
+         (docker-global-mode 1))
 
        (use-package docker-tramp :ensure t)
 
