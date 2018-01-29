@@ -3094,31 +3094,6 @@
        :config
        (elfeed-goodies/setup))
    #+END_SRC
-** ebdb
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: review setup (it was blindly copied from bbdb's and may contain some warts)
-     (use-package ebdb
-       :ensure t
-       :commands ebdb ebdb-create-record
-       :config
-       (use-package counsel-ebdb :ensure t) ;;TODO: setup
-       (use-package company-ebdb :ensure t) ;;TODO: setup
-       (add-to-list 'file-coding-system-alist (cons "\\.ebdb"  'utf-8))
-       :custom
-       (ebdb-sources '("~/.database.ebdb"))
-       (ebdb-complete-name-allow-cycling t)
-       (ebdb-completion-display-record nil)
-       (ebdb-dwim-net-address-allow-redundancy t)
-       (ebdb-north-american-phone-numbers-p nil)
-       (ebdb-offer-save 'savenoprompt) ;'automatic
-       (ebdb-phone-style 'nil)
-       (ebdb-quiet-about-name-mismatches t)
-       (ebdb-readonly-p nil)
-       (ebdb-sounds-directory nil)
-       (ebdb-use-alternate-names nil)
-       (ebdb-use-pop-up nil)
-       (ebdb/mail-auto-create-p 'ebdb-ignore-most-messages-hook))
-   #+END_SRC
 ** calendars
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package calfw
