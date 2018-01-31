@@ -2512,10 +2512,14 @@
         (use-package godoctor :ensure t)
         (setq  gofmt-command "goimports")
         (add-to-list 'multi-compile-alist
-                     '(go-mode . (("go-build" "go build -v"
+                     '(go-mode . (("go-build/git" "go build -v"
                                    (locate-dominating-file buffer-file-name ".git")) ;;TODO: try to guess binary name from project name (investigate how this refers to libraries builds, etc.)
-                                  ("go-build-and-run" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
-                                   (multi-compile-locate-file-dir ".git")))))
+                                  ("go-build/main" "go build -v"
+                                   (locate-dominating-file buffer-file-name "main.go"))
+                                  ("go-build-and-run/git" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
+                                   (multi-compile-locate-file-dir ".git"))
+                                  ("go-build-and-run/main" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
+                                   (multi-compile-locate-file-dir "main.go")))))
         (bind-key (kbd "C-c C-c") 'multi-compile-run go-mode-map)
         (bind-key (kbd "M-.") 'godef-jump go-mode-map)
         (bind-key (kbd "M-,") 'pop-tag-mark go-mode-map))
