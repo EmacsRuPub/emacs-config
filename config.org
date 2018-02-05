@@ -3749,7 +3749,6 @@
                (append holiday-other-holidays
                        holiday-solar-holidays))
          (add-hook 'org-mode-hook 'turn-on-font-lock)
-         (add-hook 'org-mode-hook 'org-bullets-mode)
          (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
          (add-hook 'org-after-refile-insert-hook 'save-buffer)
          ;; run some commands
