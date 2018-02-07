@@ -778,8 +778,14 @@
          (counsel-rg))
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
-       (setq projectile-switch-project-action 'projectile-commander)
        (projectile-global-mode 1))
+
+     (use-package counsel-projectile
+       :ensure t
+       :after (swiper projectile)
+       :config
+       (setq projectile-switch-project-action 'counsel-projectile-switch-project))
+
    #+END_SRC
 ** dired
    #+BEGIN_SRC emacs-lisp :tangle yes
