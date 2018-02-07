@@ -1977,6 +1977,11 @@
         (counsel-gtags-ignore-case t)
         (counsel-gtags-auto-update t)
         (counsel-gtags-suggested-key-mapping t))
+
+      (use-package prog-fill
+        :ensure t
+        :bind (:map prog-mode-map
+               ("M-q" . prog-fill)))
     #+END_SRC
 *** related major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
