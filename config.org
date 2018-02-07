@@ -1976,9 +1976,7 @@
         (counsel-gtags-path-style 'relative)
         (counsel-gtags-ignore-case t)
         (counsel-gtags-auto-update t)
-        (counsel-gtags-suggested-key-mapping t)
-        :config
-        )
+        (counsel-gtags-suggested-key-mapping t))
     #+END_SRC
 *** related major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
