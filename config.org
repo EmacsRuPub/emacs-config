@@ -1198,6 +1198,10 @@
         (snakehump :repo "aes/snakehump" :fetcher github :version original)
         :commands snakehump-next-at-point snakehump-prev-at-point)
 
+      (use-package ialign
+        :ensure t
+        :bind ("C-x l" . ialign))
+
       (use-package adaptive-wrap :ensure t)
 
       (use-package hungry-delete
