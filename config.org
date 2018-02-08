@@ -2141,7 +2141,9 @@
                 (emacs-lisp-mode-hook . common-hooks/newline-hook)))
 
        (use-package company-elisp
-         :after (elisp-mode company))
+         :after (elisp-mode company)
+         :config
+         (add-to-list 'company-backends 'company-elisp))
 
        (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
        (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
