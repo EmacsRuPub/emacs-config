@@ -762,7 +762,6 @@
      (use-package projectile
        :ensure t
        :delight (projectile-mode " prj")
-       :bind ("C-x j j" . projectile-switch-project)
        :demand t
        :custom
        (projectile-enable-caching t)
@@ -783,6 +782,7 @@
      (use-package counsel-projectile
        :ensure t
        :after (swiper projectile)
+       :bind ("C-x j j" . 'counsel-projectile-switch-project)
        :config
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
 
@@ -1045,7 +1045,7 @@
        ("c" projectile-commander)
        ("d" projectile-dired)
        ("f" projectile-recentf)
-       ("s" projectile-switch-project)
+       ("s" counsel-projectile-switch-project)
        ("h" projectile-find-file)
        ("r" socyl-search-regexp)
        ("g" counsel-rg)
