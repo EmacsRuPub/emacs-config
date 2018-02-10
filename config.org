@@ -373,7 +373,8 @@
                ("C-h L" . counsel-find-library)
                ("C-x C-r" . counsel-recentf)
                ("C-x C-d" . counsel-descbinds)
-               ("C-c C-." . counsel-fzf))
+               ("C-c C-." . counsel-fzf)
+               ("C-c w" . counsel-wmctrl))
         :custom
         (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
