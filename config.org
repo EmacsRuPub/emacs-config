@@ -1329,6 +1329,17 @@
      (use-package savekill :ensure t)
 
      (setq save-interprogram-paste-before-kill t)
+
+     (use-package copy-as-format
+       :ensure t
+       :config
+       (defhydra hydra-copy-format (:idle 1.0)
+         ("s" copy-as-format-slack "Slack")
+         ("g" copy-as-format-github "Github")
+         ("o" copy-as-format-org "orgmode")
+         ("m" copy-as-format-markdown "Markdown")
+         ("q" nil "cancel"))
+       (global-set-key (kbd "C-c f") 'hydra-copy-format/body))
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp :tangle yes
