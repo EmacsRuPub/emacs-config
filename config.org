@@ -2537,6 +2537,8 @@
 ***** BACKLOG review and maybe rebind keys
 *** golang
     #+BEGIN_SRC emacs-lisp :tangle yes
+      ;;TODO: some harness either here or withoin shell to automate the burden of setting up new golang project's boilerplate
+
       (use-package go-mode
         :ensure t
         :no-require t
