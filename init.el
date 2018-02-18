@@ -26,6 +26,17 @@
 (setq use-package-verbose t)
 (setq use-package-hook-name-suffix "")
 
+(mapcar
+ (lambda (package)
+   (unless (package-installed-p package)
+     (unless package-archive-contents
+       (package-refresh-contents))
+     (package-install package)))
+ ;;base system packages for bootstrapping
+ '(use-package el-get))
+
+(setq use-package-compute-statistics t)
+
 (use-package quelpa :ensure t)
 (use-package quelpa-use-package
   :ensure t
@@ -39,17 +50,6 @@
   (use-package-el-get-setup))
 
 (setq load-prefer-newer t)
-
-(mapcar
- (lambda (package)
-   (unless (package-installed-p package)
-     (unless package-archive-contents
-       (package-refresh-contents))
-     (package-install package)))
- ;;base system packages for bootstrapping
- '(use-package el-get))
-
-(setq use-package-compute-statistics t)
 
 (global-set-key (kbd "C-x C-.")
                 (lambda ()
