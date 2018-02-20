@@ -2153,9 +2153,9 @@
 
       (use-package highlight-stages
         :ensure t
-        :delight highlight-stages-mode
-        :config
-        (highlight-stages-global-mode))
+        :hook ((emacs-lisp-mode-hook . highlight-stages-mode)
+               (lisp-mode-hook . highlight-stages-mode))
+        :delight highlight-stages-mode)
     #+END_SRC
 *** elisp
 **** setup
