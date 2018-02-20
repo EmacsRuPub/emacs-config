@@ -3077,14 +3077,6 @@
         :commands counsel-notmuch)
     #+END_SRC
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
-*** hydra
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-email (:exit t :color red :idle 1.0)
-        "Read mail"
-        ("n" notmuch nil)
-        ("N" counsel-notmuch nil))
-      (global-set-key (kbd "C-c 4") 'hydra-email/body)
-    #+END_SRC
 ** security
 *** packages
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3133,6 +3125,24 @@
          ("q" nil "cancel")))
 
      (use-package ein :ensure t)
+   #+END_SRC
+** Twitter
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package twittering-mode
+       :ensure t
+       :commands twit
+       :init
+       (setq twittering-use-master-password t)
+       (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
+   #+END_SRC
+** hydra
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (defhydra hydra-clients (:exit t :color red :idle 1.0)
+       "Access to clients"
+       ("n" notmuch nil)
+       ("N" counsel-notmuch nil)
+       ("t" twit nil))
+     (global-set-key (kbd "C-c 4") 'hydra-clients/body)
    #+END_SRC
 * pim
 ** elfeed
