@@ -2061,7 +2061,28 @@
 
       (use-package git-timemachine
         :ensure t
-        :commands git-timemachine)
+        :after (ivy)
+        :commands git-timemachine
+        :config
+        ;; credits to @binchen
+        (defun custom/git-timemachine-show-selected-revision ()
+          "Show last (current) revision of file."
+          (interactive)
+          (let* ((collection (mapcar (lambda (rev)
+                                       ;; re-shape list for the ivy-read
+                                       (cons (concat (substring-no-properties (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                                     (git-timemachine--revisions))))
+            (ivy-read "commits:"
+                      collection
+                      :action (lambda (rev)
+                                ;; compatible with ivy 9+ and ivy 8
+                                (unless (string-match-p "^[a-z0-9]*$" (car rev))
+                                  (setq rev (cdr rev)))
+                                (git-timemachine-show-revision rev)))))
+        (defun custom/git-timemachine ()
+          "Open git snapshot with the selected version.  Based on ivy-mode."
+          (interactive)
+          (git-timemachine--start #'custom/git-timemachine-show-selected-revision)))
 
       (use-package gitignore-mode
         :ensure t
@@ -2119,7 +2140,7 @@
         ("b" magit-blame :color blue)
         ("B" magit-branch-manager :color blue)
         ("l" magit-log :color blue)
-        ("t" git-timemachine :color blue)
+        ("t" custom/git-timemachine :color blue)
         ("k" smerge-prev "previous conflict")
         ("j" smerge-next "next conflict")
         ("l" open-global-repos-list :color blue))
