@@ -766,6 +766,7 @@
      (use-package projectile
        :ensure t
        :delight (projectile-mode " prj")
+       :bind ("C-x j j" . projectile-switch-project)
        :demand t
        :custom
        (projectile-enable-caching t)
@@ -781,6 +782,7 @@
          (counsel-rg))
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
+       (setq projectile-switch-project-action 'projectile-commander)
        (projectile-global-mode 1))
 
      (use-package counsel-projectile
