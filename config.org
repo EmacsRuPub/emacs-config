@@ -3994,6 +3994,12 @@
          :config
          (setq calendar-holidays
           (push russian-holidays calendar-holidays)))
+
+       (use-package org-rich-yank
+         :ensure t
+         :after (org)
+         :bind (:map org-mode-map
+                     ("C-M-y" . org-rich-yank)))
      #+END_SRC
 ** hydras
    #+BEGIN_SRC emacs-lisp :tangle yes
