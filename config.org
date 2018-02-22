@@ -787,7 +787,7 @@
 
      (use-package counsel-projectile
        :ensure t
-       :after (swiper projectile)
+       :after (counsel projectile)
        :bind ("C-x j j" . 'counsel-projectile-switch-project)
        :config
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
