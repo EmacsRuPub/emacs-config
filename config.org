@@ -2515,6 +2515,7 @@
                 ("C-c j" . moo-jump-local)))
 
        (use-package rtags
+         :ensure t
          :after (cc-mode)
          :bind (:map c-mode-base-map
                 ("M-." . tags-find-symbol-at-point)
@@ -2535,8 +2536,10 @@
          (rtags-autostart-diagnostics t)
          :config
          (use-package company-rtags
+           :ensure t
            :after (company))
          (use-package flycheck-rtags
+           :ensure t
            :hook (c-mode-common-hook . (lambda ()
                                          (flycheck-select-checker 'rtags)
                                          (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
@@ -3475,14 +3478,6 @@
 
        )
      #+END_SRC
-**** pick up random Org task
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package org-randomnote
-         :bind ("C-c R" . org-randomnote)
-         :custom
-         (org-randomnote-candidates org-agenda-files)
-         (org-randomnote-open-behavior 'indirect-buffer))
-     #+END_SRC
 **** clocking customizations
      #+BEGIN_SRC emacs-lisp :tangle yes
        (define-namespace custom/
@@ -3986,6 +3981,13 @@
                  ))
          (org-super-agenda-mode 1))
 
+       (use-package org-randomnote
+         :ensure t
+         :bind ("C-c R" . org-randomnote)
+         :custom
+         (org-randomnote-candidates org-agenda-files)
+         (org-randomnote-open-behavior 'indirect-buffer))
+
        (use-package russian-holidays
          :ensure t
          :after (org)
@@ -4169,6 +4171,7 @@
                                     '((blockdiag . t))))
 
      (use-package plantuml-mode
+       :ensure t
        :mode ("\\.plantuml\\'" . plantuml-mode)
        :custom
        (plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar")
