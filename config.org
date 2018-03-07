@@ -809,7 +809,9 @@
               ("e" . (lambda ()
                        (interactive)
                        (when (derived-mode-p 'dired-mode)
-                         (eww-open-file (dired-get-file-for-visit)))))
+                         (if (file-directory-p (dired-get-filename))
+                             (message "Directories cannot be opened in EWW")
+                           (eww-open-file (dired-get-file-for-visit))))))
               ("C-x C-k" . dired-do-delete))
        :custom
        (dired-recursive-deletes 'top) ;; Allows recursive deletes
