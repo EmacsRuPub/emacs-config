@@ -353,11 +353,12 @@
         (ivy-display-style 'fancy)
         (ivy-use-virtual-buffers t) ;; add 'recentf-mode’and bookmarks to 'ivy-switch-buffer'.
         (ivy-height 20) ;; number of result lines to display
-        (ivy-count-format "") ;; do not count candidates
+        (ivy-count-format "(%d/%d)") ;; do not count candidates
         (ivy-initial-inputs-alist nil) ;; no regexp by default
         (ivy-re-builders-alist
          ;; allow input not in order
-         '((t . ivy--regex-ignore-order))))
+         '((read-file-name-internal . ivy--regex-fuzzy)
+           (t . ivy--regex-ignore-order))))
 
       (use-package amx
         :ensure t
