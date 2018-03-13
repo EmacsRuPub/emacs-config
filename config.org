@@ -1925,7 +1925,8 @@
                ("\C-d" . company-show-doc-buffer)
                ("M-." . company-show-location))
         :custom
-        (company-idle-delay t)
+        (company-idle-delay 0)
+        (company-minimum-prefix-length 2)
         (company-tooltip-align-annotations t)
         (company-show-numbers t)
         :config
