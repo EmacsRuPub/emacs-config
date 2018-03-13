@@ -297,6 +297,10 @@
      (setq delete-old-versions -1)
      (setq version-control t)
 
+     (use-package backup-each-save
+       :ensure t
+       :hook (after-save-hook . backup-each-save))
+
      (use-package backup-walker
        :ensure t
        :commands backup-walker-start) ;TODO: bind to key and other stuff
