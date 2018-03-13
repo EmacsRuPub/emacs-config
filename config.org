@@ -2583,7 +2583,12 @@
 
       (use-package pip-requirements
         :ensure t
-        :mode ("requirements\\." . pip-requirements-mode))
+        :delight (pip-requirements-mode "PyPA Requirements")
+        :preface
+        (defun custom/pip-requirements-ignore-case ()
+          (setq-local completion-ignore-case t))
+        :mode ("requirements\\." . pip-requirements-mode)
+        :hook (pip-requirements-mode . custom/pip-requirements-ignore-case))
     #+END_SRC
 ***** BACKLOG imports/formatting automation (search elpy/standalone extensions)
 ****** isort
