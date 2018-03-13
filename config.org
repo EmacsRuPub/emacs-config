@@ -1567,7 +1567,9 @@
 
      (use-package csv-mode
        :ensure t
-       :mode ("\\.csv" . csv-mode))
+       :mode ("\\.csv" . csv-mode)
+       :config
+       (setq-default csv-align-padding 2))
 
      (use-package yaml-mode
        :ensure t
