@@ -138,6 +138,8 @@
 
      (add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold most-positive-fixnum)))
      (add-hook 'minibuffer-exit-hook (lambda () (setq gc-cons-threshold 800000)))
+
+     (add-hook 'focus-out-hook #'garbage-collect)
    #+END_SRC
 * appearance
 ** fonts
