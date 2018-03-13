@@ -3278,6 +3278,13 @@
        (setq twittering-use-master-password t)
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
    #+END_SRC
+** browser editing connectivity
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package edit-server
+       :ensure t
+       :config
+       (edit-server-start))
+   #+END_SRC
 ** hydra
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-clients (:exit t :color red :idle 1.0)
