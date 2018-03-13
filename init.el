@@ -54,7 +54,10 @@
 (global-set-key (kbd "C-x C-.")
                 (lambda ()
                   (interactive)
-                  (switch-to-buffer "*Messages*")))
+                  (let ((tangled-config-file (concat user-emacs-directory "config.el")))
+                    (when (file-exists-p tangled-config-file) ;; because tangled file may be removed for some reason
+                      (find-file tangled-config-file)
+                      (use-package-lint)))))
 
 ;; open literate config fast in case of emergency (and not only)
 (use-package iqa
