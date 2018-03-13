@@ -4120,6 +4120,14 @@
          :bind (:map org-mode-map
                      ("C-M-y" . org-rich-yank)))
      #+END_SRC
+** paperwork
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (use-package paperless
+       :custom
+       ;;FIXME: provide real paths
+       (paperless-capture-directory "")
+       (paperless-root-directory ""))
+   #+END_SRC
 ** hydras
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-pim ()
