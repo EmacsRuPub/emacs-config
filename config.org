@@ -1208,7 +1208,7 @@
        ("<return>" custom/process-thing-at-point "execute ;)" :color blue))
      (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
-     (global-set-key (kbd "C-x k") 'kill-buffer)
+     (global-set-key [remap kill-buffer] #'kill-this-buffer)
    #+END_SRC
 * editing
 ** custom utils
