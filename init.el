@@ -2,6 +2,9 @@
 (setq debug-on-quit t)
 
 (require 'package)
+(unless (> emacs-major-version 25)
+  (package-initialize))
+
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives
@@ -14,7 +17,6 @@
       '(("melpa-stable" . 5)
         ("gnu" . 5)
         ("melpa" . 10)))
-(package-initialize)
 
 (unless (require 'quelpa nil t) ;;TODO: consider trying self-upgrades
   (with-temp-buffer
