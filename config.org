@@ -321,8 +321,7 @@
 ** emacs server
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package server
-       :hook (server-visit-hook . (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
-       :config
+       :preface
        (defun custom/server-save-edit ()
          (interactive)
          (save-buffer)
@@ -332,6 +331,8 @@
          (if (and (boundp 'server-buffer-clients) server-buffer-clients)
              (server-save-edit)
            (save-buffers-kill-emacs t)))
+       :hook (server-visit-hook . (lambda () (local-set-key (kbd "C-c C-c") 'custom/server-save-edit)))
+       :config
        (unless (and (string-equal "root" (getenv "USER"))
                     (server-running-p))
          (require 'server)
@@ -1805,11 +1806,7 @@
      (use-package yasnippet ;;TODO: make more declarative
        :ensure t
        :delight yas-minor-mode
-       :config
-       ;; snippets editing mode
-       (--each '("yasnippet/snippets"
-                 "\\.yasnippet$")
-         (eval `(add-to-list 'auto-mode-alist '(,it . snippet-mode))))
+       :preface
        ;; hook for automatic reloading of changed snippets
        (defun custom/update-yasnippets-on-save ()
          (when (string-match "/resources/yasnippet" buffer-file-name)
@@ -1841,6 +1838,11 @@
                (if (check-expansion)
                    (company-complete-common)
                  (indent-for-tab-command)))))
+       :config
+       ;; snippets editing mode
+       (--each '("yasnippet/snippets"
+                 "\\.yasnippet$")
+         (eval `(add-to-list 'auto-mode-alist '(,it . snippet-mode))))
        (setq yas-snippet-dirs nil)
        (push yas-installed-snippets-dir yas-snippet-dirs)
        (push (at-config-basedir "resources/yasnippet/") yas-snippet-dirs)
@@ -2146,13 +2148,13 @@
         :bind (:map magit-status-mode-map
                ("E" . magit-rebase-interactive)
                ("q" . custom/magit-kill-buffers))
-        :custom
-        (magit-completing-read-function 'ivy-completing-read)
-        (magit-blame-heading-format "%H %-20a %C %s")
-        (magit-diff-refine-hunk t)
-        (magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
-        (magit-repository-directories private/magit-repositories)
-        :config
+        :preface
+        (defun open-global-repos-list ()
+          (interactive)
+          (let ((repos-buffer (get-buffer "*Magit Repositories*")))
+            (if repos-buffer
+                (switch-to-buffer repos-buffer)
+              (magit-list-repositories))))
         (defun custom/magit-restore-window-configuration (&optional kill-buffer)
           "Bury or kill the current buffer and restore previous window configuration."
           (let ((winconf magit-previous-window-configuration)
@@ -2170,6 +2172,13 @@
           (let ((buffers (magit-mode-get-buffers)))
             (magit-restore-window-configuration)
             (mapc #'kill-buffer buffers)))
+        :custom
+        (magit-completing-read-function 'ivy-completing-read)
+        (magit-blame-heading-format "%H %-20a %C %s")
+        (magit-diff-refine-hunk t)
+        (magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
+        (magit-repository-directories private/magit-repositories)
+        :config
         (use-package magit-filenotify
           :ensure t
           :delight (magit-filenotify-mode " FN")
@@ -2185,12 +2194,6 @@
                   '("vdiff dwim" 'vdiff-magit-dwim))
           (setcdr (assoc ?E (plist-get magit-dispatch-popup :actions))
                   '("vdiff popup" 'vdiff-magit-popup)))
-        (defun open-global-repos-list ()
-          (interactive)
-          (let ((repos-buffer (get-buffer "*Magit Repositories*")))
-            (if repos-buffer
-                (switch-to-buffer repos-buffer)
-              (magit-list-repositories))))
         (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
         (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode)))
 
@@ -2198,7 +2201,7 @@
         :ensure t
         :after (ivy)
         :commands git-timemachine
-        :config
+        :preface
         ;; credits to @binchen
         (defun custom/git-timemachine-show-selected-revision ()
           "Show last (current) revision of file."
@@ -2337,7 +2340,22 @@
                (js2-mode-hook . (lambda ()
                                   (setq flycheck-checker 'javascript-jshint)
                                   (tern-mode t))))
-        :custom
+        :oreface
+        ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
+        ;; add any symbols to a buffer-local var of acceptable global vars
+        ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
+        ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
+        ;; you can;t have a symbol called "someName:false"
+        (defun custom/parse-additional-externs ()
+          (when (> (buffer-size) 0)
+            (let ((btext (replace-regexp-in-string
+                          ": *true" " "
+                          (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
+                        (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+                              (split-string
+                               (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+                               " *, *" t))
+                        )))
         :config
         (use-package js2-imenu-extras :ensure t)
         (use-package xref-js2 :ensure t)
@@ -2365,21 +2383,6 @@
         (setq-default js2-mirror-mode t)
         (setq-default js2-auto-indent-p t)
         (setq-default js2-concat-multiline-strings 'eol)
-        ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
-        ;; add any symbols to a buffer-local var of acceptable global vars
-        ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
-        ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
-        ;; you can;t have a symbol called "someName:false"
-        (defun custom/parse-additional-externs ()
-          (when (> (buffer-size) 0)
-            (let ((btext (replace-regexp-in-string
-                          ": *true" " "
-                          (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
-                        (mapc (apply-partially 'add-to-list 'js2-additional-externs)
-                              (split-string
-                               (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
-                               " *, *" t))
-                        )))
         ;;TODO: maybe make hydra
         (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
         (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
@@ -2646,19 +2649,7 @@
                 ("C-." . tags-find-symbol)
                 ("C-," . tags-find-references)
                 ("C-<" . rtags-find-virtuals-at-point))
-         :custom
-         (rtags-completions-enabled t)
-         (rtags-autostart-diagnostics t)
-         :config
-         (use-package company-rtags
-           :ensure t
-           :after (company))
-         (use-package flycheck-rtags
-           :ensure t
-           :hook (c-mode-common-hook . (lambda ()
-                                         (flycheck-select-checker 'rtags)
-                                         (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-                                         (setq-local flycheck-check-syntax-automatically nil))))
+         :preface
          (defun use-rtags (&optional useFileManager)
            (and (rtags-executable-find "rc")
                 (cond ((not (gtags-get-rootpath)) t)
@@ -2682,7 +2673,20 @@
            (call-interactively (if (use-rtags) 'rtags-find-references 'gtags-find-rtag)))
          (defun tags-find-file ()
            (interactive)
-           (call-interactively (if (use-rtags t) 'rtags-find-file 'gtags-find-file))))
+           (call-interactively (if (use-rtags t) 'rtags-find-file 'gtags-find-file)))
+         :custom
+         (rtags-completions-enabled t)
+         (rtags-autostart-diagnostics t)
+         :config
+         (use-package company-rtags
+           :ensure t
+           :after (company))
+         (use-package flycheck-rtags
+           :ensure t
+           :hook (c-mode-common-hook . (lambda ()
+                                         (flycheck-select-checker 'rtags)
+                                         (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+                                         (setq-local flycheck-check-syntax-automatically nil)))))
 
        (use-package flycheck-clang-analyzer :ensure t)
 
@@ -3323,6 +3327,15 @@
      (use-package calfw
        :ensure t
        :commands calfw
+       :preface
+       (defun custom/calfw-open-calendar ()
+         (interactive)
+         (cfw:open-calendar-buffer
+          :contents-sources
+          (list
+           (cfw:org-create-source "Green")  ; orgmode source
+           (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
+           (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed"))))  
        :custom-face (cfw:face-title ((t (:foreground "#f0dfaf" :weight bold :height 2.0 :inherit variable-pitch))))
        :custom-face (cfw:face-header ((t (:foreground "#d0bf8f" :weight bold))))
        :custom-face (cfw:face-sunday ((t :foreground "#cc9393" :background "grey10" :weight bold)))
@@ -3358,16 +3371,7 @@
        ;; Month
        (calendar-month-name-array
         ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь"
-         "Октябрь" "Ноябрь" "Декабрь"])
-       :config
-       (defun custom/calfw-open-calendar ()
-         (interactive)
-         (cfw:open-calendar-buffer
-          :contents-sources
-          (list
-           (cfw:org-create-source "Green")  ; orgmode source
-           (cfw:ical-create-source "gcal" private/google-calendar-url "IndianRed") ; google calendar ICS
-           (cfw:ical-create-source "gcal" private/google-family-calendar-url "IndianRed")))))
+         "Октябрь" "Ноябрь" "Декабрь"]))
 
      (use-package calfw-ical :ensure t)
      (use-package calfw-org :ensure t)
