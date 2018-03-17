@@ -401,10 +401,13 @@
                ("C-h L" . counsel-locate)
                ("<f1> i" . counsel-info-lookup-symbol)
                ("<f1> u" . counsel-unicode-char)
+               ("M-y" . counsel-yank-pop)
                ("C-x C-r" . counsel-recentf)
                ("C-x C-d" . counsel-descbinds)
                ("C-c C-." . counsel-fzf)
-               ("C-c w" . counsel-wmctrl))
+               ("C-c w" . counsel-wmctrl)
+               :map ivy-minibuffer-map
+               ("M-y" . ivy-next-line))
         :custom
         (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
