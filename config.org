@@ -168,6 +168,12 @@
        :config
        (spaceline-info-mode 1)
        (spaceline-emacs-theme 'projectile-root))
+
+     (use-package minions
+       :ensure t
+       :bind ([S-down-mouse-3] . minions-minor-modes-menu)
+       :config
+       (minions-mode 1))
    #+END_SRC
 ** load themes and choose one
    Also some other good-looking theme is "material-theme"
