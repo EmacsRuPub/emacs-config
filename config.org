@@ -182,6 +182,7 @@
      (use-package labburn-theme :ensure t :disabled)
      (use-package darcula-theme :ensure t :disabled)
      (use-package cyberpunk-theme :ensure t :disabled)
+     (use-package apropospriate-theme :ensure t :disabled)
 
      (use-package darkburn-theme
        :ensure t
