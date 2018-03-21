@@ -528,7 +528,11 @@
         :commands paradox-list-packages
         :custom
         (paradox-execute-asynchronously t)
-        (paradox-github-token private/paradox-github-token))
+        (paradox-column-width-package 27)
+        (paradox-column-width-version 13)
+        (paradox-github-token private/paradox-github-token)
+        :config
+        (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print))
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
