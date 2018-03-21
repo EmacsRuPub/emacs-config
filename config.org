@@ -370,11 +370,14 @@
                ("C-c V" . ivy-pop-view))
         :config
         (ivy-mode 1)
+        :custom-face
+        (ivy-current-match ((t (:background "gray1"))))
         :custom
         (ivy-display-style 'fancy)
+        (ivy-use-selectable-prompt t "Make the prompt line selectable")
         (ivy-use-virtual-buffers t) ;; add 'recentf-mode’and bookmarks to 'ivy-switch-buffer'.
         (ivy-height 20) ;; number of result lines to display
-        (ivy-count-format "(%d/%d)") ;; do not count candidates
+        (ivy-count-format "%d/%d ")
         (ivy-initial-inputs-alist nil) ;; no regexp by default
         (ivy-re-builders-alist
          ;; allow input not in order
@@ -391,27 +394,41 @@
       (use-package counsel
         :ensure t
         :after (swiper)
-        :bind (("C-x C-f" . counsel-find-file)
-               ("C-h f" . counsel-describe-function)
-               ("<f1> f" . counsel-describe-function)
-               ("C-h v" . counsel-describe-variable)
-               ("<f1> v" . counsel-describe-variable)
-               ("C-h l" . counsel-find-library)
-               ("<f1> l" . counsel-find-library)
+        :init
+        (require 'iso-transl)
+        :bind (([remap menu-bar-open] . counsel-tmm)
+               ([remap insert-char] . counsel-unicode-char)
+               ([remap isearch-forward] . counsel-grep-or-swiper)
+               ("C-x C-f" . counsel-find-file)
                ("C-h L" . counsel-locate)
-               ("<f1> i" . counsel-info-lookup-symbol)
-               ("<f1> u" . counsel-unicode-char)
                ("M-y" . counsel-yank-pop)
+               ("C-c C-SPC" . counsel-mark-ring)
                ("C-x C-r" . counsel-recentf)
-               ("C-x C-d" . counsel-descbinds)
                ("C-c C-." . counsel-fzf)
                ("C-c w" . counsel-wmctrl)
+               ;; ("<f10>" . counsel-tmm)
+               :map help-map
+               ("f" . counsel-describe-function)
+               ("v" . counsel-describe-variable)
+               ("b" . counsel-descbinds)
+               ("l" . counsel-find-library)
+               :prefix-map custom-help-prefix-map
+               :prefix "<f1>"
+               ("f" . counsel-describe-function)
+               ("v" . counsel-describe-variable)
+               ("l" . counsel-find-library)
+               ("b" . counsel-descbinds)
+               ("i" . counsel-info-lookup-symbol)
+               :map iso-transl-ctl-x-8-map
+               ("RET" . counsel-unicode-char)
                :map ivy-minibuffer-map
                ("M-y" . ivy-next-line))
         :custom
         (counsel-git-cmd "rg --files")
         (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-        (counsel-rg-base-command "rg -i -M 120 --no-heading --line-number --color never %s ."))
+        (counsel-rg-base-command "rg -i -M 120 --no-heading --line-number --color never %s .")
+        :config
+        (counsel-mode))
 
       (use-package ivy-hydra
         :ensure t
@@ -420,7 +437,10 @@
       (use-package ivy-rich
         :ensure t
         :after (ivy)
+        :defines ivy-rich-abbreviate-paths ivy-rich-switch-buffer-name-max-length
         :config
+        (setq ivy-rich-abbreviate-paths t)
+        (setq ivy-rich-switch-buffer-name-max-length 60)
         (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
 
       (use-package ivy-dired-history
@@ -512,6 +532,9 @@
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (when (eq system-type 'gnu-linux)
+       (setq x-alt-keysym 'meta))
+
      (defun custom/keys-describe-prefixes ()
        (interactive)
        (with-output-to-temp-buffer "*Bindings*"
@@ -627,45 +650,8 @@
      (set-keyboard-coding-system 'utf-8)
      (set-selection-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
+     (set-clipboard-coding-system 'utf-8)
    #+END_SRC
-** OS-specific stuff
-   Besides the common part of the common setup (sic!) there is also
-   a little part of customizations being specific to OS Emacs is
-   running on. So here they are (conditionally loaded):
-*** linux specific
-    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "yes" "no")
-      (setq x-alt-keysym 'meta)
-
-      (setq browse-url-browser-function 'browse-url-generic)
-      (setq browse-url-generic-program "xdg-open")
-    #+END_SRC
-*** darwin specific
-    #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "yes" "no")
-      ;; key bindings
-      (cua-mode t)
-      (setq mac-option-key-is-meta t)
-      (setq mac-command-key-is-meta nil)
-      (setq process-connection-type nil)
-      (setq mac-command-modifier 'hyper)    ;meta|super
-      (setq mac-pass-command-to-system nil)   ;;avoid hiding with M-h
-      (global-set-key [(hyper x)] 'cua-cut-region)
-      (global-set-key [(hyper c)] 'cua-copy-region)
-      (global-set-key [(hyper v)] 'cua-paste)
-      (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
-      (setq mac-control-modifier 'control)
-
-      ;; Ignore .DS_Store files with ido mode
-      (add-to-list 'ido-ignore-files "\\.DS_Store")
-
-      (setq locate-command "mdfind")
-
-      (prefer-coding-system 'utf-8-unix)
-      (set-default-coding-systems 'utf-8-unix)
-      (if (< emacs-major-version 23)
-          (set-keyboard-coding-system 'utf-8))
-      (set-clipboard-coding-system 'utf-8)
-      (set-terminal-coding-system 'utf-8)
-    #+END_SRC
 ** debug snippets
 *** show last command in minibuffer
      #+BEGIN_SRC emacs-lisp :tangle yes
