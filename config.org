@@ -80,7 +80,12 @@
 
      (use-package notifications)
 
-     (setq custom-file (at-config-basedir "customizations.el"))
+     (use-package cus-edit
+       :config
+       (setq custom-file (at-config-basedir "customizations.el"))
+       (when (and custom-file (file-exists-p custom-file))
+         (load-file custom-file)))
+
      (setq diredp-hide-details-initially-flag nil) ;; otherwise we'll have very clipped dired info
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
@@ -224,15 +229,23 @@
      (display-battery-mode 1)
      (global-font-lock-mode 1)
      (line-number-mode 1)
-     (menu-bar-mode -1)
      (size-indication-mode 1)
-     (tool-bar-mode 0)
      (tooltip-mode 0)
-     (when (fboundp 'scroll-bar-mode)
-       (scroll-bar-mode 0))
-     (when (>= emacs-major-version 25)
-       (horizontal-scroll-bar-mode -1))
      (mouse-avoidance-mode 'jump)
+
+     (use-package tool-bar
+       :config
+       (tool-bar-mode -1))
+
+     (use-package scroll-bar
+       :config
+       (scroll-bar-mode -1)
+       (when (>= emacs-major-version 25)
+         (horizontal-scroll-bar-mode -1)))
+
+     (use-package menu-bar
+       :config
+       (menu-bar-mode -1))
 
      (use-package popwin :ensure t)
 
@@ -253,6 +266,8 @@
        (display-time-day-and-date t)
        ;; (display-time-form-list (list 'time 'load))
        (display-time-mail-file t)
+       (display-time-default-load-average nil)
+       (display-time-24hr-format t)
        (display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
    #+END_SRC
 ** uniquify buffer names
@@ -295,14 +310,6 @@
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setf auto-save-default nil)
-     (when (> emacs-major-version 25)
-       (auto-save-visited-mode 1))
-
-     (setq backup-by-copying t)
-     (setq backup-by-copying-when-linked t)
-     (setq delete-old-versions -1)
-     (setq version-control t)
 
      (use-package backup-each-save
        :ensure t
@@ -349,6 +356,38 @@
          (require 'server)
          (server-start))
        (advice-add 'save-buffers-kill-terminal :before 'custom/save-buffer-clients-on-exit))
+   #+END_SRC
+** mode lists for formatting reference
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; clean trailing whitespaces automatically
+     (setq custom/trailing-whitespace-modes
+           '(
+             c++-mode
+             c-mode
+             haskell-mode
+             emacs-lisp-mode
+             lisp-mode
+             python-mode
+             js-mode
+             js2-mode
+             html-mode
+             lua-mode
+             yaml-mode
+             ))
+     ;; untabify some modes
+     (setq custom/untabify-modes
+           '(
+             haskell-mode
+             emacs-lisp-mode
+             lisp-mode
+             python-mode
+             ))
+     ;; sexp-based editing modes list
+     (setq custom/sexp-editing-modes
+           '(
+             lisp-mode
+             emacs-lisp-mode
+             ))
    #+END_SRC
 ** some ubiquitous packages
 *** hydra
@@ -533,6 +572,30 @@
         (paradox-github-token private/paradox-github-token)
         :config
         (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print))
+
+      (use-package files
+        :preface
+        (defun custom/trailing-whitespace-hook ()
+          (when (member major-mode custom/trailing-whitespace-modes)
+            (delete-trailing-whitespace)))
+        (defun custom/untabify-hook ()
+          (when (member major-mode custom/untabify-modes)
+            (untabify (point-min) (point-max))))
+        :hook
+        (before-save-hook . (custom/trailing-whitespace-hook custom/untabify-hook))
+        :config
+        (when (> emacs-major-version 25) (auto-save-visited-mode 1))
+        :custom
+        (require-final-newline t)
+        ;; backup settings
+        (auto-save-default nil)
+        (backup-by-copying t)
+        (backup-by-copying-when-linked t)
+        (backup-directory-alist '(("." . "~/.cache/emacs/backups")))
+        (delete-old-versions -1)
+        (kept-new-versions 6)
+        (kept-old-versions 2)
+        (version-control t))
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -594,49 +657,6 @@
    warnings processing
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq warning-suppress-types nil)
-   #+END_SRC
-** mode lists for formatting reference
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; clean trailing whitespaces automatically
-     (setq custom/trailing-whitespace-modes
-           '(
-             c++-mode
-             c-mode
-             haskell-mode
-             emacs-lisp-mode
-             lisp-mode
-             python-mode
-             js-mode
-             js2-mode
-             html-mode
-             lua-mode
-             yaml-mode
-             ))
-     ;; untabify some modes
-     (setq custom/untabify-modes
-           '(
-             haskell-mode
-             emacs-lisp-mode
-             lisp-mode
-             python-mode
-             ))
-     ;; sexp-based editing modes list
-     (setq custom/sexp-editing-modes
-           '(
-             lisp-mode
-             emacs-lisp-mode
-             ))
-
-     (defun common-hooks/trailing-whitespace-hook ()
-       (when (member major-mode custom/trailing-whitespace-modes)
-         (delete-trailing-whitespace)))
-
-     (defun common-hooks/untabify-hook ()
-       (when (member major-mode custom/untabify-modes)
-         (untabify (point-min) (point-max))))
-
-     (add-hook 'before-save-hook 'common-hooks/trailing-whitespace-hook)
-     (add-hook 'before-save-hook 'common-hooks/untabify-hook)
    #+END_SRC
 ** encodings
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -820,7 +840,8 @@
      (use-package dired
        :commands dired
        :hook (dired-mode-hook . auto-revert-mode)
-       :bind (:map dired-mode-map
+       :bind (([remap list-directory] . dired)
+              :map dired-mode-map
               ("C-c C-m" . custom/get-file-md5)
               ("e" . (lambda ()
                        (interactive)
@@ -861,6 +882,11 @@
          :config
          (diredfl-global-mode))
        (use-package dired-x))
+
+     (use-package dired-x
+       :config
+       ;; do not bind C-x C-j, it may be binded later
+       (setq dired-bind-jump nil))
 
      ;; Reload dired after making changes
      (--each '(dired-do-rename
@@ -1059,7 +1085,8 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package ibuffer
        :commands ibuffer
-       :bind (:map ibuffer-mode-map
+       :bind (([remap list-buffers] . ibuffer)
+              :map ibuffer-mode-map
               ("/ ." . (lambda (qualifier)
                          (interactive "sFilter by extname: ")
                          (ibuffer-filter-by-filename (concat "\\." qualifier "$"))))
@@ -1470,6 +1497,11 @@
          ("m" copy-as-format-markdown "Markdown")
          ("q" nil "cancel"))
        (global-set-key (kbd "C-c f") 'hydra-copy-format/body))
+
+     (use-package select
+       :config
+       (setq select-enable-clipboard t))
+
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3374,7 +3406,6 @@
        :custom-face (cfw:face-toolbar-button-off ((t :foreground "Gray10" :weight bold)))
        :custom-face (cfw:face-toolbar-button-on ((t :foreground "Gray50" :weight bold)))
        :custom
-       (calendar-week-start-day 1) ; 0:Sunday, 1:Monday
        ;; Unicode characters
        (cfw:fchar-junction ?╬)
        (cfw:fchar-vertical-line ?║)
@@ -3391,6 +3422,11 @@
        (calendar-month-name-array
         ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь"
          "Октябрь" "Ноябрь" "Декабрь"]))
+
+     (use-package calendar
+       :custom
+       ; 0:Sunday, 1:Monday
+       (calendar-week-start-day 1))
 
      (use-package calfw-ical :ensure t)
      (use-package calfw-org :ensure t)
