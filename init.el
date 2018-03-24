@@ -1,9 +1,28 @@
 (setq debug-on-error t)
 (setq debug-on-quit t)
 
+(setq load-prefer-newer t)
+(setq message-log-max t) ;; we don't want to lose any startup log info
+(setq shell-file-name "/bin/bash")
+
+;; ================= Emergency keybindings =================
+(global-set-key (kbd "C-x C-.") ;; Run use-package linter
+                (lambda ()
+                  (interactive)
+                  (let ((tangled-config-file (concat user-emacs-directory "config.el")))
+                    (when (file-exists-p tangled-config-file) ;; because tangled file may be removed for some reason
+                      (find-file tangled-config-file)
+                      (use-package-lint)))))
+(global-set-key (kbd "C-x C-,") #'goto-char)
+;; =========================================================
+
+(require 'cl)
+
+;; =================== Package management ===================
 (require 'package)
 (unless (> emacs-major-version 25)
   (package-initialize))
+(setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
@@ -18,16 +37,6 @@
         ("gnu" . 5)
         ("melpa" . 10)))
 
-(unless (require 'quelpa nil t) ;;TODO: consider trying self-upgrades
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
-
-(require 'cl)
-
-(setq use-package-verbose t)
-(setq use-package-hook-name-suffix "")
-
 (mapcar
  (lambda (package)
    (unless (package-installed-p package)
@@ -38,31 +47,30 @@
  '(use-package el-get))
 
 (setq use-package-compute-statistics t)
+(setq use-package-verbose t)
+(setq use-package-hook-name-suffix "")
+(put 'use-package 'lisp-indent-function 1)
+
+(unless (require 'quelpa nil t) ;;TODO: consider trying self-upgrades
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
 (use-package quelpa :ensure t)
 (use-package quelpa-use-package
   :ensure t
   :custom
   (quelpa-use-package-inhibit-loading-quelpa
-   t "Improve performance"))
+   t "Improve startup performance"))
 
 (use-package use-package-el-get
   :ensure t
   :config
   (use-package-el-get-setup))
+;; =========================================================
 
-(setq load-prefer-newer t)
-
-(global-set-key (kbd "C-x C-.")
-                (lambda ()
-                  (interactive)
-                  (let ((tangled-config-file (concat user-emacs-directory "config.el")))
-                    (when (file-exists-p tangled-config-file) ;; because tangled file may be removed for some reason
-                      (find-file tangled-config-file)
-                      (use-package-lint)))))
-
-;; open literate config fast in case of emergency (and not only)
-(use-package iqa
+;; ============= A bunch of essential packages =============
+(use-package iqa ;; open literate config fast in case of emergency (and not only)
   :ensure t
   :init
   (setq iqa-user-init-file (concat user-emacs-directory "config.org"))
@@ -83,19 +91,8 @@
   :config
   (exec-path-from-shell-initialize))
 
-(setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
-                         org-bibtex org-clock org-docview org-habit
-                         org-id org-info org-inlinetask org-irc
-                         org-mouse org-protocol org-timer org-w3m))
-(setq org-contrib-extra '(org-bookmark org-checklist org-collector
-                          org-drill org-expiry org-index org-interactive-query
-                          org-man org-velocity))
-(setq org-modules `(,@org-contrib-base ,@org-contrib-extra))
-
 (use-package bug-hunter :disabled)
-
-(setq message-log-max t) ;; we don't want to lose any startup log info
-(setq shell-file-name "/bin/bash")
+;; =========================================================
 
 (org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
 
