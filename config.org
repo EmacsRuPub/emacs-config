@@ -1327,17 +1327,6 @@
        (interactive "*")
        (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
 
-     ;; see http://endlessparentheses.com/fill-and-unfill-paragraphs-with-a-single-key.html
-     (defun fill-or-unfill ()
-       "Like `fill-paragraph', but unfill if used twice."
-       (interactive)
-       (let ((fill-column
-              (if (eq last-command custom/fill-or-unfill)
-                  (progn (setq this-command nil)
-                         (point-max))
-                fill-column)))
-         (call-interactively #'fill-paragraph)))
-
      )
 
      (use-package persistent-scratch
@@ -1448,6 +1437,10 @@
           :bind (:map mc/keymap
                  ("C-n" . mc/cycle-forward)
                  ("C-p" . mc/cycle-backward))))
+
+      ;;TODO: bind to keys more extensively
+      (use-package unfill
+        :ensure t)
     #+END_SRC
 ** regions and rectangles
 *** definitions
@@ -1883,7 +1876,7 @@
        ("q" nil "cancel"))
      (global-set-key (kbd "M-t") 'hydra-transpose/body)
 
-     (global-set-key [remap fill-paragraph] #'custom/fill-or-unfill)
+     (global-set-key [remap fill-paragraph] #'unfill-toggle)
 
      (global-set-key (kbd "M-g") 'goto-line) ;;TODO: bind goto-char
      (global-set-key (kbd "M-\"") 'eval-region)
