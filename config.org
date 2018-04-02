@@ -433,6 +433,7 @@
       (use-package counsel
         :ensure t
         :after (swiper)
+        :delight counsel-mode
         :init
         (require 'iso-transl)
         :bind (([remap menu-bar-open] . counsel-tmm)
@@ -477,10 +478,21 @@
         :ensure t
         :after (ivy)
         :defines ivy-rich-abbreviate-paths ivy-rich-switch-buffer-name-max-length
+        :custom
+        (ivy-rich-switch-buffer-name-max-length 60 "Increase max length of buffer name.")
         :config
         (setq ivy-rich-abbreviate-paths t)
         (setq ivy-rich-switch-buffer-name-max-length 60)
-        (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
+        (dolist (cmd
+                 '(ivy-switch-buffer
+                   ivy-switch-buffer-other-window
+                   counsel-projectile-switch-to-buffer))
+          (ivy-set-display-transformer cmd #'ivy-rich-switch-buffer-transformer)))
+
+      (use-package ivy-xref
+        :ensure t
+        :custom
+        (xref-show-xrefs-function #'ivy-xref-show-xrefs "Use Ivy to show xrefs"))
 
       (use-package ivy-dired-history
         :ensure t
