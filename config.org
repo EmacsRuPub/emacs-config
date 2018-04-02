@@ -249,9 +249,9 @@
 
      (use-package popwin :ensure t)
 
-     (use-package vline
-       :ensure t
-       :disabled)
+     (use-package hl-line
+       :config
+       (global-hl-line-mode 1))
 
      (use-package volatile-highlights
        :ensure t
