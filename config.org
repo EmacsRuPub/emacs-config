@@ -759,7 +759,11 @@
 
      )
 
-     (use-package link-hint :ensure t)
+     (use-package link-hint
+       :ensure t
+       :custom
+       (link-hint-avy-style 'de-bruijn))
+
      (use-package browse-url
        :if (and (eq system-type 'gnu/linux)
                 (eq window-system 'x))
