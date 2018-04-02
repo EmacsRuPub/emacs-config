@@ -826,6 +826,9 @@
        :disabled
        :config
        (save-place-mode 1))
+
+     ;; reduce point movement lag, see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
+     (setq auto-window-vscroll nil)
    #+END_SRC
 ** frames spawning
     #+BEGIN_SRC emacs-lisp :tangle yes
