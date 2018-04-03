@@ -4554,7 +4554,13 @@
    #+END_SRC
 * help
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package info)
+    (use-package info
+      :config
+      (info-initialize)
+      (add-to-list 'Info-directory-list
+                   (format "%selpa/%s"
+                           user-emacs-directory
+                           (car (directory-files "~/.emacs.d/elpa" nil "^use-package-")))))
 
     (use-package info-buffer
       :ensure t
