@@ -2972,6 +2972,41 @@
         :hook (go-mode-hook . gorepl-mode))
     #+END_SRC
 **** BACKLOG try to integrate https://getgb.io/
+*** lua
+**** setup
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (use-package lua-mode
+         :ensure t
+         :mode ("\\.lua$" . lua-mode)
+         :hook (lua-mode-hook . (lambda ()
+                                  (setq flycheck-checker 'lua-luacheck))))
+
+       (use-package company-lua
+         :ensure t
+         :after (lua-mode company))
+     #+END_SRC
+**** customizations
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (defun lua-broken-indentation-fix ()
+         (save-excursion
+           (lua-forward-line-skip-blanks 'back)
+           (let* ((current-indentation (current-indentation))
+                  (line (thing-at-point 'line t))
+                  (busted-p (s-matches?
+                             (rx (+ bol (* space)
+                                    (or "context" "describe" "it" "setup" "teardown")
+                                    "("))
+                             line)))
+                 (when busted-p
+                   (+ current-indentation lua-indent-level)))))
+
+       (defun rgc-lua-calculate-indentation-override (old-function &rest arguments)
+         (or (lua-broken-indentation-fix)
+             (apply old-function arguments)))
+
+       (advice-add #'lua-calculate-indentation-override
+                   :around #'rgc-lua-calculate-indentation-override)
+     #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2982,16 +3017,6 @@
       (use-package json-mode
         :after (json-reformat json-snatcher)
         :mode ("\\.json$" . json-mode))
-
-      (use-package lua-mode
-        :ensure t
-        :mode ("\\.lua$" . lua-mode)
-        :hook (lua-mode-hook . (lambda ()
-                                 (setq flycheck-checker 'lua-luacheck))))
-
-      (use-package company-lua
-        :ensure t
-        :after (lua-mode company))
 
       (use-package rust-mode
         :ensure t
