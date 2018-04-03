@@ -1125,9 +1125,11 @@
        :ensure t
        :after (avy)
        :commands ace-window
-       :init
-       (setq aw-background nil)
-       (setq aw-leading-char-style 'char)
+       :custom
+       (aw-background nil)
+       (aw-leading-char-style 'char)
+       (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l) "Use home row for selecting.")
+       (aw-scope 'global "Highlight all frames.")
        :config
        (set-face-attribute 'aw-mode-line-face nil :foreground "white")
        :custom-face (aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
