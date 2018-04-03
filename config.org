@@ -3435,11 +3435,6 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package pass :ensure t)
 
-      (use-package auth-password-store
-        :ensure t
-        :config
-        (auth-pass-enable))
-
       (use-package ivy-pass :ensure t)
     #+END_SRC
 *** hydras
