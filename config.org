@@ -643,6 +643,12 @@
        :ensure t
        :commands speed-type-region speed-type-buffer speed-type-text)
 
+     (use-package keyfreq
+       :ensure t
+       :config
+       (keyfreq-mode 1)
+       (keyfreq-autosave-mode 1))
+
      (use-package which-key
        :ensure t
        :config
