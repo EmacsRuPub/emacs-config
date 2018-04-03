@@ -2591,7 +2591,8 @@
                                     (auto-fill-mode 1)
                                     (setq indent-tabs-mode t)
                                     (setq tab-width 2)
-                                    (turn-on-eldoc-mode)))
+                                    (when (< emacs-major-version 27) ;; eldoc method signature change in emacs 27 is incompatible with slime 2.20
+                                      (turn-on-eldoc-mode))))
                 (lisp-mode-hook . common-hooks/newline-hook)
                 (lisp-mode-hook . common-hooks/prog-helpers))
          :init
