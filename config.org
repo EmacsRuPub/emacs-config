@@ -1456,6 +1456,17 @@
         :disabled
         ((prog-mode-hook . turn-on-auto-fill)
          (text-mode-hook . turn-on-auto-fill)))
+
+      (use-package cua-base
+        :if (memq window-system '(mac ns))
+        :bind (([kp-delete] . delete-char) ;; sets fn-delete to be right-delete
+               ([(hyper x)] . cua-cut-region)
+               ([(hyper c)] . cua-copy-region)
+               ([(hyper v)] . cua-paste))
+        :custom
+        (process-connection-type nil)
+        :config
+        (cua-mode t))
     #+END_SRC
 ** regions and rectangles
 *** definitions
