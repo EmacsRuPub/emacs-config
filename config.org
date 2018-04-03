@@ -1674,7 +1674,11 @@
               ("bash_aliases$" . sh-mode)
               ("bash_local$" . sh-mode)
               ("bash_completion$" . sh-mode)
-              (".powenv$" . sh-mode)))
+              (".powenv$" . sh-mode)
+              ("\\.zsh\\'" . sh-mode))
+       :config
+       ;; zsh
+       (setq system-uses-terminfo nil))
 
      (use-package nginx-mode
        :ensure t
