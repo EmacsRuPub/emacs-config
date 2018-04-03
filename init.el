@@ -20,7 +20,7 @@
 
 ;; =================== Package management ===================
 (require 'package)
-(unless (> emacs-major-version 25)
+(unless package--initialized
   (package-initialize))
 (setq package-enable-at-startup nil)
 
