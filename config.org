@@ -4066,6 +4066,7 @@
          (setq org-special-ctrl-a/e t)
          (setq org-special-ctrl-k t)
          (setq org-src-fontify-natively t)
+         (setq org-src-tab-acts-natively t)
          (setq org-startup-folded nil)
          (setq org-stuck-projects '("+LEVEL=1/-DONE" ("TODO" "GOING" "NEXT" "WAITING" "HOLD" "CANCELLED") nil ""))
          (setq org-tags-column -80)
