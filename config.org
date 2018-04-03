@@ -3294,8 +3294,6 @@
    #+END_SRC
 ** MPD
    #+BEGIN_SRC emacs-lisp :tangle yes
-
-
      (use-package mingus
        :ensure t
        :bind (("C-c m" . hydra-mingus/body)
