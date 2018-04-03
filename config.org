@@ -1540,10 +1540,6 @@
     #+END_SRC
 ** commenting
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package newcomment
-       :custom
-       (comment-style 'indent))
-
      (use-package comment-dwim-2
        :ensure t
        :bind ("M-]" . comment-dwim-2))
