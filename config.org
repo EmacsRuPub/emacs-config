@@ -158,6 +158,10 @@
        :disabled
        :config
        (unicode-fonts-setup))
+
+     (use-package font-lock+
+       :quelpa
+       (font-lock+ :repo "emacsmirror/font-lock-plus" :fetcher github))
    #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp :tangle yes
