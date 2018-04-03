@@ -1449,6 +1449,13 @@
       ;;TODO: bind to keys more extensively
       (use-package unfill
         :ensure t)
+
+      ;;TODO: consolidate (un)filling functionality
+      (use-package simple
+        :hook
+        :disabled
+        ((prog-mode-hook . turn-on-auto-fill)
+         (text-mode-hook . turn-on-auto-fill)))
     #+END_SRC
 ** regions and rectangles
 *** definitions
