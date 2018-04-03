@@ -527,32 +527,6 @@
                   :require-match t
                   :caller 'custom/open-org-kb-file))
 
-      ;; CREDITS: https://github.com/nathankot/dotemacs
-      (defvar counsel-flycheck-history nil
-        "History for `counsel-flycheck'")
-
-      (defun counsel-flycheck ()
-        (interactive)
-        (if (not (bound-and-true-p flycheck-mode))
-            (message "Flycheck mode is not available or enabled")
-          (ivy-read "Error: "
-                    (let ((source-buffer (current-buffer)))
-                      (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
-                                               (progn
-                                                 (with-current-buffer
-                                                     (get-buffer-create flycheck-error-list-buffer)
-                                                   (flycheck-error-list-mode)
-                                                   (current-buffer))))
-                        (flycheck-error-list-set-source source-buffer)
-                        (flycheck-error-list-reset-filter)
-                        (revert-buffer t t t)
-                        (split-string (buffer-string) "\n" t " *")))
-                    :action (lambda (s &rest _)
-                              (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
-                                            (pos (flycheck-error-pos error)) )
-                                (goto-char (flycheck-error-pos error))))
-                    :history 'counsel-flycheck-history)))
-
       (defhydra hydra-custom-counsel (:idle 1.0)
         ("e" custom/open-encrypted-document "open encrypted document")
         ("o" custom/open-org-file "open Org file")
@@ -1229,15 +1203,6 @@
        ("s" delete-other-frames "delete other frames" :color blue)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
-
-     (defhydra hydra-errors ()
-       ("c" counsel-flycheck :color blue)
-       ("<up>" flycheck-previous-error "previous error")
-       ("<down>" flycheck-next-error "next error")
-       ("<left>" previous-error "previous error")
-       ("<right>" next-error "next error")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "C-q") 'hydra-errors/body)
 
      (defhydra hydra-history ()
        ("y" counsel-yank-pop)
@@ -2119,6 +2084,52 @@
         :after (flycheck)
         :config
         (flycheck-pos-tip-mode))
+
+      (use-package avy-flycheck
+        :ensure t
+        :config
+        (avy-flycheck-setup)
+        (setq avy-flycheck-dispatch-alist
+            '((?x . avy-action-kill-move)
+              (?X . avy-action-kill-stay)
+              (?m . avy-action-mark)
+              (?n . avy-action-copy))))
+
+      ;; CREDITS: https://github.com/nathankot/dotemacs
+      (defvar counsel-flycheck-history nil
+        "History for `counsel-flycheck'")
+
+      (defun counsel-flycheck ()
+        (interactive)
+        (if (not (bound-and-true-p flycheck-mode))
+            (message "Flycheck mode is not available or enabled")
+          (ivy-read "Error: "
+                    (let ((source-buffer (current-buffer)))
+                      (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
+                                               (progn
+                                                 (with-current-buffer
+                                                     (get-buffer-create flycheck-error-list-buffer)
+                                                   (flycheck-error-list-mode)
+                                                   (current-buffer))))
+                        (flycheck-error-list-set-source source-buffer)
+                        (flycheck-error-list-reset-filter)
+                        (revert-buffer t t t)
+                        (split-string (buffer-string) "\n" t " *")))
+                    :action (lambda (s &rest _)
+                              (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
+                                            (pos (flycheck-error-pos error)) )
+                                (goto-char (flycheck-error-pos error))))
+                    :history 'counsel-flycheck-history)))
+
+      (defhydra hydra-errors ()
+        ("a" avy-flycheck-goto-error :color blue)
+        ("c" counsel-flycheck :color blue)
+        ("<up>" flycheck-previous-error "previous error")
+        ("<down>" flycheck-next-error "next error")
+        ("<left>" previous-error "previous error")
+        ("<right>" next-error "next error")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "C-q") 'hydra-errors/body)
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 *** virtualization
