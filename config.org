@@ -2287,6 +2287,16 @@
         :ensure t
         :bind (:map prog-mode-map
                ("M-q" . prog-fill)))
+
+      (use-package rainbow-identifiers
+        :ensure t
+        :hook
+        (prog-mode-hook . rainbow-identifiers-mode))
+
+      (use-package rainbow-delimiters
+        :ensure t
+        :hook
+        (prog-mode-hook . rainbow-delimiters-mode))
     #+END_SRC
 *** related major modes
     #+BEGIN_SRC emacs-lisp :tangle yes
