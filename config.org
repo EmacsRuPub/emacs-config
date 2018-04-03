@@ -1628,7 +1628,12 @@
        (yatemplate-fill-alist))
 
      (use-package whitespace
+       :ensure t
+       :hook
+       ((prog-mode-hook . whitespace-turn-on)
+        (text-mode-hook . whitespace-turn-on))
        :custom
+       (whitespace-line-column 121)
        (whitespace-style '(tabs trailing tab-mark face lines-tail)))
 
      (use-package page-break-lines
