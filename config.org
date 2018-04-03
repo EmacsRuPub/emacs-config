@@ -1198,9 +1198,14 @@
 
      (use-package avy
        :ensure t
+       :bind (("C-:" . avy-goto-char)
+              ("M-g M-g" . avy-goto-line)
+              ("M-s M-s" . avy-goto-word-1))
        :custom
        (avy-timeout-seconds 0.5)
-       :custom-face (avy-goto-char-timer-face ((nil (:foreground "green" :weight bold)))))
+       :custom-face (avy-goto-char-timer-face ((nil (:foreground "green" :weight bold))))
+       :config
+       (avy-setup-default))
 
      (use-package filecache)
    #+END_SRC
@@ -1881,7 +1886,6 @@
 
      (global-set-key [remap fill-paragraph] #'unfill-toggle)
 
-     (global-set-key (kbd "M-g") 'goto-line) ;;TODO: bind goto-char
      (global-set-key (kbd "M-\"") 'eval-region)
      (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
      (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
