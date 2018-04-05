@@ -2383,6 +2383,11 @@
         (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
         (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode)))
 
+      (use-package magit-org-todos
+        :ensure t
+        :config
+        (magit-org-todos-autoinsert))
+
       (use-package git-timemachine
         :ensure t
         :after (ivy)
