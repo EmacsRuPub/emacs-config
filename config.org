@@ -1440,6 +1440,12 @@
                  ("C-n" . mc/cycle-forward)
                  ("C-p" . mc/cycle-backward))))
 
+      (use-package delsel
+        :bind
+        ("C-c C-g" . minibuffer-keyboard-quit)
+        :config
+        (delete-selection-mode 1))
+
       ;;TODO: bind to keys more extensively
       ;;TODO: consolidate (un)filling functionality
       (use-package unfill
