@@ -1196,7 +1196,7 @@
        :ensure t
        :bind (("C-:" . avy-goto-char)
               ("M-g M-g" . avy-goto-line)
-              ("M-s M-s" . avy-goto-word-1))
+              ("M-s M-s" . avy-goto-word-0))
        :custom
        (avy-timeout-seconds 0.5)
        :custom-face (avy-goto-char-timer-face ((nil (:foreground "green" :weight bold))))
