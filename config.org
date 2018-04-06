@@ -1661,6 +1661,12 @@
        :hook ((shell-mode-hook term-mode-hook eshell-mode-hook) . with-editor-export-editor))
 
      (use-package archive-rpm :ensure t) ;;TODO: check if there is any additional setup needed
+
+     (use-package aggressive-indent
+       :ensure t
+       :config
+       (global-aggressive-indent-mode 1)
+       (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
    #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
