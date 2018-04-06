@@ -42,15 +42,6 @@
 
      (defun at-user-data-dir (&optional suffix)
        (concat-normalize-slashes no-littering-var-directory suffix))
-
-     (cl-defmacro with-unmanaged-errors (&rest body)
-       `(let ((debug-on-error-orig debug-on-error)
-              (debug-on-quit-orig debug-on-quit))
-          (setq debug-on-error nil)
-          (setq debug-on-quit nil)
-          ,@body
-          (setq debug-on-error debug-on-error-orig)
-          (setq debug-on-quit debug-on-quit-orig)))
    #+END_SRC
 ** essential packages and tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1987,16 +1978,14 @@
        (yas-global-mode 1)
        (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
        (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
-       ;; FIXME: fix unsetting clauses and uncomment
-       ;; unsetting Tab, removing ALL translations
-       ;; (with-unmanaged-errors
-       ;;  (unbind-key [(tab)] yas-minor-mode-map)
-       ;;  (unbind-key [(tab)] yas-keymap)
-       ;;  (unbind-key [(shift tab)] yas-keymap)
-       ;;  (unbind-key [backtab] yas-keymap)
-       ;;  (unbind-key (kbd "<tab>") yas-minor-mode-map)
-       ;;  (unbind-key (kbd "TAB") yas-minor-mode-map)
-       ;;  (unbind-key (kbd "TAB") yas-keymap))
+       ;; using define-key because it turns out bind-key cannot handle some key definition forms
+       (define-key yas-minor-mode-map [(tab)] nil)
+       (define-key yas-keymap [(tab)] nil)
+       (define-key yas-keymap [(shift tab)] nil)
+       (define-key yas-keymap [backtab] nil)
+       (define-key yas-minor-mode-map (kbd "<tab>") nil)
+       (define-key yas-minor-mode-map (kbd "TAB") nil)
+       (define-key yas-keymap (kbd "TAB") nil)
        (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
        (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
        (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
