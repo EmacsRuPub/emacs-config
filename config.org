@@ -191,31 +191,30 @@
    #+END_SRC
 ** frames
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq frame-title-format "emacs - %b %f")
-
-     (setq inhibit-startup-echo-area-message "octocat")
-     (setq inhibit-startup-message t)
-     (setq inhibit-startup-screen t)
-     (setq initial-scratch-message nil)
-
-     (setq resize-mini-windows t)
-     (setq max-mini-window-height 0.33)
      (setq use-dialog-box nil)
-     (setq visible-bell t)
-     (setq ring-bell-function 'ignore)
-     (setq split-width-threshold nil)
      (setq enable-recursive-minibuffers t)
-     (setq echo-keystrokes 0.1)
-     (setq truncate-partial-width-windows nil)
 
-     (blink-cursor-mode 0)
-     (column-number-mode 1)
-     (display-battery-mode 1)
-     (global-font-lock-mode 1)
-     (line-number-mode 1)
-     (size-indication-mode 1)
-     (tooltip-mode 0)
-     (mouse-avoidance-mode 'jump)
+     (use-package font-core
+       :config
+       (global-font-lock-mode 1))
+
+     (use-package tooltip
+       :config
+       (tooltip-mode 0))
+
+     (use-package avoid
+       :config
+       (mouse-avoidance-mode 'jump))
+
+     (use-package frame
+       :config
+       (blink-cursor-mode 0)
+       (setq frame-title-format "emacs - %b %f") ;; for various external tools
+       (setq truncate-partial-width-windows nil))
+
+     (use-package battery
+       :config
+       (display-battery-mode 1))
 
      (use-package tool-bar
        :config
@@ -1449,7 +1448,9 @@
         ((visual-line-mode . " ↩")
          (auto-fill-function . " ↵"))
         :config
-        (column-number-mode t)
+        (column-number-mode 1)
+        (line-number-mode 1)
+        (size-indication-mode 1)
         (toggle-truncate-lines 1))
 
       (use-package cua-base
