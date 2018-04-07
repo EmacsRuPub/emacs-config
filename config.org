@@ -1805,6 +1805,8 @@
        (global-auto-revert-non-file-buffers t)
        :config
        (global-auto-revert-mode 1))
+
+     (use-package symbolword-mode :ensure t)
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1878,7 +1880,11 @@
        ("K" append-next-kill)
        ("a" custom/append-cited-region)
        ("`" redraw-display)
-       ("S" scratch)
+       ("S" (lambda ()
+              (interactive)
+              (if symbolword-mode
+                  (symbolword-mode -1)
+                (symbolword-mode 1))))
        ("d" diff-buffer-with-file)
        ("n" crux-rename-file-and-buffer)
        ("x" query-replace-regexp)
