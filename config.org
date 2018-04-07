@@ -293,16 +293,13 @@
    #+END_SRC
 ** backups
    #+BEGIN_SRC emacs-lisp :tangle yes
-
      (use-package backup-each-save
        :ensure t
        :hook (after-save-hook . backup-each-save))
 
      (use-package backup-walker
        :ensure t
-       :commands backup-walker-start) ;TODO: bind to key and other stuff
-
-     (setq delete-by-moving-to-trash t)
+       :commands backup-walker-start)
    #+END_SRC
 ** concurrency and caching
    Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
