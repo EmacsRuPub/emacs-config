@@ -142,7 +142,6 @@
      (use-package unicode-fonts
        :ensure t
        :after (persistent-soft)
-       :disabled
        :config
        (unicode-fonts-setup))
 
