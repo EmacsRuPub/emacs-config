@@ -4186,7 +4186,6 @@
          (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
          (add-hook 'org-after-refile-insert-hook 'save-buffer)
          ;; run some commands
-         (run-at-time nil 60 'org-save-all-org-buffers)
          (org-add-link-type "tag" 'custom/follow-tag-link)
          (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
          (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
