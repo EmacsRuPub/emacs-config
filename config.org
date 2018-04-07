@@ -60,9 +60,6 @@
 
      (use-package names :ensure t)
      (use-package anaphora :ensure t)
-     (use-package noflet :ensure t)
-
-     (use-package delight :ensure t)
 
      (use-package pcre2el
        :ensure t
