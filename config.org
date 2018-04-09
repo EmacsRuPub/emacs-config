@@ -1751,8 +1751,6 @@
        (global-auto-revert-non-file-buffers t)
        :config
        (global-auto-revert-mode 1))
-
-     (use-package symbolword-mode :ensure t)
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp :tangle yes
