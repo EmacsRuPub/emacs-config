@@ -337,38 +337,6 @@
          (server-start))
        (advice-add 'save-buffers-kill-terminal :before 'custom/save-buffer-clients-on-exit))
    #+END_SRC
-** mode lists for formatting reference
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; clean trailing whitespaces automatically
-     (setq custom/trailing-whitespace-modes
-           '(
-             c++-mode
-             c-mode
-             haskell-mode
-             emacs-lisp-mode
-             lisp-mode
-             python-mode
-             js-mode
-             js2-mode
-             html-mode
-             lua-mode
-             yaml-mode
-             ))
-     ;; untabify some modes
-     (setq custom/untabify-modes
-           '(
-             haskell-mode
-             emacs-lisp-mode
-             lisp-mode
-             python-mode
-             ))
-     ;; sexp-based editing modes list
-     (setq custom/sexp-editing-modes
-           '(
-             lisp-mode
-             emacs-lisp-mode
-             ))
-   #+END_SRC
 ** some ubiquitous packages
 *** hydra
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -549,6 +517,29 @@
 
       (use-package files
         :preface
+        ;; clean trailing whitespaces automatically
+        (defvar custom/trailing-whitespace-modes
+          '(
+            c++-mode
+            c-mode
+            haskell-mode
+            emacs-lisp-mode
+            lisp-mode
+            python-mode
+            js-mode
+            js2-mode
+            html-mode
+            lua-mode
+            yaml-mode
+            ))
+        ;; untabify some modes
+        (defvar custom/untabify-modes
+          '(
+            haskell-mode
+            emacs-lisp-mode
+            lisp-mode
+            python-mode
+            ))
         (defun custom/trailing-whitespace-hook ()
           (when (member major-mode custom/trailing-whitespace-modes)
             (delete-trailing-whitespace)))
@@ -561,6 +552,7 @@
         (when (> emacs-major-version 25) (auto-save-visited-mode 1))
         :custom
         (require-final-newline t)
+        (enable-local-variables nil)
         ;; backup settings
         (auto-save-default nil)
         (backup-by-copying t)
@@ -629,14 +621,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq display-time-world-list
            '(("Europe/Moscow" "Moscow")))
-   #+END_SRC
-   local variables processing
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq enable-local-variables nil)
-   #+END_SRC
-   warnings processing
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq warning-suppress-types nil)
    #+END_SRC
 ** encodings
    #+BEGIN_SRC emacs-lisp :tangle yes
