@@ -4286,6 +4286,13 @@
          :after (org)
          :bind (:map org-mode-map
                      ("C-M-y" . org-rich-yank)))
+
+       (use-package counsel-org-clock
+         :after (org counsel)
+         :quelpa
+         (counsel-org-clock :repo "akirak/counsel-org-clock" :fetcher github)
+         :custom
+         (counsel-org-clock-default-action 'counsel-org-clock-clock-dwim-action))
      #+END_SRC
 ** paperwork
    #+BEGIN_SRC emacs-lisp :tangle no
@@ -4341,6 +4348,8 @@
        ("," org-clock-out)
        ("^" org-mru-clock-select-recent-task)
        ("c" org-clock-cancel)
+       ("x" counsel-org-clock-context)
+       ("h" counsel-org-clock-history)
        ("d" org-clock-display)
        ("R" org-clock-report)
        ("p" org-pomodoro)
@@ -4362,7 +4371,7 @@
        ("f" ace-link-org :color blue)
        ("n" org-narrow-to-subtree)
        ("-" org-sparse-tree)
-       ("h" counsel-org-agenda-headlines)
+       ("l" counsel-org-agenda-headlines)
        ("H" org-recent-headings-ivy)
        ("=" org-show-todo-tree)
        ("\\" counsel-org-tag)
