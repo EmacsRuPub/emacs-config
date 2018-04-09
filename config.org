@@ -479,7 +479,9 @@
         :after (dired savehist)
         :config
         (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
-
+    #+END_SRC
+*** custom ivy-based
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/open-encrypted-document ()
         (interactive)
         (ivy-read "Various documents: "
