@@ -271,7 +271,7 @@
        :custom
        (savehist-save-minibuffer-history t)
        (savehist-autosave-interval 60)
-       (history-length t)
+       (history-length 10000)
        (history-delete-duplicates t)
        (savehist-additional-variables
              '(kill-ring
