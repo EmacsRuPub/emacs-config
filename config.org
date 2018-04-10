@@ -2546,13 +2546,12 @@
                                     (set (make-local-variable 'slime-lisp-implementations)
                                          (list (assoc 'sbcl slime-lisp-implementations)))))
                 (inferior-lisp-mode-hook . inferior-slime-mode)
-                ;; (slime-mode-hook . slime-autodoc-mode) ;; some signature down the call stack is broken in 2.20
+                (slime-mode-hook . (lambda () (when (> emacs-major-version 25)
+                                                (slime-autodoc-mode -1)))) ;; some signature down the call stack is broken in 2.20
                 (lisp-mode-hook . (lambda ()
                                     (auto-fill-mode 1)
                                     (setq indent-tabs-mode t)
-                                    (setq tab-width 2)
-                                    (when (< emacs-major-version 27) ;; eldoc method signature change in emacs 27 is incompatible with slime 2.20
-                                      (turn-on-eldoc-mode))))
+                                    (setq tab-width 2)))
                 (lisp-mode-hook . common-hooks/newline-hook)
                 (lisp-mode-hook . common-hooks/prog-helpers))
          :init
