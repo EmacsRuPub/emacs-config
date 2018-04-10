@@ -42,6 +42,9 @@
 
      (defun at-user-data-dir (&optional suffix)
        (concat-normalize-slashes no-littering-var-directory suffix))
+
+     (defun at-workspace-dir (&optional suffix)
+       (concat-normalize-slashes (at-homedir "/workspace") suffix))
    #+END_SRC
 ** essential packages and tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2308,6 +2311,14 @@
         :ensure t
         :config
         (magit-org-todos-autoinsert))
+
+      (use-package magithub
+        :ensure t
+        :after (magit)
+        :custom
+        (magithub-clone-default-directory (at-workspace-dir "foss"))
+        :config
+        (magithub-feature-autoinject t))
 
       (use-package git-timemachine
         :ensure t
