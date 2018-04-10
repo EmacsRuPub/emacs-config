@@ -2994,40 +2994,7 @@
       (use-package graphql-mode
         :ensure t
         :mode ("\\.graphql$" . graphql-mode))
-    #+END_SRC
-*** xml
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/nxml-mode-hook ()
-        (auto-fill-mode)
-        (hs-minor-mode 1)
-        (rng-validate-mode)
-        (setq ispell-skip-html t)
-        (unify-8859-on-decoding-mode))
 
-      (setq nxml-auto-insert-xml-declaration-flag t)
-      (setq nxml-bind-meta-tab-to-complete-flag t)
-      (setq nxml-slash-auto-complete-flag t)
-
-      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
-
-      (add-to-list 'hs-special-modes-alist
-                   '(nxml-mode
-                     "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
-                     ""
-                     nil))
-
-      (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
-      (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
-
-      (add-to-list 'auto-mode-alist
-                   (cons (concat "\\."
-                                 (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
-                         'nxml-mode))
-
-      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
-    #+END_SRC
-*** multiple major modes
-    #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode
         :ensure t
         :mode (("\\.phtml\\'" . web-mode)
@@ -3071,7 +3038,9 @@
                         )
                     (unless tern-mode (tern-mode))
                   (if tern-mode (tern-mode -1)))))))
-
+    #+END_SRC
+*** minor modes
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package company-web
         :ensure t
         :after (company dash web-completion-data))
@@ -3083,6 +3052,37 @@
       (use-package web-narrow-mode
         :ensure t
         :hook (web-mode-hook . web-narrow-mode))
+    #+END_SRC
+*** xml
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (defun custom/nxml-mode-hook ()
+        (auto-fill-mode)
+        (hs-minor-mode 1)
+        (rng-validate-mode)
+        (setq ispell-skip-html t)
+        (unify-8859-on-decoding-mode))
+
+      (setq nxml-auto-insert-xml-declaration-flag t)
+      (setq nxml-bind-meta-tab-to-complete-flag t)
+      (setq nxml-slash-auto-complete-flag t)
+
+      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
+
+      (add-to-list 'hs-special-modes-alist
+                   '(nxml-mode
+                     "\\|<[^/>]&>\\|<[^/][^>]*[^/]>"
+                     ""
+                     nil))
+
+      (add-hook 'nxml-mode-hook 'common-hooks/newline-hook)
+      (add-hook 'nxml-mode-hook 'custom/nxml-mode-hook)
+
+      (add-to-list 'auto-mode-alist
+                   (cons (concat "\\."
+                                 (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss" "rdf") t) "\\'")
+                         'nxml-mode))
+
+      (push '("<\\?xml" . nxml-mode) magic-mode-alist)
     #+END_SRC
 *** color helper
     #+BEGIN_SRC emacs-lisp :tangle yes
