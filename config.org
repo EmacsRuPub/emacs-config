@@ -102,6 +102,7 @@
         (epa-pinentry-mode 'loopback))
 
       (use-package epg-config
+        :after (epg)
         :custom
         (epg-gpg-program "gpg2")
         (epg-gpg-home-directory "~/.gnupg"))
