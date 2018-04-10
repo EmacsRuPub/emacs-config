@@ -387,18 +387,12 @@
         :bind (([remap menu-bar-open] . counsel-tmm)
                ([remap insert-char] . counsel-unicode-char)
                ([remap isearch-forward] . counsel-grep-or-swiper)
-               ("C-x C-f" . counsel-find-file)
                ("C-h L" . counsel-locate)
-               ("M-y" . counsel-yank-pop)
                ("C-c C-SPC" . counsel-mark-ring)
                ("C-x C-r" . counsel-recentf)
                ("C-c C-." . counsel-fzf)
                ("C-c w" . counsel-wmctrl)
-               ;; ("<f10>" . counsel-tmm)
                :map help-map
-               ("f" . counsel-describe-function)
-               ("v" . counsel-describe-variable)
-               ("b" . counsel-descbinds)
                ("l" . counsel-find-library)
                :prefix-map custom-help-prefix-map
                :prefix "<f1>"
@@ -416,7 +410,7 @@
         (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
         (counsel-rg-base-command "rg -i -M 120 --no-heading --line-number --color never %s .")
         :config
-        (counsel-mode))
+        (counsel-mode 1))
 
       (use-package ivy-hydra
         :ensure t
