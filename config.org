@@ -2147,21 +2147,20 @@
      #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package c-eldoc :ensure t)
-      (use-package eldoc-eval :ensure t)
-
       (use-package eldoc
         :delight eldoc-mode
-        :commands turn-on-eldoc-mode
-        :hook (((emacs-lisp-mode-hook lisp-interaction-mode-hook ielm-mode-hook) . turn-on-eldoc-mode)
-               ((c-mode-hook c++-mode-hook) . c-turn-on-eldoc-mode))
+        :hook ((emacs-lisp-mode-hook lisp-interaction-mode-hook ielm-mode-hook) . turn-on-eldoc-mode)
         :custom
         (eldoc-idle-delay 0))
 
-      ;;TODO: maybe move to "webdev" section
-      (use-package css-eldoc
+      (use-package c-eldoc
         :ensure t
-        :hook (css-mode-hook . turn-on-css-eldoc))
+        :after (eldoc)
+        :hook ((c-mode-hook c++-mode-hook) . c-turn-on-eldoc-mode))
+
+      (use-package eldoc-eval
+        :ensure t
+        :after (eldoc))
     #+END_SRC
 *** common hooks
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3051,6 +3050,11 @@
       (use-package web-narrow-mode
         :ensure t
         :hook (web-mode-hook . web-narrow-mode))
+
+      (use-package css-eldoc
+        :ensure t
+        :after (eldoc)
+        :hook (css-mode-hook . turn-on-css-eldoc))
     #+END_SRC
 *** xml
     #+BEGIN_SRC emacs-lisp :tangle yes
