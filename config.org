@@ -835,12 +835,10 @@
          :ensure t
          :config
          (diredfl-global-mode))
-       (use-package dired-x))
-
-     (use-package dired-x
-       :config
-       ;; do not bind C-x C-j, it may be binded later
-       (setq dired-bind-jump nil))
+       (use-package dired-x
+         :config
+         ;; do not bind C-x C-j, it may be binded later
+         (setq dired-bind-jump nil)))
 
      (use-package dired-hide-dotfiles
        :ensure t
