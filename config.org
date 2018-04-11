@@ -855,10 +855,6 @@
    #+END_SRC
 ** search
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package occur-context-resize
-       :ensure t
-       :hook (occur-mode-hook . occur-context-resize-mode))
-
      (use-package phi-search
        :ensure t
        :commands phi-search phi-search-backward
