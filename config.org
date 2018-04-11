@@ -1280,9 +1280,13 @@
    #+END_SRC
 ** move and bend text around
 *** definitions
-    This override for transpose-words fixes what I consider to be a flaw with the default implementation in simple.el. To transpose chars or lines, you always put the point on the second char or line
-    to transpose with the previous char or line. The default transpose-words implementation does the opposite by flipping the current word with the next word instead of the previous word. The new
-    implementation below instead makes transpose-words more consistent with how transpose-chars and trasponse-lines behave.
+    This override for transpose-words fixes what I consider to be a flaw with
+    the default implementation in simple.el. To transpose chars or lines, you
+    always put the point on the second char or line to transpose with the
+    previous char or line. The default transpose-words implementation does the
+    opposite by flipping the current word with the next word instead of the
+    previous word. The new implementation below instead makes transpose-words
+    more consistent with how transpose-chars and trasponse-lines behave.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/transpose-words (arg)
         "[Override for default transpose-words in simple.el]
