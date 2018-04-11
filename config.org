@@ -199,6 +199,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq use-dialog-box nil)
      (setq enable-recursive-minibuffers t)
+     ;; don't let the cursor go into minibuffer prompt
+     (setq minibuffer-prompt-properties
+           '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
      (use-package font-core
        :config
@@ -750,13 +753,18 @@
       (global-unset-key (kbd "C-M-r"))
       (global-unset-key (kbd "C-x C-b"))
     #+END_SRC
-** special modes navigation
+** special navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package beginend
        :ensure t
        :delight beginend-global-mode beginend-prog-mode beginend-magit-status-mode
        :config
        (beginend-global-mode))
+
+     (use-package mwim
+       :ensure t
+       :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
+              ([remap move-end-of-line] . mwim-end-of-code-or-line)))
    #+END_SRC
 ** projects
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -796,7 +804,6 @@
        :hook (dired-mode-hook . auto-revert-mode)
        :bind (([remap list-directory] . dired)
               :map dired-mode-map
-              ("C-c C-m" . custom/get-file-md5)
               ("e" . (lambda ()
                        (interactive)
                        (when (derived-mode-p 'dired-mode)
@@ -980,10 +987,6 @@
                   :action #'prog-inline--tasks-open-action
                   :caller 'prog-inline-tasks))
     #+END_SRC
-
-    #+RESULTS:
-    : prog-inline-tasks
-
 ** operations with windows/frames
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package windmove
@@ -1210,44 +1213,6 @@
      (global-set-key [remap kill-buffer] #'kill-this-buffer)
    #+END_SRC
 * editing
-** custom utils
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (define-namespace custom/
-
-     ;; TODO implement variant with path for some VCS-controlled tree
-     (defun copy-file-name-to-clipboard ()
-       "Copy the current buffer file name to the clipboard."
-       (interactive)
-       (let ((filename (if (equal major-mode 'dired-mode)
-                           default-directory
-                         (buffer-file-name))))
-         (when filename
-           (kill-new filename)
-           (message "Copied buffer file name '%s' to the clipboard." filename))))
-
-     (defun get-file-md5 ()
-       (interactive)
-       (when (derived-mode-p 'dired-mode)
-         (let ((abs-file-name (dired-get-filename)))
-           (unless (file-directory-p abs-file-name)
-             (with-temp-buffer
-               (let ((prefix-arg t))
-                 (shell-command (format "md5sum %s" abs-file-name))
-                 (buffer-string)))))))
-
-     (defun insert-current-date-time()
-       "Insert the current date and time at point."
-       (interactive "*")
-       (insert (format-time-string "[%d.%m.%Y - %H:%M]" (current-time))))
-
-     )
-
-     (use-package persistent-scratch
-       :ensure t
-       :mode ("^*scratch*$" . lisp-interaction-mode)
-       :hook ((after-init-hook . persistent-scratch-restore)
-              (kill-emacs-hook . persistent-scratch-save)))
-   #+END_SRC
 ** common hooks
    #+BEGIN_SRC emacs-lisp :tangle yes
      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -1302,11 +1267,6 @@
     #+END_SRC
 *** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package anchored-transpose
-        :ensure t
-        :disabled
-        :commands anchored-transpose)
-
       (use-package snakehump
         :quelpa
         (snakehump :repo "aes/snakehump" :fetcher github :version original)
@@ -1316,15 +1276,9 @@
         :ensure t
         :bind ("C-x l" . ialign))
 
-      (use-package adaptive-wrap :ensure t)
-
       (use-package hungry-delete
         :ensure t
         :commands hungry-delete-forward hungry-delete-backward)
-
-      (use-package replace+
-        :ensure t
-        :disabled)
 
       (use-package multiple-cursors
         :ensure t
@@ -1373,11 +1327,18 @@
         :delight
         ((visual-line-mode . " ↩")
          (auto-fill-function . " ↵"))
+        :custom
+        (kill-whole-line t)
+        (next-line-add-newlines nil)
+        (blink-matching-paren nil)
+        (setq set-mark-command-repeat-pop t)
         :config
         (column-number-mode 1)
         (line-number-mode 1)
         (size-indication-mode 1)
-        (toggle-truncate-lines 1))
+        (toggle-truncate-lines 1)
+        (transient-mark-mode 1)
+        (put 'transient-mark-mode 'permanent-local t))
 
       (use-package cua-base
         :if (memq window-system '(mac ns))
@@ -1394,11 +1355,6 @@
 *** definitions
     #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
-
-      (defadvice whole-line-or-region-kill-region
-          (before whole-line-or-region-kill-read-only-ok activate)
-        (interactive "p")
-        (unless kill-read-only-ok (barf-if-buffer-read-only)))
 
       (defun cite-region (arg)
         (clipboard-kill-ring-save (region-beginning) (region-end))
@@ -1444,9 +1400,6 @@
         (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
         (region-bindings-mode-enable))
 
-      (use-package rectangular-region-mode
-        :bind ("H-SPC" . set-rectangular-region-anchor))
-
       (use-package whole-line-or-region ;; if no region is active, act on current line
         :ensure t
         :delight (whole-line-or-region-mode " WLR")
@@ -1456,8 +1409,12 @@
            (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
            (kill-region whole-line-or-region-kill-region nil)
            (kill-ring-save whole-line-or-region-kill-ring-save nil)
-           (yank whole-line-or-region-yank nil)))  
+           (yank whole-line-or-region-yank nil)))
         :config
+        (defadvice whole-line-or-region-kill-region
+            (before whole-line-or-region-kill-read-only-ok activate)
+          (interactive "p")
+          (unless kill-read-only-ok (barf-if-buffer-read-only)))
         (whole-line-or-region-mode 1))
     #+END_SRC
 ** commenting
@@ -1499,9 +1456,9 @@
        (global-set-key (kbd "C-c f") 'hydra-copy-format/body))
 
      (use-package select
-       :config
-       (setq select-enable-clipboard t))
-
+       :custom
+       (select-enable-clipboard t)
+       (x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1536,8 +1493,14 @@
     #+END_SRC
 ** utils
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package table)
-     (use-package epoch-view :disabled)
+     (auto-compression-mode t)
+     (electric-indent-mode -1)
+
+     (use-package persistent-scratch
+       :ensure t
+       :mode ("^*scratch*$" . lisp-interaction-mode)
+       :hook ((after-init-hook . persistent-scratch-restore)
+              (kill-emacs-hook . persistent-scratch-save)))
 
      (use-package yatemplate
        :ensure t
@@ -1549,18 +1512,8 @@
        :config
        (yatemplate-fill-alist))
 
-     (use-package whitespace
-       :ensure t
-       :hook
-       ((prog-mode-hook . whitespace-turn-on)
-        (text-mode-hook . whitespace-turn-on))
-       :custom
-       (whitespace-line-column 121)
-       (whitespace-style '(tabs trailing tab-mark face lines-tail)))
-
      (use-package page-break-lines
        :ensure t
-       :disabled
        :config
        (turn-on-page-break-lines-mode))
 
@@ -1569,28 +1522,59 @@
        :bind (("\C-x~" . macro-math-eval-and-round-region)
               ("\C-x=" . macro-math-eval-region)))
 
-     ;;TODO: consolidate all whitespaces utils
-     ;;TODO: think of activating ws-butler in some modes, just for hands-on testing
-     (use-package ws-butler
-       :ensure t
-       :commands ws-buttler-mode)
-
-     (use-package mwim
-       :ensure t
-       :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
-              ([remap move-end-of-line] . mwim-end-of-code-or-line)))
-
-     (use-package with-editor
-       :hook ((shell-mode-hook term-mode-hook eshell-mode-hook) . with-editor-export-editor))
-
      (use-package archive-rpm :ensure t) ;;TODO: check if there is any additional setup needed
 
-     (use-package aggressive-indent
+     (use-package editorconfig
        :ensure t
+       :delight (editorconfig-mode " EC")
+       :hook ((prog-mode-hook text-mode-hook) . editorconfig-mode))
+
+     (use-package autorevert
+       :disabled
+       :mode ("\\.log$" . auto-revert-mode)
+       :custom
+       (auto-revert-verbose nil)
+       (global-auto-revert-non-file-buffers t)
        :config
-       (global-aggressive-indent-mode 1)
-       (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+       (global-auto-revert-mode 1))
+
+     (use-package kmacro
+       :custom
+       (setq kmacro-ring-max 16))
+
+     (use-package paragraphs
+       :custom
+       (setq sentence-end-double-space nil))
+
+     (use-package mwheel
+       :custom
+       (mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+       (mouse-wheel-progressive-speed nil))
    #+END_SRC
+*** whitespaces
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package whitespace
+        :ensure t
+        :hook
+        ((prog-mode-hook . whitespace-turn-on)
+         (text-mode-hook . whitespace-turn-on))
+        :custom
+        (whitespace-line-column 121)
+        (whitespace-style '(indentation::space
+                            space-after-tab
+                            space-before-tab
+                            trailing
+                            lines-tail
+                            tab-mark
+                            face
+                            tabs)))
+
+      ;;TODO: consolidate all whitespaces utils
+      ;;TODO: think of activating ws-butler in some modes, just for hands-on testing
+      (use-package ws-butler
+        :ensure t
+        :commands ws-butler-mode)
+    #+END_SRC
 ** major modes
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package rst
@@ -1682,6 +1666,12 @@
        (use-package smartparens-config)
        (show-smartparens-global-mode t)
        (sp-use-smartparens-bindings))
+
+     (use-package paren
+       :custom
+       (show-paren-delay 0)
+       :config
+       (show-paren-mode t))
    #+END_SRC
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1689,82 +1679,30 @@
      (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
      (setq-default tab-width 4)
 
-     (defun custom/kill-back-to-indentation ()
-       "Kill from point back to the first non-whitespace character on the line."
-       (interactive)
-       (let ((prev-pos (point)))
-         (back-to-indentation)
-         (kill-region (point) prev-pos)))
+     (use-package indent
+       :config
+       (setq tab-always-indent t))
 
      (use-package dtrt-indent
        :ensure t
        :config
        (dtrt-indent-mode))
 
-     (bind-key "C-M-<backspace>" 'custom/kill-back-to-indentation)
-   #+END_SRC
-** Using settings from .editorconfig
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package editorconfig
+     (use-package aggressive-indent
        :ensure t
-       :delight (editorconfig-mode " EC")
-       :hook ((prog-mode-hook text-mode-hook) . editorconfig-mode))
-   #+END_SRC
-** setup basic minor modes
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (auto-compression-mode t)
-     (delete-selection-mode t)
-     (electric-indent-mode -1)
-     (transient-mark-mode 1)
-     (put 'transient-mark-mode 'permanent-local t)
-
-     (use-package paren
-       :custom
-       (show-paren-delay 0)
        :config
-       (show-paren-mode t))
-
-     (use-package autorevert
-       :disabled
-       :mode ("\\.log$" . auto-revert-mode)
-       :custom
-       (auto-revert-verbose nil)
-       (global-auto-revert-non-file-buffers t)
-       :config
-       (global-auto-revert-mode 1))
+       (global-aggressive-indent-mode 1)
+       (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
    #+END_SRC
 ** set variables
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq kill-whole-line t)
-     (setq kmacro-ring-max 16)
      (setq mark-even-if-inactive t)
-     (setq next-line-add-newlines nil)
-     (setq sentence-end-double-space nil)
-     (setq tab-always-indent t)
-     (setq user-full-name (capitalize private/real-name))
-     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-     ;; don't let the cursor go into minibuffer prompt
-     (setq minibuffer-prompt-properties
-           '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
-
      (setq-default fill-column 200)
      (setq-default indicate-empty-lines t)
      (setq-default truncate-lines t)
-
      (setq x-stretch-cursor t)
-     (setq blink-matching-paren nil)
-     (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-     (setq mouse-wheel-progressive-speed nil)
-     ;; (setq set-mark-command-repeat-pop t)
 
-     (setq whitespace-style '(indentation::space
-                              space-after-tab
-                              space-before-tab
-                              trailing
-                              lines-tail
-                              tab-mark
-                              face
-                              tabs))
+     (setq user-full-name (capitalize private/real-name))
    #+END_SRC
 ** hydras and keys
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1774,16 +1712,16 @@
        -------------------------------------------------------------------------------------
        just _o_ne space between        _y_ank to register        _`_ redraw display
        _2_ duplicate + comment         _p_ut from register       create _S_cratch
-       _/_ make comment box            _f_ilename -> clipboard   _d_iff buffer <-> file
-       _SPC_ untabify                  _k_ yank rectangle        re_n_ame buffer+file
-       _TAB_ tabify                    append next _K_ill        query/replace rege_x_p
-       delete trailing _w_hitespaces   _a_ppend cited region
+       _/_ make comment box            _k_ yank rectangle        _d_iff buffer <-> file
+       _SPC_ untabify                  append next _K_ill        re_n_ame buffer+file
+       _TAB_ tabify                    _a_ppend cited region     query/replace rege_x_p
+       delete trailing _w_hitespaces
        _s_ort lines
        keep _u_nique lines
+       _3_ snakehump back TAP
        _4_ snakehump TAP
 
        Custom:
-       _i_nsert current date+time
        _t_ranslate TAP with Google
        _T_ranslate query with Google
        "
@@ -1795,12 +1733,12 @@
        ("w" delete-trailing-whitespace)
        ("s" sort-lines)
        ("u" delete-duplicate-lines)
+       ("3" snakehump-prev-at-point)
        ("4" snakehump-next-at-point)
        ("r" rebox-dwim :color blue)
        ("c" rebox-cycle "cycle box styles")
        ("y" copy-to-register)
        ("p" insert-register)
-       ("f" custom/copy-file-name-to-clipboard)
        ("k" custom/kill-save-rectangle)
        ("K" append-next-kill)
        ("a" custom/append-cited-region)
@@ -1813,7 +1751,6 @@
        ("d" diff-buffer-with-file)
        ("n" crux-rename-file-and-buffer)
        ("x" query-replace-regexp)
-       ("i" custom/insert-current-date-time)
        ("t" google-translate-at-point)
        ("T" google-translate-query-translate)
        ("q" nil "cancel"))
