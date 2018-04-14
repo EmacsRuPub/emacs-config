@@ -48,6 +48,8 @@
    #+END_SRC
 ** essential packages and tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (load (at-config-basedir "credentials.el.gpg"))
+
      (use-package auto-compile
        :ensure t
        :config
@@ -79,7 +81,48 @@
        (when (and custom-file (file-exists-p custom-file))
          (load-file custom-file)))
 
-     (fset 'yes-or-no-p 'y-or-n-p)
+     (use-package emacs
+       :config
+       (fset 'yes-or-no-p 'y-or-n-p)
+       (setq scalable-fonts-allowed t)
+       (setq use-dialog-box nil)
+       (setq enable-recursive-minibuffers t)
+       ;; don't let the cursor go into minibuffer prompt
+       (setq minibuffer-prompt-properties
+             '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
+       (when (eq system-type 'gnu-linux)
+         (setq x-alt-keysym 'meta))
+       (put 'downcase-region 'disabled nil)
+       (put 'erase-buffer 'disabled nil)
+       (put 'narrow-to-region 'disabled nil)
+       (put 'scroll-left 'disabled nil)
+       (put 'scroll-right 'disabled nil)
+       (put 'upcase-region 'disabled nil)
+       (setq scroll-preserve-screen-position 'always)
+       ;; reduce point movement lag, see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
+       (setq auto-window-vscroll nil)
+       (setq undo-limit 1000000)
+       (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore) ;; https://stackoverflow.com/a/41560712/2112489
+       (setq indent-tabs-mode nil)
+       (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
+       (setq-default tab-width 4)
+       (setq mark-even-if-inactive t)
+       (setq-default fill-column 200)
+       (setq-default indicate-empty-lines t)
+       (setq-default truncate-lines t)
+       (setq x-stretch-cursor t)
+       (setq user-full-name (capitalize private/real-name))
+       ;; print symbols
+       (setq print-circle t)
+       (setq print-gensym t)
+       ;; encodings
+       (setq locale-coding-system 'utf-8)
+       (define-coding-system-alias 'UTF-8 'utf-8)
+       (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
+       (define-coding-system-alias 'utf_8 'utf-8)
+       (set-default buffer-file-coding-system 'utf-8-unix)
+       (setq sentence-end-double-space nil)
+       (setq tab-always-indent t))
    #+END_SRC
 ** input methods
    Set default input method
@@ -122,10 +165,6 @@
         :config
         (keychain-refresh-environment))
     #+END_SRC
-*** load encrypted credentials
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (load (at-config-basedir "credentials.el.gpg"))
-    #+END_SRC
 ** GC tweaks
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
@@ -142,18 +181,23 @@
 * appearance
 ** fonts
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq font-lock-maximum-decoration t)
-     (setq scalable-fonts-allowed t)
+     (use-package font-core
+       :config
+       (global-font-lock-mode 1))
+
+     (use-package font-lock
+       :config
+       (setq font-lock-maximum-decoration t))
+
+     (use-package font-lock+
+       :quelpa
+       (font-lock+ :repo "emacsmirror/font-lock-plus" :fetcher github))
 
      (use-package unicode-fonts
        :ensure t
        :after (persistent-soft)
        :config
        (unicode-fonts-setup))
-
-     (use-package font-lock+
-       :quelpa
-       (font-lock+ :repo "emacsmirror/font-lock-plus" :fetcher github))
    #+END_SRC
 ** setup smart modeline
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -197,16 +241,6 @@
    #+END_SRC
 ** frames
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq use-dialog-box nil)
-     (setq enable-recursive-minibuffers t)
-     ;; don't let the cursor go into minibuffer prompt
-     (setq minibuffer-prompt-properties
-           '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
-
-     (use-package font-core
-       :config
-       (global-font-lock-mode 1))
-
      (use-package tooltip
        :config
        (tooltip-mode 0))
@@ -257,6 +291,8 @@
        :custom
        (display-time-day-and-date t)
        ;; (display-time-form-list (list 'time 'load))
+       (display-time-world-list
+        '(("Europe/Moscow" "Moscow")))
        (display-time-mail-file t)
        (display-time-default-load-average nil)
        (display-time-24hr-format t)
@@ -504,7 +540,10 @@
         (add-to-list 'tramp-default-proxies-alist
                      `((regexp-quote ,(system-name)) nil nil)))
 
-      (use-package crux :ensure t)
+      (use-package crux
+        :ensure t
+        :bind (:map ctl-x-map
+                    ("\C-i" . crux-ispell-word-then-abbrev)))
 
       (use-package paradox
         :ensure t
@@ -564,13 +603,15 @@
         (delete-old-versions -1)
         (kept-new-versions 6)
         (kept-old-versions 2)
-        (version-control t))
+        (version-control t)
+        (save-abbrevs 'silently))
+
+      (use-package novice
+        :config
+        (setq disabled-command-function nil))
     #+END_SRC
 ** some keyboard related stuff
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (when (eq system-type 'gnu-linux)
-       (setq x-alt-keysym 'meta))
-
      (defun custom/keys-describe-prefixes ()
        (interactive)
        (with-output-to-temp-buffer "*Bindings*"
@@ -606,42 +647,17 @@
        (which-key-setup-side-window-right)
        (which-key-mode))
    #+END_SRC
-** tweaks
-   Enable functions that are disabled by default
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (put 'dired-find-alternate-file 'disabled nil)
-     (put 'downcase-region 'disabled nil)
-     (put 'erase-buffer 'disabled nil)
-     (put 'narrow-to-region 'disabled nil)
-     (put 'scroll-left 'disabled nil)
-     (put 'scroll-right 'disabled nil)
-     (put 'set-goal-column 'disabled nil)
-     (put 'upcase-region 'disabled nil)
-
-     (setq disabled-command-function nil)
-   #+END_SRC
-   world time
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq display-time-world-list
-           '(("Europe/Moscow" "Moscow")))
-   #+END_SRC
 ** encodings
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq locale-coding-system 'utf-8)
-
-     (define-coding-system-alias 'UTF-8 'utf-8)
-     (define-coding-system-alias 'utf-8-emacs 'utf-8) ; needed by bbdb...
-     (define-coding-system-alias 'utf_8 'utf-8)
-
-     (prefer-coding-system 'utf-8)
-
-     (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
-     (set-default buffer-file-coding-system 'utf-8-unix)
-     (set-default-coding-systems 'utf-8)
-     (set-keyboard-coding-system 'utf-8)
-     (set-selection-coding-system 'utf-8)
-     (set-terminal-coding-system 'utf-8)
-     (set-clipboard-coding-system 'utf-8)
+     (use-package mule
+       :config
+       (prefer-coding-system 'utf-8)
+       (set-default-coding-systems 'utf-8)
+       (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
+       (set-selection-coding-system 'utf-8)
+       (set-terminal-coding-system 'utf-8)
+       (set-clipboard-coding-system 'utf-8)
+       (set-keyboard-coding-system 'utf-8))
    #+END_SRC
 * navigate
 ** URLs, links and TAPs
@@ -720,14 +736,9 @@
 
      )
 
-     (setq scroll-preserve-screen-position 'always)
-
      (use-package saveplace
        :config
        (save-place-mode 1))
-
-     ;; reduce point movement lag, see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
-     (setq auto-window-vscroll nil)
    #+END_SRC
 ** frames spawning
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -816,6 +827,7 @@
        (dired-dwim-target t)
        (dired-listing-switches "-lah1v --group-directories-first")
        :config
+       (put 'dired-find-alternate-file 'disabled nil)
        (use-package dired-filetype-face :ensure t)
        (use-package dired+
          :ensure t
@@ -1331,14 +1343,18 @@
         (kill-whole-line t)
         (next-line-add-newlines nil)
         (blink-matching-paren nil)
-        (setq set-mark-command-repeat-pop t)
+        (set-mark-command-repeat-pop t)
+        (save-interprogram-paste-before-kill t)
+        (eval-expression-print-length nil)
+        (eval-expression-print-level nil)
         :config
         (column-number-mode 1)
         (line-number-mode 1)
         (size-indication-mode 1)
         (toggle-truncate-lines 1)
         (transient-mark-mode 1)
-        (put 'transient-mark-mode 'permanent-local t))
+        (put 'transient-mark-mode 'permanent-local t)
+        (put 'set-goal-column 'disabled nil))
 
       (use-package cua-base
         :if (memq window-system '(mac ns))
@@ -1431,8 +1447,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package savekill :ensure t)
 
-     (setq save-interprogram-paste-before-kill t)
-
      (use-package copy-as-format
        :ensure t
        :config
@@ -1462,8 +1476,6 @@
    #+END_SRC
 ** undo/redo
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq undo-limit 1000000)
-
      (use-package undo-tree
        :ensure t
        :delight undo-tree-mode
@@ -1473,11 +1485,6 @@
        (undo-tree-visualizer-diff t)
        :config
        (global-undo-tree-mode t))
-   #+END_SRC
-   Should undo process things [nearly] char-by-char?
-   #+BEGIN_SRC emacs-lisp :tangle no
-     ;;; https://stackoverflow.com/a/41560712/2112489
-     (advice-add 'undo-auto--last-boundary-amalgamating-number :override #'ignore)
    #+END_SRC
 *** try
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -1493,8 +1500,13 @@
     #+END_SRC
 ** utils
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (auto-compression-mode t)
-     (electric-indent-mode -1)
+     (use-package jka-cmpr-hook
+       :config
+       (auto-compression-mode 1))
+
+     (use-package electric
+       :config
+       (electric-indent-mode -1))
 
      (use-package persistent-scratch
        :ensure t
@@ -1541,10 +1553,6 @@
      (use-package kmacro
        :custom
        (setq kmacro-ring-max 16))
-
-     (use-package paragraphs
-       :custom
-       (setq sentence-end-double-space nil))
 
      (use-package mwheel
        :custom
@@ -1675,14 +1683,6 @@
    #+END_SRC
 ** indentation
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq indent-tabs-mode nil)
-     (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
-     (setq-default tab-width 4)
-
-     (use-package indent
-       :config
-       (setq tab-always-indent t))
-
      (use-package dtrt-indent
        :ensure t
        :config
@@ -1693,16 +1693,6 @@
        :config
        (global-aggressive-indent-mode 1)
        (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
-   #+END_SRC
-** set variables
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq mark-even-if-inactive t)
-     (setq-default fill-column 200)
-     (setq-default indicate-empty-lines t)
-     (setq-default truncate-lines t)
-     (setq x-stretch-cursor t)
-
-     (setq user-full-name (capitalize private/real-name))
    #+END_SRC
 ** hydras and keys
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1799,6 +1789,8 @@
      (use-package yasnippet ;;TODO: make more declarative
        :ensure t
        :delight yas-minor-mode
+       :mode (("yasnippet/snippets" . snippet-mode)
+              ("\\.yasnippet$" . snippet-mode))
        :preface
        ;; hook for automatic reloading of changed snippets
        (defun custom/update-yasnippets-on-save ()
@@ -1833,9 +1825,6 @@
                  (indent-for-tab-command)))))
        :config
        ;; snippets editing mode
-       (--each '("yasnippet/snippets"
-                 "\\.yasnippet$")
-         (eval `(add-to-list 'auto-mode-alist '(,it . snippet-mode))))
        (setq yas-snippet-dirs nil)
        (push yas-installed-snippets-dir yas-snippet-dirs)
        (push (at-config-basedir "resources/yasnippet/") yas-snippet-dirs)
@@ -1980,10 +1969,6 @@
        :delight (abbrev-mode " Abv")
        :config
        (setq-default abbrev-mode t))
-
-     (setq save-abbrevs 'silently)
-
-     (bind-key "\C-i" 'crux-ispell-word-then-abbrev ctl-x-map)
    #+END_SRC
 * programming
 ** common
@@ -1991,7 +1976,33 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flycheck
         :ensure t
-        :after (dash pkg-info let-alist seq)
+        :after (dash pkg-info let-alist seq counsel)
+        :preface
+        ;; CREDITS: https://github.com/nathankot/dotemacs
+        (defvar counsel-flycheck-history nil
+          "History for `counsel-flycheck'")
+        (defun counsel-flycheck ()
+          (interactive)
+          (if (not (bound-and-true-p flycheck-mode))
+              (message "Flycheck mode is not available or enabled")
+            (ivy-read "Error: "
+                      (let ((source-buffer (current-buffer)))
+                        (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
+                                                 (progn
+                                                   (with-current-buffer
+                                                       (get-buffer-create flycheck-error-list-buffer)
+                                                     (flycheck-error-list-mode)
+                                                     (current-buffer))))
+                          (flycheck-error-list-set-source source-buffer)
+                          (flycheck-error-list-reset-filter)
+                          (revert-buffer t t t)
+                          (split-string (buffer-string) "\n" t " *")))
+                      :action (lambda (s &rest _)
+                                (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
+                                              (pos (flycheck-error-pos error)) )
+                                  (goto-char (flycheck-error-pos error))))
+                      :history 'counsel-flycheck-history)))
+        :commands (flycheck-next-error flycheck-previous-error counsel-flycheck)
         :custom
         (flycheck-global-modes '(not emacs-lisp-mode))
         (flycheck-display-errors-delay 0.4)
@@ -2022,32 +2033,6 @@
               (?X . avy-action-kill-stay)
               (?m . avy-action-mark)
               (?n . avy-action-copy))))
-
-      ;; CREDITS: https://github.com/nathankot/dotemacs
-      (defvar counsel-flycheck-history nil
-        "History for `counsel-flycheck'")
-
-      (defun counsel-flycheck ()
-        (interactive)
-        (if (not (bound-and-true-p flycheck-mode))
-            (message "Flycheck mode is not available or enabled")
-          (ivy-read "Error: "
-                    (let ((source-buffer (current-buffer)))
-                      (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
-                                               (progn
-                                                 (with-current-buffer
-                                                     (get-buffer-create flycheck-error-list-buffer)
-                                                   (flycheck-error-list-mode)
-                                                   (current-buffer))))
-                        (flycheck-error-list-set-source source-buffer)
-                        (flycheck-error-list-reset-filter)
-                        (revert-buffer t t t)
-                        (split-string (buffer-string) "\n" t " *")))
-                    :action (lambda (s &rest _)
-                              (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
-                                            (pos (flycheck-error-pos error)) )
-                                (goto-char (flycheck-error-pos error))))
-                    :history 'counsel-flycheck-history)))
 
       (defhydra hydra-errors ()
         ("a" avy-flycheck-goto-error :color blue)
@@ -2182,7 +2167,6 @@
       (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
       (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
       (add-to-list 'auto-mode-alist '("diff" . diff-mode))
-      (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
       (add-to-list 'auto-mode-alist '("[Mm]akefile" . makefile-mode))
     #+END_SRC
 ** vcs
@@ -2192,6 +2176,8 @@
         :ensure t
         :after (async dash with-editor git-commit magit-popup)
         :commands magit-status magit-blame
+        :mode (("COMMIT_EDITMSG" . conf-javaprop-mode)
+               ("COMMIT" . git-commit-mode))
         :bind (:map magit-status-mode-map
                ("E" . magit-rebase-interactive)
                ("q" . custom/magit-kill-buffers))
@@ -2240,9 +2226,7 @@
           (setcdr (assoc ?e (plist-get magit-dispatch-popup :actions))
                   '("vdiff dwim" 'vdiff-magit-dwim))
           (setcdr (assoc ?E (plist-get magit-dispatch-popup :actions))
-                  '("vdiff popup" 'vdiff-magit-popup)))
-        (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-javaprop-mode))
-        (add-to-list 'auto-mode-alist '("COMMIT" . git-commit-mode)))
+                  '("vdiff popup" 'vdiff-magit-popup))))
 
       (use-package magit-org-todos
         :ensure t
@@ -2358,11 +2342,6 @@
 *** elisp
 **** setup
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (setq print-circle t)
-       (setq print-gensym t)
-       (setq eval-expression-print-length nil)
-       (setq eval-expression-print-level nil)
-
        (use-package edebug-x :ensure t)
 
        (use-package elisp-slime-nav
@@ -2860,40 +2839,36 @@
     #+END_SRC
 **** BACKLOG try to integrate https://getgb.io/
 *** lua
-**** setup
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package lua-mode
-         :ensure t
-         :mode ("\\.lua$" . lua-mode)
-         :hook (lua-mode-hook . (lambda ()
-                                  (setq flycheck-checker 'lua-luacheck))))
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package lua-mode
+        :ensure t
+        :preface
+        (defun lua-broken-indentation-fix ()
+          (save-excursion
+            (lua-forward-line-skip-blanks 'back)
+            (let* ((current-indentation (current-indentation))
+                   (line (thing-at-point 'line t))
+                   (busted-p (s-matches?
+                              (rx (+ bol (* space)
+                                     (or "context" "describe" "it" "setup" "teardown")
+                                     "("))
+                              line)))
+              (when busted-p
+                (+ current-indentation lua-indent-level)))))
+        (defun rgc-lua-calculate-indentation-override (old-function &rest arguments)
+          (or (lua-broken-indentation-fix)
+              (apply old-function arguments)))
+        :mode ("\\.lua$" . lua-mode)
+        :hook (lua-mode-hook . (lambda ()
+                                 (setq flycheck-checker 'lua-luacheck)))
+        :config
+        (advice-add #'lua-calculate-indentation-override
+                    :around #'rgc-lua-calculate-indentation-override))
 
-       (use-package company-lua
-         :ensure t
-         :after (lua-mode company))
-     #+END_SRC
-**** customizations
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (defun lua-broken-indentation-fix ()
-         (save-excursion
-           (lua-forward-line-skip-blanks 'back)
-           (let* ((current-indentation (current-indentation))
-                  (line (thing-at-point 'line t))
-                  (busted-p (s-matches?
-                             (rx (+ bol (* space)
-                                    (or "context" "describe" "it" "setup" "teardown")
-                                    "("))
-                             line)))
-                 (when busted-p
-                   (+ current-indentation lua-indent-level)))))
-
-       (defun rgc-lua-calculate-indentation-override (old-function &rest arguments)
-         (or (lua-broken-indentation-fix)
-             (apply old-function arguments)))
-
-       (advice-add #'lua-calculate-indentation-override
-                   :around #'rgc-lua-calculate-indentation-override)
-     #+END_SRC
+      (use-package company-lua
+        :ensure t
+        :after (lua-mode company))
+    #+END_SRC
 *** other
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2910,7 +2885,7 @@
         :mode ("\\.rs" . rust-mode))
     #+END_SRC
 ** webdev
-*** major modes
+*** setup
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package sgml-mode
         :bind (:map html-mode-map
@@ -2959,8 +2934,15 @@
         (web-mode-code-indent-offset 2)
         (web-mode-css-indent-offset 2)
         :config
-        (use-package web-mode-edit-element :ensure t)
-        (use-package web-narrow-mode :ensure t)
+        (use-package company-web
+          :ensure t
+          :after (company dash web-completion-data))
+        (use-package web-mode-edit-element
+          :ensure t
+          :hook (web-mode-hook . web-mode-edit-element-minor-mode))
+        (use-package web-narrow-mode
+          :ensure t
+          :hook (web-mode-hook . web-narrow-mode))
         (add-to-list 'web-mode-engines-alist '("django" . "\\.html\\'"))
         ;; Enable JavaScript completion between <script>...</script> etc.
         ;; TODO: check why company and AC are mentioned together (see below)
@@ -2975,20 +2957,9 @@
                         )
                     (unless tern-mode (tern-mode))
                   (if tern-mode (tern-mode -1)))))))
-    #+END_SRC
-*** minor modes
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package company-web
-        :ensure t
-        :after (company dash web-completion-data))
 
-      (use-package web-mode-edit-element
-        :ensure t
-        :hook (web-mode-hook . web-mode-edit-element-minor-mode))
-
-      (use-package web-narrow-mode
-        :ensure t
-        :hook (web-mode-hook . web-narrow-mode))
+      (use-package css-mode
+        :mode ("\\.scss$" . css-mode))
 
       (use-package css-eldoc
         :ensure t
@@ -3210,15 +3181,16 @@
        (add-to-list 'w3m-search-engine-alist
                     '("emacs-wiki" "http://www.emacswiki.org/cgi-bin/wiki.pl?search=%s")))
 
-
-     (defun eww-more-readable () ;;TODO: add to appropriate hook
-       "Makes eww more pleasant to use. Run it after eww buffer is loaded."
-       (interactive)
-       (setq eww-header-line-format nil) ;; removes page title
-       (setq mode-line-format nil) ;; removes mode-line
-       (set-window-margins (get-buffer-window) 20 20) ;; increases size of margins
-       (redraw-display) ;; apply mode-line changes
-       (eww-reload 'local)) ;; apply eww-header changes
+     (use-package eww
+       :preface
+       (defun eww-more-readable () ;;TODO: add to appropriate hook
+         "Makes eww more pleasant to use. Run it after eww buffer is loaded."
+         (interactive)
+         (setq eww-header-line-format nil) ;; removes page title
+         (setq mode-line-format nil) ;; removes mode-line
+         (set-window-margins (get-buffer-window) 20 20) ;; increases size of margins
+         (redraw-display) ;; apply mode-line changes
+         (eww-reload 'local))) ;; apply eww-header changes
    #+END_SRC
 ** MPD
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3253,20 +3225,19 @@
 ** email
 *** common
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defvar custom/gmail-accounts private/gmail-accounts)
-
       (use-package footnote)
 
-      ;; use tables in message mode
-      (add-hook 'message-mode-hook 'turn-on-orgtbl)
-    #+END_SRC
-*** send mail
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (setq mail-specify-envelope-from t)
-      (setq message-sendmail-envelope-from 'header)
-      (setq mail-envelope-from 'header)
-      (setq send-mail-function 'sendmail-send-it)
-      (setq message-kill-buffer-on-exit t)
+      (use-package sendmail
+        :custom
+        (mail-specify-envelope-from t)
+        (mail-envelope-from 'header)
+        (send-mail-function 'sendmail-send-it))
+
+      (use-package message
+        :hook (message-mode-hook . turn-on-orgtbl)
+        :custom
+        (message-sendmail-envelope-from 'header)
+        (message-kill-buffer-on-exit t))
     #+END_SRC
 *** notmuch
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3296,7 +3267,7 @@
         :custom
         (mm-text-html-renderer 'w3m)
         (notmuch-mua-compose-in 'current-window)
-        (notmuch-identities custom/gmail-accounts)
+        (notmuch-identities private/gmail-accounts)
         (notmuch-fcc-dirs private/notmuch-fcc-dirs)
         (notmuch-search-line-faces '(("unread" . (:foreground "white"))
                                      ("deleted" . (:foreground "red" :background "blue"))))
@@ -4334,11 +4305,6 @@
 * publishing
 ** setup
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun custom/tex-mode-hook ()
-         (TeX-fold-mode 1)
-         (turn-on-bib-cite)
-         (setq bib-cite-use-reftex-view-crossref t))
-
      (use-package whizzytex
        :config
        (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv"))))
@@ -4354,7 +4320,6 @@
      ;;TODO: maybe handle interdependencies between below features of auctex package
      ;; At the moment it works just fine, but there is no warranty.
      (use-package tex
-       :hook (TeX-mode-hook . custom/tex-mode-hook)
        :custom
        (TeX-parse-self t)
        (TeX-default-mode 'latex-mode)
@@ -4364,15 +4329,27 @@
        :config
        (setq-default TeX-master nil)
        (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
-       (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>")))
+       (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
+       (when (eq system-type 'gnu/linux)
+         (setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
+                                       ("^html?$" "." "open %o"))))
+       (when (eq system-type 'darwin)
+         (setq TeX-output-view-style '(("^pdf$" "." "open -a preview %s.pdf")
+                                       ("^html?$" "." "open %o")))))
 
      (use-package bib-cite
        :custom
        (TeX-auto-save t)
+       :custom
+       (setq bib-cite-use-reftex-view-crossref t)
        :config
        (use-package tex-fold))
 
      (use-package latex
+       :preface
+       (defun custom/tex-mode-hook ()
+         (TeX-fold-mode 1)
+         (turn-on-bib-cite))
        :mode ("\\.tex$" . latex-mode)
        :hook ((LaTeX-mode-hook . custom/tex-mode-hook)
               (LaTeX-mode-hook . TeX-PDF-mode)
@@ -4381,6 +4358,7 @@
               (LaTeX-mode-hook . LaTeX-math-mode)))
 
      (use-package tex-site)
+
      (use-package company-auctex
        :ensure t
        :after (yasnippet company tex latex))
@@ -4391,11 +4369,6 @@
               (latex-mode-hook . turn-on-cdlatex)))
 
      (use-package latex-preview-pane :ensure t)
-
-     (setq font-latex-title-fontify 'color)      ; this gets rid of the large fonts
-     (setq font-latex-fontify-sectioning 'color) ; in sections etc
-
-     (setq ps-multibyte-buffer 'bdf-font-except-latin)
 
      (defvar ps-print-path "~/ps-print"
        "Path for ps-print output")
@@ -4434,25 +4407,36 @@
        (org-babel-do-load-languages 'org-babel-load-languages
                                     '((plantuml . t))))
    #+END_SRC
-** linux traits
-   #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'gnu/linux) "no" "no")
-     (setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
-                                   ("^html?$" "." "open %o")))
-   #+END_SRC
-** darwin traits
-   #+BEGIN_SRC emacs-lisp :tangle (if (eq system-type 'darwin) "no" "no")
-     (setq TeX-output-view-style '(("^pdf$" "." "open -a preview %s.pdf")
-                                   ("^html?$" "." "open %o")))
-   #+END_SRC
 * help
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package info
+      :preface
+      (defun custom/open-info (topic bname)
+        "Open info on TOPIC in BNAME."
+        (if (get-buffer bname)
+            (progn
+              (switch-to-buffer bname)
+              (unless (string-match topic Info-current-file)
+                (Info-goto-node (format "(%s)" topic))))
+          (info topic bname)))
       :config
       (info-initialize)
+      (push "/usr/share/info" Info-directory-list)
+      (setq Info-additional-directory-list
+            (list (concat home-directory "/help/info")))
+      (add-to-list 'Info-directory-list "/usr/share/info")
       (add-to-list 'Info-directory-list
                    (format "%selpa/%s"
                            user-emacs-directory
-                           (car (directory-files "~/.emacs.d/elpa" nil "^use-package-")))))
+                           (car (directory-files "~/.emacs.d/elpa" nil "^use-package-"))))
+      (defhydra hydra-info-to (:hint nil :color teal)
+        "
+      _o_rg _e_lisp e_m_acs _h_yperspec"
+        ("o" (custom/open-info "org" "*org info*"))
+        ("e" (custom/open-info "elisp" "*elisp info*"))
+        ("m" (custom/open-info "emacs" "*emacs info*"))
+        ("h" (custom/open-info "gcl" "*hyperspec*")))
+      (global-set-key (kbd "C-c C-h") 'hydra-info-to/body))
 
     (use-package info-buffer
       :ensure t
@@ -4466,24 +4450,10 @@
       :ensure t
       :disabled)
 
-    (add-to-list 'Info-directory-list "/usr/share/info")
-
-    (push "/usr/share/info" Info-directory-list)
-    (setenv "MANPATH" "/usr/share/man:/usr/local/man")
-
-    (defun custom/open-info (topic bname)
-      "Open info on TOPIC in BNAME."
-      (if (get-buffer bname)
-          (progn
-            (switch-to-buffer bname)
-            (unless (string-match topic Info-current-file)
-              (Info-goto-node (format "(%s)" topic))))
-        (info topic bname)))
-
-    (setq Info-additional-directory-list
-          (list (concat home-directory "/help/info")))
-
-    (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
+    (use-package woman
+      :config
+      (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
+      (setenv "MANPATH" "/usr/share/man:/usr/local/man"))
 
     (defhydra hydra-apropos (:color blue)
       "
@@ -4509,13 +4479,4 @@
       ("t" tags-apropos "tags")
       ("e" apropos-value))
     (global-set-key (kbd "C-c h") 'hydra-apropos/body)
-
-    (defhydra hydra-info-to (:hint nil :color teal)
-      "
-      _o_rg _e_lisp e_m_acs _h_yperspec"
-      ("o" (custom/open-info "org" "*org info*"))
-      ("e" (custom/open-info "elisp" "*elisp info*"))
-      ("m" (custom/open-info "emacs" "*emacs info*"))
-      ("h" (custom/open-info "gcl" "*hyperspec*")))
-    (global-set-key (kbd "C-c C-h") 'hydra-info-to/body)
   #+END_SRC
