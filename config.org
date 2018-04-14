@@ -4272,110 +4272,26 @@
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
    #+END_SRC
 * publishing
-** setup
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package whizzytex
-       :config
-       (setq-default whizzy-viewers '(("-dvi" "xdvi") ("-ps" "gv"))))
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package blockdiag-mode :ensure t)
 
-     (use-package reftex
-       :hook ((LaTeX-mode-hook . turn-on-reftex)
-              (latex-mode-hook . turn-on-reftex))
-       :custom
-       (reftex-enable-partial-scans t)
-       (reftex-save-parse-info t)
-       (reftex-use-multiple-selection-buffers t))
+    (use-package ob-blockdiag
+      :ensure t
+      :config
+      (org-babel-do-load-languages 'org-babel-load-languages
+                                   '((blockdiag . t))))
 
-     ;;TODO: maybe handle interdependencies between below features of auctex package
-     ;; At the moment it works just fine, but there is no warranty.
-     (use-package tex
-       :custom
-       (TeX-parse-self t)
-       (TeX-default-mode 'latex-mode)
-       (TeX-open-quote "``")
-       (TeX-close-quote "''")
-       (TeX-PDF-mode t)
-       :config
-       (setq-default TeX-master nil)
-       (add-to-list 'safe-local-variable-values '(TeX-open-quote . "<<"))
-       (add-to-list 'safe-local-variable-values '(TeX-close-quote . ">>"))
-       (when (eq system-type 'gnu/linux)
-         (setq TeX-output-view-style '(("^pdf$" "." "zathura %s.pdf")
-                                       ("^html?$" "." "open %o"))))
-       (when (eq system-type 'darwin)
-         (setq TeX-output-view-style '(("^pdf$" "." "open -a preview %s.pdf")
-                                       ("^html?$" "." "open %o")))))
-
-     (use-package bib-cite
-       :custom
-       (TeX-auto-save t)
-       :custom
-       (setq bib-cite-use-reftex-view-crossref t)
-       :config
-       (use-package tex-fold))
-
-     (use-package latex
-       :preface
-       (defun custom/tex-mode-hook ()
-         (TeX-fold-mode 1)
-         (turn-on-bib-cite))
-       :mode ("\\.tex$" . latex-mode)
-       :hook ((LaTeX-mode-hook . custom/tex-mode-hook)
-              (LaTeX-mode-hook . TeX-PDF-mode)
-              (LaTeX-mode-hook . visual-line-mode)
-              (LaTeX-mode-hook . flyspell-mode)
-              (LaTeX-mode-hook . LaTeX-math-mode)))
-
-     (use-package tex-site)
-
-     (use-package company-auctex
-       :ensure t
-       :after (yasnippet company tex latex))
-
-     (use-package cdlatex
-       :ensure t
-       :hook ((LaTeX-mode-hook . turn-on-cdlatex)
-              (latex-mode-hook . turn-on-cdlatex)))
-
-     (use-package latex-preview-pane :ensure t)
-
-     (defvar ps-print-path "~/ps-print"
-       "Path for ps-print output")
-
-     ;;TODO: plan docstring or reorganize hydra
-     (defhydra hydra-publishing ()
-       ("w" whizzytex-mode)
-       ("p" custom/ps-print-buffer-with-faces)
-       ("P" custom/ps-print-region-with-faces)
-       ("s" pdf-save-buffer-with-faces)
-       ("S" pdf-save-region-with-faces)
-       ("q" nil))
-     (global-set-key (kbd "C-c n") 'hydra-publishing/body)
-
-     ;; TODO: investigate TEXT_INPUTS usage
-     ;; TODO: fix encoding issues (questions marks instead of russian letters)
-     ;; TODO: investigate how to deal with bright letters on bright
-     ;; background being printed (in such cases letters are almost invisible)
-
-     (use-package blockdiag-mode :ensure t)
-
-     (use-package ob-blockdiag
-       :ensure t
-       :config
-       (org-babel-do-load-languages 'org-babel-load-languages
-                                    '((blockdiag . t))))
-
-     (use-package plantuml-mode
-       :ensure t
-       :mode ("\\.plantuml\\'" . plantuml-mode)
-       :custom
-       (plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar")
-       (org-plantuml-jar-path plantuml-jar-path)
-       :config
-       (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-       (org-babel-do-load-languages 'org-babel-load-languages
-                                    '((plantuml . t))))
-   #+END_SRC
+    (use-package plantuml-mode
+      :ensure t
+      :mode ("\\.plantuml\\'" . plantuml-mode)
+      :custom
+      (plantuml-jar-path "/usr/share/plantuml/lib/plantuml.jar")
+      (org-plantuml-jar-path plantuml-jar-path)
+      :config
+      (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+      (org-babel-do-load-languages 'org-babel-load-languages
+                                   '((plantuml . t))))
+  #+END_SRC
 * help
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package info
