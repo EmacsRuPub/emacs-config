@@ -3545,6 +3545,11 @@
          (beginning-of-buffer)
          (switch-to-buffer "*org-tags*"))
 
+       (defun org-link-describe (link desc)
+         (cond ((string-match "file:" link)
+                (replace-regexp-in-string "^file:" "File link -> " (org-link-unescape link)))
+               (t (or desc link))))
+
        )
      #+END_SRC
 **** clocking customizations
@@ -3814,6 +3819,7 @@
          (setq org-confirm-elisp-link-function 'y-or-n-p)
          (setq org-src-window-setup 'current-window)
          (setq org-confirm-babel-evaluate nil)
+         (setf org-make-link-description-function #'custom/org-link-describe)
          (when (featurep 'unicode-fonts)
            (setq org-ellipsis "⤵"))
          ;; keywords setup
