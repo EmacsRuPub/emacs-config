@@ -1498,6 +1498,80 @@
         ("q" nil "quit" :color blue))
       (global-set-key (kbd "M-,") 'hydra-undo-tree/undo-tree-undo) ;; or whatever
     #+END_SRC
+** spellchecking
+*** flycheck
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package flycheck
+        :ensure t
+        :after (dash pkg-info let-alist seq counsel)
+        :preface
+        ;; CREDITS: https://github.com/nathankot/dotemacs
+        (defvar counsel-flycheck-history nil
+          "History for `counsel-flycheck'")
+        (defun counsel-flycheck ()
+          (interactive)
+          (if (not (bound-and-true-p flycheck-mode))
+              (message "Flycheck mode is not available or enabled")
+            (ivy-read "Error: "
+                      (let ((source-buffer (current-buffer)))
+                        (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
+                                                 (progn
+                                                   (with-current-buffer
+                                                       (get-buffer-create flycheck-error-list-buffer)
+                                                     (flycheck-error-list-mode)
+                                                     (current-buffer))))
+                          (flycheck-error-list-set-source source-buffer)
+                          (flycheck-error-list-reset-filter)
+                          (revert-buffer t t t)
+                          (split-string (buffer-string) "\n" t " *")))
+                      :action (lambda (s &rest _)
+                                (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
+                                              (pos (flycheck-error-pos error)) )
+                                  (goto-char (flycheck-error-pos error))))
+                      :history 'counsel-flycheck-history)))
+        :commands (flycheck-next-error flycheck-previous-error counsel-flycheck)
+        :custom
+        (flycheck-global-modes '(not emacs-lisp-mode))
+        (flycheck-display-errors-delay 0.4)
+        (flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
+        :custom-face (flycheck-warning ((t (:foreground "yellow" :background "red"))))
+        :config
+        (global-flycheck-mode)
+        (add-to-list 'display-buffer-alist
+                     `(,(rx bos "*Flycheck errors*" eos)
+                       (display-buffer-reuse-window
+                        display-buffer-in-side-window)
+                       (side            . bottom)
+                       (reusable-frames . visible)
+                       (window-height   . 0.33))))
+
+      (use-package flycheck-pos-tip
+        :ensure t
+        :after (flycheck)
+        :config
+        (flycheck-pos-tip-mode))
+
+      (use-package avy-flycheck
+        :ensure t
+        :config
+        (avy-flycheck-setup)
+        (setq avy-flycheck-dispatch-alist
+            '((?x . avy-action-kill-move)
+              (?X . avy-action-kill-stay)
+              (?m . avy-action-mark)
+              (?n . avy-action-copy))))
+
+      (defhydra hydra-errors ()
+        ("a" avy-flycheck-goto-error :color blue)
+        ("c" counsel-flycheck :color blue)
+        ("<up>" flycheck-previous-error "previous error")
+        ("<down>" flycheck-next-error "next error")
+        ("<left>" previous-error "previous error")
+        ("<right>" next-error "next error")
+        ("q" nil "cancel"))
+      (global-set-key (kbd "C-q") 'hydra-errors/body)
+    #+END_SRC
+**** BACKLOG review concrete checkers functionality and usage
 ** utils
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package jka-cmpr-hook
@@ -1954,103 +2028,27 @@
    #+END_SRC
 * programming
 ** common
-*** flycheck
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package flycheck
-        :ensure t
-        :after (dash pkg-info let-alist seq counsel)
-        :preface
-        ;; CREDITS: https://github.com/nathankot/dotemacs
-        (defvar counsel-flycheck-history nil
-          "History for `counsel-flycheck'")
-        (defun counsel-flycheck ()
-          (interactive)
-          (if (not (bound-and-true-p flycheck-mode))
-              (message "Flycheck mode is not available or enabled")
-            (ivy-read "Error: "
-                      (let ((source-buffer (current-buffer)))
-                        (with-current-buffer (or (get-buffer flycheck-error-list-buffer)
-                                                 (progn
-                                                   (with-current-buffer
-                                                       (get-buffer-create flycheck-error-list-buffer)
-                                                     (flycheck-error-list-mode)
-                                                     (current-buffer))))
-                          (flycheck-error-list-set-source source-buffer)
-                          (flycheck-error-list-reset-filter)
-                          (revert-buffer t t t)
-                          (split-string (buffer-string) "\n" t " *")))
-                      :action (lambda (s &rest _)
-                                (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
-                                              (pos (flycheck-error-pos error)) )
-                                  (goto-char (flycheck-error-pos error))))
-                      :history 'counsel-flycheck-history)))
-        :commands (flycheck-next-error flycheck-previous-error counsel-flycheck)
-        :custom
-        (flycheck-global-modes '(not emacs-lisp-mode))
-        (flycheck-display-errors-delay 0.4)
-        (flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
-        :custom-face (flycheck-warning ((t (:foreground "yellow" :background "red"))))
-        :config
-        (global-flycheck-mode)
-        (add-to-list 'display-buffer-alist
-                     `(,(rx bos "*Flycheck errors*" eos)
-                       (display-buffer-reuse-window
-                        display-buffer-in-side-window)
-                       (side            . bottom)
-                       (reusable-frames . visible)
-                       (window-height   . 0.33))))
-
-      (use-package flycheck-pos-tip
-        :ensure t
-        :after (flycheck)
-        :config
-        (flycheck-pos-tip-mode))
-
-      (use-package avy-flycheck
-        :ensure t
-        :config
-        (avy-flycheck-setup)
-        (setq avy-flycheck-dispatch-alist
-            '((?x . avy-action-kill-move)
-              (?X . avy-action-kill-stay)
-              (?m . avy-action-mark)
-              (?n . avy-action-copy))))
-
-      (defhydra hydra-errors ()
-        ("a" avy-flycheck-goto-error :color blue)
-        ("c" counsel-flycheck :color blue)
-        ("<up>" flycheck-previous-error "previous error")
-        ("<down>" flycheck-next-error "next error")
-        ("<left>" previous-error "previous error")
-        ("<right>" next-error "next error")
-        ("q" nil "cancel"))
-      (global-set-key (kbd "C-q") 'hydra-errors/body)
-    #+END_SRC
-**** BACKLOG review concrete checkers functionality and usage
 *** virtualization
-**** navigation
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package counsel-tramp
-         :ensure t
-         :after (docker-tramp vagrant-tramp)
-         :bind ("C-c s" . counsel-tramp))
-     #+END_SRC
-**** methods
-     #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package docker
-         :ensure t
-         :after (dash docker-tramp magit-popup s tablist json-mode)
-         :delight docker-mode
-         :custom
-         (docker-containers-show-all t)
-         :config
-         ;;TODO: bind keys
-         (docker-global-mode 1))
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package docker
+        :ensure t
+        :after (dash docker-tramp magit-popup s tablist json-mode)
+        :delight docker-mode
+        :custom
+        (docker-containers-show-all t)
+        :config
+        ;;TODO: bind keys
+        (docker-global-mode 1))
 
-       (use-package docker-tramp :ensure t)
+      (use-package docker-tramp :ensure t)
 
-       (use-package vagrant-tramp :ensure t)
-     #+END_SRC
+      (use-package vagrant-tramp :ensure t)
+
+      (use-package counsel-tramp
+        :ensure t
+        :after (docker-tramp vagrant-tramp)
+        :bind ("C-c s" . counsel-tramp))
+    #+END_SRC
 *** eldoc
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package eldoc
@@ -2080,21 +2078,17 @@
           ;; highlight too long lines
           (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
     #+END_SRC
-*** handy packages/modes
+*** packages/modes
     #+BEGIN_SRC emacs-lisp :tangle yes
       ;;TODO: extend setup
       (use-package compile)
-      (use-package gtags)
+      (use-package multi-compile :ensure t)
 
       (use-package regex-tool
         :ensure t
         :commands regex-tool)
 
-      (use-package ini-mode
-        :ensure t
-        :mode ("\\.ini\\'" . ini-mode))
-
-      (use-package multi-compile :ensure t)
+      (use-package gtags)
 
       (use-package counsel-gtags
         :ensure t
@@ -2139,12 +2133,14 @@
         :ensure t
         :hook
         (prog-mode-hook . rainbow-delimiters-mode))
-    #+END_SRC
-*** related major modes
-    #+BEGIN_SRC emacs-lisp :tangle yes
+
       (use-package rpm-spec-mode
         :ensure t
         :mode ("\\.spec$" . rpm-spec-mode))
+
+      (use-package ini-mode
+        :ensure t
+        :mode ("\\.ini\\'" . ini-mode))
 
       (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
       (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
