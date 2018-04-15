@@ -2226,7 +2226,7 @@
       (use-package git-timemachine
         :ensure t
         :after (ivy)
-        :commands git-timemachine
+        :demand t
         :preface
         ;; credits to @binchen
         (defun custom/git-timemachine-show-selected-revision ()
@@ -2242,7 +2242,9 @@
                                 ;; compatible with ivy 9+ and ivy 8
                                 (unless (string-match-p "^[a-z0-9]*$" (car rev))
                                   (setq rev (cdr rev)))
-                                (git-timemachine-show-revision rev)))))
+                                (git-timemachine-show-revision rev))
+                      :unwind (lambda () (if (not (eq last-command-event 13))
+                                             (git-timemachine-quit))))))
         (defun custom/git-timemachine ()
           "Open git snapshot with the selected version.  Based on ivy-mode."
           (interactive)
