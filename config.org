@@ -3535,7 +3535,7 @@
          (org-refile-goto-last-stored))
 
        ;;TODO: investigate usage, seems useful
-       (defun custom/org-tags ()
+       (defun org-tags ()
          (get-buffer-create "*org-tags*")
          (set-buffer "*org-tags*")
          (org-mode)
