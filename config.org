@@ -1442,6 +1442,10 @@
      (use-package rebox2
        :ensure t
        :commands rebox-dwim rebox-cycle)
+
+     (use-package banner-comment
+       :ensure t
+       :commands banner-comment)
    #+END_SRC
 ** clipboard and killring
    #+BEGIN_SRC emacs-lisp :tangle yes
