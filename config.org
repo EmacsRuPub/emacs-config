@@ -2220,7 +2220,13 @@
                   '("vdiff popup" 'vdiff-magit-popup))))
 
       (use-package magit-org-todos
-        :ensure t
+        :pin manual
+        :quelpa
+        (magit-org-todos
+         :repo "danielma/magit-org-todos.el"
+         :fetcher github
+         :commit "d592669d2db7823b6324f49466b999e2e7934efb"
+         :upgrade nil)
         :config
         (magit-org-todos-autoinsert))
 
