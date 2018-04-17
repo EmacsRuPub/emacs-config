@@ -784,6 +784,14 @@
        :delight (projectile-mode " prj")
        :bind ("C-x j j" . projectile-switch-project)
        :demand t
+       :preface
+       (defun custom/open-project-todos ()
+         (interactive)
+         (let ((todos-file (expand-file-name "todo.org" (projectile-project-root)))) ;; TODO: parameterize filename
+           (condition-case nil
+               (when (file-exists-p todos-file)
+                 (find-file todos-file))
+             (error (message "Cannot find project todos")))))
        :custom
        (projectile-enable-caching t)
        (projectile-require-project-root nil)
@@ -1191,6 +1199,7 @@
        ("G" (lambda () (interactive)
               (counsel-rg (thing-at-point 'symbol) (projectile-project-root))))
        ("l" counsel-git-log)
+       ("t" custom/open-project-todos)
        ("m" swiper-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
 
