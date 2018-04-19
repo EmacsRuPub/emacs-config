@@ -228,15 +228,33 @@
      (use-package cyberpunk-theme :ensure t :disabled)
      (use-package apropospriate-theme :ensure t :disabled)
 
-     (use-package darkburn-theme
-       :ensure t
-       :config
-       (load-theme 'darkburn t))
+     (use-package darkburn-theme :ensure t :defer t)
+     (use-package solarized-theme :ensure t :defer t)
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
      (when (boundp 'zenburn-colors-alist)
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
+
+     (use-package circadian
+       :ensure t
+       :config
+       (setq circadian-themes '(("9:00" . solarized-light)
+                                ("19:00" . darkburn)))
+       (circadian-setup))
+
+     (use-package heaven-and-hell
+       :quelpa
+       (heaven-and-hell :repo "valignatev/heaven-and-hell" :fetcher github :version original)
+       :init
+       (setq heaven-and-hell-theme-type 'dark)
+       (setq heaven-and-hell-themes
+             '((light . #'solarized-light)
+               (dark . #'darkburn)))
+       :hook (after-init . heaven-and-hell-init-hook)
+       ;; :bind (("C-c <f6>" . heaven-and-hell-load-default-emacs-theme)
+       ;;        ("<f6>" . heaven-and-hell-toggle-theme))
+       )
    #+END_SRC
 ** frames
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1164,6 +1182,7 @@
        ("n" make-frame-command "create frame" :color blue)
        ("k" delete-frame "delete frame" :color blue)
        ("s" delete-other-frames "delete other frames" :color blue)
+       ("<f6>" heaven-and-hell-toggle-theme)
        ("q" nil "cancel"))
      (global-set-key (kbd "<f2>") 'hydra-window/body)
 
