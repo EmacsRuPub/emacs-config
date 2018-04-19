@@ -1,0 +1,13 @@
+* BACKLOG fix yasnippet (especially TAB behavior)
+* BACKLOG investigate and fix orgmode/link-hint clash (for multiple links opening)
+* BACKLOG monitor + truncate/rotate savehist and save-kill
+* BACKLOG #'org-return should be correctly invoked by <Return> pressing in org-mode
+* BACKLOG fix yasnippets insertion (maybe connected with [[*fix yasnippet (especially TAB behavior)][above]])
+* BACKLOG some handle for getting 'done' tasks within particular time range :orgmode:
+* BACKLOG some tag for those tasks not directly needed for job tasks (e.g. my own setups, ssh, etc) :orgmode:
+* BACKLOG save done.org after refiling finished                        :orgmode:
+* BACKLOG auto change status TODO --> DONE before refiling             :orgmode:
+* BACKLOG [[id:3b824d3a-e56f-4be5-b663-f92c7dcc81ad][automate insertion of tramp{+docker} links (yasnippet/whatever)]]
+* BACKLOG [[id:2623e68d-5af5-4868-81d9-aab1e516026b][try to make analog of counsel-ag(?) in terms of ivy-occur(?) activation (to proceed to wgrep afterwards)]]
+* BACKLOG [[id:793cf236-4c97-4a11-911a-9a64b9f89efd][check if there is any additional setup needed for "archive-rpm"]]
+* BACKLOG [[id:1b1592b1-0ffd-46c4-bea7-4b2faba6ea27][review whole tags cloud (in org corpus) and update org-tag-alist accordingly]]

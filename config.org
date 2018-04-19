@@ -6,7 +6,6 @@
    It's good to have centralized working datasets storage,
    to prevent pollution of Emacs config directory.
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: consolidate related extensions setup here
      (use-package no-littering
        :ensure t
        :custom
@@ -524,8 +523,10 @@
       (global-set-key (kbd "C-c r") 'hydra-custom-counsel/body)
     #+END_SRC
 *** other
+    :PROPERTIES:
+    :ID:       3b824d3a-e56f-4be5-b663-f92c7dcc81ad
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      ;;TODO: automate insertion of tramp[+docker] links (yasnippet/whatever)
       (use-package tramp
         :config
         (setq tramp-default-method "ssh")
@@ -883,6 +884,9 @@
                 (revert-buffer))))
    #+END_SRC
 ** search
+   :PROPERTIES:
+   :ID:       2623e68d-5af5-4868-81d9-aab1e516026b
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package phi-search
        :ensure t
@@ -894,7 +898,6 @@
          :config
          (phi-search-mc/setup-keys)))
 
-     ;;TODO: try to make analog of counsel-ag(?) in terms of ivy-occur(?) activation (to process to wgrep afterwards)
      (use-package socyl
        :ensure t
        :commands socyl-search-regexp
@@ -1144,9 +1147,8 @@
    #+END_SRC
 ** hydras and keybindings
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: plan docstring
      (defhydra hydra-window (:idle 1.0)
-       "window"
+       "Windows/frames management"
        ("<left>" windmove-left "left" :color blue)
        ("<down>" windmove-down "down" :color blue)
        ("<up>" windmove-up "up" :color blue)
@@ -1586,6 +1588,9 @@
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 ** utils
+   :PROPERTIES:
+   :ID:       793cf236-4c97-4a11-911a-9a64b9f89efd
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package jka-cmpr-hook
        :config
@@ -1621,7 +1626,7 @@
        :bind (("\C-x~" . macro-math-eval-and-round-region)
               ("\C-x=" . macro-math-eval-region)))
 
-     (use-package archive-rpm :ensure t) ;;TODO: check if there is any additional setup needed
+     (use-package archive-rpm :ensure t)
 
      (use-package editorconfig
        :ensure t
@@ -3379,12 +3384,10 @@
 **** org-id usage
      org-id usage example for the future:
      "* TODO___ %a\n  :PROPERTIES:\n  :ID: %(org-id-new)\n  :END:\n  %U\n\n  %i"
-*** to be done
-**** TODO some handle for getting 'done' tasks within particular time range
-**** TODO some tag for those tasks not directly needed for job tasks (e.g. my own setups, ssh, etc)
-**** TODO save done.org after refiling finished
-**** TODO auto change status TODO --> DONE before refiling
 *** setup
+    :PROPERTIES:
+    :ID:       1b1592b1-0ffd-46c4-bea7-4b2faba6ea27
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package org
         :ensure org-plus-contrib
@@ -3844,7 +3847,6 @@
               '(("GOING" ("current" . t))
                 ("DONE" ("current"))))
         (setq org-complete-tags-always-offer-all-agenda-tags t)
-        ;;TODO: review whole tags cloud (in org corpus) and update org-tag-alist accordingly
         ;; org-habit
         (setq org-habit-graph-column 50)
         (setq org-habit-preceding-days 10)
@@ -4078,7 +4080,6 @@
        ("q" nil))
      (global-set-key (kbd "C-c c") 'hydra-pim/body)
 
-     ;;TODO: update docstring
      (defhydra hydra-org-global (:color teal :idle 1.0)
        "
        ^Control^                 ^Editing^            ^Context^               ^Movement^
