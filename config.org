@@ -3933,6 +3933,9 @@
         (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
         (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
         (bind-key [remap org-return] 'custom/org-return-dwim org-mode-map))
+
+      (use-package org-protocol
+        :after (org server))
     #+END_SRC
 *** additional packages / extensions
     #+BEGIN_SRC emacs-lisp :tangle yes
