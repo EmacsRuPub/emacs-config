@@ -2179,10 +2179,18 @@
         :ensure t
         :mode ("\\.ini\\'" . ini-mode))
 
-      (add-to-list 'auto-mode-alist '("\\.po$\\|\\.po\\." . po-mode))
-      (add-to-list 'auto-mode-alist '("\\.gdb$" . gdb-script-mode))
-      (add-to-list 'auto-mode-alist '("diff" . diff-mode))
-      (add-to-list 'auto-mode-alist '("[Mm]akefile" . makefile-mode))
+      (use-package po-mode
+        :ensure t
+        :mode ("\\.po$\\|\\.po\\." . po-mode))
+
+      (use-package gud
+        :mode ("\\.gdb$" . gdb-script-mode))
+
+      (use-package diff-mode
+        :mode ("diff" . diff-mode))
+
+      (use-package make-mode
+        :mode ("[Mm]akefile" . makefile-mode))
     #+END_SRC
 ** vcs
 *** git
