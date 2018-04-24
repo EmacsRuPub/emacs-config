@@ -4158,14 +4158,13 @@
           (info topic bname)))
       :config
       (info-initialize)
-      (push "/usr/share/info" Info-directory-list)
       (setq Info-additional-directory-list
             (list (concat home-directory "/help/info")))
       (add-to-list 'Info-directory-list "/usr/share/info")
       (add-to-list 'Info-directory-list
                    (format "%selpa/%s"
                            user-emacs-directory
-                           (car (directory-files "~/.emacs.d/elpa" nil "^use-package-"))))
+                           (car (directory-files (at-config-basedir "elpa") nil "^use-package-"))))
       (defhydra hydra-info-to (:hint nil :color teal)
         "
       _o_rg _e_lisp e_m_acs _h_yperspec"
