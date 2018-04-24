@@ -216,45 +216,19 @@
 ** load themes and choose one
    Also some other good-looking theme is "material-theme"
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package nimbus-theme :ensure t :disabled)
-     (use-package nord-theme :ensure t :disabled)
-     (use-package kaolin-themes :ensure t :disabled)
-     (use-package material-theme :ensure t :disabled)
-     (use-package challenger-deep-theme :ensure t :disabled)
-     (use-package hc-zenburn-theme :ensure t :disabled)
-     (use-package sunburn-theme :ensure t :disabled)
-     (use-package labburn-theme :ensure t :disabled)
-     (use-package darcula-theme :ensure t :disabled)
-     (use-package cyberpunk-theme :ensure t :disabled)
-     (use-package apropospriate-theme :ensure t :disabled)
-
-     (use-package darkburn-theme :ensure t :defer t)
-     (use-package solarized-theme :ensure t :defer t)
+     (use-package nord-theme :ensure t :config (load-theme 'nord t) :disabled)
+     (use-package kaolin-themes :ensure t :config (load-theme 'kaolin-dark t) :disabled)
+     (use-package hc-zenburn-theme :ensure t :config (load-theme 'hc-zenburn t) :disabled)
+     (use-package sunburn-theme :ensure t :config (load-theme 'sunburn t) :disabled)
+     (use-package labburn-theme :ensure t :config (load-theme 'labburn t) :disabled)
+     (use-package darcula-theme :ensure t :config (load-theme 'darcula t) :disabled)
+     (use-package darkburn-theme :ensure t :config (load-theme 'darkburn t))
+     (use-package solarized-theme :ensure t :config (load-theme 'solarized-dark t) :disabled)
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
      (when (boundp 'zenburn-colors-alist)
        (set-face-attribute 'default nil :background "#1A1A1A")
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
-
-     (use-package circadian
-       :ensure t
-       :config
-       (setq circadian-themes '(("9:00" . solarized-light)
-                                ("19:00" . darkburn)))
-       (circadian-setup))
-
-     (use-package heaven-and-hell
-       :quelpa
-       (heaven-and-hell :repo "valignatev/heaven-and-hell" :fetcher github :version original)
-       :init
-       (setq heaven-and-hell-theme-type 'dark)
-       (setq heaven-and-hell-themes
-             '((light . #'solarized-light)
-               (dark . #'darkburn)))
-       :hook (after-init . heaven-and-hell-init-hook)
-       ;; :bind (("C-c <f6>" . heaven-and-hell-load-default-emacs-theme)
-       ;;        ("<f6>" . heaven-and-hell-toggle-theme))
-       )
    #+END_SRC
 ** frames
    #+BEGIN_SRC emacs-lisp :tangle yes
