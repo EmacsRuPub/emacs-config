@@ -769,6 +769,8 @@
        :ensure t
        :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
               ([remap move-end-of-line] . mwim-end-of-code-or-line)))
+
+     (use-package smooth-scrolling :ensure t)
    #+END_SRC
 ** projects
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3129,6 +3131,8 @@
      (use-package fb2-mode
        :quelpa
        (fb2-mode :repo "spline1986/fb2-mode" :fetcher github :version original)
+       :mode ("\\.fb2\\'" . fb2-mode)
+       :hook (fb2-mode . (lambda () (smooth-scrolling-mode 1)))
        :custom
        (fb2-replace-hard-space t))
 
