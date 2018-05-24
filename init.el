@@ -81,17 +81,6 @@
 ;; =========================================================
 
 ;; ============= A bunch of essential packages =============
-(use-package iqa ;; open literate config fast in case of emergency (and not only)
-  :ensure t
-  :init
-  (setq iqa-user-init-file (concat user-emacs-directory "config.org"))
-  :config
-  (iqa-setup-default))
-
-(use-package restart-emacs
-  :ensure t
-  :config
-  (global-set-key (kbd "C-x C-c") 'restart-emacs))
 
 (use-package exec-path-from-shell
   :ensure t
@@ -106,6 +95,20 @@
 ;; =========================================================
 
 (org-babel-load-file (concat (file-name-directory load-file-name) literate-config-filename))
+
+;; ======= A bunch of essential packages (continued) =======
+(use-package iqa ;; open literate config fast in case of emergency (and not only)
+  :ensure t
+  :init
+  (setq iqa-user-init-file (concat user-emacs-directory literate-config-filename))
+  :config
+  (iqa-setup-default))
+
+(use-package restart-emacs
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x C-c") 'restart-emacs))
+;; =========================================================
 
 (setq debug-on-error nil)
 (setq debug-on-quit nil)
