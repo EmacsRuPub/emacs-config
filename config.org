@@ -168,7 +168,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
 
-     (setq gc-cons-threshold 64000000)
+     (setq gc-cons-threshold most-positive-fixnum)
      (add-hook 'after-init-hook #'(lambda ()
                                     (setq gc-cons-threshold 800000)))
 
