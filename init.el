@@ -5,6 +5,9 @@
 (setq message-log-max t) ;; we don't want to lose any startup log info
 (setq shell-file-name "/bin/bash")
 
+(defvar literate-config-filename "config.org")
+(defvar tangled-config-filename (concat (file-name-sans-extension literate-config-filename) ".el"))
+
 ;; ================= Emergency keybindings =================
 (global-set-key (kbd "C-x C-.") ;; Run use-package linter
                 (lambda ()
@@ -94,7 +97,7 @@
 (use-package bug-hunter :disabled)
 ;; =========================================================
 
-(org-babel-load-file (concat (file-name-directory load-file-name) "config.org"))
+(org-babel-load-file (concat (file-name-directory load-file-name) literate-config-filename))
 
 (setq debug-on-error nil)
 (setq debug-on-quit nil)
