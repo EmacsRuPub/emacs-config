@@ -401,6 +401,7 @@
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package server
+       :defer 2
        :preface
        (defun custom/server-save-edit ()
          (interactive)
@@ -468,6 +469,7 @@
 
       (use-package counsel
         :ensure t
+        :defer 2
         :after (swiper)
         :delight counsel-mode
         :init
@@ -797,6 +799,7 @@
      )
 
      (use-package saveplace
+       :defer 1
        :config
        (save-place-mode 1))
    #+END_SRC
@@ -855,6 +858,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package projectile
        :ensure t
+       :defer 2
        :delight (projectile-mode " prj")
        :bind ("C-x j j" . projectile-switch-project)
        :demand t
@@ -1763,6 +1767,7 @@
        :hook ((prog-mode-hook text-mode-hook) . editorconfig-mode))
 
      (use-package autorevert
+       :defer 2
        :disabled
        :mode ("\\.log$" . auto-revert-mode)
        :custom
@@ -1787,6 +1792,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package whitespace
         :ensure t
+        :defer 2
         :hook
         ((prog-mode-hook . whitespace-turn-on)
          (text-mode-hook . whitespace-turn-on))
@@ -1909,6 +1915,7 @@
        (sp-use-smartparens-bindings))
 
      (use-package paren
+       :defer 2
        :custom
        (show-paren-delay 0)
        :config
