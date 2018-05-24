@@ -3,6 +3,9 @@
 
 * bootstrapping
 ** basic utils
+   :PROPERTIES:
+   :ID:       6384b6fd-8dd7-4e9d-a4a2-eec18757ab1e
+   :END:
    It's good to have centralized working datasets storage,
    to prevent pollution of Emacs config directory.
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -46,6 +49,9 @@
        (concat-normalize-slashes (at-homedir "/workspace") suffix))
    #+END_SRC
 ** essential packages and tweaks
+   :PROPERTIES:
+   :ID:       f2a7ba0e-9ec0-4f97-9b28-adc923f60859
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (load (at-config-basedir "credentials.el.gpg"))
 
@@ -124,6 +130,9 @@
        (setq tab-always-indent t))
    #+END_SRC
 ** input methods
+   :PROPERTIES:
+   :ID:       19ad65dc-243b-4d83-b4ed-c0161f35e3ae
+   :END:
    Set default input method
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq default-input-method 'russian-computer)
@@ -140,6 +149,9 @@
    #+END_SRC
 ** Encryption and security
 *** packages
+    :PROPERTIES:
+    :ID:       f23f36ac-a857-455c-9186-129925c5d5c4
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package epa
         :after (epg)
@@ -165,6 +177,9 @@
         (keychain-refresh-environment))
     #+END_SRC
 ** GC tweaks
+   :PROPERTIES:
+   :ID:       f696a57b-17a7-485b-8642-c6d1431ba612
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq gc-cons-percentage 0.3)
 
@@ -179,6 +194,9 @@
    #+END_SRC
 * appearance
 ** fonts
+   :PROPERTIES:
+   :ID:       bd3e3e74-904d-40f2-b8e7-ed96b0d366ad
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package font-core
        :config
@@ -199,6 +217,9 @@
        (unicode-fonts-setup))
    #+END_SRC
 ** setup smart modeline
+   :PROPERTIES:
+   :ID:       487f7c0d-ba0c-4598-a6fa-d817a8b30ba4
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package spaceline :ensure t
        :custom
@@ -214,6 +235,9 @@
        (spaceline-emacs-theme 'projectile-root))
    #+END_SRC
 ** load themes and choose one
+   :PROPERTIES:
+   :ID:       561c87c4-8d29-4a80-ac66-2dc3251cf5ca
+   :END:
    Also some other good-looking theme is "material-theme"
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package nord-theme :ensure t :config (load-theme 'nord t) :disabled)
@@ -231,6 +255,9 @@
        (set-face-attribute 'region nil :background (cdr (assoc "zenburn-bg-2" zenburn-colors-alist))))
    #+END_SRC
 ** frames
+   :PROPERTIES:
+   :ID:       8f6440cb-848f-4f09-a13a-a39cb3e18531
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package tooltip
        :config
@@ -290,6 +317,9 @@
        (display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
    #+END_SRC
 ** uniquify buffer names
+   :PROPERTIES:
+   :ID:       636ed879-e1ab-4a6a-b88e-160833520849
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package uniquify
        :custom
@@ -300,6 +330,9 @@
    #+END_SRC
 * persistence
 ** save history
+   :PROPERTIES:
+   :ID:       3f0c8dc7-a980-42da-ad21-69aae50566ab
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package savehist
        :config
@@ -315,9 +348,13 @@
                regexp-search-ring)))
    #+END_SRC
 ** maintain recent files
+   :PROPERTIES:
+   :ID:       71d27955-27a7-4efe-ad81-8b45298ddfda
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package recentf
        :no-require t
+       :defer 1
        :config
        (use-package recentf-ext :ensure t)
        (add-to-list 'recentf-exclude no-littering-var-directory)
@@ -328,6 +365,9 @@
        (recentf-max-menu-items 15))
    #+END_SRC
 ** backups
+   :PROPERTIES:
+   :ID:       12bb8959-8134-4017-a147-1151a96fde54
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package backup-each-save
        :ensure t
@@ -338,6 +378,9 @@
        :commands backup-walker-start)
    #+END_SRC
 ** concurrency and caching
+   :PROPERTIES:
+   :ID:       1a9bd60c-7c56-49be-9f08-38d1649eaa16
+   :END:
    Simultaneous edits still will be detected when saving is made. But disabling lock files prevents our working
    dirs from being clobbered with.
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -353,6 +396,9 @@
    #+END_SRC
 * common
 ** emacs server
+   :PROPERTIES:
+   :ID:       d12f1321-1005-42b2-8d96-0e55ebb5cee9
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package server
        :preface
@@ -375,6 +421,9 @@
    #+END_SRC
 ** some ubiquitous packages
 *** hydra
+    :PROPERTIES:
+    :ID:       bd5362c6-e714-48af-b1de-7b521fa6bb44
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package hydra
         :ensure t
@@ -382,6 +431,9 @@
         (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
     #+END_SRC
 *** ivy-based
+    :PROPERTIES:
+    :ID:       977de8de-42e2-478a-ad6b-6c2d87b6e47a
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package ivy
         :ensure t
@@ -479,6 +531,9 @@
         (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
     #+END_SRC
 *** custom ivy-based
+    :PROPERTIES:
+    :ID:       307edab6-3ef0-41c5-b010-de6c25c376d8
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/open-encrypted-document ()
         (interactive)
@@ -604,6 +659,9 @@
         (setq disabled-command-function nil))
     #+END_SRC
 ** some keyboard related stuff
+   :PROPERTIES:
+   :ID:       8e8a622e-1c3c-487b-853d-16f72635d4f9
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defun custom/keys-describe-prefixes ()
        (interactive)
@@ -641,6 +699,9 @@
        (which-key-mode))
    #+END_SRC
 ** encodings
+   :PROPERTIES:
+   :ID:       3819b6d8-73a0-4fba-bf37-ab10e3c9f45a
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package mule
        :config
@@ -654,6 +715,9 @@
    #+END_SRC
 * navigate
 ** URLs, links and TAPs
+   :PROPERTIES:
+   :ID:       26a89d53-8c77-48d7-82b4-09a6acef1e6f
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
@@ -709,6 +773,9 @@
               '(("." . browse-url-xdg-open)))))
    #+END_SRC
 ** cursor positioning
+   :PROPERTIES:
+   :ID:       da45d0ec-d722-4d55-9841-912ccf83aadf
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (define-namespace custom/
 
@@ -734,6 +801,9 @@
        (save-place-mode 1))
    #+END_SRC
 ** frames spawning
+   :PROPERTIES:
+   :ID:       6e6577e0-0142-4c0b-99fb-52cbd81797c9
+   :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/update-frames (heads-count)
         (let* ((frames-count (length (frame-list)))
@@ -750,6 +820,9 @@
            (t t))))
     #+END_SRC
 ** unset keybindings
+   :PROPERTIES:
+   :ID:       41e2a40b-7161-4ef8-92ce-51fbcfa2b1b5
+   :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (global-unset-key (kbd "C-s"))
       (global-unset-key (kbd "C-r"))
@@ -758,6 +831,9 @@
       (global-unset-key (kbd "C-x C-b"))
     #+END_SRC
 ** special navigation
+   :PROPERTIES:
+   :ID:       96abc097-e32b-4e28-b1ab-85691f83ea61
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package beginend
        :ensure t
@@ -773,6 +849,9 @@
      (use-package smooth-scrolling :ensure t)
    #+END_SRC
 ** projects
+   :PROPERTIES:
+   :ID:       b530ebb1-9107-4c98-a03b-c139588735f9
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package projectile
        :ensure t
@@ -812,6 +891,9 @@
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
    #+END_SRC
 ** dired
+   :PROPERTIES:
+   :ID:       c33b40eb-4d4b-44ba-9b00-5725a2af0ada
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package dired
        :commands dired
@@ -924,6 +1006,9 @@
        :bind ("C->" . ivy-imenu-anywhere))
    #+END_SRC
 *** inline tasks navigation
+    :PROPERTIES:
+    :ID:       11f56794-5fdd-4bb8-9e61-5ab50be9b005
+    :END:
     with credits to `github.com/hlissner/doom-emacs` project
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defvar prog-inline-task-tags
@@ -1015,6 +1100,9 @@
                   :caller 'prog-inline-tasks))
     #+END_SRC
 ** operations with windows/frames
+   :PROPERTIES:
+   :ID:       3f1d854c-5c75-4a89-b266-79cc876f8b5f
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package windmove
        :bind
@@ -1070,6 +1158,9 @@
        :commands transpose-frame)
    #+END_SRC
 ** scope
+   :PROPERTIES:
+   :ID:       95be5ba3-1e7f-4d62-94ad-d734f064add4
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package ibuffer
        :commands ibuffer
@@ -1118,6 +1209,9 @@
      (use-package recursive-narrow :ensure t)
    #+END_SRC
 ** warping
+   :PROPERTIES:
+   :ID:       e366a2e8-2acd-4623-b584-2f64f06d7fa4
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package swiper
        :ensure t
@@ -1150,6 +1244,9 @@
      (use-package filecache)
    #+END_SRC
 ** hydras and keybindings
+   :PROPERTIES:
+   :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-window (:idle 1.0)
        "Windows/frames management"
@@ -1242,6 +1339,9 @@
    #+END_SRC
 * editing
 ** common hooks
+   :PROPERTIES:
+   :ID:       72f052f0-e63d-420e-bb29-637d4098c15c
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
      (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -1273,6 +1373,9 @@
    #+END_SRC
 ** move and bend text around
 *** definitions
+    :PROPERTIES:
+    :ID:       c5c1a49f-1d05-4890-871e-a2a2f40b35ea
+    :END:
     This override for transpose-words fixes what I consider to be a flaw with
     the default implementation in simple.el. To transpose chars or lines, you
     always put the point on the second char or line to transpose with the
@@ -1294,6 +1397,9 @@
         (forward-word (+ arg 1)))
     #+END_SRC
 *** setup
+    :PROPERTIES:
+    :ID:       b3febdce-3124-4695-b010-9822943b04c7
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package snakehump
         :quelpa
@@ -1385,6 +1491,9 @@
     #+END_SRC
 ** regions and rectangles
 *** definitions
+    :PROPERTIES:
+    :ID:       7cfe1de9-52f8-4a68-bae4-4973830b6390
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
@@ -1421,6 +1530,9 @@
       )
     #+END_SRC
 *** setup
+    :PROPERTIES:
+    :ID:       0fc28d80-7af1-4ce9-a52e-d46fff4d050f
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package expand-region
         :ensure t
@@ -1450,6 +1562,9 @@
         (whole-line-or-region-mode 1))
     #+END_SRC
 ** commenting
+   :PROPERTIES:
+   :ID:       b5079d1e-1e13-4acd-92d5-25cc660dad24
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package comment-dwim-2
        :ensure t
@@ -1464,6 +1579,9 @@
        :commands banner-comment)
    #+END_SRC
 ** clipboard and killring
+   :PROPERTIES:
+   :ID:       1486e40e-8c27-4ed9-8bce-83464ad35e19
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package savekill :ensure t)
 
@@ -1495,6 +1613,9 @@
        (x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
    #+END_SRC
 ** undo/redo
+   :PROPERTIES:
+   :ID:       106282c8-1906-4508-a07e-62a831b60458
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package undo-tree
        :ensure t
@@ -1520,6 +1641,9 @@
     #+END_SRC
 ** spellchecking
 *** flycheck
+    :PROPERTIES:
+    :ID:       4c008f67-6b4f-4e10-afb1-b36e165a7a12
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flycheck
         :ensure t
@@ -1657,6 +1781,9 @@
        (mouse-wheel-progressive-speed nil))
    #+END_SRC
 *** whitespaces
+    :PROPERTIES:
+    :ID:       3efe6111-4b9c-42a9-9a03-0d26ec8fed58
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package whitespace
         :ensure t
@@ -1681,6 +1808,9 @@
         :commands ws-butler-mode)
     #+END_SRC
 ** major modes
+   :PROPERTIES:
+   :ID:       a525152e-b1d7-4a69-a12a-7246e1679498
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package rst
        :mode ("\\.rst$" . rst-mode))
@@ -1721,6 +1851,9 @@
        :hook (yaml-mode-hook . common-hooks/newline-hook))
    #+END_SRC
 *** docker
+    :PROPERTIES:
+    :ID:       84391052-7b6b-4c35-b3bb-687ea1613a9b
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package dockerfile-mode
         :ensure t
@@ -1731,6 +1864,9 @@
         :mode ("docker-compose" . docker-compose-mode))
     #+END_SRC
 ** sexps
+   :PROPERTIES:
+   :ID:       d4065366-b58b-4cac-a41c-432fc6e3d1ba
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;;TODO: maybe relocate
      (use-package highlight-sexp
@@ -1779,6 +1915,9 @@
        (show-paren-mode t))
    #+END_SRC
 ** indentation
+   :PROPERTIES:
+   :ID:       26fdd8dd-8d85-4aed-9b34-99b9869ee54c
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package dtrt-indent
        :ensure t
@@ -1792,6 +1931,9 @@
        (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
    #+END_SRC
 ** hydras and keys
+   :PROPERTIES:
+   :ID:       89d1510e-ae5a-4d28-b044-018dd60c8f90
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-edit (:color blue :idle 1.0)
        "
@@ -1882,6 +2024,9 @@
    #+END_SRC
 * completion
 ** snippets
+   :PROPERTIES:
+   :ID:       82415c3d-9621-4a30-876b-f528246d9e6c
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package yasnippet ;;TODO: make more declarative
        :ensure t
@@ -1973,6 +2118,9 @@
    #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
 ** company
+   :PROPERTIES:
+   :ID:       f265a0cd-6f51-4150-a9c5-1ee0a79bc95b
+   :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package company
         :ensure t
@@ -2012,6 +2160,9 @@
     #+END_SRC
 *** specialized uses
 **** ansible
+     :PROPERTIES:
+     :ID:       66b51149-ccb4-4e7e-8781-f099c321b6d1
+     :END:
      #+BEGIN_SRC emacs-lisp :tangle yes
        (use-package company-ansible
          :ensure t
@@ -2027,6 +2178,9 @@
 **** https://github.com/iquiw/company-restclient
 **** https://github.com/Valloric/ycmd + https://github.com/abingham/emacs-ycmd
 ** abbrevs
+   :PROPERTIES:
+   :ID:       47d2e50a-055b-4dc5-ab50-5a8028c34f3e
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package hippie-exp
        :bind ("C-S-<iso-lefttab>" . hippie-expand)
@@ -2052,6 +2206,9 @@
 * programming
 ** common
 *** virtualization
+    :PROPERTIES:
+    :ID:       318076ea-2093-4a67-9879-c476ca30f85c
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package docker
         :ensure t
@@ -2073,6 +2230,9 @@
         :bind ("C-c s" . counsel-tramp))
     #+END_SRC
 *** eldoc
+    :PROPERTIES:
+    :ID:       4c7f893f-75f5-447e-9404-4ee913bb7b29
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package eldoc
         :delight eldoc-mode
@@ -2090,6 +2250,9 @@
         :after (eldoc))
     #+END_SRC
 *** common hooks
+    :PROPERTIES:
+    :ID:       75d0a1e7-a985-4122-a87f-21c8a0812a3a
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       ;; show FIXME/TODO/BUG keywords
       (defun common-hooks/prog-helpers ()
@@ -2102,6 +2265,9 @@
           (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
     #+END_SRC
 *** packages/modes
+    :PROPERTIES:
+    :ID:       eaf84ab6-e3df-4c7c-89cd-65515830664f
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       ;;TODO: extend setup
       (use-package compile)
@@ -2180,6 +2346,9 @@
     #+END_SRC
 ** vcs
 *** git
+    :PROPERTIES:
+    :ID:       55dea188-0ba1-40da-b7b0-819246bc9500
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package magit
         :ensure t
@@ -2304,6 +2473,9 @@
     #+END_SRC
 **** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** tools
+    :PROPERTIES:
+    :ID:       32595eee-b431-4a3b-aa90-4bf77268a449
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package smerge-mode
         :hook (find-file-hooks . (lambda ()
@@ -2314,6 +2486,9 @@
     #+END_SRC
 **** BACKLOG try to make hydra, neat functions detected
 *** hydra
+    :PROPERTIES:
+    :ID:       cad1e463-7d2c-48b9-bf6e-11df3e6cea89
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-vcs ()
         "
@@ -2347,6 +2522,9 @@
     #+END_SRC
 ** languages
 *** common
+    :PROPERTIES:
+    :ID:       d641747c-bda2-4c36-ac7f-9fbaee986ee0
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package info-look)
 
@@ -2357,6 +2535,9 @@
         :delight highlight-stages-mode)
     #+END_SRC
 *** elisp
+    :PROPERTIES:
+    :ID:       133554f2-800c-481d-8bcf-252753c28efd
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package edebug-x :ensure t)
 
@@ -2387,6 +2568,9 @@
           (add-hook 'eval-expression-minibuffer-setup-hook mode)))
     #+END_SRC
 *** lisp
+    :PROPERTIES:
+    :ID:       4aca675a-9557-41a4-8fe2-121fab08fdfd
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package slime
         :ensure t
@@ -2464,6 +2648,9 @@
       (global-set-key (kbd "M-p") 'hydra-slime/body)
     #+END_SRC
 *** python                                                               :review:
+    :PROPERTIES:
+    :ID:       ebee8721-2700-4182-850c-cfb29daadfb8
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package jedi-core
         :ensure t
@@ -2567,6 +2754,9 @@
 ****** review pylint setup
 *** cc
 **** specialization for PostgreSQL development
+     :PROPERTIES:
+     :ID:       3ecd6265-28ad-4dab-9d73-95073d47e2f9
+     :END:
      #+BEGIN_SRC emacs-lisp :tangle yes
        (defun pgsql-c-mode ()
          ;; sets up formatting for PostgreSQL C code
@@ -2579,6 +2769,9 @@
          (setq indent-tabs-mode t))      ; make sure we keep tabs when indenting
      #+END_SRC
 **** packages
+     :PROPERTIES:
+     :ID:       4a59c96b-705d-4511-a0a5-1ec836cf3803
+     :END:
      #+BEGIN_SRC emacs-lisp :tangle yes
        (use-package cc-mode
          :hook ((c++-mode-hook . common-hooks/newline-hook)
@@ -2674,6 +2867,9 @@
 **** TBD
 ***** BACKLOG review and maybe rebind keys
 *** golang
+    :PROPERTIES:
+    :ID:       a11c0b98-c406-4f14-99c3-8ef24f4624c9
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       ;;TODO: some harness either here or withoin shell to automate the burden of setting up new golang project's boilerplate
 
@@ -2770,6 +2966,9 @@
     #+END_SRC
 **** BACKLOG try to integrate https://getgb.io/
 *** lua
+    :PROPERTIES:
+    :ID:       6f132b0e-a71f-467c-9dd5-5dad03db781b
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package lua-mode
         :ensure t
@@ -2801,6 +3000,9 @@
         :after (lua-mode company))
     #+END_SRC
 *** other
+    :PROPERTIES:
+    :ID:       14b5a898-7acf-4f43-8d3c-3c86926e5bba
+    :END:
     Languages without much extra customization are going precisely here
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package actionscript-mode
@@ -2817,6 +3019,9 @@
     #+END_SRC
 ** webdev
 *** setup
+    :PROPERTIES:
+    :ID:       73d9af60-e617-48c7-b5b2-26830d73f6b0
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package sgml-mode
         :bind (:map html-mode-map
@@ -2898,12 +3103,18 @@
         :hook (css-mode-hook . turn-on-css-eldoc))
     #+END_SRC
 *** color helper
+    :PROPERTIES:
+    :ID:       0d387fc8-4354-42cc-911b-c316221a228e
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package rainbow-mode
         :ensure t
         :hook (css-mode-hook . rainbow-mode))
     #+END_SRC
 *** emmet mode setup
+    :PROPERTIES:
+    :ID:       dca077a3-6d96-4286-be6b-49edfec189ca
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package emmet-mode
         :ensure t
@@ -2924,6 +3135,9 @@
     #+END_SRC
 * clients
 ** restclient
+   :PROPERTIES:
+   :ID:       628303d1-2a9b-48e9-b2f9-9797d652e2d8
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package company-restclient
        :ensure t
@@ -2938,6 +3152,9 @@
    #+END_SRC
 ** terminal
 *** common
+    :PROPERTIES:
+    :ID:       81643770-7b1b-44f6-b0f3-29dfe82219ee
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package ansi-color
         :hook (compilation-filter-hook . (lambda ()
@@ -2947,6 +3164,9 @@
                                               compilation-filter-start (point))))))
     #+END_SRC
 *** comint
+    :PROPERTIES:
+    :ID:       22daa0a4-4d55-4f78-abb1-67bbf1bceebf
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (define-namespace custom/
 
@@ -2988,6 +3208,9 @@
       (bind-key "\C-c\M-o" 'custom/comint-clear-buffer comint-mode-map)
     #+END_SRC
 *** shell/check syntax
+    :PROPERTIES:
+    :ID:       2637da5b-b7ee-44ac-8fb4-7c3f4120184b
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/sh-check-finish-hook (buf msg)
         "Function, that is executed at the end of sh check"
@@ -3021,6 +3244,9 @@
     #+END_SRC
 **** BACKLOG try to leverage shellcheck util usage
 *** tmux
+    :PROPERTIES:
+    :ID:       dbced8f9-5c3e-4408-854f-99aa26bf3d52
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package emamux
         :ensure t
@@ -3038,6 +3264,9 @@
           ("q" nil)))
     #+END_SRC
 ** internal browser (w3m/eww)
+   :PROPERTIES:
+   :ID:       5b5a4f9f-0802-4b4a-b6c3-55562ac635cf
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package w3m
        :ensure t
@@ -3090,6 +3319,9 @@
          (eww-reload 'local))) ;; apply eww-header changes
    #+END_SRC
 ** MPD
+   :PROPERTIES:
+   :ID:       bf28ef56-a90e-42b4-855d-84a6437c77b5
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package mingus
        :ensure t
@@ -3116,10 +3348,16 @@
          ("q" nil "cancel")))
    #+END_SRC
 ** open files in external apps
+   :PROPERTIES:
+   :ID:       4ad12d2a-5605-4c56-bb70-860686f41f60
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (bind-key "C-!" 'crux-open-with dired-mode-map)
    #+END_SRC
 ** open ebooks internally
+   :PROPERTIES:
+   :ID:       27a0775b-b056-4eb1-80e2-086bc44cb8b8
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package nov
        :ensure t
@@ -3184,6 +3422,9 @@
    #+END_SRC
 ** email
 *** common
+    :PROPERTIES:
+    :ID:       5b4ffaf1-14e1-4ecb-b08f-9bbf3be90413
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package footnote)
 
@@ -3200,6 +3441,9 @@
         (message-kill-buffer-on-exit t))
     #+END_SRC
 *** notmuch
+    :PROPERTIES:
+    :ID:       18ebc99a-8bc4-4f0b-9e11-9b388c9170d6
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package notmuch
         :ensure t
@@ -3246,12 +3490,18 @@
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
 ** security
 *** packages
+    :PROPERTIES:
+    :ID:       cec54d13-16be-4e61-850f-37f7ba2aeb0e
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package pass :ensure t)
 
       (use-package ivy-pass :ensure t)
     #+END_SRC
 *** hydras
+    :PROPERTIES:
+    :ID:       9f0fcd37-4dc5-4444-b429-dea775bb9b32
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (defhydra hydra-security (:idle 1.0)
         ("p" pass "pass" :color blue)
@@ -3260,6 +3510,9 @@
       (global-set-key (kbd "<f6>") 'hydra-security/body)
     #+END_SRC
 ** various useful packages
+   :PROPERTIES:
+   :ID:       52e2700e-1695-4382-b0ef-992b1f575976
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (imagemagick-register-types)
 
@@ -3289,6 +3542,9 @@
      (use-package ein :ensure t)
    #+END_SRC
 ** Twitter
+   :PROPERTIES:
+   :ID:       124e9f69-847c-4682-989c-98e42f9a81b5
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package twittering-mode
        :ensure t
@@ -3298,6 +3554,9 @@
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
    #+END_SRC
 ** browser editing connectivity
+   :PROPERTIES:
+   :ID:       e3a36f53-7898-472c-a446-8f6e8496c3df
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package edit-server
        :ensure t
@@ -3305,6 +3564,9 @@
        (edit-server-start))
    #+END_SRC
 ** hydra
+   :PROPERTIES:
+   :ID:       681df8be-f272-4b73-8399-935b20414567
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-clients (:exit t :color red :idle 1.0)
        "Access to clients"
@@ -3978,6 +4240,9 @@
                    org-babel-expand-body:bash))
     #+END_SRC
 *** additional packages / extensions
+    :PROPERTIES:
+    :ID:       73af33db-8f7b-4a96-a108-b541def2aae4
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package ox-html)
 
@@ -4102,6 +4367,9 @@
        (paperless-root-directory ""))
    #+END_SRC
 ** hydras
+   :PROPERTIES:
+   :ID:       1666c146-50ef-4264-bc2d-0fe9e473e157
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-pim ()
        "
@@ -4186,6 +4454,9 @@
      (global-set-key (kbd "<f7>") 'hydra-org-global/body)
    #+END_SRC
 * publishing
+  :PROPERTIES:
+  :ID:       27edca98-b474-41dd-8a12-79b20eb52ede
+  :END:
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package blockdiag-mode :ensure t)
 
@@ -4207,6 +4478,9 @@
                                    '((plantuml . t))))
   #+END_SRC
 * help
+  :PROPERTIES:
+  :ID:       c49ac158-ba13-49ea-88cc-a85abf12b9e3
+  :END:
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package info
       :preface
