@@ -4,6 +4,7 @@
 *semantic*
 *~
 .emacs.desktop
+.python-environments
 config.el
 credentials.el.gpg
 customizations.el
@@ -15,3 +16,4 @@ private
 quelpa
 request
 savehist
+todo.org
