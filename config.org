@@ -1843,13 +1843,13 @@
               ("*pentadactyl*" . vimrc-mode)))
 
      (use-package sh-script
-       :mode (("bashrc$" . sh-mode)
-              ("bash_profile$" . sh-mode)
-              ("bash_aliases$" . sh-mode)
-              ("bash_local$" . sh-mode)
-              ("bash_completion$" . sh-mode)
-              (".powenv$" . sh-mode)
-              ("\\.zsh\\'" . sh-mode))
+       :mode (("bashrc$" . shell-script-mode)
+              ("bash_profile$" . shell-script-mode)
+              ("bash_aliases$" . shell-script-mode)
+              ("bash_local$" . shell-script-mode)
+              ("bash_completion$" . shell-script-mode)
+              (".powenv$" . shell-script-mode)
+              ("\\zsh\\'" . shell-script-mode))
        :config
        ;; zsh
        (setq system-uses-terminfo nil))
