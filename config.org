@@ -153,6 +153,10 @@
     :ID:       f23f36ac-a857-455c-9186-129925c5d5c4
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package auth-source
+        :custom
+        (auth-sources '("~/.authinfo.gpg")))
+
       (use-package epa
         :after (epg)
         :config
