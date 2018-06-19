@@ -886,6 +886,9 @@
        (def-projectile-commander-method ?g
          "Search in project."
          (counsel-rg))
+       (def-projectile-commander-method ?t
+         "Open project's file with TODOs."
+         (custom/open-project-todos))
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
        (setq projectile-switch-project-action 'projectile-commander)
@@ -894,8 +897,17 @@
      (use-package counsel-projectile
        :ensure t
        :after (counsel projectile)
+       :preface
+       (defun counsel-projectile-switch-project-action-open-todos (project)
+         "Open project's TODOs."
+         (let ((projectile-switch-project-action
+                (lambda ()
+                  (custom/open-project-todos))))
+           (counsel-projectile-switch-project-by-name project)))
+
        :bind ("C-x j j" . 'counsel-projectile-switch-project)
        :config
+       (add-to-list 'counsel-projectile-switch-project-action '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
    #+END_SRC
 ** dired
