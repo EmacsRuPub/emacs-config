@@ -946,7 +946,11 @@
          (:map dired-mode-map
                ("." . dired-hide-dotfiles-mode))
          :hook
-         (dired-mode . dired-hide-dotfiles-mode)))
+         (dired-mode . dired-hide-dotfiles-mode))
+       (use-package dired-recent
+         :ensure t
+         :config
+         (dired-recent-mode 1)))
 
      ;; Reload dired after making changes
      (--each '(dired-do-rename
