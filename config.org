@@ -829,7 +829,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package projectile
        :ensure t
-       :defer 2
        :delight (projectile-mode " prj")
        :bind ("C-x j j" . projectile-switch-project)
        :demand t
