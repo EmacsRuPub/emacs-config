@@ -518,8 +518,6 @@
         :custom
         (ivy-rich-switch-buffer-name-max-length 60 "Increase max length of buffer name.")
         :config
-        (setq ivy-rich-abbreviate-paths t)
-        (setq ivy-rich-switch-buffer-name-max-length 60)
         (dolist (cmd
                  '(ivy-switch-buffer
                    ivy-switch-buffer-other-window
