@@ -1857,6 +1857,10 @@
 
      (use-package portage-mode
        :mode (("portage" . portage-mode)))
+
+     (use-package nix-mode
+       :ensure t
+       :mode ("nix" . nix-mode))
    #+END_SRC
 *** docker
     :PROPERTIES:
