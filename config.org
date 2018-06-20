@@ -1820,7 +1820,7 @@
         :ensure t
         :commands ws-butler-mode)
     #+END_SRC
-** major modes
+** major (and helper) modes
    :PROPERTIES:
    :ID:       a525152e-b1d7-4a69-a12a-7246e1679498
    :END:
@@ -1848,6 +1848,11 @@
      (use-package nginx-mode
        :ensure t
        :mode ("nginx" . nginx-mode))
+
+     (use-package company-nginx
+       :ensure t
+       :after (nginx-mode)
+       :hook (nginx-mode-hook . company-nginx-keywords))
 
      (use-package fic-mode :ensure t)
 
