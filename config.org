@@ -603,38 +603,14 @@
         (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print))
 
       (use-package files
-        :preface
-        ;; clean trailing whitespaces automatically
-        (defvar custom/trailing-whitespace-modes
-          '(
-            c++-mode
-            c-mode
-            haskell-mode
-            emacs-lisp-mode
-            lisp-mode
-            python-mode
-            js-mode
-            js2-mode
-            html-mode
-            lua-mode
-            yaml-mode
-            ))
-        ;; untabify some modes
-        (defvar custom/untabify-modes
-          '(
-            haskell-mode
-            emacs-lisp-mode
-            lisp-mode
-            python-mode
-            ))
-        (defun custom/trailing-whitespace-hook ()
-          (when (member major-mode custom/trailing-whitespace-modes)
-            (delete-trailing-whitespace)))
-        (defun custom/untabify-hook ()
-          (when (member major-mode custom/untabify-modes)
-            (untabify (point-min) (point-max))))
         :hook
-        (before-save-hook . (custom/trailing-whitespace-hook custom/untabify-hook))
+        (before-save-hook . (delete-trailing-whitespace))
+        (before-save-hook . (lambda ()
+                              (when (member major-mode '(haskell-mode
+                                                         emacs-lisp-mode
+                                                         lisp-mode
+                                                         python-mode))
+                                (untabify (point-min) (point-max)))))
         :config
         (when (> emacs-major-version 25) (auto-save-visited-mode 1))
         :custom
