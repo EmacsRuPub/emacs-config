@@ -2113,6 +2113,10 @@
        :ensure t
        :after (yasnippet))
 
+     (use-package ivy-yasnippet
+       :after (dash ivy yasnippet)
+       :ensure t)
+
      (defhydra hydra-yasnippet (:color teal)
        "
        _c_reate auto snippet
@@ -2125,7 +2129,7 @@
        ("e" aya-expand)
        ("p" aya-persist-snippet)
        ("v" yas-visit-snippet-file)
-       ("i" yas-insert-snippet)
+       ("i" ivy-yasnippet)
        ("q" nil))
      (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
    #+END_SRC
