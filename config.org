@@ -81,10 +81,9 @@
      (use-package notifications)
 
      (use-package cus-edit
-       :config
-       (setq custom-file (at-config-basedir "customizations.el"))
-       (when (and custom-file (file-exists-p custom-file))
-         (load-file custom-file)))
+       :hook (kiil-emacs-hook . (lambda () (delete-file custom-file)))
+       :custom
+       (setq custom-file (at-config-basedir "customizations.el")))
 
      (use-package emacs
        :config
