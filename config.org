@@ -2409,7 +2409,10 @@
           :ensure t
           :delight (magit-filenotify-mode " FN")
           :after magit
-          :hook (magit-status-mode-hook . magit-filenotify-mode))
+          :hook (magit-status-mode-hook . (lambda ()
+                                            (condition-case nil
+                                                (magit-filenotify-mode)
+                                              (error (magit-filenotify-mode -1))))))
         (use-package vdiff-magit
           :ensure t
           :bind (:map magit-mode-map
