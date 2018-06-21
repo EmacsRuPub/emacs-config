@@ -2048,6 +2048,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package yasnippet ;;TODO: make more declarative
        :ensure t
+       :demand t
        :delight yas-minor-mode
        :mode (("yasnippet/snippets" . snippet-mode)
               ("\\.yasnippet$" . snippet-mode))
