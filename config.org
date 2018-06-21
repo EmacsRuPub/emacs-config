@@ -2294,8 +2294,6 @@
         :ensure t
         :commands regex-tool)
 
-      (use-package gtags)
-
       (use-package counsel-gtags
         :ensure t
         :after (counsel gtags)
