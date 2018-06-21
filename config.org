@@ -3373,7 +3373,7 @@
        :quelpa
        (fb2-mode :repo "spline1986/fb2-mode" :fetcher github :version original)
        :mode ("\\.fb2\\'" . fb2-mode)
-       :hook (fb2-mode . (lambda () (smooth-scrolling-mode 1)))
+       :hook (fb2-mode-hook . (lambda () (smooth-scrolling-mode 1)))
        :custom
        (fb2-replace-hard-space t))
 
