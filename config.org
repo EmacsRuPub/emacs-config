@@ -2367,6 +2367,11 @@
 
       ;; TODO: (alex3rd) extend setup
       (use-package format-all :ensure t)
+
+      (use-package skeletor
+        :ensure t
+        :custom
+        (skeletor-project-directory (at-workspace-dir "pets")))
     #+END_SRC
 ** vcs
 *** git
