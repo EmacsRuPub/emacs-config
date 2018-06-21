@@ -3380,6 +3380,7 @@
      (use-package pdf-tools
        :pin manual
        :ensure t
+       :hook (after-init-hook . pdf-tools-install)
        :config
        (use-package pdf-view
          :ensure nil
@@ -3402,10 +3403,10 @@
                 (t (scroll-other-window arg))))))
          :bind (("C-M-v" . custom/scroll-other-window)
                 :map pdf-view-mode-map
-                ;; TODO: bind pdf-view-kill-ring-save
                 ("C-s" . isearch-forward)
                 ("h" . pdf-annot-add-highlight-markup-annotation)
                 ("t" . pdf-annot-add-text-annotation)
+                ("y" . pdf-view-kill-ring-save)
                 ("D" . pdf-annot-delete))
          :hook ((after-init-hook . pdf-tools-install)
                 (pdf-view-mode-hook . pdf-isearch-minor-mode)
