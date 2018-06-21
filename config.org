@@ -2591,8 +2591,7 @@
                                                (slime-autodoc-mode -1)))) ;; some signature down the call stack is broken in 2.20
                (lisp-mode-hook . (lambda ()
                                    (auto-fill-mode 1)
-                                   (setq indent-tabs-mode t)
-                                   (setq tab-width 2)))
+                                   (setq indent-tabs-mode nil)))
                (lisp-mode-hook . common-hooks/newline-hook)
                (lisp-mode-hook . common-hooks/prog-helpers))
         :init
