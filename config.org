@@ -2363,6 +2363,9 @@
 
       (use-package make-mode
         :mode ("[Mm]akefile" . makefile-mode))
+
+      ;; TODO: (alex3rd) extend setup
+      (use-package format-all :ensure t)
     #+END_SRC
 ** vcs
 *** git
