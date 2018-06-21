@@ -1941,7 +1941,12 @@
        :ensure t
        :config
        (global-aggressive-indent-mode 1)
-       (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+       (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+       (add-to-list 'aggressive-indent-excluded-modes 'slime-repl-mode)
+       (delete 'lisp-mode aggressive-indent-modes-to-prefer-defun)
+       (delete 'emacs-lisp-mode aggressive-indent-modes-to-prefer-defun)
+       (add-to-list 'aggressive-indent-dont-indent-if
+                    '(not (null (string-match (rx (zero-or-more space) (syntax comment-start) (zero-or-more anything)) (thing-at-point 'line))))))
    #+END_SRC
 ** hydras and keys
    :PROPERTIES:
