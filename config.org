@@ -4245,14 +4245,18 @@
                    org-babel-expand-body:sh
                    org-babel-execute:bash
                    org-babel-expand-body:bash))
+
+      (use-package ox-html
+        :ensure org-plus-contrib
+        :commands (org-html-convert-region-to-html
+                   org-html-export-as-html
+                   org-html-export-to-html))
     #+END_SRC
 *** additional packages / extensions
     :PROPERTIES:
     :ID:       73af33db-8f7b-4a96-a108-b541def2aae4
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ox-html)
-
       (use-package ob-async
         :ensure t
         :after (org ob))
