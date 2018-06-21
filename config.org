@@ -3757,38 +3757,6 @@
             (beginning-of-buffer)
             (switch-to-buffer (current-buffer))
             (read-only-mode)))
-        (defun custom/org-return-dwim ()
-          "Add new list or headline"
-          (interactive)
-          (cond
-           ((org-in-item-p)
-            (if (org-element-property :contents-begin (org-element-context))
-                (org-insert-heading)
-              (beginning-of-line)
-              (setf (buffer-substring
-                     (line-beginning-position) (line-end-position)) "")
-              (org-return)))
-           ((org-at-heading-p)
-            (if (not (string= "" (org-element-property :title (org-element-context))))
-                (progn (org-end-of-meta-data)
-                       (org-insert-heading))
-              (beginning-of-line)
-              (setf (buffer-substring
-                     (line-beginning-position) (line-end-position)) "")))
-           ((org-at-table-p)
-            (if (-any?
-                 (lambda (x) (not (string= "" x)))
-                 (nth
-                  (- (org-table-current-dline) 1)
-                  (org-table-to-lisp)))
-                (org-return)
-              ;; empty row
-              (beginning-of-line)
-              (setf (buffer-substring
-                     (line-beginning-position) (line-end-position)) "")
-              (org-return)))
-           (t
-            (org-return))))
         ;; Remove empty CLOCK drawers on clock out
         (defun custom/remove-empty-drawer-on-clock-out ()
           (interactive)
@@ -4182,8 +4150,7 @@
         (bind-key "s-l" 'org-edit-src-code org-mode-map)
         (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
         (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
-        (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map)
-        (bind-key [remap org-return] 'custom/org-return-dwim org-mode-map))
+        (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map))
 
       (use-package org-protocol
         :after (org server))
