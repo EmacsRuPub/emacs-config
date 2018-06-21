@@ -3367,6 +3367,47 @@
          ("<left>" mingus-seek-backward "seek backward")
          ("q" nil "cancel")))
    #+END_SRC
+** EMMS
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package emms
+       :ensure t
+       :config
+       (use-package emms-setup)
+       (use-package emms-player-mpv)
+       (emms-standard)
+       (emms-default-players)
+       ;; (define-emms-simple-player mpv '(file url)
+       ;;   (regexp-opt '(".ogg" ".mpg" ".mpeg" ".wmv" ".wma"
+       ;;                 ".mov" ".avi" ".divx" ".ogm" ".asf"
+       ;;                 ".mkv" ".rm" ".rmvb" ".mp4" ".vob"
+       ;;                 ".m4a" ".flv" ".ogv" "http://" "mms://"))
+       ;;   "mpv")
+       )
+
+     (use-package emms-info-mediainfo
+       :ensure t
+       :after (emms))
+
+     (use-package emms-mark-ext
+       :ensure t
+       :after (emms))
+
+     (use-package emms-mode-line-cycle
+       :ensure t
+       :after (emms))
+
+     (use-package emms-player-simple-mpv
+       :ensure t
+       :after (emms))
+
+     (use-package emms-soundcloud
+       :ensure t
+       :after (emms))
+
+     (use-package emms-state
+       :ensure t
+       :after (emms))
+   #+END_SRC
 ** open files in external apps
    :PROPERTIES:
    :ID:       4ad12d2a-5605-4c56-bb70-860686f41f60
