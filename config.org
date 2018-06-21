@@ -3485,9 +3485,10 @@
         (notmuch-saved-searches private/notmuch-saved-searches)
         (notmuch-crypto-process-mime t) ; Automatically check signatures
         (notmuch-hello-hide-tags (quote ("killed")))
-        (notmuch-address-command "notmuch-addrlookup")
-        :config
-        (use-package org-notmuch))
+        (notmuch-address-command "notmuch-addrlookup"))
+
+      (use-package org-notmuch
+        :after (org notmuch))
 
       (use-package counsel-notmuch
         :ensure t
