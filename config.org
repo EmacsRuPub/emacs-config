@@ -1860,7 +1860,7 @@
 
      (use-package nix-mode
        :ensure t
-       :mode ("nix" . nix-mode))
+       :mode ("nix$" . nix-mode))
    #+END_SRC
 *** docker
     :PROPERTIES:
