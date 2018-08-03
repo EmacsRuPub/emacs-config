@@ -1770,9 +1770,6 @@
      (use-package portage-mode
        :mode (("portage" . portage-mode)))
 
-     (use-package nix-mode
-       :ensure t
-       :mode ("nix$" . nix-mode))
    #+END_SRC
 *** docker
     :PROPERTIES:
@@ -2929,6 +2926,21 @@
       (use-package company-lua
         :ensure t
         :after (lua-mode company))
+    #+END_SRC
+*** NixOS
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package nix-mode
+        :ensure t
+        :mode ((rx (eval "nix") (zero-or-more anything) eol) . nix-mode))
+
+      (use-package nixos-options
+        :ensure t
+        :disabled)
+
+      (use-package company-nixos-options
+        :ensure t
+        :config
+        (add-to-list 'company-backends 'company-nixos-options))
     #+END_SRC
 *** other
     :PROPERTIES:
