@@ -1358,8 +1358,7 @@
 
       (use-package simple
         :hook
-        ((prog-mode-hook . turn-on-auto-fill)
-         (text-mode-hook . turn-on-auto-fill))
+        (((prog-mode-hook text-mode-hook) . turn-on-auto-fill))
         :delight
         ((visual-line-mode . " ↩")
          (auto-fill-function . " ↵"))
@@ -1694,8 +1693,7 @@
         :ensure t
         :defer 2
         :hook
-        ((prog-mode-hook . whitespace-turn-on)
-         (text-mode-hook . whitespace-turn-on))
+        (((prog-mode-hook text-mode-hook) . whitespace-turn-on))
         :custom
         (whitespace-line-column 121)
         (whitespace-style '(indentation::space
@@ -2459,8 +2457,7 @@
 
       (use-package highlight-stages
         :ensure t
-        :hook ((emacs-lisp-mode-hook . highlight-stages-mode)
-               (lisp-mode-hook . highlight-stages-mode))
+        :hook ((emacs-lisp-mode-hook lisp-mode-hook) . highlight-stages-mode)
         :delight highlight-stages-mode)
     #+END_SRC
 *** elisp
@@ -2702,11 +2699,9 @@
      :END:
      #+BEGIN_SRC emacs-lisp :tangle yes
        (use-package cc-mode
-         :hook ((c++-mode-hook . common-hooks/newline-hook)
+         :hook (((c++-mode-hook c-mode-hook) . common-hooks/newline-hook)
                 (c-mode-common-hook . common-hooks/prog-helpers)
-                (c-mode-hook . common-hooks/newline-hook)
-                (c++-mode-hook . flycheck-mode)
-                (c-mode-hook . flycheck-mode))
+                ((c++-mode-hook c-mode-hook) . flycheck-mode))
          :mode (("\\.ipp?$" . c++-mode)
                 ("\\.h$" . c++-mode)
                 ("CMakeLists\\.txt\\'" . cmake-mode)
@@ -3067,11 +3062,7 @@
                ("C-j" . nil)
                ("<C-return>" . nil)
                ("C-c C-j" . emmet-expand-line))
-        :hook ((sgml-mode-hook . emmet-mode)
-               (nxml-mode-hook . emmet-mode)
-               (django-mode . emmet-mode)
-               (sgml-mode-hook . emmet-mode)
-               (css-mode-hook . emmet-mode))
+        :hook ((sgml-mode-hook nxml-mode-hook django-mode sgml-mode-hook css-mode-hook) . emmet-mode)
         :custom
         (emmet-move-cursor-between-quotes t)
         (emmet-indentation 2))
