@@ -2349,6 +2349,7 @@
                   '("vdiff popup" 'vdiff-magit-popup))))
 
       (use-package magithub
+        :disabled
         :ensure t
         :after (magit)
         :custom
