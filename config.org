@@ -4257,6 +4257,7 @@
 
       (use-package org-recent-headings
         :ensure t
+        :disabled
         :custom
         (org-recent-headings-save-file (at-user-data-dir "org-recent-headings"))
         :config
