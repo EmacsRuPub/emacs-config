@@ -4238,6 +4238,7 @@
 
       (use-package org-bullets
         :ensure t
+        :disabled
         :hook (org-mode-hook . (lambda () (org-bullets-mode 1)))
         :after (org))
 
