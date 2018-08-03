@@ -994,101 +994,13 @@
        :disabled ;;TODO: rebind and reenable
        :commands ivy-imenu-anywhere
        :bind ("C->" . ivy-imenu-anywhere))
+
+     ;; inline tasks navigation
+     (use-package doom-todo-ivy
+       :quelpa
+       (doom-todo-ivy :repo "jsmestad/doom-todo-ivy" :fetcher github)
+       :hook (after-init . doom-todo-ivy))
    #+END_SRC
-*** inline tasks navigation
-    :PROPERTIES:
-    :ID:       11f56794-5fdd-4bb8-9e61-5ab50be9b005
-    :END:
-    with credits to `github.com/hlissner/doom-emacs` project
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defvar prog-inline-task-tags
-        '(("TODO"  . warning)
-          ("FIXME" . error))
-        "An alist of tags for `prog-inline-tasks' to include in its search, whose CDR is the
-      face to render it with.")
-
-      (defun prog-inline--tasks-candidates (tasks)
-        "Generate a list of task tags (specified by `prog-inline-task-tags') for
-      `prog-inline-tasks'."
-        (let* ((max-type-width
-                (cl-loop for task in prog-inline-task-tags maximize (length (car task))))
-               (max-desc-width
-                (cl-loop for task in tasks maximize (length (cl-cdadr task))))
-               (max-width (max (- (frame-width) (1+ max-type-width) max-desc-width)
-                               25)))
-          (cl-loop
-           with fmt = (format "%%-%ds %%-%ds%%s%%s:%%s" max-type-width max-width)
-           for alist in tasks
-           collect
-           (let-alist alist
-             (format fmt
-                     (propertize .type 'face (cdr (assoc .type prog-inline-task-tags)))
-                     (substring .desc 0 (min max-desc-width (length .desc)))
-                     (propertize " | " 'face 'font-lock-comment-face)
-                     (propertize (abbreviate-file-name .file) 'face 'font-lock-keyword-face)
-                     (propertize .line 'face 'font-lock-constant-face))))))
-
-      (defun prog-inline--tasks (target)
-        (let* (case-fold-search
-               (task-tags (mapcar #'car prog-inline-task-tags))
-               (cmd
-                (format "%s -H -S --no-heading -- %s %s"
-                        (or (when-let* ((bin (executable-find "rg")))
-                              (concat bin " --line-number"))
-                            (when-let* ((bin (executable-find "ag")))
-                              (concat bin " --numbers"))
-                            (error "ripgrep & the_silver_searcher are unavailable"))
-                        (shell-quote-argument
-                         (concat "\\s("
-                                 (string-join task-tags "|")
-                                 ")([\\s:]|\\([^)]+\\):?)"))
-                        target)))
-          (save-match-data
-            (cl-loop with out = (shell-command-to-string cmd)
-                     for x in (and out (split-string out "\n" t))
-                     when (condition-case-unless-debug ex
-                              (string-match
-                               (concat "^\\([^:]+\\):\\([0-9]+\\):.+\\("
-                                       (string-join task-tags "\\|")
-                                       "\\):?\\s-*\\(.+\\)")
-                               x)
-                            (error
-                             (message! (red "Error matching task in file: (%s) %s"
-                                            (error-message-string ex)
-                                            (car (split-string x ":"))))
-                             nil))
-                     collect `((type . ,(match-string 3 x))
-                               (desc . ,(match-string 4 x))
-                               (file . ,(match-string 1 x))
-                               (line . ,(match-string 2 x)))))))
-
-      (defun prog-inline--tasks-open-action (x)
-        "Jump to the file and line of the current task."
-        (let ((location (cadr (split-string x " | ")))
-              (type (car (split-string x " "))))
-          (cl-destructuring-bind (file line) (split-string location ":")
-            (with-ivy-window
-              (find-file (expand-file-name file (projectile-project-root)))
-              (goto-char (point-min))
-              (forward-line (1- (string-to-number line)))
-              (search-forward type (line-end-position) t)
-              (backward-char (length type))
-              (recenter)))))
-
-      ;;;###autoload
-      (defun prog-inline-tasks (&optional arg)
-        "Search through all TODO/FIXME tags in the current project. If ARG, only
-      search current file. See `prog-inline-task-tags' to customize what this searches for."
-        (interactive "P")
-        (ivy-read (format "Tasks (%s): "
-                          (if arg
-                              (concat "in: " (file-relative-name buffer-file-name))
-                            "project"))
-                  (prog-inline--tasks-candidates
-                   (prog-inline--tasks (if arg buffer-file-name (projectile-project-root))))
-                  :action #'prog-inline--tasks-open-action
-                  :caller 'prog-inline-tasks))
-    #+END_SRC
 ** operations with windows/frames
    :PROPERTIES:
    :ID:       3f1d854c-5c75-4a89-b266-79cc876f8b5f
@@ -1322,7 +1234,7 @@
        ("Y" link-hint-copy-multiple-links :color blue)
        ("3" w3m-select-buffer :color blue)
        ("I" counsel-imenu :color blue)
-       ("t" prog-inline-tasks :color blue))
+       ("t" doom/ivy-tasks :color blue))
      (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
      (global-set-key [remap kill-buffer] #'kill-this-buffer)
