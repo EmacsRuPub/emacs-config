@@ -1753,6 +1753,10 @@
        :config
        (setq-default csv-align-padding 2))
 
+     (use-package jinja2-mode
+       :ensure t
+       :mode ("\\.j2$" . jinja2-mode))
+
      (use-package yaml-mode
        :ensure t
        :mode (("\\.yml\\'" . yaml-mode)
