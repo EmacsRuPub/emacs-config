@@ -2080,10 +2080,6 @@
         :hook
         (prog-mode-hook . rainbow-delimiters-mode))
 
-      (use-package rpm-spec-mode
-        :ensure t
-        :mode ("\\.spec$" . rpm-spec-mode))
-
       (use-package ini-mode
         :ensure t
         :mode ("\\.ini\\'" . ini-mode))
@@ -2091,9 +2087,6 @@
       (use-package po-mode
         :ensure t
         :mode ("\\.po$\\|\\.po\\." . po-mode))
-
-      (use-package gud
-        :mode ("\\.gdb$" . gdb-script-mode))
 
       (use-package diff-mode
         :mode ("diff" . diff-mode))
