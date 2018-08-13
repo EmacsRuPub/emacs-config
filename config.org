@@ -698,24 +698,20 @@
    :ID:       da45d0ec-d722-4d55-9841-912ccf83aadf
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (define-namespace custom/
-
      ;;Make cursor stay in the same column when scrolling using pgup/dn.
      ;;Previously pgup/dn clobbers column position, moving it to the
      ;;beginning of the line.
      ;;<http://www.dotemacs.de/dotfiles/ElijahDaniel.emacs.html>
-     (defadvice scroll-up (around ewd-scroll-up first act)
+     (defadvice custom/scroll-up (around ewd-scroll-up first act)
        "Keep cursor in the same column."
        (let ((col (current-column)))
          ad-do-it
          (move-to-column col)))
-     (defadvice scroll-down (around ewd-scroll-down first act)
+     (defadvice custom/scroll-down (around ewd-scroll-down first act)
        "Keep cursor in the same column."
        (let ((col (current-column)))
          ad-do-it
          (move-to-column col)))
-
-     )
 
      (use-package saveplace
        :defer 1
