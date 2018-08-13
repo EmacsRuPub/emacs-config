@@ -3178,40 +3178,6 @@
      (global-set-key (kbd "C-c 4") 'hydra-clients/body)
    #+END_SRC
 * pim
-** elfeed
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (use-package elfeed
-       :ensure t
-       :bind (("C-x w" . elfeed)
-              :map elfeed-search-mode-map
-              ("!" . elfeed-search-untag-all-unread)
-              ("=" . elfeed-search-update--force)
-              ("+" . elfeed-search-fetch))
-       :config
-       (defface elfeed-lisp-tag-face
-         '((t :weight bold :foreground "cyan"))
-         "Face used in search mode for unread entry titles.")
-       (push '(lisp elfeed-lisp-tag-face) elfeed-search-face-alist)
-       (defface elfeed-functional-tag-face
-         '((t :weight bold :foreground "green"))
-         "Face used in search mode for unread entry titles.")
-       (push '(functional elfeed-functional-tag-face) elfeed-search-face-alist)
-       (setq-default elfeed-search-filter "-junk @1-week-ago +unread"))
-
-     (use-package elfeed-org
-       :ensure t
-       :after (elfeed)
-       :custom
-       (rmh-elfeed-org-files `(,(at-org-kb-dir "/feeds.org")))
-       :config
-       (elfeed-org))
-
-     (use-package elfeed-goodies
-       :ensure t
-       :after (elfeed)
-       :config
-       (elfeed-goodies/setup))
-   #+END_SRC
 ** orgmode
 *** preface
 **** Notes about setting up org-capture
