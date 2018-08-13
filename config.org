@@ -209,12 +209,6 @@
        :config
        (setq font-lock-maximum-decoration t))
 
-     (use-package font-lock+
-       :quelpa
-       (font-lock+ :repo "emacsmirror/font-lock-plus" :fetcher github))
-
-     (use-package fontify-face :ensure t) ;; TODO: enable fontify-face-mode in appropriate modes
-
      (use-package unicode-fonts
        :ensure t
        :after (persistent-soft)
