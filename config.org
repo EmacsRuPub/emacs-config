@@ -1195,26 +1195,6 @@
        (local-set-key (kbd "C-m") 'newline-and-indent)
        (local-set-key (kbd "<return>") 'newline-and-indent))
    #+END_SRC
-** case folding
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (defvar custom/transform-whole-words nil)
-
-     (defun ensure-region-active (oldfun &rest args)
-       (when (region-active-p)
-         (apply oldfun args)))
-
-     (defun maybe-backward-word (oldfun &rest args)
-       (when (and (not (looking-back "\\b")) custom/transform-whole-words)
-         (backward-word)))
-
-     (advice-add 'upcase-region :around 'ensure-region-active)
-     (advice-add 'downcase-region :around 'ensure-region-active)
-     (advice-add 'capitalize-region :around 'ensure-region-active)
-
-     (advice-add 'upcase-region :before 'maybe-backward-word)
-     (advice-add 'downcase-region :before 'maybe-backward-word)
-     (advice-add 'capitalize-region :before 'maybe-backward-word)
-   #+END_SRC
 ** move and bend text around
 *** definitions
     :PROPERTIES:
