@@ -935,9 +935,7 @@
 
      (use-package imenu-anywhere
        :ensure t
-       :disabled ;;TODO: rebind and reenable
-       :commands ivy-imenu-anywhere
-       :bind ("C->" . ivy-imenu-anywhere))
+       :commands ivy-imenu-anywhere)
 
      ;; inline tasks navigation
      (use-package doom-todo-ivy
@@ -1177,7 +1175,7 @@
        ("F" link-hint-open-multiple-links :color blue)
        ("Y" link-hint-copy-multiple-links :color blue)
        ("3" w3m-select-buffer :color blue)
-       ("I" counsel-imenu :color blue)
+       ("I" ivy-imenu-anywhere :color blue)
        ("t" doom/ivy-tasks :color blue))
      (global-set-key (kbd "<f3>") 'hydra-navigate/body)
 
