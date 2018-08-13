@@ -362,6 +362,7 @@
        :ensure t
        :hook (after-save-hook . backup-each-save))
 
+     ;;TODO: ensure backups are being created
      (use-package backup-walker
        :ensure t
        :commands backup-walker-start)
