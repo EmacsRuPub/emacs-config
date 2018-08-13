@@ -2799,119 +2799,26 @@
 
      (use-package httprepl :ensure t)
    #+END_SRC
-** terminal
-*** common
-    :PROPERTIES:
-    :ID:       81643770-7b1b-44f6-b0f3-29dfe82219ee
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ansi-color
-        :hook (compilation-filter-hook . (lambda ()
-                                           "Colorize from `compilation-filter-start' to `point'."
-                                           (let ((inhibit-read-only t))
-                                             (ansi-color-apply-on-region
-                                              compilation-filter-start (point))))))
-    #+END_SRC
-*** comint
-    :PROPERTIES:
-    :ID:       22daa0a4-4d55-4f78-abb1-67bbf1bceebf
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
-
-      ;;TODO: parametrize shell for terminal
-      (defun terminal ()
-        "Switch to terminal. Launch if nonexistent."
-        (interactive)
-        (if (get-buffer "*ansi-term*")
-            (switch-to-buffer "*ansi-term*")
-          (ansi-term "/bin/zsh"))
-        (get-buffer-process "*ansi-term*"))
-
-      (defalias 'tt 'terminal)
-
-      (defun comint-clear-buffer ()
-        (interactive)
-        (let ((comint-buffer-maximum-size 0))
-          (comint-truncate-buffer)))
-
-      (defun term-exec-hook ()
-        (let* ((buff (current-buffer))
-               (proc (get-buffer-process buff)))
-          (set-process-sentinel
-           proc
-           `(lambda (process event)
-              (if (string= event "finished\n")
-                  (kill-buffer ,buff))))))
-
-      )
-
-      (use-package term
-        :commands term
-        :bind (:map term-raw-map
-               ("C-c C-y" . term-paste))
-        :hook (term-exec-hook . custom/term-exec-hook)
-        :custom
-        (explicit-shell-file-name "/bin/zsh"))
-
-      (bind-key "\C-c\M-o" 'custom/comint-clear-buffer comint-mode-map)
-    #+END_SRC
-*** shell/check syntax
-    :PROPERTIES:
-    :ID:       2637da5b-b7ee-44ac-8fb4-7c3f4120184b
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/sh-check-finish-hook (buf msg)
-        "Function, that is executed at the end of sh check"
-        (when (not (string-match "finished" msg))
-          (next-error 1 t)))
-
-      (define-compilation-mode sh-check-mode "SH"
-        "Mode for check sh source code."
-        (set (make-local-variable 'compilation-disable-input) t)
-        (set (make-local-variable 'compilation-scroll-output) nil)
-        (set (make-local-variable 'compilation-finish-functions)
-             (list 'custom/sh-check-finish-hook)))
-
-      (use-package shell
-        :mode ("\\.sh$" . shell-mode)
-        :bind (:map shell-mode-map
-                    ("C-c l" . (lambda ()
-                                 "Check syntax of current file"
-                                 (interactive)
-                                 (when (string-match "^\\(ba\\|z\\)sh" (symbol-name sh-shell))
-                                   (save-some-buffers t)
-                                   (compilation-start (concat (symbol-name sh-shell) " -n " (buffer-file-name))
-                                                      'sh-check-mode)))))
-        :hook ((shell-mode-hook . ansi-color-for-comint-mode-on)
-               (shell-mode-hook . common-hooks/newline-hook)
-               (shell-mode-hook . common-hooks/prog-helpers)))
-
-      (use-package company-shell
-        :ensure t
-        :after (shell company))
-    #+END_SRC
-**** BACKLOG try to leverage shellcheck util usage
-*** tmux
-    :PROPERTIES:
-    :ID:       dbced8f9-5c3e-4408-854f-99aa26bf3d52
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package emamux
-        :ensure t
-        :bind ("<f12>" . hydra-emamux/body)
-        :config
-        (defhydra hydra-emamux ()
-          "
-          _n_ew window
-          _s_end region
-          _r_un command
-          "
-          ("n" emamux:new-window)
-          ("s" emamux:send-region)
-          ("r" emamux:run-command)
-          ("q" nil)))
-    #+END_SRC
+** tmux
+   :PROPERTIES:
+   :ID:       dbced8f9-5c3e-4408-854f-99aa26bf3d52
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package emamux
+       :ensure t
+       :bind ("<f12>" . hydra-emamux/body)
+       :config
+       (defhydra hydra-emamux ()
+         "
+         _n_ew window
+         _s_end region
+         _r_un command
+         "
+         ("n" emamux:new-window)
+         ("s" emamux:send-region)
+         ("r" emamux:run-command)
+         ("q" nil)))
+   #+END_SRC
 ** internal browser (w3m/eww)
    :PROPERTIES:
    :ID:       5b5a4f9f-0802-4b4a-b6c3-55562ac635cf
