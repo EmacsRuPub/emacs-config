@@ -1196,124 +1196,85 @@
        (local-set-key (kbd "<return>") 'newline-and-indent))
    #+END_SRC
 ** move and bend text around
-*** definitions
-    :PROPERTIES:
-    :ID:       c5c1a49f-1d05-4890-871e-a2a2f40b35ea
-    :END:
-    This override for transpose-words fixes what I consider to be a flaw with
-    the default implementation in simple.el. To transpose chars or lines, you
-    always put the point on the second char or line to transpose with the
-    previous char or line. The default transpose-words implementation does the
-    opposite by flipping the current word with the next word instead of the
-    previous word. The new implementation below instead makes transpose-words
-    more consistent with how transpose-chars and trasponse-lines behave.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/transpose-words (arg)
-        "[Override for default transpose-words in simple.el]
-        Interchange words around point, leaving point at end of
-        them. With prefix arg ARG, effect is to take word before or
-        around point and drag it backward past ARG other words (forward
-        if ARG negative). If ARG is zero, the words around or after
-        point and around or after mark are interchanged."
-        (interactive "*p")
-        (if (eolp) (forward-char -1))
-        (transpose-subr 'backward-word arg)
-        (forward-word (+ arg 1)))
-    #+END_SRC
-*** setup
-    :PROPERTIES:
-    :ID:       b3febdce-3124-4695-b010-9822943b04c7
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package snakehump
-        :quelpa
-        (snakehump :repo "aes/snakehump" :fetcher github :version original)
-        :commands snakehump-next-at-point snakehump-prev-at-point)
+   :PROPERTIES:
+   :ID:       b3febdce-3124-4695-b010-9822943b04c7
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package snakehump
+       :quelpa
+       (snakehump :repo "aes/snakehump" :fetcher github :version original)
+       :commands snakehump-next-at-point snakehump-prev-at-point)
 
-      (use-package ialign
-        :ensure t
-        :bind ("C-x l" . ialign))
+     (use-package ialign
+       :ensure t
+       :bind ("C-x l" . ialign))
 
-      (use-package hungry-delete
-        :ensure t
-        :commands hungry-delete-forward hungry-delete-backward)
+     (use-package multiple-cursors
+       :ensure t
+       :after (region-bindings-mode)
+       :bind (:map region-bindings-mode-map
+                   ("C->" . mc/mark-next-like-this)
+                   ("C-<" . mc/mark-previous-like-this)
+                   ("C-c C-o" . mc/mark-all-like-this)
+                   ("C-{" . mc/edit-beginnings-of-lines)
+                   ("C-}" . mc/edit-ends-of-lines)
+                   ("M-+" . mc/mark-more-like-this-extended)
+                   ("C-c a" . mc/mark-all-in-region)
+                   ("C-c d" . mc/mark-all-like-this-in-defun)
+                   ("C-c D" . mc/mark-all-like-this-dwim)
+                   ("`" . mc/sort-regions)
+                   ("C-+" . mc/insert-numbers))
+       :config
+       (use-package mc-extras
+         :ensure t
+         :after (multiple-cursors region-bindings-mode)
+         :bind (:map region-bindings-mode-map  ; should we use this keymap or bind elsewhere?
+                     ("M-." . mc/mark-next-sexps)
+                     ("M-," . mc/mark-previous-sexps)
+                     ("C-|" . mc/move-to-column)
+                     ("C-." . mc/remove-current-cursor)))
+       (use-package mc-cycle-cursors
+         :bind (:map mc/keymap
+                     ("C-n" . mc/cycle-forward)
+                     ("C-p" . mc/cycle-backward))))
 
-      (use-package multiple-cursors
-        :ensure t
-        :after (region-bindings-mode)
-        :bind (:map region-bindings-mode-map
-               ("C->" . mc/mark-next-like-this)
-               ("C-<" . mc/mark-previous-like-this)
-               ("C-c C-o" . mc/mark-all-like-this)
-               ("C-{" . mc/edit-beginnings-of-lines)
-               ("C-}" . mc/edit-ends-of-lines)
-               ("M-+" . mc/mark-more-like-this-extended)
-               ("C-c a" . mc/mark-all-in-region)
-               ("C-c d" . mc/mark-all-like-this-in-defun)
-               ("C-c D" . mc/mark-all-like-this-dwim)
-               ("`" . mc/sort-regions)
-               ("C-+" . mc/insert-numbers))
-        :config
-        (use-package mc-extras
-          :ensure t
-          :after (multiple-cursors region-bindings-mode)
-          :bind (:map region-bindings-mode-map  ; should we use this keymap or bind elsewhere?
-                 ("M-." . mc/mark-next-sexps)
-                 ("M-," . mc/mark-previous-sexps)
-                 ("C-|" . mc/move-to-column)
-                 ("C-." . mc/remove-current-cursor)))
-        (use-package mc-cycle-cursors
-          :bind (:map mc/keymap
-                 ("C-n" . mc/cycle-forward)
-                 ("C-p" . mc/cycle-backward))))
+     (use-package delsel
+       :bind
+       ("C-c C-g" . minibuffer-keyboard-quit)
+       :config
+       (delete-selection-mode 1))
 
-      (use-package delsel
-        :bind
-        ("C-c C-g" . minibuffer-keyboard-quit)
-        :config
-        (delete-selection-mode 1))
+     ;;TODO: bind to keys more extensively
+     ;;TODO: consolidate (un)filling functionality
+     (use-package unfill
+       :ensure t)
 
-      ;;TODO: bind to keys more extensively
-      ;;TODO: consolidate (un)filling functionality
-      (use-package unfill
-        :ensure t)
-
-      (use-package simple
-        :hook
-        (((prog-mode-hook text-mode-hook) . turn-on-auto-fill))
-        :delight
-        ((visual-line-mode . " ↩")
-         (auto-fill-function . " ↵"))
-        :custom
-        (bidi-display-reordering nil)
-        (kill-whole-line t)
-        (next-line-add-newlines nil)
-        (blink-matching-paren nil)
-        (set-mark-command-repeat-pop t)
-        (save-interprogram-paste-before-kill t)
-        (x-gtk-use-system-tooltips nil)
-        (eval-expression-print-length nil)
-        (eval-expression-print-level nil)
-        :config
-        (column-number-mode 1)
-        (line-number-mode 1)
-        (size-indication-mode 1)
-        (toggle-truncate-lines 1)
-        (transient-mark-mode 1)
-        (put 'transient-mark-mode 'permanent-local t)
-        (put 'set-goal-column 'disabled nil))
-
-      (use-package cua-base
-        :if (memq window-system '(mac ns))
-        :bind (([kp-delete] . delete-char) ;; sets fn-delete to be right-delete
-               ([(hyper x)] . cua-cut-region)
-               ([(hyper c)] . cua-copy-region)
-               ([(hyper v)] . cua-paste))
-        :custom
-        (process-connection-type nil)
-        :config
-        (cua-mode t))
-    #+END_SRC
+     (use-package simple
+       :hook
+       (((prog-mode-hook text-mode-hook) . turn-on-auto-fill))
+       :delight
+       ((visual-line-mode . " ↩")
+        (auto-fill-function . " ↵"))
+       :bind ("M-g" . goto-line)
+       :custom
+       (bidi-display-reordering nil)
+       (kill-whole-line t)
+       (next-line-add-newlines nil)
+       (blink-matching-paren nil)
+       (set-mark-command-repeat-pop t)
+       (save-interprogram-paste-before-kill t)
+       (x-gtk-use-system-tooltips nil)
+       (eval-expression-print-length nil)
+       (eval-expression-print-level nil)
+       :config
+       (column-number-mode 1)
+       (line-number-mode 1)
+       (size-indication-mode 1)
+       (toggle-truncate-lines 1)
+       (transient-mark-mode 1)
+       (put 'transient-mark-mode 'permanent-local t)
+       (put 'set-goal-column 'disabled nil))
+   #+END_SRC
 ** regions and rectangles
 *** definitions
     :PROPERTIES:
