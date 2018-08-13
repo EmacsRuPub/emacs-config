@@ -2635,10 +2635,14 @@
         :after (lua-mode company))
     #+END_SRC
 *** NixOS
+    :PROPERTIES:
+    :ID:       29ef8b65-a278-4dc7-9c8f-86c1c72ce85a
+    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package nix-mode
         :ensure t
-        :mode ((rx (eval "nix") (zero-or-more anything) eol) . nix-mode))
+        :mode (("\\.nix$" . nix-mode)
+               ((rx (eval "configuration.nix") (zero-or-more anything) eol) . nix-mode)))
 
       (use-package nixos-options
         :ensure t
