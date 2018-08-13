@@ -2063,35 +2063,6 @@
         :ensure t
         :commands regex-tool)
 
-      (use-package counsel-gtags
-        :ensure t
-        :after (counsel gtags)
-        :delight (counsel-gtags-mode " CGT")
-        :hook ((c-mode-hook . counsel-gtags-mode)
-               (c++-mode-hook . counsel-gtags-mode))
-        :bind (:map c-mode-map
-               ("C-M-s" . counsel-gtags-find-symbol)
-               ("C-c u" . counsel-gtags-update-tags)
-               ("M-," . counsel-gtags-go-backward)
-               ("M-." . counsel-gtags-dwim)
-               ("M-r" . counsel-gtags-find-reference)
-               :map c++-mode-map
-               ("C-M-s" . counsel-gtags-find-symbol)
-               ("C-c u" . counsel-gtags-update-tags)
-               ("M-," . counsel-gtags-go-backward)
-               ("M-." . counsel-gtags-dwim)
-               ("M-r" . counsel-gtags-find-reference)
-               :map counsel-gtags-mode-map
-               ("C-M-s" . counsel-gtags-find-symbol)
-               ("M-," . counsel-gtags-go-backward)
-               ("M-." . counsel-gtags-dwim)
-               ("M-r" . counsel-gtags-find-reference))
-        :custom
-        (counsel-gtags-path-style 'relative)
-        (counsel-gtags-ignore-case t)
-        (counsel-gtags-auto-update t)
-        (counsel-gtags-suggested-key-mapping t))
-
       (use-package prog-fill
         :ensure t
         :bind (:map prog-mode-map
