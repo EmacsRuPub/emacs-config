@@ -1355,10 +1355,12 @@
        :ensure t
        :bind ("M-]" . comment-dwim-2))
 
+     ;;TODO: bind in hydras
      (use-package rebox2
        :ensure t
        :commands rebox-dwim rebox-cycle)
 
+     ;;TODO: bind in hydras
      (use-package banner-comment
        :ensure t
        :commands banner-comment)
