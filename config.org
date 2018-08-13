@@ -1892,25 +1892,11 @@
        (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
        (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
 
-     (use-package auto-yasnippet
-       :ensure t
-       :after (yasnippet))
-
      (use-package ivy-yasnippet
        :after (dash ivy yasnippet)
        :ensure t)
 
      (defhydra hydra-yasnippet (:color teal)
-       "
-       _c_reate auto snippet
-       _e_xpand auto snippet
-       _p_ersist auto snippet
-       _v_isit snippets file
-       _i_nsert snippet
-       "
-       ("c" aya-create)
-       ("e" aya-expand)
-       ("p" aya-persist-snippet)
        ("v" yas-visit-snippet-file)
        ("i" ivy-yasnippet)
        ("q" nil))
