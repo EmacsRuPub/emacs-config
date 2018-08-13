@@ -3247,25 +3247,6 @@
                                     '(read-only t))))
         (defvar custom/org-journal-file (at-org-dir "/journal.org"))
         (defvar custom/org-browser-tabs (at-org-dir "/browser-tabs.org"))
-        (defun custom/jump-to-org-agenda ()
-          (interactive)
-          (let ((buf (get-buffer "*Org Agenda*"))
-                wind)
-            (if buf
-                (if (setq wind (get-buffer-window buf))
-                    (select-window wind)
-                  (if (called-interactively-p)
-                      (progn
-                        (select-window (display-buffer buf t t))
-                        (org-fit-window-to-buffer)
-                        (org-agenda-redo))
-                    (with-selected-window (display-buffer buf)
-                      (org-fit-window-to-buffer)
-                      (org-agenda-redo))))
-              (call-interactively 'org-agenda-list)))
-          (let ((buf (get-buffer "*Calendar*")))
-            (unless (get-buffer-window buf)
-              (org-agenda-goto-calendar))))
         (defun custom/jump-to-custom-agenda-random () ;;FIXME: do not show tasks in done states
           (interactive)
           (let* ((agendas
@@ -3275,19 +3256,6 @@
                  (agendas-count (length agendas)))
             (org-agenda nil
                         (car (nthcdr (random agendas-count) agendas)))))
-        ;;TODO: use prefix arg
-        (defun custom/org-update-timestamp-with-time (&optional as-is)
-          (interactive)
-          (unless as-is
-            (insert " "))
-          (insert (format-time-string "%H:%M")))
-        (defun custom/get-org-timestamp ()
-          (with-temp-buffer
-            (call-interactively 'org-time-stamp-inactive)
-            (buffer-string)))
-        (defun custom/strip-org-timestamp (ts)
-          (let ((tslen (length ts)))
-            (substring ts 1 (- tslen 4))))
         ;; Exclude DONE state tasks from refile targets
         (defun custom/verify-refile-target ()
           "Exclude todo keywords with a done state from refile targets"
@@ -3796,15 +3764,9 @@
         :ensure t
         :after (org ob))
 
-      (use-package org-footnote)
-
       (use-package org-pomodoro
         :ensure t
         :after (alert))
-
-      (use-package org-dashboard
-        :ensure t
-        :commands org-dashboard-display)
 
       (use-package orgit
         ;;TODO: automate insertion of links below (yasnippet/whatever)
@@ -3812,12 +3774,6 @@
         ;;    orgit-rev:/path/to/repo/::REV   links to a `magit-revision' buffer
         ;;    orgit-log:/path/to/repo/::ARGS  links to a `magit-log' buffer
         :ensure t)
-
-      (use-package org-bullets
-        :ensure t
-        :disabled
-        :hook (org-mode-hook . (lambda () (org-bullets-mode 1)))
-        :after (org))
 
       (use-package orglink
         :ensure t
@@ -3839,8 +3795,6 @@
         :config
         (org-clock-today-mode 1))
 
-      (use-package org-mru-clock :ensure t)
-
       (use-package org-recent-headings
         :ensure t
         :disabled
@@ -3849,35 +3803,10 @@
         :config
         (org-recent-headings-mode 1))
 
-      (use-package org-sticky-header
-        :ensure t
-        :hook (org-mode-hook . org-sticky-header-mode))
-
-      (use-package org-alert
-        :ensure t
-        :config
-        (setq alert-default-style 'libnotify))
-
       (use-package org-link-minor-mode
         :ensure t
         :config
         (org-link-minor-mode t))
-
-      (use-package org-super-agenda           ;TODO: investigate options (given initial setup below)
-        :ensure t
-        :config
-        (setq org-super-agenda-groups
-              '((:name "Today"
-                       :time-grid t
-                       :todo "TODAY")
-                (:todo "WAITING" :order 7)
-                (:todo "SOON"
-                       :order 8)
-                (:todo ("SOMEDAY" "WAITING" "FEEDBACK" "OUTDATED")
-                       :order 9)
-                (:priority<= "B" :order 1)
-                ))
-        (org-super-agenda-mode 1))
 
       (use-package org-randomnote
         :ensure t
@@ -3952,7 +3881,6 @@
        _p_omodoro                create _T_able       _=_ todo tree
        _s_chedule                                     _2_ random agenda
        _|_ deadline
-       _i_ add time to TS
        _t_oggle TS type
 
        _\?_ clocking commands
@@ -3969,7 +3897,6 @@
        ("p" org-pomodoro)
        ("s" org-schedule :color blue)
        ("|" org-deadline :color blue)
-       ("i" custom/org-update-timestamp-with-time)
        ("t" org-toggle-timestamp-type)
        ("e" org-capture :color blue)
        ("w" org-store-link)
