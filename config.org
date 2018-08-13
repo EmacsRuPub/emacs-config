@@ -1536,8 +1536,6 @@
 
      (use-package autorevert
        :defer 2
-       :disabled
-       :mode ("\\.log$" . auto-revert-mode)
        :custom
        (auto-revert-verbose nil)
        (global-auto-revert-non-file-buffers t)
