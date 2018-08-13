@@ -272,10 +272,6 @@
        (setq frame-title-format "emacs - %b %f") ;; for various external tools
        (setq truncate-partial-width-windows nil))
 
-     (use-package battery
-       :config
-       (display-battery-mode 1))
-
      (use-package tool-bar
        :config
        (tool-bar-mode -1))
