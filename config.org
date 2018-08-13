@@ -1529,18 +1529,6 @@
        :config
        (yatemplate-fill-alist))
 
-     (use-package page-break-lines
-       :ensure t
-       :config
-       (turn-on-page-break-lines-mode))
-
-     (use-package macro-math
-       :ensure t
-       :bind (("\C-x~" . macro-math-eval-and-round-region)
-              ("\C-x=" . macro-math-eval-region)))
-
-     (use-package archive-rpm :ensure t)
-
      (use-package editorconfig
        :ensure t
        :delight (editorconfig-mode " EC")
