@@ -2926,6 +2926,7 @@
 
      (use-package emms-mark-ext
        :ensure t
+       :disabled ;;FIXME: fails to load for some reason, fix and reenable
        :after (emms))
 
      (use-package emms-mode-line-cycle
@@ -3299,7 +3300,7 @@
           (let ((buf (get-buffer "*Calendar*")))
             (unless (get-buffer-window buf)
               (org-agenda-goto-calendar))))
-        (defun custom/jump-to-custom-agenda-random ()
+        (defun custom/jump-to-custom-agenda-random () ;;FIXME: do not show tasks in done states
           (interactive)
           (let* ((agendas
                   (remove-if
