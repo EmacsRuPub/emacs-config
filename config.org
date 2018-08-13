@@ -587,8 +587,11 @@
 
       (use-package crux
         :ensure t
-        :bind (:map ctl-x-map
-                    ("\C-i" . crux-ispell-word-then-abbrev)))
+        :disabled
+        :bind (:map dired-mode-map
+               ("C-!" . crux-open-with)
+               :map ctl-x-map
+               ("\C-i" . crux-ispell-word-then-abbrev)))
 
       (use-package paradox
         :ensure t
@@ -3326,13 +3329,6 @@
      (use-package emms-state
        :ensure t
        :after (emms))
-   #+END_SRC
-** open files in external apps
-   :PROPERTIES:
-   :ID:       4ad12d2a-5605-4c56-bb70-860686f41f60
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (bind-key "C-!" 'crux-open-with dired-mode-map)
    #+END_SRC
 ** open ebooks internally
    :PROPERTIES:
