@@ -1998,7 +1998,7 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package docker
         :ensure t
-        :after (dash docker-tramp magit-popup s tablist json-mode)
+        :after (dash docker-tramp s tablist json-mode)
         :delight docker-mode
         :custom
         (docker-containers-show-all t)
