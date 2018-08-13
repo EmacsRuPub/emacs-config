@@ -2061,7 +2061,9 @@
 
       (use-package regex-tool
         :ensure t
-        :commands regex-tool)
+        :commands regex-tool
+        :custom
+        (regex-tool-backend 'perl))
 
       (use-package prog-fill
         :ensure t
