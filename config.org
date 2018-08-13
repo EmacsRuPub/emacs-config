@@ -623,47 +623,13 @@
       (use-package novice
         :config
         (setq disabled-command-function nil))
+
+      (use-package which-key
+        :ensure t
+        :config
+        (which-key-setup-side-window-right)
+        (which-key-mode))
     #+END_SRC
-** some keyboard related stuff
-   :PROPERTIES:
-   :ID:       8e8a622e-1c3c-487b-853d-16f72635d4f9
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun custom/keys-describe-prefixes ()
-       (interactive)
-       (with-output-to-temp-buffer "*Bindings*"
-         (dolist (letter-group (list
-                                (cl-loop for c from ?a to ?z
-                                         collect (string c))
-                                (cl-loop for c from ?α to ?ω
-                                         collect (string c))))
-           (dolist (prefix '("" "C-" "M-" "C-M-"))
-             (princ (mapconcat
-                     (lambda (letter)
-                       (let ((key (concat prefix letter)))
-                         (format ";; (global-set-key (kbd \"%s\") '%S)"
-                                 key
-                                 (key-binding (kbd key)))))
-                     letter-group
-                     "\n"))
-             (princ "\n\n")))))
-
-     (use-package speed-type
-       :ensure t
-       :commands speed-type-region speed-type-buffer speed-type-text)
-
-     (use-package keyfreq
-       :ensure t
-       :config
-       (keyfreq-mode 1)
-       (keyfreq-autosave-mode 1))
-
-     (use-package which-key
-       :ensure t
-       :config
-       (which-key-setup-side-window-right)
-       (which-key-mode))
-   #+END_SRC
 ** encodings
    :PROPERTIES:
    :ID:       3819b6d8-73a0-4fba-bf37-ab10e3c9f45a
