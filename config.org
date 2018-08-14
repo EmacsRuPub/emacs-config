@@ -947,13 +947,6 @@
    :ID:       3f1d854c-5c75-4a89-b266-79cc876f8b5f
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package windmove
-       :bind
-       (("C-s-<up>" . windmove-up)
-        ("C-s-<down>" . windmove-down)
-        ("C-s-<left>" . windmove-left)
-        ("C-s-<right>" . windmove-right)))
-
      (use-package winner
        :config
        (winner-mode 1))
@@ -963,12 +956,6 @@
        :delight golden-ratio-mode
        :init
        (golden-ratio-mode 1))
-
-     (use-package framemove
-       :ensure t
-       :disabled
-       :custom
-       (framemove-hook-into-windmove t))
 
      (use-package windsize
        :ensure t
@@ -1092,10 +1079,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defhydra hydra-window (:idle 1.0)
        "Windows/frames management"
-       ("<left>" windmove-left "left" :color blue)
-       ("<down>" windmove-down "down" :color blue)
-       ("<up>" windmove-up "up" :color blue)
-       ("<right>" windmove-right "right" :color blue)
        ("w" ace-window "ace" :color blue)
        ("=" text-scale-increase)
        ("-" text-scale-decrease)
