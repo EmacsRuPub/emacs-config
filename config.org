@@ -146,39 +146,38 @@
        :config
        (reverse-im-activate "russian-computer"))
    #+END_SRC
-** Encryption and security
-*** packages
-    :PROPERTIES:
-    :ID:       f23f36ac-a857-455c-9186-129925c5d5c4
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package auth-source
-        :custom
-        (auth-sources '("~/.authinfo.gpg")))
+** encryption and security
+   :PROPERTIES:
+   :ID:       f23f36ac-a857-455c-9186-129925c5d5c4
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package auth-source
+       :custom
+       (auth-sources '("~/.authinfo.gpg")))
 
-      (use-package epa
-        :after (epg)
-        :config
-        (epa-file-enable)
-        :custom
-        (epa-pinentry-mode 'loopback))
+     (use-package epa
+       :after (epg)
+       :config
+       (epa-file-enable)
+       :custom
+       (epa-pinentry-mode 'loopback))
 
-      (use-package epg-config
-        :after (epg)
-        :custom
-        (epg-gpg-program "gpg2")
-        (epg-gpg-home-directory "~/.gnupg"))
+     (use-package epg-config
+       :after (epg)
+       :custom
+       (epg-gpg-program "gpg2")
+       (epg-gpg-home-directory "~/.gnupg"))
 
-      (use-package password-cache
-        :custom
-        (password-cache-expiry nil)
-        (password-cache t))
+     (use-package password-cache
+       :custom
+       (password-cache-expiry nil)
+       (password-cache t))
 
-      (use-package keychain-environment
-        :ensure t
-        :config
-        (keychain-refresh-environment))
-    #+END_SRC
+     (use-package keychain-environment
+       :ensure t
+       :config
+       (keychain-refresh-environment))
+   #+END_SRC
 ** GC tweaks
    :PROPERTIES:
    :ID:       f696a57b-17a7-485b-8642-c6d1431ba612
