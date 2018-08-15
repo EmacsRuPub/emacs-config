@@ -2927,7 +2927,6 @@
        (fb2-replace-hard-space t))
 
      (use-package pdf-tools
-       :pin manual
        :ensure t
        :hook (after-init-hook . pdf-tools-install)
        :config
