@@ -2088,6 +2088,8 @@
         :ensure t
         :custom
         (skeletor-project-directory (at-workspace-dir "pets")))
+
+      (use-package eglot :ensure t)
     #+END_SRC
 ** vcs
 *** git
@@ -2409,18 +2411,17 @@
         :config
         (add-to-list 'company-backends 'company-jedi))
 
-      (use-package python-mode
-        :ensure t
+      (use-package python
+        :after (eglot)
         :mode ("\\.py$" . python-mode)
         :hook ((python-mode-hook . common-hooks/prog-helpers)
                (python-mode-hook . common-hooks/newline-hook)
+               (python-mode-hook . eglot-ensure)
                (python-mode-hook . (lambda ()
                                      (setq flycheck-checker 'python-flake8)
                                      (setq indent-tabs-mode nil)
                                      (setq tab-width 4)
                                      (setq imenu-create-index-function 'imenu-default-create-index-function)
-                                     (modify-syntax-entry ?_ "." python-mode-syntax-table)
-                                     (modify-syntax-entry ?- "." python-mode-syntax-table)
                                      (auto-fill-mode 1)))
                ;; Highlight the call to ipdb, src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
                (python-mode-hook . (lambda ()
@@ -2429,45 +2430,28 @@
                                      (highlight-lines-matching-regexp "import wdb")
                                      (highlight-lines-matching-regexp "wdb.set_trace()"))))
         :bind (:map python-mode-map
-               ("<M-left>" . py-shift-indent-left)
-               ("<M-right>" . py-shift-indent-right))
+               ("M-_" . python-indent-shift-left)
+               ("M-+" . python-indent-shift-right))
         :config
         (add-function :before-until (local 'eldoc-documentation-function)
                       #'(lambda () "")))
 
-      (use-package python-environment
+      (use-package pyvenv
         :ensure t
-        :disabled
-        :custom
-        (setq python-environment-directory (at-user-data-dir ".python-environments")))
-
-      (use-package virtualenvwrapper
-        :ensure t
-        :no-require t
-        :hook (projectile-after-switch-project-hook . venv-projectile-auto-workon)
-        :config
-        (setq venv-location (at-homedir ".virtualenvs/"))
-        (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format)))
-
-      (use-package smartparens-python
-        :after (smartparens))
-
-      (use-package flycheck-pycheckers
-        :ensure t
-        :no-require t
-        :hook (flycheck-mode-hook . flycheck-pycheckers-setup)
-        :after (flycheck))
-
-      (use-package py-autopep8 :ensure t)
-
-      (use-package importmagic
-        :ensure t
-        :disabled
-        :hook (python-mode-hook . importmagic-mode))
-
-      (use-package py-isort
-        :ensure t
-        :disabled) ;; TODO: bind py-isort-{buffer, region}
+        :after (jedi-core projectile dash)
+        :preface
+        (defun custom/switch-python-project-context ()
+          (let ((project-root (projectile-project-root)))
+            (when (-non-nil (mapcar (lambda (variant) (file-exists-p (concat project-root variant)))
+                                    '("requirements.pip" "requirements.txt")))
+              (pyvenv-activate (format "%s/%s"
+                                       (pyvenv-workon-home)
+                                       (file-name-base
+                                        (directory-file-name
+                                         project-root))))))
+          (jedi:stop-server))
+        :hook ((projectile-before-switch-project-hook . jedi:stop-server)
+               (projectile-after-switch-project-hook . custom/switch-python-project-context)))
 
       (use-package pip-requirements
         :ensure t
@@ -2483,8 +2467,6 @@
 ***** BACKLOG fix new setup
 ****** incorrect flake8 config (excludes)
 ****** check/add W0512
-****** automatic venv changing per project fails
-****** with active venv some "cannot import.." messages still persist
 ****** check epc/importmagic work
 ****** actualize py-isort setup
 ****** review pylint setup
