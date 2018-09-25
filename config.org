@@ -1709,6 +1709,9 @@
        (global-aggressive-indent-mode 1)
        (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
        (add-to-list 'aggressive-indent-excluded-modes 'slime-repl-mode)
+       (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
+       (add-to-list 'aggressive-indent-excluded-modes 'lisp-mode)
+       (add-to-list 'aggressive-indent-excluded-modes 'emacs-lisp-mode)
        (delete 'lisp-mode aggressive-indent-modes-to-prefer-defun)
        (delete 'emacs-lisp-mode aggressive-indent-modes-to-prefer-defun)
        (add-to-list 'aggressive-indent-dont-indent-if
