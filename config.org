@@ -306,10 +306,10 @@
    #+END_SRC
 ** transparency
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq transparency-percent 75)
+     (setq opacity-percent 75)
 
-     (set-frame-parameter (selected-frame) 'alpha `(,transparency-percent . 50))
-     (add-to-list 'default-frame-alist `(alpha . (,transparency-percent . 50)))
+     (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+     (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
 
      (defun toggle-transparency ()
        (interactive)
@@ -322,7 +322,7 @@
                          ;; Also handle undocumented (<active> <inactive>) form.
                          ((numberp (cadr alpha)) (cadr alpha)))
                    100)
-              `(,transparency-percent . 50) '(100 . 100)))))
+              `(,opacity-percent . 50) '(100 . 100)))))
      ;; (global-set-key (kbd "C-c t") 'toggle-transparency)
    #+END_SRC
 ** uniquify buffer names
