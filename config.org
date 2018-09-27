@@ -3308,6 +3308,7 @@
                      nil
                      'custom/clockout-when-idle)))))
         :config
+        (use-package org-capture-pop-frame :ensure t)
         (add-hook 'kill-emacs-hook #'custom/finally-tangle-literate-config)
         (setq org-archive-location (concat custom/org-journal-file "::datetree/"))
         (setq org-contrib-base '(org-agenda org-archive org-attach org-bbdb
