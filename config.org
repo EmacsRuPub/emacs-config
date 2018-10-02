@@ -2449,6 +2449,7 @@
                                          project-root))))))
           (jedi:stop-server))
         :hook ((projectile-before-switch-project-hook . jedi:stop-server)
+               (projectile-before-switch-project-hook . pyvenv-deactivate)
                (projectile-after-switch-project-hook . custom/switch-python-project-context)))
 
       (use-package pip-requirements
