@@ -517,11 +517,7 @@
         :custom
         (ivy-rich-switch-buffer-name-max-length 60 "Increase max length of buffer name.")
         :config
-        (dolist (cmd
-                 '(ivy-switch-buffer
-                   ivy-switch-buffer-other-window
-                   counsel-projectile-switch-to-buffer))
-          (ivy-set-display-transformer cmd #'ivy-rich-switch-buffer-transformer)))
+        (ivy-rich-mode 1))
 
       (use-package ivy-xref
         :ensure t
