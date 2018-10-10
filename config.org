@@ -3787,9 +3787,8 @@
                     ("C-M-y" . org-rich-yank)))
 
       (use-package counsel-org-clock
+        :ensure t
         :after (org counsel)
-        :quelpa
-        (counsel-org-clock :repo "akirak/counsel-org-clock" :fetcher github)
         :custom
         (counsel-org-clock-default-action 'counsel-org-clock-clock-dwim-action))
     #+END_SRC
