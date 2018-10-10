@@ -1248,6 +1248,7 @@
        (x-gtk-use-system-tooltips nil)
        (eval-expression-print-length nil)
        (eval-expression-print-level nil)
+       (kill-ring-max 1024)
        :config
        (column-number-mode 1)
        (line-number-mode 1)
