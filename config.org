@@ -3114,6 +3114,20 @@
        (setq twittering-use-master-password t)
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
    #+END_SRC
+** Telegram
+   :PROPERTIES:
+   :ID:       cae5fbbf-3814-451b-8b20-491425fa09a3
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package telega
+       :quelpa
+       (telega :repo "zevlg/telega.el" :fetcher github :version original)
+       :custom
+       (telega-completing-read-function #'ivy-completing-read)
+       :hook (telega-root-mode . telega-notifications-mode)
+       :config
+       (use-package telega-notifications))
+   #+END_SRC
 ** browser editing connectivity
    :PROPERTIES:
    :ID:       e3a36f53-7898-472c-a446-8f6e8496c3df
