@@ -306,6 +306,9 @@
        (display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
    #+END_SRC
 ** transparency
+   :PROPERTIES:
+   :ID:       2c408fe1-66b3-4ddc-938b-e322cc33212b
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (setq opacity-percent 75)
 
@@ -339,6 +342,9 @@
        (uniquify-strip-common-suffix nil))
    #+END_SRC
 * persistence
+  :PROPERTIES:
+  :ID:       315c2a85-73ef-49a1-afbd-a94df7b4c16a
+  :END:
   backups, history and timely saving
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package savehist
@@ -2856,6 +2862,9 @@
          ("q" nil "cancel")))
    #+END_SRC
 ** EMMS
+   :PROPERTIES:
+   :ID:       c4a75f91-4fef-4fca-8371-a93d59e220ed
+   :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package emms
        :ensure t
