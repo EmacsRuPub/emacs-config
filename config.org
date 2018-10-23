@@ -536,15 +536,6 @@
     :ID:       307edab6-3ef0-41c5-b010-de6c25c376d8
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/open-encrypted-document ()
-        (interactive)
-        (ivy-read "Various documents: "
-                  (funcall #'(lambda () (f-files (at-homedir "/docs/enc") nil t)))
-                  :action #'(lambda (candidate)
-                              (find-file candidate))
-                  :require-match t
-                  :caller 'custom/open-encrypted-document))
-
       (defun custom/open-org-file ()
         (interactive)
         (ivy-read "Org files: "
@@ -564,7 +555,6 @@
                   :caller 'custom/open-org-kb-file))
 
       (defhydra hydra-custom-counsel (:idle 1.0)
-        ("e" custom/open-encrypted-document "open encrypted document")
         ("o" custom/open-org-file "open Org file")
         ("k" custom/open-org-kb-file "open Org KB file")
         ("q" nil "cancel"))
