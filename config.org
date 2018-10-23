@@ -126,7 +126,8 @@
        (define-coding-system-alias 'utf_8 'utf-8)
        (set-default buffer-file-coding-system 'utf-8-unix)
        (setq sentence-end-double-space nil)
-       (setq tab-always-indent t))
+       (setq tab-always-indent t)
+       (setq frame-inhibit-implied-resize nil))
    #+END_SRC
 ** input methods
    :PROPERTIES:
