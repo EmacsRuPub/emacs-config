@@ -780,7 +780,7 @@
        :preface
        (defun custom/open-project-todos ()
          (interactive)
-         (let ((todos-file (expand-file-name "todo.org" (projectile-project-root)))) ;; TODO: parameterize filename
+         (let ((todos-file (expand-file-name "todo.org" (projectile-project-root))))
            (condition-case nil
                (when (file-exists-p todos-file)
                  (find-file todos-file))
