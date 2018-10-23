@@ -723,7 +723,7 @@
    :PROPERTIES:
    :ID:       6e6577e0-0142-4c0b-99fb-52cbd81797c9
    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
+    #+BEGIN_SRC emacs-lisp :tangle (if (member (getenv "CURRENT_WM") '("stumpwm")) "yes" "no")
       (defun custom/update-frames (heads-count)
         (let* ((frames-count (length (frame-list)))
                (diff-count (- heads-count frames-count))
