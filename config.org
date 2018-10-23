@@ -795,6 +795,7 @@
        (projectile-enable-caching t)
        (projectile-require-project-root nil)
        (projectile-completion-system 'ivy)
+       (projectile-track-known-projects-automatically t)
        (projectile-tags-command "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        :config
        (def-projectile-commander-method ?d
