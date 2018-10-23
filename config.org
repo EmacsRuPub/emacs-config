@@ -827,7 +827,8 @@
 
        :bind ("C-x j j" . 'counsel-projectile-switch-project)
        :config
-       (add-to-list 'counsel-projectile-switch-project-action '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
+       (add-to-list 'counsel-projectile-switch-project-action
+                    '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
    #+END_SRC
 ** dired
