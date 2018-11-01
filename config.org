@@ -3221,11 +3221,7 @@
                ("\\.org_archive$" . org-mode))
         :preface
         (defun custom/finally-tangle-literate-config ()
-          (when (time-less-p (nth 5 (file-attributes tangled-config-filename))
-                             (nth 5 (file-attributes literate-config-filename)))
-            (let ((orgfile (concat user-emacs-directory literate-config-filename))
-                  (elfile (concat user-emacs-directory tangled-config-filename)))
-              (org-babel-tangle-file orgfile elfile))))
+          (shell-command (format "ntangle %s" (concat user-emacs-directory literate-config-filename))))
         (defadvice custom/browse-url-at-point (before org-position-url activate)
           (when (derived-mode-p 'org-mode)
             (let ((end nil))
