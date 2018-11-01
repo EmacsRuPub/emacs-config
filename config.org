@@ -241,11 +241,11 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package nord-theme :ensure t :config (load-theme 'nord t) :disabled)
      (use-package kaolin-themes :ensure t :config (load-theme 'kaolin-dark t) :disabled)
-     (use-package hc-zenburn-theme :ensure t :config (load-theme 'hc-zenburn t) :disabled)
+     (use-package hc-zenburn-theme :ensure t :config (load-theme 'hc-zenburn t))
      (use-package sunburn-theme :ensure t :config (load-theme 'sunburn t) :disabled)
      (use-package labburn-theme :ensure t :config (load-theme 'labburn t) :disabled)
      (use-package darcula-theme :ensure t :config (load-theme 'darcula t) :disabled)
-     (use-package darkburn-theme :ensure t :config (load-theme 'darkburn t))
+     (use-package darkburn-theme :ensure t :config (load-theme 'darkburn t) :disabled)
      (use-package solarized-theme :ensure t :config (load-theme 'solarized-dark t) :disabled)
 
      ;; Providing dark enough colors, unless we are using an appropriate theme, Darkburn, for example
