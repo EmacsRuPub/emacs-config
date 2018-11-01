@@ -127,7 +127,11 @@
        (set-default buffer-file-coding-system 'utf-8-unix)
        (setq sentence-end-double-space nil)
        (setq tab-always-indent t)
-       (setq frame-inhibit-implied-resize nil))
+       (setq frame-inhibit-implied-resize nil)
+       (setq split-width-threshold nil)
+       (setq split-height-threshold nil)
+       (setq same-window-buffer-names
+             '("*Help*")))
    #+END_SRC
 ** input methods
    :PROPERTIES:
