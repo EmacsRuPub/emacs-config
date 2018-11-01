@@ -3229,20 +3229,6 @@
                 (setq end (save-excursion (outline-next-heading) (point))))
               (org-back-to-heading t)
               (re-search-forward org-plain-link-re end t))))
-        ;; show desktop notifications for org-capture
-        (defadvice org-protocol-do-capture (around display-notify-after-capture)
-          (let ((result ad-do-it))
-            (when result
-              (notifications-notify
-               :title "Link captured"
-               :body (concat (caar org-stored-links)
-                             "\n"
-                             (cadar org-stored-links))
-               :app-name "emacs"
-               :app-icon (expand-file-name "~/.rc/org.svg")
-               :timeout 3000
-               :urgency 'low))
-            result))
         ;; remove read-only props from yanked text (e.g. from jabber.el chat buffer)
         (defadvice org-yank (after make-yank-writeable disable)
           (let ((inhibit-read-only t))
