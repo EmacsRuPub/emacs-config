@@ -459,7 +459,9 @@
                ("M-<f12>" . ivy-switch-buffer)
                ("<f10>" . ivy-resume)
                ("C-c v" . ivy-push-view)
-               ("C-c V" . ivy-pop-view))
+               ("C-c V" . ivy-pop-view)
+               :map ivy-minibuffer-map
+               ("C-j" . ivy-immediate-done))
         :config
         (ivy-mode 1)
         :custom-face
