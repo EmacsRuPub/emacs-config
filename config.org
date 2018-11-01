@@ -47,6 +47,8 @@
 
      (defun at-workspace-dir (&optional suffix)
        (concat-normalize-slashes (at-homedir "/workspace") suffix))
+
+     (defvar enable-experimental-packages nil)
    #+END_SRC
 ** essential packages and tweaks
    :PROPERTIES:
@@ -376,6 +378,7 @@
 
     (use-package super-save
       :ensure t
+      :if enable-experimental-packages
       :custom
       (super-save-remote-files nil)
       :config
@@ -1702,6 +1705,7 @@
 
      (use-package aggressive-indent
        :ensure t
+       :if enable-experimental-packages
        :config
        (global-aggressive-indent-mode 1)
        (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
