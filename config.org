@@ -3606,7 +3606,6 @@
         (setq org-todo-state-tags-triggers
               '(("GOING" ("current" . t))
                 ("DONE" ("current"))))
-        (setq org-complete-tags-always-offer-all-agenda-tags t)
         ;; org-habit
         (setq org-habit-graph-column 50)
         (setq org-habit-preceding-days 10)
@@ -3652,6 +3651,8 @@
         (add-hook 'org-mode-hook 'turn-on-font-lock)
         (add-hook 'org-clock-out-hook 'custom/remove-empty-drawer-on-clock-out 'append)
         (add-hook 'org-after-refile-insert-hook 'save-buffer)
+        (add-hook 'org-capture-mode-hook
+                  (lambda () (setq-local org-complete-tags-always-offer-all-agenda-tags t)))
         ;; run some commands
         (org-add-link-type "tag" 'custom/follow-tag-link)
         (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
