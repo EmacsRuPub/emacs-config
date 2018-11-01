@@ -145,9 +145,10 @@
    to behave correctly with keybindings. It definitely makes sense while
    using Emacs in such X WMs when there is no chance to hook into keyboard
    layouts switching (those are probably all, except StumpWM/XMonad, AFAIK)
-   #+BEGIN_SRC emacs-lisp :tangle (if (not (member (getenv "CURRENT_WM") '("stumpwm" "xmonad"))) "yes" "no")
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package reverse-im
        :ensure t
+       :if (not (member (getenv "CURRENT_WM") '("stumpwm" "xmonad")))
        :config
        (reverse-im-activate "russian-computer"))
    #+END_SRC
@@ -733,7 +734,7 @@
    :PROPERTIES:
    :ID:       6e6577e0-0142-4c0b-99fb-52cbd81797c9
    :END:
-    #+BEGIN_SRC emacs-lisp :tangle (if (member (getenv "CURRENT_WM") '("stumpwm")) "yes" "no")
+    #+BEGIN_SRC emacs-lisp :tangle yes
       (defun custom/update-frames (heads-count)
         (let* ((frames-count (length (frame-list)))
                (diff-count (- heads-count frames-count))
