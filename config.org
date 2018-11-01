@@ -2220,6 +2220,8 @@
           (interactive)
           (git-timemachine--start #'custom/git-timemachine-show-selected-revision)))
 
+      (use-package git-wip-timemachine :ensure t)
+
       (use-package gitignore-mode
         :ensure t
         :mode ("^.gitignore$" . gitignore-mode))
@@ -2283,6 +2285,7 @@
         ("B" magit-branch-manager :color blue)
         ("l" magit-log :color blue)
         ("t" custom/git-timemachine :color blue)
+        ("W" git-wip-timemachine-toggle :color blue)
         ("k" smerge-prev "previous conflict")
         ("j" smerge-next "next conflict")
         ("l" open-global-repos-list :color blue))
