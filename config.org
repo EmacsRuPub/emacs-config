@@ -546,6 +546,11 @@
         :after (dired savehist)
         :config
         (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
+
+      (use-package ivy-historian
+        :ensure t
+        :config
+        (ivy-historian-mode))
     #+END_SRC
 *** custom ivy-based
     :PROPERTIES:
