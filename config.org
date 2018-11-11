@@ -925,6 +925,10 @@
          :config
          (phi-search-mc/setup-keys)))
 
+     (use-package deadgrep
+       :ensure t
+       :commands deadgrep)
+
      (use-package socyl
        :ensure t
        :commands socyl-search-regexp
@@ -1134,6 +1138,7 @@
        ("s" counsel-projectile-switch-project)
        ("h" projectile-find-file)
        ("r" socyl-search-regexp)
+       ("d" deadgrep)
        ("g" counsel-rg)
        ("G" (lambda () (interactive)
               (counsel-rg (thing-at-point 'symbol) (projectile-project-root))))
