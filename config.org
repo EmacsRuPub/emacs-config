@@ -112,7 +112,7 @@
        (setq indent-tabs-mode nil)
        (set-default 'indent-tabs-mode nil);; Never insert tabs, !!!DO NOT REMOVE!!!
        (setq-default tab-width 4)
-       (setq mark-even-if-inactive t)
+       (setq mark-even-if-inactive nil)
        (setq-default fill-column 200)
        (setq-default indicate-empty-lines t)
        (setq-default truncate-lines t)
@@ -1252,7 +1252,7 @@
        (kill-whole-line t)
        (next-line-add-newlines nil)
        (blink-matching-paren nil)
-       (set-mark-command-repeat-pop t)
+       (set-mark-command-repeat-pop nil)
        (save-interprogram-paste-before-kill t)
        (x-gtk-use-system-tooltips nil)
        (eval-expression-print-length nil)
