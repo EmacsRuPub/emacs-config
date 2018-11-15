@@ -840,9 +840,8 @@
        :preface
        (defun counsel-projectile-switch-project-action-open-todos (project)
          "Open project's TODOs."
-         (let ((projectile-switch-project-action
-                (lambda ()
-                  (custom/open-project-todos))))
+         (let ((projectile-switch-project-action #'custom/open-project-todos))
+           (counsel-projectile-switch-project-by-name project)))
        (defun counsel-projectile-switch-project-action-deadgrep (project)
          "Search in project with deadgrep."
          (let ((projectile-switch-project-action #'custom/search-deadgrep))
