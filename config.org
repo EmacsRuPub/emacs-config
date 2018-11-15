@@ -3522,6 +3522,8 @@
         (setf org-clock-x11idle-program-name "xprintidle")
         (setf org-x11idle-exists-p t)
         ;; refiling customizations
+        (setq org-outline-path-complete-in-steps nil)
+        (setq org-refile-allow-creating-parent-nodes 'confirm)
         (setq org-refile-target-verify-function 'custom/verify-refile-target)
         (setq org-refile-targets '((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))
         (setq org-refile-use-outline-path 'file)
@@ -3561,7 +3563,6 @@
         (setq org-log-into-drawer t)
         (setq org-log-repeat 'time)
         (setq org-loop-over-headlines-in-active-region t)
-        (setq org-outline-path-complete-in-steps nil)
         (setq org-read-date-prefer-future 'time)
         (setq org-return-follows-link t)
         (setq org-special-ctrl-a/e t)
