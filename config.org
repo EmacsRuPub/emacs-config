@@ -806,6 +806,10 @@
                (when (file-exists-p todos-file)
                  (find-file todos-file))
              (error (message "Cannot find project todos")))))
+       (defun custom/search-deadgrep ()
+         (interactive)
+         (let ((term (read-from-minibuffer "Search term: ")))
+           (deadgrep term)))
        :custom
        (projectile-enable-caching t)
        (projectile-require-project-root nil)
@@ -813,7 +817,7 @@
        (projectile-track-known-projects-automatically t)
        (projectile-tags-command "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
        :config
-       (def-projectile-commander-method ?d
+       (def-projectile-commander-method ?D
          "Open project root in dired."
          (projectile-dired))
        (def-projectile-commander-method ?g
@@ -822,6 +826,9 @@
        (def-projectile-commander-method ?t
          "Open project's file with TODOs."
          (custom/open-project-todos))
+       (def-projectile-commander-method ?d
+         "Search project with deadgrep."
+         (custom/search-deadgrep))
        (add-to-list 'projectile-other-file-alist '("html" "js"))
        (add-to-list 'projectile-other-file-alist '("js" "html"))
        (setq projectile-switch-project-action 'projectile-commander)
@@ -836,12 +843,16 @@
          (let ((projectile-switch-project-action
                 (lambda ()
                   (custom/open-project-todos))))
+       (defun counsel-projectile-switch-project-action-deadgrep (project)
+         "Search in project with deadgrep."
+         (let ((projectile-switch-project-action #'custom/search-deadgrep))
            (counsel-projectile-switch-project-by-name project)))
-
        :bind ("C-x j j" . 'counsel-projectile-switch-project)
        :config
        (add-to-list 'counsel-projectile-switch-project-action
                     '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
+       (add-to-list 'counsel-projectile-switch-project-action
+                    '("d" counsel-projectile-switch-project-action-deadgrep "search project with deadgrep") t)
        (setq projectile-switch-project-action 'counsel-projectile-switch-project))
    #+END_SRC
 ** dired
