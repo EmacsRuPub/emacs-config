@@ -1332,32 +1332,16 @@
     :ID:       0fc28d80-7af1-4ce9-a52e-d46fff4d050f
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package expand-region
+      (use-package easy-kill
         :ensure t
-        :bind ("C-=" . er/expand-region))
+        :bind (([remap kill-ring-save] . easy-kill)
+               ([remap mark-sexp] . easy-mark)))
 
       (use-package region-bindings-mode
         :ensure t
         :config
         (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
         (region-bindings-mode-enable))
-
-      (use-package whole-line-or-region ;; if no region is active, act on current line
-        :ensure t
-        :delight (whole-line-or-region-mode " WLR")
-        :custom
-        (whole-line-or-region-extensions-alist
-         '((comment-dwim whole-line-or-region-comment-dwim-2 nil)
-           (copy-region-as-kill whole-line-or-region-copy-region-as-kill nil)
-           (kill-region whole-line-or-region-kill-region nil)
-           (kill-ring-save whole-line-or-region-kill-ring-save nil)
-           (yank whole-line-or-region-yank nil)))
-        :config
-        (defadvice whole-line-or-region-kill-region
-            (before whole-line-or-region-kill-read-only-ok activate)
-          (interactive "p")
-          (unless kill-read-only-ok (barf-if-buffer-read-only)))
-        (whole-line-or-region-mode 1))
     #+END_SRC
 ** commenting
    :PROPERTIES:
