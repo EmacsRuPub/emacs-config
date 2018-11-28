@@ -3218,10 +3218,13 @@
           (org-tags-view nil tag))              ;nil was (null current-prefix-arg) originally
         ;; http://irreal.org/blog/?p=6166
         (defun custom/org-tags-all ()
+          ;;TODO: bind some key to close buffer
           (interactive)
           (with-current-buffer (get-buffer-create "*org-tags*")
             (delete-region (point-min) (point-max))
             (org-mode)
+            ;;TODO: review tag collection methods and find some truth
+            ;; (sort (delete-dups (apply 'append (delete-dups (org-map-entries (lambda () org-scanner-tags) t 'agenda)))) 'string<)
             (let ((tags (sort (delete-dups
                                (cl-loop for buffer in (org-buffer-list 'agenda t)
                                         append (with-current-buffer buffer
@@ -3253,15 +3256,6 @@
           (org-capture-refile)
           (org-refile-goto-last-stored))
         ;;TODO: investigate usage, seems useful
-        (defun custom/org-tags ()
-          (get-buffer-create "*org-tags*")
-          (set-buffer "*org-tags*")
-          (org-mode)
-          (let ((tags (sort (delete-dups (apply 'append (delete-dups (org-map-entries (lambda () org-scanner-tags) t 'agenda)))) 'string<)))
-            (dolist (tag tags)
-              (insert (concat "[[elisp:(org-tags-view nil \"" tag "\")][" tag  "]]\n"))))
-          (beginning-of-buffer)
-          (switch-to-buffer "*org-tags*"))
         (defun custom/org-link-describe (link desc)
           (cond ((string-match "file:" link)
                  (replace-regexp-in-string "^file:" "File link -> " (org-link-unescape link)))
@@ -3336,6 +3330,7 @@
                 (delete orgfile org-agenda-files)))
         (add-to-list 'org-agenda-files (at-config-basedir "config.org"))
         ;; agenda customizations
+        (setq org-confirm-elisp-link-not-regexp "org-tags-view")
         (setf org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :narrow 60))
         (setq org-agenda-dim-blocked-tasks 'invisible)
         (setq org-agenda-include-all-todo t)
