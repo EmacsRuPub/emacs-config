@@ -216,6 +216,10 @@
        :config
        (setq font-lock-maximum-decoration t))
 
+     (use-package face-remap
+       :bind (("C-=" . text-scale-increase)
+              ("C--" . text-scale-decrease)))
+
      (use-package unicode-fonts
        :ensure t
        :after (persistent-soft)
@@ -272,9 +276,32 @@
        (mouse-avoidance-mode 'jump))
 
      (use-package frame
+       :preface
+       (defvar opacity-percent 75 "Opacity percent")
+       (defun custom/toggle-transparency ()
+         (interactive)
+         (let ((alpha (frame-parameter nil 'alpha)))
+           (set-frame-parameter
+            nil 'alpha
+            (if (eql (cond ((numberp alpha) alpha)
+                           ((numberp (cdr alpha))
+                            (cdr alpha))
+                           ;; Also handle undocumented (<active> <inactive>) form.
+                           ((numberp (cadr alpha)) (cadr alpha)))
+                     100)
+                `(,opacity-percent . 50) '(100 . 100)))))
+       :bind (:prefix "<f2>"
+                      :prefix-map frame-keymap
+                      ("n" . make-frame-command)
+                      ("k" . delete-frame)
+                      ("s" . delete-other-frames)
+                      ("v" . custom/toggle-transparency))
        :config
+       (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
        (blink-cursor-mode 0)
+       (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
        (setq frame-title-format "emacs - %b %f") ;; for various external tools
+       (setq opacity-percent 75)
        (setq truncate-partial-width-windows nil))
 
      (use-package tool-bar
@@ -309,29 +336,6 @@
        (display-time-default-load-average nil)
        (display-time-24hr-format t)
        (display-time-string-forms '( day " " monthname " (" dayname ") " 24-hours ":" minutes)))
-   #+END_SRC
-** transparency
-   :PROPERTIES:
-   :ID:       2c408fe1-66b3-4ddc-938b-e322cc33212b
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (setq opacity-percent 75)
-
-     (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
-     (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
-
-     (defun toggle-transparency ()
-       (interactive)
-       (let ((alpha (frame-parameter nil 'alpha)))
-         (set-frame-parameter
-          nil 'alpha
-          (if (eql (cond ((numberp alpha) alpha)
-                         ((numberp (cdr alpha))
-                          (cdr alpha))
-                         ;; Also handle undocumented (<active> <inactive>) form.
-                         ((numberp (cadr alpha)) (cadr alpha)))
-                   100)
-              `(,opacity-percent . 50) '(100 . 100)))))
    #+END_SRC
 ** uniquify buffer names
    :PROPERTIES:
@@ -374,7 +378,6 @@
       :custom
       (super-save-remote-files nil)
       :config
-      (add-to-list 'super-save-triggers 'ace-window)
       (add-to-list 'super-save-hook-triggers 'find-file-hook)
       (super-save-mode 1))
   #+END_SRC
@@ -968,27 +971,6 @@
         ("C-s-j" . windsize-down)
         ("C-s-h" . windsize-left)
         ("C-s-l" . windsize-right)))
-
-     (use-package ace-window
-       :ensure t
-       :after (avy)
-       :commands ace-window
-       :custom
-       (aw-background nil)
-       (aw-leading-char-style 'char)
-       (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l) "Use home row for selecting.")
-       (aw-scope 'global "Highlight all frames.")
-       :config
-       (set-face-attribute 'aw-mode-line-face nil :foreground "white")
-       :custom-face (aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-
-     (use-package tile
-       :ensure t
-       :commands tile)
-
-     (use-package transpose-frame
-       :ensure t
-       :commands transpose-frame)
    #+END_SRC
 ** scope
    :PROPERTIES:
@@ -1081,24 +1063,6 @@
    :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-window (:idle 1.0)
-       "Windows/frames management"
-       ("w" ace-window "ace" :color blue)
-       ("=" text-scale-increase)
-       ("-" text-scale-decrease)
-       ("t" tile :color blue)
-       ("T" transpose-frame "transpose")
-       ("i" flip-frame "flip")
-       ("o" flop-frame "flop")
-       ("r" rotate-frame "rotate")
-       ("n" make-frame-command "create frame" :color blue)
-       ("k" delete-frame "delete frame" :color blue)
-       ("s" delete-other-frames "delete other frames" :color blue)
-       ("<f6>" heaven-and-hell-toggle-theme)
-       ("v" toggle-transparency :color blue)
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f2>") 'hydra-window/body)
-
      (defhydra hydra-history ()
        ("y" counsel-yank-pop)
        ("m" counsel-mark-ring)
