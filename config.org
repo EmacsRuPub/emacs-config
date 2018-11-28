@@ -2927,18 +2927,6 @@
    :ID:       27a0775b-b056-4eb1-80e2-086bc44cb8b8
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package nov
-       :ensure t
-       :mode ("\\.epub\\'" . nov-mode))
-
-     (use-package fb2-mode
-       :quelpa
-       (fb2-mode :repo "spline1986/fb2-mode" :fetcher github :version original)
-       :mode ("\\.fb2\\'" . fb2-mode)
-       :hook (fb2-mode-hook . (lambda () (smooth-scrolling-mode 1)))
-       :custom
-       (fb2-replace-hard-space t))
-
      (use-package pdf-tools
        :ensure t
        :hook (after-init-hook . pdf-tools-install)
