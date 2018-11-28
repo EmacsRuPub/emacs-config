@@ -227,7 +227,8 @@
    :ID:       487f7c0d-ba0c-4598-a6fa-d817a8b30ba4
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package spaceline :ensure t
+     (use-package spaceline
+       :ensure t
        :custom
        (powerline-default-separator 'wave)
        (spaceline-flycheck-bullet "❖ %s")
