@@ -947,15 +947,8 @@
        :config
        (winner-mode 1))
 
-     (use-package golden-ratio
-       :ensure t
-       :delight golden-ratio-mode
-       :init
-       (golden-ratio-mode 1))
-
      (use-package windsize
        :ensure t
-       :disabled ; have no sense with golden-ratio enabled
        :bind
        (("C-s-k" . windsize-up)
         ("C-s-j" . windsize-down)
