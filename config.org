@@ -1476,10 +1476,6 @@
       (defhydra hydra-errors ()
         ("a" avy-flycheck-goto-error :color blue)
         ("c" counsel-flycheck :color blue)
-        ("<up>" flycheck-previous-error "previous error")
-        ("<down>" flycheck-next-error "next error")
-        ("<left>" previous-error "previous error")
-        ("<right>" next-error "next error")
         ("q" nil "cancel"))
       (global-set-key (kbd "C-q") 'hydra-errors/body)
     #+END_SRC
