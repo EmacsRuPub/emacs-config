@@ -3207,15 +3207,6 @@
                                     '(read-only t))))
         (defvar custom/org-journal-file (at-org-dir "/journal.org"))
         (defvar custom/org-browser-tabs (at-org-dir "/browser-tabs.org"))
-        (defun custom/jump-to-custom-agenda-random () ;;FIXME: do not show tasks in done states
-          (interactive)
-          (let* ((agendas
-                  (remove-if
-                   (lambda (agenda) (= (length agenda) 1))
-                   (mapcar (lambda (x) (car x)) org-agenda-custom-commands)))
-                 (agendas-count (length agendas)))
-            (org-agenda nil
-                        (car (nthcdr (random agendas-count) agendas)))))
         ;; Exclude DONE state tasks from refile targets
         (defun custom/verify-refile-target ()
           "Exclude todo keywords with a done state from refile targets"
@@ -3619,7 +3610,6 @@
         (org-add-link-type "tag" 'custom/follow-tag-link)
         (org-clock-persistence-insinuate) ;; Resume clocking tasks when emacs is restarted
         (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
-        (run-with-idle-timer 1800 t 'custom/jump-to-custom-agenda-random)
         (set-charset-priority 'unicode)
         (turn-on-orgtbl)
         (run-with-idle-timer custom/idle-clockout-timeout t 'custom/clockout-when-idle)
@@ -3831,7 +3821,7 @@
        _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         recent _H_eadings
        _R_eport clocks           _r_efile             agenda _h_eadings       Org _G_oto
        _p_omodoro                create _T_able       _=_ todo tree
-       _s_chedule                                     _2_ random agenda
+       _s_chedule
        _|_ deadline
        _t_oggle TS type
 
@@ -3868,7 +3858,6 @@
        ("H" org-recent-headings-ivy)
        ("=" org-show-todo-tree)
        ("\\" counsel-org-tag)
-       ("2" custom/jump-to-custom-agenda-random "show random custom agenda")
        ("<right>" outline-next-visible-heading "next heading")
        ("<left>" outline-previous-visible-heading "prev heading")
        ("<down>" org-forward-heading-same-level "next heading at same level")
