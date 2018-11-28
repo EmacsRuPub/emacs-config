@@ -509,6 +509,14 @@
                ("C-c w" . counsel-wmctrl)
                ("C-c o" . custom/open-org-file)
                ("C-c k" . custom/open-org-kb-file)
+               :prefix-map counsel-aux-map
+               :prefix "<f9>"
+               ("y" . counsel-yank-pop)
+               ("m" . counsel-mark-ring)
+               ("c" . counsel-command-history)
+               ("e" . counsel-expression-history)
+               ("p" . counsel-package)
+               ("l" . counsel-git-log)
                :map help-map
                ("l" . counsel-find-library)
                :prefix-map custom-help-prefix-map
@@ -1046,15 +1054,6 @@
    :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-history ()
-       ("y" counsel-yank-pop)
-       ("m" counsel-mark-ring)
-       ("c" counsel-command-history)
-       ("e" counsel-expression-history)
-       ("p" counsel-package)
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f9>") 'hydra-history/body)
-
      (defhydra hydra-projects (:color teal :idle 1.0)
        "
        PROJECT: %(projectile-project-root)
@@ -1079,7 +1078,6 @@
        ("g" counsel-rg)
        ("G" (lambda () (interactive)
               (counsel-rg (thing-at-point 'symbol) (projectile-project-root))))
-       ("l" counsel-git-log)
        ("t" custom/open-project-todos)
        ("m" swiper-multi))
      (global-set-key (kbd "<f8>") 'hydra-projects/body)
