@@ -480,6 +480,23 @@
         :defer 2
         :after (swiper)
         :delight counsel-mode
+        :preface
+        (defun custom/open-org-file ()
+          (interactive)
+          (ivy-read "Org files: "
+                    (funcall #'(lambda () (f-files (at-org-dir) nil t)))
+                    :action #'(lambda (candidate)
+                                (find-file candidate))
+                    :require-match t
+                    :caller 'custom/open-org-file))
+        (defun custom/open-org-kb-file ()
+          (interactive)
+          (ivy-read "Org files: "
+                    (funcall #'(lambda () (f-files (at-org-kb-dir) nil t)))
+                    :action #'(lambda (candidate)
+                                (find-file candidate))
+                    :require-match t
+                    :caller 'custom/open-org-kb-file))
         :init
         (require 'iso-transl)
         :bind (([remap menu-bar-open] . counsel-tmm)
@@ -490,6 +507,8 @@
                ("C-x C-r" . counsel-recentf)
                ("C-c C-." . counsel-fzf)
                ("C-c w" . counsel-wmctrl)
+               ("C-c o" . custom/open-org-file)
+               ("C-c k" . custom/open-org-kb-file)
                :map help-map
                ("l" . counsel-find-library)
                :prefix-map custom-help-prefix-map
@@ -538,35 +557,6 @@
         :ensure t
         :config
         (ivy-historian-mode))
-    #+END_SRC
-*** custom ivy-based
-    :PROPERTIES:
-    :ID:       307edab6-3ef0-41c5-b010-de6c25c376d8
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/open-org-file ()
-        (interactive)
-        (ivy-read "Org files: "
-                  (funcall #'(lambda () (f-files (at-org-dir) nil t)))
-                  :action #'(lambda (candidate)
-                              (find-file candidate))
-                  :require-match t
-                  :caller 'custom/open-org-file))
-
-      (defun custom/open-org-kb-file ()
-        (interactive)
-        (ivy-read "Org files: "
-                  (funcall #'(lambda () (f-files (at-org-kb-dir) nil t)))
-                  :action #'(lambda (candidate)
-                              (find-file candidate))
-                  :require-match t
-                  :caller 'custom/open-org-kb-file))
-
-      (defhydra hydra-custom-counsel (:idle 1.0)
-        ("o" custom/open-org-file "open Org file")
-        ("k" custom/open-org-kb-file "open Org KB file")
-        ("q" nil "cancel"))
-      (global-set-key (kbd "C-c r") 'hydra-custom-counsel/body)
     #+END_SRC
 *** other
     :PROPERTIES:
