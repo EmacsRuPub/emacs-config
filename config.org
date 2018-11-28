@@ -576,14 +576,6 @@
         (setq tramp-ssh-controlmaster-options "")
         (setq tramp-default-proxies-alist nil))
 
-      (use-package crux
-        :ensure t
-        :disabled
-        :bind (:map dired-mode-map
-               ("C-!" . crux-open-with)
-               :map ctl-x-map
-               ("\C-i" . crux-ispell-word-then-abbrev)))
-
       (use-package paradox
         :ensure t
         :after (seq let-alist spinner hydra)
@@ -1708,7 +1700,7 @@
        Editing                         Kill/yank                 Buffers
        -------------------------------------------------------------------------------------
        just _o_ne space between        _y_ank to register        _`_ redraw display
-       _2_ duplicate + comment         _p_ut from register       create _S_cratch
+                                     _p_ut from register       create _S_cratch
        _/_ make comment box            _k_ yank rectangle        _d_iff buffer <-> file
        _SPC_ untabify                  append next _K_ill        re_n_ame buffer+file
        _TAB_ tabify                    _a_ppend cited region     query/replace rege_x_p
