@@ -1186,11 +1186,6 @@
    :ID:       b3febdce-3124-4695-b010-9822943b04c7
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package snakehump
-       :quelpa
-       (snakehump :repo "aes/snakehump" :fetcher github :version original)
-       :commands snakehump-next-at-point snakehump-prev-at-point)
-
      (use-package ialign
        :ensure t
        :bind ("C-x l" . ialign))
@@ -1261,6 +1256,23 @@
        (transient-mark-mode 1)
        (put 'transient-mark-mode 'permanent-local t)
        (put 'set-goal-column 'disabled nil))
+
+     (defun custom/switch-case (&optional style)
+       (interactive)
+       (let* ((bounds (bounds-of-thing-at-point 'symbol))
+              (from (if (use-region-p) (region-beginning) (car bounds)))
+              (to (if (use-region-p) (region-end) (cdr bounds)))
+              (data (buffer-substring-no-properties from to))
+              (result (funcall (cond ((eq style 'camel) 's-lower-camel-case)
+                                   ((eq style 'camel-up) 's-upper-camel-case)
+                                   ((eq style 'snake) 's-snake-case)
+                                   ((eq style 'kebab) 's-dashed-words)
+                                   (t 's-lower-camel-case))
+                            data)))
+         (save-excursion
+           (delete-region from to)
+           (goto-char from)
+           (insert result))))
    #+END_SRC
 ** regions and rectangles
 *** definitions
@@ -1707,8 +1719,10 @@
        delete trailing _w_hitespaces
        _s_ort lines
        keep _u_nique lines
-       _3_ snakehump back TAP
-       _4_ snakehump TAP
+       _6_ camelCase
+       _^_ CamelCase
+       ___ snake_case
+       _-_ kebab-case
 
        Custom:
        _t_ranslate TAP with Google
@@ -1722,8 +1736,10 @@
        ("w" delete-trailing-whitespace)
        ("s" sort-lines)
        ("u" delete-duplicate-lines)
-       ("3" snakehump-prev-at-point)
-       ("4" snakehump-next-at-point)
+       ("6" (lambda () (interactive) (custom/switch-case 'camel)))
+       ("^" (lambda () (interactive) (custom/switch-case 'camel-up)))
+       ("_" (lambda () (interactive) (custom/switch-case 'snake)))
+       ("-" (lambda () (interactive) (custom/switch-case 'kebab)))
        ("r" rebox-dwim :color blue)
        ("c" rebox-cycle "cycle box styles")
        ("y" copy-to-register)
