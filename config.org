@@ -3226,8 +3226,7 @@
                                     '(read-only t))))
         (defvar custom/org-journal-file (at-org-dir "/journal.org"))
         (defvar custom/org-browser-tabs (at-org-dir "/browser-tabs.org"))
-        ;; Exclude DONE state tasks from refile targets
-        (defun custom/verify-refile-target ()
+        (defun custom/verify-refile-target () ;; Exclude DONE state tasks from refile targets
           "Exclude todo keywords with a done state from refile targets"
           (not (member (nth 2 (org-heading-components)) org-done-keywords)))
         ;;TODO: customize "todo-only" parameter for "org-tags-view"
