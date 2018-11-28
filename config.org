@@ -332,7 +332,6 @@
                          ((numberp (cadr alpha)) (cadr alpha)))
                    100)
               `(,opacity-percent . 50) '(100 . 100)))))
-     ;; (global-set-key (kbd "C-c t") 'toggle-transparency)
    #+END_SRC
 ** uniquify buffer names
    :PROPERTIES:
