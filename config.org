@@ -1935,6 +1935,9 @@
          :after (company)
          :config
          (add-to-list 'company-backends 'company-ansible))
+
+       (use-package poly-ansible
+         :ensure t)
      #+END_SRC
 *** try 3rdparty packages
 **** https://github.com/nsf/gocode
