@@ -1633,13 +1633,6 @@
    :ID:       d4065366-b58b-4cac-a41c-432fc6e3d1ba
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;;TODO: maybe relocate
-     (use-package highlight-sexp
-       :quelpa
-       (highlight-sexp :repo "daimrod/highlight-sexp" :fetcher github :version original)
-       :delight highlight-sexp-mode
-       :hook ((lisp-mode-hook emacs-lisp-mode-hook) . highlight-sexp-mode))
-
      (use-package smartparens
        :ensure t
        :after (dash)
