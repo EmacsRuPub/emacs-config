@@ -1488,16 +1488,6 @@
        :ensure t
        :mode (("\\.yml\\'" . yaml-mode)
               ("\\.yaml\\'" . yaml-mode)))
-
-     (define-derived-mode portage-mode prog-mode "Portage"
-       "A major mode for editing Portage-related files"
-       (setq-local comment-start "# ")
-       (setq-local comment-start-skip "#+\\s-*")
-       (setq-local font-lock-defaults nil))
-
-     (use-package portage-mode
-       :mode (("portage" . portage-mode)))
-
    #+END_SRC
 *** docker
     :PROPERTIES:
