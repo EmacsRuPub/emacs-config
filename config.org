@@ -1261,25 +1261,24 @@
 
      (use-package copy-as-format
        :ensure t
-       :config
-       (defhydra hydra-copy-format (:idle 1.0)
-         ("s" copy-as-format-slack "Slack")
-         ("g" copy-as-format-github "Github")
-         ("o" copy-as-format-org-mode "orgmode")
-         ("m" copy-as-format-markdown "Markdown")
-         ("a" copy-as-format-asciidoc "Asciidoc")
-         ("b" copy-as-format-bitbucket "Bitbucket")
-         ("d" copy-as-format-disqus "Disqus")
-         ("l" copy-as-format-gitlab "GitLab")
-         ("c" copy-as-format-hipchat "Hipchat")
-         ("h" copy-as-format-html "HTML")
-         ("j" copy-as-format-jira "Jira")
-         ("w" copy-as-format-mediawiki "MediaWiki")
-         ("p" copy-as-format-pod "Pod")
-         ("r" copy-as-format-rst "RST")
-         ("f" copy-as-format "generic")
-         ("q" nil "cancel"))
-       (global-set-key (kbd "C-c f") 'hydra-copy-format/body))
+       :bind (:map mode-specific-map
+              :prefix-map copy-as-format-map
+              :prefix "f"
+              ("s" . copy-as-format-slack)
+              ("g" . copy-as-format-github)
+              ("o" . copy-as-format-org-mode)
+              ("m" . copy-as-format-markdown)
+              ("a" . copy-as-format-asciidoc)
+              ("b" . copy-as-format-bitbucket)
+              ("d" . copy-as-format-disqus)
+              ("l" . copy-as-format-gitlab)
+              ("c" . copy-as-format-hipchat)
+              ("h" . copy-as-format-html)
+              ("j" . copy-as-format-jira)
+              ("w" . copy-as-format-mediawiki)
+              ("p" . copy-as-format-pod)
+              ("r" . copy-as-format-rst)
+              ("f" . copy-as-format)))
 
      (use-package select
        :custom
