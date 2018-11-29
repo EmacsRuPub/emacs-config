@@ -1295,21 +1295,18 @@
      (use-package undo-tree
        :ensure t
        :delight undo-tree-mode
-       :commands undo-tree-undo undo-tree-redo
+       :bind (("M-[ p" . undo-tree-undo)
+              ("M-[ n" . undo-tree-redo)
+              ("M-[ s" . undo-tree-save-history)
+              ("M-[ l" . undo-tree-load-history)
+              ("M-[ u" . undo-tree-visualize)
+              :map undo-tree-map
+              ("C-_" . nil))
        :custom
        (undo-tree-visualizer-timestamps t)
        (undo-tree-visualizer-diff t)
        :config
-       (bind-key (kbd "C-_") nil undo-tree-map)
-       (global-undo-tree-mode t)
-       (defhydra hydra-undo-tree ()
-         ("p" undo-tree-undo)
-         ("n" undo-tree-redo)
-         ("s" undo-tree-save-history)
-         ("l" undo-tree-load-history)
-         ("u" undo-tree-visualize :color blue)
-         ("q" nil "quit" :color blue))
-       (global-set-key (kbd "M-[") 'hydra-undo-tree/body))
+       (global-undo-tree-mode t))
    #+END_SRC
 ** spellchecking
 *** flycheck
