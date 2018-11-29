@@ -213,6 +213,16 @@
        (global-font-lock-mode 1))
 
      (use-package font-lock
+       :preface
+       (defun custom/highlight-keywords ()
+         ;; highlight additional keywords
+         (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
+         (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
+         (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
+         (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
+         ;; highlight too long lines
+         (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
+       :hook ((emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/highlight-keywords)
        :config
        (setq font-lock-maximum-decoration t))
 
@@ -1071,19 +1081,6 @@
      (global-set-key [remap kill-buffer] #'kill-this-buffer)
    #+END_SRC
 * editing
-** common hooks
-   :PROPERTIES:
-   :ID:       72f052f0-e63d-420e-bb29-637d4098c15c
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-     (add-hook 'text-mode-hook 'turn-on-auto-fill)
-     (add-hook 'text-mode-hook 'text-mode-hook-identify)
-
-     (defun common-hooks/newline-hook ()
-       (local-set-key (kbd "C-m") 'newline-and-indent)
-       (local-set-key (kbd "<return>") 'newline-and-indent))
-   #+END_SRC
 ** move and bend text around
    :PROPERTIES:
    :ID:       b3febdce-3124-4695-b010-9822943b04c7
@@ -1140,6 +1137,11 @@
        ((visual-line-mode . " ↩")
         (auto-fill-function . " ↵"))
        :bind ("M-g" . goto-line)
+       :preface
+       (defun custom/newline-hook ()
+         (local-set-key (kbd "C-m") 'newline-and-indent)
+         (local-set-key (kbd "<return>") 'newline-and-indent))
+       :hook (((yaml-mode-hook emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/newline-hook))
        :custom
        (bidi-display-reordering nil)
        (kill-whole-line t)
@@ -1387,6 +1389,12 @@
    :ID:       793cf236-4c97-4a11-911a-9a64b9f89efd
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package executable
+       :hook (after-save-hook . executable-make-buffer-file-executable-if-script-p))
+
+     (use-package text-mode
+       :hook (text-mode-hook . text-mode-hook-identify))
+
      (use-package jka-cmpr-hook
        :config
        (auto-compression-mode 1))
@@ -1504,8 +1512,7 @@
      (use-package yaml-mode
        :ensure t
        :mode (("\\.yml\\'" . yaml-mode)
-              ("\\.yaml\\'" . yaml-mode))
-       :hook (yaml-mode-hook . common-hooks/newline-hook))
+              ("\\.yaml\\'" . yaml-mode)))
 
      (define-derived-mode portage-mode prog-mode "Portage"
        "A major mode for editing Portage-related files"
@@ -1917,21 +1924,6 @@
         :ensure t
         :after (eldoc))
     #+END_SRC
-*** common hooks
-    :PROPERTIES:
-    :ID:       75d0a1e7-a985-4122-a87f-21c8a0812a3a
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      ;; show FIXME/TODO/BUG keywords
-      (defun common-hooks/prog-helpers ()
-          ;; highlight additional keywords
-          (font-lock-add-keywords nil '(("\\<\\(FIXME\\|FIX_ME\\|FIX ME\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(BUG\\|BUGS\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(TODO\\|TO DO\\NOTE\\|TBD\\):" 1 font-lock-warning-face t)))
-          (font-lock-add-keywords nil '(("\\<\\(DONE\\|HACK\\):" 1 font-lock-doc-face t)))
-          ;; highlight too long lines
-          (font-lock-add-keywords nil '(("^[^\n]\\{120\\}\\(.*\\)$" 1 font-lock-warning-face t))))
-    #+END_SRC
 *** packages/modes
     :PROPERTIES:
     :ID:       eaf84ab6-e3df-4c7c-89cd-65515830664f
@@ -2211,9 +2203,7 @@
                                          (auto-fill-mode 1)
                                          (setq indent-tabs-mode nil)
                                          (setq comment-start ";;")
-                                         (turn-on-eldoc-mode)))
-               (emacs-lisp-mode-hook . common-hooks/prog-helpers)
-               (emacs-lisp-mode-hook . common-hooks/newline-hook)))
+                                         (turn-on-eldoc-mode)))))
 
       (use-package company-elisp
         :after (elisp-mode company)
@@ -2244,9 +2234,7 @@
                                                (slime-autodoc-mode -1)))) ;; some signature down the call stack is broken in 2.20
                (lisp-mode-hook . (lambda ()
                                    (auto-fill-mode 1)
-                                   (setq indent-tabs-mode nil)))
-               (lisp-mode-hook . common-hooks/newline-hook)
-               (lisp-mode-hook . common-hooks/prog-helpers))
+                                   (setq indent-tabs-mode nil))))
         :init
         (use-package slime-autoloads)
         :custom
@@ -2341,9 +2329,7 @@
       (use-package python
         :after (lsp-python)
         :mode ("\\.py$" . python-mode)
-        :hook ((python-mode-hook . common-hooks/prog-helpers)
-               (python-mode-hook . common-hooks/newline-hook)
-               (python-mode-hook . (lambda ()
+        :hook ((python-mode-hook . (lambda ()
                                      (setq flycheck-checker 'python-flake8)
                                      (setq indent-tabs-mode nil)
                                      (setq tab-width 4)
