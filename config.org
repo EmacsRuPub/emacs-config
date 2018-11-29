@@ -517,6 +517,9 @@
                ("e" . counsel-expression-history)
                ("p" . counsel-package)
                ("l" . counsel-git-log)
+               ("g" . counsel-rg)
+               ("G" . (lambda () (interactive) (counsel-rg (thing-at-point 'symbol))))
+               ("m" . swiper-multi)
                :map help-map
                ("l" . counsel-find-library)
                :prefix-map custom-help-prefix-map
@@ -773,8 +776,18 @@
      (use-package projectile
        :ensure t
        :delight (projectile-mode " prj")
-       :bind ("C-x j j" . projectile-switch-project)
-       :demand t
+       :custom
+       (projectile-enable-caching t)
+       (projectile-require-project-root nil)
+       (projectile-completion-system 'ivy)
+       (projectile-track-known-projects-automatically t)
+       :config
+       (setq projectile-switch-project-action 'projectile-commander)
+       (projectile-mode 1))
+
+     (use-package counsel-projectile
+       :ensure t
+       :after (counsel projectile)
        :preface
        (defun custom/open-project-todos ()
          (interactive)
@@ -787,34 +800,6 @@
          (interactive)
          (let ((term (read-from-minibuffer "Search term: ")))
            (deadgrep term)))
-       :custom
-       (projectile-enable-caching t)
-       (projectile-require-project-root nil)
-       (projectile-completion-system 'ivy)
-       (projectile-track-known-projects-automatically t)
-       (projectile-tags-command "find %s -type f -print | egrep -v \"/[.][a-zA-Z]\" | etags -")
-       :config
-       (def-projectile-commander-method ?D
-         "Open project root in dired."
-         (projectile-dired))
-       (def-projectile-commander-method ?g
-         "Search in project."
-         (counsel-rg))
-       (def-projectile-commander-method ?t
-         "Open project's file with TODOs."
-         (custom/open-project-todos))
-       (def-projectile-commander-method ?d
-         "Search project with deadgrep."
-         (custom/search-deadgrep))
-       (add-to-list 'projectile-other-file-alist '("html" "js"))
-       (add-to-list 'projectile-other-file-alist '("js" "html"))
-       (setq projectile-switch-project-action 'projectile-commander)
-       (projectile-mode 1))
-
-     (use-package counsel-projectile
-       :ensure t
-       :after (counsel projectile)
-       :preface
        (defun counsel-projectile-switch-project-action-open-todos (project)
          "Open project's TODOs."
          (let ((projectile-switch-project-action #'custom/open-project-todos))
@@ -823,7 +808,15 @@
          "Search in project with deadgrep."
          (let ((projectile-switch-project-action #'custom/search-deadgrep))
            (counsel-projectile-switch-project-by-name project)))
-       :bind ("C-x j j" . 'counsel-projectile-switch-project)
+       :bind (("C-x j j" . 'counsel-projectile-switch-project)
+              :prefix-map projectile-mode-custom-map
+              :prefix "<f8>"
+              ("i" . projectile-invalidate-cache)
+              ("k" . projectile-kill-buffers)
+              ("c" . projectile-commander)
+              ("d" . projectile-dired)
+              ("f" . projectile-recentf)
+              ("h" . projectile-find-file))
        :config
        (add-to-list 'counsel-projectile-switch-project-action
                     '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
@@ -919,11 +912,13 @@
 
      (use-package deadgrep
        :ensure t
-       :commands deadgrep)
+       :commands deadgrep
+       :bind (:map mode-specific-map
+              ("d" . deadgrep)))
 
      (use-package socyl
        :ensure t
-       :commands socyl-search-regexp
+       :bind ("C-r" . socyl-search-regexp)
        :custom
        (socyl-backend 'ripgrep))
 
@@ -1054,34 +1049,6 @@
    :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-projects (:color teal :idle 1.0)
-       "
-       PROJECT: %(projectile-project-root)
-       Project               More                              Search
-       --------------------------------------------------------------------------------
-       _i_nvalidate cache    _c_ommander                       _r_egexp
-       _I_buffer             _d_ired                           a_g_
-       _k_ill buffers        recent_f_                         _m_ulti-swoop
-                             _s_witch project
-                             _h_elm-projectile
-       "
-       ("I" ibuffer)
-       ("i" projectile-invalidate-cache)
-       ("k" projectile-kill-buffers)
-       ("c" projectile-commander)
-       ("d" projectile-dired)
-       ("f" projectile-recentf)
-       ("s" counsel-projectile-switch-project)
-       ("h" projectile-find-file)
-       ("r" socyl-search-regexp)
-       ("d" deadgrep)
-       ("g" counsel-rg)
-       ("G" (lambda () (interactive)
-              (counsel-rg (thing-at-point 'symbol) (projectile-project-root))))
-       ("t" custom/open-project-todos)
-       ("m" swiper-multi))
-     (global-set-key (kbd "<f8>") 'hydra-projects/body)
-
      (defhydra hydra-navigate ()
        "
        Locate                  Narrow/widen               Links
