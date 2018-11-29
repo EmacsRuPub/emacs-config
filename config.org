@@ -288,6 +288,10 @@
      (use-package frame
        :preface
        (defvar opacity-percent 75 "Opacity percent")
+       (defun custom/other-window-multiframe ()
+         (interactive)
+         (other-window 1 'visible)
+         (select-frame-set-input-focus (selected-frame)))
        (defun custom/toggle-transparency ()
          (interactive)
          (let ((alpha (frame-parameter nil 'alpha)))
@@ -300,7 +304,8 @@
                            ((numberp (cadr alpha)) (cadr alpha)))
                      100)
                 `(,opacity-percent . 50) '(100 . 100)))))
-       :bind (:prefix "<f2>"
+       :bind (("M-o" . custom/other-window-multiframe)
+              :prefix "<f2>"
               :prefix-map frame-keymap
               ("n" . make-frame-command)
               ("k" . delete-frame)
@@ -3511,7 +3516,6 @@
         ;; (bind-key "<f7> ." 'org-agenda-clock-in org-agenda-mode-map)
         ;; (bind-key "<f7> ," 'org-agenda-clock-out org-agenda-mode-map)
         ;; (bind-key "<f7> o" 'ace-link-org org-agenda-mode-map)
-        (bind-key "M-o" 'ace-link-org org-mode-map)
         (bind-key "C-'" nil org-mode-map)
         (bind-key "C-c [" nil org-mode-map)
         (bind-key "C-c ]" nil org-mode-map)
