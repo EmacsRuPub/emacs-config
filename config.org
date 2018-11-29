@@ -1318,7 +1318,6 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flycheck
         :ensure t
-        :after (dash pkg-info let-alist seq counsel)
         :preface
         ;; CREDITS: https://github.com/nathankot/dotemacs
         (defvar counsel-flycheck-history nil
@@ -1344,43 +1343,20 @@
                                               (pos (flycheck-error-pos error)) )
                                   (goto-char (flycheck-error-pos error))))
                       :history 'counsel-flycheck-history)))
-        :commands (flycheck-next-error flycheck-previous-error counsel-flycheck)
-        :custom
-        (flycheck-global-modes '(not emacs-lisp-mode))
-        (flycheck-display-errors-delay 0.4)
-        (flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
+        :bind (:map mode-specific-map
+               ("y" . counsel-flycheck))
         :custom-face (flycheck-warning ((t (:foreground "yellow" :background "red"))))
         :config
-        (global-flycheck-mode)
-        (add-to-list 'display-buffer-alist
-                     `(,(rx bos "*Flycheck errors*" eos)
-                       (display-buffer-reuse-window
-                        display-buffer-in-side-window)
-                       (side            . bottom)
-                       (reusable-frames . visible)
-                       (window-height   . 0.33))))
+        (setq flycheck-global-modes '(not emacs-lisp-mode))
+        (setq flycheck-display-errors-delay 0.4)
+        (setq flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
+        (global-flycheck-mode 1))
 
       (use-package flycheck-pos-tip
         :ensure t
         :after (flycheck)
         :config
-        (flycheck-pos-tip-mode))
-
-      (use-package avy-flycheck
-        :ensure t
-        :config
-        (avy-flycheck-setup)
-        (setq avy-flycheck-dispatch-alist
-            '((?x . avy-action-kill-move)
-              (?X . avy-action-kill-stay)
-              (?m . avy-action-mark)
-              (?n . avy-action-copy))))
-
-      (defhydra hydra-errors ()
-        ("a" avy-flycheck-goto-error :color blue)
-        ("c" counsel-flycheck :color blue)
-        ("q" nil "cancel"))
-      (global-set-key (kbd "C-q") 'hydra-errors/body)
+        (flycheck-pos-tip-mode 1))
     #+END_SRC
 **** BACKLOG review concrete checkers functionality and usage
 ** utils
