@@ -520,6 +520,7 @@
                ("g" . counsel-rg)
                ("G" . (lambda () (interactive) (counsel-rg (thing-at-point 'symbol))))
                ("m" . swiper-multi)
+               ("I" . ivy-imenu-anywhere)
                :map help-map
                ("l" . counsel-find-library)
                :prefix-map custom-help-prefix-map
@@ -650,6 +651,14 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package link-hint
        :ensure t
+       :bind (:map mode-specific-map
+              :prefix-map link-hint-map
+              :prefix "l"
+              ("s" . custom/open-url-current-buffer)
+              ("f" . link-hint-open-link)
+              ("y" . link-hint-copy-link)
+              ("F" . link-hint-open-multiple-links)
+              ("Y" . link-hint-copy-multiple-links))
        :custom
        (link-hint-avy-style 'de-bruijn))
 
@@ -816,6 +825,7 @@
               ("c" . projectile-commander)
               ("d" . projectile-dired)
               ("f" . projectile-recentf)
+              ("T" . doom/ivy-tasks)
               ("h" . projectile-find-file))
        :config
        (add-to-list 'counsel-projectile-switch-project-action
@@ -1007,7 +1017,16 @@
                 " "
                 filename-and-process)) "include vc status info"))
 
-     (use-package recursive-narrow :ensure t)
+     (use-package recursive-narrow
+       :ensure t
+       :bind (:map mode-specific-map
+              :prefix-map recursive-narrow-map
+              :prefix "n"
+              ("r" . narrow-to-region)
+              ("d" . narrow-to-defun)
+              ("w" . widen)
+              ("N" . recursive-narrow-or-widen-dwim)
+              ("D" . recursive-widen-dwim)))
    #+END_SRC
 ** warping
    :PROPERTIES:
@@ -1049,34 +1068,6 @@
    :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-navigate ()
-       "
-       Locate                  Narrow/widen               Links
-       -----------------------------------------------------------------------
-       _s_ open URL            _r_egion                   _f_ hint & open
-       _>_ reposition buffer   _d_efun                    _y_ hint & copy
-       counsel-_I_menu         defun + _C_omments         _F_ hint & open multiple
-                             _w_iden                    _Y_ hint & copy multiple
-                             recursive _N_arrow DWIM    select w_3_m buffer
-                             recursive wi_D_en DWIM
-       "
-       ("s" custom/open-url-current-buffer "open URL" :color blue)
-       (">" reposition-window :color blue)
-       ("r" narrow-to-region :color blue)
-       ("d" narrow-to-defun :color blue)
-       ("C" narrow-to-defun+comments-above :color blue)
-       ("w" widen :color blue)
-       ("N" recursive-narrow-or-widen-dwim)
-       ("D" recursive-widen-dwim)
-       ("f" link-hint-open-link :color blue)
-       ("y" link-hint-copy-link :color blue)
-       ("F" link-hint-open-multiple-links :color blue)
-       ("Y" link-hint-copy-multiple-links :color blue)
-       ("3" w3m-select-buffer :color blue)
-       ("I" ivy-imenu-anywhere :color blue)
-       ("t" doom/ivy-tasks :color blue))
-     (global-set-key (kbd "<f3>") 'hydra-navigate/body)
-
      (global-set-key [remap kill-buffer] #'kill-this-buffer)
    #+END_SRC
 * editing
