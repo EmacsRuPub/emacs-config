@@ -301,11 +301,11 @@
                      100)
                 `(,opacity-percent . 50) '(100 . 100)))))
        :bind (:prefix "<f2>"
-                      :prefix-map frame-keymap
-                      ("n" . make-frame-command)
-                      ("k" . delete-frame)
-                      ("s" . delete-other-frames)
-                      ("v" . custom/toggle-transparency))
+              :prefix-map frame-keymap
+              ("n" . make-frame-command)
+              ("k" . delete-frame)
+              ("s" . delete-other-frames)
+              ("v" . custom/toggle-transparency))
        :config
        (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
        (blink-cursor-mode 0)
