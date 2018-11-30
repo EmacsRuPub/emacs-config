@@ -2606,27 +2606,19 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package mingus
        :ensure t
-       :bind (("C-c m" . hydra-mingus/body)
+       :bind (:map mode-specific-map
+              :prefix-map mingus-custom-map
+              :prefix "m"
+              ("s" . mingus)
+              ("/" . mingus-search)
+              ("<up>" . mingus-vol-up)
+              ("<down>" . mingus-vol-down)
+              ("<right>" . mingus-seek)
+              ("<left>" . mingus-seek-backward)
               :map mingus-playlist-map
               ("<Backspace>" . mingus-del))
        :config
-       (use-package libmpdee :ensure t)
-       (defhydra hydra-mingus ()
-         "
-       Control               Playlist
-       ------------------------------
-       _<up>_ volume up        _s_ show playlist
-       _<down>_ volume down    _/_ search for tracks
-       _<right>_ seek forward
-       _<left>_ seek backward
-       "
-         ("s" mingus "open mingus")
-         ("/" mingus-search "Search")
-         ("<up>" (dotimes (i 5) (mingus-vol-up)) "Louder")
-         ("<down>" (dotimes (i 5) (mingus-vol-down)) "Quieter")
-         ("<right>" mingus-seek "seek forward")
-         ("<left>" mingus-seek-backward "seek backward")
-         ("q" nil "cancel")))
+       (use-package libmpdee :ensure t))
    #+END_SRC
 ** EMMS
    :PROPERTIES:
