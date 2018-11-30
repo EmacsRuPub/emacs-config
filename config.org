@@ -1886,7 +1886,18 @@
         :commands magit-status magit-blame
         :mode (("COMMIT_EDITMSG" . conf-javaprop-mode)
                ("COMMIT" . git-commit-mode))
-        :bind (:map magit-status-mode-map
+        :bind (:prefix-map magit-custom-map
+               :prefix "C-'"
+               ("s" . magit-status)
+               ("f" . magit-log-buffer-file)
+               ("c" . magit-checkout)
+               ("w" . magit-diff-working-tree)
+               ("r" . magit-reflog)
+               ("b" . magit-blame)
+               ("B" . magit-branch-manager)
+               ("l" . magit-log)
+               ("l" . open-global-repos-list)
+               :map magit-status-mode-map
                ("E" . magit-rebase-interactive)
                ("q" . custom/magit-kill-buffers))
         :preface
@@ -1973,7 +1984,9 @@
         (defun custom/git-timemachine ()
           "Open git snapshot with the selected version.  Based on ivy-mode."
           (interactive)
-          (git-timemachine--start #'custom/git-timemachine-show-selected-revision)))
+          (git-timemachine--start #'custom/git-timemachine-show-selected-revision))
+        :bind (:map mode-specific-map
+               (";" . custom/git-timemachine)))
 
       (use-package git-wip-timemachine :ensure t)
 
@@ -2003,48 +2016,16 @@
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package smerge-mode
+        :bind (:map mode-specific-map
+               :prefix-map smerge-custom-map
+               :prefix "g"
+               ("k" . smerge-prev)
+               ("j" . smerge-next))
         :hook (find-file-hooks . (lambda ()
                                    (save-excursion
                                      (goto-char (point-min))
                                      (when (re-search-forward "^<<<<<<< " nil t)
                                        (smerge-mode 1))))))
-    #+END_SRC
-**** BACKLOG try to make hydra, neat functions detected
-*** hydra
-    :PROPERTIES:
-    :ID:       cad1e463-7d2c-48b9-bf6e-11df3e6cea89
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-vcs ()
-        "
-        PROJECT: %(projectile-project-root)
-
-        Magit               Additional
-        -----------------------------------------
-        _s_: status         _k_ smerge / goto prev conflict
-        _l_: log            _j_ smerge / goto next conflict
-        _f_: file log       _l_ Show repositories _l_ist
-        _r_: reflog
-        _w_: diff worktree
-        _t_: time machine
-        _b_: blame
-        _c_: checkout
-        _B_: branch mgr
-        "
-        ("s" magit-status :color blue)
-        ("f" magit-log-buffer-file :color blue)
-        ("c" magit-checkout :color blue)
-        ("w" magit-diff-working-tree :color blue)
-        ("r" magit-reflog :color blue)
-        ("b" magit-blame :color blue)
-        ("B" magit-branch-manager :color blue)
-        ("l" magit-log :color blue)
-        ("t" custom/git-timemachine :color blue)
-        ("W" git-wip-timemachine-toggle :color blue)
-        ("k" smerge-prev "previous conflict")
-        ("j" smerge-next "next conflict")
-        ("l" open-global-repos-list :color blue))
-      (global-set-key (kbd "C-'") 'hydra-vcs/body)
     #+END_SRC
 ** languages
 *** common
