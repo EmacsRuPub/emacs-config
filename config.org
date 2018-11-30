@@ -2813,13 +2813,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (imagemagick-register-types)
 
-     (use-package google-translate
-       :ensure t
-       :bind (("C-c C-t" . google-translate-at-point)
-              ("C-c C-T" . google-translate-smooth-translate))
-       :init
-       (use-package google-translate-default-ui))
-
      (use-package wttrin
        :ensure t
        :after (xterm-color)
@@ -2833,8 +2826,6 @@
               :prefix "M-t"
               ("b" . webpaste-paste-buffer)
               ("r" . webpaste-paste-region)))
-
-     (use-package ein :ensure t)
 
      (use-package atomic-chrome
        :ensure t
