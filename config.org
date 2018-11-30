@@ -395,11 +395,9 @@
 
     (use-package super-save
       :ensure t
-      :if enable-experimental-packages
       :custom
       (super-save-remote-files nil)
       :config
-      (add-to-list 'super-save-hook-triggers 'find-file-hook)
       (super-save-mode 1))
   #+END_SRC
   maintain recent files
