@@ -2538,18 +2538,11 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package emamux
        :ensure t
-       :bind ("<f12>" . hydra-emamux/body)
-       :config
-       (defhydra hydra-emamux ()
-         "
-         _n_ew window
-         _s_end region
-         _r_un command
-         "
-         ("n" emamux:new-window)
-         ("s" emamux:send-region)
-         ("r" emamux:run-command)
-         ("q" nil)))
+       :bind (:prefix-map emamux-custom-map
+              :prefix "<f12>"
+              ("n" . emamux:new-window)
+              ("s" . emamux:send-region)
+              ("r" . emamux:run-command)))
    #+END_SRC
 ** internal browser (w3m/eww)
    :PROPERTIES:
