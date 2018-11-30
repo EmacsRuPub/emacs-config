@@ -1171,6 +1171,7 @@
               :prefix "C-z"
               ("o" . just-one-space)
               ("w" . delete-trailing-whitespace)
+              ("s" . transpose-sexps)
               ("6" . (lambda () (interactive) (custom/switch-case 'camel)))
               ("^" . (lambda () (interactive) (custom/switch-case 'camel-up)))
               ("_" . (lambda () (interactive) (custom/switch-case 'snake)))
@@ -1555,22 +1556,6 @@
    :ID:       89d1510e-ae5a-4d28-b044-018dd60c8f90
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (global-unset-key (kbd "M-t")) ;; Transpose stuff with M-t // which used to be transpose-words
-
-     (defhydra hydra-transpose ()
-       "
-       ___ undo last
-       transpose _w_ords
-       transpose _s_exps
-       _a_nchored transpose
-       "
-       ("_" undo-tree-undo "undo last")
-       ("w" custom/transpose-words "on words")
-       ("s" transpose-sexps "on sexps")
-       ("a" anchored-transpose "anchored")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "M-t") 'hydra-transpose/body)
-
      (global-set-key [remap fill-paragraph] #'unfill-toggle)
 
      (global-set-key (kbd "M-\"") 'eval-region)
