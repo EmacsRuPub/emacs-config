@@ -1137,12 +1137,36 @@
        :delight
        ((visual-line-mode . " ↩")
         (auto-fill-function . " ↵"))
-       :bind ("M-g" . goto-line)
        :preface
        (defun custom/newline-hook ()
          (local-set-key (kbd "C-m") 'newline-and-indent)
          (local-set-key (kbd "<return>") 'newline-and-indent))
+       (defun custom/switch-case (&optional style)
+         (interactive)
+         (let* ((bounds (bounds-of-thing-at-point 'symbol))
+                (from (if (use-region-p) (region-beginning) (car bounds)))
+                (to (if (use-region-p) (region-end) (cdr bounds)))
+                (data (buffer-substring-no-properties from to))
+                (result (funcall (cond ((eq style 'camel) 's-lower-camel-case)
+                                       ((eq style 'camel-up) 's-upper-camel-case)
+                                       ((eq style 'snake) 's-snake-case)
+                                       ((eq style 'kebab) 's-dashed-words)
+                                       (t 's-lower-camel-case))
+                                 data)))
+           (save-excursion
+             (delete-region from to)
+             (goto-char from)
+             (insert result))))
        :hook (((yaml-mode-hook emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/newline-hook))
+       :bind (("M-g" . goto-line)
+              :prefix-map custom-edit-map
+              :prefix "C-z"
+              ("o" . just-one-space)
+              ("w" . delete-trailing-whitespace)
+              ("6" . (lambda () (interactive) (custom/switch-case 'camel)))
+              ("^" . (lambda () (interactive) (custom/switch-case 'camel-up)))
+              ("_" . (lambda () (interactive) (custom/switch-case 'snake)))
+              ("-" . (lambda () (interactive) (custom/switch-case 'kebab))))
        :custom
        (bidi-display-reordering nil)
        (kill-whole-line t)
@@ -1163,63 +1187,21 @@
        (put 'transient-mark-mode 'permanent-local t)
        (put 'set-goal-column 'disabled nil))
 
-     (defun custom/switch-case (&optional style)
-       (interactive)
-       (let* ((bounds (bounds-of-thing-at-point 'symbol))
-              (from (if (use-region-p) (region-beginning) (car bounds)))
-              (to (if (use-region-p) (region-end) (cdr bounds)))
-              (data (buffer-substring-no-properties from to))
-              (result (funcall (cond ((eq style 'camel) 's-lower-camel-case)
-                                   ((eq style 'camel-up) 's-upper-camel-case)
-                                   ((eq style 'snake) 's-snake-case)
-                                   ((eq style 'kebab) 's-dashed-words)
-                                   (t 's-lower-camel-case))
-                            data)))
-         (save-excursion
-           (delete-region from to)
-           (goto-char from)
-           (insert result))))
+     (use-package tabify
+       :bind (:map mode-specific-map
+              :prefix-map tabify-map
+              :prefix "t"
+              ("SPC" . untabify)
+              ("TAB" . tabify)))
+
+     (use-package sort
+       :bind (:map mode-specific-map
+              :prefix-map sort-map
+              :prefix "s"
+              ("s" . sort-lines)
+              ("u" . delete-duplicate-lines)))
    #+END_SRC
 ** regions and rectangles
-*** definitions
-    :PROPERTIES:
-    :ID:       7cfe1de9-52f8-4a68-bae4-4973830b6390
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (define-namespace custom/
-
-      (defun cite-region (arg)
-        (clipboard-kill-ring-save (region-beginning) (region-end))
-        (with-temp-buffer
-          (let ((comment-start "> "))
-            (yank)
-            (comment-region (point-min) (point-max))
-            (when (> arg 1)
-              (beginning-of-buffer)
-              (insert "\n"))
-            (clipboard-kill-region (point-min) (point-max)))))
-
-      (defun append-cited-region (arg)
-        (interactive "P")
-        (let ((numarg (prefix-numeric-value arg)))
-          (custom/cite-region numarg)
-          (when (> numarg 1)
-            (end-of-buffer))
-          (yank)))
-
-      ;; Compliment to kill-rectangle (just like kill-ring-save compliments
-      ;; kill-region)
-      ;; http://www.emacsblog.org/2007/03/17/quick-tip-set-goal-column/#comment-183
-      (defun kill-save-rectangle (start end &optional fill)
-        "Save the rectangle as if killed, but don't kill it. See
-        `kill-rectangle' for more information."
-        (interactive "r\nP")
-        (kill-rectangle start end fill)
-        (goto-char start)
-        (yank-rectangle))
-
-      )
-    #+END_SRC
 *** setup
     :PROPERTIES:
     :ID:       0fc28d80-7af1-4ce9-a52e-d46fff4d050f
@@ -1244,17 +1226,12 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package comment-dwim-2
        :ensure t
-       :bind ("M-]" . comment-dwim-2))
+       :bind (:map mode-specific-map
+              ("]" . comment-dwim-2)))
 
-     ;;TODO: bind in hydras
-     (use-package rebox2
-       :ensure t
-       :commands rebox-dwim rebox-cycle)
-
-     ;;TODO: bind in hydras
-     (use-package banner-comment
-       :ensure t
-       :commands banner-comment)
+     (use-package newcomment
+       :bind (:map mode-specific-map
+              ("/" . comment-box)))
    #+END_SRC
 ** clipboard and killring
    :PROPERTIES:
@@ -1522,19 +1499,7 @@
               ("C-S-a" . sp-beginning-of-sexp)
               ("C-S-d" . sp-end-of-sexp)
               (")" . sp-up-sex)
-              ("C-<left_bracket>" . sp-select-previous-thing)
-              ("C-c / r n" . sp-narrow-to-sexp)
-              ("C-c / t" . sp-prefix-tag-object)
-              ("C-c / p" . sp-prefix-pair-object)
-              ("C-c / y" . sp-prefix-symbol-object)
-              ("C-c / c" . sp-convolute-sexp)
-              ("C-c / a" . sp-absorb-sexp)
-              ("C-c / w" . sp-rewrap-sexp)
-              ("C-c / e" . sp-emit-sexp)
-              ("C-c / p" . sp-add-to-previous-sexp)
-              ("C-c / n" . sp-add-to-next-sexp)
-              ("C-c / j" . sp-join-sexp)
-              ("C-c / s" . sp-split-sexp))
+              ("C-<left_bracket>" . sp-select-previous-thing))
        :config
        (use-package smartparens-config)
        (show-smartparens-global-mode t)
@@ -1577,60 +1542,6 @@
    :ID:       89d1510e-ae5a-4d28-b044-018dd60c8f90
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-edit (:color blue :idle 1.0)
-       "
-       Editing                         Kill/yank                 Buffers
-       -------------------------------------------------------------------------------------
-       just _o_ne space between        _y_ank to register        _`_ redraw display
-                                     _p_ut from register       create _S_cratch
-       _/_ make comment box            _k_ yank rectangle        _d_iff buffer <-> file
-       _SPC_ untabify                  append next _K_ill        re_n_ame buffer+file
-       _TAB_ tabify                    _a_ppend cited region     query/replace rege_x_p
-       delete trailing _w_hitespaces
-       _s_ort lines
-       keep _u_nique lines
-       _6_ camelCase
-       _^_ CamelCase
-       ___ snake_case
-       _-_ kebab-case
-
-       Custom:
-       _t_ranslate TAP with Google
-       _T_ranslate query with Google
-       "
-       ("o" just-one-space)
-       ("2" crux-duplicate-and-comment-current-line-or-region)
-       ("/" comment-box)
-       ("SPC" untabify)
-       ("TAB" tabify)
-       ("w" delete-trailing-whitespace)
-       ("s" sort-lines)
-       ("u" delete-duplicate-lines)
-       ("6" (lambda () (interactive) (custom/switch-case 'camel)))
-       ("^" (lambda () (interactive) (custom/switch-case 'camel-up)))
-       ("_" (lambda () (interactive) (custom/switch-case 'snake)))
-       ("-" (lambda () (interactive) (custom/switch-case 'kebab)))
-       ("r" rebox-dwim :color blue)
-       ("c" rebox-cycle "cycle box styles")
-       ("y" copy-to-register)
-       ("p" insert-register)
-       ("k" custom/kill-save-rectangle)
-       ("K" append-next-kill)
-       ("a" custom/append-cited-region)
-       ("`" redraw-display)
-       ("S" (lambda ()
-              (interactive)
-              (if symbolword-mode
-                  (symbolword-mode -1)
-                (symbolword-mode 1))))
-       ("d" diff-buffer-with-file)
-       ("n" crux-rename-file-and-buffer)
-       ("x" query-replace-regexp)
-       ("t" google-translate-at-point)
-       ("T" google-translate-query-translate)
-       ("q" nil "cancel"))
-     (global-set-key (kbd "C-z") 'hydra-edit/body)
-
      (defhydra hydra-toggle (:color blue)
        "
        TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
@@ -1864,10 +1775,10 @@
 
       (use-package vagrant-tramp :ensure t)
 
+      ;;TODO: rebind to something
       (use-package counsel-tramp
         :ensure t
-        :after (docker-tramp vagrant-tramp)
-        :bind ("C-c s" . counsel-tramp))
+        :after (docker-tramp vagrant-tramp))
     #+END_SRC
 *** eldoc
     :PROPERTIES:
