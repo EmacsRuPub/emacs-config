@@ -3618,6 +3618,17 @@
               (unless (string-match topic Info-current-file)
                 (Info-goto-node (format "(%s)" topic))))
           (info topic bname)))
+      (defun custom/info-org () (custom/open-info "org" "*org info*"))
+      (defun custom/info-elisp () (custom/open-info "elisp" "*elisp info*"))
+      (defun custom/info-emacs () (custom/open-info "emacs" "*emacs info*"))
+      (defun custom/info-gcl () (custom/open-info "gcl" "*hyperspec*"))
+      :bind (:map mode-specific-map
+             :prefix-map info-custom-map
+             :prefix "C-h"
+             ("o" . custom/open-org)
+             ("e" . custom/open-elisp)
+             ("m" . custom/open-emacs)
+             ("h" . custom/open-gcl))
       :config
       (info-initialize)
       (setq Info-additional-directory-list
@@ -3626,15 +3637,7 @@
       (add-to-list 'Info-directory-list
                    (format "%selpa/%s"
                            user-emacs-directory
-                           (car (directory-files (at-config-basedir "elpa") nil "^use-package-"))))
-      (defhydra hydra-info-to (:hint nil :color teal)
-        "
-      _o_rg _e_lisp e_m_acs _h_yperspec"
-        ("o" (custom/open-info "org" "*org info*"))
-        ("e" (custom/open-info "elisp" "*elisp info*"))
-        ("m" (custom/open-info "emacs" "*emacs info*"))
-        ("h" (custom/open-info "gcl" "*hyperspec*")))
-      (global-set-key (kbd "C-c C-h") 'hydra-info-to/body))
+                           (car (directory-files (at-config-basedir "elpa") nil "^use-package-")))))
 
     (use-package info-buffer
       :ensure t
