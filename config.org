@@ -2828,13 +2828,11 @@
 
      (use-package webpaste
        :ensure t
-       :bind ("M-t" . hydra-transpose/body)
-       :config
        ;;TODO: fix keybindings
-       (defhydra hydra-webpaste ()
-         ("b" webpaste-paste-buffer "paste buffer")
-         ("r" webpaste-paste-region "paste region")
-         ("q" nil "cancel")))
+       :bind (:prefix-map webpaste-custom-map
+              :prefix "M-t"
+              ("b" . webpaste-paste-buffer)
+              ("r" . webpaste-paste-region)))
 
      (use-package ein :ensure t)
 
