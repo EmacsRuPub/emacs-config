@@ -918,16 +918,6 @@
    :ID:       2623e68d-5af5-4868-81d9-aab1e516026b
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package phi-search
-       :ensure t
-       :commands phi-search phi-search-backward
-       :hook (isearch-mode-hook . phi-search-from-isearch-mc/setup-keys)
-       :config
-       (use-package phi-search-mc
-         :ensure t
-         :config
-         (phi-search-mc/setup-keys)))
-
      (use-package deadgrep
        :ensure t
        :commands deadgrep
@@ -1087,34 +1077,8 @@
        :ensure t
        :bind ("C-x l" . ialign))
 
-     (use-package multiple-cursors
-       :ensure t
-       :after (region-bindings-mode)
-       :bind (:map region-bindings-mode-map
-                   ("C->" . mc/mark-next-like-this)
-                   ("C-<" . mc/mark-previous-like-this)
-                   ("C-c C-o" . mc/mark-all-like-this)
-                   ("C-{" . mc/edit-beginnings-of-lines)
-                   ("C-}" . mc/edit-ends-of-lines)
-                   ("M-+" . mc/mark-more-like-this-extended)
-                   ("C-c a" . mc/mark-all-in-region)
-                   ("C-c d" . mc/mark-all-like-this-in-defun)
-                   ("C-c D" . mc/mark-all-like-this-dwim)
-                   ("`" . mc/sort-regions)
-                   ("C-+" . mc/insert-numbers))
-       :config
-       (use-package mc-extras
-         :ensure t
-         :after (multiple-cursors region-bindings-mode)
-         :bind (:map region-bindings-mode-map  ; should we use this keymap or bind elsewhere?
-                     ("M-." . mc/mark-next-sexps)
-                     ("M-," . mc/mark-previous-sexps)
-                     ("C-|" . mc/move-to-column)
-                     ("C-." . mc/remove-current-cursor)))
-       (use-package mc-cycle-cursors
-         :bind (:map mc/keymap
-                     ("C-n" . mc/cycle-forward)
-                     ("C-p" . mc/cycle-backward))))
+     (use-package iedit
+       :ensure t)
 
      (use-package delsel
        :bind
