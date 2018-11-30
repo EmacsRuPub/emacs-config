@@ -2789,26 +2789,19 @@
     #+END_SRC
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
 ** security
-*** packages
-    :PROPERTIES:
-    :ID:       cec54d13-16be-4e61-850f-37f7ba2aeb0e
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package pass :ensure t)
-
-      (use-package ivy-pass :ensure t)
-    #+END_SRC
-*** hydras
-    :PROPERTIES:
-    :ID:       9f0fcd37-4dc5-4444-b429-dea775bb9b32
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defhydra hydra-security (:idle 1.0)
-        ("p" pass "pass" :color blue)
-        ("!" ivy-pass "Ivy interface to Pass" :color blue)
-        ("q" nil "cancel"))
-      (global-set-key (kbd "<f6>") 'hydra-security/body)
-    #+END_SRC
+   :PROPERTIES:
+   :ID:       cec54d13-16be-4e61-850f-37f7ba2aeb0e
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package pass
+       :ensure t
+       :bind (:prefix-map pass-custom-map
+              :prefix "<f6>"
+              ("p" . pass)
+              ("!" . ivy-pass))
+       :config
+       (use-package ivy-pass :ensure t))
+   #+END_SRC
 ** various useful packages
    :PROPERTIES:
    :ID:       52e2700e-1695-4382-b0ef-992b1f575976
