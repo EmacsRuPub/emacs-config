@@ -1506,6 +1506,11 @@
        (delete 'emacs-lisp-mode aggressive-indent-modes-to-prefer-defun)
        (add-to-list 'aggressive-indent-dont-indent-if
                     '(not (null (string-match (rx (zero-or-more space) (syntax comment-start) (zero-or-more anything)) (thing-at-point 'line))))))
+
+     (use-package dynamic-ruler
+       :ensure t
+       :bind (("C->" . dynamic-ruler)
+              ("C-^" . dynamic-ruler-vertical)))
    #+END_SRC
 * completion
 ** snippets
