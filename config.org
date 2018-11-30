@@ -3647,28 +3647,17 @@
       (defalias 'man 'woman) ;'Woman' offers completion better than 'man'.
       (setenv "MANPATH" "/usr/share/man:/usr/local/man"))
 
-    (defhydra hydra-apropos (:color blue)
-      "
-      Apropos
-      ---------------
-      _a_s it is =)
-      _d_ocumentation
-      _v_ariable
-      _c_ommand
-      _l_ibrary
-      _u_ser option
-      _i_nfo
-      _t_ags
-      valu_e_
-      "
-      ("a" apropos)
-      ("d" apropos-documentation)
-      ("v" apropos-variable)
-      ("c" apropos-command)
-      ("l" apropos-library)
-      ("u" apropos-user-option)
-      ("i" info-apropos "info")
-      ("t" tags-apropos "tags")
-      ("e" apropos-value))
-    (global-set-key (kbd "C-c h") 'hydra-apropos/body)
+    (use-package apropos
+      :bind (:map mode-specific-map
+             :prefix-map apropos-custom-map
+             :prefix "h"
+             ("a" . apropos)
+             ("d" . apropos-documentation)
+             ("v" . apropos-variable)
+             ("c" . apropos-command)
+             ("l" . apropos-library)
+             ("u" . apropos-user-option)
+             ("i" . info-apropos)
+             ("t" . tags-apropos)
+             ("e" . apropos-value)))
   #+END_SRC
