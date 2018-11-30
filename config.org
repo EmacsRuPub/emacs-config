@@ -2967,6 +2967,46 @@
                      (time-add (current-idle-time) custom/idle-clockout-recheck-interval)
                      nil
                      'custom/clockout-when-idle)))))
+        :bind (:prefix-map orgmode-custom-map
+               :prefix "<f7>"
+               ("g" . org-clock-goto)
+               ("." . org-clock-in)
+               ("," . org-clock-out)
+               ("^" . org-mru-clock-select-recent-task)
+               ("c" . org-clock-cancel)
+               ("x" . counsel-org-clock-context)
+               ("h" . counsel-org-clock-history)
+               ("d" . org-clock-display)
+               ("R" . org-clock-report)
+               ("p" . org-pomodoro)
+               ("s" . org-schedule)
+               ("|" . org-deadline)
+               ("t" . org-toggle-timestamp-type)
+               ("e" . org-capture)
+               ("w" . org-store-link)
+               ("y" . org-insert-link-global)
+               ("S" . org-set-property)
+               ("D" . org-delete-property)
+               ("A" . org-footnote-action)
+               ("r" . org-refile)
+               ("T" . org-table-create)
+               ("a" . org-agenda)
+               ("b" . org-dashboard-display)
+               ("v" . org-reveal)
+               ("f" . ace-link-org)
+               ("n" . org-narrow-to-subtree)
+               ("-" . org-sparse-tree)
+               ("l" . counsel-org-agenda-headlines)
+               ("H" . org-recent-headings-ivy)
+               ("=" . org-show-todo-tree)
+               ("\\" . counsel-org-tag)
+               ("<right>" . outline-next-visible-heading)
+               ("<left>" . outline-previous-visible-heading)
+               ("<down>" . org-forward-heading-same-level)
+               ("<up>" . org-backward-heading-same-level)
+               ("u" . outline-up-heading)
+               ("G" . org-goto)
+               (";" . custom/org-tags-all))
         :config
         (use-package org-capture-pop-frame :ensure t)
         (add-hook 'kill-emacs-hook #'custom/finally-tangle-literate-config)
@@ -3461,71 +3501,6 @@
         :custom
         (counsel-org-clock-default-action 'counsel-org-clock-clock-dwim-action))
     #+END_SRC
-** hydras
-   :PROPERTIES:
-   :ID:       1666c146-50ef-4264-bc2d-0fe9e473e157
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-org-global (:color teal :idle 1.0)
-       "
-       ^Control^                 ^Editing^            ^Context^               ^Movement^
-       ---------------------------------------------------------------------------------------------------------
-       _g_oto clock              captur_e_            _a_genda                _<right>_ next visible heading
-       _._ clock in              _w_ store link       dash_b_oard             _<left>_  prev visible heading
-       _,_ clock out             _y_ank link          re_v_eal                _<down>_  forward same level
-       _\^_ recently clocked     _S_et property       _f_ ace-link            _<up>_    backward same level
-       _c_ancel clock            _D_elete property    _n_arrow to subtree     heading _u_p
-       _d_isplay clocktime       footnote _A_ction    _-_ sparse tree         recent _H_eadings
-       _R_eport clocks           _r_efile             agenda _h_eadings       Org _G_oto
-       _p_omodoro                create _T_able       _=_ todo tree
-       _s_chedule
-       _|_ deadline
-       _t_oggle TS type
-
-       _\?_ clocking commands
-       "
-       ("g" org-clock-goto)
-       ("." org-clock-in)
-       ("," org-clock-out)
-       ("^" org-mru-clock-select-recent-task)
-       ("c" org-clock-cancel)
-       ("x" counsel-org-clock-context)
-       ("h" counsel-org-clock-history)
-       ("d" org-clock-display)
-       ("R" org-clock-report)
-       ("p" org-pomodoro)
-       ("s" org-schedule :color blue)
-       ("|" org-deadline :color blue)
-       ("t" org-toggle-timestamp-type)
-       ("e" org-capture :color blue)
-       ("w" org-store-link)
-       ("y" org-insert-link-global)
-       ("S" org-set-property)
-       ("D" org-delete-property)
-       ("A" org-footnote-action)
-       ("r" org-refile "refile")
-       ("T" org-table-create)
-       ("a" org-agenda :color blue)
-       ("b" org-dashboard-display :color blue)
-       ("v" org-reveal "reveal")
-       ("f" ace-link-org :color blue)
-       ("n" org-narrow-to-subtree)
-       ("-" org-sparse-tree)
-       ("l" counsel-org-agenda-headlines)
-       ("H" org-recent-headings-ivy)
-       ("=" org-show-todo-tree)
-       ("\\" counsel-org-tag)
-       ("<right>" outline-next-visible-heading "next heading")
-       ("<left>" outline-previous-visible-heading "prev heading")
-       ("<down>" org-forward-heading-same-level "next heading at same level")
-       ("<up>" org-backward-heading-same-level "prev heading at same level")
-       ("u" outline-up-heading "up heading")
-       ("G" org-goto "goto" :exit t)
-       (";" custom/org-tags-all  :exit t)
-       ("?" (org-info "Clocking commands") "")
-       ("q" nil "cancel"))
-     (global-set-key (kbd "<f7>") 'hydra-org-global/body)
-   #+END_SRC
 * publishing
   :PROPERTIES:
   :ID:       27edca98-b474-41dd-8a12-79b20eb52ede
@@ -3566,6 +3541,7 @@
                 (Info-goto-node (format "(%s)" topic))))
           (info topic bname)))
       (defun custom/info-org () (custom/open-info "org" "*org info*"))
+      (defun custom/info-org-clocking () (org-info "Clocking commands"))
       (defun custom/info-elisp () (custom/open-info "elisp" "*elisp info*"))
       (defun custom/info-emacs () (custom/open-info "emacs" "*emacs info*"))
       (defun custom/info-gcl () (custom/open-info "gcl" "*hyperspec*"))
@@ -3573,6 +3549,7 @@
              :prefix-map info-custom-map
              :prefix "C-h"
              ("o" . custom/open-org)
+             ("?" . custom/info-org-clocking)
              ("e" . custom/open-elisp)
              ("m" . custom/open-emacs)
              ("h" . custom/open-gcl))
