@@ -2754,10 +2754,15 @@
                         (interactive)
                         (if (member "unread" (notmuch-search-get-tags))
                             (notmuch-search-tag '("-unread" "-spam"))
-            (notmuch-search-tag '("+unread")))))
+                          (notmuch-search-tag '("+unread")))))
                ("g" . notmuch-refresh-this-buffer)
                :map notmuch-message-mode-map
-               ("#" . mml-attach-file))
+               ("#" . mml-attach-file)
+               :map mode-specific-map
+               :prefix-map notmuch-custom-map
+               :prefix "4"
+               ("n" . notmuch)
+               ("N" . counsel-notmuch))
         :hook ((notmuch-hello-refresh-hook . (lambda ()
                                                (if (and (eq (point) (point-min))
                                                         (search-forward "Saved searches:" nil t))
@@ -2777,15 +2782,14 @@
         (notmuch-saved-searches private/notmuch-saved-searches)
         (notmuch-crypto-process-mime t) ; Automatically check signatures
         (notmuch-hello-hide-tags (quote ("killed")))
-        (notmuch-address-command "notmuch-addrlookup"))
-
-      (use-package org-notmuch
-        :after (org notmuch))
-
-      (use-package counsel-notmuch
-        :ensure t
-        :after (counsel notmuch)
-        :commands counsel-notmuch)
+        (notmuch-address-command "notmuch-addrlookup")
+        :config
+        (use-package org-notmuch
+          :after (org notmuch))
+        (use-package counsel-notmuch
+          :ensure t
+          :after (counsel notmuch)
+          :commands counsel-notmuch))
     #+END_SRC
 **** BACKLOG try tagging from https://asynchronous.in/2017/04/21/Email-with-notmuch-and-astroid/
 ** security
@@ -2850,7 +2854,10 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package twittering-mode
        :ensure t
-       :commands twit
+       :bind (:map mode-specific-map
+              :prefix-map twittering-custom-map
+              :prefix "5"
+              ("t" . twit))
        :init
        (setq twittering-use-master-password t)
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
@@ -2878,18 +2885,6 @@
        :ensure t
        :config
        (edit-server-start))
-   #+END_SRC
-** hydra
-   :PROPERTIES:
-   :ID:       681df8be-f272-4b73-8399-935b20414567
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-clients (:exit t :color red :idle 1.0)
-       "Access to clients"
-       ("n" notmuch nil)
-       ("N" counsel-notmuch nil)
-       ("t" twit nil))
-     (global-set-key (kbd "C-c 4") 'hydra-clients/body)
    #+END_SRC
 * pim
 ** orgmode
