@@ -88,6 +88,8 @@
        (custom-file (at-config-basedir "customizations.el")))
 
      (use-package emacs
+       :bind (("M-\"" . eval-region)
+              ([remap kill-buffer] . kill-this-buffer))
        :config
        (fset 'yes-or-no-p 'y-or-n-p)
        (setq scalable-fonts-allowed t)
@@ -446,16 +448,6 @@
        (advice-add 'save-buffers-kill-terminal :before 'custom/save-buffer-clients-on-exit))
    #+END_SRC
 ** some ubiquitous packages
-*** hydra
-    :PROPERTIES:
-    :ID:       bd5362c6-e714-48af-b1de-7b521fa6bb44
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package hydra
-        :ensure t
-        :config
-        (set-face-attribute 'hydra-face-blue nil :foreground "#00bfff"))
-    #+END_SRC
 *** ivy-based
     :PROPERTIES:
     :ID:       977de8de-42e2-478a-ad6b-6c2d87b6e47a
@@ -632,6 +624,7 @@
       (setq kept-old-versions 2)
       (setq version-control t)
       (setq save-abbrevs 'silently)
+      (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
 
       (use-package novice
         :config
@@ -1078,12 +1071,11 @@
 
      (use-package filecache)
    #+END_SRC
-** hydras and keybindings
+** keybindings
    :PROPERTIES:
    :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (global-set-key [remap kill-buffer] #'kill-this-buffer)
    #+END_SRC
 * editing
 ** move and bend text around
@@ -1133,7 +1125,8 @@
      ;;TODO: bind to keys more extensively
      ;;TODO: consolidate (un)filling functionality
      (use-package unfill
-       :ensure t)
+       :ensure t
+       :bind ([remap fill-paragraph] . unfill-toggle))
 
      (use-package simple
        :hook
@@ -1163,6 +1156,7 @@
              (insert result))))
        :hook (((yaml-mode-hook emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/newline-hook))
        :bind (("M-g" . goto-line)
+              ("M-SPC" . cycle-spacing)
               :prefix-map custom-toggle-map
               :prefix "<f11>"
               ("b" . subword-mode)
@@ -1550,17 +1544,6 @@
        (delete 'emacs-lisp-mode aggressive-indent-modes-to-prefer-defun)
        (add-to-list 'aggressive-indent-dont-indent-if
                     '(not (null (string-match (rx (zero-or-more space) (syntax comment-start) (zero-or-more anything)) (thing-at-point 'line))))))
-   #+END_SRC
-** hydras and keys
-   :PROPERTIES:
-   :ID:       89d1510e-ae5a-4d28-b044-018dd60c8f90
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (global-set-key [remap fill-paragraph] #'unfill-toggle)
-
-     (global-set-key (kbd "M-\"") 'eval-region)
-     (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
-     (global-set-key (kbd "M-SPC") 'cycle-spacing) ;; TODO: maybe place into some hydra
    #+END_SRC
 * completion
 ** snippets
