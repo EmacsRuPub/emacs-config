@@ -2148,24 +2148,6 @@
        :regexp "[^][()'\" \t\n]+"
        :ignore-case t
        :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
-
-      (defhydra hydra-slime ()
-        "
-      Slime
-      -----------
-      _s_ run
-      _l_ selector
-      _;_ insert balanced comments
-      _M-;_ remove balanced comments
-      _h_ documentation lookup
-      "
-        ("s" slime "run slime" :color blue)
-        ("l" slime-selector "slime selector" :color blue)
-        (";" slime-insert-balanced-comments)
-        ("M-;" slime-remove-balanced-comments)
-        ("h" slime-documentation-lookup)
-        ("q" nil "cancel"))
-      (global-set-key (kbd "M-p") 'hydra-slime/body)
     #+END_SRC
 *** python                                                               :review:
     :PROPERTIES:
