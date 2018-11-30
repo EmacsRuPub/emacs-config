@@ -1622,8 +1622,15 @@
                (if (check-expansion)
                    (company-complete-common)
                  (indent-for-tab-command)))))
+       :bind (:prefix-map yasnippet-custom-map
+              :prefix "<f5>"
+              ("v" . yas-visit-snippet-file)
+              ("i" . ivy-yasnippet))
        :config
        ;; snippets editing mode
+       (use-package ivy-yasnippet
+         :after (dash ivy yasnippet)
+         :ensure t)
        (setq yas-snippet-dirs nil)
        (push yas-installed-snippets-dir yas-snippet-dirs)
        (push (at-config-basedir "resources/yasnippet/") yas-snippet-dirs)
@@ -1652,16 +1659,6 @@
        (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
        (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
        (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
-
-     (use-package ivy-yasnippet
-       :after (dash ivy yasnippet)
-       :ensure t)
-
-     (defhydra hydra-yasnippet (:color teal)
-       ("v" yas-visit-snippet-file)
-       ("i" ivy-yasnippet)
-       ("q" nil))
-     (global-set-key (kbd "<f5>") 'hydra-yasnippet/body)
    #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
 ** company
