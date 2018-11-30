@@ -3519,25 +3519,6 @@
    :ID:       1666c146-50ef-4264-bc2d-0fe9e473e157
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-pim ()
-       "
-       BBDB                        Various
-       --------------------------------------------------------
-       _b_ as it is                _o_ calendar
-       _c_ create                  _k_ show keys frequencies
-       _u_ delete current record   _d_ deft
-       _D_ quit deft
-       "
-       ("b" bbdb)
-       ("c" bbdb-create)
-       ("u" bbdb-delete-current-record)
-       ("o" custom/calfw-open-calendar)
-       ("k" keyfreq-show)
-       ("d" deft)
-       ("D" custom/deft/quit-deft)
-       ("q" nil))
-     (global-set-key (kbd "C-c c") 'hydra-pim/body)
-
      (defhydra hydra-org-global (:color teal :idle 1.0)
        "
        ^Control^                 ^Editing^            ^Context^               ^Movement^
