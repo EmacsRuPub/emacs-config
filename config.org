@@ -1988,8 +1988,6 @@
         :bind (:map mode-specific-map
                (";" . custom/git-timemachine)))
 
-      (use-package git-wip-timemachine :ensure t)
-
       (use-package gitignore-mode
         :ensure t
         :mode ("^.gitignore$" . gitignore-mode))
