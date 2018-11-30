@@ -331,6 +331,10 @@
 
      (use-package menu-bar
        :config
+       :bind (:map mode-specific-map
+              ("b" . toggle-debug-on-error)
+              ("q" . toggle-debug-on-quit))
+       :config
        (menu-bar-mode -1))
 
      (use-package popwin :ensure t)
@@ -1159,6 +1163,10 @@
              (insert result))))
        :hook (((yaml-mode-hook emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/newline-hook))
        :bind (("M-g" . goto-line)
+              :prefix-map custom-toggle-map
+              :prefix "<f11>"
+              ("b" . subword-mode)
+              ("v" . view-mode)
               :prefix-map custom-edit-map
               :prefix "C-z"
               ("o" . just-one-space)
@@ -1402,7 +1410,12 @@
         :ensure t
         :defer 2
         :hook
-        (((prog-mode-hook text-mode-hook) . whitespace-turn-on))
+        ((prog-mode-hook text-mode-hook) . whitespace-turn-on)
+        :bind (:map mode-specific-map
+               :prefix-map whitespace-custom-map
+               :prefix "x"
+               ("w" . whitespace-mode)
+               ("W" . global-whitespace-mode))
         :custom
         (whitespace-line-column 121)
         (whitespace-style '(indentation::space
@@ -1542,20 +1555,6 @@
    :ID:       89d1510e-ae5a-4d28-b044-018dd60c8f90
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defhydra hydra-toggle (:color blue)
-       "
-       TOGGLE: de_b_ug on error (%(format \"%S\" debug-on-error))
-       _w_hitespace mode
-       "
-       ("b" toggle-debug-on-error "debug on error")
-       ("w" whitespace-mode "whitespace mode")
-       ("W" global-whitespace-mode "*global* whitespace mode")
-       ("B" subword-mode)
-       ("v" view-mode)
-       ("h" highlight-sexp-mode "toggle highlight-sexp mode")
-       ("q" toggle-debug-on-quit "toggle debug-on-quit mode"))
-     (global-set-key (kbd "<f11>") 'hydra-toggle/body)
-
      (global-unset-key (kbd "M-t")) ;; Transpose stuff with M-t // which used to be transpose-words
 
      (defhydra hydra-transpose ()
