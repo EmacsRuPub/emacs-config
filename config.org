@@ -735,25 +735,6 @@
        :config
        (save-place-mode 1))
    #+END_SRC
-** frames spawning
-   :PROPERTIES:
-   :ID:       6e6577e0-0142-4c0b-99fb-52cbd81797c9
-   :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (defun custom/update-frames (heads-count)
-        (let* ((frames-count (length (frame-list)))
-               (diff-count (- heads-count frames-count))
-               (diff-count-abs (abs diff-count)))
-          (cond
-           ((plusp diff-count)
-            (dotimes (i diff-count-abs)
-              (make-frame-command)))
-           ((minusp diff-count)
-            (let ((frame (selected-frame)))
-              (dolist (fr (frame-list))
-                (unless (eq fr frame) (condition-case nil (delete-frame fr) (error nil))))))
-           (t t))))
-    #+END_SRC
 ** unset keybindings
    :PROPERTIES:
    :ID:       41e2a40b-7161-4ef8-92ce-51fbcfa2b1b5
