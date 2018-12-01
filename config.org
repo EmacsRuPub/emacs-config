@@ -2070,6 +2070,8 @@
         :hook
         (python-mode-hook . lsp-python-enable))
 
+      ;;TODO: check if project is pythonic while switching with projectile machinery, otherwise ignore venvs switching
+
       (use-package python
         :after (lsp-python)
         :mode ("\\.py$" . python-mode)
