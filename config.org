@@ -199,6 +199,21 @@
 
      (add-hook 'focus-out-hook #'garbage-collect)
    #+END_SRC
+** encodings
+   :PROPERTIES:
+   :ID:       3819b6d8-73a0-4fba-bf37-ab10e3c9f45a
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package mule
+       :config
+       (prefer-coding-system 'utf-8)
+       (set-default-coding-systems 'utf-8)
+       (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
+       (set-selection-coding-system 'utf-8)
+       (set-terminal-coding-system 'utf-8)
+       (set-clipboard-coding-system 'utf-8)
+       (set-keyboard-coding-system 'utf-8))
+   #+END_SRC
 * appearance
 ** fonts
    :PROPERTIES:
@@ -440,211 +455,239 @@
          (server-start))
        (advice-add 'save-buffers-kill-terminal :before 'custom/save-buffer-clients-on-exit))
    #+END_SRC
-** some ubiquitous packages
-*** ivy-based
-    :PROPERTIES:
-    :ID:       977de8de-42e2-478a-ad6b-6c2d87b6e47a
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ivy
-        :ensure t
-        :delight ivy-mode
-        :bind (("C-x b" . ivy-switch-buffer)
-               ("M-<f12>" . ivy-switch-buffer)
-               ("<f10>" . ivy-resume)
-               ("C-c v" . ivy-push-view)
-               ("C-c V" . ivy-pop-view)
-               :map ivy-minibuffer-map
-               ("C-j" . ivy-immediate-done))
-        :config
-        (ivy-mode 1)
-        :custom-face
-        (ivy-current-match ((t (:background "gray1"))))
-        :custom
-        (ivy-display-style 'fancy)
-        (ivy-use-selectable-prompt t "Make the prompt line selectable")
-        (ivy-use-virtual-buffers t) ;; add 'recentf-mode’and bookmarks to 'ivy-switch-buffer'.
-        (ivy-height 20) ;; number of result lines to display
-        (ivy-count-format "%d/%d ")
-        (ivy-initial-inputs-alist nil) ;; no regexp by default
-        (ivy-re-builders-alist
-         ;; allow input not in order
-         '((read-file-name-internal . ivy--regex-fuzzy)
-           (t . ivy--regex-ignore-order))))
-
-      (use-package amx
-        :ensure t
-        :bind ("M-x" . amx)
-        :custom
-        (amx-backend 'ivy)
-        (amx-save-file (at-user-data-dir "amx-items")))
-
-      (use-package counsel
-        :ensure t
-        :defer 2
-        :after (swiper)
-        :delight counsel-mode
-        :preface
-        (defun custom/open-org-file ()
-          (interactive)
-          (ivy-read "Org files: "
-                    (funcall #'(lambda () (f-files (at-org-dir) nil t)))
-                    :action #'(lambda (candidate)
-                                (find-file candidate))
-                    :require-match t
-                    :caller 'custom/open-org-file))
-        (defun custom/open-org-kb-file ()
-          (interactive)
-          (ivy-read "Org files: "
-                    (funcall #'(lambda () (f-files (at-org-kb-dir) nil t)))
-                    :action #'(lambda (candidate)
-                                (find-file candidate))
-                    :require-match t
-                    :caller 'custom/open-org-kb-file))
-        :init
-        (require 'iso-transl)
-        :bind (([remap menu-bar-open] . counsel-tmm)
-               ([remap insert-char] . counsel-unicode-char)
-               ([remap isearch-forward] . counsel-grep-or-swiper)
-               ("C-h L" . counsel-locate)
-               ("C-c C-SPC" . counsel-mark-ring)
-               ("C-x C-r" . counsel-recentf)
-               ("C-c C-." . counsel-fzf)
-               ("C-c w" . counsel-wmctrl)
-               ("C-c o" . custom/open-org-file)
-               ("C-c k" . custom/open-org-kb-file)
-               :prefix-map counsel-aux-map
-               :prefix "<f9>"
-               ("y" . counsel-yank-pop)
-               ("m" . counsel-mark-ring)
-               ("c" . counsel-command-history)
-               ("e" . counsel-expression-history)
-               ("p" . counsel-package)
-               ("l" . counsel-git-log)
-               ("g" . counsel-rg)
-               ("G" . (lambda () (interactive) (counsel-rg (thing-at-point 'symbol))))
-               ("m" . swiper-multi)
-               ("I" . ivy-imenu-anywhere)
-               :map help-map
-               ("l" . counsel-find-library)
-               :prefix-map custom-help-prefix-map
-               :prefix "<f1>"
-               ("f" . counsel-describe-function)
-               ("v" . counsel-describe-variable)
-               ("l" . counsel-find-library)
-               ("b" . counsel-descbinds)
-               ("i" . counsel-info-lookup-symbol)
-               :map iso-transl-ctl-x-8-map
-               ("RET" . counsel-unicode-char)
-               :map ivy-minibuffer-map
-               ("M-y" . ivy-next-line))
-        :custom
-        (counsel-git-cmd "rg --files")
-        (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-        (counsel-rg-base-command "rg -i -M 120 --no-heading --line-number --color never %s .")
-        :config
-        (counsel-mode 1))
-
-      (use-package ivy-rich
-        :ensure t
-        :after (ivy)
-        :defines ivy-rich-abbreviate-paths ivy-rich-switch-buffer-name-max-length
-        :custom
-        (ivy-rich-switch-buffer-name-max-length 60 "Increase max length of buffer name.")
-        :config
-        (ivy-rich-mode 1))
-
-      (use-package ivy-xref
-        :ensure t
-        :custom
-        (xref-show-xrefs-function #'ivy-xref-show-xrefs "Use Ivy to show xrefs"))
-
-      (use-package ivy-dired-history
-        :ensure t
-        :after (dired savehist)
-        :config
-        (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
-
-      (use-package ivy-historian
-        :ensure t
-        :config
-        (ivy-historian-mode))
-    #+END_SRC
-*** other
-    :PROPERTIES:
-    :ID:       3b824d3a-e56f-4be5-b663-f92c7dcc81ad
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package tramp
-        :config
-        (setq tramp-default-method "ssh")
-        (setq tramp-ssh-controlmaster-options "")
-        (setq tramp-default-proxies-alist nil))
-
-      (use-package paradox
-        :ensure t
-        :after (seq let-alist spinner hydra)
-        :commands paradox-list-packages
-        :custom
-        (paradox-execute-asynchronously t)
-        (paradox-column-width-package 27)
-        (paradox-column-width-version 13)
-        (paradox-github-token private/paradox-github-token)
-        :config
-        (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print))
-
-      ;; for some reason feature 'files' provided with use-package
-      ;; brings more headache than it deserves, so a little bit of
-      ;; dirty imperative style below (still hope on fixing it later)
-      (defun custom/untabify-buffer ()
-        (when (member major-mode '(haskell-mode
-                                   emacs-lisp-mode
-                                   lisp-mode
-                                   python-mode))
-          (untabify (point-min) (point-max))))
-      (add-hook 'before-save-hook #'delete-trailing-whitespace)
-      (add-hook 'before-save-hook #'custom/untabify-buffer)
-      (when (> emacs-major-version 25) (auto-save-visited-mode 1))
-      (setq require-final-newline t)
-      (setq enable-local-variables nil)
-      ;; backup settings
-      (setq auto-save-default nil)
-      (setq backup-by-copying t)
-      (setq backup-by-copying-when-linked t)
-      (setq backup-directory-alist '(("." . "~/.cache/emacs/backups")))
-      (setq delete-old-versions -1)
-      (setq kept-new-versions 6)
-      (setq kept-old-versions 2)
-      (setq version-control t)
-      (setq save-abbrevs 'silently)
-      (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
-
-      (use-package novice
-        :config
-        (setq disabled-command-function nil))
-
-      (use-package which-key
-        :ensure t
-        :config
-        (which-key-setup-side-window-right)
-        (which-key-mode))
-    #+END_SRC
-** encodings
+** misc
    :PROPERTIES:
-   :ID:       3819b6d8-73a0-4fba-bf37-ab10e3c9f45a
+   :ID:       3b824d3a-e56f-4be5-b663-f92c7dcc81ad
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package mule
+     (use-package amx
+       :ensure t
+       :bind ("M-x" . amx)
+       :custom
+       (amx-backend 'ivy)
+       (amx-save-file (at-user-data-dir "amx-items")))
+
+     (use-package tramp
        :config
-       (prefer-coding-system 'utf-8)
-       (set-default-coding-systems 'utf-8)
-       (set-buffer-file-coding-system 'utf-8 'utf-8-unix)
-       (set-selection-coding-system 'utf-8)
-       (set-terminal-coding-system 'utf-8)
-       (set-clipboard-coding-system 'utf-8)
-       (set-keyboard-coding-system 'utf-8))
+       (setq tramp-default-method "ssh")
+       (setq tramp-ssh-controlmaster-options "")
+       (setq tramp-default-proxies-alist nil))
+
+     (use-package paradox
+       :ensure t
+       :after (seq let-alist spinner)
+       :commands paradox-list-packages
+       :custom
+       (paradox-execute-asynchronously t)
+       (paradox-column-width-package 27)
+       (paradox-column-width-version 13)
+       (paradox-github-token private/paradox-github-token)
+       :config
+       (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print))
+
+     ;; for some reason feature 'files' provided with use-package
+     ;; brings more headache than it deserves, so a little bit of
+     ;; dirty imperative style below (still hope on fixing it later)
+     (defun custom/untabify-buffer ()
+       (when (member major-mode '(haskell-mode
+                                  emacs-lisp-mode
+                                  lisp-mode
+                                  python-mode))
+         (untabify (point-min) (point-max))))
+     (add-hook 'before-save-hook #'delete-trailing-whitespace)
+     (add-hook 'before-save-hook #'custom/untabify-buffer)
+     (when (> emacs-major-version 25) (auto-save-visited-mode 1))
+     (setq require-final-newline t)
+     (setq enable-local-variables nil)
+     ;; backup settings
+     (setq auto-save-default nil)
+     (setq backup-by-copying t)
+     (setq backup-by-copying-when-linked t)
+     (setq backup-directory-alist '(("." . "~/.cache/emacs/backups")))
+     (setq delete-old-versions -1)
+     (setq kept-new-versions 6)
+     (setq kept-old-versions 2)
+     (setq version-control t)
+     (setq save-abbrevs 'silently)
+     (global-set-key (kbd "C-x f") 'find-file) ; I never use set-fill-column and I hate hitting it by accident.
+
+     (use-package novice
+       :config
+       (setq disabled-command-function nil))
+
+     (use-package which-key
+       :ensure t
+       :config
+       (which-key-setup-side-window-right)
+       (which-key-mode))
+
+     (use-package ibuffer
+       :commands ibuffer
+       :bind (([remap list-buffers] . ibuffer)
+              :map ibuffer-mode-map
+              ("/ ." . (lambda (qualifier)
+                         (interactive "sFilter by extname: ")
+                         (ibuffer-filter-by-filename (concat "\\." qualifier "$"))))
+              ("M-o" . other-window)) ; was ibuffer-visit-buffer-1-window
+       :hook (ibuffer-mode-hook . (lambda ()
+                                    ;; Make sure we're always using our buffer groups
+                                    (ibuffer-switch-to-saved-filter-groups "default")))
+       :custom
+       (ibuffer-default-sorting-mode 'major-mode) ;recency
+       (ibuffer-always-show-last-buffer :nomini)
+       (ibuffer-default-shrink-to-minimum-size t)
+       (ibuffer-jump-offer-only-visible-buffers t)
+       (ibuffer-saved-filters
+        '(("dired" ((mode . dired-mode)))
+          ("foss" ((filename . "foss")))
+          ("pets" ((filename . "pets")))
+          ("jabberchat" ((mode . jabber-chat-mode)))
+          ("orgmode" ((mode . org-mode)))
+          ("elisp" ((mode . emacs-lisp-mode)))
+          ("fundamental" ((mode . fundamental-mode)))
+          ("haskell" ((mode . haskell-mode)))))
+       (ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups))
+
+     (use-package ibuffer-vc
+       :ensure t
+       :hook (ibuffer-hook . (lambda ()
+                               (ibuffer-vc-set-filter-groups-by-vc-root)
+                               (unless (eq ibuffer-sorting-mode 'alphabetic)
+                                 (ibuffer-do-sort-by-alphabetic))))
+       :custom
+       (ibuffer-formats
+        '((mark modified read-only vc-status-mini " "
+                (name 18 18 :left :elide)
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " "
+                filename-and-process)) "include vc status info"))
    #+END_SRC
 * navigate
+** Ivy
+   :PROPERTIES:
+   :ID:       977de8de-42e2-478a-ad6b-6c2d87b6e47a
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package ivy
+       :ensure t
+       :delight ivy-mode
+       :bind (("C-x b" . ivy-switch-buffer)
+              ("M-<f12>" . ivy-switch-buffer)
+              ("<f10>" . ivy-resume)
+              ("C-c v" . ivy-push-view)
+              ("C-c V" . ivy-pop-view)
+              :map ivy-minibuffer-map
+              ("C-j" . ivy-immediate-done))
+       :config
+       (ivy-mode 1)
+       :custom-face
+       (ivy-current-match ((t (:background "gray1"))))
+       :custom
+       (ivy-display-style 'fancy)
+       (ivy-use-selectable-prompt t "Make the prompt line selectable")
+       (ivy-use-virtual-buffers t) ;; add 'recentf-mode’and bookmarks to 'ivy-switch-buffer'.
+       (ivy-height 20) ;; number of result lines to display
+       (ivy-count-format "%d/%d ")
+       (ivy-initial-inputs-alist nil) ;; no regexp by default
+       (ivy-re-builders-alist
+        ;; allow input not in order
+        '((read-file-name-internal . ivy--regex-fuzzy)
+          (t . ivy--regex-ignore-order))))
+
+     (use-package counsel
+       :ensure t
+       :defer 2
+       :after (swiper)
+       :delight counsel-mode
+       :preface
+       (defun custom/open-org-file ()
+         (interactive)
+         (ivy-read "Org files: "
+                   (funcall #'(lambda () (f-files (at-org-dir) nil t)))
+                   :action #'(lambda (candidate)
+                               (find-file candidate))
+                   :require-match t
+                   :caller 'custom/open-org-file))
+       (defun custom/open-org-kb-file ()
+         (interactive)
+         (ivy-read "Org files: "
+                   (funcall #'(lambda () (f-files (at-org-kb-dir) nil t)))
+                   :action #'(lambda (candidate)
+                               (find-file candidate))
+                   :require-match t
+                   :caller 'custom/open-org-kb-file))
+       :init
+       (require 'iso-transl)
+       :bind (([remap menu-bar-open] . counsel-tmm)
+              ([remap insert-char] . counsel-unicode-char)
+              ([remap isearch-forward] . counsel-grep-or-swiper)
+              ("C-h L" . counsel-locate)
+              ("C-c C-SPC" . counsel-mark-ring)
+              ("C-x C-r" . counsel-recentf)
+              ("C-c C-." . counsel-fzf)
+              ("C-c w" . counsel-wmctrl)
+              ("C-c o" . custom/open-org-file)
+              ("C-c k" . custom/open-org-kb-file)
+              :prefix-map counsel-aux-map
+              :prefix "<f9>"
+              ("y" . counsel-yank-pop)
+              ("m" . counsel-mark-ring)
+              ("c" . counsel-command-history)
+              ("e" . counsel-expression-history)
+              ("p" . counsel-package)
+              ("l" . counsel-git-log)
+              ("g" . counsel-rg)
+              ("G" . (lambda () (interactive) (counsel-rg (thing-at-point 'symbol))))
+              ("m" . swiper-multi)
+              ("I" . ivy-imenu-anywhere)
+              :map help-map
+              ("l" . counsel-find-library)
+              :prefix-map custom-help-prefix-map
+              :prefix "<f1>"
+              ("f" . counsel-describe-function)
+              ("v" . counsel-describe-variable)
+              ("l" . counsel-find-library)
+              ("b" . counsel-descbinds)
+              ("i" . counsel-info-lookup-symbol)
+              :map iso-transl-ctl-x-8-map
+              ("RET" . counsel-unicode-char)
+              :map ivy-minibuffer-map
+              ("M-y" . ivy-next-line))
+       :custom
+       (counsel-git-cmd "rg --files")
+       (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+       (counsel-rg-base-command "rg -i -M 120 --no-heading --line-number --color never %s .")
+       :config
+       (counsel-mode 1))
+
+     (use-package ivy-rich
+       :ensure t
+       :after (ivy)
+       :defines ivy-rich-abbreviate-paths ivy-rich-switch-buffer-name-max-length
+       :custom
+       (ivy-rich-switch-buffer-name-max-length 60 "Increase max length of buffer name.")
+       :config
+       (ivy-rich-mode 1))
+
+     (use-package ivy-xref
+       :ensure t
+       :custom
+       (xref-show-xrefs-function #'ivy-xref-show-xrefs "Use Ivy to show xrefs"))
+
+     (use-package ivy-dired-history
+       :ensure t
+       :after (dired savehist)
+       :config
+       (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable))
+
+     (use-package ivy-historian
+       :ensure t
+       :config
+       (ivy-historian-mode))
+   #+END_SRC
 ** URLs, links and TAPs
    :PROPERTIES:
    :ID:       26a89d53-8c77-48d7-82b4-09a6acef1e6f
@@ -940,66 +983,6 @@
         ("C-s-h" . windsize-left)
         ("C-s-l" . windsize-right)))
    #+END_SRC
-** scope
-   :PROPERTIES:
-   :ID:       95be5ba3-1e7f-4d62-94ad-d734f064add4
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package ibuffer
-       :commands ibuffer
-       :bind (([remap list-buffers] . ibuffer)
-              :map ibuffer-mode-map
-              ("/ ." . (lambda (qualifier)
-                         (interactive "sFilter by extname: ")
-                         (ibuffer-filter-by-filename (concat "\\." qualifier "$"))))
-              ("M-o" . other-window)) ; was ibuffer-visit-buffer-1-window
-       :hook (ibuffer-mode-hook . (lambda ()
-                                    ;; Make sure we're always using our buffer groups
-                                    (ibuffer-switch-to-saved-filter-groups "default")))
-       :custom
-       (ibuffer-default-sorting-mode 'major-mode) ;recency
-       (ibuffer-always-show-last-buffer :nomini)
-       (ibuffer-default-shrink-to-minimum-size t)
-       (ibuffer-jump-offer-only-visible-buffers t)
-       (ibuffer-saved-filters
-        '(("dired" ((mode . dired-mode)))
-          ("foss" ((filename . "foss")))
-          ("pets" ((filename . "pets")))
-          ("jabberchat" ((mode . jabber-chat-mode)))
-          ("orgmode" ((mode . org-mode)))
-          ("elisp" ((mode . emacs-lisp-mode)))
-          ("fundamental" ((mode . fundamental-mode)))
-          ("haskell" ((mode . haskell-mode)))))
-       (ibuffer-saved-filter-groups custom/ibuffer-saved-filter-groups))
-
-     (use-package ibuffer-vc
-       :ensure t
-       :hook (ibuffer-hook . (lambda ()
-                               (ibuffer-vc-set-filter-groups-by-vc-root)
-                               (unless (eq ibuffer-sorting-mode 'alphabetic)
-                                 (ibuffer-do-sort-by-alphabetic))))
-       :custom
-       (ibuffer-formats
-        '((mark modified read-only vc-status-mini " "
-                (name 18 18 :left :elide)
-                " "
-                (size 9 -1 :right)
-                " "
-                (mode 16 16 :left :elide)
-                " "
-                filename-and-process)) "include vc status info"))
-
-     (use-package recursive-narrow
-       :ensure t
-       :bind (:map mode-specific-map
-              :prefix-map recursive-narrow-map
-              :prefix "n"
-              ("r" . narrow-to-region)
-              ("d" . narrow-to-defun)
-              ("w" . widen)
-              ("N" . recursive-narrow-or-widen-dwim)
-              ("D" . recursive-widen-dwim)))
-   #+END_SRC
 ** warping
    :PROPERTIES:
    :ID:       e366a2e8-2acd-4623-b584-2f64f06d7fa4
@@ -1034,12 +1017,6 @@
        (avy-setup-default))
 
      (use-package filecache)
-   #+END_SRC
-** keybindings
-   :PROPERTIES:
-   :ID:       82b18fd6-6823-4456-8403-7a7d8411212a
-   :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
    #+END_SRC
 * editing
 ** move and bend text around
@@ -1142,24 +1119,34 @@
               ("s" . sort-lines)
               ("u" . delete-duplicate-lines)))
    #+END_SRC
-** regions and rectangles
-*** setup
-    :PROPERTIES:
-    :ID:       0fc28d80-7af1-4ce9-a52e-d46fff4d050f
-    :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package objed
-        :ensure t
-        :bind (("M-n" . objed-next-identifier)
-               ("M-p" . objed-prev-identifier)
-               ("M-<f2>" . objed-mode)))
+** scope
+   :PROPERTIES:
+   :ID:       95be5ba3-1e7f-4d62-94ad-d734f064add4
+   :END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package objed
+       :ensure t
+       :bind (("M-n" . objed-next-identifier)
+              ("M-p" . objed-prev-identifier)
+              ("M-<f2>" . objed-mode)))
 
-      (use-package region-bindings-mode
-        :ensure t
-        :config
-        (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
-        (region-bindings-mode-enable))
-    #+END_SRC
+     (use-package region-bindings-mode
+       :ensure t
+       :config
+       (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
+       (region-bindings-mode-enable))
+
+     (use-package recursive-narrow
+       :ensure t
+       :bind (:map mode-specific-map
+              :prefix-map recursive-narrow-map
+              :prefix "n"
+              ("r" . narrow-to-region)
+              ("d" . narrow-to-defun)
+              ("w" . widen)
+              ("N" . recursive-narrow-or-widen-dwim)
+              ("D" . recursive-widen-dwim)))
+   #+END_SRC
 ** commenting
    :PROPERTIES:
    :ID:       b5079d1e-1e13-4acd-92d5-25cc660dad24
