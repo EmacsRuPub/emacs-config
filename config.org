@@ -75,11 +75,6 @@
 
      (use-package delight :ensure t)
 
-     (use-package pcre2el
-       :ensure t
-       :config
-       (pcre-mode))
-
      (use-package notifications)
 
      (use-package cus-edit
