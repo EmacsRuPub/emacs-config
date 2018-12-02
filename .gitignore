@@ -1,22 +1,11 @@
 */#*#
-*elc
-*log
-*semantic*
 *~
-.emacs.desktop
 .python-environments
 config.el
 credentials.el.gpg
 customizations.el
 data
-# (alex3rd): find how it is saved and if location can be changed
 dired-history
-# ============
 elpa
-etc
-network-security.data
-private
 quelpa
-request
-savehist
 todo.org
