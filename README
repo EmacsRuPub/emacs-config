@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GNU Emacs configuration
-;; (c) Alexander Ermolov 2009-2016
+;; (c) Alexander Ermolov 2009-2019
 ;; aaermolov AT gmail.com
 ;;
 ;; Thanks to all, who has helped me in creation, especially to:
@@ -11,4 +11,3 @@
 ;; Ivan Shvedunov aka ivan4th
 ;; Sacha Chua
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
