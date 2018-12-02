@@ -2253,6 +2253,19 @@
         :config
         (add-to-list 'company-backends 'company-nixos-options))
     #+END_SRC
+*** Rust
+    :PROPERTIES:
+    :ID:       14b5a898-7acf-4f43-8d3c-3c86926e5bba
+    :END:
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package rustic
+        :ensure t
+        :mode ("\\.rs" . rustic-mode))
+
+      (use-package lsp-rust
+        :ensure t
+        :after (lsp-mode))
+    #+END_SRC
 *** other
     :PROPERTIES:
     :ID:       14b5a898-7acf-4f43-8d3c-3c86926e5bba
@@ -2266,10 +2279,6 @@
       (use-package json-mode
         :after (json-reformat json-snatcher)
         :mode ("\\.json$" . json-mode))
-
-      (use-package rust-mode
-        :ensure t
-        :mode ("\\.rs" . rust-mode))
     #+END_SRC
 ** webdev
 *** setup
