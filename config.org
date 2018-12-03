@@ -2020,34 +2020,11 @@
     :ID:       ebee8721-2700-4182-850c-cfb29daadfb8
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package jedi-core
-        :ensure t
-        :hook (python-mode-hook . jedi:setup)
-        :bind (:map python-mode-map
-               ("M-/" . jedi:show-doc))
-        :custom
-        (jedi:complete-on-dot t)
-        (jedi:goto-definition-marker-ring-length 32)
-        (jedi:tooltip-method nil)
-        (epc:accept-process-timeout 200)
-        (jedi:get-in-function-call-timeout 0)
-        (jedi:get-in-function-call-delay 0)
-        (jedi:goto-definition-config '((nil definition nil)))
-        (jedi:use-shortcuts t))
-
-      (use-package company-jedi
-        :ensure t
-        :after (company jedi-core)
-        :config
-        (add-to-list 'company-backends 'company-jedi))
-
       (use-package lsp-python
         :ensure t
         :after (lsp-mode)
         :hook
         (python-mode-hook . lsp-python-enable))
-
-      ;;TODO: check if project is pythonic while switching with projectile machinery, otherwise ignore venvs switching
 
       (use-package python
         :after (lsp-python)
@@ -2073,7 +2050,7 @@
 
       (use-package pyvenv
         :ensure t
-        :after (jedi-core projectile dash)
+        :after (projectile dash)
         :preface
         (defun custom/switch-python-project-context ()
           (let ((project-root (projectile-project-root)))
@@ -2083,10 +2060,8 @@
                                        (pyvenv-workon-home)
                                        (file-name-base
                                         (directory-file-name
-                                         project-root))))))
-          (jedi:stop-server))
-        :hook ((projectile-before-switch-project-hook . jedi:stop-server)
-               (projectile-before-switch-project-hook . pyvenv-deactivate)
+                                         project-root)))))))
+        :hook ((projectile-before-switch-project-hook . pyvenv-deactivate)
                (projectile-after-switch-project-hook . custom/switch-python-project-context)))
 
       (use-package pip-requirements
