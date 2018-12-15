@@ -1926,11 +1926,6 @@
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package info-look)
-
-      (use-package highlight-stages
-        :ensure t
-        :hook ((emacs-lisp-mode-hook lisp-mode-hook) . highlight-stages-mode)
-        :delight highlight-stages-mode)
     #+END_SRC
 *** elisp
     :PROPERTIES:
