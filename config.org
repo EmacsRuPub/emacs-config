@@ -1132,11 +1132,10 @@
    :ID:       95be5ba3-1e7f-4d62-94ad-d734f064add4
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package objed
+     (use-package easy-kill
        :ensure t
-       :bind (("M-n" . objed-next-identifier)
-              ("M-p" . objed-prev-identifier)
-              ("M-<f2>" . objed-mode)))
+       :bind (([remap kill-ring-save] . easy-kill)
+              ([remap mark-sexp] . easy-mark)))
 
      (use-package region-bindings-mode
        :ensure t
