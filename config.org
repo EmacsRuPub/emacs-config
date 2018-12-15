@@ -1054,6 +1054,10 @@
        (defun custom/newline-hook ()
          (local-set-key (kbd "C-m") 'newline-and-indent)
          (local-set-key (kbd "<return>") 'newline-and-indent))
+       (defun custom/gnocchi-case (s)
+         "Convert S to 'gnocchi case'."
+         (declare (side-effect-free t))
+         (s-join " " (mapcar 'downcase (s-split-words s))))
        (defun custom/switch-case (&optional style)
          (interactive)
          (let* ((bounds (bounds-of-thing-at-point 'symbol))
@@ -1063,6 +1067,7 @@
                 (result (funcall (cond ((eq style 'camel) 's-lower-camel-case)
                                        ((eq style 'camel-up) 's-upper-camel-case)
                                        ((eq style 'snake) 's-snake-case)
+                                       ((eq style 'gnocchi) 'custom/gnocchi-case)
                                        ((eq style 'kebab) 's-dashed-words)
                                        (t 's-lower-camel-case))
                                  data)))
@@ -1085,6 +1090,7 @@
               ("6" . (lambda () (interactive) (custom/switch-case 'camel)))
               ("^" . (lambda () (interactive) (custom/switch-case 'camel-up)))
               ("_" . (lambda () (interactive) (custom/switch-case 'snake)))
+              ("SPC" . (lambda () (interactive) (custom/switch-case 'gnocchi)))
               ("-" . (lambda () (interactive) (custom/switch-case 'kebab))))
        :custom
        (bidi-display-reordering nil)
