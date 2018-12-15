@@ -854,6 +854,7 @@
               ("T" . doom/ivy-tasks)
               ("h" . projectile-find-file))
        :config
+       (counsel-projectile-mode 1)
        (add-to-list 'counsel-projectile-switch-project-action
                     '("t" counsel-projectile-switch-project-action-open-todos "open project's todos") t)
        (add-to-list 'counsel-projectile-switch-project-action
