@@ -1908,6 +1908,7 @@
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package smerge-mode
+        :delight (smerge-mode "∓")
         :bind (:map mode-specific-map
                :prefix-map smerge-custom-map
                :prefix "g"
