@@ -405,6 +405,7 @@
 
     (use-package super-save
       :ensure t
+      :delight super-save-mode
       :custom
       (super-save-remote-files nil)
       :config
