@@ -83,8 +83,9 @@
        (custom-file (at-config-basedir "customizations.el")))
 
      (use-package emacs
-       :bind (("M-\"" . eval-region)
-              ([remap kill-buffer] . kill-this-buffer))
+       :general
+       ("M-\"" 'eval-region)
+       ([remap kill-buffer] 'kill-this-buffer)
        :config
        (fset 'yes-or-no-p 'y-or-n-p)
        (setq scalable-fonts-allowed t)
@@ -239,8 +240,9 @@
        (setq font-lock-maximum-decoration t))
 
      (use-package face-remap
-       :bind (("C-=" . text-scale-increase)
-              ("C--" . text-scale-decrease)))
+       :general
+       ("C-=" 'text-scale-increase)
+       ("C--" 'text-scale-decrease))
 
      (use-package unicode-fonts
        :ensure t
@@ -316,13 +318,13 @@
                            ((numberp (cadr alpha)) (cadr alpha)))
                      100)
                 `(,opacity-percent . 50) '(100 . 100)))))
-       :bind (("M-o" . custom/other-window-multiframe)
-              :prefix "<f2>"
-              :prefix-map frame-keymap
-              ("n" . make-frame-command)
-              ("k" . delete-frame)
-              ("s" . delete-other-frames)
-              ("v" . custom/toggle-transparency))
+       :general
+       ("M-o" 'custom/other-window-multiframe)
+       (:prefix "<f2>"
+                "n" 'make-frame-command
+                "k" 'delete-frame
+                "s" 'delete-other-frames
+                "v" 'custom/toggle-transparency)
        :config
        (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
        (blink-cursor-mode 0)
@@ -342,10 +344,10 @@
          (horizontal-scroll-bar-mode -1)))
 
      (use-package menu-bar
-       :config
-       :bind (:map mode-specific-map
-              ("b" . toggle-debug-on-error)
-              ("q" . toggle-debug-on-quit))
+       :general
+       (:keymaps 'mode-specific-map
+                 "b" 'toggle-debug-on-error
+                 "q" 'toggle-debug-on-quit)
        :config
        (menu-bar-mode -1))
 
@@ -463,7 +465,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package amx
        :ensure t
-       :bind ("M-x" . amx)
+       :general ("M-x" 'amx)
        :custom
        (amx-backend 'ivy)
        (amx-save-file (at-user-data-dir "amx-items")))
@@ -524,12 +526,13 @@
 
      (use-package ibuffer
        :commands ibuffer
-       :bind (([remap list-buffers] . ibuffer)
-              :map ibuffer-mode-map
-              ("/ ." . (lambda (qualifier)
-                         (interactive "sFilter by extname: ")
-                         (ibuffer-filter-by-filename (concat "\\." qualifier "$"))))
-              ("M-o" . other-window)) ; was ibuffer-visit-buffer-1-window
+       :general
+       ([remap list-buffers] 'ibuffer)
+       (:keymaps 'ibuffer-mode-map
+                 "/ ." '(lambda (qualifier)
+                          (interactive "sFilter by extname: ")
+                          (ibuffer-filter-by-filename (concat "\\." qualifier "$")))
+                 "M-o" 'other-window) ; was ibuffer-visit-buffer-1-window
        :hook (ibuffer-mode-hook . (lambda ()
                                     ;; Make sure we're always using our buffer groups
                                     (ibuffer-switch-to-saved-filter-groups "default")))
@@ -575,13 +578,14 @@
      (use-package ivy
        :ensure t
        :delight ivy-mode
-       :bind (("C-x b" . ivy-switch-buffer)
-              ("M-<f12>" . ivy-switch-buffer)
-              ("<f10>" . ivy-resume)
-              ("C-c v" . ivy-push-view)
-              ("C-c V" . ivy-pop-view)
-              :map ivy-minibuffer-map
-              ("C-j" . ivy-immediate-done))
+       :general
+       ("C-x b" 'ivy-switch-buffer)
+       ("M-<f12>" 'ivy-switch-buffer)
+       ("<f10>" 'ivy-resume)
+       ("C-c v" 'ivy-push-view)
+       ("C-c V" 'ivy-pop-view)
+       (:keymaps 'ivy-minibuffer-map
+                 "C-j" 'ivy-immediate-done)
        :config
        (ivy-mode 1)
        :custom-face
@@ -622,41 +626,40 @@
                    :caller 'custom/open-org-kb-file))
        :init
        (require 'iso-transl)
-       :bind (([remap menu-bar-open] . counsel-tmm)
-              ([remap insert-char] . counsel-unicode-char)
-              ([remap isearch-forward] . counsel-grep-or-swiper)
-              ("C-h L" . counsel-locate)
-              ("C-c C-SPC" . counsel-mark-ring)
-              ("C-x C-r" . counsel-recentf)
-              ("C-c C-." . counsel-fzf)
-              ("C-c w" . counsel-wmctrl)
-              ("C-c o" . custom/open-org-file)
-              ("C-c k" . custom/open-org-kb-file)
-              :prefix-map counsel-aux-map
-              :prefix "<f9>"
-              ("y" . counsel-yank-pop)
-              ("m" . counsel-mark-ring)
-              ("c" . counsel-command-history)
-              ("e" . counsel-expression-history)
-              ("p" . counsel-package)
-              ("l" . counsel-git-log)
-              ("g" . counsel-rg)
-              ("G" . (lambda () (interactive) (counsel-rg (thing-at-point 'symbol))))
-              ("m" . swiper-multi)
-              ("I" . ivy-imenu-anywhere)
-              :map help-map
-              ("l" . counsel-find-library)
-              :prefix-map custom-help-prefix-map
-              :prefix "<f1>"
-              ("f" . counsel-describe-function)
-              ("v" . counsel-describe-variable)
-              ("l" . counsel-find-library)
-              ("b" . counsel-descbinds)
-              ("i" . counsel-info-lookup-symbol)
-              :map iso-transl-ctl-x-8-map
-              ("RET" . counsel-unicode-char)
-              :map ivy-minibuffer-map
-              ("M-y" . ivy-next-line))
+       :general
+       ([remap menu-bar-open] 'counsel-tmm)
+       ([remap insert-char] 'counsel-unicode-char)
+       ([remap isearch-forward] 'counsel-grep-or-swiper)
+       ("C-h L" 'counsel-locate)
+       ("C-c C-SPC" 'counsel-mark-ring)
+       ("C-x C-r" 'counsel-recentf)
+       ("C-c C-." 'counsel-fzf)
+       ("C-c w" 'counsel-wmctrl)
+       ("C-c o" 'custom/open-org-file)
+       ("C-c k" 'custom/open-org-kb-file)
+       (:prefix "<f9>"
+                "y" 'counsel-yank-pop
+                "m" 'counsel-mark-ring
+                "c" 'counsel-command-history
+                "e" 'counsel-expression-history
+                "p" 'counsel-package
+                "l" 'counsel-git-log
+                "g" 'counsel-rg
+                "G" '(lambda () (interactive) (counsel-rg (thing-at-point 'symbol)))
+                "m" 'swiper-multi
+                "I" 'ivy-imenu-anywhere)
+       (:keymaps 'help-map
+                 "l" 'counsel-find-library)
+       (:prefix "<f1>"
+                "f" 'counsel-describe-function
+                "v" 'counsel-describe-variable
+                "l" 'counsel-find-library
+                "b" 'counsel-descbinds
+                "i" 'counsel-info-lookup-symbol)
+       (:keymaps 'iso-transl-ctl-x-8-map
+                 "RET" 'counsel-unicode-char)
+       (:keymaps 'ivy-minibuffer-map
+                 "M-y" 'ivy-next-line)
        :custom
        (counsel-git-cmd "rg --files")
        (counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
@@ -696,14 +699,13 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package link-hint
        :ensure t
-       :bind (:map mode-specific-map
-              :prefix-map link-hint-map
-              :prefix "l"
-              ("s" . custom/open-url-current-buffer)
-              ("f" . link-hint-open-link)
-              ("y" . link-hint-copy-link)
-              ("F" . link-hint-open-multiple-links)
-              ("Y" . link-hint-copy-multiple-links))
+       :general
+       (:keymaps 'mode-specific-map
+                 "l s" 'custom/open-url-current-buffer
+                 "l f" 'link-hint-open-link
+                 "l y" 'link-hint-copy-link
+                 "l F" 'link-hint-open-multiple-links
+                 "l Y" 'link-hint-copy-multiple-links)
        :custom
        (link-hint-avy-style 'de-bruijn))
 
@@ -779,11 +781,15 @@
    :ID:       41e2a40b-7161-4ef8-92ce-51fbcfa2b1b5
    :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (global-unset-key (kbd "C-s"))
-      (global-unset-key (kbd "C-r"))
-      (global-unset-key (kbd "C-M-s"))
-      (global-unset-key (kbd "C-M-r"))
-      (global-unset-key (kbd "C-x C-b"))
+      (general-unbind 'global
+        "C-s"
+        "C-r"
+        "C-M-s"
+        "C-M-r"
+        "C-x C-b"
+        "C-z"
+        "M-t"
+        "<f11>")
     #+END_SRC
 ** special navigation
    :PROPERTIES:
@@ -798,8 +804,9 @@
 
      (use-package mwim
        :ensure t
-       :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
-              ([remap move-end-of-line] . mwim-end-of-code-or-line)))
+       :general
+       ([remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
+       ([remap move-end-of-line] 'mwim-end-of-code-or-line))
 
      (use-package smooth-scrolling :ensure t)
    #+END_SRC
@@ -843,16 +850,16 @@
          "Search in project with deadgrep."
          (let ((projectile-switch-project-action #'custom/search-deadgrep))
            (counsel-projectile-switch-project-by-name project)))
-       :bind (("C-x j j" . 'counsel-projectile-switch-project)
-              :prefix-map projectile-mode-custom-map
-              :prefix "<f8>"
-              ("i" . projectile-invalidate-cache)
-              ("k" . projectile-kill-buffers)
-              ("c" . projectile-commander)
-              ("d" . projectile-dired)
-              ("f" . projectile-recentf)
-              ("T" . doom/ivy-tasks)
-              ("h" . projectile-find-file))
+       :general
+       ("C-x j j" 'counsel-projectile-switch-project)
+       (:prefix "<f8>"
+                "i" 'projectile-invalidate-cache
+                "k" 'projectile-kill-buffers
+                "c" 'projectile-commander
+                "d" 'projectile-dired
+                "f" 'projectile-recentf
+                "T" 'doom/ivy-tasks
+                "h" 'projectile-find-file)
        :config
        (counsel-projectile-mode 1)
        (add-to-list 'counsel-projectile-switch-project-action
@@ -869,15 +876,16 @@
      (use-package dired
        :commands dired
        :hook (dired-mode-hook . auto-revert-mode)
-       :bind (([remap list-directory] . dired)
-              :map dired-mode-map
-              ("e" . (lambda ()
-                       (interactive)
-                       (when (derived-mode-p 'dired-mode)
-                         (if (file-directory-p (dired-get-filename))
-                             (message "Directories cannot be opened in EWW")
-                           (eww-open-file (dired-get-file-for-visit))))))
-              ("C-x C-k" . dired-do-delete))
+       :general
+       ([remap list-directory] 'dired)
+       (:keymaps 'dired-mode-map
+                 "e" '(lambda ()
+                        (interactive)
+                        (when (derived-mode-p 'dired-mode)
+                          (if (file-directory-p (dired-get-filename))
+                              (message "Directories cannot be opened in EWW")
+                            (eww-open-file (dired-get-file-for-visit)))))
+                 "C-x C-k" 'dired-do-delete)
        :preface
        (defvar custom/large-file-ok-types
          (rx "." (or "mp4" "mkv" "pdf") string-end)
@@ -896,14 +904,16 @@
        (ad-activate 'abort-if-file-too-large)
        (use-package dired-filetype-face :ensure t)
        (use-package wdired
-         :bind (:map dired-mode-map
-                ("r" . wdired-change-to-wdired-mode))
+         :general
+         (:keymaps 'dired-mode-map
+                   "r" 'wdired-change-to-wdired-mode)
          :custom
          (wdired-allow-to-change-permissions 'advanced))
        (use-package dired-narrow
          :ensure t
-         :bind (:map dired-mode-map
-                ("/" . dired-narrow)))
+         :general
+         (:keymaps 'dired-mode-map
+                   "/" 'dired-narrow))
        (use-package dired-quick-sort
          :ensure t
          :config
@@ -919,9 +929,9 @@
        (use-package dired-hide-dotfiles
          :ensure t
          :after (dired)
-         :bind
-         (:map dired-mode-map
-               ("." . dired-hide-dotfiles-mode))
+         :general
+         (:keymaps 'dired-mode-map
+                   "." 'dired-hide-dotfiles-mode)
          :hook
          (dired-mode . dired-hide-dotfiles-mode)))
 
@@ -940,20 +950,23 @@
      (use-package deadgrep
        :ensure t
        :commands deadgrep
-       :bind (:map mode-specific-map
-              ("d" . deadgrep)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "d" 'deadgrep))
 
      (use-package socyl
        :ensure t
-       :bind ("C-r" . socyl-search-regexp)
+       :general
+       ("C-r" 'socyl-search-regexp)
        :custom
        (socyl-backend 'ripgrep))
 
      (use-package wgrep
        :ensure t
-       :bind (:map grep-mode-map
-              ("C-x C-q" . wgrep-change-to-wgrep-mode)
-              ("C-c C-c" . wgrep-finish-edit)))
+       :general
+       (:keymaps 'grep-mode-map
+                 "C-x C-q" 'wgrep-change-to-wgrep-mode
+                 "C-c C-c" 'wgrep-finish-edit))
 
      (defadvice occur-mode-goto-occurrence (after close-occur activate)
        (delete-other-windows))
@@ -979,11 +992,12 @@
 
      (use-package windsize
        :ensure t
-       :bind
-       (("C-s-k" . windsize-up)
-        ("C-s-j" . windsize-down)
-        ("C-s-h" . windsize-left)
-        ("C-s-l" . windsize-right)))
+       :disabled ;;TODO: remap keys and reenable
+       :general
+       ("C-s-k" 'windsize-up)
+       ("C-s-j" 'windsize-down)
+       ("C-s-h" 'windsize-left)
+       ("C-s-l" 'windsize-right))
    #+END_SRC
 ** warping
    :PROPERTIES:
@@ -999,7 +1013,8 @@
          (if tap
              (swiper (thing-at-point 'symbol))
            (swiper)))
-       :bind ("C-s" . custom/swiper)
+       :general
+       ("C-s" 'custom/swiper)
        :custom
        (swiper-include-line-number-in-search t)
        :custom-face (swiper-match-face-1 ((t (:background "#dddddd"))))
@@ -1009,8 +1024,9 @@
 
      (use-package avy
        :ensure t
-       :bind (("C-:" . avy-goto-char)
-              ("M-s M-s" . avy-goto-word-0))
+       :general
+       ("C-:" 'avy-goto-char)
+       ("M-s M-s" 'avy-goto-word-0)
        :custom
        (avy-timeout-seconds 0.5)
        (avy-keys '(?0 ?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))
@@ -1028,14 +1044,15 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package ialign
        :ensure t
-       :bind ("C-x l" . ialign))
+       :general
+       ("C-x l" 'ialign))
 
      (use-package iedit
        :ensure t)
 
      (use-package delsel
-       :bind
-       ("C-c C-g" . minibuffer-keyboard-quit)
+       :general
+       ("C-c C-g" 'minibuffer-keyboard-quit)
        :config
        (delete-selection-mode 1))
 
@@ -1043,7 +1060,8 @@
      ;;TODO: consolidate (un)filling functionality
      (use-package unfill
        :ensure t
-       :bind ([remap fill-paragraph] . unfill-toggle))
+       :general
+       ([remap fill-paragraph] 'unfill-toggle))
 
      (use-package simple
        :hook
@@ -1077,22 +1095,21 @@
              (goto-char from)
              (insert result))))
        :hook (((yaml-mode-hook emacs-lisp-mode-hook lisp-mode-hook python-mode-hook) . custom/newline-hook))
-       :bind (("M-g" . goto-line)
-              ("M-SPC" . cycle-spacing)
-              :prefix-map custom-toggle-map
-              :prefix "<f11>"
-              ("b" . subword-mode)
-              ("v" . view-mode)
-              :prefix-map custom-edit-map
-              :prefix "C-z"
-              ("o" . just-one-space)
-              ("w" . delete-trailing-whitespace)
-              ("s" . transpose-sexps)
-              ("6" . (lambda () (interactive) (custom/switch-case 'camel)))
-              ("^" . (lambda () (interactive) (custom/switch-case 'camel-up)))
-              ("_" . (lambda () (interactive) (custom/switch-case 'snake)))
-              ("SPC" . (lambda () (interactive) (custom/switch-case 'gnocchi)))
-              ("-" . (lambda () (interactive) (custom/switch-case 'kebab))))
+       :general
+       ("M-g" 'goto-line)
+       ("M-SPC" 'cycle-spacing)
+       (:prefix "<f11>"
+                "b" 'subword-mode
+                "v" 'view-mode)
+       (:prefix "C-z"
+                "o" 'just-one-space
+                "w" 'delete-trailing-whitespace
+                "s" 'transpose-sexps
+                "6" '(lambda () (interactive) (custom/switch-case 'camel))
+                "^" '(lambda () (interactive) (custom/switch-case 'camel-up))
+                "_" '(lambda () (interactive) (custom/switch-case 'snake))
+                "SPC" '(lambda () (interactive) (custom/switch-case 'gnocchi))
+                "-" '(lambda () (interactive) (custom/switch-case 'kebab)))
        :custom
        (bidi-display-reordering nil)
        (kill-whole-line t)
@@ -1114,18 +1131,16 @@
        (put 'set-goal-column 'disabled nil))
 
      (use-package tabify
-       :bind (:map mode-specific-map
-              :prefix-map tabify-map
-              :prefix "t"
-              ("SPC" . untabify)
-              ("TAB" . tabify)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "t SPC" 'untabify
+                 "t TAB" 'tabify))
 
      (use-package sort
-       :bind (:map mode-specific-map
-              :prefix-map sort-map
-              :prefix "s"
-              ("s" . sort-lines)
-              ("u" . delete-duplicate-lines)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "s s" 'sort-lines
+                 "s u" 'delete-duplicate-lines))
    #+END_SRC
 ** scope
    :PROPERTIES:
@@ -1134,8 +1149,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package easy-kill
        :ensure t
-       :bind (([remap kill-ring-save] . easy-kill)
-              ([remap mark-sexp] . easy-mark)))
+       :general
+       ([remap kill-ring-save] 'easy-kill)
+       ([remap mark-sexp] 'easy-mark))
 
      (use-package region-bindings-mode
        :ensure t
@@ -1145,14 +1161,13 @@
 
      (use-package recursive-narrow
        :ensure t
-       :bind (:map mode-specific-map
-              :prefix-map recursive-narrow-map
-              :prefix "n"
-              ("r" . narrow-to-region)
-              ("d" . narrow-to-defun)
-              ("w" . widen)
-              ("N" . recursive-narrow-or-widen-dwim)
-              ("D" . recursive-widen-dwim)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "n r" 'narrow-to-region
+                 "n d" 'narrow-to-defun
+                 "n w" 'widen
+                 "n N" 'recursive-narrow-or-widen-dwim
+                 "n D" 'recursive-widen-dwim))
    #+END_SRC
 ** commenting
    :PROPERTIES:
@@ -1161,12 +1176,14 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package comment-dwim-2
        :ensure t
-       :bind (:map mode-specific-map
-              ("]" . comment-dwim-2)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "]" 'comment-dwim-2))
 
      (use-package newcomment
-       :bind (:map mode-specific-map
-              ("/" . comment-box)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "/" 'comment-box))
    #+END_SRC
 ** clipboard and killring
    :PROPERTIES:
@@ -1177,24 +1194,23 @@
 
      (use-package copy-as-format
        :ensure t
-       :bind (:map mode-specific-map
-              :prefix-map copy-as-format-map
-              :prefix "f"
-              ("s" . copy-as-format-slack)
-              ("g" . copy-as-format-github)
-              ("o" . copy-as-format-org-mode)
-              ("m" . copy-as-format-markdown)
-              ("a" . copy-as-format-asciidoc)
-              ("b" . copy-as-format-bitbucket)
-              ("d" . copy-as-format-disqus)
-              ("l" . copy-as-format-gitlab)
-              ("c" . copy-as-format-hipchat)
-              ("h" . copy-as-format-html)
-              ("j" . copy-as-format-jira)
-              ("w" . copy-as-format-mediawiki)
-              ("p" . copy-as-format-pod)
-              ("r" . copy-as-format-rst)
-              ("f" . copy-as-format)))
+       :general
+       (:keymaps 'mode-specific-map
+                 "f s" 'copy-as-format-slack
+                 "f g" 'copy-as-format-github
+                 "f o" 'copy-as-format-org-mode
+                 "f m" 'copy-as-format-markdown
+                 "f a" 'copy-as-format-asciidoc
+                 "f b" 'copy-as-format-bitbucket
+                 "f d" 'copy-as-format-disqus
+                 "f l" 'copy-as-format-gitlab
+                 "f c" 'copy-as-format-hipchat
+                 "f h" 'copy-as-format-html
+                 "f j" 'copy-as-format-jira
+                 "f w" 'copy-as-format-mediawiki
+                 "f p" 'copy-as-format-pod
+                 "f r" 'copy-as-format-rst
+                 "f f" 'copy-as-format))
 
      (use-package select
        :custom
@@ -1209,13 +1225,15 @@
      (use-package undo-tree
        :ensure t
        :delight undo-tree-mode
-       :bind (("M-[ p" . undo-tree-undo)
-              ("M-[ n" . undo-tree-redo)
-              ("M-[ s" . undo-tree-save-history)
-              ("M-[ l" . undo-tree-load-history)
-              ("M-[ u" . undo-tree-visualize)
-              :map undo-tree-map
-              ("C-_" . nil))
+       :general
+       (:prefix "M-["
+                "p" 'undo-tree-undo
+                "n" 'undo-tree-redo
+                "s" 'undo-tree-save-history
+                "l" 'undo-tree-load-history
+                "u" 'undo-tree-visualize)
+       (:keymaps 'undo-tree-map
+                 "C-_" nil)
        :custom
        (undo-tree-visualizer-timestamps t)
        (undo-tree-visualizer-diff t)
@@ -1255,8 +1273,9 @@
                                               (pos (flycheck-error-pos error)) )
                                   (goto-char (flycheck-error-pos error))))
                       :history 'counsel-flycheck-history)))
-        :bind (:map mode-specific-map
-               ("y" . counsel-flycheck))
+        :general
+        (:keymaps 'mode-specific-map
+                  "y" 'counsel-flycheck)
         :custom-face (flycheck-warning ((t (:foreground "yellow" :background "red"))))
         :config
         (setq flycheck-global-modes '(not emacs-lisp-mode))
@@ -1338,11 +1357,10 @@
         :defer 2
         :hook
         ((prog-mode-hook text-mode-hook) . whitespace-turn-on)
-        :bind (:map mode-specific-map
-               :prefix-map whitespace-custom-map
-               :prefix "x"
-               ("w" . whitespace-mode)
-               ("W" . global-whitespace-mode))
+        :general
+        (:keymaps 'mode-specific-map
+                  "x w" 'whitespace-mode
+                  "x W" 'global-whitespace-mode)
         :custom
         (whitespace-line-column 121)
         (whitespace-style '(indentation::space
@@ -1430,16 +1448,17 @@
        :demand t
        :hook (((prog-mode-hook yaml-mode-hook) . smartparens-mode)
               ((lisp-mode-hook emacs-lisp-mode-hook markdown-mode-hook) . smartparens-strict-mode))
-       :bind (:map smartparens-mode-map
+       :general
+       (:keymaps 'smartparens-mode-map
               ;;TODO: try to make more brief keybindings
-              ("C-M-t" . sp-transpose-sexp)
-              ("M-F" . nil)
-              ("M-B" . nil)
-              ("M-<backspace>" . nil)
-              ("C-S-a" . sp-beginning-of-sexp)
-              ("C-S-d" . sp-end-of-sexp)
-              (")" . sp-up-sex)
-              ("C-<left_bracket>" . sp-select-previous-thing))
+                 "C-M-t" 'sp-transpose-sexp
+                 "M-F" nil
+                 "M-B" nil
+                 "M-<backspace>" nil
+                 "C-S-a" 'sp-beginning-of-sexp
+                 "C-S-d" 'sp-end-of-sexp
+                 ")" 'sp-up-sex
+                 "C-<left_bracket>" 'sp-select-previous-thing)
        :config
        (use-package smartparens-config)
        (show-smartparens-global-mode t)
@@ -1479,8 +1498,9 @@
 
      (use-package dynamic-ruler
        :ensure t
-       :bind (("C->" . dynamic-ruler)
-              ("C-^" . dynamic-ruler-vertical)))
+       :general
+       ("C->" 'dynamic-ruler)
+       ("C-^" 'dynamic-ruler-vertical))
    #+END_SRC
 * completion
 ** snippets
@@ -1526,10 +1546,24 @@
                (if (check-expansion)
                    (company-complete-common)
                  (indent-for-tab-command)))))
-       :bind (:prefix-map yasnippet-custom-map
-              :prefix "<f5>"
-              ("v" . yas-visit-snippet-file)
-              ("i" . ivy-yasnippet))
+       :general
+       (:prefix "<f5>"
+                "v" 'yas-visit-snippet-file
+                "i" 'ivy-yasnippet)
+       (:keymaps 'yas-keymap
+                 [(tab)] nil
+                 [(shift tab)] nil
+                 [backtab] nil
+                 "TAB" nil
+                 "<return>" 'yas-exit-all-snippets
+                 "C-e" 'custom/yas-goto-end-of-active-field
+                 "C-a" 'custom/yas-goto-start-of-active-field
+                 "C-n" 'yas-next-field-or-maybe-expand
+                 "C-p" 'yas-prev-field)
+       (:keymaps 'yas-minor-mode-map
+                 [(tab)] nil
+                 "<tab>" nil
+                 "TAB" nil)
        :config
        ;; snippets editing mode
        (use-package ivy-yasnippet
@@ -1550,19 +1584,6 @@
        (yas-global-mode 1)
        (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
        (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
-       ;; using define-key because it turns out bind-key cannot handle some key definition forms
-       (define-key yas-minor-mode-map [(tab)] nil)
-       (define-key yas-keymap [(tab)] nil)
-       (define-key yas-keymap [(shift tab)] nil)
-       (define-key yas-keymap [backtab] nil)
-       (define-key yas-minor-mode-map (kbd "<tab>") nil)
-       (define-key yas-minor-mode-map (kbd "TAB") nil)
-       (define-key yas-keymap (kbd "TAB") nil)
-       (bind-key (kbd "<return>") 'yas-exit-all-snippets yas-keymap)
-       (bind-key (kbd "C-e") 'custom/yas-goto-end-of-active-field yas-keymap)
-       (bind-key (kbd "C-a") 'custom/yas-goto-start-of-active-field yas-keymap)
-       (bind-key (kbd "C-n") 'yas-next-field-or-maybe-expand yas-keymap)
-       (bind-key (kbd "C-p") 'yas-prev-field yas-keymap))
    #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
 ** company
@@ -1574,11 +1595,12 @@
         :ensure t
         :demand t
         :delight (company-mode " γ")
-        :bind (:map company-active-map
-               ("\C-n" . company-select-next)
-               ("\C-p" . company-select-previous)
-               ("\C-d" . company-show-doc-buffer)
-               ("M-." . company-show-location))
+        :general
+        (:keymaps 'company-active-map
+                  "C-n" 'company-select-next
+                  "C-p" 'company-select-previous
+                  "C-d" 'company-show-doc-buffer
+                  "M-." 'company-show-location)
         :custom
         (company-idle-delay 0)
         (company-minimum-prefix-length 2)
@@ -1595,8 +1617,9 @@
           :ensure t
           :no-require t
           :after (company)
-          :bind (:map company-active-map
-                 ("C-c h" . company-quickhelp-manual-begin))
+          :general
+          (:keymaps 'company-active-map
+                    "C-c h" 'company-quickhelp-manual-begin)
           :config
           (company-quickhelp-mode 1))
         (use-package company-statistics
@@ -1634,7 +1657,8 @@
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package hippie-exp
-       :bind ("C-S-<iso-lefttab>" . hippie-expand)
+       :general
+       ("C-S-<iso-lefttab>" 'hippie-expand)
        :custom
        (setq hippie-expand-try-functions-list
              '(yas-hippie-try-expand
@@ -1718,8 +1742,9 @@
 
       (use-package prog-fill
         :ensure t
-        :bind (:map prog-mode-map
-               ("M-q" . prog-fill)))
+        :general
+        (:keymaps 'prog-mode-map
+                  "M-q" 'prog-fill))
 
       (use-package ini-mode
         :ensure t
@@ -1754,10 +1779,10 @@
         :ensure t
         :after (lsp-mode)
         :hook (lsp-mode-hook . lsp-ui-mode)
-        :config
-        :bind(:map lsp-ui-mode-map
-              ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-              ([remap xref-find-references] . lsp-ui-peek-find-references)))
+        :general
+        (:keymaps 'lsp-ui-mode-map
+                  [remap xref-find-definitions] 'lsp-ui-peek-find-definitions
+                  [remap xref-find-references] 'lsp-ui-peek-find-references))
 
       (use-package company-lsp
         :ensure t
@@ -1780,20 +1805,20 @@
         :commands magit-status magit-blame
         :mode (("COMMIT_EDITMSG" . conf-javaprop-mode)
                ("COMMIT" . git-commit-mode))
-        :bind (:prefix-map magit-custom-map
-               :prefix "C-'"
-               ("s" . magit-status)
-               ("f" . magit-log-buffer-file)
-               ("c" . magit-checkout)
-               ("w" . magit-diff-working-tree)
-               ("r" . magit-reflog)
-               ("b" . magit-blame)
-               ("B" . magit-branch-manager)
-               ("l" . magit-log)
-               ("l" . open-global-repos-list)
-               :map magit-status-mode-map
-               ("E" . magit-rebase-interactive)
-               ("q" . custom/magit-kill-buffers))
+        :general
+        (:prefix "C-'"
+                 "s" 'magit-status
+                 "f" 'magit-log-buffer-file
+                 "c" 'magit-checkout
+                 "w" 'magit-diff-working-tree
+                 "r" 'magit-reflog
+                 "b" 'magit-blame
+                 "B" 'magit-branch-manager
+                 "l" 'magit-log
+                 "l" 'open-global-repos-list)
+        (:keymaps 'magit-status-mode-map
+                  "E" 'magit-rebase-interactive
+                  "q" 'custom/magit-kill-buffers)
         :preface
         (defun open-global-repos-list ()
           (interactive)
@@ -1835,9 +1860,10 @@
                                               (error (magit-filenotify-mode -1))))))
         (use-package vdiff-magit
           :ensure t
-          :bind (:map magit-mode-map
-                      ("d" . vdiff-magit-dwim)
-                      ("p" . vdiff-magit-popup))
+          :general
+          (:keymaps 'magit-mode-map
+                    "d" 'vdiff-magit-dwim
+                    "p" 'vdiff-magit-popup)
           :config
           (setcdr (assoc ?e (plist-get magit-dispatch-popup :actions))
                   '("vdiff dwim" 'vdiff-magit-dwim))
@@ -1879,8 +1905,9 @@
           "Open git snapshot with the selected version.  Based on ivy-mode."
           (interactive)
           (git-timemachine--start #'custom/git-timemachine-show-selected-revision))
-        :bind (:map mode-specific-map
-               (";" . custom/git-timemachine)))
+        :general
+        (:keymaps 'mode-specific-map
+                  ";" 'custom/git-timemachine))
 
       (use-package gitignore-mode
         :ensure t
@@ -1895,8 +1922,9 @@
 
       (use-package git-msg-prefix
         :ensure t
-        :bind (:map git-commit-mode-map
-               ("C-c i" . commit-msg-prefix))
+        :general
+        (:keymaps 'git-commit-mode-map
+                  "C-c i" 'commit-msg-prefix)
         :custom
         (git-msg-prefix-log-flags " --since='1 week ago' ")
         (commit-msg-prefix-input-method 'ivy-read))
@@ -1909,11 +1937,10 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package smerge-mode
         :delight (smerge-mode "∓")
-        :bind (:map mode-specific-map
-               :prefix-map smerge-custom-map
-               :prefix "g"
-               ("k" . smerge-prev)
-               ("j" . smerge-next))
+        :general
+        (:keymaps 'mode-specific-map
+                  "g k" 'smerge-prev
+                  "g j" 'smerge-next)
         :hook (find-file-hooks . (lambda ()
                                    (save-excursion
                                      (goto-char (point-min))
@@ -2044,9 +2071,10 @@
                                      (highlight-lines-matching-regexp "ipdb.set_trace()")
                                      (highlight-lines-matching-regexp "import wdb")
                                      (highlight-lines-matching-regexp "wdb.set_trace()"))))
-        :bind (:map python-mode-map
-               ("M-_" . python-indent-shift-left)
-               ("M-+" . python-indent-shift-right))
+        :general
+        (:keymaps 'python-mode-map
+                  "M-_" 'python-indent-shift-left
+                  "M-+" 'python-indent-shift-right)
         :config
         (add-function :before-until (local 'eldoc-documentation-function)
                       #'(lambda () "")))
@@ -2097,6 +2125,11 @@
         :after (multi-compile)
         :mode ("\\.go$" . go-mode)
         :hook (before-save-hook . gofmt-before-save)
+        :general
+        (:keymaps 'go-mode-map
+                  "C-c C-c" 'multi-compile-run
+                  "M-." 'godef-jump
+                  "M-," 'pop-tag-mark)
         :config
         (use-package godoctor :ensure t)
         (setq  gofmt-command "goimports")
@@ -2108,10 +2141,7 @@
                                   ("go-build-and-run/git" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
                                    (multi-compile-locate-file-dir ".git"))
                                   ("go-build-and-run/main" "go build -v && echo '########## build finished ##########' && eval ./${PWD##*/}"
-                                   (multi-compile-locate-file-dir "main.go")))))
-        (bind-key (kbd "C-c C-c") 'multi-compile-run go-mode-map)
-        (bind-key (kbd "M-.") 'godef-jump go-mode-map)
-        (bind-key (kbd "M-,") 'pop-tag-mark go-mode-map))
+                                   (multi-compile-locate-file-dir "main.go"))))))
 
       (use-package company-go
         :ensure t
@@ -2147,14 +2177,15 @@
       (use-package gotest
         :ensure t
         :after (go-mode)
-        :bind (:map go-mode-map
-               ("C-c C-x f" . go-test-current-file)
-               ("C-c C-x t" . go-test-current-test)
-               ("C-c C-x p" . go-test-current-project)
-               ("C-c C-x T" . go-test-current-benchmark)
-               ("C-c C-x F" . go-test-current-file-benchmarks)
-               ("C-c C-x P" . go-test-current-project-benchmarks)
-               ("C-c C-x x" . go-run)))
+        :general
+        (:keymaps 'go-mode-map
+                  "C-c C-x f" 'go-test-current-file
+                  "C-c C-x t" 'go-test-current-test
+                  "C-c C-x p" 'go-test-current-project
+                  "C-c C-x T" 'go-test-current-benchmark
+                  "C-c C-x F" 'go-test-current-file-benchmarks
+                  "C-c C-x P" 'go-test-current-project-benchmarks
+                  "C-c C-x x" 'go-run))
 
       (use-package govet
         :ensure t)
@@ -2163,9 +2194,10 @@
         :ensure t
         :no-require t
         :after (go-mode)
-        :bind (:map go-mode-map
-               ("C-c t" . go-tag-add)
-               ("C-c T" . go-tag-remove))
+        :general
+        (:keymaps 'go-mode-map
+                  "C-c t" 'go-tag-add
+                  "C-c T" 'go-tag-remove)
         :custom
         (go-tag-args '("-transform" "camelcase")))
 
@@ -2265,8 +2297,9 @@
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package sgml-mode
-        :bind (:map html-mode-map
-               ("C-c C-w" . html-wrap-in-tag)))
+        :general
+        (:keymaps 'html-mode-map
+                  "C-c C-w" 'html-wrap-in-tag))
 
       (use-package markdown-mode
         :ensure t
@@ -2275,9 +2308,10 @@
                ("\\.mkd$" . markdown-mode)
                ("\\.pdc$" . markdown-mode)
                ("\\.README$" . markdown-mode))
-        :bind (:map markdown-mode-map
-               ("C-c C-v" . markdown-preview)
-               ("C-<tab>" . yas/expand)))
+        :general
+        (:keymaps 'markdown-mode-map
+                  "C-c C-v" 'markdown-preview
+                  "C-<tab>" 'yas/expand))
 
       (use-package graphql-mode
         :ensure t
@@ -2293,8 +2327,9 @@
                ("\\.mustache\\'" . web-mode)
                ("\\.djhtml\\'" . web-mode)
                ("\\.html?\\'" . web-mode))
-        :bind (:map web-mode-map
-               ("M-SPC" . company-complete)) ;; manual autocomplete
+        :general
+        (:keymaps 'web-mode-map
+                  "M-SPC" 'company-complete) ;; manual autocomplete
         :hook (web-mode-hook . (lambda ()
                                  (set (make-local-variable 'company-backends)
                                       '(company-tern company-web-html company-yasnippet company-files))
@@ -2360,10 +2395,11 @@
         :ensure t
         :delight emmet-mode
         :commands emmet-mode
-        :bind (:map emmet-mode-keymap
-               ("C-j" . nil)
-               ("<C-return>" . nil)
-               ("C-c C-j" . emmet-expand-line))
+        :general
+        (:keymaps 'emmet-mode-keymap
+                  "C-j" nil
+                  "<C-return>" nil
+                  "C-c C-j" 'emmet-expand-line)
         :hook ((sgml-mode-hook nxml-mode-hook django-mode sgml-mode-hook css-mode-hook) . emmet-mode)
         :custom
         (emmet-move-cursor-between-quotes t)
@@ -2393,11 +2429,11 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package emamux
        :ensure t
-       :bind (:prefix-map emamux-custom-map
-              :prefix "<f12>"
-              ("n" . emamux:new-window)
-              ("s" . emamux:send-region)
-              ("r" . emamux:run-command)))
+       :general
+       (:prefix "<f12>"
+                "n" 'emamux:new-window
+                "s" 'emamux:send-region
+                "r" 'emamux:run-command))
    #+END_SRC
 ** internal browser (w3m/eww)
    :PROPERTIES:
@@ -2482,13 +2518,14 @@
                                                ((numberp arg) arg)
                                                (t 1))))))
                 (t (scroll-other-window arg))))))
-         :bind (("C-M-v" . custom/scroll-other-window)
-                :map pdf-view-mode-map
-                ("C-s" . isearch-forward)
-                ("h" . pdf-annot-add-highlight-markup-annotation)
-                ("t" . pdf-annot-add-text-annotation)
-                ("y" . pdf-view-kill-ring-save)
-                ("D" . pdf-annot-delete))
+         :general
+         ("C-M-v" 'custom/scroll-other-window)
+         (:keymaps 'pdf-view-mode-map
+                   "C-s" 'isearch-forward
+                   "h" 'pdf-annot-add-highlight-markup-annotation
+                   "t" 'pdf-annot-add-text-annotation
+                   "y" 'pdf-view-kill-ring-save
+                   "D" 'pdf-annot-delete)
          :hook ((after-init-hook . pdf-tools-install)
                 (pdf-view-mode-hook . pdf-isearch-minor-mode)
                 ;; (pdf-tools-enabled-hook . pdf-view-midnight-minor-mode)
@@ -2499,9 +2536,10 @@
          (pdf-view-display-size 'fit-page))
        (use-package pdf-annot
          :ensure nil
-         :bind (:map pdf-annot-edit-contents-minor-mode-map
-                     ("<return>" . pdf-annot-edit-contents-commit)
-                     ("<S-return>" . newline))
+         :general
+         (:keymaps 'pdf-annot-edit-contents-minor-mode-map
+                   "<return>" 'pdf-annot-edit-contents-commit
+                   "<S-return>" 'newline)
          :custom
          (pdf-annot-activate-created-annotations t)
          :config
@@ -2537,21 +2575,20 @@
         :ensure t
         :no-require t
         :commands notmuch
-        :bind (:map notmuch-search-mode-map
-               ("!" . (lambda ()
-                        "toggle unread tag for thread"
-                        (interactive)
-                        (if (member "unread" (notmuch-search-get-tags))
-                            (notmuch-search-tag '("-unread" "-spam"))
-                          (notmuch-search-tag '("+unread")))))
-               ("g" . notmuch-refresh-this-buffer)
-               :map notmuch-message-mode-map
-               ("#" . mml-attach-file)
-               :map mode-specific-map
-               :prefix-map notmuch-custom-map
-               :prefix "4"
-               ("n" . notmuch)
-               ("N" . counsel-notmuch))
+        :general
+        (:keymaps 'notmuch-search-mode-map
+                  "!" '(lambda ()
+                         "toggle unread tag for thread"
+                         (interactive)
+                         (if (member "unread" (notmuch-search-get-tags))
+                             (notmuch-search-tag '("-unread" "-spam"))
+                           (notmuch-search-tag '("+unread"))))
+                  "g" 'notmuch-refresh-this-buffer)
+        (:keymaps 'notmuch-message-mode-map
+                  "#" 'mml-attach-file)
+        (:keymaps 'mode-specific-map
+                  "4 n" 'notmuch
+                  "4 N" 'counsel-notmuch)
         :hook ((notmuch-hello-refresh-hook . (lambda ()
                                                (if (and (eq (point) (point-min))
                                                         (search-forward "Saved searches:" nil t))
@@ -2588,10 +2625,10 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package pass
        :ensure t
-       :bind (:prefix-map pass-custom-map
-              :prefix "<f6>"
-              ("p" . pass)
-              ("!" . ivy-pass))
+       :general
+       (:prefix "<f6>"
+                "p" 'pass
+                "!" 'ivy-pass)
        :config
        (use-package ivy-pass :ensure t))
    #+END_SRC
@@ -2611,10 +2648,10 @@
      (use-package webpaste
        :ensure t
        ;;TODO: fix keybindings
-       :bind (:prefix-map webpaste-custom-map
-              :prefix "M-t"
-              ("b" . webpaste-paste-buffer)
-              ("r" . webpaste-paste-region)))
+       :general
+       (:prefix "M-t"
+                "b" 'webpaste-paste-buffer
+                "r" 'webpaste-paste-region))
 
      (use-package atomic-chrome
        :ensure t
@@ -2632,10 +2669,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package twittering-mode
        :ensure t
-       :bind (:map mode-specific-map
-              :prefix-map twittering-custom-map
-              :prefix "5"
-              ("t" . twit))
+       :general
+       (:keymaps 'mode-specific-map
+                 "5 t" 'twit)
        :init
        (setq twittering-use-master-password t)
        (setq twittering-private-info-file (expand-file-name "~/docs/enc/cred/.twittering-mode.gpg")))
@@ -2784,47 +2820,64 @@
                     (time-add (current-idle-time) custom/idle-clockout-recheck-interval)
                     nil
                     'custom/clockout-when-idle)))))
-       :bind (:prefix-map orgmode-custom-map
-              :prefix "<f7>"
-              ("g" . org-clock-goto)
-              ("." . org-clock-in)
-              ("," . org-clock-out)
-              ("^" . org-mru-clock-select-recent-task)
-              ("c" . org-clock-cancel)
-              ("x" . counsel-org-clock-context)
-              ("h" . counsel-org-clock-history)
-              ("d" . org-clock-display)
-              ("R" . org-clock-report)
-              ("p" . org-pomodoro)
-              ("s" . org-schedule)
-              ("|" . org-deadline)
-              ("t" . org-toggle-timestamp-type)
-              ("e" . org-capture)
-              ("w" . org-store-link)
-              ("y" . org-insert-link-global)
-              ("S" . org-set-property)
-              ("D" . org-delete-property)
-              ("A" . org-footnote-action)
-              ("r" . org-refile)
-              ("T" . org-table-create)
-              ("a" . org-agenda)
-              ("b" . org-dashboard-display)
-              ("v" . org-reveal)
-              ("f" . ace-link-org)
-              ("n" . org-narrow-to-subtree)
-              ("-" . org-sparse-tree)
-              ("l" . counsel-org-agenda-headlines)
-              ("H" . org-recent-headings-ivy)
-              ("=" . org-show-todo-tree)
-              ("\\" . counsel-org-tag)
-              ("<right>" . outline-next-visible-heading)
-              ("<left>" . outline-previous-visible-heading)
-              ("<down>" . org-forward-heading-same-level)
-              ("<up>" . org-backward-heading-same-level)
-              ("u" . outline-up-heading)
-              ("G" . org-goto)
-              (";" . custom/org-tags-all))
-       :config
+       :general
+       (:prefix "<f7>"
+                "g" 'org-clock-goto
+                "." 'org-clock-in
+                "," 'org-clock-out
+                "^" 'org-mru-clock-select-recent-task
+                "c" 'org-clock-cancel
+                "x" 'counsel-org-clock-context
+                "h" 'counsel-org-clock-history
+                "d" 'org-clock-display
+                "R" 'org-clock-report
+                "p" 'org-pomodoro
+                "s" 'org-schedule
+                "|" 'org-deadline
+                "t" 'org-toggle-timestamp-type
+                "e" 'org-capture
+                "w" 'org-store-link
+                "y" 'org-insert-link-global
+                "S" 'org-set-property
+                "D" 'org-delete-property
+                "A" 'org-footnote-action
+                "r" 'org-refile
+                "T" 'org-table-create
+                "a" 'org-agenda
+                "b" 'org-dashboard-display
+                "v" 'org-reveal
+                "f" 'ace-link-org
+                "n" 'org-narrow-to-subtree
+                "-" 'org-sparse-tree
+                "l" 'counsel-org-agenda-headlines
+                "H" 'org-recent-headings-ivy
+                "=" 'org-show-todo-tree
+                "\\" 'counsel-org-tag
+                "<right>" 'outline-next-visible-heading
+                "<left>" 'outline-previous-visible-heading
+                "<down>" 'org-forward-heading-same-level
+                "<up>" 'org-backward-heading-same-level
+                "u" 'outline-up-heading
+                "G" 'org-goto
+                ";" 'custom/org-tags-all)
+       ;; (:keymaps 'org-agenda-mode-map
+       ;;           "<f7> ." 'org-agenda-clock-in org-agenda-mode-map
+       ;;           "<f7> ," 'org-agenda-clock-out org-agenda-mode-map
+       ;;           "<f7> o" 'ace-link-org org-agenda-mode-map)
+       (:keymaps 'org-mode-map
+                 "C-'" nil
+                 "C-c [" nil
+                 "C-c ]" nil
+                 "C-c C-o" nil
+                 "s-j" 'org-babel-next-src-block
+                 "s-k" 'org-babel-previous-src-block
+                 "s-l" 'org-edit-src-code
+                 "C-c C-'" 'org-edit-src-code)
+       (:keymaps 'org-src-mode-map
+                 "s-l" 'org-edit-src-exit
+                 "C-c C-'" 'org-edit-src-exit)
+
+         :config
        (use-package org-capture-pop-frame :ensure t)
        (add-hook 'kill-emacs-hook #'custom/finally-tangle-literate-config)
        (setq org-archive-location (concat custom/org-journal-file "::datetree/"))
@@ -3138,20 +3191,7 @@
        (font-lock-add-keywords
         'org-mode
         `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
-        'append)
-       ;; (bind-key "<f7> ." 'org-agenda-clock-in org-agenda-mode-map)
-       ;; (bind-key "<f7> ," 'org-agenda-clock-out org-agenda-mode-map)
-       ;; (bind-key "<f7> o" 'ace-link-org org-agenda-mode-map)
-       (bind-key "C-'" nil org-mode-map)
-       (bind-key "C-c [" nil org-mode-map)
-       (bind-key "C-c ]" nil org-mode-map)
-       (bind-key "C-c C-o" nil org-mode-map)
-       (bind-key "s-j" 'org-babel-next-src-block org-mode-map)
-       (bind-key "s-k" 'org-babel-previous-src-block org-mode-map)
-       (bind-key "s-l" 'org-edit-src-code org-mode-map)
-       (bind-key "s-l" 'org-edit-src-exit org-src-mode-map)
-       (bind-key "C-c C-'" 'org-edit-src-code org-mode-map)
-       (bind-key "C-c C-'" 'org-edit-src-exit org-src-mode-map))
+        'append))
 
      (use-package org-protocol
        :after (org server))
@@ -3282,7 +3322,8 @@
 
      (use-package org-randomnote
        :ensure t
-       :bind ("C-c R" . org-randomnote)
+       :general
+       ("C-c R" 'org-randomnote)
        :custom
        (org-randomnote-candidates org-agenda-files)
        (org-randomnote-open-behavior 'indirect-buffer))
@@ -3297,8 +3338,9 @@
      (use-package org-rich-yank
        :ensure t
        :after (org)
-       :bind (:map org-mode-map
-                   ("C-M-y" . org-rich-yank)))
+       :general
+       (:keymaps 'org-mode-map
+                 "C-M-y" 'org-rich-yank))
 
      (use-package counsel-org-clock
        :ensure t
@@ -3350,14 +3392,13 @@
       (defun custom/info-elisp () (custom/open-info "elisp" "*elisp info*"))
       (defun custom/info-emacs () (custom/open-info "emacs" "*emacs info*"))
       (defun custom/info-gcl () (custom/open-info "gcl" "*hyperspec*"))
-      :bind (:map mode-specific-map
-             :prefix-map info-custom-map
-             :prefix "C-h"
-             ("o" . custom/open-org)
-             ("?" . custom/info-org-clocking)
-             ("e" . custom/open-elisp)
-             ("m" . custom/open-emacs)
-             ("h" . custom/open-gcl))
+      :general
+      (:keymaps 'mode-specific-map
+                "C-h o" 'custom/open-org
+                "C-h ?" 'custom/info-org-clocking
+                "C-h e" 'custom/open-elisp
+                "C-h m" 'custom/open-emacs
+                "C-h h" 'custom/open-gcl)
       :config
       (info-initialize)
       (setq Info-additional-directory-list
@@ -3370,7 +3411,8 @@
 
     (use-package info-buffer
       :ensure t
-      :bind (("C-h i" . info-buffer)))
+      :general
+      ("C-h i" 'info-buffer))
 
     (use-package info-colors
       :ensure t
@@ -3382,16 +3424,15 @@
       (setenv "MANPATH" "/usr/share/man:/usr/local/man"))
 
     (use-package apropos
-      :bind (:map mode-specific-map
-             :prefix-map apropos-custom-map
-             :prefix "h"
-             ("a" . apropos)
-             ("d" . apropos-documentation)
-             ("v" . apropos-variable)
-             ("c" . apropos-command)
-             ("l" . apropos-library)
-             ("u" . apropos-user-option)
-             ("i" . info-apropos)
-             ("t" . tags-apropos)
-             ("e" . apropos-value)))
+      :general
+      (:keymaps 'mode-specific-map
+                "h a" 'apropos
+                "h d" 'apropos-documentation
+                "h v" 'apropos-variable
+                "h c" 'apropos-command
+                "h l" 'apropos-library
+                "h u" 'apropos-user-option
+                "h i" 'info-apropos
+                "h t" 'tags-apropos
+                "h e" 'apropos-value))
   #+END_SRC
