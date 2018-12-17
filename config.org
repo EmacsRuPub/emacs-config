@@ -2682,6 +2682,7 @@
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package telega
+       :disabled
        :quelpa
        (telega :repo "zevlg/telega.el" :fetcher github :version original)
        :custom
