@@ -3347,6 +3347,14 @@
        :after (org counsel)
        :custom
        (counsel-org-clock-default-action 'counsel-org-clock-clock-dwim-action))
+
+     (use-package org-download
+       :ensure t
+       ;;TODO: bind keys ASAP
+       ;;TODO: use in automation
+       :hook (dired-mode-hook . org-download-enable)
+       :custom
+       (org-download-method 'attach))
    #+END_SRC
 * publishing
   :PROPERTIES:
