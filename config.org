@@ -2544,8 +2544,7 @@
          :custom
          (pdf-annot-activate-created-annotations t)
          :config
-         (advice-add 'pdf-annot-edit-contents-commit :after 'save-buffer) ;; save after adding comment
-         ))
+         (advice-add 'pdf-annot-edit-contents-commit :after 'save-buffer)))
    #+END_SRC
 ** email
 *** common
