@@ -1564,6 +1564,9 @@
                  [(tab)] nil
                  "<tab>" nil
                  "TAB" nil)
+       :hook
+       (hippie-expand-try-functions-list . yas-hippie-try-expand)
+       (after-save-hook . custom/update-yasnippets-on-save)
        :config
        ;; snippets editing mode
        (use-package ivy-yasnippet
@@ -1581,9 +1584,7 @@
                yas-no-prompt))
        ;; Wrap around region
        (setq yas-wrap-around-region t)
-       (yas-global-mode 1)
-       (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-       (add-hook 'after-save-hook 'custom/update-yasnippets-on-save)
+       (yas-global-mode 1))
    #+END_SRC
 **** BACKLOG try https://github.com/abrochard/org-sync-snippets
 ** company
