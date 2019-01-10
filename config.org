@@ -582,8 +582,9 @@
        ("C-x b" 'ivy-switch-buffer)
        ("M-<f12>" 'ivy-switch-buffer)
        ("<f10>" 'ivy-resume)
-       ("C-c v" 'ivy-push-view)
-       ("C-c V" 'ivy-pop-view)
+       (:keymaps 'mode-specific-map
+                 "v" 'ivy-push-view
+                 "V" 'ivy-pop-view)
        (:keymaps 'ivy-minibuffer-map
                  "C-j" 'ivy-immediate-done)
        :config
@@ -630,13 +631,15 @@
        ([remap menu-bar-open] 'counsel-tmm)
        ([remap insert-char] 'counsel-unicode-char)
        ([remap isearch-forward] 'counsel-grep-or-swiper)
+       (:keymaps 'mode-specific-map
+                 "C-SPC" 'counsel-mark-ring
+                 "C-." 'counsel-fzf
+                 "w" 'counsel-wmctrl
+                 "o" 'custom/open-org-file
+                 "k" 'custom/open-org-kb-file)
+       (:keymaps 'ctl-x-map
+                 "C-r" 'counsel-recentf)
        ("C-h L" 'counsel-locate)
-       ("C-c C-SPC" 'counsel-mark-ring)
-       ("C-x C-r" 'counsel-recentf)
-       ("C-c C-." 'counsel-fzf)
-       ("C-c w" 'counsel-wmctrl)
-       ("C-c o" 'custom/open-org-file)
-       ("C-c k" 'custom/open-org-kb-file)
        (:prefix "<f9>"
                 "y" 'counsel-yank-pop
                 "m" 'counsel-mark-ring
@@ -851,7 +854,8 @@
          (let ((projectile-switch-project-action #'custom/search-deadgrep))
            (counsel-projectile-switch-project-by-name project)))
        :general
-       ("C-x j j" 'counsel-projectile-switch-project)
+       (:keymaps 'ctl-x-map
+                 "j j" 'counsel-projectile-switch-project)
        (:prefix "<f8>"
                 "i" 'projectile-invalidate-cache
                 "k" 'projectile-kill-buffers
@@ -1045,14 +1049,16 @@
      (use-package ialign
        :ensure t
        :general
-       ("C-x l" 'ialign))
+       (:keymaps 'ctl-x-map
+                 "l" 'ialign))
 
      (use-package iedit
        :ensure t)
 
      (use-package delsel
        :general
-       ("C-c C-g" 'minibuffer-keyboard-quit)
+       (:keymaps 'mode-specific-map
+                 "C-g" 'minibuffer-keyboard-quit)
        :config
        (delete-selection-mode 1))
 
