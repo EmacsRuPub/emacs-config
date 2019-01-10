@@ -654,8 +654,6 @@
        (:keymaps 'help-map
                  "l" 'counsel-find-library)
        (:prefix "<f1>"
-                "f" 'counsel-describe-function
-                "v" 'counsel-describe-variable
                 "l" 'counsel-find-library
                 "b" 'counsel-descbinds
                 "i" 'counsel-info-lookup-symbol)
@@ -3424,6 +3422,27 @@
                            user-emacs-directory
                            (car (directory-files (at-config-basedir "elpa") nil "^use-package-")))))
 
+    (use-package helpful
+      :ensure t
+      :general
+      ;;TODO: investigate more concise way
+      ;;TODO: use C-u version (catch up TAPs)
+      (:prefix "<f1>"
+               "f" 'helpful-function
+               "v" 'helpful-variable
+               "C" 'helpful-callable
+               "m" 'helpful-macro
+               "c" 'helpful-command
+               "k" 'helpful-key
+               "RET" 'helpful-at-point)
+      (:prefix "C-h"
+               "f" 'helpful-function
+               "v" 'helpful-variable
+               "C" 'helpful-callable
+               "m" 'helpful-macro
+               "c" 'helpful-command
+               "k" 'helpful-key
+               "RET" 'helpful-at-point))
     (use-package info-buffer
       :ensure t
       :general
