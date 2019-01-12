@@ -579,7 +579,6 @@
        :ensure t
        :delight ivy-mode
        :general
-       ("C-x b" 'ivy-switch-buffer)
        ("M-<f12>" 'ivy-switch-buffer)
        ("<f10>" 'ivy-resume)
        (:keymaps 'mode-specific-map
@@ -692,6 +691,17 @@
        :ensure t
        :config
        (ivy-historian-mode))
+
+     (use-package ace-jump-buffer
+       :ensure t
+       :general
+       (:keymaps 'ctl-x-map
+                 "b" 'ace-jump-buffer
+                 "C-b" 'ace-jump-buffer-with-configuration)
+       :config
+       (general-unbind 'global "C-x C-b")
+       :custom
+       (ajb-bs-configuration 'projectile))
    #+END_SRC
 ** URLs, links and TAPs
    :PROPERTIES:
@@ -787,7 +797,6 @@
         "C-r"
         "C-M-s"
         "C-M-r"
-        "C-x C-b"
         "C-z"
         "M-t"
         "<f11>")
