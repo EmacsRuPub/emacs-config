@@ -787,20 +787,6 @@
        :config
        (save-place-mode 1))
    #+END_SRC
-** unset keybindings
-   :PROPERTIES:
-   :ID:       41e2a40b-7161-4ef8-92ce-51fbcfa2b1b5
-   :END:
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (general-unbind 'global
-        "C-s"
-        "C-r"
-        "C-M-s"
-        "C-M-r"
-        "C-z"
-        "M-t"
-        "<f11>")
-    #+END_SRC
 ** special navigation
    :PROPERTIES:
    :ID:       96abc097-e32b-4e28-b1ab-85691f83ea61
@@ -969,6 +955,8 @@
        :ensure t
        :general
        ("C-r" 'socyl-search-regexp)
+       :config
+       (general-unbind 'global "C-r")
        :custom
        (socyl-backend 'ripgrep))
 
@@ -1026,6 +1014,8 @@
            (swiper)))
        :general
        ("C-s" 'custom/swiper)
+       :config
+       (general-unbind 'global "C-s")
        :custom
        (swiper-include-line-number-in-search t)
        :custom-face (swiper-match-face-1 ((t (:background "#dddddd"))))
@@ -1135,6 +1125,7 @@
        (eval-expression-print-level nil)
        (kill-ring-max 1024)
        :config
+       (general-unbind 'global "<f11>" "C-z")
        (column-number-mode 1)
        (line-number-mode 1)
        (size-indication-mode 1)
@@ -2660,9 +2651,8 @@
 
      (use-package webpaste
        :ensure t
-       ;;TODO: fix keybindings
        :general
-       (:prefix "M-t"
+       (:prefix "M-p"
                 "b" 'webpaste-paste-buffer
                 "r" 'webpaste-paste-region))
 
