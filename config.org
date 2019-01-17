@@ -302,10 +302,6 @@
      (use-package frame
        :preface
        (defvar opacity-percent 75 "Opacity percent")
-       (defun custom/other-window-multiframe ()
-         (interactive)
-         (other-window 1 'visible)
-         (select-frame-set-input-focus (selected-frame)))
        (defun custom/toggle-transparency ()
          (interactive)
          (let ((alpha (frame-parameter nil 'alpha)))
@@ -319,7 +315,7 @@
                      100)
                 `(,opacity-percent . 50) '(100 . 100)))))
        :general
-       ("M-o" 'custom/other-window-multiframe)
+       ("M-o" 'ace-window)
        (:prefix "<f2>"
                 "n" 'make-frame-command
                 "k" 'delete-frame
@@ -989,6 +985,19 @@
        ("C-s-j" 'windsize-down)
        ("C-s-h" 'windsize-left)
        ("C-s-l" 'windsize-right))
+
+     (use-package ace-window
+       :ensure t
+       :after (avy)
+       :commands ace-window
+       :custom
+       (aw-background nil)
+       (aw-leading-char-style 'char)
+       (aw-scope 'global "Highlight all frames.")
+       :custom-face (aw-leading-char-face
+                     ((t (:inherit ace-jump-face-foreground
+                                   :foreground "green"
+                                   :height 1.5)))))
    #+END_SRC
 ** warping
    :PROPERTIES:
