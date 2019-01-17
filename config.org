@@ -581,12 +581,15 @@
        :general
        ("M-<f12>" 'ivy-switch-buffer)
        ("<f10>" 'ivy-resume)
+       (:keymaps 'ctl-x-map
+                 "b" 'ivy-switch-buffer)
        (:keymaps 'mode-specific-map
                  "v" 'ivy-push-view
                  "V" 'ivy-pop-view)
        (:keymaps 'ivy-minibuffer-map
                  "C-j" 'ivy-immediate-done)
        :config
+       (general-unbind 'global "C-x C-b")
        (ivy-mode 1)
        :custom-face
        (ivy-current-match ((t (:background "gray1"))))
@@ -691,17 +694,6 @@
        :ensure t
        :config
        (ivy-historian-mode))
-
-     (use-package ace-jump-buffer
-       :ensure t
-       :general
-       (:keymaps 'ctl-x-map
-                 "b" 'ace-jump-buffer
-                 "C-b" 'ace-jump-buffer-with-configuration)
-       :config
-       (general-unbind 'global "C-x C-b")
-       :custom
-       (ajb-bs-configuration 'projectile))
    #+END_SRC
 ** URLs, links and TAPs
    :PROPERTIES:
