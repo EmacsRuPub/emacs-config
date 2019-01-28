@@ -2349,6 +2349,15 @@
       (use-package json-mode
         :after (json-reformat json-snatcher)
         :mode ("\\.json$" . json-mode))
+
+      (use-package opascal
+        :quelpa
+        (opascal :repo "ki11men0w/emacs-delphi-mode" :fetcher github)
+        :mode ("\\.\\(pas\\|dpr\\|dpk\\)\\'" . opascal-mode)
+        :custom
+        (opascal-indent-level 2)
+        :config
+        (smartparens-mode -1))
     #+END_SRC
 ** webdev
 *** setup
