@@ -257,6 +257,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package spaceline
        :ensure t
+       :disabled
        :custom
        (powerline-default-separator 'wave)
        (spaceline-flycheck-bullet "❖ %s")
@@ -265,9 +266,15 @@
 
      (use-package spaceline-config
        :ensure spaceline
+       :disabled
        :config
        (spaceline-info-mode 1)
        (spaceline-emacs-theme 'projectile-root))
+
+     (use-package doom-modeline
+       :ensure t
+       :config
+       (doom-modeline-mode 1))
    #+END_SRC
 ** load themes and choose one
    :PROPERTIES:
