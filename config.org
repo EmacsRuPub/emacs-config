@@ -1201,6 +1201,15 @@
                  "n w" 'widen
                  "n N" 'recursive-narrow-or-widen-dwim
                  "n D" 'recursive-widen-dwim))
+
+     (use-package highlight-indent-guides
+       :ensure t
+       :general
+       (:keymaps 'mode-specific-map
+                 "h g" 'highlight-indent-guides-mode)
+       :custom
+       (highlight-indent-guides-method 'fill)
+       (highlight-indent-guides-responsive 'stack))
    #+END_SRC
 ** commenting
    :PROPERTIES:
