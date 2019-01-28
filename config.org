@@ -2548,7 +2548,9 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package pdf-tools
        :ensure t
-       :hook (after-init-hook . pdf-tools-install)
+       :hook ((pdf-view-mode-hook . (pdf-links-minor-mode
+                                     pdf-outline-minor-mode))
+              (after-init-hook . pdf-tools-install))
        :config
        (use-package pdf-view
          :ensure nil
