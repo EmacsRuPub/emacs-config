@@ -1834,6 +1834,7 @@
                  "l" 'open-global-repos-list)
         (:keymaps 'magit-status-mode-map
                   "E" 'magit-rebase-interactive
+                  "o" 'custom/magit-open-repo
                   "q" 'custom/magit-kill-buffers)
         :preface
         (defun open-global-repos-list ()
@@ -1859,6 +1860,26 @@
           (let ((buffers (magit-mode-get-buffers)))
             (magit-restore-window-configuration)
             (mapc #'kill-buffer buffers)))
+        (defun custom/parse-git-remote (url)
+          "convert a git remote location as a HTTP URL"
+          (cond ((and (string-match "^https" url) ;; common Butbucket URL
+                      (string-match "bitbucket" url))
+                 (replace-regexp-in-string "\\(.*\\)@\\(.*\\)/\\(.*\\)\\(\\.git?\\)"
+                                           "https://\\2/\\3" url))
+                ((string-match "^http" url) url) ;; generic HTTP[S] URL
+                (t ;; git protocol
+                 (message "default URL")
+                 (replace-regexp-in-string "\\(.*\\)@\\(.*\\):\\(.*\\)\\(\\.git?\\)"
+                                             "https://\\2/\\3"
+                                             url))))
+        (defun custom/magit-open-repo ()
+          "open remote repo URL"
+          (interactive)
+          (let ((url (magit-get "remote" "origin" "url")))
+            (progn
+              (browse-url (custom/parse-git-remote url))
+              ;; (message "opening repo %s" url)
+              (message "opening repo %s" (custom/parse-git-remote url)))))
         :custom
         (magit-completing-read-function 'ivy-completing-read)
         (magit-blame-heading-format "%H %-20a %C %s")
