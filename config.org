@@ -1,5 +1,6 @@
 #+TITLE: Wiedzmin's literate Emacs configuration
 #+OPTIONS: toc:4 h:4
+#+PROPERTY: header-args:conf :comments link :tangle-mode (identity #o444)
 
 * bootstrapping
 ** basic utils
@@ -3450,6 +3451,12 @@
                "c" 'helpful-command
                "k" 'helpful-key
                "RET" 'helpful-at-point))
+
+    (use-package help-find-org-mode
+      :ensure t
+      :pin melpa-stable
+      :config (help-find-org-mode t))
+
     (use-package info-buffer
       :ensure t
       :general
