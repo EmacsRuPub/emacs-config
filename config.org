@@ -558,6 +558,7 @@
 
      (use-package ibuffer-vc
        :ensure t
+       :disabled
        :hook (ibuffer-hook . (lambda ()
                                (ibuffer-vc-set-filter-groups-by-vc-root)
                                (unless (eq ibuffer-sorting-mode 'alphabetic)
@@ -572,6 +573,23 @@
                 (mode 16 16 :left :elide)
                 " "
                 filename-and-process)) "include vc status info"))
+
+     (use-package ibuffer-project
+       :ensure t
+       :hook ((ibuffer-hook . (lambda () (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))))
+              (ibuffer-hook . (lambda ()
+                                (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+                                (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                                  (ibuffer-do-sort-by-project-file-relative)))))
+       :custom
+       (ibuffer-formats
+        '((mark modified read-only locked " "
+                (name 18 18 :left :elide)
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " project-file-relative))))
    #+END_SRC
 * navigate
 ** Ivy
