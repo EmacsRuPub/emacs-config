@@ -1787,7 +1787,9 @@
         :hook (lsp-after-open-hook . lsp-enable-imenu)
         :custom
         (lsp-message-project-root-warning t)
-        (lsp-inhibit-message t))
+        (lsp-inhibit-message t)
+        :config
+        (use-package lsp-clients))
 
       (use-package lsp-ui
         :ensure t
@@ -2064,27 +2066,23 @@
     :ID:       ebee8721-2700-4182-850c-cfb29daadfb8
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package lsp-python
-        :ensure t
-        :after (lsp-mode)
-        :hook
-        (python-mode-hook . lsp-python-enable))
-
       (use-package python
-        :after (lsp-python)
+        :after (lsp-mode)
         :mode ("\\.py$" . python-mode)
-        :hook ((python-mode-hook . (lambda ()
-                                     (setq flycheck-checker 'python-flake8)
-                                     (setq indent-tabs-mode nil)
-                                     (setq tab-width 4)
-                                     (setq imenu-create-index-function 'imenu-default-create-index-function)
-                                     (auto-fill-mode 1)))
-               ;; Highlight the call to ipdb, src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
-               (python-mode-hook . (lambda ()
-                                     (highlight-lines-matching-regexp "import ipdb")
-                                     (highlight-lines-matching-regexp "ipdb.set_trace()")
-                                     (highlight-lines-matching-regexp "import wdb")
-                                     (highlight-lines-matching-regexp "wdb.set_trace()"))))
+        :hook
+        (python-mode-hook . (lambda ()
+                                      (setq flycheck-checker 'python-flake8)
+                                      (setq indent-tabs-mode nil)
+                                      (setq tab-width 4)
+                                      (setq imenu-create-index-function 'imenu-default-create-index-function)
+                                      (auto-fill-mode 1)))
+        ;; Highlight the call to ipdb, src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
+        (python-mode-hook . (lambda ()
+                              (highlight-lines-matching-regexp "import ipdb")
+                              (highlight-lines-matching-regexp "ipdb.set_trace()")
+                              (highlight-lines-matching-regexp "import wdb")
+                              (highlight-lines-matching-regexp "wdb.set_trace()")))
+        (python-mode-hook . lsp)
         :general
         (:keymaps 'python-mode-map
                   "M-_" 'python-indent-shift-left
@@ -2284,11 +2282,9 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package rustic
         :ensure t
+        :hook (rust-mode-hook . lsp)
+        :custom (rustic-rls-pkg 'lsp-mode)
         :mode ("\\.rs" . rustic-mode))
-
-      (use-package lsp-rust
-        :ensure t
-        :after (lsp-mode))
     #+END_SRC
 *** other
     :PROPERTIES:
