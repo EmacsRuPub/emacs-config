@@ -1377,6 +1377,9 @@
        :custom
        (auto-revert-verbose nil)
        (global-auto-revert-non-file-buffers t)
+       (auto-revert-check-vc-info t)
+       ;; (vc-handled-backends (delq 'Git vc-handled-backends))
+       ;; (vc-handled-backends nil)
        :config
        (global-auto-revert-mode 1))
 
