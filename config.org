@@ -2358,6 +2358,34 @@
         :custom (rustic-rls-pkg 'lsp-mode)
         :mode ("\\.rs" . rustic-mode))
     #+END_SRC
+*** Clojure
+    :PROPERTIES:
+    :ID:       14b5a898-7acf-4f43-8d3c-3c86926e5bba
+    :END:
+    #+BEGIN_SRC emacs-lisp :tangle no
+      (use-package clojure-mode
+        :defer t
+        :config
+        (define-clojure-indent
+          (alet 'defun)
+          (mlet 'defun)))
+
+      (use-package clojure-snippets
+        :defer t)
+
+      (use-package cider
+        :defer t
+        ;; :custom
+        ;; (cider-repl-display-help-banner nil)
+        :config
+        ;; sadly, we can't use :diminish keyword here, yet
+        (diminish 'cider-mode
+                  '(:eval (format " 🍏%s" (cider--modeline-info)))))
+
+      (use-package kibit-helper
+        :disabled ;;TODO: setup kibit first
+        :defer t)
+    #+END_SRC
 *** other
     :PROPERTIES:
     :ID:       14b5a898-7acf-4f43-8d3c-3c86926e5bba
