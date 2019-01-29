@@ -2338,10 +2338,6 @@
         :mode (("\\.nix$" . nix-mode)
                ((rx (eval "configuration.nix") (zero-or-more anything) eol) . nix-mode)))
 
-      (use-package nixos-options
-        :ensure t
-        :disabled)
-
       (use-package company-nixos-options
         :ensure t
         :config
