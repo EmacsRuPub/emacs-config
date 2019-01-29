@@ -1010,11 +1010,13 @@
        :custom
        (aw-background nil)
        (aw-leading-char-style 'char)
-       (aw-scope 'global "Highlight all frames.")
+       (aw-scope 'visible)
+       :config
+       (ace-window-display-mode 1)
        :custom-face (aw-leading-char-face
                      ((t (:inherit ace-jump-face-foreground
                                    :foreground "green"
-                                   :height 1.5)))))
+                                   :height 0.1)))))
    #+END_SRC
 ** warping
    :PROPERTIES:
