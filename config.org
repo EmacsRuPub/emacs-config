@@ -256,24 +256,13 @@
    :ID:       487f7c0d-ba0c-4598-a6fa-d817a8b30ba4
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package spaceline
-       :ensure t
-       :disabled
-       :custom
-       (powerline-default-separator 'wave)
-       (spaceline-flycheck-bullet "❖ %s")
-       (spaceline-separator-dir-left '(right . right))
-       (spaceline-separator-dir-right '(left . left)))
-
-     (use-package spaceline-config
-       :ensure spaceline
-       :disabled
-       :config
-       (spaceline-info-mode 1)
-       (spaceline-emacs-theme 'projectile-root))
-
      (use-package doom-modeline
        :ensure t
+       :custom
+       (doom-modeline-height 25)
+       (doom-modeline-icon t)
+       (doom-modeline-major-mode-icon nil)
+       (doom-modeline-minor-modes nil)
        :config
        (doom-modeline-mode 1))
    #+END_SRC
