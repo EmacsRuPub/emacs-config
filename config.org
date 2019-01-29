@@ -648,8 +648,8 @@
                  "C-SPC" 'counsel-mark-ring
                  "C-." 'counsel-fzf
                  "w" 'counsel-wmctrl
-                 "o" 'custom/open-org-file
-                 "k" 'custom/open-org-kb-file)
+                 "O" 'custom/open-org-file
+                 "K" 'custom/open-org-kb-file)
        (:keymaps 'ctl-x-map
                  "C-r" 'counsel-recentf)
        ("C-h L" 'counsel-locate)
@@ -715,11 +715,11 @@
        :ensure t
        :general
        (:keymaps 'mode-specific-map
-                 "l s" 'custom/open-url-current-buffer
-                 "l f" 'link-hint-open-link
-                 "l y" 'link-hint-copy-link
-                 "l F" 'link-hint-open-multiple-links
-                 "l Y" 'link-hint-copy-multiple-links)
+                 "o s" 'custom/open-url-current-buffer
+                 "o f" 'link-hint-open-link
+                 "o y" 'link-hint-copy-link
+                 "o F" 'link-hint-open-multiple-links
+                 "o Y" 'link-hint-copy-multiple-links)
        :custom
        (link-hint-avy-style 'de-bruijn))
 
@@ -810,6 +810,15 @@
        ([remap move-end-of-line] 'mwim-end-of-code-or-line))
 
      (use-package smooth-scrolling :ensure t)
+
+     (use-package bln-mode
+       :ensure t
+       :general
+       (:keymaps 'mode-specific-map
+                 "h" 'bln-backward-half
+                 "j" 'bln-forward-half-v
+                 "k" 'bln-backward-half-v
+                 "l" 'bln-forward-half))
    #+END_SRC
 ** projects
    :PROPERTIES:
@@ -1197,7 +1206,7 @@
        :ensure t
        :general
        (:keymaps 'mode-specific-map
-                 "h g" 'highlight-indent-guides-mode)
+                 "g h" 'highlight-indent-guides-mode)
        :custom
        (highlight-indent-guides-method 'fill)
        (highlight-indent-guides-responsive 'stack))
@@ -3572,13 +3581,13 @@
     (use-package apropos
       :general
       (:keymaps 'mode-specific-map
-                "h a" 'apropos
-                "h d" 'apropos-documentation
-                "h v" 'apropos-variable
-                "h c" 'apropos-command
-                "h l" 'apropos-library
-                "h u" 'apropos-user-option
-                "h i" 'info-apropos
-                "h t" 'tags-apropos
-                "h e" 'apropos-value))
+                "H a" 'apropos
+                "H d" 'apropos-documentation
+                "H v" 'apropos-variable
+                "H c" 'apropos-command
+                "H l" 'apropos-library
+                "H u" 'apropos-user-option
+                "H i" 'info-apropos
+                "H t" 'tags-apropos
+                "H e" 'apropos-value))
   #+END_SRC
