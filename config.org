@@ -1188,8 +1188,9 @@
 
      (use-package region-bindings-mode
        :ensure t
+       :custom
+       (region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
        :config
-       (setq region-bindings-mode-disable-predicates '((lambda () buffer-read-only)))
        (region-bindings-mode-enable))
 
      (use-package recursive-narrow
