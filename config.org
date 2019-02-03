@@ -1326,10 +1326,12 @@
         (:keymaps 'mode-specific-map
                   "y" 'counsel-flycheck)
         :custom-face (flycheck-warning ((t (:foreground "yellow" :background "red"))))
+        :custom
+        (flycheck-check-syntax-automatically '(mode-enabled save idle-change))
+        (flycheck-display-errors-delay 0.4)
+        (flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+        (flycheck-global-modes '(not emacs-lisp-mode))
         :config
-        (setq flycheck-global-modes '(not emacs-lisp-mode))
-        (setq flycheck-display-errors-delay 0.4)
-        (setq flycheck-check-syntax-automatically '(mode-enabled save idle-change new-line))
         (global-flycheck-mode 1))
 
       (use-package flycheck-pos-tip
@@ -1827,6 +1829,7 @@
         :custom
         (lsp-message-project-root-warning t)
         (lsp-inhibit-message t)
+        (lsp-prefer-flymake nil)
         :config
         (use-package lsp-clients))
 
@@ -2165,6 +2168,7 @@
                               (highlight-lines-matching-regexp "import wdb")
                               (highlight-lines-matching-regexp "wdb.set_trace()")))
         (python-mode-hook . lsp)
+        (python-mode-hook . flycheck-mode)
         :general
         (:keymaps 'python-mode-map
                   "M-_" 'python-indent-shift-left
