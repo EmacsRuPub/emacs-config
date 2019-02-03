@@ -2177,6 +2177,12 @@
         (add-function :before-until (local 'eldoc-documentation-function)
                       #'(lambda () "")))
 
+      (use-package blacken
+        :ensure t
+        :disabled
+        :hook
+        (python-mode-hook . blacken-mode))
+
       (use-package pyvenv
         :ensure t
         :after (projectile dash)
