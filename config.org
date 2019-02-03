@@ -1078,8 +1078,14 @@
        (:keymaps 'ctl-x-map
                  "l" 'ialign))
 
-     (use-package iedit
-       :ensure t)
+     (use-package multiple-cursors
+       :ensure t
+       :general
+       (:keymaps 'region-bindings-mode-map
+                 "a" 'mc/mark-all-like-this
+                 "p" 'mc/mark-previous-like-this
+                 "n" 'mc/mark-next-like-this
+                 "m" 'mc/mark-more-like-this-extended))
 
      (use-package delsel
        :general
