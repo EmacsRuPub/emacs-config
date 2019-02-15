@@ -2425,6 +2425,15 @@
         (opascal-indent-level 2)
         :config
         (smartparens-mode -1))
+
+      (use-package ccls
+        :ensure t
+        :after (lsp-mode)
+        :hook ((c-mode-hook c++-mode-hook objc-mode-hook) . (lambda () (require 'ccls) (lsp)))
+        :custom
+        (ccls-executable "/run/current-system/sw/bin/ccls")
+        :config
+        (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)))
     #+END_SRC
 ** webdev
 *** setup
