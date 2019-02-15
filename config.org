@@ -1870,7 +1870,7 @@
                  "c" 'magit-checkout
                  "w" 'magit-diff-working-tree
                  "r" 'magit-reflog
-                 "b" 'magit-blame
+                 "b" 'magit-blame-addition
                  "B" 'magit-branch-manager
                  "l" 'magit-log
                  "l" 'open-global-repos-list)
