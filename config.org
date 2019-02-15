@@ -264,7 +264,7 @@
        (doom-modeline-major-mode-icon nil)
        (doom-modeline-minor-modes nil)
        :config
-       (doom-modeline-mode 1))
+       (doom-modeline 1))
    #+END_SRC
 ** load themes and choose one
    :PROPERTIES:
