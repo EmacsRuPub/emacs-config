@@ -2564,7 +2564,7 @@
        :after (restclient company))
 
      (use-package ob-restclient
-       :ensure org-plus-contrib
+       :ensure t
        :after (ob restclient)
        :commands (org-babel-execute:restclient))
 
