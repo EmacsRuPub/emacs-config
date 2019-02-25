@@ -968,11 +968,20 @@
      (use-package socyl
        :ensure t
        :general
-       ("C-r" 'socyl-search-regexp)
-       :config
-       (general-unbind 'global "C-r")
+       (:keymaps 'mode-specific-map
+                 "r" 'socyl-search-regexp)
        :custom
        (socyl-backend 'ripgrep))
+
+     (use-package phi-search
+       :ensure t
+       :commands phi-search phi-search-backward
+       :hook (isearch-mode-hook . phi-search-from-isearch-mc/setup-keys)
+       :config
+       (use-package phi-search-mc
+         :ensure t
+         :config
+         (phi-search-mc/setup-keys)))
 
      (use-package wgrep
        :ensure t
