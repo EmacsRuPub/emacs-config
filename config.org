@@ -2195,6 +2195,8 @@
         :hook
         (python-mode-hook . blacken-mode))
 
+      (use-package py-yapf :ensure t)
+
       (use-package pyvenv
         :ensure t
         :after (projectile dash)
