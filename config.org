@@ -2303,9 +2303,6 @@
                   "C-c C-x P" 'go-test-current-project-benchmarks
                   "C-c C-x x" 'go-run))
 
-      (use-package govet
-        :ensure t)
-
       (use-package go-tag
         :ensure t
         :no-require t
