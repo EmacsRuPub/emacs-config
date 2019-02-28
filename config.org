@@ -2168,7 +2168,6 @@
         :mode ("\\.py$" . python-mode)
         :hook
         (python-mode-hook . (lambda ()
-                                      (setq flycheck-checker 'python-flake8)
                                       (setq indent-tabs-mode nil)
                                       (setq tab-width 4)
                                       (setq imenu-create-index-function 'imenu-default-create-index-function)
