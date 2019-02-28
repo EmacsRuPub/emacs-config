@@ -2204,13 +2204,13 @@
           (let ((project-root (projectile-project-root)))
             (when (-non-nil (mapcar (lambda (variant) (file-exists-p (concat project-root variant)))
                                     '("requirements.pip" "requirements.txt")))
+              (pyvenv-deactivate)
               (pyvenv-activate (format "%s/%s"
                                        (pyvenv-workon-home)
                                        (file-name-base
                                         (directory-file-name
                                          project-root)))))))
-        :hook ((projectile-before-switch-project-hook . pyvenv-deactivate)
-               (projectile-after-switch-project-hook . custom/switch-python-project-context)))
+        :hook (projectile-after-switch-project-hook . (custom/switch-python-project-context lsp-restart-workspace)))
 
       (use-package pip-requirements
         :ensure t
