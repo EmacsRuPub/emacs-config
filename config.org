@@ -1280,23 +1280,11 @@
    :ID:       106282c8-1906-4508-a07e-62a831b60458
    :END:
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package undo-tree
+     (use-package undo-propose
        :ensure t
-       :delight undo-tree-mode
        :general
-       (:prefix "M-["
-                "p" 'undo-tree-undo
-                "n" 'undo-tree-redo
-                "s" 'undo-tree-save-history
-                "l" 'undo-tree-load-history
-                "u" 'undo-tree-visualize)
-       (:keymaps 'undo-tree-map
-                 "C-_" nil)
-       :custom
-       (undo-tree-visualizer-timestamps t)
-       (undo-tree-visualizer-diff t)
-       :config
-       (global-undo-tree-mode t))
+       (:keymaps 'ctl-x-map
+                 "u" 'undo-propose))
    #+END_SRC
 ** spellchecking
 *** flycheck
