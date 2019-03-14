@@ -1993,7 +1993,9 @@
         (:keymaps 'mode-specific-map
                   "g g" 'browse-at-remote)
         (:keymaps 'magit-status-mode-map
-                  "o" 'browse-at-remote))
+                  "o" 'browse-at-remote)
+        :custom
+        (browse-at-remote-prefer-symbolic nil))
     #+END_SRC
 **** BACKLOG [#A] find some way (maybe smth like spacemacs dashboard) to represent the states of repos from some list (either hardcoded or created dynamically), with unstaged/unpushed/whatever_useful info displayed
 *** tools
