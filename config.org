@@ -848,6 +848,16 @@
                (when (file-exists-p todos-file)
                  (find-file todos-file))
              (error (message "Cannot find project todos")))))
+       (defun custom/ensure-project-switch-buffer (arg)
+         "Custom switch to buffer.
+          With universal argument ARG or when not in project, rely on
+          `ivy-switch-buffer'.
+          Otherwise, use `counsel-projectile-switch-to-buffer'."
+         (interactive "P")
+         (if (or arg
+                 (not (projectile-project-p)))
+             (ivy-switch-buffer)
+           (counsel-projectile-switch-to-buffer)))
        (defun custom/search-deadgrep ()
          (interactive)
          (let ((term (read-from-minibuffer "Search term: ")))
@@ -862,7 +872,8 @@
            (counsel-projectile-switch-project-by-name project)))
        :general
        (:keymaps 'ctl-x-map
-                 "j j" 'counsel-projectile-switch-project)
+                 "j j" 'counsel-projectile-switch-project
+                 "b" 'custom/ensure-project-switch-buffer)
        (:prefix "<f8>"
                 "i" 'projectile-invalidate-cache
                 "k" 'projectile-kill-buffers
