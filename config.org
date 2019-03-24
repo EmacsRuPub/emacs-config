@@ -882,6 +882,7 @@
                 "c" 'projectile-commander
                 "d" 'projectile-dired
                 "f" 'projectile-recentf
+                "t" 'custom/open-project-todos
                 "T" 'doom/ivy-tasks
                 "h" 'projectile-find-file)
        :config
