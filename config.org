@@ -160,6 +160,8 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package auth-source
        :custom
+       ;;TODO: investigate and setup ghub according to https://github.com/magit/ghub/blob/master/ghub.org#user-content-manually-creating-and-storing-a-token
+       ;;TODO: check if it needed and resurrect .authinfo.gpg
        (auth-sources '("~/.authinfo.gpg")))
 
      (use-package epa
