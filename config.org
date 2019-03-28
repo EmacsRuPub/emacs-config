@@ -923,7 +923,7 @@
        :custom
        (dired-recursive-deletes 'top) ;; Allows recursive deletes
        (dired-dwim-target t)
-       (dired-listing-switches "-lah1v --group-directories-first")
+       (dired-listing-switches "-lah1v --group-directories-first") ;;TODO: think of using TIME_STYLE env var
        :config
        (put 'dired-find-alternate-file 'disabled nil)
        (ad-activate 'abort-if-file-too-large)
