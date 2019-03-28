@@ -2187,12 +2187,6 @@
         (add-function :before-until (local 'eldoc-documentation-function)
                       #'(lambda () "")))
 
-      (use-package blacken
-        :ensure t
-        :disabled
-        :hook
-        (python-mode-hook . blacken-mode))
-
       (use-package py-yapf :ensure t)
 
       (use-package pyvenv
