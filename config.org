@@ -2825,6 +2825,10 @@
        :config
        ;; TODO: (alex3rd) make use of atomic-chrome-url-major-mode-alist
        (atomic-chrome-start-server))
+
+     (use-package carbon-now-sh
+       :quelpa
+       (carbon-now-sh :repo "wiedzmin/carbon-now-sh.el" :fetcher github))
    #+END_SRC
 ** Twitter
    :PROPERTIES:
