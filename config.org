@@ -1288,14 +1288,6 @@
        :custom
        (select-enable-clipboard t)
        (x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-
-     (use-package ixio
-       :quelpa
-       (ixio :repo "jorgenschaefer/emacs-ixio" :fetcher github)
-       :general
-       (:keymaps 'mode-specific-map
-                 "i" 'ixio-paste))
-
    #+END_SRC
 ** undo/redo
    :PROPERTIES:
@@ -2821,7 +2813,9 @@
        :general
        (:prefix "M-p"
                 "b" 'webpaste-paste-buffer
-                "r" 'webpaste-paste-region))
+                "r" 'webpaste-paste-region)
+       :custom
+       (webpaste-provider-priority '("ix.io" "gist.github.com")))
 
      (use-package atomic-chrome
        :ensure t
