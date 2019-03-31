@@ -2428,6 +2428,24 @@
         :quelpa
         (opascal :repo "ki11men0w/emacs-delphi-mode" :fetcher github)
         :mode ("\\.\\(pas\\|dpr\\|dpk\\)\\'" . opascal-mode)
+        :preface
+        (defun custom/enclose-by-spaces (left right)
+          "Insert symbols LEFT and RIGHT around a region or point."
+          (interactive "r")
+          (if (use-region-p) ; act on region
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (save-excursion
+                  (goto-char end)
+                  (insert " ")
+                  (goto-char start)
+                  (insert " ")))
+            (progn ; act around point
+              (insert " " " ")
+              (backward-char 1))))
+        :general
+        (:keymaps 'mode-specific-map
+                  "a" 'custom/enclose-by-spaces)
         :custom
         (opascal-indent-level 2)
         :config
