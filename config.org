@@ -321,6 +321,7 @@
                 "s" 'delete-other-frames
                 "v" 'custom/toggle-transparency)
        :config
+       (general-unbind 'global "M-o")
        (add-to-list 'default-frame-alist `(alpha . (100 . 100)))
        (blink-cursor-mode 0)
        (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
