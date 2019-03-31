@@ -2163,7 +2163,6 @@
     :END:
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package python
-        :after (lsp-mode)
         :mode ("\\.py$" . python-mode)
         :hook
         (python-mode-hook . (lambda ()
@@ -2192,7 +2191,7 @@
       (use-package pyvenv
         :ensure t
         :after (projectile dash)
-        :preface
+        :init
         (defun custom/switch-python-project-context ()
           (let ((project-root (projectile-project-root)))
             (when (-non-nil (mapcar (lambda (variant) (file-exists-p (concat project-root variant)))
@@ -2203,7 +2202,10 @@
                                        (file-name-base
                                         (directory-file-name
                                          project-root)))))))
-        :hook (projectile-after-switch-project-hook . (custom/switch-python-project-context lsp-restart-workspace)))
+        :config
+        (pyvenv-mode 1)
+        :hook ((projectile-after-switch-project-hook . custom/switch-python-project-context)
+               (python-mode . custom/switch-python-project-context)))
 
       (use-package pip-requirements
         :ensure t
