@@ -1862,7 +1862,9 @@
         :general
         (:keymaps 'lsp-ui-mode-map
                   [remap xref-find-definitions] 'lsp-ui-peek-find-definitions
-                  [remap xref-find-references] 'lsp-ui-peek-find-references))
+                  [remap xref-find-references] 'lsp-ui-peek-find-references)
+        (:keymaps 'mode-specific-map
+                  "R" 'lsp-restart-workspace))
 
       (use-package company-lsp
         :ensure t
@@ -3474,7 +3476,8 @@
      (use-package org-randomnote
        :ensure t
        :general
-       ("C-c R" 'org-randomnote)
+       (:keymaps 'mode-specific-map
+                 "o r" 'org-randomnote)
        :custom
        (org-randomnote-candidates org-agenda-files)
        (org-randomnote-open-behavior 'indirect-buffer))
